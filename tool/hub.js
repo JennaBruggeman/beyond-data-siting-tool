@@ -27,7 +27,8 @@ const RULES = {
   e2: { w: 2.6, l: 3.6, why: 'freight lift E2 shaft 2.6 × 3.6 m (spec 1b car ≈ 2.5 × 3.4 m, drawing choice; passenger-rated, the staff accessible route)' },
   door: { w: 0.9, why: '0.9 m doors (doorway ≥ 850 mm, VBBL / NBC Table 3.4.3.2.-A); travel measured through 0.9 m doors (spec rule 6)' },
   street: { w: 1.8, why: 'street doors 1.8 m (spec 15c, drawing choice)' },
-  lobby: { w: 6.0, m2: 20, why: 'shared lobby ≥ 20 m² (spec 15c, drawing choice), 6.0 m wide on the street (drawing choice)' },
+  lobby: { w: 6.0, m2: 20, ws: [6.0, 5.0, 4.0], why: 'shared lobby ≥ 20 m² (spec 15c, drawing choice), 6.0 m wide on the street, narrowed to 5.0 or 4.0 m on narrow lots (drawing choices; the 1330 Glen Dr hand fit draws 4.4 m)' },
+  overflow: { why: 'narrow lots (F2b, 9 Nov 2026): when the hub service row is full, the staff office, first aid and cot storage move into the front row beside the refuge, still off the public corridor (drawing choice, as the 1330 Glen Dr and 8238 Fraser St hand fits)' },
   band: { why: 'bands street → rear (spec rule 1): hub front row (refuge, shelter, lobby on the street) → public corridor → hub service row → data-centre entrance row and loading → covered truck court → plant yard' },
   rowB: { d: 5.0, why: 'beside variant: service rows 5.0 m deep (drawing choice; keeps a 5-exam clinic under 500 m², BE 3.3.1)' },
   rowR: { d: 6.9, why: 'hub service row as deep as a stair (6.9 m, drawing choice) so the clinic stairs and lift sit in it' },
@@ -148,10 +149,12 @@ function layout(S0) {
   const LT = S.lotType || null, ltype = LT && LT.type;
   const variant = { main: stackedZone ? 'stacked' : 'beside', sideDrive: !!drive, notBuilt: [], flags: [], lotType: ltype || (LT ? 'not a site (job A1)' : '?') };
   if (streets.some(e => e.kind === 'flank')) { variant.flags.push('corner'); flags.push('Corner: hub and lobby on the main street; service, loading and plant from the side street (spec Part 2)'); }
-  if (streets.some(e => e.kind === 'rear')) { variant.flags.push('through'); flags.push('Through lot: hub on the main street; service, loading and plant from the street at the rear (spec Part 2); an exit passage where side yards are 0 m'); }
+  /* through: a street at the rear, or two street lines the site model could not tell front from rear ('unclear', as 8238 Fraser St) */
+  if (streets.some(e => e.kind === 'rear') || streets.filter(e => e.kind === 'unclear' || e.kind === 'front').length >= 2 && streets.some(e => e.kind === 'unclear')) { variant.flags.push('through'); flags.push('Through lot: hub on the main street; service, loading and plant from the street at the rear (spec Part 2); an exit passage where side yards are 0 m'); }
   if (ltype === 'large') { variant.flags.push('large'); flags.push('Large lot: hub-sized data centre (≤ 2,325 m² of data-centre floor, one hall storey, J.B. 8 Nov); the rest of the land stays open (spec Part 2)'); }
   if (ltype === 'irregular') { variant.flags.push('irregular'); flags.push('Irregular lot (job A1: lot area under 0.75 of its bounding rectangle): the hub is drawn in the widest width the yards allow at each depth'); }
   if (ltype === 'small') variant.flags.push('small');
+  if (ltype === 'wide_shallow') { variant.flags.push('wide-shallow'); variant.notBuilt.push('turned'); }
   if (LT && !ltype) flags.push('Job A1 lists this lot as not a site (no street frontage found); the variant is named from the lot’s streets in the tool (?)');
   if (!van) flags.push('Edmonton: every hub needs a rezoning (a data centre is Major Industrial, not in BE; IH does not allow the refuge, shelter or clinic). Shown as if rezoned; the design does not change (J.B. 8 Nov).');
   if (van && !stackedZone) flags.push(`Zone ${zone}: the stacked variant is drawn only for I-2 and I-3; ${zone} drawn as beside (?)`);
@@ -205,31 +208,51 @@ function stacked(C) {
   let W = r2(sp[1] - sp[0]);
   const build = (W, Da) => {
     const R = [], D = [];
-    /* storey 1, front row: refuge (grows) | day shelter | lobby on the drive side (spec 15c: one wall on the main street) */
-    const minF = (PRG.refuge.m2 + (st.shelter ? PRG.shelter.m2 : 0)) / (W - RULES.lobby.w);
-    const dF = Math.max(6.0, up1(minF));
-    const fItems = [{ id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 4)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2, grow: true }]
-      .concat(st.shelter ? [{ id: 'shel', n: 'Warming shelter rest area (day)', k: 'shelter', w: 4.0, m2: PRG.shelter.m2 }] : [])
-      .concat([{ id: 'lob', n: 'Shared lobby', k: 'lobby', w: RULES.lobby.w }]);
-    const pf = pack(fItems, W, dF); if (pf.fail) return { fail: `front row needs ${pf.fail} m across; ${W} m available (refuge ${PRG.refuge.m2} m² + shelter + lobby, spec 1a, 15c)` };
-    const F = place(fItems, pf.ws, 0, 0, dF);
-    const aC = dF, aR = r2(dF + cw), aB = r2(aR + dR);
-    /* hub load and washrooms (Part 1: refuge + shelter area ÷ 0.75 m² a person, half each sex; Table 3.7.2.2.-A) */
-    let ref2w = 0, rItems, pr;
-    for (let it = 0; it < 4; it++) {
-      const areaRS = sum(F.filter(x => x.k === 'refuge' || x.k === 'shelter').map(x => ra(x.rr))) + ref2w * dR;
-      const load = Math.ceil(areaRS / 0.75), [nM, nF] = wcA(Math.ceil(load / 2));
-      rItems = [{ id: 'p2', n: 'Stair P2 (clinic)', k: 'pcore', fix: SW, stair: true }, { id: 'e1', n: 'Lift E1 (public, storeys 1–2)', k: 'pcore', fix: RULES.e1.w, lift: true },
-        { id: 'wcw', n: `WC women (${nF})`, k: 'proom', w: Math.max(sm, r2(nF * wcm)), wc: nF }, { id: 'wcm', n: `WC men (${nM})`, k: 'proom', w: Math.max(sm, r2(nM * wcm)), wc: nM },
-        { id: 'uwc', n: 'Universal WC', k: 'proom', w: PRG.uwc.w }, { id: 'sho', n: 'Universal shower', k: 'proom', w: PRG.sho.w },
-        { id: 'fa', n: 'First aid', k: 'proom', w: PRG.fa.w, m2: PRG.fa.m2 }, { id: 'off', n: 'Staff office (shared)', k: 'proom', w: PRG.off.w, m2: PRG.off.m2 },
-        { id: 'cot', n: 'Cot and supply storage', k: 'proom', w: sm }, { id: 'pmec', n: 'Programs mechanical, emergency panel', k: 'plant', w: PRG.pmec.w },
-        { id: 'ref2', n: 'Refuge, second room (grown into spare floor)', k: 'refuge2', w: 0, grow: true }, { id: 'p1', n: 'Stair P1 (clinic)', k: 'pcore', fix: SW, stair: true }];
-      pr = pack(rItems, W, dR); if (pr.fail) return { fail: `hub service row needs ${pr.fail} m across; ${W} m available (washrooms for a load of ${load}, Table 3.7.2.2.-A)`, load };
-      const g = pr.ws[rItems.findIndex(x => x.id === 'ref2')];
-      if (g < PRG.refuge.w) { const ci = rItems.findIndex(x => x.id === 'cot'); pr.ws[ci] = r2(pr.ws[ci] + g); pr.ws[rItems.findIndex(x => x.id === 'ref2')] = 0; if (ref2w === 0) break; ref2w = 0; continue; }
-      if (Math.abs(g - ref2w) < 0.05) break; ref2w = g;
+    /* the hub service row behind the public corridor (hub load and washrooms, Part 1: refuge + shelter area ÷ 0.75 m² a person, half each sex;
+       Table 3.7.2.2.-A): [P2 E1] WCs, universal WC and shower, first aid, office, cot storage, programs mechanical, the refuge's second room
+       (grows into what is left), [P1]; rooms in 'ovf' already sit in the front row; the clinic stairs and lift only with a clinic (F2b) */
+    const clinicStairs = st.exams > 0;
+    const serviceRow = (F, ovf) => { let ref2w = 0, rI, prr, load;
+      for (let it = 0; it < 4; it++) {
+        const areaRS = sum(F.filter(x => x.k === 'refuge' || x.k === 'shelter').map(x => ra(x.rr))) + ref2w * dR;
+        load = Math.ceil(areaRS / 0.75); const [nM, nF] = wcA(Math.ceil(load / 2));
+        rI = (clinicStairs ? [{ id: 'p2', n: 'Stair P2 (clinic)', k: 'pcore', fix: SW, stair: true }, { id: 'e1', n: 'Lift E1 (public, storeys 1–2)', k: 'pcore', fix: RULES.e1.w, lift: true }] : [])
+          .concat([{ id: 'wcw', n: `WC women (${nF})`, k: 'proom', w: Math.max(sm, r2(nF * wcm)), wc: nF }, { id: 'wcm', n: `WC men (${nM})`, k: 'proom', w: Math.max(sm, r2(nM * wcm)), wc: nM },
+          { id: 'uwc', n: 'Universal WC', k: 'proom', w: PRG.uwc.w }, { id: 'sho', n: 'Universal shower', k: 'proom', w: PRG.sho.w },
+          { id: 'fa', n: 'First aid', k: 'proom', w: PRG.fa.w, m2: PRG.fa.m2 }, { id: 'off', n: 'Staff office (shared)', k: 'proom', w: PRG.off.w, m2: PRG.off.m2 },
+          { id: 'cot', n: 'Cot and supply storage', k: 'proom', w: sm }, { id: 'pmec', n: 'Programs mechanical, emergency panel', k: 'plant', w: PRG.pmec.w },
+          { id: 'ref2', n: 'Refuge, second room (grown into spare floor)', k: 'refuge2', w: 0, grow: true }])
+          .concat(clinicStairs ? [{ id: 'p1', n: 'Stair P1 (clinic)', k: 'pcore', fix: SW, stair: true }] : []).filter(x => !ovf.includes(x.id));
+        prr = pack(rI, W, dR); if (prr.fail) return { fail: `hub service row needs ${prr.fail} m across; ${W} m available (washrooms for a load of ${load}, Table 3.7.2.2.-A)`, load };
+        const gi = rI.findIndex(x => x.id === 'ref2'), g = prr.ws[gi];
+        if (g < PRG.refuge.w) { const ci = rI.findIndex(x => x.id === (ovf.includes('cot') ? 'pmec' : 'cot')); prr.ws[ci] = r2(prr.ws[ci] + g); prr.ws[gi] = 0; if (ref2w === 0) break; ref2w = 0; continue; }
+        if (Math.abs(g - ref2w) < 0.05) break; ref2w = g;
+      }
+      return { rItems: rI, pr: prr }; };
+    /* storey 1, front row: refuge (grows) | day shelter | [overflow rooms] | lobby on the drive side (spec 15c: one wall on the main street).
+       F2b (9 Nov 2026): the front row deepens until it fits (it was one depth only), the lobby narrows on narrow lots (RULES.lobby.ws), rooms
+       that overflow the service row move beside the refuge (RULES.overflow), and when the clinic is dropped (ladder step 3 on) its stairs P1, P2
+       and lift E1 are not built: the floor over the hub is unassigned data-centre floor off the secure corridor */
+    const OVF = ['off', 'fa', 'cot'];
+    let F, dF, fItems, rItems, pr, lobW;
+    for (let moveN = 0; moveN <= OVF.length; moveN++) {
+      const ovf = OVF.slice(0, moveN);
+      const ovfItems = ovf.map(id => id === 'off' ? { id: 'off', n: 'Staff office (shared)', k: 'proom', w: PRG.off.w, m2: PRG.off.m2, ovf: true } : id === 'fa' ? { id: 'fa', n: 'First aid', k: 'proom', w: PRG.fa.w, m2: PRG.fa.m2, ovf: true } : { id: 'cot', n: 'Cot and supply storage', k: 'proom', w: sm, ovf: true });
+      let pf = null;
+      for (lobW of RULES.lobby.ws) {
+        fItems = [{ id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 4)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2, grow: true }]
+          .concat(st.shelter ? [{ id: 'shel', n: 'Warming shelter rest area (day)', k: 'shelter', w: 4.0, m2: PRG.shelter.m2 }] : []).concat(ovfItems)
+          .concat([{ id: 'lob', n: 'Shared lobby', k: 'lobby', w: lobW, m2: RULES.lobby.m2 }]);
+        const minF = (PRG.refuge.m2 + (st.shelter ? PRG.shelter.m2 : 0)) / Math.max(1, W - lobW);
+        pf = { fail: r2(W + 0.1) };
+        for (dF = Math.max(6.0, up1(minF)); dF <= 24 + 1e-9; dF = r2(dF + 0.1)) { pf = pack(fItems, W, dF); if (!pf.fail) break; }
+        if (!pf.fail) break;
+      }
+      if (pf.fail) return { fail: `front row needs ${pf.fail} m across; ${W} m available (refuge ${PRG.refuge.m2} m² + shelter + lobby ≥ ${RULES.lobby.m2} m², spec 1a, 15c)` };
+      F = place(fItems, pf.ws, 0, 0, dF);
+      const sr = serviceRow(F, ovf); if (sr.fail && moveN < OVF.length) continue; if (sr.fail) return sr; rItems = sr.rItems; pr = sr.pr; break;
     }
+    const aC = dF, aR = r2(dF + cw), aB = r2(aR + dR);
     const Rr = place(rItems, pr.ws, 0, aR, aB).filter(x => x.rr[3] - x.rr[2] > 0.01);
     /* storey 1 rooms */
     const pub = (x, rect, extra) => R.push(room(1, x.id, x.n, x.k === 'plant' ? 'plant' : x.k === 'lobby' ? 'circ' : x.k === 'pcore' ? 'circ' : 'pub', x.k === 'refuge' || x.k === 'shelter' || x.k === 'refuge2' ? 'proom' : x.k, rect, Object.assign({ block: 'hub' }, extra || {})));
@@ -267,7 +290,7 @@ function stackedRest(C, B, W, Da) {
   /* loading count (rule 10) needs the areas: first the rooms, then the bays */
   const hubArea = sum(R.filter(x => x.block === 'hub' && !x.core).map(x => sum(x.r.map(ra))));
   /* storey 2, clinic over the hub (I-3 2.2.6): front row | clinic corridor (over the public corridor) | back row with P2, E1, P1 */
-  const R2 = []; let clin = 0, clinWhy = null;
+  const R2 = []; let clin = 0, clinWhy = null, hubSpareDC = false;
   const dcFrontD = RULES.dcFront.d;
   if (st.exams > 0) {
     const fI = [];
@@ -295,6 +318,10 @@ function stackedRest(C, B, W, Da) {
       else if (x.rr[3] - x.rr[2] > 0.01) R2.push(room(2, x.id, x.n, x.spare ? 'spare' : 'clin', x.spare ? 'spare' : 'croom', [x.rr], { block: x.spare ? 'spare' : 'clinic', prog: x.p })); });
     clin = sum(R2.filter(x => x.block === 'clinic' && !x.core).map(x => sum(x.r.map(ra))));
     if (clin > 500 && van) clinWhy = 'clinic over 500 m²: one loading space (Parking By-law 5.2.9)';
+  } else if (!B.Rr.some(x => x.id === 'e1')) {
+    /* F2b (9 Nov 2026): no clinic, so no clinic stairs or public lift: the floor over the hub joins the data-centre storey as unassigned floor
+       off the secure corridor (as the 1330 Glen Dr hand fit); placed below once the cores and the secure corridor are known */
+    hubSpareDC = true;
   } else {
     /* no clinic: storey 2 over the hub is unassigned floor off the public lift (spare rule) — kept, with P1, P2 and E1 so it is reached */
     R2.push(room(2, 'ccor', 'Corridor to unassigned floor', 'circ', 'ccor', [[aC, aR, 0, W]], { block: 'spare', corridor: true }));
@@ -339,8 +366,9 @@ function stackedRest(C, B, W, Da) {
   /* front row: the rooms fill the stretch left of E2, then right of E2; what does not fit goes to the back row; the rest of each stretch is unassigned */
   const lW = r2(e2[2] - s1[3]), rW = r2(s2[2] - e2[3]), wOf = x => Math.max(x.w || 0, x.m2 ? up1(x.m2 / dcFrontD) : 0);
   const sides = [{ b0: s1[3], W: lW, it: [] }, { b0: e2[3], W: rW, it: [] }], moved = [];
-  frontL.concat(frontR.map(x => Object.assign({}, x, { grow: false }))).forEach(x => { const sd = sides.find(z => r2(sum(z.it.map(wOf)) + wOf(x)) <= z.W + 1e-6); if (sd) sd.it.push(x); else moved.push(x); });
-  sides.forEach((sd, k) => { const it = sd.it.concat([{ id: k ? 'fsp2' : 'fspare', n: 'Unassigned (no use yet)', w: 0, grow: true, spare: true }]); const pk = pack(it, sd.W, dcFrontD); if (pk.fail) return; const li = it.length - 1; if (pk.ws[li] < 1.5 && li > 0) { pk.ws[li - 1] = r2(pk.ws[li - 1] + pk.ws[li]); pk.ws[li] = 0; }
+  frontL.concat(frontR.map(x => Object.assign({}, x, { grow: false }))).forEach(x => { const sd = !hubSpareDC && sides.find(z => r2(sum(z.it.map(wOf)) + wOf(x)) <= z.W + 1e-6); if (sd) sd.it.push(x); else moved.push(x); });
+  if (hubSpareDC) R2.push(room(2, 'sparehub', 'Unassigned (no use yet; clinic dropped), off the secure corridor', 'spare', 'spare', subAll([[0, aS, 0, W]], [S1r, S2r, E2r]), { block: 'spare', dcSide: true }));
+  if (!hubSpareDC) sides.forEach((sd, k) => { const it = sd.it.concat([{ id: k ? 'fsp2' : 'fspare', n: 'Unassigned (no use yet)', w: 0, grow: true, spare: true }]); const pk = pack(it, sd.W, dcFrontD); if (pk.fail) return; const li = it.length - 1; if (pk.ws[li] < 1.5 && li > 0) { pk.ws[li - 1] = r2(pk.ws[li - 1] + pk.ws[li]); pk.ws[li] = 0; }
     place(it, pk.ws, sd.b0, aB, aS).forEach(x => { if (x.rr[3] - x.rr[2] < 0.01) return; R2.push(x.spare ? room(2, x.id, x.n, 'spare', 'spare', [x.rr], { block: 'spare' }) : sec(2, x.id, x.n, 'sroom', [x.rr], { prog: x.id })); }); });
   /* back row: NOC, offices, break room, shipping and storage (+ any moved rooms), then unassigned; the strips behind S1 and S2 join the end rooms */
   const dBk = r2(Da - aS2);
@@ -535,9 +563,9 @@ function finish(res, S) {
     door(1, 'ves', 'e2', 0.5); ext(1, 'ves', 'a1', 0.5); door(1, 'dock', 'e2', 0.5); ext(1, 'dock', 'a1', 0.5, 1.8, 0);
     R[1].filter(x => x.kind === 'bay').slice(-1).forEach(x => door(1, 'dock', x.id, 0.5, 1.8));
     /* storey 2 */
-    R[2].filter(x => x.st === 2 && (x.kind === 'croom' || (x.kind === 'spare' && x.r[0][0] < L.aB - 0.01) || x.id === 'e1' || x.id === 'p1' || x.id === 'p2')).forEach(x => door(2, x.id, 'ccor', 0.5));
+    R[2].filter(x => x.st === 2 && (x.kind === 'croom' || (x.kind === 'spare' && !x.dcSide && x.r[0][0] < L.aB - 0.01) || x.id === 'e1' || x.id === 'p1' || x.id === 'p2')).forEach(x => door(2, x.id, 'ccor', 0.5));
     door(2, 's1', 'dcor', 0.5); door(2, 's2', 'dcor', 0.5); door(2, 'e2', 'dcor', 0.5);
-    R[2].filter(x => (x.kind === 'sroom' || (x.kind === 'spare' && x.r[0][0] >= L.aB - 0.01))).forEach(x => door(2, x.id, 'dcor', 0.5));
+    R[2].filter(x => (x.kind === 'sroom' || (x.kind === 'spare' && (x.dcSide || x.r[0][0] >= L.aB - 0.01)))).forEach(x => door(2, x.id, 'dcor', 0.5));
     door(3, 'hall', 's1', 0.5); door(3, 'hall', 's2', 0.5); door(3, 'hall', 'e2', 0.5);
   } else {
     ext(1, 'lob', 'a0', 0.5, sW); door(1, 'lob', 'cor', 0.5); ext(1, 'ref', 'a0', 0.5, sW); door(1, 'ref', 'cor', 0.5); if (by(1, 'shel')) door(1, 'shel', 'cor', 0.5);
@@ -585,8 +613,8 @@ function zonesOf(L) { const R = L.rooms, Z = [];
   const ids = (st, f) => (R[st] || []).filter(x => x.kind !== 'exitpas' && f(x)).map(x => x.id);
   if (L.kind === 'stacked') {
     Z.push({ name: 'hub', st: 1, pubCor: true, ids: ids(1, x => x.block === 'hub' && !x.core) });
-    if ((R[2] || []).some(x => x.block === 'clinic' && !x.core)) Z.push({ name: 'clinic', st: 2, ids: ids(2, x => (x.block === 'clinic' || (x.kind === 'spare' && x.r[0][0] < L.aB - 0.01)) && !x.core) });
-    Z.push({ name: 'storey 2 data centre', st: 2, ids: ids(2, x => (x.block === 'data centre' || (x.kind === 'spare' && x.r[0][0] >= L.aB - 0.01)) && !x.core) });
+    if ((R[2] || []).some(x => x.block === 'clinic' && !x.core)) Z.push({ name: 'clinic', st: 2, ids: ids(2, x => (x.block === 'clinic' || (x.kind === 'spare' && !x.dcSide && x.r[0][0] < L.aB - 0.01)) && !x.core) });
+    Z.push({ name: 'storey 2 data centre', st: 2, ids: ids(2, x => (x.block === 'data centre' || (x.kind === 'spare' && (x.dcSide || x.r[0][0] >= L.aB - 0.01))) && !x.core) });
     Z.push({ name: 'hall', st: 3, ids: ['hall'] });
   } else {
     Z.push({ name: 'hub', st: 1, pubCor: true, ids: ids(1, x => x.block === 'hub' && !x.core) });
