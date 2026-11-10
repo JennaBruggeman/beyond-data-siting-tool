@@ -347,3 +347,36 @@ Also from the check, for information:
 - From that front the lot is under 10 m wide for the first 6 m, so the tool's hub does not fit (it now says so, with this reason). Stepping the building back far enough to fit would put the lobby 28 m from the street, which breaks spec 15c (lobby on the main street), so Code capped the step-back at 6 m (drawing choice) instead.
 - The Part 4 hand fit draws the hub from a different street line, with the building moved 2.1 m for a walkway.
 - **Question:** for the tool, should the hub be laid out from the street line the hand fit uses (which one: Oak St?), even where the site model calls another line the front? Code has not changed the site model.
+
+## HANDOFF (Code, 10 Nov 2026): account switch, F2b half done
+**Branch `site-f1`, all local, nothing pushed.** GitHub has `site-f1` at 975c2e6 (pushed by J.B. 9 Nov after the purge; `main` and `overnight-2026-10-30` force-pushed then too). The commits since then are listed at the end of this section.
+
+### Where things stand
+- **Purge:** done and pushed (9 Nov). Backups `backup/pre-altalis-purge-2026-11-08-*` are local only: never push them. J.B. decided not to send the GitHub Support request (draft kept untracked: `checks/purge/github_support_request_2026-11-09.md`). `checks/push_list_2026-11-09.md` (untracked) is the pre-push list, now out of date.
+- **F2b (Emergency hub variants in `tool/hub.js`), J.B. chose "fix the layout too":**
+  - Done: corner and through named from the lot's streets (corner takes service from the side street); large, irregular, small and wide-shallow named from the job A1 lot type (`tool/data/lot_types.json`); the variant is shown on the cards.
+  - Done: turned variant (1353 Pender St E fits, 2.13 MW); large beside lots capped at 60 m frontage (14715 travel 46.7 → 40.3 m); irregular slanted fronts step back at most 6 m; refuge egress door fixes.
+  - Done: narrow-lot groundwork (front row deepens, lobby 6.0/5.0/4.0 m, overflow rooms beside the refuge, no clinic stairs or lift once the clinic drops).
+  - Test: `checks/tests/hub_lots.js` (nine spec test lots, summary only). Golden identical, F1 gate clean, spec copy check passes (8a2dcde).
+  - Result now: fits on 339, 1353, 64 Airport, 4103, 14715; **doesn't fit on 1330 Glen Dr, 8238 Fraser St, 1360 Frances St, 8980 Oak St** (hand fits fit 1330, 8238, 8980; 1360 only with generators upstairs).
+
+### Exact next step
+Build the narrow-lot layout in `tool/hub.js` for 1330 Glen Dr and 8238 Fraser St (stacked, Vancouver):
+- the hub's three bands run back from the street: refuge and shelter strip | public corridor | service strip, with the lobby across the corridor and service bands at the street end;
+- the data-centre entrance and bays at the far end of the depth;
+- the corridor's far-end exit: into the side drive (1330) or an exit passage along the lot line to the rear street (8238);
+- storey 2 and the hall as in `stacked()`.
+
+Follow the hand fits `tool/f1/eh_fits/v1330.json` and `v8238.json`. Trigger: `stacked()` fails on width (roughly W < 20 m). Then run `node checks/tests/hub_lots.js <out.json>` (tool served on :8766), the Part 7 tests (`hub_part7.js`, `--edm`), golden and the F1 gate.
+
+After that: 1360 Frances St's generators-upstairs variant (V1360) and the new Edmonton lot types Cowork drew on 10 Nov (10004, 15231, 16075, 10003: add them to `hub_lots.js`, outputs local only). Then the queue: Phase C sweep, F4 white model (tree tiles are built, git-ignored), Resident, Reports.
+
+### Waiting on J.B.
+1. **F7 small-lot band:** switch to buildable ground per the hub spec's 10 Nov "Lot or buildable" note (750 m² at grade; about 512 m² Vancouver, about 408 m² Edmonton with generators upstairs), or keep "about 530 m² lot area"?
+2. **8980 Oak St front line** (section above): lay the hub out from Oak St (the hand fit's line) when the site model calls another line the front?
+3. **"Meets code as read" label** (register quote check, item 3): VBBL 3.6.2.8 covers emergency generators; keep the label or add "(emergency generators; standby ?)"?
+4. The other three spec conflicts from the register quote check (flood clause Div. C; FM 5-32 and transformers; pool construction 3.2.2.29), and the ES54 PDF a subagent's web read saved into Claude's session folder (delete it, or move it into the library?).
+5. `checks/trust_to_rate_2026-11-09.md`: the separate rating round.
+
+### Commits on site-f1 not on GitHub
+Listed by `git log --oneline origin/site-f1..site-f1` (this handoff commit on top).
