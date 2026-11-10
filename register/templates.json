@@ -205,6 +205,15 @@
    ],
    "why": "rules the Community pool spec will apply: spec, not live yet"
   },
+  "hub_small_lot_rules": {
+   "tier": "arch_only",
+   "parties": [
+    "operator",
+    "neighbours",
+    "city"
+   ],
+   "why": "rules for the Emergency hub on a small lot: spec, not live yet"
+  },
   "site_trees": {
    "tier": "arch",
    "parties": [
@@ -2983,6 +2992,10 @@
    [
     "site_trees",
     "input"
+   ],
+   [
+    "hub_small_lot_rules",
+    "test"
    ]
   ],
   "edges": [
@@ -4517,12 +4530,16 @@
    [
     "parcel",
     "site_trees"
+   ],
+   [
+    "massing",
+    "hub_small_lot_rules"
    ]
   ]
  },
  "resident_count": 42,
  "full_count": 211,
- "arch_count": 157,
+ "arch_count": 158,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

@@ -44,6 +44,8 @@ T = {
  # 9 Nov 2026: Heat cascade and Community pool spec sources (register_additions_2026-11-09_*.md), spec, not live yet
  'heat_cascade_spec_rules': ('arch_only', 'operator neighbours city', 'rules the Heat cascade spec will apply: spec, not live yet'),
  'community_pool_spec_rules': ('arch_only', 'operator neighbours city', 'rules the Community pool spec will apply: spec, not live yet'),
+ # 9 Nov 2026: Emergency hub generators-upstairs variant (patch typology_research_2026_11_09.py), spec, not live yet
+ 'hub_small_lot_rules': ('arch_only', 'operator neighbours city', 'rules for the Emergency hub on a small lot: spec, not live yet'),
  # 9 Nov 2026: job F4, City tree inventories (patch f4_trees_2026_11_09.py), data ready, view not built yet
  'site_trees': (C, 'neighbours city', 'trees around the lot: data ready, white model not built yet'),
  'start_case': (R, 'host operator', 'new, shared, retrofit or leased: assumed for residents, shown and changeable'),
