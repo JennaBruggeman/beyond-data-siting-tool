@@ -377,7 +377,7 @@ function stackedRest(C, B, W, Da) {
   }
   /* storey 1 DC entrance row */
   const dcGuess = W * (Da - aB) + (W * Da - 2 * SW * SL - RULES.e2.w * RULES.e2.l) + 3 * 20;
-  const nDC = van ? bays5_2_5(dcGuess) : 0, nRef = van ? (hubArea < 100 ? 0 : Math.ceil(hubArea / 2800)) : 0, nCl = van ? (clin < 500 ? 0 : clin <= 5000 ? 1 : clin <= 10000 ? 2 : 3) : 0;
+  const nDC = van ? bays5_2_5(dcGuess) : 0, nRef = van ? (hubArea < 100 ? 0 : rh517(hubArea / 2800)) : 0, nCl = van ? (clin < 500 ? 0 : clin <= 5000 ? 1 : clin <= 10000 ? 2 : 3) : 0;
   let nb = van ? (st.shared ? Math.max(nDC, nRef) + nCl : nDC + nRef + nCl) : null;
   if (!van) { const tot = hubArea + clin + dcGuess; nb = tot < 2500 ? 0 : tot <= 7500 ? 1 : 2; }
   const bayL = B.bayL, bayW = B.bayW;
@@ -483,7 +483,7 @@ function narrowLot(C) {
   };
   /* the loading count from the floor areas (Parking By-law 5.2.5, 5.2.3; no clinic), then the depth */
   const nbOf = (P, Dend) => { const hub = P.areaRS + (P.W - P.Wr) * P.aE; const dc = 2 * P.W * P.aE + 2 * P.W * (Dend - P.aE);
-    const nDC = van ? bays5_2_5(dc) : 0, nRef = van ? (hub < 100 ? 0 : Math.ceil(hub / 2800)) : 0; if (!van) return { nb: hub + dc < 2500 ? 0 : hub + dc <= 7500 ? 1 : 2, nDC, nRef };
+    const nDC = van ? bays5_2_5(dc) : 0, nRef = van ? (hub < 100 ? 0 : rh517(hub / 2800)) : 0; if (!van) return { nb: hub + dc < 2500 ? 0 : hub + dc <= 7500 ? 1 : 2, nDC, nRef };
     return { nb: st.shared ? Math.max(nDC, nRef) : nDC + nRef, nDC, nRef }; };
   const depthOf = (P, nb) => r2(P.aE + dAx + (drive ? nb * bayW : bayL));
   let W = L0(Math.min(40, C.aMax)), P = null, nbr = null, Dend = null, why = null;
@@ -589,7 +589,10 @@ function narrowLot(C) {
     storeyNames: ['Hub at grade, bands back from the street; data-centre entrance rooms at the rear', 'Data-centre support over the hub; unassigned floor', 'One data-hall storey over the hub'] };
   return L;
 }
-function bays5_2_5(m2) { return m2 <= 0 ? 0 : m2 <= 465 ? 1 : m2 <= 2325 ? 2 : 2 + Math.ceil((m2 - 2325) / 2325); }
+/* Parking By-law 6059 row 5.2.5 Class B: one for the first 465 m², one for the next 1,860 (to 2,325), one per further 2,325; fractions to the nearest
+   whole number above zero, one-half up (5.1.7; register arch_up3_vanPkg5). Was rounded up (10 Nov 2026 fix; no test lot changes: the hub caps the data centre at 2,325 m²) */
+const rh517 = x => Math.max(1, Math.floor(x + 0.5));
+function bays5_2_5(m2) { return m2 <= 0 ? 0 : m2 <= 465 ? 1 : m2 <= 2325 ? 2 : 2 + Math.floor((m2 - 2325) / 2325 + 0.5); }
 function subR(a, b) { if (!(b[0] < a[1] - 1e-6 && b[1] > a[0] + 1e-6 && b[2] < a[3] - 1e-6 && b[3] > a[2] + 1e-6)) return [a]; const o = [];
   if (b[0] > a[0]) o.push([a[0], b[0], a[2], a[3]]); if (b[1] < a[1]) o.push([b[1], a[1], a[2], a[3]]); const m0 = Math.max(a[0], b[0]), m1 = Math.min(a[1], b[1]);
   if (b[2] > a[2]) o.push([m0, m1, a[2], b[2]]); if (b[3] < a[3]) o.push([m0, m1, b[3], a[3]]); return o.filter(r => ra(r) > 0.05).map(r => r.map(r2)); }
