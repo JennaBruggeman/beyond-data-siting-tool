@@ -25,6 +25,11 @@ function ptSeg(px,py,ax,ay,bx,by){ const dx=bx-ax,dy=by-ay,L=dx*dx+dy*dy; let t=
 function ptRing(px,py,r){ let b=1e12; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) b=Math.min(b,ptSeg(px,py,r[j],r[j+1],r[i],r[i+1])); return b; }
 function ringRing(a,b){ let d=1e12; for(let i=0;i<a.length;i+=2) d=Math.min(d,ptRing(a[i],a[i+1],b)); for(let i=0;i<b.length;i+=2) d=Math.min(d,ptRing(b[i],b[i+1],a)); return d; } /* edge to edge, 0 if they touch at a vertex; our arithmetic */
 const ringArea=r=>{ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=r[j]*r[i+1]-r[i]*r[j+1]; return Math.abs(s)/2; };
+/* 10 Nov 2026 (Municipal report, main chat): the area inside the yard line itself (M.yardOff: each lot line moved in by its own yard), not clipped to
+   the lot's rectangular frame (which read low on skewed lots, 339 1st Ave E 1,738 m²); and the part within the zone's greatest depth of the front yard line */
+const yardAreas=M=>{ const yo=M.yardOff&&!M.yardOffBad?M.yardOff:null; if(!yo) return null; const all=ringArea(yo), mx=M.Z&&M.Z.yards&&M.Z.yards.max; let dIn=null;
+  if(mx&&M.F&&M.uFront!=null&&M.dir&&BD.geo){ const F=M.F, u1=M.uFront-M.dir*mx, c=BD.geo.clip(yo,BD.geo.rectW(F,Math.min(M.uFront,u1),Math.max(M.uFront,u1),-F.W,F.W)); dIn=c&&c.length>=6?ringArea(c):null; }
+  return {all,dIn,mx}; };
 /* streets of the city, light; the base of the maps */
 async function streetsD(city,f,bb){ const st=await BD.streets(city); if(!st) return ''; let sd='';
   for(const g of st.segs){ let ok=false; for(let i=2;i+1<g.length;i+=2) if(g[i]>=bb[0]&&g[i]<=bb[2]&&g[i+1]>=bb[1]&&g[i+1]<=bb[3]){ ok=true; break; } if(!ok) continue;
@@ -124,7 +129,7 @@ C.add(T,'What the lot allows',{async build(x){
   const M=x.M, Z=M.Z, r=x.sel.ring; if(!r||!Z) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
   const E=(M.edgeYards||[]).filter(e=>isFinite(e.ax)), b=C.bbox(r), cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, half=Math.max(b[2]-b[0],b[3]-b[1])/2*1.45+6, W=390, H=390;
   const bb=[cx-half,cy-half,cx+half,cy+half], f=C.frame(bb,W,H,0), st=await streetsD(x.city,f,bb), [gx,gy]=f.P(cx,cy);
-  const yl=M.yardLine&&!M.yardOffBad?M.yardLine:null, buildable=yl?ringArea(yl):null;
+  const yl=M.yardLine&&!M.yardOffBad?M.yardLine:null, YA=yardAreas(M), buildable=YA?YA.all:(yl?ringArea(yl):null);
   const mk=E.map((e,i)=>{ const [a1,a2]=f.P(e.ax,e.ay), [b1,b2]=f.P(e.bx,e.by), mx=(a1+b1)/2, my=(a2+b2)/2; let nx=-(b2-a2), ny=b1-a1; const L=Math.hypot(nx,ny)||1; nx/=L; ny/=L; if(nx*(mx-gx)+ny*(my-gy)<0){ nx=-nx; ny=-ny; }
     const px=mx+nx*15, py=my+ny*15, front=e.kind==='front';
     return `<line x1="${a1.toFixed(1)}" y1="${a2.toFixed(1)}" x2="${b1.toFixed(1)}" y2="${b2.toFixed(1)}" stroke="${K.ink}" stroke-width="${front?4:1.8}"/><circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="8" fill="#fff" stroke="${K.ink}" stroke-width="0.8"/><text x="${px.toFixed(1)}" y="${(py+4).toFixed(1)}" text-anchor="middle" font-size="11" fill="${K.ink}">${String.fromCharCode(65+i)}</text>`; }).join('');
@@ -141,10 +146,10 @@ C.add(T,'What the lot allows',{async build(x){
   const miss=[]; if(Z.assumed) miss.push('zone limits for this zone (the tool borrows another zone’s limits to draw)');
   return {draw:`<div class="f1c-site-wrap">${svg}${key}${tbl}</div>`,lead:'The zoning envelope: yards, height and floor area. Anything the typology places must sit inside it. Rezonings and variances come later as flagged options.',
     hero:[{v:H0?n1(H0):C.q(),u:H0?' m':'',l:'height limit'},{v:fs,u:fsr?' × lot':'',l:'floor space ratio'},{v:buildable?n0(buildable):C.q(),u:buildable?' m²':'',l:'inside the yards'}],
-    rows:[['Floor area, at most',maxFloor?`${n0(maxFloor)} m²`:C.q()],['Front · side · rear yard',`${n1(y.front)} · ${n1(y.side)} · ${n1(y.rear)} m${x.city==='edm'?' (by edge, see key)':''}`],['Ground floor',Z.ground?'no data storage, except entrances':'no ground-floor rule found']],
+    rows:[['Floor area, at most',maxFloor?`${n0(maxFloor)} m²`:C.q()]].concat(YA&&YA.dIn?[[`Inside the yards, within ${n0(YA.mx)} m of the front yard line`,`${n0(YA.dIn)} m²`]]:[]).concat([['Front · side · rear yard',`${n1(y.front)} · ${n1(y.side)} · ${n1(y.rear)} m${x.city==='edm'?' (by edge, see key)':''}`],['Ground floor',Z.ground?'no data storage, except entrances':'no ground-floor rule found']]),
     more:[['Each rule and its clause',`<table class="f1c-site-ed">${(Z.cl||[]).map(c=>`<tr><td style="width:90px">${esc(c[0])}</td><td>${esc(c[1])}<small>${esc(c[2])}</small></td></tr>`).join('')}</table>${Z.warn?`<p>${esc(Z.warn.replace(/<[^>]+>/g,''))}</p>`:''}`],['Floor area with approval',`<p>${fc?esc(fc.t)+' ('+esc(fc.s)+')':'No increase clause is read for this zone.'}</p>`]],
     src:['Height: Z.hOutright and Z.hx from the zone row, drawn as the Municipal card’s bullet graph; rooftop equipment: tool/data/arch.json roofEquip (registers arch_hb_edm570, arch_up_vanZDB10).',`Zone limits and clauses: tool/data/zones.json, row ${Z.vkey||Z.key} (${((C.dcStatus?C.dcStatus(x.city,Z.vkey||Z.key).src:[])||[]).join(', ')||'envelope'}).`,
-      `Lot lines: each line's class and yard from lotside.js and site.js (${((M.yards&&M.yards.src)||[]).join(', ')||'?'}); classes marked ? are our reading.`,'Inside the yards: the area of the yard line (M.yardLine), our arithmetic'+(M.yardOffBad?'; the yard line folds on this lot, so no area is given (?)':'')+'. Maximum floor area: floor space ratio × lot area, our arithmetic.',C.CONTEXT_SRC(x.city)],missing:miss}; }});
+      `Lot lines: each line's class and yard from lotside.js and site.js (${((M.yards&&M.yards.src)||[]).join(', ')||'?'}); classes marked ? are our reading.`,'Inside the yards: the area inside the yard line (each lot line moved in by its own yard, M.yardOff; before 10 Nov 2026 clipped to the lot’s rectangular frame, which read low on skewed lots), our arithmetic'+(M.yardOffBad?'; the yard line folds on this lot, so no area is given (?)':'')+'. Maximum floor area: floor space ratio × lot area, our arithmetic.',C.CONTEXT_SRC(x.city)],missing:miss}; }});
 
 /* ===== A07 Ground and flood (Vancouver: one scale, CGVD28 GVRD; Edmonton: datum and flood level not in the tool) ===== */
 C.add(T,'Ground and flood',{async build(x){

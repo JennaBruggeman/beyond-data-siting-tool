@@ -24,6 +24,11 @@ const redQ='<tspan fill="'+RED+'">?</tspan>';
 const hasQ=(Z,f)=>!!Z&&(!!Z.assumed||(Z.q||[]).includes(f)); /* a field the zone row does not give: the tool borrows another zone's figure only to draw */
 const zoneName=(x)=>x.sel&&x.sel.a?String(x.city==='van'?(x.sel.a[1]||''):(x.sel.a[2]||x.sel.a[1]||'')).trim():'?';
 const ringArea=r=>{ let s=0; for(let i=0,j=r.length-2;i<r.length;j=i,i+=2) s+=r[j]*r[i+1]-r[i]*r[j+1]; return Math.abs(s)/2; };
+/* 10 Nov 2026 (Municipal report, main chat): the area inside the yard line itself (M.yardOff: each lot line moved in by its own yard), not clipped to
+   the lot's rectangular frame (which read low on skewed lots, 339 1st Ave E 1,738 m²); and the part within the zone's greatest depth of the front yard line */
+const yardAreas=M=>{ const yo=M.yardOff&&!M.yardOffBad?M.yardOff:null; if(!yo) return null; const all=ringArea(yo), mx=M.Z&&M.Z.yards&&M.Z.yards.max; let dIn=null;
+  if(mx&&M.F&&M.uFront!=null&&M.dir&&BD.geo){ const F=M.F, u1=M.uFront-M.dir*mx, c=BD.geo.clip(yo,BD.geo.rectW(F,Math.min(M.uFront,u1),Math.max(M.uFront,u1),-F.W,F.W)); dIn=c&&c.length>=6?ringArea(c):null; }
+  return {all,dIn,mx}; };
 const streetsD=async(city,f,bb)=>{ const st=await BD.streets(city); if(!st) return ''; let sd=''; for(const g of st.segs){ let ok=false; for(let i=2;i+1<g.length;i+=2) if(g[i]>=bb[0]&&g[i]<=bb[2]&&g[i+1]>=bb[1]&&g[i+1]<=bb[3]){ ok=true; break; } if(!ok) continue;
   for(let i=2;i+1<g.length;i+=2){ const [a,b]=f.P(g[i],g[i+1]); sd+=(i>2?'L':'M')+a.toFixed(1)+' '+b.toFixed(1); } } return sd; };
 const KN={front:'Front',side:'Side',rear:'Rear',flank:'Flank',unclear:'Unclear'};
@@ -145,14 +150,14 @@ C.add(T,'Yards by edge',{async build(x){
   const note=ours?`<div class="f1c-mb-note">Which line is the front, side or rear is our reading of the by-law’s yard diagram; the City has not confirmed it.</div>`:'';
   const tbl=`<table class="f1c-mb-ed two">${edges.map(e=>`<tr><td><b class="l">${e.letter}</b></td><td>${KN[e.kind]||esc(e.kind)} · ${e.d>0?'yard '+n1(e.d)+' m':'no yard'} · ${n0(e.len)} m long${e.abuts?' · faces '+esc(abutWord(e.abuts)):''}${ourReading(e)?' · <span style="color:'+RED+'">our reading ?</span>':''}<small>${esc(e.why||'')}</small></td></tr>`).join('')}</table>`;
   const by=k=>{ const d=edges.filter(e=>e.kind===k).map(e=>e.d); if(!d.length) return null; const lo=Math.min(...d), hi=Math.max(...d); return lo===hi?n1(lo):n1(lo)+' to '+n1(hi); };
-  const buildable=yl?ringArea(yl):null, yz=Z.yards||{}, yc=clause(Z,/^(Yards|Setbacks)/i);
+  const YA=yardAreas(M), buildable=YA?YA.all:(yl?ringArea(yl):null), yz=Z.yards||{}, yc=clause(Z,/^(Yards|Setbacks)/i);
   const miss=[]; if(Z.assumed) miss.push('yards for this zone (it has no data-centre row in the tool)'); if(!yl) miss.push('yard line (no yard figure, or it folds on this lot)'); if(edges.some(e=>e.kind==='unclear')) miss.push('class of one or more lot lines (unclear)');
   const rows=[['Front yard',by('front')?`${by('front')} m`:'no front line found'],['Side yard',by('side')?`${by('side')} m`:'none found'],['Rear yard',by('rear')?`${by('rear')} m`:'none found']]
-    .concat(yz.max?[['Building width or depth, at most',`${n0(yz.max)} m`]]:[]).concat([['Buildable area inside the yards',buildable?`${n0(buildable)} m²`:C.q()]]);
+    .concat(yz.max?[['Building width or depth, at most',`${n0(yz.max)} m`]]:[]).concat([['Buildable area inside the yards',buildable?`${n0(buildable)} m²`:C.q()]]).concat(YA&&YA.dIn?[[`Inside the yards, within ${n0(YA.mx)} m of the front yard line`,`${n0(YA.dIn)} m²`]]:[]);
   return {draw:`<div class="f1c-mb-wrap">${svg}<div class="f1c-key">${edgeKey(pl)}</div>${note}${edges.length<=6?tbl:''}</div>`,lead:`Each lot line is classed as front, side or rear, and each class has its own yard. ${zoneName(x)}, ${gcite(Z,x)}.`,
     hero:[by('front')&&{v:by('front'),u:' m',l:'front yard'},by('side')&&{v:by('side'),u:' m',l:'side yard'},by('rear')&&{v:by('rear'),u:' m',l:'rear yard'}].filter(Boolean),
     rows,more:[['Each lot line',tbl],['Each rule and its clause',`<table class="f1c-mb-ed">${(Z.cl||[]).filter(c=>/^(Yards|Setbacks)/i.test(c[0])).map(c=>`<tr><td style="width:90px">${esc(c[0])}</td><td>${esc(c[1])}<small>${esc(c[2])}</small></td></tr>`).join('')}</table>`],['How each line was classed',`<p>${esc(((M.yards&&M.yards.src)||[]).join(', ')||'')}. Where the by-law gives different yards by what a line faces (street, lane, neighbouring zone), the tool reads that from the City’s street and zone data.</p>`]],
-    src:[srcZone(x),`Each lot line’s class and yard: the tool’s lot-line reading (lotside.js, site.js; ${((M.yards&&M.yards.src)||[]).join(', ')||'?'}); lines marked "our reading" are ours, not the City’s.`,'Buildable area: the area of the yard line (M.yardLine), our arithmetic'+(M.yardOffBad?'; the yard line folds on this lot, so no area is given (?)':'')+'.',C.CONTEXT_SRC(x.city)],missing:miss}; }});
+    src:[srcZone(x),`Each lot line’s class and yard: the tool’s lot-line reading (lotside.js, site.js; ${((M.yards&&M.yards.src)||[]).join(', ')||'?'}); lines marked "our reading" are ours, not the City’s.`,'Buildable area: the area inside the yard line (each lot line moved in by its own yard, M.yardOff; before 10 Nov 2026 it was clipped to the lot’s rectangular frame and read low on skewed lots), our arithmetic'+(M.yardOffBad?'; the yard line folds on this lot, so no area is given (?)':'')+'.',C.CONTEXT_SRC(x.city)],missing:miss}; }});
 
 /* ===== M7 Noise limits around the lot (job F1b item 4): each lot within ~340 m filled by the night limit at that lot, at the point of reception ===== */
 const NR=340;
