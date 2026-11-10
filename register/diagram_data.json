@@ -6,10 +6,10 @@
 "rule": "A quantity's confidence is the lowest of its inputs; a condition's is the lowest of its quantities; a match fails at its weakest link; burdens are recorded beside, never netted.",
 "counts": {
 "inputs": 17,
-"quantities": 223,
+"quantities": 224,
 "conditions": 112,
 "opportunities": 14,
-"sources": 1701
+"sources": 1703
 }
 },
 "stages": [
@@ -13959,6 +13959,34 @@
 "both": 0,
 "gen": 2
 }
+},
+{
+"id": "site_trees",
+"kind": "quantity",
+"stage": "input",
+"name": "Trees around the lot (data ready, view not built yet)",
+"formula": "City tree inventory points within the white model's context radius, drawn as simple trees sized from the inventory's height (Vancouver, classes) or trunk diameter (Edmonton), else one default size (labelled). City-owned trees only; private trees missing. Not computed or shown by the tool yet (job F4).",
+"coef": "none: positions and sizes as the City records them",
+"unit": "trees",
+"sources": [
+"vanPublicTrees2026",
+"edmTrees2026"
+],
+"source_roles": [],
+"conf": 80,
+"status": "data ready, view not built yet (9 Nov 2026)",
+"direction": "",
+"trial": "",
+"inputs": [
+"parcel"
+],
+"upstream": 80,
+"city": {
+"van": 1,
+"edm": 1,
+"both": 0,
+"gen": 0
+}
 }
 ],
 "edges": [
@@ -15489,6 +15517,10 @@
 {
 "from": "massing",
 "to": "community_pool_spec_rules"
+},
+{
+"from": "parcel",
+"to": "site_trees"
 }
 ],
 "conditions": [
@@ -20311,7 +20343,9 @@
 "vbbl25_31171": "RULE: Vancouver Building By-law 2025, vol. 1, Div. B 3.1.17.1 and Table 3.1.17.1 (PDF pp. 174–175): occupant load = the number of persons the area is designed for, but not less than the table, unless it can be shown the area will hold fewer (then a permanent posted sign, (2)); rooms used for different occupancies at different times take the value giving the most persons ((4)). Areas per person: assembly space with non-fixed seats 0.75 m2, non-fixed seats and tables 0.95, standing 0.40, dining 1.20; dormitories 4.60; personal services shops 4.60; offices 9.30; care, treatment and sleeping room areas 10.00; kitchens 9.30; storage 46.00. First read by Cowork (Claude Link register_additions_2026-11-08.md, row vbbl25_31171; not added to the register then); second check by Code from J.B.'s copy, 8 Nov 2026. Trust 90.",
 "edmPropInfo2026": "City of Edmonton Open Data, Property Information (Current Calendar Year), https://data.edmonton.ca/d/dkk9-cj3x, full export received 13 Oct 2026 (439,696 accounts as points; docs/retrieval_guide.md N4), joined on account number with Property Assessment Data (Current Calendar Year), q7d6-ambg (N4b): data/edmonton_properties_2026.csv (raw data, not in git). The tool's Edmonton lot points, addresses and zones (tool/make_tiles.py) and the Edmonton lot counts in tool/data/approval_counts.json. Licence: Open Government Licence – Edmonton v1.0 (as edm_3dBuildings). Trust 80.",
 "rule_codeLevel": "DECISION (J.B., 9 Nov 2026): Claude Link CODE_LEVEL_RULE_2026-11-09.md, how far the code checks go. Check the big moves: use and approval; envelope (height, floor area, yards, depth, flood construction level); separations (2 h between data centre and public programs, nothing wet over the hall); exits (two per zone, travel 45 m, exits apart, dead ends 6 m, egress doors for rooms over 60 people, exit width by load, no public exits through data-centre space or plant yards); room minimum area and width; washroom counts by load (VBBL 3.7.2.2) and one universal washroom per hub; loading counts; plant clearances; step-free entry. Not checked (detailed design): fixture layouts, accessible stalls, door swings, grab bars, edge-vs-centre measurement and other sub-0.5 m refinements, finishes, hardware, signage, lighting, intake and exhaust placement. Tolerance: a result within 0.5 m (or 5 %) of a limit is 'tight: check in design', not re-planned; re-plan only when a big-move rule fails by more. A decision, not a source: no trust rating (n/a).",
-"van_landUseTable2023": "REFERENCE ONLY, SUPERSEDED: City of Vancouver, 'Land Uses by Zoning District', Oct 2023 (summary table; web, read through WebFetch, small-model read). Out of date against the June 2026 district schedules: reads Bulk Data Storage and Urban Farm - Class B as outright in I-2 and I-3 and omits Beauty and Wellness Centre. The schedules govern (van_zdb_i2, van_zdb_i3). Kept as the conflict record only; no figure uses it. Trust 50 (reference only). Spec, not live yet (Heat cascade Part 2a, conflict record). (Claude Link register_additions_2026-11-09_heat_cascade.md)"
+"van_landUseTable2023": "REFERENCE ONLY, SUPERSEDED: City of Vancouver, 'Land Uses by Zoning District', Oct 2023 (summary table; web, read through WebFetch, small-model read). Out of date against the June 2026 district schedules: reads Bulk Data Storage and Urban Farm - Class B as outright in I-2 and I-3 and omits Beauty and Wellness Centre. The schedules govern (van_zdb_i2, van_zdb_i3). Kept as the conflict record only; no figure uses it. Trust 50 (reference only). Spec, not live yet (Heat cascade Part 2a, conflict record). (Claude Link register_additions_2026-11-09_heat_cascade.md)",
+"vanPublicTrees2026": "City of Vancouver Open Data, Public trees (dataset public-trees; publisher City of Vancouver, data team Vancouver Board of Parks and Recreation): 'a listing of public trees on boulevards and public trees in parks'; 'Private trees are not included in the inventory'; coordinates from the 2016 Geospatial Data for City of Vancouver Street Trees project; refreshed daily on weekdays, some attributes 'several years between updates' (portal description, read 9 Nov 2026). File public-trees-new.csv (38,882,173 bytes, ';'-separated, J.B. download 9 Nov 2026 about 14:22 UTC, before the portal's 14:49 UTC refresh: the file has 184,152 rows, the portal 184,085 after it). Columns: Asset ID, Address, Common name, Genus, Species, Cultivar, height_(m), diameter_(cm), Local Area, Geom, geo_point_2d. Heights are classes (mostly 4.6, 7.6, 10.7 m: 15, 25, 35 ft), not measurements (our reading of the values). Our counts: 1 row with no coordinates, 193 outside the city (191 on UBC/UEL land along NW Marine Drive west of Blanca, 2 in Mount Pleasant at a gap in the zoning layer), 183,958 kept; 2 with no height, 469 with no diameter; no duplicate ids. Tiles: tool/tiles/van/r_*.json (73 tiles, git-ignored). Licence: Open Government Licence - Vancouver v1.0 (https://opendata.vancouver.ca/pages/licence/); the City gives no dataset-specific attribution, so: 'Contains information licensed under the Open Government Licence – Vancouver.' Trust 80. — https://opendata.vancouver.ca/explore/dataset/public-trees/",
+"edmTrees2026": "City of Edmonton Open Data, Trees (dataset eecg-fc54; attribution 'City of Edmonton', link edmonton.ca urban forestry): 'Boulevard and Open Space Trees owned and maintained by the City of Edmonton - not all City-owned trees are captured'; purpose 'List of all trees owned and maintained by the City of Edmonton'; updated monthly; rows updated 9 Nov 2026 09:42 UTC (portal metadata, read 9 Nov 2026). File Trees_20261109.csv (142,636,712 bytes, J.B. download 9 Nov 2026), 489,543 rows. Columns include LOCATION_TYPE, SPECIES, DIAMETER_BREAST_HEIGHT, CONDITION_PERCENT, PLANTED_DATE, OWNER, LATITUDE, LONGITUDE; no height column. Location types: Park 185,762, Boulevard 163,133, Buffer 41,723, Naturalized Park 36,975, Monowalk 24,013 and smaller groups: park and natural-area trees are included, so 'street trees only' is wrong for Edmonton. Our counts: 0 rows with no coordinates, 0 outside the city, 489,543 kept; 1,073 with no diameter; no duplicate ids. Tiles: tool/tiles/edm/r_*.json (120 tiles, git-ignored). Licence: the dataset names 'See Terms of Use': Open Government Licence - Edmonton v1.0, July 2022 (https://data.edmonton.ca/stories/s/City-of-Edmonton-Open-Data-Terms-of-Use/msh8-if28). Attribution: 'City of Edmonton'; the licence's default statement: 'Contains information licensed under the Open Government Licence – City of Edmonton.' Trust 80. — https://data.edmonton.ca/d/eecg-fc54"
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -23651,7 +23685,9 @@
 "edm_3dBuildings": "government data",
 "edm_rooflines": "government data",
 "canvecHydroAB": "government data",
-"van_landUseTable2023": "city web page (reference only, superseded)"
+"van_landUseTable2023": "city web page (reference only, superseded)",
+"vanPublicTrees2026": "government dataset (City open data)",
+"edmTrees2026": "government dataset (City open data)"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -26443,7 +26479,9 @@
 "vbbl25_31171": "van",
 "edmPropInfo2026": "edm",
 "rule_codeLevel": "van",
-"van_landUseTable2023": "van"
+"van_landUseTable2023": "van",
+"vanPublicTrees2026": "van",
+"edmTrees2026": "edm"
 },
 "city_gaps": {
 "van": [

@@ -44,6 +44,8 @@ T = {
  # 9 Nov 2026: Heat cascade and Community pool spec sources (register_additions_2026-11-09_*.md), spec, not live yet
  'heat_cascade_spec_rules': ('arch_only', 'operator neighbours city', 'rules the Heat cascade spec will apply: spec, not live yet'),
  'community_pool_spec_rules': ('arch_only', 'operator neighbours city', 'rules the Community pool spec will apply: spec, not live yet'),
+ # 9 Nov 2026: job F4, City tree inventories (patch f4_trees_2026_11_09.py), data ready, view not built yet
+ 'site_trees': (C, 'neighbours city', 'trees around the lot: data ready, white model not built yet'),
  'start_case': (R, 'host operator', 'new, shared, retrofit or leased: assumed for residents, shown and changeable'),
  'receivers': (C, 'receiver', 'who could take the heat'), 'receiver_temp': (F, 'receiver', 'engineering input'),
  'receptors': (C, 'neighbours', 'who is close enough to hear it'), 'zone': (R, 'city neighbours', 'what the land is zoned for'),
