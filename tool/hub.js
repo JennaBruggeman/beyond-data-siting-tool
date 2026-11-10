@@ -42,6 +42,7 @@ const RULES = {
   pexit: { w: 1.2, why: 'exit passages 1.2 m (≥ 1.1 m, VBBL 3.3.1.9; 2 h)' },
   storeyH: { hall: 6.0, up: 4.0, why: 'hall storey 6.0 m (drawing choice, TIA-942 unread); upper storeys 4.0 m (I-2 3.2.2.9 / I-3 3.1.2.9 minimum); ground 6.1 m I-2 (3.1.2.4), 6.0 m I-3 (3.1.2.9); Edmonton one storey at 6.0 m (no storey minimum in BE, drawing choice)' },
   hallPerMW: { v: 630, why: 'data hall 630 m² a MW (spec 1b: fits use the tool’s low-MW end; dc_rooms.json arch_dc_hall)' },
+  largeW: { w: 60, why: 'beside variant: the building takes at most 60 m of frontage; on wider lots the rest of the land stays open (spec Part 2 large lot; drawing choice, F2b 9 Nov 2026: at 85 m the data-centre travel on 14715 Yellowhead Trail was 46.7 m, over 45 m)' },
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
   base: { why: 'base surface: the corner grades joined by triangles; both triangulations computed (fans from neighbouring corners: on a four-corner lot the two diagonals) and the lower surface used under the building (Z&D s. 2 joins the corner grades; J.B. 8 Nov, our reading)' },
@@ -163,15 +164,27 @@ function layout(S0) {
   const lad = [{ k: 1, t: 'full program', exams: 13, shelter: true, shared: false }, { k: 2, t: 'clinic 13 → 5 exam rooms', exams: 5, shelter: true, shared: false },
     { k: 3, t: 'no clinic', exams: 0, shelter: true, shared: false }, { k: 4, t: 'shelter merged into the refuge (day)', exams: 0, shelter: false, shared: false },
     { k: 5, t: 'shared loading by approval (Parking By-law 5.1.5)', exams: 0, shelter: false, shared: true }];
-  let out = null, why = [];
-  for (const st of lad) {
-    const tryMW = mw => (variant.main === 'stacked' ? stacked : beside)({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags });
-    let mw = S.mw || 1.8, L = tryMW(mw);
-    if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
-    /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
-    let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - 0.25); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail) break; L = L2; }
-    if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
-    out = L; out.ladder = { step: st.k, what: st.t, limiting: why.slice() }; break;
+  const ladder = extra => { const why = [];
+    for (const st of lad) {
+      const tryMW = mw => (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {}));
+      let mw = S.mw || 1.8, L = tryMW(mw);
+      if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
+      /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
+      let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - 0.25); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail) break; L = L2; }
+      if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
+      L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
+    }
+    return { out: null, why }; };
+  let { out, why } = ladder();
+  /* TURNED (spec Part 2, wide-shallow lots; F2b 9 Nov 2026): no yard behind the building for the plant, so the building takes less than the
+     frontage and the plant goes in a yard beside it, the bands still running along the street (as the 1353 Pender St E hand fit). The widest
+     building that works is kept: the plant yard grows 2 m at a time (drawing choice). A screened street-front plant yard is not drawn (?). */
+  if (!out && variant.main === 'stacked') {
+    const fr = streets.find(e => e.kind === 'front'), frw = fr ? Math.hypot(fr.b[0] - fr.a[0], fr.b[1] - fr.a[1]) : 0, sp0 = spanOver(0, Math.min(40, aMax));
+    if (sp0 && (ltype === 'wide_shallow' || frw > aMax)) { const Wfull = r2(sp0[1] - sp0[0]);
+      for (let cut = 8; cut <= Wfull - 20 && !out; cut += 2) { const t = ladder({ maxW: r2(Wfull - cut), Wfull, turned: true }); if (t.out) { out = t.out; out.turnedYard = cut; } }
+      if (out) { variant.flags.push('turned'); variant.notBuilt = variant.notBuilt.filter(x => x !== 'turned');
+        flags.push(`Turned (spec Part 2): the building takes ${out.W} m of the ${Wfull} m width; the plant stands in a yard about ${out.turnedYard} m wide beside it, the bands still along the street (drawing choice; a screened street-front yard not drawn)`); } }
   }
   if (!out) { res.doesntFit = { limiting: why }; res.variant = variant; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
     const front = streets.find(e => e.kind === 'front'), fw = front ? Math.hypot(front.b[0] - front.a[0], front.b[1] - front.a[1]) : null;
@@ -205,7 +218,7 @@ function stacked(C) {
   const { st, van } = C, cw = RULES.cor.w, SW = RULES.stair.w, SL = RULES.stair.l, dR = RULES.rowR.d, wcm = RULES.wcMod.w, sm = RULES.smallRoom.w;
   /* the width: the yard across the first 40 m (refined once the depth is known) */
   let sp = C.spanOver(0, Math.min(40, C.aMax)); if (!sp) return { fail: 'no buildable width' };
-  let W = r2(sp[1] - sp[0]);
+  let W = r2(sp[1] - sp[0]); if (C.maxW) W = Math.min(W, C.maxW);   /* turned: a narrower building, the plant beside it */
   const build = (W, Da) => {
     const R = [], D = [];
     /* the hub service row behind the public corridor (hub load and washrooms, Part 1: refuge + shelter area ÷ 0.75 m² a person, half each sex;
@@ -403,7 +416,7 @@ const subAll = (rs, cut) => cut.reduce((acc, c) => acc.flatMap(r => subR(r, c)),
 function beside(C) {
   const { st, van } = C, cw = RULES.cor.w, sm = RULES.smallRoom.w, wcm = RULES.wcMod.w, pw = RULES.pexit.w;
   let sp = C.spanOver(0, Math.min(40, C.aMax)); if (!sp) return { fail: 'no buildable width' };
-  let W = r2(sp[1] - sp[0]), L = null;
+  let W = Math.min(r2(sp[1] - sp[0]), RULES.largeW.w), L = null;
   for (let it = 0; it < 4; it++) { L = besideW(C, W); if (!L.narrow) return L; W = L.narrow; }
   return { fail: 'width narrows over the depth' };
 }
@@ -498,6 +511,9 @@ function plantLayout(C, W, Da, MW, rooms) {
   const tankLot = tank >= 2500 && tank <= 50000 ? 3.0 : tank < 2500 ? null : null, tankBld = tank >= 2500 ? 1.5 : null;
   const G = { l: 8.43, w: 2.62 }, T = { l: 2.49, w: 2.63 }, CH = { l: 12.14, w: 2.36, side: 1.5, end: 2.1 };
   const aP = r2(Da + RULES.aisle.w), items = [], why = [];
+  /* turned (F2b): the yard beside the building also holds plant; the building and its rear aisle are kept clear, 1.5 m around (tanks to the building, CSA B139) */
+  const side = !!C.maxW, Wscan = side ? (C.Wfull || W) : W;
+  if (side) { const bR = [0, r2(Da + RULES.aisle.w), 0, W]; items.push({ id: 'bld', pseudo: true, r: bR, z: bR, keep: [bR[0] - 1.5, bR[1] + 1.5, bR[2] - 1.5, bR[3] + 1.5] }); }
   /* candidate test in the local frame: inside the yard (and off the drive), clear of everything placed (with their keep-outs) */
   let roof = null;   /* chillers on the lower roof over the hub block when the yard cannot hold them (spec rule 1: a lower roof not over the hall) */
   const okRect = (r, keepLot) => { if (roof) return r[0] >= roof[0] - 1e-6 && r[1] <= roof[1] + 1e-6 && r[2] >= roof[2] - 1e-6 && r[3] <= roof[3] + 1e-6; for (let a = r[0]; a <= r[1] + 1e-9; a += Math.max(0.5, (r[1] - r[0]) / 6)) for (let b = r[2]; b <= r[3] + 1e-9; b += Math.max(0.5, (r[3] - r[2]) / 6)) { const [u, v] = C.mapUV(Math.min(a, r[1]), Math.min(b, r[3])); if (!C.inYard(u, v) || C.inDrive(u, v)) return false; } return true; };
@@ -506,8 +522,8 @@ function plantLayout(C, W, Da, MW, rooms) {
   const lotDist = r => { let m = 1e9; for (const [a, b] of [[r[0], r[2]], [r[0], r[3]], [r[1], r[2]], [r[1], r[3]], [(r[0] + r[1]) / 2, r[2]], [(r[0] + r[1]) / 2, r[3]], [r[0], (r[2] + r[3]) / 2], [r[1], (r[2] + r[3]) / 2]]) { const p = C.mapUV(a, b); for (let i = 0; i < C.S.ring.length; i++) m = Math.min(m, dSeg(p, C.S.ring[i], C.S.ring[(i + 1) % C.S.ring.length])); } return m; };
   const span = r2(Math.max(40, C.aMax + 60));
   const tryPlace = (it0, aFix) => { for (const rot of (it0.rot ? [false, true] : [false])) { const it = rot ? Object.assign({}, it0, { L: it0.Wd, Wd: it0.L, zone: it0.zoneR }) : it0;
-    const aS0 = roof ? roof[0] : aFix != null ? aFix : aP, aS1 = roof ? roof[1] : aFix != null ? aFix : Da + span;
-    for (let a = aS0; a <= aS1; a = r2(a + 0.5)) for (let b = roof ? roof[2] : -10; b <= (roof ? roof[3] : W + 10); b = r2(b + 0.5)) {
+    const aS0 = roof ? roof[0] : aFix != null ? aFix : side ? 0 : aP, aS1 = roof ? roof[1] : aFix != null ? aFix : Da + span;
+    for (let a = aS0; a <= aS1; a = r2(a + 0.5)) for (let b = roof ? roof[2] : -10; b <= (roof ? roof[3] : Wscan + 10); b = r2(b + 0.5)) {
       const r = [a, r2(a + it.L), b, r2(b + it.Wd)], z = it.zone ? it.zone(r) : r;
       if (!okRect(r) || (it.zone && !okRect(z))) continue;
       if (it.lot != null && lotDist(r) < it.lot - 1e-6) continue;
@@ -516,7 +532,7 @@ function plantLayout(C, W, Da, MW, rooms) {
     } }
     return null; };
   /* transformer pads: front row on the yard aisle (front faces the aisle, 3 m clear in front: the aisle; 1 m apart and from structures; BC Hydro ES54 F) */
-  for (let i = 0; i < nT; i++) { const p = tryPlace({ L: T.l, Wd: T.w, gap: 1.0 }, aP); if (!p) { why.push(`transformer pad ${i + 1} of ${nT}`); break; }
+  for (let i = 0; i < nT; i++) { const p = tryPlace({ L: T.l, Wd: T.w, gap: 1.0 }, side ? null : aP); if (!p) { why.push(`transformer pad ${i + 1} of ${nT}`); break; }
     items.push({ id: 't' + (i + 1), n: `Transformer pad ${i + 1}`, kind: 'pad', r: p.r, z: p.r, keep: grow(p.r, 1.0), front: 'faces the yard aisle' }); }
   /* generators at grade (FM 5-32 2.6.4.3): sets 2.0 m apart (CSA C282 6.5.1.1); tanks 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2) */
   for (let i = 0; i < nG; i++) { const p = tryPlace({ L: G.l, Wd: G.w, gap: 2.0, lot: tankLot, rot: true }); if (!p) { why.push(`generator ${i + 1} of ${nG}`); break; }
@@ -528,6 +544,7 @@ function plantLayout(C, W, Da, MW, rooms) {
     if (!p) { why.push(`chiller ${i + 1} of ${nC}`); break; }
     items.push({ id: 'c' + (i + 1), n: `Chiller ${i + 1} (${roof ? 'on the hub roof, ' + lowRoof.z + ' m' : 'at grade'})`, kind: 'chiller', roof: !!roof, r: p.r, z: p.z, keep: p.z, panel: p.rot ? 'end toward the side (long axis across the lot: panel end to an access path ?)' : 'end toward the yard aisle' }); }
   const ok = !why.length; if (onRoof) why.length = 0;
+  for (let i = items.length - 1; i >= 0; i--) if (items[i].pseudo) items.splice(i, 1);
   return { ok, why: why.length ? why.join(', ') + ' do not fit in the yard' : null, Q: r2(Q), nG, nC, nT, setKW: big ? 2000 : 1000, tank: Math.round(tank), tankLot, tankBld, items, aisle: [Da, aP],
     rules: ['generators and pads at grade (FM 5-32 2.6.4.3, insurer)', 'sets 2.0 m apart (CSA C282 6.5.1.1)', `tank ${Math.round(tank)} L a set: 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2)`,
       'pads 1 m apart and from structures, 3 m clear in front, front to the aisle (BC Hydro ES54 F; drawing choice)', 'chiller clear zones 1.5 m long sides, 2.1 m ends, 2.5 m above (open sky); 3.0 / 4.2 m between units (Vertiv SL-70790 s. 4.2.4, our reading)',
@@ -589,11 +606,17 @@ function finish(res, S) {
         const st = e.storey, X = by(st, e.room), d0 = D.find(d => d[0] === st && (d[1] === e.room || d[2] === e.room)); if (!X || !d0) continue;
         const have = new Set(D.filter(d => d[0] === st && (d[1] === e.room || d[2] === e.room)).map(d => d[1] === e.room ? d[2] : d[1]));
         let best = null;
-        for (const Y of R[st].filter(y => y.id !== e.room && !have.has(y.id) && (y.kind === 'proom' || y.kind === 'lobby' || y.kind === 'pcor' || y.kind === 'refuge2'))) {
+        for (const Y of R[st].filter(y => y.id !== e.room && !have.has(y.id) && (y.kind === 'proom' || y.kind === 'lobby' || y.kind === 'pcor' || y.kind === 'refuge2' || (y.kind === 'pcore' && y.stair)))) {   /* F2b: a door into an exit stair counts (an exit) */
           for (const t of [0.1, 0.5, 0.9]) { const n0 = D.length; const fl = L.flags.length; door(st, e.room, Y.id, t); L.flags.length = fl; if (D.length === n0) break;
             const dn = D.pop(), dist = Math.hypot(dn[3] - d0[3], dn[4] - d0[4]); if (!best || dist > best.dist) best = { dist, d: dn }; } }
         if (best) D.push(best.d); else L.flags.push(`Egress doorways: ${X.n} needs a second door and shares no wall with a public room or corridor (?)`);
-      } } }
+      }
+      /* F2b: a large refuge or shelter whose two doors are too close: the corridor door and the street door move to opposite ends (only where the test fails) */
+      if (L.kind === 'stacked') { const G1 = { S: {}, D, city: S.city }; Object.keys(R).forEach(k => { G1.S[k] = R[k].map(x => ({ id: x.id, n: x.n, g: x.g, kind: x.kind, r: x.r, core: !!x.core, stair: !!x.stair })); });
+        for (const e of T0.egressDoors(G1).filter(e => e.doors >= 2 && !e.ok && e.storey === 1 && (e.room === 'ref' || e.room === 'shel'))) {
+          for (let i = D.length - 1; i >= 0; i--) { const d = D[i]; if (d[0] === 1 && (d[1] === e.room || d[2] === e.room) && (d[2] === 'cor' || d[1] === 'cor' || d[2] === 'OUT')) D.splice(i, 1); }
+          door(1, e.room, 'cor', 0.06); ext(1, e.room, 'a0', 0.94, sW); } }
+    } }
   L.D = D;
   /* the T-reach graph, in the local frame */
   const G = { S: {}, D, city: S.city };

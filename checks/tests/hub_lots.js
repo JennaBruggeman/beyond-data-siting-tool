@@ -40,10 +40,11 @@ const LOTS = {
       return { sel: BD.S.sel && BD.S.sel.a && BD.S.sel.a[0], variant: h.variant, ladder: h.ladder && { step: h.ladder.step, what: h.ladder.what }, doesntFit: h.doesntFit || null,
         MW: rd(h.MW), dcArea: rd(h.dcArea), clin: rd(h.clin), W: rd(h.W), Da: rd(h.Da), site: h.site, nb: h.nb, kind: h.kind,
         reach: T.reach ? (T.reach.length ? T.reach.length + ' findings: ' + T.reach.slice(0, 3).map(o => o.rule + ' ' + o.room).join('; ') : 'PASS') : '?', deadWorst: T.dead ? Math.max(0, ...T.dead.map(c => c.deadEnd_m || 0)) : null,
-        widthFails: T.width ? (T.width.rows || []).filter(x => x.sev === 'fail').length : null, height: h.grades && h.grades.height, flags: H.flags };
+        widthFails: T.width ? (T.width.rows || []).filter(x => x.sev === 'fail').length : null, height: h.grades && h.grades.height, heightStatus: h.grades && h.grades.heightStatus,
+        travel: (h.travel || []).map(z => `${z.zone} ${z.worst} m ${z.status}`), apart: (h.apart || []).map(z => `${z.zone} ${z.apart_m}/${z.need_m} m ${z.status}`), discharge: (h.discharge || []).filter(x => x.status !== 'pass').map(x => `${x.a}-${x.b} ${x.d}/${x.need} m ${x.status}`), flags: H.flags };
       } catch (e) { return { err: String(e.stack || e) }; } });
     r.spec = L.spec; r.errors = errs; res[key] = r;
-    console.log(key, r.err ? 'ERROR ' + r.err.split('\n')[0] : `${r.kind || '-'} · ${(r.variant && [r.variant.main].concat(r.variant.flags || []).join(', ')) || ''} · step ${r.ladder ? r.ladder.step : '-'} · ${r.MW} MW${r.doesntFit ? ' · DOESN’T FIT' : ''} · reach ${r.reach}`);
+    console.log(key, r.err ? 'ERROR ' + r.err.split('\n')[0] : `${r.kind || '-'} · ${(r.variant && [r.variant.main].concat(r.variant.flags || []).join(', ')) || ''} · step ${r.ladder ? r.ladder.step : '-'} · ${r.MW} MW${r.doesntFit ? ' · DOESN’T FIT' : ''} · reach ${r.reach}${(r.travel||[]).concat(r.apart||[]).some(x=>/fail/.test(x))?' · TRAVEL/EXITS FAIL':''}`);
     await p.close();
   }
   fs.writeFileSync(out, JSON.stringify(res, null, 1)); await b.close();
