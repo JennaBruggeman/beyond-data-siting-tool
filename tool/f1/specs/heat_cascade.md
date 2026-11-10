@@ -83,6 +83,12 @@ Public programs (our arithmetic, research §1): lean 297 + 815 + 181 − 204 ≈
 
 ---
 
+### 1e. Placement on the lot: front public yard (rule PASSED, J.B. 10 Nov; `GATE_front_public_yard_2026-11-10.md`)
+- Order from the rear: rear yard → loading → plant yard → building. The building sits against the plant yard; the 61 m building depth is counted from the plant-yard edge toward the street.
+- Ground left between the front yard line and the building, at least 6 m deep, is a **front public yard**: opens straight off the street, fenced or kerbed from any side drive or truck route, the public entrance on it, reported on the board as "Front public yard: x m², y m deep". No area threshold.
+- What it holds (SPEC_NOTE rule 6, J.B. 10 Nov): **heated paths** on the low-grade return (rules 15–16, as the snow-melt edge: built practice); **covered beds** via the heat pump at about 40 °C, about **8–138 W/m²** (measured US field trials) and about **155 W/m²** (Iceland, our arithmetic), labelled "other climates (OR, MN, PA, Iceland); no local data ?"; season: earlier harvests in most trials, no local figure (?). **No built data-centre-heated outdoor garden found.** Register gdn_*. Bed and path layout: drawing choice.
+- No tool zone caps the front setback (hub research, `RESEARCH_max_front_setback_RESULT_2026-11-10.md`); Vancouver Schedule C streets (landscaped setback) not read (?).
+
 ## 2. Variants
 
 What decides the variant, in order: (1) the zone's use list and ground-floor rule; (2) the lot type (A1: regular, small, large, narrow_deep, wide_shallow, irregular; corner as a flag); (3) lane or no lane; (4) flood plain; (5) height; (6) climate (snow melt vs covered edge). A lot can carry more than one variant.
@@ -160,11 +166,13 @@ Rules 2–3, 5–7, 9–13 and 15 (one outline per storey; shared lobby; corrido
     | Kind | Line | Rooms | Opens off | Through another room? |
     |---|---|---|---|---|
     | proom (wet) | public | pool hall, spa rooms (hot pool, steam, sauna, plunge, rest), change rooms, universal change | change rooms off the lobby or public corridor; **pool deck and spa only through the change rooms** (toilet → shower → pool, BC guide 5.1; our reading for the spa) plus staff and exit doors | **Required:** bathers enter the deck through the change rooms. Exits from the deck are exterior doors or the public corridor |
-    | proom (grow) | public | growing house, headhouse | public corridor or lobby; headhouse may open off the growing house it serves | allowed as stated |
+    | proom (grow) | public | growing house, headhouse | public corridor or lobby; headhouse may open off the growing house it serves; **the growing house may open off its headhouse** (D3, J.B. 10 Nov) | allowed as stated |
     | plant (programs) | — | pool plant, spa plant, chlorine room, acid store, programs mechanical, edge manifold | pool plant: exterior door + a door to the deck or staff corridor (NBC(AE) 7.2.3.38; BC 9.8); chlorine room: **exterior door only** (AB); manifold: exterior or the pool plant | never through a public room |
     | hr | secure (hand-over on the public side) | heat-recovery room | secure corridor or the hall side; flanges to the pool plant or programs mechanical room through the 2 h wall, no door; in a stacked fit, through the 2 h floor by a riser to the wet block below (V339, drawing choice) | — |
 
     Corridors, dead ends and the T-reach rules (R0–R7) as the hub's 15b–15d, with the deck-through-change route added as an allowance in R5.
+
+    **Rule change D3 (deliberate, J.B. 10 Nov 2026; FIXLIST_rules_vs_scripts_2026-11-10.md, finding 2):** the growing house may open off its headhouse (normal greenhouse practice), and a **staff** WC may open off the one room it serves. Reason: the rules-vs-scripts check found boards showing these low-risk layouts that the written rule did not allow; J.B. chose to change the rule on purpose, not to loosen it to fit the boards. A **public** WC (e.g. the greenhouse universal WC) still opens off public circulation. Everything else in the hub's 15a stays strict; heat-recovery room off the hall stays allowed (row hr above).
 
 16. **Heat order and pipe run** (J.B., 10 Nov; decides the diagram and plant adjacency, not the plan): heat-recovery room → **spa** (water 40 °C: BC Pool Operations v3 5.2 limit for a hot tub, PWTAG 2009 design via Sport England DGN App. 2 Table 4) → **pool** (water 29 °C design for a main pool, PWTAG 2009, UK benchmark; BC limit ≤ 37 °C) → **greenhouse** (bench 35–40 °C, ASABE EP406) and **heated edge** (mean fluid 17–19 °C light snow, ≤ 17 K step, ASHRAE ch. 52). **Supply = water temperature + exchanger margin (?)**. The spa needs the top ASHRAE liquid-cooling class (> 45 °C; HPAC trade report, 2014) or a heat pump (our reading). Layout rule kept: the pool plant and the greenhouse's heat-transfer point adjoin the heat-recovery room's wall or a shared service corridor (drawing choice). Boards: `tfchk.heat_order_row`.
 
@@ -197,6 +205,15 @@ Added after the final gate at J.B.'s request (10 Nov, Q5); the gated rows above 
 | 11814 168 St NW (update to the gated row) | beside, bays redrawn 10 Nov (late) | **1.11 MW** (was 1.15) | **fits, 0 fail** after the redraw: bays moved 3.9 m south behind a recessed apron (10.0 m straight run ≥ 9.0); rest area off the deck; 3 generators; Floor Area 2,818 m² → 1 bay, 2 drawn | as the gated row; truck turning not checked (?) |
 
 Not checked on any of these: truck turning templates, fire access, intakes, noise, Edmonton cooling below the maker's range, grade, flood layer, road class, neighbouring zones, north.
+
+### 4-F. Front public yard re-runs (rule passed 10 Nov; post-gate, self-checked) — FOR J.B.'S GATE
+| Lot | Change | Front public yard | Side drive beside it | Status |
+|---|---|---|---|---|
+| 1515 Boundary Rd | whole plan moved 44.75 m back; plant yard on the 3.1 m rear yard; drive runs the full depth | **3,168 m², 44.75 m deep** (behind the heated edge) | yes, ≈ 45 m, fenced | 0 fail; MW unchanged (1.83); new rows: yard (flag), garden heat (?), drive beside the yard (?), Schedule C (?) |
+| 10003 63 Ave NW | plant yard moved 4.5 m to the rectangle's east edge, building against it | **441 m², 8.5 m deep** on the assumed frontage side | yes, the north drive, fenced | frontage position assumed; the outline puts it elsewhere: the yard does not hold on the real lot (flag); still 1 fail (drive enters the plant yard, no vehicle gate: J.B.) |
+| 339 1st Ave E | needs the truck court moved (re-plan): reported to J.B., not drawn | ≈ 8 m deep, ≈ 250 m² (estimate) | yes, the SE drive | pending J.B. |
+| 16075 Fort Rd NW | none: the drawn rectangle is full; the real lot (≈ 9.7 m deeper) not read | ? | ? | ? |
+| 15231, 11814, 1353, 443 | none: the building already fills the depth | — | — | no change |
 
 ## 5–7. Pass/fail tests, doesn't-fit rule, worked example — rule 6 started
 **Doesn't fit (9 Nov, as the Community pool rule):** if the plant yard, the data-centre entrance and the bays leave less ground than the core (spa block at its minimum + edge), report "doesn't fit" and point to the hub small variant. The limiting rules are three together: no data storage at grade (I-2 2.2.7), nothing wet under the hall (rule 8) and nothing wet over it (FM 5-32 2.2.1.6), so the spa needs its own ground. Worked: 1360 Frances St (≈ 145 left vs ≈ 235). Roof limit: chillers off the hall need 16.3 × 10.7 m of roof; on 1330 that takes the only big roof and leaves too little for the greenhouse.
