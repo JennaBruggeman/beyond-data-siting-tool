@@ -1,6 +1,6 @@
 # Part 7 check: 339 1st Avenue East (tool/hub.js hub rule sheet v1 (8 Nov 2026))
 
-Run 2026-11-09 by checks/tests/hub_part7.js on the tool's site model (lot 63819485). Tolerances (J.B. 8 Nov): counts and pass/fail exact; areas within 10 %; dimensions within 0.5 m. "partly": some figures in the row match, others do not (each difference explained).
+Run 2026-11-10 by checks/tests/hub_part7.js on the tool's site model (lot 63819485). Tolerances (J.B. 8 Nov): counts and pass/fail exact; areas within 10 %; dimensions within 0.5 m. "partly": some figures in the row match, others do not (each difference explained).
 
 | # | Step | Part 7 | Tool | Match | Why it differs |
 |---|---|---|---|---|---|

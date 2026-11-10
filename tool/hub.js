@@ -95,6 +95,11 @@ let GPV = null;
 function gradePoints(city, id) { if (city !== 'van' || !root || typeof XMLHttpRequest === 'undefined') return null;
   if (GPV === null) { try { const x = new XMLHttpRequest(); x.open('GET', 'data/grade_points_van.json', false); x.send(null); GPV = JSON.parse(x.responseText).lots || {}; } catch (e) { GPV = {}; } }
   return GPV[id] || null; }
+/* job A1 lot type (tool/data/lot_types.json, from checks/lot_types_2026-11-07.csv): [type, corner, lane]; null where not measured or 'not a site' */
+let LTY = null;
+function lotTypeOf(city, id) { if (!root || typeof XMLHttpRequest === 'undefined') return null;
+  if (LTY === null) { try { const x = new XMLHttpRequest(); x.open('GET', 'data/lot_types.json', false); x.send(null); LTY = JSON.parse(x.responseText); } catch (e) { LTY = {}; } }
+  const r = (LTY[city] || {})[id]; return r ? { type: r[0] || null, corner: !!r[1], lane: !!r[2] } : null; }
 function siteOf(P) { const s = P.s, M = s.M, F = M.F, L = (X, Y) => F.toL(X, Y).map(r2);
   const ring = []; for (let i = 0; i < M.ring.length; i += 2) ring.push(L(M.ring[i], M.ring[i + 1]));
   if (ring.length > 1 && Math.hypot(ring[0][0] - ring[ring.length - 1][0], ring[0][1] - ring[ring.length - 1][1]) < 0.01) ring.pop();
@@ -106,7 +111,7 @@ function siteOf(P) { const s = P.s, M = s.M, F = M.F, L = (X, Y) => F.toL(X, Y).
   return { city: M.city, id: sel.id || null, addr: sel.a ? sel.a[0] : null, zone: String(Z.zone || '').toUpperCase(), dir: s.dir < 0 ? -1 : 1, uf: s.uf, ring, edges,
     sideDrive: M.sideDrive ? { w: M.sideDrive.w, inYard: M.sideDrive.inYard, r: bb(M.sideDrive.ring) } : null, maxDepth: base.yards && base.yards.max || null,
     hLimit: M.H || null, mw: (P.ratio && P.ratio.mwTest) || An.mw || M.mwSized || null, fcl: M.grade && M.grade.fcl ? { v: M.grade.fcl.v, datum: M.grade.fcl.datum, src: M.grade.fcl.src } : null,
-    gradeDatum: M.grade ? M.grade.datum : null, grade };
+    gradeDatum: M.grade ? M.grade.datum : null, grade, lotType: lotTypeOf(M.city, sel.id) };
 }
 
 /* ---------- the core ---------- */
@@ -121,7 +126,10 @@ function layout(S0) {
   const vs = ring.map(p => p[1]), vMid = (Math.min(...vs) + Math.max(...vs)) / 2;
   let sv = -1, driveWhy = 'no lane or side drive: the drive side is taken as the low-v side (drawing choice)';
   if (drive) { sv = (drive[2] + drive[3]) / 2 > vMid ? 1 : -1; driveWhy = `side drive ${S.sideDrive.w} m ${S.sideDrive.inYard > 0.1 ? 'in the side yard' : 'taking frontage'} (site.js); the side is the site model's choice (drawing choice, accepted by J.B. 8 Nov)`; }
-  else { const al = S.edges.find(e => e.abuts === 'alley' && e.kind !== 'front'); if (al) { sv = (al.a[1] + al.b[1]) / 2 > vMid ? 1 : -1; driveWhy = 'the lane along the side'; } }
+  else { /* F2b (9 Nov 2026): a corner lot takes service, loading and plant from the side street (spec Part 2 'Corner'); else a lane along the side */
+    const fl = S.edges.find(e => e.abuts === 'street' && e.kind === 'flank'), al = S.edges.find(e => e.abuts === 'alley' && e.kind !== 'front');
+    if (fl) { sv = (fl.a[1] + fl.b[1]) / 2 > vMid ? 1 : -1; driveWhy = 'the side street: service, loading and plant from it (corner variant, spec Part 2)'; }
+    else if (al) { sv = (al.a[1] + al.b[1]) / 2 > vMid ? 1 : -1; driveWhy = 'the lane along the side'; } }
   const dir = S.dir, uf = S.uf, uOf = a => uf - dir * a;
   /* across-span of the yard at depth a (v interval, 0.05 m samples), the drive cut out */
   const vMin = Math.min(...vs), vMax = Math.max(...vs);
@@ -135,10 +143,16 @@ function layout(S0) {
   if (S.maxDepth) aMax = Math.min(aMax, S.maxDepth);
   const res = { site: { a0, aMax: r2(aMax), driveSide: sv > 0 ? 'high v' : 'low v', driveWhy }, flags, notes };
 
-  /* variants (spec Part 2; J.B. 8 Nov: stacked, beside, side drive, small, clinic ≤ 500 now; corner, through, turned, height-capped not yet) */
+  /* variants (spec Part 2). F2b (9 Nov 2026): corner and through from the lot's streets; large, irregular, small, wide-shallow from the job A1 lot type */
   const streets = S.edges.filter(e => e.abuts === 'street');
-  const variant = { main: stackedZone ? 'stacked' : 'beside', sideDrive: !!drive, notBuilt: [] };
-  if (streets.some(e => e.kind !== 'front')) { variant.notBuilt.push(streets.some(e => e.kind === 'rear') ? 'through lot' : 'corner'); }
+  const LT = S.lotType || null, ltype = LT && LT.type;
+  const variant = { main: stackedZone ? 'stacked' : 'beside', sideDrive: !!drive, notBuilt: [], flags: [], lotType: ltype || (LT ? 'not a site (job A1)' : '?') };
+  if (streets.some(e => e.kind === 'flank')) { variant.flags.push('corner'); flags.push('Corner: hub and lobby on the main street; service, loading and plant from the side street (spec Part 2)'); }
+  if (streets.some(e => e.kind === 'rear')) { variant.flags.push('through'); flags.push('Through lot: hub on the main street; service, loading and plant from the street at the rear (spec Part 2); an exit passage where side yards are 0 m'); }
+  if (ltype === 'large') { variant.flags.push('large'); flags.push('Large lot: hub-sized data centre (≤ 2,325 m² of data-centre floor, one hall storey, J.B. 8 Nov); the rest of the land stays open (spec Part 2)'); }
+  if (ltype === 'irregular') { variant.flags.push('irregular'); flags.push('Irregular lot (job A1: lot area under 0.75 of its bounding rectangle): the hub is drawn in the widest width the yards allow at each depth'); }
+  if (ltype === 'small') variant.flags.push('small');
+  if (LT && !ltype) flags.push('Job A1 lists this lot as not a site (no street frontage found); the variant is named from the lot’s streets in the tool (?)');
   if (!van) flags.push('Edmonton: every hub needs a rezoning (a data centre is Major Industrial, not in BE; IH does not allow the refuge, shelter or clinic). Shown as if rezoned; the design does not change (J.B. 8 Nov).');
   if (van && !stackedZone) flags.push(`Zone ${zone}: the stacked variant is drawn only for I-2 and I-3; ${zone} drawn as beside (?)`);
 
@@ -156,7 +170,7 @@ function layout(S0) {
     if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
     out = L; out.ladder = { step: st.k, what: st.t, limiting: why.slice() }; break;
   }
-  if (!out) { res.doesntFit = { limiting: why }; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
+  if (!out) { res.doesntFit = { limiting: why }; res.variant = variant; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
     const front = streets.find(e => e.kind === 'front'), fw = front ? Math.hypot(front.b[0] - front.a[0], front.b[1] - front.a[1]) : null;
     if (fw && fw > aMax) flags.push(`Not built yet: the turned variant (bands along the street, spec Part 2) might fit this wide, shallow lot (frontage ${Math.round(fw)} m, depth ${Math.round(aMax)} m) (?)`);
     return res; }

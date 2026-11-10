@@ -1,6 +1,6 @@
 # T-checks: 64 Airport Rd NW (tool/hub.js hub rule sheet v1 (8 Nov 2026))
 
-Run 2026-11-09 by checks/tests/hub_part7.js --edm. Variant beside, ladder step 2 (clinic 13 → 5 exam rooms), 1.87 MW, data centre 1978 m², clinic 465 m², 1 loading space(s).
+Run 2026-11-10 by checks/tests/hub_part7.js --edm. Variant beside, ladder step 2 (clinic 13 → 5 exam rooms), 1.87 MW, data centre 1978 m², clinic 465 m², 1 loading space(s).
 
 - T-reach: PASS
 - Dead ends (limit 6 m): cor 3 m ok; ccor 4.8 m ok; scor 0.8 m ok
