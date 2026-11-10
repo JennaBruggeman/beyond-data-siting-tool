@@ -8,7 +8,7 @@ const new_ = { built: 'new', extent: 'whole', floor: '' };
 /* spec Part 4 (Claude Link eh/specs/emergency_hub.md, 10 Nov): the hand fit's variant and result, for comparison only */
 const LOTS = {
   V339: { lab: '339 1st Ave E', sel: { city: 'van', tile: '1_1', id: '63819485' }, spec: 'stacked, side drive, raised; 1.80 MW; fits' },
-  V1330: { lab: '1330 Glen Dr', sel: { city: 'van', tile: '1_1', id: '22260652' }, spec: 'stacked, small, side drive; clinic dropped; fits' },
+  V1330: { lab: '1330 Glen Dr', sel: { city: 'van', tile: '1_1', id: '22260652' }, spec: 'stacked, small, side drive; clinic dropped; fits', note: 'hand fit puts chillers on a storey-2 roof over the drive (our reading); not modelled (J.B. 10 Nov: keep doesn’t fit)' },
   V8238: { lab: '8238 Fraser St', sel: { city: 'van', tile: '1_-3', id: '21083038' }, spec: 'stacked, through, height-capped; 0.94 MW; clinic dropped; fits' },
   V1353: { lab: '1353 Pender St E', sel: { city: 'van', tile: '2_2', id: '59223039' }, spec: 'turned, stacked; 1.64 MW; 6 exams; fits' },
   V8980: { lab: '8980 Oak St', sel: { city: 'van', tile: '-1_-4', id: '14984188' }, spec: 'stacked, irregular corner, raised; 0.94 MW (plant); fits' },
@@ -43,8 +43,8 @@ const LOTS = {
         widthFails: T.width ? (T.width.rows || []).filter(x => x.sev === 'fail').length : null, height: h.grades && h.grades.height, heightStatus: h.grades && h.grades.heightStatus,
         travel: (h.travel || []).map(z => `${z.zone} ${z.worst} m ${z.status}`), apart: (h.apart || []).map(z => `${z.zone} ${z.apart_m}/${z.need_m} m ${z.status}`), discharge: (h.discharge || []).filter(x => x.status !== 'pass').map(x => `${x.a}-${x.b} ${x.d}/${x.need} m ${x.status}`), flags: H.flags };
       } catch (e) { return { err: String(e.stack || e) }; } });
-    r.spec = L.spec; r.errors = errs; res[key] = r;
-    console.log(key, r.err ? 'ERROR ' + r.err.split('\n')[0] : `${r.kind || '-'} · ${(r.variant && [r.variant.main].concat(r.variant.flags || []).join(', ')) || ''} · step ${r.ladder ? r.ladder.step : '-'} · ${r.MW} MW${r.doesntFit ? ' · DOESN’T FIT' : ''} · reach ${r.reach}${(r.travel||[]).concat(r.apart||[]).some(x=>/fail/.test(x))?' · TRAVEL/EXITS FAIL':''}`);
+    r.spec = L.spec; if (L.note) r.note = L.note; r.errors = errs; res[key] = r;
+    console.log(key, r.err ? 'ERROR ' + r.err.split('\n')[0] : `${r.kind || '-'} · ${(r.variant && [r.variant.main].concat(r.variant.flags || []).join(', ')) || ''} · step ${r.ladder ? r.ladder.step : '-'} · ${r.MW} MW${r.doesntFit ? ' · DOESN’T FIT' : ''} · reach ${r.reach}${(r.travel||[]).concat(r.apart||[]).some(x=>/fail/.test(x))?' · TRAVEL/EXITS FAIL':''}${L.note ? ' · note: ' + L.note : ''}`);
     await p.close();
   }
   fs.writeFileSync(out, JSON.stringify(res, null, 1)); await b.close();

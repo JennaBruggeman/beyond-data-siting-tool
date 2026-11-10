@@ -390,7 +390,7 @@ Listed by `git log --oneline origin/site-f1..site-f1` (this handoff commit on to
 |---|---|---|
 | 8238 Fraser St | **fits**, 0.70 MW, 3 bays, 17.1 m; T-reach PASS, dead ends ≤ 6 m, no width fail; travel ≤ 33 m | fits, 0.94 MW |
 | 8980 Oak St | **fits** (new), 0.70 MW, 17.4 m, from the site model's front line with the 6 m step-back | fits, 0.94 MW, from another street line |
-| 1330 Glen Dr | **doesn't fit**: the 2nd generator and both chillers don't fit | doesn't fit outright (drive aisle 4.9 m); chillers on a storey-2 roof over the drive |
+| 1330 Glen Dr | **doesn't fit**: the 2nd generator and both chillers don't fit. Note: hand fit puts chillers on a storey-2 roof over the drive (our reading); not modelled | doesn't fit outright (drive aisle 4.9 m); chillers on a storey-2 roof over the drive |
 | 1360 Frances St | doesn't fit (3 bays don't fit beside S2 on 13.96 m) | at grade doesn't fit (as spec) |
 | 339, 1353, Edmonton | unchanged | |
 
@@ -399,3 +399,15 @@ Questions:
 2. **Refuge grows** to fill the strip beside the service rooms (8238: 239 m², 68 people), so the washrooms are sized for 394 people. The hand fits keep the refuge near 50 and draw spare floor. Keep it growing (spare floor at grade → refuge first), or hold it at 175 m² and draw the rest unassigned?
 3. **8980** now fits from the slanted front line with the 6 m step-back (lobby by a walkway, not drawn). The front-line question (Oak St) is still open.
 Golden identical (one V339 noise count flaked 4,729 → 4,728 once; two re-runs identical). F1 gate clean. Part 7 (339 and 64 Airport Rd) unchanged. Emergency hub and heat cascade specs re-copied (Claude Link 11:41 and 11:53).
+
+### Step 5b: J.B.'s answers applied (10 Nov 2026)
+1. **1330 Glen Dr:** stays "doesn't fit". The tool doesn't build over the side drive. Row note (J.B.): "hand fit puts chillers on a storey-2 roof over the drive (our reading); not modelled".
+2. **Refuge capped** at the spec size on narrow lots (175 m², 50 people, as the hand fits). The shelter follows it. The rest of the refuge strip is **open ground, not built** (as the hub decision of 10 Nov). Washrooms are sized to the capped refuge and shelter (load 308).
+   - Result: 8238 and 8980 now 0.68 MW (was 0.70). Smaller washrooms shorten the service strip, so the hub and the hall over it get shorter.
+   - Open ground: 54 m² (8238) and 55 m² (8980), beside the corridor at the far end of the strip. Storey 2 is drawn over it, so it is a covered open area. Whether it stays covered is not decided (?).
+   - The stacked and beside layouts are unchanged: there the spec's spare-floor rule (refuge first at grade) still applies. 339's refuge is 177 m² there.
+3. **Front line** = the lot line on the street named in the address (J.B. 10 Nov). The tool now checks this with the City street names (Vancouver street centrelines, 16 Oct download). If the front line faces another street, the hub isn't laid out, and the board says why.
+   - 8980 Oak St: the site model's front (bearing 1°, facing west) faces **Oak St**, 10.1 m to the centreline. The flank faces W Kent Ave North. So the layout stands.
+   - All six Vancouver test lots front onto their address street. Negative test (8980 given the address W Kent Ave North): refused, naming the flank line.
+   - Edmonton: no street names in the file (edmRoads2026 has classes only), so it's flagged "not checked (?)".
+
