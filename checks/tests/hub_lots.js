@@ -39,7 +39,7 @@ const LOTS = {
       const T = h.treach || {}, rd = x => x == null ? null : Math.round(x * 100) / 100;
       return { sel: BD.S.sel && BD.S.sel.a && BD.S.sel.a[0], variant: h.variant, ladder: h.ladder && { step: h.ladder.step, what: h.ladder.what }, doesntFit: h.doesntFit || null,
         MW: rd(h.MW), dcArea: rd(h.dcArea), clin: rd(h.clin), W: rd(h.W), Da: rd(h.Da), site: h.site, nb: h.nb, kind: h.kind,
-        reach: T.reach ? (T.reach.length ? T.reach.length + ' findings: ' + T.reach.slice(0, 3).map(o => o.rule + ' ' + o.room).join('; ') : 'PASS') : '?', deadWorst: T.dead ? Math.max(0, ...T.dead.map(c => c.deadEnd_m || 0)) : null,
+        reach: T.reach ? (T.reach.length ? T.reach.length + ' findings: ' + T.reach.slice(0, 3).map(o => o.rule + ' ' + o.room).join('; ') : 'PASS') : '?', deadWorst: T.dead ? Math.max(0, ...T.dead.map(c => c.deadEnd_m || 0)) : null, deadOver6: T.dead ? T.dead.filter(c => (c.deadEnd_m || 0) > 6).map(c => `storey ${c.storey} ${c.corridor} ${c.deadEnd_m} m ${c.status || ''}`.trim()) : null,
         widthFails: T.width ? (T.width.rows || []).filter(x => x.sev === 'fail').length : null, height: h.grades && h.grades.height, heightStatus: h.grades && h.grades.heightStatus,
         travel: (h.travel || []).map(z => `${z.zone} ${z.worst} m ${z.status}`), apart: (h.apart || []).map(z => `${z.zone} ${z.apart_m}/${z.need_m} m ${z.status}`), discharge: (h.discharge || []).filter(x => x.status !== 'pass').map(x => `${x.a}-${x.b} ${x.d}/${x.need} m ${x.status}`), flags: H.flags };
       } catch (e) { return { err: String(e.stack || e) }; } });

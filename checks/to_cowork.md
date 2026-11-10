@@ -380,3 +380,22 @@ After that: 1360 Frances St's generators-upstairs variant (V1360) and the new Ed
 
 ### Commits on site-f1 not on GitHub
 Listed by `git log --oneline origin/site-f1..site-f1` (this handoff commit on top).
+
+## F2b step 5: narrow-lot layout in the tool (Code, 10 Nov 2026, new account)
+`tool/hub.js` `narrowLot()` (RULES.narrow, drawing choices): where the stacked rows don't fit a lot under 20 m wide, the hub bands run back from the street: refuge strip | public corridor | 3.0 m service strip, lobby across the corridor and service strip at the street, stair S1 at the refuge's street corner, overflow rooms in a 3.5 m pocket of the refuge strip. Rear: the data-centre entrance row, then the bays. No clinic (spec Part 6). Hall over the hub only; the rear is two storeys, chillers on its roof.
+- With a side drive (1330): entrance row only as wide as the bays, S2 and E2 turned across, the dock and vestibule behind them, bays across the lot onto the drive, plant yard behind the refuge (as the hand fit).
+- No drive (8238, 8980): S2 along the exit passage, opening onto a rear truck court; the passage (2 h) runs from the corridor along the lot line to the court. A narrow lot with no drive and no street or lane at the rear or side doesn't fit (no truck access).
+
+| Lot | Tool now | Hand fit (spec Part 4) |
+|---|---|---|
+| 8238 Fraser St | **fits**, 0.70 MW, 3 bays, 17.1 m; T-reach PASS, dead ends ≤ 6 m, no width fail; travel ≤ 33 m | fits, 0.94 MW |
+| 8980 Oak St | **fits** (new), 0.70 MW, 17.4 m, from the site model's front line with the 6 m step-back | fits, 0.94 MW, from another street line |
+| 1330 Glen Dr | **doesn't fit**: the 2nd generator and both chillers don't fit | doesn't fit outright (drive aisle 4.9 m); chillers on a storey-2 roof over the drive |
+| 1360 Frances St | doesn't fit (3 bays don't fit beside S2 on 13.96 m) | at grade doesn't fit (as spec) |
+| 339, 1353, Edmonton | unchanged | |
+
+Questions:
+1. **1330 chillers:** the hand fit's storey 2 reaches over the side drive and carries the chillers. The tool never builds over the drive. Allow storey 2 over the drive (truck clearance under it ?), or keep "doesn't fit" with the plant as the limiting rule?
+2. **Refuge grows** to fill the strip beside the service rooms (8238: 239 m², 68 people), so the washrooms are sized for 394 people. The hand fits keep the refuge near 50 and draw spare floor. Keep it growing (spare floor at grade → refuge first), or hold it at 175 m² and draw the rest unassigned?
+3. **8980** now fits from the slanted front line with the 6 m step-back (lobby by a walkway, not drawn). The front-line question (Oak St) is still open.
+Golden identical (one V339 noise count flaked 4,729 → 4,728 once; two re-runs identical). F1 gate clean. Part 7 (339 and 64 Airport Rd) unchanged. Emergency hub and heat cascade specs re-copied (Claude Link 11:41 and 11:53).
