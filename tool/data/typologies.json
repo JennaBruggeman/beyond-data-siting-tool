@@ -1,5 +1,5 @@
 {
- "_about": "F7 (CODE_JOB_F7_typologies.md, 8 Nov 2026): the typology library. One entry per typology, in MASTER_PLAN Phase B order. Figures come from each typology's spec (Emergency hub: Claude Link eh/specs/emergency_hub.md, parts 1-4, 9 Nov 2026) with register ids; a typology whose spec has not passed J.B.'s gate shows no figures. Status: specified (spec parts 1-3 final), in progress (spec being written; test-fit boards exist), not started (research file only, checks/research_typ/). Update this file when a spec changes. The Emergency hub spec is published with the tool (J.B., 9 Nov 2026): tool/f1/specs/emergency_hub.md, a verbatim copy; re-copy it when Cowork changes the spec.",
+ "_about": "F7 (CODE_JOB_F7_typologies.md, 8 Nov 2026): the typology library. One entry per typology, in MASTER_PLAN Phase B order. Figures come from each typology's spec (Emergency hub: Claude Link eh/specs/emergency_hub.md, parts 1-4, 9 Nov 2026) with register ids; a typology whose spec has not passed J.B.'s gate shows no figures. Status: specified (spec parts 1-3 final), in progress (spec being written; test-fit boards exist), not started (research file only, checks/research_typ/). Update this file when a spec changes. The three passed specs are published with the tool (J.B., 9 and 10 Nov 2026): tool/f1/specs/<id>.md, verbatim copies; re-copy one when Cowork changes it (checks/tests/spec_sync.js fails until then).",
  "_icons": "tool/f1/icons/*.svg (copied from Claude Link docs/icons, first pass, 8 Nov): servers, refuge, clinic, pool, greenhouse. Programs without a drawn model show their name only.",
  "list": [
   {"id": "emergency_hub", "name": "Emergency hub", "status": "specified", "statusNote": "spec parts 1–3 final; 8 test lots",
@@ -11,11 +11,11 @@
     {"lo": 0.41, "hi": 1.83, "u": "MW", "l": "data centre, 8 test lots", "src": ["spec_emergencyHub"]},
     {"lo": 50, "u": "people", "l": "refuge, at least", "src": ["spec_emergencyHub", "arch_ahsReceptionCentres", "refuge_people"]}
    ]},
-  {"id": "community_pool", "name": "Community pool", "status": "in progress", "statusNote": "spec being written; test-fit boards exist",
-   "spec": {"link": "community_pool/specs/community_pool.md", "gate": "draft", "gateNote": "not published with the tool yet (no file); 'draft' until J.B. approves it at her final gate"},
+  {"id": "community_pool", "name": "Community pool", "status": "specified", "statusNote": "spec passed 10 Nov; parts 5–7 to follow (spec status line)",
+   "spec": {"file": "community_pool.md", "link": "community_pool/specs/community_pool.md", "gate": "approved", "gateNote": "J.B. passed the spec at her final gate, 10 Nov 2026 (Claude Link community_pool/specs/GATE_community_pool_2026-11-10.md). The spec's own status line still reads 'parts 1–3 FINAL … Parts 5–7 to follow' (asked in checks/to_cowork.md). Before that: 'draft'."},
    "programs": [{"icon": "servers", "name": "data centre"}, {"icon": "pool", "name": "community pool"}]},
-  {"id": "heat_cascade", "name": "Heat cascade", "status": "in progress", "statusNote": "spec being written; test-fit boards exist",
-   "spec": {"link": "heat_cascade/specs/heat_cascade.md", "gate": "draft", "gateNote": "not published with the tool yet (no file); 'draft' until J.B. approves it at her final gate"},
+  {"id": "heat_cascade", "name": "Heat cascade", "status": "specified", "statusNote": "spec passed 10 Nov; six test fits drawn",
+   "spec": {"file": "heat_cascade.md", "link": "heat_cascade/specs/heat_cascade.md", "gate": "approved", "gateNote": "J.B. passed the spec at her final gate, 10 Nov 2026 (Claude Link heat_cascade/specs/GATE_heat_cascade_2026-11-10.md). Before that: 'draft'."},
    "programs": [{"icon": "servers", "name": "data centre"}, {"name": "heat cascade"}]},
   {"id": "warm_bath", "name": "Warm bath", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "warm bath"}]},
   {"id": "aquaponics", "name": "Aquaponics", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "aquaponics"}]},
@@ -23,6 +23,15 @@
   {"id": "conservatory", "name": "Conservatory", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "conservatory"}]},
   {"id": "shelter_laundry", "name": "Shelter + laundry", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "shelter + laundry"}]}
  ],
+ "smallLots": {
+  "_about": "F7 small-lot floors (J.B., 9 Nov 2026): which typology fits a small lot with a lane. From the Emergency hub spec Part 4 (Claude Link eh/specs/emergency_hub.md, 'Small lot' and 'Near miss 1 drawn on 1360 Frances St', 10 Nov) and the two gate notes of 10 Nov (heat cascade, community pool: small lots point to the Emergency hub V1360). Floors are 'about': our arithmetic on test lots, not a citywide sweep.",
+  "rows": [
+   {"hi": 530, "what": "No typology fits", "note": "Under about 530 m² with a lane, none of the three passed typologies fits.", "src": ["spec_emergencyHub"]},
+   {"lo": 530, "hi": 750, "what": "Emergency hub, generators upstairs", "label": "Meets code as read; not FM 5-32 (insurer)", "note": "Generators in a 2-hour room on storey 2 (VBBL 3.6.2.8), transformer alcoves on the street, refuge at grade. Drawn on 1360 Frances St (I-2, 484 m² buildable): fits as drawn, with tight margins. Needs a lane frontage of at least 14.0 m and a street frontage of at least 14.2 m. Heat cascade and community pool: no small-lot version; they point here.", "src": ["spec_emergencyHub"]},
+   {"lo": 750, "what": "At-grade versions", "note": "Generators and pads at grade, as FM 5-32 asks. One floor for every typology: about 750 m² with a lane (room minimums alone give about 620 m²; unproven between).", "src": ["spec_emergencyHub"]}
+  ],
+  "noLane": "Without a lane: the at-grade versions need about 1,010 m² and at least 26.7 m of frontage. The upstairs variant is not worked out without a lane (?)."
+ },
  "pages": {
   "emergency_hub": {
    "capacities": [

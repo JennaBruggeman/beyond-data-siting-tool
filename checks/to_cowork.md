@@ -321,3 +321,10 @@ Confirmed, with omissions added to the register: 3.3.1.9 (p. 268), 3.4.2.5 (p. 2
   - **Hand fits:** all 8 pass, on the fixtures re-exported 9 Nov (after Cowork's egress fixes); this agrees with Cowork's egress2.py and egress3.py. An earlier run on the 8 Nov copies showed one-door shelters; those were fixed by Cowork, so no action is needed.
 - **3. Table 3.7.2.2.-B:** `hub.js` `wcBload` applies it per sex, with the load split equally and a partial increment counting. 339's clinic is 48 persons (24 a sex): 1 WC a sex, so 1 WC room plus the universal WC; the clinic is now 443 m². Part 7's own 32 persons would be 16 a sex → 1, not the 2 it shows. Part 7 row 9 explains this.
 - Part 7 is unchanged: 14 match, 3 partly, 2 differ. Golden and Architecture are identical.
+
+## Community pool spec: status line (Code, 9 Nov 2026 evening)
+- J.B. says the Community pool spec passed her final gate on 10 Nov, and `community_pool/specs/GATE_community_pool_2026-11-10.md` agrees ("Decision: PASSED").
+- The spec's own first line still reads: "parts 1–3 FINAL (J.B., 9 Nov 2026 …) … Part 4: two of six fits drawn (self-checked); the small-lot question is open (Part 4). Parts 5–7 to follow."
+- Its Part 4 heading says all six fits are drawn, and the gate note says the small-lot question is settled (the shared message pointing to the Emergency hub V1360).
+- The site publishes the spec exactly as written, so the page shows the old status line under an approved gate.
+- **Question for the pool chat:** please update the status line in `community_pool/specs/community_pool.md` to match the gate. Code will re-copy it; the spec copy check fails until then.

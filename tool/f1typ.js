@@ -22,8 +22,17 @@ const fig=f=>`<div class="f1t-fig"><b>${f.hi!=null?`${n2(f.lo)}–${n2(f.hi)}`:`
 function libHtml(){ return `<div class="f1t-wrap"><div class="f1t-intro"><h1>Typologies</h1><p>Ways a data centre and public programs can share one building. Each adapts to the lot through its variants. A typology shows figures only once its spec has passed J.B.’s gate: nothing unsourced.</p></div>
   <div class="f1t-grid">${T.list.map(t=>`<article class="f1t-card${t.card?' has':''}"><header><h2>${esc(t.name)}</h2>${chip(t.status)}</header>${models(t)}
     ${t.card?`<div class="f1t-figs">${t.card.map(fig).join('')}</div><p class="f1t-share">shares: ${esc(t.shares)}</p><button class="f1t-open" data-typ="${esc(t.id)}">Open the typology →</button>`
+      :t.spec&&t.spec.gate==='approved'&&t.spec.file?`<p class="f1t-none">Spec passed J.B.’s gate; figures not on this page yet.<br><span>${esc(t.statusNote||'')}</span></p><button class="f1t-open" data-spec="${esc(t.id)}">Read the spec →</button>`
       :`<p class="f1t-none">No figures until its spec passes the gate.<br><span>${esc(t.statusNote||'')}</span></p>`}</article>`).join('')}</div>
+  ${smallHtml()}
   <p class="f1t-foot">Program models: first pass (servers, refuge, clinic, pool drawn); the rest come with their specs. Figures: tool/data/typologies.json, from each spec, with register ids.</p></div>`; }
+
+/* F7 small-lot floors (J.B., 9 Nov 2026): tool/data/typologies.json smallLots, from the Emergency hub spec Part 4 and the 10 Nov gate notes */
+function smallHtml(){ const L=T.smallLots; if(!L) return '';
+  const rng=r=>r.lo==null?`under about ${n0(r.hi)} m²`:r.hi==null?`about ${n0(r.lo)} m² and up`:`about ${n0(r.lo)}–${n0(r.hi)} m²`;
+  return `<section class="f1t-small"><div class="f1t-h"><h2>Small lots</h2><span>lot area, with a lane; our arithmetic on test lots, not a citywide count</span></div>
+   <div class="f1t-bands">${L.rows.map(r=>`<article class="f1t-band${r.lo==null?' none':''}"><p class="rng">${rng(r)}</p><h3>${esc(r.what)}</h3>${r.label?`<p class="f1t-label" role="note">${esc(r.label)}</p>`:''}<p>${esc(r.note)}</p>${srcs(r.src)}</article>`).join('')}</div>
+   <p class="f1t-q">${esc(L.noLane)}</p></section>`; }
 
 function capRow(c){ let v='';
   if(c.pueLo!=null) v=`${n2(c.pueLo)}–${n2(c.pueHi)} ${esc(c.note)}`;
@@ -90,7 +99,7 @@ function md(src){ const L=src.replace(/\r/g,'').split('\n'); let h='', par=[], s
   flush(); closeTo(0); return h; }
 async function specHtml(id){ const t=T.list.find(x=>x.id===id); const src=await fetch('f1/specs/'+id+'.md').then(r=>r.ok?r.text():'');
   return `<div class="f1t-wrap"><button class="f1t-back" data-typ="${esc(id)}">← ${esc(t?t.name:'Typology')}</button>
-   <p class="f1t-q" style="max-width:980px">The typology spec as Cowork wrote it, published with the tool by J.B.’s decision (9 Nov 2026); copied unchanged from her working folder. Source ids are register entries (Logic diagram). File paths (eh/…, checks/…) are working files, not on this site; the Edmonton hand fits’ plans are not published (licensed lot lines).</p>
+   <p class="f1t-q" style="max-width:980px">The typology spec as Cowork wrote it, published with the tool by J.B.’s decision (9 and 10 Nov 2026); copied unchanged from her working folder. Source ids are register entries (Logic diagram). File paths (eh/…, checks/…) are working files, not on this site; the Edmonton hand fits’ plans are not published (licensed lot lines).</p>
    ${t&&t.spec&&t.spec.gate==='approved'?'':`<div class="f1t-draft" role="note"><b>Draft:</b> not yet approved by J.B. Figures and rules may change.</div>`}
    <article class="f1t-spec">${src?md(src):'<p>The spec file is missing.</p>'}</article></div>`; }
 
