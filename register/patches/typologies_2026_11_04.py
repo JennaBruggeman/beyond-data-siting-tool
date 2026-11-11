@@ -22,6 +22,7 @@ for f in sorted(A.glob('*_sources.json')):
     src = clean(json.load(open(f))); md = 'checks/research_typ/' + f.name.replace('_sources.json', '.md')
     for k, v in src.items():
         if k.startswith('_'): continue
+        if k not in res: continue   # 11 Nov 2026 (from-scratch rebuild): the folder now also holds later typologies' sources (their own patches add them); this patch covers the ids its check covered
         if k not in S: n_new += 1
         S[k] = v
         kind = next((kk for pre, kk in KIND if v.upper().startswith(pre)), 'named in our notes, not yet checked')

@@ -1,10 +1,10 @@
 # Licensed-standard text in checks/ and the booklet: cleanup, diff summary (11 Nov 2026)
 
-J.B. 11 Nov 2026: same method as the register rewrite (figures plus clause numbers); OP S710 treated as licensed; EN 253 quoted by Energiforsk paraphrased; the rest as proposed. Not committed, not pushed.
+J.B. 11 Nov 2026: same method as the register rewrite (figures plus clause numbers); OP S710 treated as licensed; EN 253 quoted by Energiforsk paraphrased; the rest as proposed. Pushed to site-f1 after J.B.'s wording calls (same day, section at the end).
 
 ## Weaknesses first
 - **Git history keeps the old text** (as agreed for the register).
-- **A from-scratch rebuild of the register was not run.** 25 old patches load files from checks/ (not only the two we knew of). They now pass what they load through a guard (`register/patches/_licensed.py`). It applies the rewrite pairs, then stops the build if any old passage is still there. Where an agent paraphrased research text differently from the register's wording, a rebuild would write the agent's wording (still clean) and could stop at the rewrite patch ("found 0 times"). It would not bring quotes back.
+- **From-scratch rebuild: runs to the end, but differs from today's register in wording** (see the section at the end).
 - **Meaning shifts, closest first:**
   - CE Code Rule 26-010 2): "installed in a service room" became "allowed in a service room" (checks/check2/result_full_5.json). The full clause was never quoted, so "allowed" may overstate it.
   - NFPA 75 in handover.md: "shall be permitted" (only IT equipment) became "must hold only". The restriction is kept; the permission wording is gone.
@@ -38,3 +38,13 @@ J.B. 11 Nov 2026: same method as the register rewrite (figures plus clause numbe
 ## Tests
 - Golden: every lot ok (run after all changes).
 - register_wiring: the same 11,856 lot_types flags as before; nothing new.
+
+## J.B.'s wording calls and the rebuild (11 Nov 2026, later)
+- CE Code 26-010: "installed in a service room (full clause not read, ?)". NFPA 75 (handover.md): "permitted to hold ITE and support equipment only".
+- The four partial-quote paraphrases carry "(paraphrase of a partial quote; full clause ?)".
+- CIBSE line in Dudzińska 2021 paraphrased in the research files and the register (patch b, arch_tmp_dudzinska2021).
+- **From-scratch rebuild** (`checks/tests/register_rebuild.py`, log `register_rebuild_log_2026-11-11.txt`): the register as of the repo reorganization (22 Oct) plus all 180 patches in commit order, with today's scripts and checks/ files. Runs to the end. Three stops fixed:
+  1. typologies_2026_11_04.py read every *_sources.json in the folder, including later typologies with no check result: now only the ids its check covered.
+  2. Commit 2fbf4c6 (29 Oct) edited hall_layout in the register with no patch; one_method_floor_racks stopped. Back-fill patch `hall_capacity_check_backfill_2026_10_29.py`.
+  3. The rewrite patches stopped where an old patch now loads a research file paraphrased in the agents' words. They now accept that case when none of the old quoted words remain (5 passages).
+- **Result:** no old licensed passage in the rebuilt register. Same 225 parts and 112 conditions, and no number differs. It still differs in wording: 323 source texts, 85 extra source entries, 8 quantity text or source-list fields (price_ceiling, affordability, component_space, fuel_on_site, heat_sale_rules, arch_program_catalogue). Causes: older direct register edits with no patch, and patches that read whole research folders as they are today. Not fixed (each would need a back-fill); today's register stays the source of truth.

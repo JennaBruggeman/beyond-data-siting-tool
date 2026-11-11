@@ -7,7 +7,7 @@ Titles of documents stay as cited. Government codes, by-laws, government guides,
 The old patch scripts that held the same quotes were edited in place with the same paraphrases.
 Idempotent: each old passage must be found once, or its paraphrase must already be there.
 """
-import json, pathlib
+import json, pathlib, re
 R = pathlib.Path(__file__).resolve().parents[2]
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text(encoding='utf-8'))
 Q = {q['id']: q for q in d['quantities']}
@@ -566,7 +566,13 @@ def put(w, s):
         Q[w[1]][w[2]] = s
 
 
-n_done = n_already = 0
+# 11 Nov 2026 (from-scratch rebuild): an old patch may load a checks/ file whose quote was paraphrased there in its own words;
+# then neither this old passage nor this paraphrase is in the entry. Accepted when none of the old passage's quoted words remain.
+QW = re.compile(r"'([^']{12,})'|\"([^\"]{12,})\"")
+def upstream(old, s):
+    inner = [a or b for a, b in QW.findall(old)]
+    return bool(inner) and not any(t in s for t in inner)
+n_done = n_already = n_up = 0
 for w, pairs in E:
     s = get(w)
     for old, new in pairs:
@@ -575,6 +581,8 @@ for w, pairs in E:
             s = s.replace(old, new); n_done += 1
         elif c == 0 and new in s:
             n_already += 1
+        elif c == 0 and upstream(old, s):
+            n_up += 1
         else:
             raise SystemExit(f'{w}: found {c} times: {old[:80]}')
     put(w, s)
@@ -582,5 +590,5 @@ for w, _ in E:
     if w[0] == 'q':
         Q[w[1]]['revised'] = '2026-11-11'
 p.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding='utf-8', newline='\n')
-print(f'{len(E)} entries; {n_done} passages rewritten, {n_already} already done')
+print(f'{len(E)} entries; {n_done} passages rewritten, {n_already} already done, {n_up} paraphrased upstream')
 
