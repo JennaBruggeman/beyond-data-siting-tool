@@ -28,15 +28,15 @@ Probe: checks/tests/gen_noise_probe.js (339 1st Ave E, golden answers, read-only
 ## 339 at sizes above the cap (Vancouver, sets of 2 MW)
 | Size | Yard depth | Sets needed / installed | One-set test at nearest lot line (9.1 m) | All running sets at that line (power cut) | All running sets at 375 1st Ave E (22.3 m, plant check's worst receiver, limit 55) |
 |---|---|---|---|---|---|
-| 2.5 MW | within cap | 2 / 3 | 75.7 dB(A), **within 80** | 78.7 | 70.6 |
-| 2.6–3.5 MW | 23 m | 3 / 4 | 75.7, within | 80.5 | 72.4 |
-| 4.0 MW | 28 m | 4 / 5 | 75.7, within | 81.7 | 73.6 |
+| 2.5 MW | within cap | 2 / 3 | 75.7 dB(A), **within 80** | 78.7 | 70.8 |
+| 2.6–3.5 MW | 23 m | 3 / 4 | 75.7, within | 80.5 | 72.7 |
+| 4.0 MW | 28 m | 4 / 5 | 75.7, within | 81.7 | 74.0 |
 
 (Our arithmetic: Lp = 102.9 + 10 log n − 20 log r − 8, all sets taken at the nearest set's distance, no screening.)
 
 - **Monthly test, one set:** passes at every size. The nearest set stays 9.1 m from the lot line, so a deeper yard doesn't move it.
 - **Annual 180-minute test:** if the sets are tested together, 3 sets come to 80.5 dB(A), just over 80. Whether the annual test is one set or all is not stated (?).
-- **Power cut:** 70–74 dB(A) at the neighbour against a 55 quiet-zone limit, but in Vancouver that's exempt as emergency works (our reading, ?). In Edmonton the same arithmetic would be flagged overnight.
+- **Power cut:** 71–74 dB(A) at the neighbour against a 55 quiet-zone limit, but in Vancouver that's exempt as emergency works (our reading, ?). In Edmonton the same arithmetic would be flagged overnight.
 
 ## Estimate
 - **Can the noise check replace the cap?** Yes, technically. The one-set test check and the screening formula already exist. A power-cut row with all running sets at the receivers the plant check already tests is about a half-day build.
