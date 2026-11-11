@@ -432,3 +432,16 @@ Also: negative money is shown as −$; the BC/Alberta price label now follows th
 - Site report polish (see "Parked: the site report").
 - Research gaps: EPCOR tiers; BC Reg 8/2026 and 123/2026; NFPA 1142; Edmonton encroachment guide; Alberta 2018 surface water guidelines; Vancouver DFPS map; truck trips per refresh; Edmonton warming and reception centres.
 - Open from steps 3–5: opportunities hidden from residents (keep behind "show more" or always name them?); the section-to-parts table (logic.js SEC); logic panel on steps without 3D.
+
+## Receiver locations: BC Assessment check (10 Nov 2026, J.B.)
+Checked: the four files that hold receiver locations (`chosen_sites/V09_275_1st_Ave_E/V09_heat_receivers.csv`, its copy `site_maps/chosen/V09_heat_receivers.csv`, `chosen_sites/V09_275_1st_Ave_E/tool_data_full.json`, `tool/receivers_van.json`). No raw BC Assessment field in any of them: no use code or description, floor area, assessed value, year built or roll/folio attribute.
+
+BC Assessment receivers (`src: vanBCA`), field by field:
+- name (address): City parcel file, title-cased.
+- lat, lon: City, a point inside the City parcel outline. BC Assessment has no geometry; it joins to the parcel by folio (`tool/make_bigrecv.py`).
+- type (commercial or apartment): derived, our two groups from BC Assessment's description text (`tool/bca/bca_derive.py`); the text is not kept.
+- `dem`: derived, homes × 16.81 MWh or floor area × CEUD 2023 BC intensity, rounded to 2 significant figures.
+- `lo`: derived, `dem` ÷ 1.7. CSV heat demand: derived, `dem` × 0.85. Distance, reach, counted heat: derived by the tool. `meas`, `src`, `aka`: tool labels.
+- `tool_data_full.json` holds more than the cards show (all 1,842 receivers; routes and costs for the 1,073 within 3 km), but nothing raw.
+
+**Decision (J.B.):** these are City-parcel locations with derived, rounded values, not BC Assessment geometry; allowed under the UBC Library terms (rounded values per building). The files stay as they are, and the older check files that name receivers are not redacted (the tool publishes the same names). New exports name receivers by type only (`checks/tests/eng_redact.js`).
