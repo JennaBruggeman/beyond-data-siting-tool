@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-11T01:11:40.411Z",
- "commit": "1fbe003",
+ "made": "2026-11-11T01:33:55.981Z",
+ "commit": "7def2ff",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -290,7 +290,7 @@
    "register": [
     {
      "id": "arch_dc_battery",
-     "text": "{\"quantity\":\"Battery room, lithium-ion, m² per MW of IT (Architecture mode)\",\"unit\":\"m² per MW IT\",\"formula\":\"Li-ion cabinets 1.0–1.8 m² per MW for about 5 min (equipment only); VRLA ≈3.3–6.0 m² per MW (Li-ion ÷ 0.3, maker's 'saves space 70%', our arithmetic; not used)\",\"coef\":\"manufacturer claims (Vertiv EnergyCore Li5, Delta LZH; register component_space); HVAC separate from the hall, above the 500-year flood + 0.3–0.6 m (FM 5-28, insurer guidance); 2 h kept (NFPA 855, US standard, stricter than FM 1 h); Li-ion room rules are in FM 5-33, not read (?); 0.914 m clear in front of cabinets (Vertiv manual) [7 Nov 2026 (V339 board fixes): the per-MW figure stays the basis of Ratios' MW (equipment only); the drawn room is by count (electrical_room), and any hall floor it leaves short is reported (?).]\",\"source\":null}"
+     "text": "{\"quantity\":\"Battery room, lithium-ion, m² per MW of IT (Architecture mode)\",\"unit\":\"m² per MW IT\",\"formula\":\"Li-ion cabinets 2.1–3.8 m² per MW for 10–15 min (FM 5-32; 1.0–1.8 at about 5 min scaled by the cabinet count, our arithmetic; equipment only); VRLA ≈3.3–6.0 m² per MW (Li-ion ÷ 0.3, maker's 'saves space 70%', our arithmetic; not used)\",\"coef\":\"manufacturer claims (Vertiv EnergyCore Li5, Delta LZH; register component_space); HVAC separate from the hall, above the 500-year flood + 0.3–0.6 m (FM 5-28, insurer guidance); 2 h kept (NFPA 855, US standard, stricter than FM 1 h); Li-ion room rules are in FM 5-33, not read (?); 0.914 m clear in front of cabinets (Vertiv manual) [7 Nov 2026 (V339 board fixes): the per-MW figure stays the basis of Ratios' MW (equipment only); the drawn room is by count (electrical_room), and any hall floor it leaves short is reported (?).]\",\"source\":null}"
     },
     {
      "id": "arch_dc_electrical",
@@ -461,11 +461,11 @@
     "Plant space",
     "m² for UPS, batteries, cooling units (and heat pump, liquid loop); equipment only, no service clearances",
     "Air (pick)",
-    "66–131 m²",
+    "69–136 m²",
     "Liquid to the chip",
-    "92–172 m²",
+    "95–177 m²",
     "Immersion",
-    "92–172 m²",
+    "95–177 m²",
     "Outside: how the heat leaves the building · inside held at air",
     "Water used",
     "make-up water, m³ a year",
@@ -486,11 +486,11 @@
     "Plant space",
     "m² for UPS, batteries, cooling units; equipment only, no service clearances",
     "Air-cooled chillers (pick)",
-    "66–131 m²",
+    "69–136 m²",
     "Cooling towers",
-    "25–77 m²",
+    "28–82 m²",
     "Hybrid coolers",
-    "94–207 m²",
+    "97–212 m²",
     "your pick (the tool’s default, kept here)",
     "the others",
     "range, low to high",
@@ -527,17 +527,17 @@
       {
        "option": "Air",
        "picked": true,
-       "value": "66–131 m²"
+       "value": "69–136 m²"
       },
       {
        "option": "Liquid to the chip",
        "picked": false,
-       "value": "92–172 m²"
+       "value": "95–177 m²"
       },
       {
        "option": "Immersion",
        "picked": false,
-       "value": "92–172 m²"
+       "value": "95–177 m²"
       }
      ]
     },
@@ -590,22 +590,22 @@
       {
        "option": "Air-cooled chillers",
        "picked": true,
-       "value": "66–131 m²"
+       "value": "69–136 m²"
       },
       {
        "option": "Cooling towers",
        "picked": false,
-       "value": "25–77 m²"
+       "value": "28–82 m²"
       },
       {
        "option": "Hybrid coolers",
        "picked": false,
-       "value": "94–207 m²"
+       "value": "97–212 m²"
       }
      ]
     }
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at air-cooled chillers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm² for UPS, batteries, cooling units (and heat pump, liquid loop); equipment only, no service clearances\nAir (pick)\n66–131 m²\nLiquid to the chip\n92–172 m²\nImmersion\n92–172 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nAir-cooled chillers (pick)\nnone for cooling\nCooling towers\n36,661–61,101 m³/yr\nHybrid coolers\n4,546–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nAir-cooled chillers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm² for UPS, batteries, cooling units; equipment only, no service clearances\nAir-cooled chillers (pick)\n66–131 m²\nCooling towers\n25–77 m²\nHybrid coolers\n94–207 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55; industry surveys, not this design): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nAir-cooled chillers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nAir-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at air-cooled chillers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm² for UPS, batteries, cooling units (and heat pump, liquid loop); equipment only, no service clearances\nAir (pick)\n69–136 m²\nLiquid to the chip\n95–177 m²\nImmersion\n95–177 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nAir-cooled chillers (pick)\nnone for cooling\nCooling towers\n36,661–61,101 m³/yr\nHybrid coolers\n4,546–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nAir-cooled chillers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm² for UPS, batteries, cooling units; equipment only, no service clearances\nAir-cooled chillers (pick)\n69–136 m²\nCooling towers\n28–82 m²\nHybrid coolers\n97–212 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55; industry surveys, not this design): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nAir-cooled chillers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nAir-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 5,
@@ -655,17 +655,17 @@
     {
      "kind": "hero",
      "label": "battery cabinets",
-     "value": "7–10",
+     "value": "14–21",
      "unit": null,
      "key": null,
      "red": false,
      "range": {
-      "low": 7,
-      "high": 10
+      "low": 14,
+      "high": 21
      },
      "numbers": [
-      7,
-      10
+      14,
+      21
      ]
     },
     {
@@ -741,51 +741,61 @@
     {
      "kind": "row",
      "label": "Battery cabinets",
-     "value": "7–10 (263–400 kW each; maker claims)",
+     "value": "14–21 (124.4–186.6 kW each for 15–10 min: Vertiv EnergyCore Li5, 31.1 kWh, maker claim; the rating at these runtimes is our arithmetic)",
      "key": null,
      "range": {
-      "low": 7,
-      "high": 10
+      "low": 14,
+      "high": 21
      },
      "numbers": [
-      7,
+      14,
+      21,
+      124.4,
+      186.6,
+      15,
       10,
-      263,
-      400
+      5,
+      31.1
      ]
     },
     {
      "kind": "row",
      "label": "Battery runtime",
-     "value": "1–5 minutes, about 0–0.2 MWh at full load (vendor runtimes, operator claims; our arithmetic)",
+     "value": "10–15 minutes (FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026), about 0.4–0.6 MWh at full load (our arithmetic)",
      "key": null,
      "range": {
-      "low": 1,
-      "high": 5
+      "low": 10,
+      "high": 15
      },
      "numbers": [
-      1,
+      10,
+      15,
       5,
-      0,
-      0.2
+      -32,
+      3.5,
+      2.1,
+      11,
+      2026,
+      0.4,
+      0.6
      ]
     },
     {
      "kind": "row",
      "label": "Floor space, UPS and batteries",
-     "value": "9–13 m² (2.4–3.3 + 1–1.8 m² per MW; register component_space)",
+     "value": "11–18 m² (2.4–3.3 + 2.1–3.8 m² per MW; register component_space)",
      "key": null,
      "range": {
-      "low": 9,
-      "high": 13
+      "low": 11,
+      "high": 18
      },
      "numbers": [
-      9,
-      13,
+      11,
+      18,
       2.4,
       3.3,
-      1,
-      1.8
+      2.1,
+      3.8
      ]
     }
    ],
@@ -830,7 +840,7 @@
     },
     {
      "id": "battery_cabinets",
-     "text": "{\"quantity\":\"UPS battery cabinets\",\"unit\":\"count (range)\",\"formula\":\"n = ⌈P_IT ÷ cabinet power at the runtime⌉, ×2 for 2N\",\"coef\":\"about 5 min runtime (backup_hours, colocation); 263 kW per cabinet (Vertiv EnergyCore Li5, 0.6 × 0.75 × 2.0 m, drawn) to 400 kW per rack (Delta LZH) for 5 min → range (manufacturer claims)\",\"source\":null}"
+     "text": "{\"quantity\":\"UPS battery cabinets\",\"unit\":\"count (range)\",\"formula\":\"n = ⌈P_IT ÷ cabinet power at the runtime⌉, ×2 for 2N\",\"coef\":\"10–15 min runtime (FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026); Vertiv EnergyCore Li5, 31.1 kWh, 263 kW (0.6 × 0.75 × 2.0 m, drawn): 186.6 kW for 10 min, 124.4 kW for 15 min (our arithmetic from the stored energy); Delta LZH at these runtimes not held (?). Earlier: about 5 min runtime (backup_hours, colocation); 263 kW per cabinet (Vertiv EnergyCore Li5, 0.6 × 0.75 × 2.0 m, drawn) to 400 kW per rack (Delta LZH) for 5 min → range (manufacturer claims)\",\"source\":null}"
     },
     {
      "id": "fuel_on_site",
@@ -853,7 +863,7 @@
     "lot",
     "UPS modules and battery cabinets sit inside the building: the tool counts their floor space, it does not draw them."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n3 generator sets\n2 MW each · in the yard\n339 1st Ave E\n0\n20 m\nN ↑\nstandby generators\nbuilding\nlot\nUPS modules and battery cabinets sit inside the building: the tool counts their floor space, it does not draw them.\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nBackup power\n\nStandby power in three parts: diesel generators outdoors, UPS modules that bridge the first minutes, and batteries behind them.\n\n3 × 2 MW\nstandby generators\n12,200 L\nfuel for 12 h at the high end\n4 × 1 MW\nUPS modules\n7–10\nbattery cabinets\nGenerators\n3 sets: 2 carry the load, 1 spare · 2 MW each, 13.5 × 3.5 m, 4.8 m high (Rehlko KD2000, maker claim)\nWhere the generators sit\nin the yard: 3 in the yard, 0 on the roof (plant.js layout)\nFuel in the set bases\nabout 6,100 L a set, 18,300 L in all (sub-base tanks, maker claim)\nFuel for 12 hours\n11,000–12,200 L (3.5–3.9 MW × 12 h × 0.263 L per kWh; Uptime minimum, maker rate)\nUPS modules\n4 of 1,000 kW (load ÷ 1,000 kW, one spare unless set to none or 2N; vendor figure)\nBattery cabinets\n7–10 (263–400 kW each; maker claims)\nBattery runtime\n1–5 minutes, about 0–0.2 MWh at full load (vendor runtimes, operator claims; our arithmetic)\nFloor space, UPS and batteries\n9–13 m² (2.4–3.3 + 1–1.8 m² per MW; register component_space)\nGenerator capacity against the load it carries\npass\n3.9 MW load · 2 sets of 2 MW carry 4 MW · 1 spare\nplant.js sizeFor\nWhere the fuel rule applies\nThe generator list the plant layout gives\nBack\nNext\n5 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n3 generator sets\n2 MW each · in the yard\n339 1st Ave E\n0\n20 m\nN ↑\nstandby generators\nbuilding\nlot\nUPS modules and battery cabinets sit inside the building: the tool counts their floor space, it does not draw them.\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nBackup power\n\nStandby power in three parts: diesel generators outdoors, UPS modules that bridge the first minutes, and batteries behind them.\n\n3 × 2 MW\nstandby generators\n12,200 L\nfuel for 12 h at the high end\n4 × 1 MW\nUPS modules\n14–21\nbattery cabinets\nGenerators\n3 sets: 2 carry the load, 1 spare · 2 MW each, 13.5 × 3.5 m, 4.8 m high (Rehlko KD2000, maker claim)\nWhere the generators sit\nin the yard: 3 in the yard, 0 on the roof (plant.js layout)\nFuel in the set bases\nabout 6,100 L a set, 18,300 L in all (sub-base tanks, maker claim)\nFuel for 12 hours\n11,000–12,200 L (3.5–3.9 MW × 12 h × 0.263 L per kWh; Uptime minimum, maker rate)\nUPS modules\n4 of 1,000 kW (load ÷ 1,000 kW, one spare unless set to none or 2N; vendor figure)\nBattery cabinets\n14–21 (124.4–186.6 kW each for 15–10 min: Vertiv EnergyCore Li5, 31.1 kWh, maker claim; the rating at these runtimes is our arithmetic)\nBattery runtime\n10–15 minutes (FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026), about 0.4–0.6 MWh at full load (our arithmetic)\nFloor space, UPS and batteries\n11–18 m² (2.4–3.3 + 2.1–3.8 m² per MW; register component_space)\nGenerator capacity against the load it carries\npass\n3.9 MW load · 2 sets of 2 MW carry 4 MW · 1 spare\nplant.js sizeFor\nWhere the fuel rule applies\nThe generator list the plant layout gives\nBack\nNext\n5 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 6,
@@ -1001,7 +1011,7 @@
     {
      "kind": "row",
      "label": "Generator testing",
-     "value": "one set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together wo",
+     "value": "one set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m, maker claim; free field",
      "key": null,
      "range": {
       "low": 6,
@@ -1011,10 +1021,12 @@
       75.7,
       9.1,
       80,
-      78,
-      7,
       6,
-      -154
+      -154,
+      2000,
+      2,
+      78,
+      7
      ]
     }
    ],
@@ -1076,7 +1088,7 @@
     },
     {
      "title": "Generator test",
-     "text": "Generator testing: up to 80 dBA at the point of reception, or 6.1 m from the source if that is farther, once a month for up to 60 minutes in the daytime, plus once a year for up to 180 minutes. By-law 6555 s. 4.1(c).Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?)."
+     "text": "Generator testing: up to 80 dBA at the point of reception, or 6.1 m from the source if that is farther, once a month for up to 60 minutes in the daytime, plus once a year for up to 180 minutes. By-law 6555 s. 4.1(c).Generator test (Noise By-law 6555 s. 4.1(c)): one set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m, maker claim; free field, our arithmetic). Sets tested together would be louder. Running in a power cut as emergency works (s. 4.3(c)): our reading (?)."
     },
     {
      "title": "Method",
@@ -1139,7 +1151,7 @@
     "304 1st Ave E\tIC-3\t38 m\t44–48 dBA\t69–73 dBA\t65 dBA",
     "Levels at a lot are at its point nearest the plant, from the tool’s own check; the limit is that lot’s night limit (Noise Control By-law 6555 s. 2.3(b)(i)). Where two limits show, the first is for the quieter-rated units, the second for standard units."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n375 1st Ave E\n74–77 dBA without the measure\nlimit 55 dBA\n339 1st Ave E\nplant: indoors\n0\n30 m\nN ↑\nlot: level well under its limit\nwithin 10 dBA of the limit\nover the limit with standard-rating units\nover the limit with the quieter rating\n+ plant centre\nPredicted level at the nearest lots, against each lot’s limit\nLot (point of reception)\tZone\tDistance\tLevel, with the measure\tWithout it\tNight limit\n375 1st Ave E\nno building on record: tested at its lot line (our reading)\n\tCD-1 (402)\t23 m\t49–52 dBA\t74–77 dBA\t55 dBA\n275 1st Ave E\tI-3\t23 m\t48–52 dBA\t73–77 dBA\t65 dBA\n336 1st Ave E\tIC-3\t35 m\t45–48 dBA\t70–73 dBA\t65 dBA\n316 1st Ave E\tIC-3\t35 m\t45–48 dBA\t70–73 dBA\t65 dBA\n304 1st Ave E\tIC-3\t38 m\t44–48 dBA\t69–73 dBA\t65 dBA\n\nLevels at a lot are at its point nearest the plant, from the tool’s own check; the limit is that lot’s night limit (Noise Control By-law 6555 s. 2.3(b)(i)). Where two limits show, the first is for the quieter-rated units, the second for standard units.\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nNoise\n\nThe plant runs all night, so the night limit governs. It passes only with the measure below.\n\n74–77 dBA\nworst case without a measure\n55 dBA\nits night limit\n23 m\nfrom the plant\n−25 dB\nmeasure the tool requires: plant room\nWorst case\n375 1st Ave E (CD-1 (402), quiet zone), 23 m from the plant: 74–77 dBA without the measure against 55 dBA\nWhat the tool requires\nneeds a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 74–77 dBA (quieter–standard unit rating) at the point of reception beside 375 1ST AVE E (CD-1 (402), quiet zone) (no building on record: point of reception at its lot line, our reading), 23 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).\nCooling plant sits\nindoors\nSound power of the plant\n109–112 dBA (4 units; maker claims)\nLots tested\n4,729 receivers within the check’s radius\nGenerator testing\none set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (78 dB(A) at 7 m, Kohler G6-154, maker claim; free field, our arithmetic). Sets tested together wo\nThe lot’s own lines\nGenerator test\nMethod\nBack\nNext\n6 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n375 1st Ave E\n74–77 dBA without the measure\nlimit 55 dBA\n339 1st Ave E\nplant: indoors\n0\n30 m\nN ↑\nlot: level well under its limit\nwithin 10 dBA of the limit\nover the limit with standard-rating units\nover the limit with the quieter rating\n+ plant centre\nPredicted level at the nearest lots, against each lot’s limit\nLot (point of reception)\tZone\tDistance\tLevel, with the measure\tWithout it\tNight limit\n375 1st Ave E\nno building on record: tested at its lot line (our reading)\n\tCD-1 (402)\t23 m\t49–52 dBA\t74–77 dBA\t55 dBA\n275 1st Ave E\tI-3\t23 m\t48–52 dBA\t73–77 dBA\t65 dBA\n336 1st Ave E\tIC-3\t35 m\t45–48 dBA\t70–73 dBA\t65 dBA\n316 1st Ave E\tIC-3\t35 m\t45–48 dBA\t70–73 dBA\t65 dBA\n304 1st Ave E\tIC-3\t38 m\t44–48 dBA\t69–73 dBA\t65 dBA\n\nLevels at a lot are at its point nearest the plant, from the tool’s own check; the limit is that lot’s night limit (Noise Control By-law 6555 s. 2.3(b)(i)). Where two limits show, the first is for the quieter-rated units, the second for standard units.\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nNoise\n\nThe plant runs all night, so the night limit governs. It passes only with the measure below.\n\n74–77 dBA\nworst case without a measure\n55 dBA\nits night limit\n23 m\nfrom the plant\n−25 dB\nmeasure the tool requires: plant room\nWorst case\n375 1st Ave E (CD-1 (402), quiet zone), 23 m from the plant: 74–77 dBA without the measure against 55 dBA\nWhat the tool requires\nneeds a plant room: solid walls, roof RW 47 or better, gaps sealed, louvres of at least 6–27 dB by band (NSW 2021 Table 4-5): −25 dB (arch_nz_nswDcNoise). Without it: about 74–77 dBA (quieter–standard unit rating) at the point of reception beside 375 1ST AVE E (CD-1 (402), quiet zone) (no building on record: point of reception at its lot line, our reading), 23 m away; limit 55 dBA at night (Noise Control By-law 6555 s. 2.3(b)(i)).\nCooling plant sits\nindoors\nSound power of the plant\n109–112 dBA (4 units; maker claims)\nLots tested\n4,729 receivers within the check’s radius\nGenerator testing\none set at a time is about 75.7 dB(A) at 9.1 m (the nearest lot line), within the 80 dB(A) test limit (Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m, maker claim; free field\nThe lot’s own lines\nGenerator test\nMethod\nBack\nNext\n6 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 7,
@@ -1308,7 +1320,7 @@
     },
     {
      "title": "How the heat figure is worked out",
-     "text": "Heat captured = 13,140 MWh of IT energy × 0.57–0.75 (liquid capture). Heat out = captured × COP ÷ (COP − 1), COP 4.5 for the low end and 3 for the high end. It is an upper bound: the tool has no sourced typical share of full load (logic: it_load_share)."
+     "text": "Heat captured = 13,140 MWh of IT energy × 0.57–0.75 (liquid capture). Heat out = captured × COP ÷ (COP − 1), COP 4.5 for the low end and 3 for the high end. IT energy is the size × 8,760 h × 0.6 load factor (register load_factor: Fan et al. 2007, one operator’s clusters averaged about 60 % of their machines’ combined maximum; J.B. 11 Nov 2026)."
     }
    ],
    "meters": [],
@@ -1335,12 +1347,12 @@
    ],
    "register": [
     {
-     "id": "it_load_share",
-     "text": "{\"quantity\":\"How much of the IT capacity actually runs\",\"unit\":\"share of design IT load\",\"formula\":\"running IT load = design IT load × share in use; share in use not set (?)\",\"coef\":\"Guide at VAN3: halls are not always at capacity (empty racks, enclosures being built) and power per area depends on the tenants (tourVAN3, guide's claim); a quarter of surveyed sites typically run under 40% of their UPS capacity (Uptime 2024, operator self-report); LBNL assumes 50% average capacity utilisation for the whole US fleet, unsourced (lbnl2024). Neither gives a typical value for one colocation building, so heat and energy stay at capacity: an upper bound (the Heat view does not yet say so ?)\",\"source\":null}"
-    },
-    {
      "id": "liquid_capture",
      "text": "{\"quantity\":\"Share of heat captured in liquid\",\"unit\":\"—\",\"formula\":\"0.57–0.75 cold plate (LBNL: 57–59 % typical, 67–75 % best; decided 30 Oct 2026, J.B.); 1.0 immersion; air: judged\",\"coef\":\"18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air cooling — still no capture share for a whole air-cooled hall. Reuse is shown 'possible with a change' (heat pumps on the chilled-water loop or chiller condenser) and the figure 'not yet known'. Evidence: Oró et al. 2019 (return air up to 47 °C, condenser up to 50 °C; ERF on a primary-energy basis 25–45% / ~55%, not ISO ERF); Požgaj et al. 2025 (108 kW hybrid; liquid removes ~70 %, so ~30 % to air, implied; ERF 0.78 in the 3G case with heat pumps, 0.86 in 4G and 0.88 in 5G without heat pumps); Ljungqvist et al. 2023 (theoretical upper limit with no heat pump, 0.50–0.66 at 13–18 °C); Yuan et al. 2025 review (Table 2 temperatures; its '50–70% recoverable' is cited to Singapore energy statistics — unsupported, not used). 13 Oct 2026: direct-to-chip 48–75 % (LBNL 2014; NREL), cold plate up to 94 % (Heydari 2024), hot-water cooled 80 % (Zimmermann 2012); air-cooled: no primary figure; the often-cited 97 % (Lu et al. 2011) describes electricity becoming heat, not capture — unverified at source. A water-cooled chiller plant rejects all heat to the condenser loop\",\"source\":null}"
+    },
+    {
+     "id": "load_factor",
+     "text": "{\"quantity\":\"Load factor (average ÷ the servers' combined maximum power)\",\"unit\":\"—\",\"formula\":\"average ÷ sum of each server's measured maximum\",\"coef\":\"≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr\",\"source\":null}"
     }
    ],
    "drawText": [
@@ -1776,12 +1788,17 @@
     "PUE for each cooling type (one range is used)"
    ],
    "sources": [
-    "Power, electricity a year, carbon, cost, UPS: tool/engine.js energyView (\"What it draws\", \"The batteries it already has\"): servers × PUE (R.pue) × load factor (R.lf), register: pue (LBNL 2023; Uptime 2025 industry survey).",
+    "Power, electricity a year, carbon, cost, UPS: tool/engine.js energyView (\"What it draws\", \"The batteries it already has\"): servers × PUE (R.pue) × load factor (R.lf = 0.6, register load_factor: Fan et al. 2007, one operator), register: pue (LBNL 2023; Uptime 2025 industry survey).",
     "Cost: BC Hydro large general service, 6.79 ¢/kWh + $13.83/kW a month, demand taken at full load (energyView). Carbon: R.grid.",
     "Electrical service thresholds and grid text: engine.js fitsView (\"Electrical service\", \"Grid\"); BC Hydro downtown supply area (CPCN) note.",
     "Substations: tool/substations.json: named stations from utility and government sources (audit I_substations.md), others NRCan CanVec 50K Res_MGT 2019 (Open Government Licence – Canada); straight-line distance from the lot (our arithmetic)."
    ],
-   "register": [],
+   "register": [
+    {
+     "id": "load_factor",
+     "text": "{\"quantity\":\"Load factor (average ÷ the servers' combined maximum power)\",\"unit\":\"—\",\"formula\":\"average ÷ sum of each server's measured maximum\",\"coef\":\"≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr\",\"source\":null}"
+    }
+   ],
    "drawText": [
     "What the hall draws",
     "0",
@@ -2297,7 +2314,7 @@
     "BUILDING FOOTPRINT",
     "18.3 m",
     "BUILDING HEIGHT",
-    "66–131 m²",
+    "69–136 m²",
     "PLANT SPACE (EQUIPMENT ONLY, NO SERVICE CLEARANCES)",
     "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "01",
@@ -2326,12 +2343,10 @@
     "load it could shift for the grid; see Power",
     "Land",
     "4,503 m² lot",
-    "Materials",
-    "racks, drives and copper at each refresh",
-    "Equipment",
-    "servers replaced every 5–6 years",
     "People",
     "jobs, and a street edge",
+    "Equipment",
+    "servers replaced every 5–6 years",
     "THE CARBON IN THAT ELECTRICITY, SAME SERVERS",
     "This design",
     "333–369 t CO₂e a year",
@@ -2502,7 +2517,6 @@
     "40 yr",
     "50 yr",
     "Each refresh is a decision: what leaves the building, and in what state. The pipe and the grid connection outlast theservers and the tenant; what feeds them when the tenant changes is not settled here.",
-    "WHAT IT IS MADE OF",
     "WHAT NEIGHBOURS WOULD HEAR, SEE AND FEEL",
     "WHO LIVES AND WORKS WITHIN 1 KM",
     "200 m",
@@ -2689,11 +2703,11 @@
     "10–15",
     "PLANT SPACE (EQUIPMENT ONLY, NO SERVICE CLEARANCES), M²",
     "A",
-    "34–68",
+    "36–71",
     "B",
-    "66–131",
+    "69–136",
     "C",
-    "92–172",
+    "95–177",
     "A: smaller, air-cooled; B: largest that fits, air-cooled; C: largest that fits, heat to the network. Each gains andgives up something: more heat offered means more plant, more electricity and more pipe in the street.",
     "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "08",
@@ -2779,7 +2793,7 @@
     "11 letter pages, drawn by the tool from this lot and the picks above. Scroll sideways for the rest.",
     "Print the report"
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-11\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n18–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 10–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-11\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n66–131 m²\nPLANT SPACE (EQUIPMENT ONLY, NO SERVICE CLEARANCES)\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n18–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in18–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 19 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nMaterials\nracks, drives and copper at each refresh\nEquipment\nservers replaced every 5–6 years\nPeople\njobs, and a street edge\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n333–369 t CO₂e a year\nConventional, this site\n333–369 t CO₂e a year\nEdmonton, same design\n6,367–7,049 t CO₂e a year\nEdmonton, conventional\n6,367–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $63 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,610 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $63/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 18–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n18–20 GWh\nConventional, this site\n18–20 GWh\nCologix VAN4, Vancouver,claim\n20 GWh\nVancouver, modelled\n18–20 GWh\nEdmonton, same design\n18–20 GWh\nEdmonton, conventional\n18–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this "
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-11\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n18–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 10–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-11\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n69–136 m²\nPLANT SPACE (EQUIPMENT ONLY, NO SERVICE CLEARANCES)\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n18–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in18–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 19 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nPeople\njobs, and a street edge\nEquipment\nservers replaced every 5–6 years\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n333–369 t CO₂e a year\nConventional, this site\n333–369 t CO₂e a year\nEdmonton, same design\n6,367–7,049 t CO₂e a year\nEdmonton, conventional\n6,367–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $63 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,610 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $63/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 18–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n18–20 GWh\nConventional, this site\n18–20 GWh\nCologix VAN4, Vancouver,claim\n20 GWh\nVancouver, modelled\n18–20 GWh\nEdmonton, same design\n18–20 GWh\nEdmonton, conventional\n18–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this site(at most)\n30,551 m³ evaporated\nConventional, th"
   }
  ],
  "errors": [],
