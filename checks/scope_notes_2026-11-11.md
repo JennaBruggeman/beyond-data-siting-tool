@@ -51,3 +51,42 @@ Estimates are working time in this session, not counting your review.
 - **NoiseModelling (?)** (Université Gustave Eiffel, open source): from memory, a Java tool (H2GIS/PostGIS, scripts or a WPS server) built for CNOSSOS-EU propagation; whether it implements ISO 9613-2 itself, and its licence terms, I haven't checked. It would run offline on your computer, not in the browser tool, fed the City building footprints and heights we hold, ground type and terrain.
 - **Would need reading:** NoiseModelling's documentation (method, licence); ISO 9613-2:2024 itself (paywalled, UBC Library).
 - **Build:** a batch check for the lots within 5 dB of a limit, results stored per lot and shown as "full method" beside the screening figure. Two to three days, including setup, if NoiseModelling fits.
+
+---
+
+# Scope notes (i) and (j), 11 Nov 2026: no changes made
+
+## Weaknesses first
+- **(i)** Neither province has a published marginal grid factor for a new load. BC: none exists (register deep dive, 13 Oct). Alberta: the one figure held (EGDF) is an offset-crediting policy number, not a measured marginal.
+- **(j)** We hold no building-scale gas-boiler cost. The one boiler cost we hold is district-heating scale (Danish). We hold only 12 months of gas prices, so a gas-price range is a one-year spread, not a forecast.
+
+## (i) Electricity carbon: average vs marginal for a new load
+| Province | Average (in use) | Other figure held | What it is |
+|---|---|---|---|
+| BC | 18.1 g/kWh (NIR 2026 Annex 7, consumption, 2024; q 80) | 22.8 g/kWh (BC Gov electricity emission intensity factor 2025, consumption basis **with imports**, 4-yr rolling 2021–24; register gridBC) | Still an average, not marginal. Includes net imports. |
+| BC | none | marginal / incremental: **none published** | Register grid_co2 and meta.gaps: "BC marginal factor still unpublished". |
+| Alberta | 346.1 g/kWh (NIR 2026, consumption, 2024) | EGDF v3.3 Table 1 (Aug 2026): 430 g/kWh for 2026 (460 for 2025, 400 for 2027); **459 g/kWh with line loss** for increased grid use (2026) (register abEGDF) | Alberta's offset-crediting schedule: a policy number, not a measured marginal (register says so). Declines to 340 / 363 by 2029. |
+
+- **Today:** register grid_co2's formula says "average and long-run marginal, both reported". Only the average is computed (O-11, 30 Oct: the marginal "is not computed (?)").
+- **Could cards show both?**
+  - **Alberta: yes**, labelled "Alberta offset displacement factor (policy number), 459 g/kWh with line loss (2026)" beside the 346 average. On Electricity and Heat offered (heat pump carbon), carbon rises by about a third.
+  - **BC: only the import-inclusive 22.8** beside 18.1, labelled "BC's own factor, with imports (still an average)". A true marginal would need the intensity of imports (BPA / Pacific NW or Alberta) and BC Hydro's dispatch: **not held**. It would read "marginal: no published figure (?)".
+- **Would need reading (BC):** BC Hydro 2025 IRP (held for LRMC, register lrmc_bc) for any marginal-emissions statement; ECCC or CER import-intensity data. I haven't checked either for this.
+- **Build:** a second carbon figure in tool/data (grid2 by city: AB 459 with its year, BC 22.8) and one row each on Electricity, Heat offered and Compare, plus a register patch so grid_co2 says what is shown. About 2–3 hours.
+
+## (j) Heat worth: avoided boiler capital and a gas-price range
+**Today:** worth = (FortisBC Rate 3 per-GJ charges or ATCO delivery + 12-month mean commodity) × 3.6 ÷ 0.85. BC $40/MWh, Alberta $13/MWh. Carbon tax zero in BC since 1 Apr 2025 (bcCarbonTax2025).
+
+| Input | Held? | Values |
+|---|---|---|
+| Gas commodity, 12 months (Nov 2025 – Oct 2026) | yes (cards.js gasMonths; bcucG5026, ucaRates2026) | BC $1.66–2.23/GJ; Alberta $0.94–3.39/GJ |
+| → heat worth range (our arithmetic) | can compute | **BC $39–42/MWh** (mean $40); **Alberta $8–19/MWh** (mean $13) |
+| Longer gas history or forecast | **no** | would need e.g. CER Energy Futures or AUC/BCUC filings |
+| Federal fuel charge | **no source** (register says it needs its own) | the tool assumes none |
+| Gas boiler capital | partly | DEA sheet 44: 0.064 M€/MW (district-heating scale, 2020 €) ≈ $101,000/MW × 1.5782 (our arithmetic). Life and O&M not yet extracted (?) |
+| Building-scale boiler capital (school, care home, apartment) | **no** | RSMeans (paywalled, UBC Library) or a utility program's cost data |
+| Does the receiver keep its boiler? | judged | most keep it for peaks and backup (Odense, Markham cases in the register) → avoided capital is **zero in the low case** |
+
+- **Effect on (c):** in BC the gas range moves worth by only ±$1–2/MWh, so the break-even pipe cost barely moves. In Alberta worth more than doubles low to high, but even $19/MWh is below the heat pump's electricity cost per MWh of heat (about $50/MWh: pool $43.68 + transmission and reserve, ÷ COP 3–4.5 ≈ $11–17, plus upkeep), so break-even stays near zero.
+- **Avoided boiler capital (DEA scale), rough:** $101,000/MW annualised over 25 yr at 5.6 % (0.0752, life assumed ?) ≈ $7,600/MW·yr. ÷ 4,400–7,100 h ≈ **$1–2 per MWh of heat**. Small at DH scale; building-scale boilers cost more per MW, so this is the floor.
+- **Build:** worth as a range (gas low/high) through heatEcon's cases (best case with high gas, worst with low); avoided boiler capital as an optional credit (0 low, DEA high), labelled; break-even pipe cost row shows the spread. About half a day, plus a register patch (price_ceiling) and re-running Who could take it; golden would change.
