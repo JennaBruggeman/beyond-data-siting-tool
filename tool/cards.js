@@ -191,7 +191,9 @@ BD.lorenzCOP=lorenzCOP;
 function loopCase(id){ const L=(BD.data.heat&&BD.data.heat.loop)||{classes:[['W32',32],['W40',40],['W45',45]],cooler:'W32',warmer:'W45',rise:[11,16]}; const k=id||L.cooler, c=L.classes.find(x=>x[0]===k)||L.classes[0];
   return {id:c[0],sup:c[1],ret:[c[1]+L.rise[0],c[1]+L.rise[1]],rise:L.rise.slice()}; }
 function loopCOP(id,sink){ const c=loopCase(id), lo=lorenzCOP([c.ret[0],c.sup],sink)[0], hi=lorenzCOP([c.ret[1],c.sup],sink)[1]; return [lo,hi]; }   /* worst: η 0.40 at the smaller rise; best: η 0.50 at the larger */
-BD.loopCase=loopCase; BD.loopCOP=loopCOP;
+/* J.B. 11 Nov 2026: for the cost of heat the loop COP is capped, end by end, at the realised range R.cop (3–4.5: register cop, Odense and built cases); the Lorenz figures stay as a labelled note */
+function loopCOPcost(id,sink){ const c=loopCOP(id,sink), R=E().R; return [Math.min(c[0],R.cop[0]),Math.min(c[1],R.cop[1])]; }
+BD.loopCase=loopCase; BD.loopCOP=loopCOP; BD.loopCOPcost=loopCOPcost;
 // one pipe from the site to a group of buildings: shared street segments are dug once; a segment carrying several buildings is sized up
 // by continuity (diameter ∝ √flow, from the DN100 the tool assumes for one building) and priced by Persson & Werner (cost per metre = €212 + €4,464 × diameter)
 function groupCost(f,G){ if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null; const T=RT.T, Gr=RT.G; const seg=new Map(); let tail=0;
@@ -213,7 +215,7 @@ function scen(f,G,cop,offer){ const v=ECON.heatVal(f.city), pe=ECON.elec[f.city]
   if(!isFinite(mid.lcoh)||!isFinite(gc.len)) return null; /* lot test 20 Oct: a group whose route could not be measured gave $NaN or $-Infinity as the best set-up; it is left out */
   return {G,H:Hm,Hhi:H,HL,len:gc.len,v,mid,lo,hi,offer,elec:Hm/((cop[0]+cop[1])/2)}; }
 function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p._route).sort((a,b)=>(a.econ.lcohMid||1e9)-(b.econ.lcohMid||1e9)).slice(0,60); if(!cand.length) return null; const out=[];
-  for(const sk of HS.sinks){ const cop=loopCOP(null,sk.t);   /* cooler case W32 (scope a) */
+  for(const sk of HS.sinks){ const cop=loopCOPcost(null,sk.t);   /* cooler case W32 (scope a), capped at the realised 3–4.5 (J.B. 11 Nov 2026) */
     // start from the building with the lowest cost per MWh on its own, then add whichever building lowers the group's cost most
     let best=null; for(const p of cand){ const r=scen(f,[p],cop,offer); if(r&&(!best||r.mid.lcoh<best.mid.lcoh)) best=r; }
     if(!best) continue; let G=best.G.slice(), grew=true;
