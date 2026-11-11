@@ -500,6 +500,13 @@ function fitPlan(){ const A=BD.S.answers, B=Object.assign({},A); delete B.mw; de
   fpCache={key,v}; return v; }
 const planText=v=>v&&v.mw!=null?`up to ${v.mw.toFixed(1)} MW ${v.measure?v.measure.t:''}${v.measure&&v.measure.auto?`; ${v.asIs!=null?v.asIs.toFixed(1)+' MW':'no size'} with the plant on the roof as set up`:''}`:null;
 BD.measureOf=measureOf; BD.fitPlan=fitPlan; BD.planText=planText;
+/* 11 Nov 2026 (J.B., one method for floor and racks): the step from the largest size that fits to the next: generator sets, sets per row, yard depth,
+   footprint, and the hall floors against the floor test (637 m² per MW: hall + UPS + battery, the conservative end of dc_rooms.json). Answers restored after. */
+function fitStep(mw){ const A=BD.S.answers, keep=A.mw, RR=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[], per=RR.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0)||630;
+  const at=v=>{ A.mw=v; cache.key=null; const m=model(); if(!m||!m.foot||m.existing) return null; const P=m.plant||{}, s=P.s||{}, all=m.nF?m.nF[0]:1, up=Math.max(1,m.Z&&m.Z.ground?all-1:all), fa=BD.area(m.foot);
+    return {mw:v,gN:s.gN||0,gNeed:s.gNeed||0,setL:s.g?s.g.L:null,perRow:P.genPerRow||null,width:m.v?m.v[1]-m.v[0]:null,yard:m.plantYardDepth||0,foot:fa,up,floor:fa*up,need:v*per}; };
+  try{ return {per,a:at(mw),b:at(Math.round((mw+0.1)*10)/10)}; } catch(e){ return null; } finally{ A.mw=keep; cache.key=null; } }
+BD.fitStep=fitStep;
 BD.fitWhy=()=>{ fitMax(); return fitMax0.why; }; BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitBeyond=()=>!!fitMax0.beyond; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 /* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
    yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,

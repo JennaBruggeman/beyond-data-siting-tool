@@ -251,26 +251,28 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   const wallZone=gallery0?gallery0+S.twall.W+Lr.wallClear:(RT==='crah'&&need.room?S.crah.W+Lr.crahFront:need.cdu?S.cdu.W+Lr.cduFront:0)+0.05, farZone=RT==='wall'?gallery+S.twall.W+Lr.wallClear:wallZone;
   // 3. racks in back-to-back pairs: cold aisle 1.2 | rack 1.2 | hot aisle 1.2 | rack 1.2
   const pts=[]; const D=S.rack.W, Wd=S.rack.L; let v=v0+wallZone+Lr.aisle; const rowsV=[];
-  // Schneider spacing (J.B., 30 Oct 2026): a rack takes rackFloor (2.32 m², WP 46) with its aisles, not just rack + aisle (Wd × (D + aisle) = 1.44 m²);
-  // the extra floor is drawn as breaks in each row: runs of RUN racks, then GAP empty places. How the extra floor is arranged is our choice (?)
-  const tight=Wd*(D+Lr.aisle), fr=Math.min(1,tight/(Lr.rackFloor||tight)), GAP=3, RUN=fr>=1?1e9:Math.max(1,Math.round(GAP*fr/(1-fr))), gapAt=k=>(k%(RUN+GAP))>=RUN;
+  // 11 Nov 2026 (J.B., one method for floor and racks): the floor test (site.js fitMax, 637 m² per MW) sets the size; the layout draws the racks that size
+  // needs, spread evenly over every place a rack fits at rack + aisle spacing (was: rows thinned to Schneider's 2.32 m² a rack, WP 46). Spreading is our choice (?)
+  const spread=(L,n)=>{ if(n>=L.length) return L; const o=[]; for(let i=0;i<n;i++) o.push(L[Math.floor((i+0.5)*L.length/n)]); return o; };
   while(v+2*D+Lr.aisle<=v1-farZone-Lr.aisle+1e-6) { rowsV.push(v,v+D+Lr.aisle); v+=2*D+2*Lr.aisle; }
   // in-row coolers: at both ends of each row, then evenly along it (Vertiv CRV catalog E.2)
-  let slots1=0; const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
+  let slots1=0; const cand1=[]; const crvPer=RT==='inrow'&&need.room&&rowsV.length?Math.max(2,Math.ceil(need.room/rowsV.length)):0; const crvAt=[];
   for(const vr of rowsV){ const slots=[]; for(let u=ua;u+Wd<=ub;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
     const pick=new Set(); if(crvPer){ for(let k=0;k<crvPer&&k<slots.length;k++) pick.add(Math.round(k*(slots.length-1)/Math.max(1,crvPer-1))); }
-    slots.forEach((u,k)=>{ if(!pick.has(k)&&!gapAt(k)) slots1++; if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else if(!gapAt(k)&&pts.length<need.racks) pts.push([u+Wd/2,vr+D/2]); }); }
+    slots.forEach((u,k)=>{ if(pick.has(k)&&crvAt.length<need.room) crvAt.push([u+Wd/2,vr+D/2]); else cand1.push([u+Wd/2,vr+D/2]); }); }
+  slots1=cand1.length; pts.push(...spread(cand1,need.racks));
   crvAt.forEach(([u,vv])=>put('crv',u,vv,0)); if(RT==='inrow') got.room=crvAt.length;
   // the other hall floors have no UPS and battery room: count their rack places by the same rules (not drawn)
-  const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ let k=0; for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)){ if(!gapAt(k)) n++; k++; } } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
+  const slotsFrom=u_a=>{ let n=0; const ub2=u1-Lr.corridor; for(const vr of rowsV){ let k=0; for(let u=u_a;u+Wd<=ub2;u+=Wd){ if(inside(u+Wd/2,vr+D/2)){ n++; k++; } } } return n-(RT==='inrow'?Math.min(need.room,rowsV.length*crvPer):0); };
   const otherFloor=floors>1?slotsFrom(u0+Lr.corridor):0;
   got.racks=pts.length;
   // the other hall floors: same rows, from the u0 corridor (no UPS room, no heat plant), same cap per floor; room units cloned up; in-row coolers re-picked per row
   const upper=[], crvUp=[];
-  for(let k=1;k<floors;k++){ const dz=k*fh; let nr=0, nc=0;
+  for(let k=1;k<floors;k++){ const dz=k*fh; let nc=0; const candU=[];
     for(const vr of rowsV){ const slots=[]; for(let u=u0+Lr.corridor;u+Wd<=u1-Lr.corridor;u+=Wd){ if(inside(u+Wd/2,vr+D/2)) slots.push(u); } if(!slots.length) continue;
       const pick=new Set(); if(crvPer){ for(let j=0;j<crvPer&&j<slots.length;j++) pick.add(Math.round(j*(slots.length-1)/Math.max(1,crvPer-1))); }
-      slots.forEach((u,j)=>{ if(pick.has(j)&&nc<need.room){ crvUp.push([u+Wd/2,vr+D/2,dz]); nc++; } else if(!gapAt(j)&&nr<need.racks){ upper.push([u+Wd/2,vr+D/2,dz]); nr++; } }); }
+      slots.forEach((u,j)=>{ if(pick.has(j)&&nc<need.room){ crvUp.push([u+Wd/2,vr+D/2,dz]); nc++; } else candU.push([u+Wd/2,vr+D/2,dz]); }); }
+    upper.push(...spread(candU,need.racks));
     placed.forEach(g=>{ const c=g.clone(); c.position.y+=dz; state.dc.add(c); }); }
   crvUp.forEach(([u,vv,dz])=>{ const g=put('crv',u,vv,0); g.position.y+=dz; });
   const geo=new T.BoxGeometry(Wd*0.98,S.rack.H,D*0.98); const mat=new T.MeshStandardMaterial({color:0xD7D7D4,roughness:.8,flatShading:true,transparent:true,opacity:0.9});
@@ -461,14 +463,18 @@ function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.c
   if(R.nbMesh){ const m=R.nbMesh.material; const see=on&&!light3d(); m.transparent=see; m.opacity=see?0.22:1; m.depthWrite=!see; m.needsUpdate=true; /* light: solid white massing, as in the spreads */ }
   const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.45,sp*0.95+rf*1.25,sp*1.65); R.ctl.target.set(0,rf*0.45,0); R.ctl.update(); } }
 function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
-function layoutCheck(){ const M=BD.model&&BD.model(); if(!T||!M||!M.foot||M.existing||!(M.footArea>200)||!BD.eng) return null;
-  const A=BD.S.answers, keep={mw:A.mw,dc:state.dc,rooms:state.rooms,hallZ:state.hallZ,elec:state.elecRoom,heat:state.heatRoom,opt:state.opt,c:state.c};
-  if(!state.c) state.c=[0,0];   /* 11 Nov 2026: before the 3D view opens there is no scene centre; the count does not depend on it */
-  const Mf=Object.assign({},M,{serverFoot:M.foot}), kw=BD.eng.R.equip.kwRack; let mw=Math.max(0.5,(BD.fitMax&&BD.fitMax())||2), cap=0, floors=1;
-  try{ for(let i=0;i<3;i++){ A.mw=mw; state.dc=new T.Group(); state.opt=null; racksFor(Mf); cap=state.rooms.maxRacks; floors=state.rooms.floors; mw=Math.max(0.5,cap*kw[0]/1000); } }
-  catch(e){ cap=0; }
-  finally{ A.mw=keep.mw; state.dc=keep.dc; state.rooms=keep.rooms; state.hallZ=keep.hallZ; state.elecRoom=keep.elec; state.heatRoom=keep.heat; state.opt=keep.opt; state.c=keep.c; }
-  return cap?{racks:cap,floors,mw:[cap*kw[0]/1000,cap*kw[1]/1000]}:null; }
+/* 11 Nov 2026 (J.B., one method for floor and racks): the rack layout runs on the building at the size tested (its own generator yard and footprint),
+   draws the racks that size needs (rack_count) spread evenly over the hall floors, and flags only when they cannot be placed at rack + aisle spacing with
+   corridors, room cooling and the UPS room. The floor test (site.js fitMax, 637 m² per MW) decides the size. Before: racks counted at 2.32 m² a rack on the
+   current size's building, reported as MW. Returns {mw, need:[at 8 kW, at 7.1 kW], placed, cap (rack + aisle spacing), floors, floor m², ok}. */
+function layoutCheck(mwIn){ if(!T||!BD.eng||!BD.model) return null; const A=BD.S.answers, keep={mw:A.mw,dc:state.dc,rooms:state.rooms,hallZ:state.hallZ,elec:state.elecRoom,heat:state.heatRoom,opt:state.opt,c:state.c};
+  let mw=mwIn||A.mw; if(!mw){ try{ mw=BD.fitMax&&BD.fitMax(); }catch(e){} } if(!mw) return null;
+  try{ A.mw=mw; if(BD.modelReset) BD.modelReset(); const M=BD.model(); if(!M||!M.foot||M.existing||!(M.footArea>200)) return null;
+    if(!state.c) state.c=[0,0];   /* before the 3D view opens there is no scene centre; the count does not depend on it */
+    const Mf=Object.assign({},M,{serverFoot:M.foot}); state.dc=new T.Group(); state.opt=null; const r=racksFor(Mf), st=state.rooms, E=st.E, need=E.racks.slice();
+    return {mw,need,placed:Math.min(r.drawn,need[1]),cap:st.maxRacks,floors:st.floors,floor:Math.round(BD.area(M.foot)*st.floors),ok:r.drawn>=need[1]}; }
+  catch(e){ return null; }
+  finally{ A.mw=keep.mw; if(BD.modelReset) BD.modelReset(); state.dc=keep.dc; state.rooms=keep.rooms; state.hallZ=keep.hallZ; state.elecRoom=keep.elec; state.heatRoom=keep.heat; state.opt=keep.opt; state.c=keep.c; } }
 BD.scene3d={layoutCheck,show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };
 })();
