@@ -58,11 +58,20 @@
   ]
  },
  "fuelLkWh": {
-  "v": 0.263,
+  "v": 0.264,
   "src": [
    "fuel_on_site",
-   "cat3516c"
-  ]
+   "rehlkoKD2000"
+  ],
+  "_note": "11 Nov 2026 (J.B.): Rehlko KD2000, G5-626 9/23 p. 2: 528.3 L/h at 2,000 kW standby, full load (manufacturer claim; our arithmetic); was 0.263 (one Cat model)"
+ },
+ "fuelPart": {
+  "v": [[100, 0.264], [75, 0.304], [50, 0.312], [25, 0.363]],
+  "src": [
+   "fuel_on_site",
+   "rehlkoKD2000"
+  ],
+  "_note": "L per kWh at % of standby load: G5-626 9/23 p. 2 (528.3, 455.9, 311.6, 181.5 L/h) ÷ kW (our arithmetic); up to 4 % more by volume with HVO/renewable diesel"
  },
  "fuelHours": {
   "v": 12,

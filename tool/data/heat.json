@@ -61,7 +61,29 @@
   "src": [
    "grid_co2",
    "nir2026"
+  ],
+  "_note": "11 Nov 2026 (J.B.): both cities on NIR, same method: NIR 2026 Annex 7, consumption intensity, 2024, flagged 'a' in the workbook (preliminary, footnote not re-checked ?); the latest final year could not be read (the Annex 7 workbook is not on this computer)"
+ },
+ "gridYear": {
+  "v": "2024, preliminary",
+  "src": [
+   "grid_co2",
+   "nir2026"
   ]
+ },
+ "gridBC": {
+  "v": {
+   "v": 22.8,
+   "year": 2025,
+   "lo": 9.7,
+   "hi": 22.8,
+   "years": "2021–2025"
+  },
+  "src": [
+   "grid_co2",
+   "gridBC"
+  ],
+  "_note": "11 Nov 2026 (J.B.): a second, labelled BC figure: BC Government electricity emission intensity factor, Integrated Grid, 2025 factor 22.8 tCO2e/GWh (= g/kWh), consumption-based, net imports included, exports excluded, 4-year window (2025 uses 2021-2024). Spread 9.7-22.8 = the factors made by the current (2021) method, 2021-2025 (2021 9.7, 2022 11.5, 2023 11.3, 2024 9.9, 2025 22.8). The 2017-2020 factors (25.3-40.1) are on the 2017 method; backcast on the 2021 method 2020 is 9.2. Page read by Claude 11 Nov 2026, last updated 26 May 2026."
  },
  "neuCredit": {
   "v": 32.59,

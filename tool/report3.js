@@ -134,7 +134,7 @@ function pSite(D,no){ const {f,m,mw,prec,fitMax}=D, R2=BD.report2, pal=R2.PAL.w1
   const pl=D.lead('prec'); if(pl){ s+=caps(X0,y,'Real buildings'); y+=12; const p=para(X0,y,pl,52,{fs:7.2}); s+=p.s; y+=p.h+6; }
   for(const k of ['Closest in size']){ const v=D.note('prec',k); if(!v) continue; const L=wrap(v,52).slice(0,4); s+=T(X0,y,k,{fs:6.4,c:K.mute})+T(X0,y+9,L,{fs:6.6}); y+=9+L.length*9+6; }
   { const yb=PH-130, Hb=m.existing?Math.max(m.roofH||m.H||0,...((BD.S.sel&&BD.S.sel.blds)||[]).map(b=>b.h||0)):m.H, fp=m.existing?(f.foot||0):((m.sizedTo&&m.footArea)||f.fp||0); s+=rule(M,yb-24,PW-M,K.ink,0.5);
-    const cells=[[`${fmt(f.lot||0)} m²`,'lot'],[fp?`${fmt(Math.round(fp/10)*10)} m²`:'—','building footprint'],[Hb?`${r1(Hb)} m`:'—','building height'],[`${rng(D.r.plant[0],D.r.plant[1],'m²')}`,'plant space (equipment only, no service clearances)']];
+    const cells=[[`${fmt(f.lot||0)} m²`,'lot'],[fp?`${fmt(Math.round(fp/10)*10)} m²`:'—','building footprint'],[Hb?`${r1(Hb)} m`:'—','building height'],[`${rng(D.r.plant[0],D.r.plant[1],'m²')}`,'plant space (cooling units with clear zones; UPS and batteries equipment only)']];
     cells.forEach(([v,l],i)=>{ s+=big(M+i*138,yb,v,l,{fs:17}); }); }
   return page(D,no,'What fits','A data centre sized for this lot, with the room its plant, generators and loading need.',s); }
 
@@ -288,7 +288,7 @@ async function pOptions(D,no){ const {e,f,near,nets,A}=D; const opts=e.optionSet
     if(!miss.length){ const iso=siteIso({x0:x,y0:110,x1:x+cw,y1:300},{pipe:o.recover,air:!o.recover,grid:false,pad:0.06}); s+=iso.s; } else s+=T(x,200,wrap(`Not drawn: at ${o.mw} MW this set-up breaks a hard rule.`,40).slice(0,2),{fs:6.6,c:K.mute});
     s+=T(x,318,`${o.id.toUpperCase()}. ${o.name}`,{fs:8,w:600})+T(x,330,wrap(o.gives,40).slice(0,3),{fs:6.4,c:K.mute}); if(miss.length) s+=T(x,358,wrap('Not allowed at this size: '+miss[0],40).slice(0,3),{fs:6.2,c:K.redT}); }); }
   finally{ Object.keys(A).forEach(k=>delete A[k]); Object.assign(A,JSON.parse(keep)); BD.modelReset(); BD.model(); }
-  const groups=[['Servers','MW',o=>[o.mw,o.mw]],['Electricity a year','GWh',o=>[o.r.facMWh[0]/1000,o.r.facMWh[1]/1000]],['Heat offered a year','GWh',o=>o.recover?[o.r.avail[0]/1000,o.r.avail[1]/1000]:[0,0]],['Plant space (equipment only, no service clearances)','m²',o=>[o.r.plant[0],o.r.plant[1]]]];
+  const groups=[['Servers','MW',o=>[o.mw,o.mw]],['Electricity a year','GWh',o=>[o.r.facMWh[0]/1000,o.r.facMWh[1]/1000]],['Heat offered a year','GWh',o=>o.recover?[o.r.avail[0]/1000,o.r.avail[1]/1000]:[0,0]],['Plant space (cooling units with clear zones)','m²',o=>[o.r.plant[0],o.r.plant[1]]]];
   let y=390; const OC=[K.faint,K.heat,K.ink];
   for(const [l,u,fn] of groups){ s+=caps(M,y,`${l}, ${u}`); y+=8; const rows=opts.map((o,i)=>{ const [a,b]=fn(o); return {l:`${o.id.toUpperCase()}`,v:a,hi:b,t:a||b?rng(a,b,'',u==='MW'?1:0):'none',c:OC[i]}; }); const hb=hbars(M,y,PW-2*M,rows,{lw:20,step:11}); s+=hb.s; y+=hb.h+12; }
   s+=T(M,y+4,wrap(opts.map(o=>`${o.id.toUpperCase()}: ${o.name.toLowerCase()}`).join('; ')+'. Each gains and gives up something: more heat offered means more plant, more electricity and more pipe in the street.',120),{fs:7});

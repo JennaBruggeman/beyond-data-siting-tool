@@ -703,7 +703,7 @@ function besideW(C, W) {
 /* ---------- plant (rule 9): generators, transformer pads, chillers with Vertiv clear zones, packed in the yard behind the building ---------- */
 function plantLayout(C, W, Da, MW, rooms) {
   const Q = MW * 1.55, big = Q > 3, nG = Math.ceil(Q / (big ? 2 : 1)) + 1, nC = Math.ceil(Q / 1.489) + 1, nT = Math.ceil(Q / 2.5) + 1;
-  const tank = MW * 1.55 * 1000 * 12 * 0.263 / Math.ceil(Q / (big ? 2 : 1));
+  const tank = MW * 1.55 * 1000 * 12 * ((typeof BD !== 'undefined' && BD.data && BD.data.equipment && BD.data.equipment.fuelLkWh) || 0.264) / Math.ceil(Q / (big ? 2 : 1));   /* 11 Nov 2026 (J.B.): fuel rate from tool/data/equipment.json (Rehlko KD2000 G5-626); was 0.263 written here */
   const tankLot = tank >= 2500 && tank <= 50000 ? 3.0 : tank < 2500 ? null : null, tankBld = tank >= 2500 ? 1.5 : null;
   const G = { l: 8.43, w: 2.62 }, T = { l: 2.49, w: 2.63 }, CH = { l: 12.14, w: 2.36, side: 1.5, end: 2.1 };
   const aP = r2(Da + RULES.aisle.w), items = [], why = [];
