@@ -80,14 +80,11 @@
   },
   {
    "id": "battery",
-   "name": "Battery room, lithium-ion (about 5 min)",
+   "name": "Battery room, lithium-ion (10–15 min, FM 5-32)",
    "split": true,
    "where": "floor",
    "perMW": {
-    "v": [
-     1.0,
-     1.8
-    ],
+    "v": [2.1, 3.8],
     "src": [
      "arch_dc_battery",
      "component_space",

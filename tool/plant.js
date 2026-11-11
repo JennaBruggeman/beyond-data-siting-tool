@@ -42,7 +42,7 @@ function segD(px,py,ax,ay,bx,by){ const dx=bx-ax, dy=by-ay, L2=dx*dx+dy*dy; let 
 function edgeD(x,y,r){ let d=1e9; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; d=Math.min(d,segD(x,y,r[i],r[i+1],r[j],r[j+1])); } return d; }
 /* 7 Nov 2026: EDGE.segs = per-line distances (Edmonton generator test, C14600 s. 19(3), 21(3)); every line keeps its own */
 const segsOK=(x,y)=>!EDGE||!EDGE.segs||EDGE.segs.every(e=>segD(x,y,e.ax,e.ay,e.bx,e.by)>=e.d-1e-6);
-/* the distance at which one generator set meets a test limit: 78 dB(A) at 7 m (Kohler G6-154), free field, our arithmetic */
+/* the distance at which one generator set meets a test limit: (Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m), free field, our arithmetic */
 const testD=lim=>{ const G=BD.data.noise&&BD.data.noise.gen; return G?7*Math.pow(10,(G.lp7-lim)/20):0; };
 /* pack w × d rectangles (long side along the frame's u axis unless rot) inside a region, with wall and unit clearances */
 function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){

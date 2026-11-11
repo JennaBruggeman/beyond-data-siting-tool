@@ -11047,7 +11047,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "UPS battery cabinets",
 "formula": "n = ⌈P_IT ÷ cabinet power at the runtime⌉, ×2 for 2N",
-"coef": "about 5 min runtime (backup_hours, colocation); 263 kW per cabinet (Vertiv EnergyCore Li5, 0.6 × 0.75 × 2.0 m, drawn) to 400 kW per rack (Delta LZH) for 5 min → range (manufacturer claims)",
+"coef": "10–15 min runtime (FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026); Vertiv EnergyCore Li5, 31.1 kWh, 263 kW (0.6 × 0.75 × 2.0 m, drawn): 186.6 kW for 10 min, 124.4 kW for 15 min (our arithmetic from the stored energy); Delta LZH at these runtimes not held (?). Earlier: about 5 min runtime (backup_hours, colocation); 263 kW per cabinet (Vertiv EnergyCore Li5, 0.6 × 0.75 × 2.0 m, drawn) to 400 kW per rack (Delta LZH) for 5 min → range (manufacturer claims)",
 "unit": "count (range)",
 "sources": [
 "vertivLi5",
@@ -12506,8 +12506,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "test",
 "name": "How much of the IT capacity actually runs",
-"formula": "running IT load = design IT load × share in use; share in use not set (?)",
-"coef": "Guide at VAN3: halls are not always at capacity (empty racks, enclosures being built) and power per area depends on the tenants (tourVAN3, guide's claim); a quarter of surveyed sites typically run under 40% of their UPS capacity (Uptime 2024, operator self-report); LBNL assumes 50% average capacity utilisation for the whole US fleet, unsourced (lbnl2024). Neither gives a typical value for one colocation building, so heat and energy stay at capacity: an upper bound (the Heat view does not yet say so ?)",
+"formula": "running IT load = design IT load × 0.6, the load factor (register load_factor); no further share for racks not yet in use",
+"coef": "The tool applies the load factor 0.6 to yearly electricity, cost, carbon, heat offered and cooling water (register load_factor: Fan et al. 2007, one operator's clusters averaged 59.5 % of their machines' combined maximum; J.B. 11 Nov 2026). No sourced share exists for racks not yet in use in one colocation building, so none is applied on top: Guide at VAN3: halls are not always at capacity (empty racks, enclosures being built) and power per area depends on the tenants (tourVAN3, guide's claim); a quarter of surveyed sites typically run under 40% of their UPS capacity (Uptime 2024, operator self-report); LBNL assumes 50% average capacity utilisation for the whole US fleet, unsourced (lbnl2024). Neither gives a typical value for one colocation building.",
 "unit": "share of design IT load",
 "sources": [
 "tourVAN3",
@@ -13188,7 +13188,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "size",
 "name": "Battery room, lithium-ion, m² per MW of IT (Architecture mode)",
-"formula": "Li-ion cabinets 1.0–1.8 m² per MW for about 5 min (equipment only); VRLA ≈3.3–6.0 m² per MW (Li-ion ÷ 0.3, maker's 'saves space 70%', our arithmetic; not used)",
+"formula": "Li-ion cabinets 2.1–3.8 m² per MW for 10–15 min (FM 5-32; 1.0–1.8 at about 5 min scaled by the cabinet count, our arithmetic; equipment only); VRLA ≈3.3–6.0 m² per MW (Li-ion ÷ 0.3, maker's 'saves space 70%', our arithmetic; not used)",
 "coef": "manufacturer claims (Vertiv EnergyCore Li5, Delta LZH; register component_space); HVAC separate from the hall, above the 500-year flood + 0.3–0.6 m (FM 5-28, insurer guidance); 2 h kept (NFPA 855, US standard, stricter than FM 1 h); Li-ion room rules are in FM 5-33, not read (?); 0.914 m clear in front of cabinets (Vertiv manual) [7 Nov 2026 (V339 board fixes): the per-MW figure stays the basis of Ratios' MW (equipment only); the drawn room is by count (electrical_room), and any hall floor it leaves short is reported (?).]",
 "unit": "m² per MW IT",
 "sources": [

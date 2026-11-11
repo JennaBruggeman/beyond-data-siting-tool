@@ -176,7 +176,7 @@ function noiseLw(mw){ const CU=coolUnits(mw), LU=CU.name==='dry coolers'?R.lwUni
 /* cooling units for the noise count: the same units the plant lays out (sweep M30), spares included */
 /* equipment counts (register: rack_count, ups_modules, battery_cabinets, room_cooling_units, cdu_units, cooling_units, generator_sets;
    29 Oct 2026). Each count is [low, high] where its coefficient is a range. */
-R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[400,263], crahKW:[246,172], cduKW:1516, wallKW:500, rowKW:73.7, rowOver:1.2, wfCrah:150, wfWall:400};
+R.equip={kwRack:[7.1,8], upsKW:1000, cabKW:[186.6,124.4] /* 11 Nov 2026 (J.B., F11 B4): UPS carries the load 10–15 min (FM 5-32 3.5.2.1); Vertiv EnergyCore Li5, 31.1 kWh: 186.6 kW for 10 min, 124.4 kW for 15 min (our arithmetic); was 400–263 kW for about 5 min */, crahKW:[246,172], cduKW:1516, wallKW:500, rowKW:73.7, rowOver:1.2, wfCrah:150, wfWall:400};
 /* layout rules (register: hall_layout, electrical_room; 29 Oct 2026) — every distance has its source there */
 R.layout={rackFloor:2.32 /* m² of floor a rack: Schneider WP 46 Fig. 1 'rack floor equivalent of 25 ft2' (aisles included; common 25–30 ft²) */, aisle:1.2, corridor:1.1, crahFront:0.864, crahEnd:0.457, cduFront:1.0, upsFront:1.5, battFront:0.914, battWall:0.025, upsAmps:1203, wallClear:1.1, wallGap:0.152};
 function equip(mw,A){ A=A||BD.S.answers; const sp=A.spares||'n1', red=n=>sp==='2n'?n*2:sp==='n1'?n+1:n, kw=mw*1000, E=R.equip;
@@ -734,7 +734,7 @@ function energyView(){
   const co2=MWh.map(v=>v*R.grid[f.city]/1000);
   const cost=f.city==='van'?[MWh[0]*1000*0.0679+fac[0]*1000*13.83*12,MWh[1]*1000*0.0679+fac[1]*1000*13.83*12]:null;
   const Pg=f.M&&f.M.plant&&f.M.plant.s, gInst=Pg&&Pg.g?Pg.gN*Pg.g.mw:null; // installed sets, spares included (sweep M39)
-  const ups=[mw*1/60*0.5,mw*5/60*0.5], gen=gInst?[gInst*1000*4,gInst*1000*4]:[fac[0]*1000*4,fac[1]*1000*4];
+  const ups=[mw*10/60*0.5,mw*15/60*0.5], gen=gInst?[gInst*1000*4,gInst*1000*4]:[fac[0]*1000*4,fac[1]*1000*4];
   let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">A customer first. What it can give back is <span class="k">flexibility</span>, and only the operator can give it.</p>
   <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lf*100)}% of full load on average</dd>
   ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month, the demand charge taken at full load and billed monthly, which is conservative), for a site connected at distribution voltage, as a 2.5–10 MW data centre usually is; the transmission rate (RS 1830, supply at 60 kV or higher) is not applied, and the size at which BC Hydro would require it is not yet sourced (?)</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025; with EPCOR's site charges about $49.67/MWh energy only (register: electricity_price), plus distribution and transmission charges not counted</dd>`}
@@ -743,7 +743,7 @@ function energyView(){
   <h3>Solar on its own roof</h3><dl><dt>Roof</dt><dd>${fmt(roof)} m², of which plant takes about ${Math.round(share*100)}%</dd><dt>Panels</dt><dd>${rng(kwp[0],kwp[1],'kWp')} → ${rng(pvMWh[0],pvMWh[1],'MWh/yr')}</dd><dt>Share of its own use</dt><dd>${rng(pvMWh[0]/MWh[1]*100,pvMWh[1]/MWh[0]*100,'%')} — a small share at data-centre densities</dd></dl>${s3('pv')}
   <h3>What it could offer the grid</h3><dl>
   <dt>Who decides</dt><dd>${state('cj')}only whoever runs the computing; in a shared (colocation) building that is each tenant. Training runs can pause at checkpoints; live services cannot.</dd>
-  <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (1–5 min of runtime; half kept for outages is our assumption ?) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
+  <dt>The batteries it already has</dt><dd>${rng(ups[0],ups[1],'MWh')} for minutes (10–15 min of runtime, FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026; half kept for outages is our assumption ?) — fast grid support, not a 4-hour peak; BC Hydro's storage incentive excludes an existing UPS</dd>
   <dt>A battery added for the grid</dt><dd>1 MW for 4 h takes ${fmt(4000/49)}–${fmt(4000/19)} m²; BC Hydro pays $50/kW a season for winter peak relief (fossil generators excluded)</dd>
   <dt>EV charging, if 1 MW were set aside</dt><dd>${fmt(1000/19.2)}–${fmt(1000/(0.5*7.4))} Level 2 stalls (7.4 kW table example to 19.2 kW maximum, WSU; from all charging at once to half at once, the share found for fast-charging sites, Silber et al. 2024), about ${fmt(1000/19.2*(f.city==="edm"?23.4:22))}–${fmt(1000/(0.5*7.4)*(f.city==="edm"?23.4:22))} m² of parking</dd></dl>${s3('ctl')}${s3('ups')}${s3('batt')}${s3('dr')}${s3('ev')}
   <h3>Standby generators</h3><dl><dt>Testing</dt><dd>about 4 full-load hours a year: ${rng(gen[0]*0.706/1000,gen[1]*0.706/1000,'t CO₂')} and ${rng(gen[0]*14.6/1000,gen[1]*14.6/1000,'kg NOₓ')} a year, testing every installed set (AP-42 factors for uncontrolled diesel engines)</dd></dl>${s3('gen')}
@@ -753,7 +753,7 @@ function energyView(){
     cost?`Cost: energy ${n0(MWh[0])} MWh × 1,000 × $0.0679 + demand ${n1(fac[0])} MW × 1,000 × $13.83 × 12 = $${n0(cost[0])}; high end $${n0(cost[1])}.`:'Cost: Alberta pool price plus EPCOR charges; no single-rate estimate.',
     `Carbon: ${n0(MWh[0])}–${n0(MWh[1])} MWh × ${R.grid[f.city]} g/kWh ÷ 1,000 = <b>${rng(co2[0],co2[1],'t CO₂e')}</b>.`,
     `Solar: roof ${n0(roof)} m² × 0.66 usable × (1 − ${share.toFixed(2)} plant) × 0.70 packing × 0.16–0.20 kW/m² = ${n1(kwp[0])}–${n1(kwp[1])} kWp; × ${fmt(yld[0])}–${fmt(yld[1])} kWh per kWp a year (flat to latitude tilt, NRCan) = <b>${rng(pvMWh[0],pvMWh[1],'MWh')}</b>; ÷ the building's use = ${(pvMWh[0]/MWh[1]*100).toFixed(2)}–${(pvMWh[1]/MWh[0]*100).toFixed(2)}%.`,
-    `UPS batteries: ${mw} MW × 1–5 min ÷ 60 × 0.5 kept for outages = <b>${n1(ups[0])}–${n1(ups[1])} MWh</b>.`,
+    `UPS batteries: ${mw} MW × 10–15 min ÷ 60 × 0.5 kept for outages = <b>${n1(ups[0])}–${n1(ups[1])} MWh</b>.`,
     `Generator testing: ${gInst?`${Pg.gN} sets × ${Pg.g.mw} MW = ${n1(gInst)} MW`:`${n1(fac[0])}–${n1(fac[1])} MW`} × 1,000 × 4 h = ${n0(gen[0])}–${n0(gen[1])} kWh; × 0.706 kg CO₂/kWh = ${n1(gen[0]*0.706/1000)}–${n1(gen[1]*0.706/1000)} t; × 14.6 g NOₓ/kWh = ${n0(gen[0]*14.6/1000)}–${n0(gen[1]*14.6/1000)} kg.`],
     'PUE: LBNL 2023, Uptime 2025. Load factor: Fan et al. 2007. Rates: BC Hydro LGS 2026. Solar: NRCan yields, NREL densities. Generator factors: AP-42 Table 3.4-1 (upper bounds).')}
   <div class="draftnote">Ranges carry the register's confidence.</div>`;

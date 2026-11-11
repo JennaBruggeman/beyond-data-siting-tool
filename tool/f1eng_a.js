@@ -158,7 +158,7 @@ C.add(T,'Backup power',{async build(x){
   const A=BD.S.answers, R=BD.eng.R, P=M.plant, S=P&&P.s, mw=M.mwSized, eq=BD.eng.equip(mw), none=A.gens==='none', g=S&&S.g, gT=P&&P.genTank;
   const fac=[mw*R.pue[0],mw*R.pue[1]], fuel12=[fac[0]*1000*R.fuelHours*R.fuelLkWh,fac[1]*1000*R.fuelHours*R.fuelLkWh], tankTot=g&&gT?S.gN*gT.L:null;
   const gb=(P&&P.boxes||[]).filter(q=>q.name==='standby generators'), at=none?null:(A.genAt||'yard');
-  const upsMWh=[mw/60*1,mw/60*5];
+  const upsMWh=[mw/60*10,mw/60*15];   /* F11 B4: 10–15 min (FM 5-32) */
   const pl=plan(x,M,{aria:'Where the generators sit on the lot',box:q=>q.name==='standby generators'?K.dc:K.neut,leaders:[
     ...(gb.length?[{pts:gb.map(q=>BD.centroid(arr(q.ring))),lines:[`${gb.length} generator sets`,`${n1(g.mw)} MW each · ${at==='roof'?'on the roof':'in the yard'}`]}]:[]),
     ...(M.foot?[{pts:[BD.centroid(arr(M.foot))],lines:['UPS and batteries','inside the building, not drawn']}]:[]),
@@ -175,8 +175,8 @@ C.add(T,'Backup power',{async build(x){
       ['Fuel in the set bases',g&&gT?`about ${fmtL(gT.L)} L a set, ${fmtL(tankTot)} L in all (sub-base tanks, maker claim)`:'–'],
       ['Fuel for 12 hours',`${fmtL(fuel12[0])}–${fmtL(fuel12[1])} L (${rng(fac[0],fac[1])} MW × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh; Uptime minimum, maker rate)`],
       ['UPS modules',`${eq.ups} of 1,000 kW (load ÷ 1,000 kW, one spare unless set to none or 2N; vendor figure)`],
-      ['Battery cabinets',`${rng(eq.batt[0],eq.batt[1],0)} (${R.equip.cabKW[1]}–${R.equip.cabKW[0]} kW each; maker claims)`],
-      ['Battery runtime',`1–5 minutes, about ${rng(upsMWh[0],upsMWh[1])} MWh at full load (vendor runtimes, operator claims; our arithmetic)`],
+      ['Battery cabinets',`${rng(eq.batt[0],eq.batt[1],0)} (${R.equip.cabKW[1]}–${R.equip.cabKW[0]} kW each for 15–10 min: Vertiv EnergyCore Li5, 31.1 kWh, maker claim; the rating at these runtimes is our arithmetic)`],
+      ['Battery runtime',`10–15 minutes (FM 5-32 3.5.2.1, insurer guidance; J.B. 11 Nov 2026), about ${rng(upsMWh[0],upsMWh[1])} MWh at full load (our arithmetic)`],
       ['Floor space, UPS and batteries',`${rng((R.plant.ups[0]+R.plant.batt[0])*mw,(R.plant.ups[1]+R.plant.batt[1])*mw,0)} m² (${R.plant.ups[0]}–${R.plant.ups[1]} + ${R.plant.batt[0]}–${R.plant.batt[1]} m² per MW; register component_space)`]],
     more:[['Where the fuel rule applies',`<p>In the yard the sets stand at grade, 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2). On a roof each tank is limited to ${BD.data.equipment&&BD.data.equipment.roofTank?n0(BD.data.equipment.roofTank.each):'?'} L and the supply line to ${BD.data.equipment&&BD.data.equipment.roofTank?n0(BD.data.equipment.roofTank.line):'?'} L (CSA B139.1.1 6.5.3).</p>`],['The generator list the plant layout gives',`<p>${(P&&P.genLines||[]).slice(0,2).map(esc).join('<br>')||'none'}</p>`]],
     src:['Generator count and size: plant.js sizeFor (Rehlko KD2000 2,000 kW standby; manufacturer claim; register genset sizing, chosen 29 Oct 2026).','Fuel: R.fuelHours × R.fuelLkWh (register fuel_on_site; NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h). Tank per set: plant.js genTank (maker sub-base tank).','UPS and batteries: BD.eng.equip, R.equip (register ups_modules, battery_cabinets; vendor claims). Runtime: register ups_flex (operator claims).','Placement: BD.model().plant (plant.js), with CSA C282 and B139.1.0 clearances.',C.CONTEXT_SRC(x.city)],

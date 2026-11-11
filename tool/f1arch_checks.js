@@ -398,7 +398,7 @@ C.add(T,'Plant and site',{chip:CHIP,async build(x){
   if(N&&N.city==='edm'&&N.night) rows.push(['Overnight power cut','over the night limit (flagged)']);
   rows.push(['Fire department access and FDC',C.q()],['Transformers',C.q()],['Fuel truck spot',C.q()]);
   const rl=R.filter(r=>/generator|loading|truck|dock|noise|roof plant/i.test(r.t)&&r.sev!=='x');
-  const noteNoise=N?(N.city==='van'?'Generator test, one set at a time, free field (By-law 6555 s. 4.1(c); 78 dB(A) at 7 m, maker claim).':'Generator test, daytime up to 1 h (C14600 s. 19(3), 21(3); 78 dB(A) at 7 m, maker claim).'):'Generator noise: no generator set placed, so not computed.';
+  const noteNoise=N?(N.city==='van'?'Generator test, one set at a time, free field (By-law 6555 s. 4.1(c); Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m, maker claim).':'Generator test, daytime up to 1 h (C14600 s. 19(3), 21(3); Kohler enclosure sheet G6-154 for KD2000, Sound Level 2, 78 dB(A) at 7 m, maker claim).'):'Generator noise: no generator set placed, so not computed.';
   return {draw,lead:'The plant yard, the distances the codes set around it, and the flood level. Equipment that does not fit is reported, never moved.',
     hero:[{v:String(nGen),l:'generator sets in the yard'},{v:yardArea!=null?n0(yardArea):C.q(),u:yardArea!=null?'m²':'',l:'plant yard'},{v:da?(da.ok?'yes':'no'):'–',l:'trucks reach the dock',red:!!(da&&!da.ok)},{v:fcl?n1(fcl.v):C.q(),u:fcl?'m':'',l:'flood construction level'}],
     rows,meters,
