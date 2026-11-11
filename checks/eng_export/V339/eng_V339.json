@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-10T23:37:46.352Z",
- "commit": "bc38a8d",
+ "made": "2026-11-11T01:01:46.891Z",
+ "commit": "8279aac",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -2105,7 +2105,7 @@
    "screenshot": "cards/11_Materials.png",
    "captured": true,
    "error": null,
-   "lead": "The building lasts decades; the servers are replaced every five to six years. The tool counts the servers’ embodied carbon each year and the building once.",
+   "lead": "The building lasts decades; the servers are replaced every five to six years.",
    "figures": [
     {
      "kind": "hero",
@@ -2133,30 +2133,34 @@
     },
     {
      "kind": "hero",
-     "label": "embodied, servers",
-     "value": "290–435",
-     "unit": "t CO₂e/yr",
+     "label": "electronic waste, servers alone",
+     "value": "14.7–18.3",
+     "unit": "t/yr",
      "key": null,
      "red": false,
      "range": {
-      "low": 290,
-      "high": 435
+      "low": 14.7,
+      "high": 18.3
      },
      "numbers": [
-      290,
-      435
+      14.7,
+      18.3
      ]
     },
     {
      "kind": "hero",
-     "label": "embodied, building",
-     "value": "715",
-     "unit": "t CO₂e",
+     "label": "copper in the facility",
+     "value": "50–100",
+     "unit": "t",
      "key": null,
      "red": false,
-     "range": null,
+     "range": {
+      "low": 50,
+      "high": 100
+     },
      "numbers": [
-      715
+      50,
+      100
      ]
     },
     {
@@ -2189,34 +2193,6 @@
     },
     {
      "kind": "row",
-     "label": "Embodied carbon, servers",
-     "value": "290.1–435.1 t CO₂e/yr; the 10–15% manufacturing share is our assumption (?)",
-     "key": null,
-     "range": {
-      "low": 290.1,
-      "high": 435.1
-     },
-     "numbers": [
-      290.1,
-      435.1,
-      10,
-      15
-     ]
-    },
-    {
-     "kind": "row",
-     "label": "Embodied carbon, building",
-     "value": "715 t CO₂e for 1,550 m² at 461 kg/m²",
-     "key": null,
-     "range": null,
-     "numbers": [
-      715,
-      1550,
-      461
-     ]
-    },
-    {
-     "kind": "row",
      "label": "Concrete and steel",
      "value": "?",
      "key": null,
@@ -2235,10 +2211,6 @@
    "lists": [],
    "more": [
     {
-     "title": "What the building figure covers",
-     "text": "1,550 m² is the top of the floor-area range the tool reads for this lot (f.gross), not the building sized for 2.5 MW. A general building median of 461 kg/m²; no data-centre benchmark exists."
-    },
-    {
      "title": "Lifespans",
      "text": "Servers about 5–6 years; cooling and heat pumps 15–25; building 25–27 (economic life, Statistics Canada); pipe network 30–50, depending on water temperature."
     }
@@ -2256,50 +2228,21 @@
    ],
    "missing": [
     "concrete and steel tonnes",
-    "embodied carbon of cooling plant",
-    "rare earths in retired equipment (logic node rare_earth has no figure)",
-    "data-centre building benchmark for embodied carbon"
+    "rare earths in retired equipment (logic node rare_earth has no figure)"
    ],
    "sources": [
-    "Racks, servers, waste, copper, embodied carbon: tool/engine.js materialsView. research or government lab LBNL 2024: about 600 W per server (register: servers)",
+    "Racks, servers, waste, copper: tool/engine.js materialsView. research or government lab LBNL 2024: about 600 W per server (register: servers)",
     "operator or maker claim register: ewaste (server masses 21.2–26.3 kg, 6-year refresh)",
     "operator or maker claim register: copper_tonnes (Copper Development Association 2023 — industry figure)",
-    "operator or maker claim register: embodied_it (Dell R760 life-cycle assessment 2025 — manufacturer)",
-    "research or government lab register: embodied_building (461 kg CO₂e/m² median; no data-centre benchmark)",
-    "Lifespans: the \"Lifespans\" row of the same panel. The 25-year sum is our arithmetic: yearly servers figure × 25."
+    "Lifespans: the \"Lifespans\" row of the same panel."
    ],
    "register": [
     {
      "id": "copper_tonnes",
      "text": "{\"quantity\":\"Copper in the facility\",\"unit\":\"t\",\"formula\":\"MW × 20–40 t/MW\",\"coef\":\"CDA 2023 (industry); of that, 'nearly 3 tons/MW' at rack level (CDA 2023 p. 21), so most sits outside the racks (where exactly: not broken down in what was read ?); data cabling is now mostly fibre (VAN3 guide, claim)\",\"source\":null}"
-    },
-    {
-     "id": "embodied_building",
-     "text": "{\"quantity\":\"Embodied carbon, building\",\"unit\":\"tCO2e\",\"formula\":\"floor_area × kg CO2e/m²\",\"coef\":\"Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; 461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate\",\"source\":null}"
-    },
-    {
-     "id": "embodied_it",
-     "text": "{\"quantity\":\"Embodied carbon, IT\",\"unit\":\"tCO2e/yr\",\"formula\":\"servers × kg CO2e per server ÷ lifespan\",\"coef\":\"Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power (their two cases only). The tool's own inference: on Vancouver's low-carbon grid, making the servers is of the same order as running them (at 1 MW the electricity is about 133–147 t/yr at 18.1 g/kWh); in Edmonton running them dominates.\",\"source\":null}"
-    },
-    {
-     "id": "floor",
-     "text": "Operator floor price at any Canadian site"
     }
    ],
    "drawText": [
-    "Embodied carbon, t CO₂e",
-    "0",
-    "5,000",
-    "10,000",
-    "15,000",
-    "20,000",
-    "Servers, each year",
-    "290–435",
-    "Building, once",
-    "715 t",
-    "Servers over 25 years (our sum)",
-    "7,252–10,878",
-    "t CO₂e, one scale",
     "How long each part lasts, years",
     "0",
     "13",
@@ -2316,12 +2259,11 @@
     "30–50",
     "years, one scale",
     "Not in the tool yet:",
-    "tonnes of concrete and steel · embodied carbon of the cooling plant · rare earths in retired equipment",
+    "tonnes of concrete and steel · rare earths in retired equipment",
     "low end",
-    "high end",
-    "The 25-year servers bar is the tool’s yearly figure × 25: our sum, not a tool figure."
+    "high end"
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nEmbodied carbon, t CO₂e\n0\n5,000\n10,000\n15,000\n20,000\nServers, each year\n290–435\nBuilding, once\n715 t\nServers over 25 years (our sum)\n7,252–10,878\nt CO₂e, one scale\nHow long each part lasts, years\n0\n13\n25\n38\n50\nServers\n5–6\nCooling and heat pumps\n15–25\nBuilding\n25–27\nPipe network\n30–50\nyears, one scale\nNot in the tool yet:\ntonnes of concrete and steel · embodied carbon of the cooling plant · rare earths in retired equipment\nlow end\nhigh end\nThe 25-year servers bar is the tool’s yearly figure × 25: our sum, not a tool figure.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nMaterials\n\nThe building lasts decades; the servers are replaced every five to six years. The tool counts the servers’ embodied carbon each year and the building once.\n\n313\nracks, at 8 kW each\n4,167\nservers, at 600 W each\n290–435t CO₂e/yr\nembodied, servers\n715t CO₂e\nembodied, building\nElectronic waste\n14.7–18.3 t/yr, servers alone, six-year refresh\nCopper in the facility\n50–100 t\nEmbodied carbon, servers\n290.1–435.1 t CO₂e/yr; the 10–15% manufacturing share is our assumption (?)\nEmbodied carbon, building\n715 t CO₂e for 1,550 m² at 461 kg/m²\nConcrete and steel\n?\ntonnes not in the tool yet\nRare earths in retired equipment\n?\nnot in the tool yet\nWhat the building figure covers\nLifespans\nBack\nNext\n11 / 12\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nMaterials\n12\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nHow long each part lasts, years\n0\n13\n25\n38\n50\nServers\n5–6\nCooling and heat pumps\n15–25\nBuilding\n25–27\nPipe network\n30–50\nyears, one scale\nNot in the tool yet:\ntonnes of concrete and steel · rare earths in retired equipment\nlow end\nhigh end\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nMaterials\n\nThe building lasts decades; the servers are replaced every five to six years.\n\n313\nracks, at 8 kW each\n4,167\nservers, at 600 W each\n14.7–18.3t/yr\nelectronic waste, servers alone\n50–100t\ncopper in the facility\nElectronic waste\n14.7–18.3 t/yr, servers alone, six-year refresh\nCopper in the facility\n50–100 t\nConcrete and steel\n?\ntonnes not in the tool yet\nRare earths in retired equipment\n?\nnot in the tool yet\nLifespans\nBack\nNext\n11 / 12\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nMaterials\n12\nReport"
   },
   {
    "n": 12,
@@ -2490,7 +2432,7 @@
    "register": [],
    "drawText": [
     "BEYOND DATA · SITE REPORT",
-    "2026-11-10",
+    "2026-11-11",
     "339 1st Ave E",
     "Vancouver · I-3 · 4,503 m² lot",
     "Report level: How it is worked out",
@@ -2528,7 +2470,7 @@
     "11 sections",
     "What it could hold",
     "4 sections",
-    "Generated by the Beyond Data tool · Vancouver · figures as of 2026-11-10",
+    "Generated by the Beyond Data tool · Vancouver · figures as of 2026-11-11",
     "01 · Cover",
     "address, the site drawn, four numbers",
     "BEYOND DATA · SITE REPORT",
@@ -2584,7 +2526,7 @@
     "BUILDING HEIGHT",
     "66–131 m²",
     "PLANT SPACE",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "01",
     "02 · What fits",
     "plan, section, how big",
@@ -2627,7 +2569,7 @@
     "Edmonton, conventional",
     "6,367–7,049 t CO₂e a year",
     "Grid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "02",
     "03 · What moves in and out",
     "electricity, heat, water, carbon",
@@ -2692,7 +2634,7 @@
     "6",
     "hospital",
     "4",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "03",
     "04 · Heat",
     "who could take it, at what cost",
@@ -2730,7 +2672,7 @@
     "EV charging hub",
     "not ruled out",
     "not yet known: grid headroom at the parcel",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "04",
     "05 · Power",
     "the meter, generators, the grid",
@@ -2764,7 +2706,7 @@
     "not ruled out",
     "Emergency water for neighbours",
     "not ruled out",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "05",
     "06 · Water",
     "evaporated against rain",
@@ -2830,7 +2772,7 @@
     "1",
     "1",
     "Buildings in the tool's heat lists (measured, licensedor assessed), counted within each distance. Homes inprivate houses are not listed.",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "06",
     "07 · Over time, and next door",
     "50 years; sound; who is within 1 km",
@@ -2936,7 +2878,7 @@
     "Land and time",
     "People",
     "Possible here means every test the tool can run passes; it is not a recommendation. An unknown is a question the toolcannot answer yet, not a failure.",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "07",
     "08 · Opportunities",
     "six tests for each",
@@ -2980,7 +2922,7 @@
     "C",
     "92–172",
     "A: smaller, air-cooled; B: largest that fits, air-cooled; C: largest that fits, heat to the network. Each gains andgives up something: more heat offered means more plant, more electricity and more pipe in the street.",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "08",
     "09 · Three options",
     "what each gains and gives up",
@@ -3014,7 +2956,7 @@
     "Vancouver 781",
     "Edmonton about 0",
     "The same servers and the same design in both cities. What changes is the grid that powers them, the climate that coolsthem, the price of the gas their heat would replace, and the rules. Rain is for each worked-example lot's roof.",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "09",
     "10 · Two cities",
     "the same design in both",
@@ -3022,7 +2964,7 @@
     "339 1ST AVE E · VANCOUVER",
     "10",
     "How it is worked out",
-    "242 parts in 8 stages, from the lot to what could become.",
+    "239 parts in 8 stages, from the lot to what could become.",
     "What we startwith",
     "How big it canbe",
     "What the siteoffers",
@@ -3033,7 +2975,7 @@
     "Who gains, whopays",
     "EACH DOT IS ONE PART OF THE TOOL; COLOUR IS THE FIRST REPORT THAT SHOWS IT",
     "every report (42)",
-    "Architecture and Engineering (85)",
+    "Architecture and Engineering (82)",
     "Engineering only (84)",
     "Architecture only (31)",
     "Every part runs in every report; a report only changes what is shown. The full report lists, for each result, the partsit is worked out from (see the appendix). Lines are what feeds what.",
@@ -3057,14 +2999,14 @@
     "11 sections",
     "What it could hold",
     "4 sections",
-    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-10",
+    "339 1st Ave E, Vancouver · How it is worked out · 2026-11-11",
     "10",
     "11 · How it is worked out",
     "every part of the tool, by stage",
     "11 letter pages, drawn by the tool from this lot and the picks above. Scroll sideways for the rest.",
     "Print the report"
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-10\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n18–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 10–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-10\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n66–131 m²\nPLANT SPACE\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-10\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n18–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in18–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 19 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nMaterials\nracks, drives and copper at each refresh\nEquipment\nservers replaced every 5–6 years\nPeople\njobs, and a street edge\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n333–369 t CO₂e a year\nConventional, this site\n333–369 t CO₂e a year\nEdmonton, same design\n6,367–7,049 t CO₂e a year\nEdmonton, conventional\n6,367–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-10\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $63 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,610 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $63/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-10\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 18–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n18–20 GWh\nConventional, this site\n18–20 GWh\nCologix VAN4, Vancouver,claim\n20 GWh\nVancouver, modelled\n18–20 GWh\nEdmonton, same design\n18–20 GWh\nEdmonton, conventional\n18–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-10\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this site(at most)\n30,551 m³ evaporated\nConve"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-11\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n18–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 10–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-11\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n66–131 m²\nPLANT SPACE\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n18–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in18–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 19 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nMaterials\nracks, drives and copper at each refresh\nEquipment\nservers replaced every 5–6 years\nPeople\njobs, and a street edge\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n333–369 t CO₂e a year\nConventional, this site\n333–369 t CO₂e a year\nEdmonton, same design\n6,367–7,049 t CO₂e a year\nEdmonton, conventional\n6,367–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $63 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,610 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $63/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 18–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n18–20 GWh\nConventional, this site\n18–20 GWh\nCologix VAN4, Vancouver,claim\n20 GWh\nVancouver, modelled\n18–20 GWh\nEdmonton, same design\n18–20 GWh\nEdmonton, conventional\n18–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this site(at most)\n30,551 m³ evaporated\nConve"
   }
  ],
  "errors": [],
