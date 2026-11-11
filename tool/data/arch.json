@@ -37,13 +37,15 @@
    35
   ],
   "liquid": [
-   50,
-   60
+   43,
+   61
   ],
   "src": [
-   "heat_temp"
+   "heat_temp",
+   "ashraeTG5liquid",
+   "nrelESIF2019"
   ],
-  "_note": "data-hall heat temperature by cooling type, °C; the liquid figure is marked unverified (?) in arch.js"
+  "_note": "data-hall heat temperature by cooling type, °C. Liquid (11 Nov 2026, J.B., scope a): the loop's return water, 43 °C (cooler case W32: 32 °C supply + 11 K) to 61 °C (warmer case W45: 45 °C + 16 K); supply maximums ASHRAE Thermal Guidelines 5th ed. (2021) Table 3.1 p. 47, rise NREL ESIF (Van Geet 2019). Direct = served in both cases; partly = only in the warmer case. Was 50-60 °C (unverified)."
  },
  "hpMaxC": {
   "v": 70,

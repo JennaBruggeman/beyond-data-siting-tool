@@ -278,7 +278,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 225,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1710
+"sources": 1711
 }
 },
 "stages": [
@@ -1089,8 +1089,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "characterise",
 "name": "Heat temperature by cooling type",
-"formula": "air-cooled 25–35; liquid-cooled 50–60; two runs if unknown",
-"coef": "18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Wahlroos p.1753 (temperatures); Alissa p.332 (cold-plate liquid share 50–80%+, not temperatures); heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
+"formula": "air-cooled 25–35 °C; liquid-cooled: the loop as a case pair, return = class supply maximum + 11–16 K: W32 (cooler) 43–48 °C, W40 51–56 °C, W45 (warmer) 56–61 °C",
+"coef": "11 Nov 2026 (J.B., scope a): supply maximums ASHRAE TG5 Table 3.1 p. 47 (ashraeTG5liquid); rise 11–16 K NREL ESIF (nrelESIF2019); the heat pump cost of heat uses the cooler case W32; the warmer case W45 is shown as temperatures (Lorenz COP not reliable within a few K of the sink, ?); Architecture direct-heat test 43–61 °C. Was liquid 50–60 °C (unverified). ‖ 18 Oct 2026 (J.B. decisions, heat items 1–7; audit/heat_items_sources_2026-10-18.md): air-side return hot air 25–47 °C, chiller condenser 40–50 °C, chilled-water loop 10–20 °C (Yuan et al. 2025 Table 2; Oró et al. 2019); the tool keeps 25–35 °C as the typical air-cooled figure. Wahlroos p.1753 (temperatures); Alissa p.332 (cold-plate liquid share 50–80%+, not temperatures); heat-rejection equipment per site from permits: rooftop condensers (1050 W Pender, 175 W Cordova), rooftop chiller (55 E 7th), P1 chiller room (555 W Hastings), L8 roof well (515 W Hastings); seen on site (J.B.): 55 E 7th lane deck with a Cummins generator enclosure and a packaged cooling unit piped into the building (rooftop chiller in BP-2019-00595 not photographed — keep both); 111 E 5th louvre bands and three rooftop vent stacks; Internet Centre two rooftop condensing units (corroborates the 2024 \"two RTUs, AC only\" permit); Qu EDM2 cooling units on a raised platform under a canopy, \"Munters\" casings (air-side or indirect evaporative suggested, not confirmed); Kyndryl Acheson cooling plant with pipe racks into the wall on the south side; Baxtel claim for Kyndryl: two 550-ton water-cooled chillers (≈3.9 MW thermal) — operator/directory claim | 19 Oct 2026: liquid-cooled measured design 24 °C supply, 35–40 °C return (NREL ESIF); 50–60 °C remains unverified (secondary).",
 "unit": "°C",
 "sources": [
 "lorenz",
@@ -1102,7 +1102,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "wahlroos2018",
 "alissa2025lca",
 "sethuramalingam2019",
-"ornlWang"
+"ornlWang",
+"ashraeTG5liquid"
 ],
 "source_roles": [
 {
@@ -1146,6 +1147,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "traced from lorenz",
 "conf": 70,
 "verified": false
+},
+{
+"id": "ashraeTG5liquid",
+"term": "liquid loop supply maximums by class",
+"role": "coefficient (standard guideline)",
+"conf": 90,
+"verified": true
 }
 ],
 "conf": 70,
@@ -1160,7 +1168,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 1,
 "edm": 0,
 "both": 0,
-"gen": 9
+"gen": 10
 }
 },
 {
@@ -20483,7 +20491,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "vbbl25_32229": "RULE: Vancouver Building By-law 2025, Book I (Volume 1, v4.01, consolidated to 30 Sep 2026; J.B.'s copy in Downloads, vbbl-2025-volume-1-v4-01.pdf, not yet in the source library), Div. B 3.2.2.29 Group A, Division 3, any height, any area, sprinklered, printed p. 173: noncombustible; floors fire separations 2 h; mezzanines 1 h; loadbearing as the supported assembly. 3.2.2.6.(1), p. 166: in a building with more than one major occupancy the requirements for the most restricted major occupancy apply to the whole building (3.2.2.7 superimposed occupancies, same page, not applied: ?). Used by: construction rows for 3+ storey buildings with a pool or spa (Heat cascade; Community pool fits on 3 storeys currently cite 3.2.2.77 only: conflict). Read 9 Nov 2026 (register_quote_check). Trust 90.",
 "cp_fit_rules": "DECISION (J.B., 9 Nov 2026): Claude Link community_pool/specs/community_pool.md rules 2, 5, 9, 14, 15: pool hall single volume, the data hall never over or under it; wet kind and bather path (R8); chlorine rules in both cities; spare-floor order; fallback ladder with the learner pool. A decision, not a source: no trust rating (n/a). Spec, not live yet.",
 "arch_sportEngPoolsApp2": "HOLD, NOT READ: DESIGN GUIDE (UK benchmark): Swimming Pools Design Guidance Note 2013, Appendix 2 Servicing the building, Sport England (hosted by CIBSE), Table 4 (citing PWTAG 2009): pool water temperatures by pool type and air about 1 °C above water, as reported by the main Cowork chat 9 Nov 2026 (figures ? until read: 28 competitive, 29 main, 30 leisure, 31 children, 32 babies/disabled, 35 hydrotherapy, 40 spa) — https://cibse.org/media/vihawrzw/swimming-pools-2013-appendix-2-servicing-the-building.pdf. Trust ? (benchmark, outside Canada).",
-"hpacAshraeLC2014": "HOLD, NOT READ: TRADE REPORT: HPAC Engineering, 22 Apr 2014, on ASHRAE TC 9.9 Liquid Cooling Guidelines 2nd ed.: 'five water-temperature classes', the highest 'greater than 45°C' (as reported by the main Cowork chat 9 Nov 2026; edition differs from upsiteASHRAE5's 5th-edition W classes) — https://www.hpac.com/air-conditioning/article/20927580/ashrae-adds-supply-water-temp-class-to-data-center-cooling-guidance. Trust 50 (trade report); replace with the ASHRAE text."
+"hpacAshraeLC2014": "HOLD, NOT READ: TRADE REPORT: HPAC Engineering, 22 Apr 2014, on ASHRAE TC 9.9 Liquid Cooling Guidelines 2nd ed.: 'five water-temperature classes', the highest 'greater than 45°C' (as reported by the main Cowork chat 9 Nov 2026; edition differs from upsiteASHRAE5's 5th-edition W classes) — https://www.hpac.com/air-conditioning/article/20927580/ashrae-adds-supply-water-temp-class-to-data-center-cooling-guidance. Trust 50 (trade report); replace with the ASHRAE text.",
+"ashraeTG5liquid": "STANDARD GUIDELINE (licensed; J.B. via UBC Library, 11 Nov 2026; never in the repo): ASHRAE TC 9.9, Thermal Guidelines for Data Processing Environments, 5th ed. (2021), ch. 3, Table 3.1 \"2021 Thermal Guidelines for Liquid Cooling\", p. 47: facility supply water temperature by class, W17 17 °C, W27 27, W32 32, W40 40, W45 45, W+ >45; \"Minimum water temperature for all classes is 2°C\"; typical facilities: W32 cooling tower with chiller or district heating system, W45 cooling tower with district heating system. p. 48: \"The liquid cooling classes with supply temperatures of 32°C ... and higher (shown in Table 3.1) are candidates for district heating.\" Supply temperatures are requirements met by the ITE; the facility owner must allow for the CDU approach (p. 48). No return temperature or rise given."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -24922,7 +24931,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "arch_van_cd1_818": "claude",
 "kohlerG6154sound": "claude",
 "van6555s41c": "claude",
-"edm14600s19to24": "claude"
+"edm14600s19to24": "claude",
+"ashraeTG5liquid": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -26633,7 +26643,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "vbbl25_32229": "van",
 "cp_fit_rules": "gen",
 "arch_sportEngPoolsApp2": "gen",
-"hpacAshraeLC2014": "gen"
+"hpacAshraeLC2014": "gen",
+"ashraeTG5liquid": "gen"
 },
 "city_gaps": {
 "van": [

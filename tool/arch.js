@@ -369,7 +369,7 @@ function rules(P){ const s=P.s, M=s.M, city=s.city, code=zoneCode(), out=[...P.f
   return out; }
 
 /* ---------- the heat a program needs, against what the hall gives ---------- */
-function dcTemp(){ return (BD.S.answers.inside||'air')==='air'?AD.dcTemp.air.slice():AD.dcTemp.liquid.slice(); } // register heat_temp by cooling type: air-cooled 25–35 °C; liquid 50–60 °C (unverified, ?)
+function dcTemp(){ return (BD.S.answers.inside||'air')==='air'?AD.dcTemp.air.slice():AD.dcTemp.liquid.slice(); } // register heat_temp by cooling type: air-cooled 25–35 °C; liquid 43–61 °C, the loop's return from the cooler case W32 to the warmer W45 (ASHRAE TG5 Table 3.1 p. 47; rise NREL ESIF), 11 Nov 2026
 function lift(p){ const t=p.heat&&p.heat.supply_C; if(!t) return null; const d=dcTemp(); return t[1]<=d[0]?'direct':t[1]<=d[1]?'partly':t[1]<=AD.hpMaxC?'heat pump':'hotter than '+AD.hpMaxC+' °C'; } // tool/data/arch.json (cop, dea)
 
 /* ---------- panel ---------- */

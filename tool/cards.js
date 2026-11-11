@@ -180,11 +180,18 @@ function otherNets(city){ const L=OTHERNETS[city]||[]; if(!L.length) return '';
    Searches what the tool can vary for heat and shows the set-up with the lowest cost per MWh (middle case), with its trade-offs. Not a verdict.
    Levers: size (heat offered), which buildings share one pipe (a small branch network along the streets), the buildings' heating temperature.
    Liquid cooling to the chip is assumed (the only cooling with a sourced heat figure). Sources: audit/heat_search_2026-10-19.md */
-const HS={src:{t:[37.5,24]}, // °C, liquid-cooled water from the servers and back to them: NREL ESIF, supply 24 °C, return 35–40 °C (Van Geet 2019)
+const HS={src:{t:[37.5,24]}, // superseded 11 Nov 2026 (scope a): the source is now the loop case pair, loopCase() below; kept for reference (NREL ESIF, supply 24 °C, return 35–40 °C)
   sinks:[{id:'70',t:[70,50],lab:'baseboards or fan coils (70 °C supply, 50 °C return)'},{id:'60',t:[60,45],lab:'panel radiators (60 °C, 45 °C)'}], // City of Vancouver NE connectivity standards (Dec 2013) s. 4.3
   eta:[0.40,0.50]}; // Lorenz efficiency for a built heat pump (register cop; calibrated at Odense, η 0.50 → 4.56 against 4.5 realised)
 function lorenzCOP(src,sink){ const K=273.15, lm=(a,b)=>Math.abs(a-b)<0.01?a+K:((a+K)-(b+K))/Math.log((a+K)/(b+K)); const Tk=lm(sink[0],sink[1]), Ts=lm(src[0],src[1]); return HS.eta.map(e=>e*Tk/(Tk-Ts)); }
 BD.lorenzCOP=lorenzCOP;
+/* 11 Nov 2026 (J.B., scope a): the liquid loop as a case pair. Supply maximum by class: ASHRAE Thermal Guidelines 5th ed. (2021) Table 3.1 p. 47; return = supply + 11–16 K
+   (NREL ESIF; ASHRAE gives no return). The heat pump's cost of heat uses the cooler case (W32); the warmer case (W45) is shown as temperatures only: its return
+   comes within a few kelvin of the sinks, where the Lorenz method gives COPs no built heat pump reaches (no sourced cap ?). */
+function loopCase(id){ const L=(BD.data.heat&&BD.data.heat.loop)||{classes:[['W32',32],['W40',40],['W45',45]],cooler:'W32',warmer:'W45',rise:[11,16]}; const k=id||L.cooler, c=L.classes.find(x=>x[0]===k)||L.classes[0];
+  return {id:c[0],sup:c[1],ret:[c[1]+L.rise[0],c[1]+L.rise[1]],rise:L.rise.slice()}; }
+function loopCOP(id,sink){ const c=loopCase(id), lo=lorenzCOP([c.ret[0],c.sup],sink)[0], hi=lorenzCOP([c.ret[1],c.sup],sink)[1]; return [lo,hi]; }   /* worst: η 0.40 at the smaller rise; best: η 0.50 at the larger */
+BD.loopCase=loopCase; BD.loopCOP=loopCOP;
 // one pipe from the site to a group of buildings: shared street segments are dug once; a segment carrying several buildings is sized up
 // by continuity (diameter ∝ √flow, from the DN100 the tool assumes for one building) and priced by Persson & Werner (cost per metre = €212 + €4,464 × diameter)
 function groupCost(f,G){ if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null; const T=RT.T, Gr=RT.G; const seg=new Map(); let tail=0;
@@ -206,7 +213,7 @@ function scen(f,G,cop,offer){ const v=ECON.heatVal(f.city), pe=ECON.elec[f.city]
   if(!isFinite(mid.lcoh)||!isFinite(gc.len)) return null; /* lot test 20 Oct: a group whose route could not be measured gave $NaN or $-Infinity as the best set-up; it is left out */
   return {G,H:Hm,Hhi:H,HL,len:gc.len,v,mid,lo,hi,offer,elec:Hm/((cop[0]+cop[1])/2)}; }
 function bestHeat(f,all,offer){ const cand=all.filter(p=>p.econ&&p.econ.take&&p._route).sort((a,b)=>(a.econ.lcohMid||1e9)-(b.econ.lcohMid||1e9)).slice(0,60); if(!cand.length) return null; const out=[];
-  for(const sk of HS.sinks){ const cop=lorenzCOP(HS.src.t,sk.t);
+  for(const sk of HS.sinks){ const cop=loopCOP(null,sk.t);   /* cooler case W32 (scope a) */
     // start from the building with the lowest cost per MWh on its own, then add whichever building lowers the group's cost most
     let best=null; for(const p of cand){ const r=scen(f,[p],cop,offer); if(r&&(!best||r.mid.lcoh<best.mid.lcoh)) best=r; }
     if(!best) continue; let G=best.G.slice(), grew=true;
