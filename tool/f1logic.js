@@ -12,7 +12,7 @@ const TABS=[['resident','Resident'],['municipal','Municipal'],['full','Engineeri
 const MUNI_CARD={'Your city':['parcel','zone'],'Your parcel':['parcel','zone'],'Is a data centre allowed?':['zoning_status'],'Height and floor area':['envelope','floor_area','roof_equipment_rule'],'Yards by edge':['envelope'],
  'Noise limits around the lot':['noise_limit'],'Storeys and street frontage':['storey_min'],'Loading':['loading_need'],'Approval process':['rezoning_price']};
 /* parts lit by a card ("This card in the interactive logic diagram"), from logic.js's step lists where a card matches a step; the other cards light nothing yet */
-const CARD={ 'Cooling':'setup','Noise':'setup','Backup power':'setup','What fits':'fits','Heat offered':'heat','Who could take it':'heat','Electricity':'energy','Water':'water','Materials':'materials', /* Engineering's 12 cards (8 Nov 2026) */'Heat receivers nearby':'heat','People nearby':'social','Neighbours and views':'social' };
+const CARD={ 'Cooling':'setup','Noise':'setup','Backup power':'setup','What fits':'fits','Heat offered':'heat','Who could take it':'heat','Electricity':'energy','Water':'water', /* Engineering's 12 cards (8 Nov 2026) */'Heat receivers nearby':'heat','People nearby':'social','Neighbours and views':'social' };
 const WORD=[[100,'arithmetic'],[90,'regulation, tariff or standard read directly'],[80,'government dataset'],[70,'peer-reviewed coefficient from another context'],[60,'derived with a stated assumption'],[50,'operator or industry claim'],[40,'proxy'],[20,'judged'],[0,'gap']]; /* CLAUDE.md §3 */
 const word=q=>{ if(q==null) return 'not rated'; for(const [v,w] of WORD) if(q>=v) return w; return 'gap'; };
 let L=null, O=null, UP={}, ORDER={}; const S={tab:'full',sel:null,lit:[],label:''};

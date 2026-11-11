@@ -246,24 +246,7 @@ C.add(T,'Water',{async build(x){
     src:['Evaporation, make-up, blowdown, rain, water behind electricity: tool/engine.js waterView with tool/data/water.json. '+reg3('evap'),reg3('rain'),reg3('wbe'),...(city==='van'?[reg3('wprice')]:[]),'Fire-fighting water: the tool names the code basis in its opportunity text (opps.js) but sizes no volume.'],
     missing:['fire-fighting water volume','sewer rate for the water bill (Vancouver)']}; }});
 
-/* ======================= 11 Materials ======================= */
-C.add(T,'Materials',{async build(x){
-  const M=await modelNow(x), e=BD.eng, R=e.R, f=e.siteFacts(), A=BD.S.answers, city=x.city, mw=A.mw||M.mwSized||1;
-  /* 11 Nov 2026 (J.B., F10): embodied carbon dropped from the tool (not accurate enough to show); the equipment, waste, copper and lifespans stay */
-  const racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6, ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40];
-  const W=1000, H0=330; let svg=`<svg viewBox="0 0 ${W} ${H0}" width="${W}" height="${H0}" role="img" aria-label="How long each part of the data centre lasts">`;
-  const LIFE=[['Servers',5,6],['Cooling and heat pumps',15,25],['Building',25,27],['Pipe network',30,50]];
-  svg+=TXT(0,16,'How long each part lasts, years',{fs:15,c:K.ink});
-  const b2=rbars(LIFE.map(l=>({l:l[0],lo:l[1],hi:l[2],col:K.dc,col2:K.dcSup,val:`${l[1]}–${l[2]}`})),{W:760,x0:0,y0:34,pitch:50,pad:170,max:50,tf:fm}); svg+=b2.s+TXT(0,34+b2.h+16,'years, one scale',{fs:11,c:K.mute});
-  svg+=TXT(0,H0-24,'Not in the tool yet:',{fs:12.5,c:K.red})+TXT(120,H0-24,'tonnes of concrete and steel · rare earths in retired equipment',{fs:12.5,c:K.red});
-  svg+='</svg>';
-  const key=`<div class="f1c-key"><span><i style="background:${K.dc}"></i>low end</span><span><i style="background:${K.dcSup}"></i>high end</span></div>`;
-  return {draw:`<div class="${NS}wrap">${svg}${key}</div>`,lead:'The building lasts decades; the servers are replaced every five to six years.',
-    hero:[{v:fm(racks),l:'racks, at 8 kW each'},{v:fm(servers),l:'servers, at 600 W each'},{v:rg(ew[0],ew[1],f1),u:'t/yr',l:'electronic waste, servers alone'},{v:`${fm(cu[0])}–${fm(cu[1])}`,u:'t',l:'copper in the facility'}],
-    rows:[['Electronic waste',`${rg(ew[0],ew[1],f1)} t/yr, servers alone, six-year refresh`],['Copper in the facility',`${rg(cu[0],cu[1])} t`],['Concrete and steel',C.q('tonnes not in the tool yet')],['Rare earths in retired equipment',C.q('not in the tool yet')]],
-    more:[['Lifespans',`<p>Servers about 5–6 years; cooling and heat pumps 15–25; building 25–27 (economic life, Statistics Canada); pipe network 30–50, depending on water temperature.</p>`]],
-    src:['Racks, servers, waste, copper: tool/engine.js materialsView. '+reg3('srv'),reg3('ew'),reg3('cu'),'Lifespans: the "Lifespans" row of the same panel.'],
-    missing:['concrete and steel tonnes','rare earths in retired equipment (logic node rare_earth has no figure)']}; }});
+/* 11 Materials: dropped (J.B. 11 Nov 2026, F10 widened): embodied carbon not accurate enough to show, and the card goes with it */
 
 /* ======================= 12 Report ======================= */
 C.add(T,'Report',{async build(x){
