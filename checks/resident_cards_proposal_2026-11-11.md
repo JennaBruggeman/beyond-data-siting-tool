@@ -39,7 +39,7 @@ Built on your 7 Nov decisions (CODE_JOB_F1_site_build.md §3c): show where data 
 ## Questions for you
 1. Types: (a) → inside a tower; (b) and (c) → stand-alone, with "fenced site" only where sourced. OK?
 2. Edmonton facilities outside the city: list below the map without dots (proposed), or leave them out?
-3. Video stills: your 7 Nov decisions don't include them. I've left them out; say if you want them, and from which video.
+(Video stills: none; generic graphics only. J.B., 11 Nov 2026.)
 
 ## Effort
 Step 0 inventory load (register patch, parcel matching, counts): 1 day. Four cards and the report: 2–3 days. Then the F1 gate on Resident.
