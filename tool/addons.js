@@ -226,27 +226,7 @@ function waterIndex(){ if(BD.loadWP&&!waterIndex.q){ waterIndex.q=BD.loadWP().th
   if(a.add&&a.add.rainwater&&f.M&&f.M.foot){ const tank=roof*(f.city==='van'?124:82.7)/1000*0.8, c=BD.centroid(f.M.foot), s=Math.sqrt(tank/4); d.cistern=[{ring:new Float64Array([c[0]-s/2,c[1]-s/2,c[0]+s/2,c[1]-s/2,c[0]+s/2,c[1]+s/2,c[0]-s/2,c[1]+s/2]),h:4,base:-4.5}]; }
   e.show3d('water',d); }
 
-/* ---------- materials as an index, with trucks, a 50-year slider and where equipment can go ---------- */
-function materialsIndex(){ const e=E(), f=e.siteFacts(), R=e.R, a=A(), mw=a.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6; BD.S.view2='tab';
-  const ew=[servers*21.2/6/1000,servers*26.3/6/1000], yr=a.yr||25, refresh=Math.floor(yr/5.5), rf=[Math.floor(yr/6),Math.floor(yr/5)] /* sweep 20 Oct: 25 years at every 5–6 years is 4–5 refreshes, not 4 */;   /* 11 Nov 2026 (J.B., F10): embodied carbon dropped from the tool */
-  let h=e.tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
-  <div class="hfig"><div><b>${fmt(racks)}</b><span>racks at 8 kW each (Uptime 2024 average, survey)</span></div><div><b>${fmt(servers)}</b><span>servers at about 600 W (LBNL 2024)</span></div><div><b>${e.rng(ew[0],ew[1],'t')}</b><span>of servers retired a year, on a six-year refresh</span></div><div><b>${fmt(mw*20)}–${fmt(mw*40)} t</b><span>copper in the facility (industry figure)</span></div></div>
-  <h3>Over ${yr} years</h3><div class="numin"><label>Years <input type="range" id="yr" min="5" max="50" step="1" value="${yr}" style="width:200px"> <b id="yrv">${yr}</b></label></div>
-  <dl><dt>Server refreshes</dt><dd>${rf[0]===rf[1]?rf[0]:rf[0]+'–'+rf[1]} (every 5–6 years)</dd><dt>Servers retired</dt><dd>${e.rng(ew[0]*yr,ew[1]*yr,'t')}</dd><dt>The shell</dt><dd>${yr<=27?'within its economic life (about 25–27 years, Statistics Canada)':'past its economic life of about 25–27 years (Statistics Canada); physical life not published'}; cooling and heat pumps replaced ${Math.floor(yr/20)} time${Math.floor(yr/20)===1?'':'s'} (every 20 years: our point within ASHRAE survey medians of 15–25 years)</dd></dl>${''/* 2 Nov 2026 fix pass: D-life */}
-  <h3>Where retired equipment can go</h3>
-  <div class="addrow"><div>Reuse: ${f.city==='van'?'BC Technology for Learning Society (Burnaby)':'Alberta Computers for Schools (Edmonton), which takes servers'}<div class="src">Computers for Schools Plus (ISED)</div></div><div><button class="btn" data-mc="reuse">Explore ›</button></div></div>
-  <div class="addrow"><div>Certified recyclers (R2v3)<div class="src">${f.city==='van'?'Delta, Surrey ×2, Chilliwack, Bellingham WA':'Edmonton ×2'}</div></div><div><button class="btn" data-mc="r2">Explore ›</button></div></div>
-  <div class="addrow"><div>The provincial program<div class="src">${f.city==='van'?'Return-It Electronics (EPRA BC): servers covered; 3-pallet pickup':'Alberta Recycling (ARMA): rack servers named'}</div></div><div><button class="btn" data-mc="epr">Explore ›</button></div></div>
-  <div class="addrow"><div>UPS batteries<div class="src">Call2Recycle: dry cells up to 5 kg only</div></div><div><button class="btn" data-mc="batt">Explore ›</button></div></div>
-  <div class="addrow"><div>Wiping drives before they leave<div class="src">ITSP.40.006 (federal), NIST SP 800-88</div></div><div><button class="btn" data-mc="wipe">Explore ›</button></div></div>
-  <h3>Trucks</h3><p class="sub">${draft('One truck per loading space in 3D. Trips per refresh: not yet verified.')}</p>
-  `;
-  $('#side').innerHTML=h; e.wireTabs(); BD.draw();
-  const y=$('#yr'); y.oninput=()=>{ $('#yrv').textContent=y.value; }; y.onchange=()=>{ a.yr=+y.value; materialsIndex(); };
-  const C={reuse:['Reuse',['cfsPlus']],r2:['Certified recyclers',[f.city==='van'?'r2Van2026':'r2Edm2026']],epr:['The provincial program',[f.city==='van'?'epraBC':'armaElectronics']],batt:['UPS batteries',['call2recycle']],wipe:['Wiping drives',['itsp40006']]};
-  document.querySelectorAll('#side [data-mc]').forEach(b=>b.onclick=()=>{ const [t,ids]=C[b.dataset.mc]; const S=(OP&&OP.sources)||{}; BD.drawer.open(`<div class="kind">Materials · where it goes</div><h2>${esc(t)}</h2>${ids.map(i=>`<p class="sub">${esc((S[i]||'').replace(/\s*—\s*https?:\/\/\S+$/,''))}</p>`).join('')}<h3>Sources</h3>${src(ids)}<div class="draftnote">Directory and program listings, not endorsements.</div>`); });
-  const M=f.M, trucks=[]; if(M&&M.loadSpaces){ M.loadSpaces.slice(0,4).forEach(r=>{ const c=BD.centroid(r); const F=M.F; const [u,v]=F.toL(c[0],c[1]); trucks.push({ring:BD.geo.rectW(F,u-4.5,u+4.5,v-1.25,v+1.25),h:3.6}); }); }
-  e.show3d('materials',{site:f,trucks}); }
+/* Materials tab dropped (J.B. 11 Nov 2026, F10: "all parts of the tool") */
 
 /* ---------- people: stakeholders, sound, sight lines, the edge ---------- */
 function sightLines(f,G){ const M=f.M; if(!M) return {lines:[],homes:[0,0],edge:[0,0]}; const st=BD.scene3d&&BD.scene3d.state(); const ready=!!(M.plant&&st&&st.site); /* Build 2 part 6: the viewpoints run even when the plant test does not */
@@ -305,5 +285,5 @@ function personCard(f,p,TYPE){ const NL=E().noiseLw(A().mw||(f.M&&f.M.mwSized)||
   BD.drawer.open(`<div class="kind">People · neighbour</div><h2>${esc(p.n||TYPE[p.t])}</h2><p class="sub">${esc(TYPE[p.t])}${p.u?' · '+p.u+' homes':''} · ${fmt(p.dist)} m from the site</p>
   <dl><dt>Would hear</dt><dd>about ${Math.round(Math.max(0,lp[0]))}–${Math.round(lp[1])} dBA from the cooling plant, before walls, barriers or enclosures (screening estimate)</dd><dt>Would see</dt><dd>see the sight-line count on the People tab</dd><dt>Could gain</dt><dd>${p.t==='housing'||p.t==='school'||p.t==='care'||p.t==='rec'||p.t==='pool'?'heat, if it can take low-temperature heat (Heat tab)':'—'}${p.t==='rec'||p.t==='school'?'; a warming or cooling room, if the rules allow it (opportunities)':''}</dd><dt>Who they are</dt><dd>${draft('a record in a national or City list; how the people there would feel is for engagement, not the tool')}</dd></dl>
   <h3>Sources</h3>${E().s3('snd')}${E().src('recv')}`); }
-BD.tabOverride=Object.assign(BD.tabOverride||{},{energy:energyIndex,water:waterIndex,materials:materialsIndex,social:peopleIndex});
+BD.tabOverride=Object.assign(BD.tabOverride||{},{energy:energyIndex,water:waterIndex,social:peopleIndex});
 })();

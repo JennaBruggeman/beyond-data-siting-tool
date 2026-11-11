@@ -308,7 +308,7 @@ function fitsView(){
   ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
   ${pos==='upper'?`<dt>Floor strength</dt><dd class="draft">Office floors above grade are designed for 2.4 kPa; equipment rooms need at least 3.6 kPa, and data halls their actual load — likely strengthening.</dd>`:''}
   </dl>${src('pue')}${src('plant')}${src('fuel')}${src('svc')}${f.cpcn?src('grid2'):''}${pos==='upper'?src('floor'):''}${mathNeeds(mw,fac,f)}
-  <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water, materials and people, each in 3D.</span></div>
+  <div class="next"><button id="toRecv">What it exchanges →</button><span class="sub">Heat, energy, water and people, each in 3D.</span></div>
   <div class="draftnote">Every range carries the register's confidence; nothing here is a design.</div>`;
   $('#side').innerHTML=h;
   $('#back').onclick=()=>{ BD.S.view2=null; BD.scene3d&&BD.scene3d.hide(); BD.card(); BD.draw(); };
@@ -628,9 +628,9 @@ BD.legendRecv=function(){ return `<div style="margin-top:6px"><i style="border:1
  <div><i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%"></i>Care, hospital <i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Recreation, pool <i style="background:#6E6E6B;width:8px;height:8px;border-radius:50%;margin-left:6px"></i>Arena</div>`; };
 
 /* ---------- the exchange tabs (J.B., 15 Oct): heat · energy · water · materials · social · options; each with a 3D view ---------- */
-const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['materials','Materials'],['social','People'],['opps2','Opportunities'],['opts','Options'],['time','Over time'],['cities','Two cities']];
+const TABS=[['prec','Precedents'],['heat','Heat'],['energy','Energy'],['water','Water'],['social','People'],['opps2','Opportunities'],['opts','Options'],['time','Over time'],['cities','Two cities']];
 /* the path through the tool (J.B., 16 Oct: "make the path through the tool clear"): five steps, sub-views only inside a step; context at the end */
-const STEPS=[['site','Site'],['fits','What fits'],['ex','Exchanges',[['heat','Heat'],['energy','Electricity'],['water','Water'],['materials','Materials'],['social','People']]],
+const STEPS=[['site','Site'],['fits','What fits'],['ex','Exchanges',[['heat','Heat'],['energy','Electricity'],['water','Water'],['social','People']]],
   ['become','Could become',[['opps2','Opportunities'],['opts','Three options'],['time','Over time']]],['report','Report']];
 const CONTEXT=[['prec','Real buildings'],['cities','Two cities']];
 function stepOf(k){ for(const s of STEPS) if(s[2]&&s[2].some(t=>t[0]===k)) return s[0]; return k==='report'?'report':null; }
@@ -712,7 +712,7 @@ document.addEventListener('click',ev=>{ const b=ev.target.closest&&ev.target.clo
 (function watchSide(){ const side=document.getElementById('side'); if(!side){ return setTimeout(watchSide,200); }
   new MutationObserver(()=>{ if(!BD.S||!BD.S.sel||side.querySelector('.path')) return; const st=BD.S.view2==='fits'?'fits':BD.S.view2?null:'site'; if(st){ if(!(BD.flow&&BD.flow.on)) side.insertAdjacentHTML('afterbegin',stepNav(st)); collapseSections(side); finePrintAll(side); } }).observe(side,{childList:true}); })();
 function wireTabs(){ const sd=document.getElementById('side'); if(sd&&BD.S.tab!=='heat') collapseSections(sd); setTimeout(()=>finePrintAll(sd),0); document.querySelectorAll('#side .tabs button, #side .ctx a[data-tab]').forEach(b=>b.onclick=ev=>{ ev.preventDefault(); tabView(b.dataset.tab); }); wireSecs(document.getElementById('side')); if(BD.tabExtraWire) BD.tabExtraWire(); const bk=$('#back'); if(bk) bk.onclick=()=>{ document.body.classList.remove('wide'); BD.scene3d&&BD.scene3d.hide(); fitsView(); }; }
-function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,materials:materialsView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
+function tabView(k){ document.body.classList.remove('wide'); BD.S.view2='tab'; if(BD.drawer&&BD.drawer.isOpen()) BD.drawer.close(); if(BD.tabOverride&&BD.tabOverride[k]) return BD.tabOverride[k](); ({heat:recvView,energy:energyView,water:waterView,social:socialView,opts:optionsView,prec:precView}[k]||(BD.views&&BD.views[k]))(); }
 function show3d(tab,data){ if(!BD.scene3d) return; BD.scene3d.show(tab,data).catch(e=>{ const n=document.getElementById('st'); if(n) n.textContent='3D view could not load: '+e.message; }); }
 /* M47: a new building's roof is the footprint drawn from the site setup (else the yard-based footprint); an existing one is every building on the lot */
 function roofArea(f){ const A=BD.S.answers; if(A.built==='new') return (f.M&&f.M.footArea)||f.fp||0; return f.foot||0; }
@@ -784,26 +784,7 @@ function waterView(){
   $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.outside=b.dataset.v; BD.modelReset&&BD.modelReset(); waterView(); }); BD.draw();
   show3d('water',{site:f,rain,towers:towers||A.outside==='hybrid',evap:towers?fmt(evap[1])+' m³/yr':''});
 }
-function materialsView(){
-  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6;
-  const ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40];   /* 11 Nov 2026 (J.B., F10): embodied carbon dropped from the tool */
-  let h=tabBar('materials')+`<h2>What it is made of, and how often</h2><p class="draft">The building lasts decades; <span class="k">the servers are replaced every five to six years</span>.</p>
-  <h3>The equipment</h3><dl><dt>Racks</dt><dd>about ${fmt(racks)} at 8 kW each</dd><dt>Servers</dt><dd>about ${fmt(servers)} at 600 W each</dd>
-  <dt>Electronic waste</dt><dd>${rng(ew[0],ew[1],'t/yr')} of servers alone, on a six-year refresh</dd><dt>Copper</dt><dd>${fmt(cu[0])}–${fmt(cu[1])} t in the facility (industry figure; only about 3 t per MW of it at rack level, so most sits outside the racks)</dd>
-</dl>${s3('srv')}${s3('ew')}${s3('cu')}
-  <h3>The building</h3><dl>${A.built==='existing'?`<dt>Reuse</dt><dd>an existing building keeps its structure; precedents: 515 W Hastings offices (2023), Edmonton office and warehouse conversions</dd><dt>Afterlife</dt><dd>two views, dated: a UK valuation note (2017) calls computer centres 'not readily adaptable' after closure; its 2026 update says such buildings can take another use</dd><dt>Watch for</dt><dd>floor strength, floor-to-floor height and room for plant</dd>`:''}
-  <dt>Lifespans</dt><dd>servers about 5–6 years · cooling and heat pumps 15–25 · building 25–27 (economic life, Statistics Canada) · pipe network 30–50, depending on water temperature</dd></dl>
-  ${mathBox([
-    `Racks: ${mw} MW × 1,000 ÷ ${R.kWPerRack} kW per rack = <b>${n0(racks)}</b>.`,
-    `Servers: ${mw} MW × 1,000 ÷ 0.6 kW each = <b>${n0(servers)}</b>.`,
-    `Electronic waste: ${n0(servers)} servers × 21.2–26.3 kg ÷ 6 years ÷ 1,000 = <b>${rng(ew[0],ew[1],'t/yr')}</b>.`,
-    `Copper: ${mw} MW × 20–40 t per MW = <b>${n0(cu[0])}–${n0(cu[1])} t</b>; the same study puts nearly 3 t per MW at rack level.`,
-    ].filter(Boolean),
-    'Servers: LBNL 2024. Waste: server masses, 6-year refresh. Copper: Copper Development Association (industry).')}
-  `;
-  $('#side').innerHTML=h; wireTabs(); BD.draw();
-  show3d('materials',{site:f});
-}
+/* Materials tab dropped (J.B. 11 Nov 2026, F10: "all parts of the tool") */
 const CENSUS={};
 function censusNear(city,c,r){ const d=CENSUS[city]; if(!d||d==='loading') return null; const C=d.cell, t=[0,0,0,0,0,0,0];
   for(const q of d.cells){ const x=(q[0]+0.5)*C-c[0], y=(q[1]+0.5)*C-c[1]; if(x*x+y*y<=r*r) for(let i=0;i<7;i++) t[i]+=q[i+2]; } return t; }

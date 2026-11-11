@@ -23,7 +23,6 @@ const STEP={
  heat:['it_load_share','heat_delivered','homes_heated','receivers_nearby','lcoh','hr_flow','hr_pipe_size','heat_pumps','phe_frames','buffer_tanks','hr_pumps','hr_plant_room','heat_sale_rules'],
  energy:['power_allocation','spare_capacity','grid_headroom','flexible_load','power_bill_effect','grid_co2'],
  water:['evaporation','water_supply','rainwater','water_restriction_rule'],
- materials:['ewaste','copper_tonnes'],
  social:['noise_level','visibility','people_affected','standoff'],
  opps:['refuge_services','refuge_code','crisis_events','tradeoffs','receivers_nearby','homes_heated','ev_stalls','refuge_people'],
  opts:['tradeoffs','ledger','futures','commitment'],
@@ -42,8 +41,7 @@ const SEC={
  'energy:Solar on the roof':['pv_roof','pv_lcoe'], 'energy:A battery for the grid':['battery','peak_relief'], 'energy:EV charging for the public':['ev_stalls','ev_repay'],
  'water:How it compares':['evaporation'], 'water:Water the cooling buys':['evaporation','water_supply','blowdown'],
  'water:Rainwater for cooling':['rainwater'], 'water:Reclaimed water':['reclaimed_makeup'],
- 'materials:Over 25 years':['ewaste','copper_tonnes'],
- 'materials:Where retired equipment can go':['ewaste','rare_earth'],
+
  'social:Sound':['noise_level','noise_limit','lf_flag'], 'social:The street edge':['standoff','visibility','watched_area'],
  'social:Who is nearby':['people_affected','deprivation','nations_named'],
  'opps:Set-ups that open the most here':['tradeoffs'],
@@ -51,7 +49,7 @@ const SEC={
 const ROWID={cGrid:['interconnection','lead_time','grid_headroom'], cGen:['generator_nox_pm','genset_test','fuel_on_site'], cFlex:['flexible_load','ups_flex','peak_relief'], cNext:['ev_exemption','self_gen_rules']};
 const KIND=[['Heat · how it is worked out',['heat_rejected','liquid_capture','cop','heat_delivered','hp_electricity']],['Heat · district energy',['receivers_nearby','competing_sources','distribution_cost']],
  ['Heat · connection',['receiver_demand','distribution_cost','lcoh','payback']],['Distance',['receiver_radius']],['Water · connection',['water_supply','reclaimed_makeup']],
- ['Seen or hidden',['visibility']],['People · neighbour',['noise_level','people_affected']],['Materials · where it goes',['ewaste','rare_earth']],
+ ['Seen or hidden',['visibility']],['People · neighbour',['noise_level','people_affected']],
  ['Energy · standby',['generator_nox_pm','genset_test','fuel_on_site']],['Energy · how it is worked out',['pue','load_factor','it_load_actual','spare_capacity']],
  ['Energy · flexibility',['flexible_load','ups_flex','peak_relief']],['Energy · connection',['interconnection','lead_time','grid_headroom']],
  ['Energy · across the property line',['ev_exemption','self_gen_rules']],['Cooling',['cooling_type','heat_temp']],['What fits here',['size_fit','envelope']]];

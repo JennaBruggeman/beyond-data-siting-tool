@@ -155,9 +155,9 @@ function pFlows(D,no){ const {r,rec,mw,refs,f,e}=D; let s='';
   // everything else it takes in and gives off (not to scale)
   const here=refs.find(x=>x.id==='here'); const roof=e.roofArea(f)||0, mm={van:1159.5,edm:422.5}[f.city];
   const ins=[['Water',here&&here.n.evap[1]?`up to ${fmt(here.n.evap[1])} m³ a year evaporated`:`little: ${BD.dryName()} evaporate none`],['Rain on the roof',`about ${fmt(Math.round(roof*mm/1000*0.8/10)*10)} m³ a year could be caught`],['Land',`${fmt(f.lot||0)} m² lot`],['Equipment','servers replaced every 5–6 years']];
-  const has=k=>(D.plan||[]).includes(k); const outs=[['Sound',`roof plant and generators${has('time')?'; see Over time, and next door':''}`],['Flexibility',`load it could shift for the grid${has('power')?'; see Power':''}`],['Materials','racks, drives and copper at each refresh'],['People','jobs, and a street edge']];
+  const has=k=>(D.plan||[]).includes(k); const outs=[['Sound',`roof plant and generators${has('time')?'; see Over time, and next door':''}`],['Flexibility',`load it could shift for the grid${has('power')?'; see Power':''}`],['People','jobs, and a street edge']];
   let y=yN+30; s+=caps(M,y,'It also takes in')+caps(PW/2+10,y,'It also gives off or could give'); y+=14;
-  for(let i=0;i<4;i++){ s+=dot(M+3,y-2.5,2.5,K.dim)+T(M+10,y,ins[i][0],{fs:7.2,w:400})+T(M+10,y+9,ins[i][1],{fs:6.4,c:K.mute}); s+=dot(PW/2+13,y-2.5,2.5,K.red)+T(PW/2+20,y,outs[i][0],{fs:7.2,w:400})+T(PW/2+20,y+9,outs[i][1],{fs:6.4,c:K.mute}); y+=26; }
+  for(let i=0;i<Math.max(ins.length,outs.length);i++){ if(ins[i]) s+=dot(M+3,y-2.5,2.5,K.dim)+T(M+10,y,ins[i][0],{fs:7.2,w:400})+T(M+10,y+9,ins[i][1],{fs:6.4,c:K.mute}); if(outs[i]) s+=dot(PW/2+13,y-2.5,2.5,K.red)+T(PW/2+20,y,outs[i][0],{fs:7.2,w:400})+T(PW/2+20,y+9,outs[i][1],{fs:6.4,c:K.mute}); y+=26; }   /* Materials dropped (F10): the lists may differ in length */
   // grid carbon of that electricity, both cities, the same design
   y+=12; s+=caps(M,y,'The carbon in that electricity, same servers'); y+=10;
   const rows=refs.filter(x=>['here','conv','edmd','edmc'].includes(x.id)&&!x.noPue).map(x=>({l:x.lab,v:x.n.co2[0],hi:x.n.co2[1],t:rng(x.n.co2[0],x.n.co2[1],'t CO₂e a year'),c:x.city==='edm'?K.mute:K.cold,me:x.id==='here'}));
@@ -231,7 +231,6 @@ function pTime(D,no){ const {rec,EC}=D; let s=''; const X0=M+90, X1=PW-M, Y=130,
   s+=T(M,y+6,'Servers',{fs:7}); for(let t=0;t<50;t+=5.5) s+=`<rect x="${px(t)}" y="${y}" width="${Math.max(1,px(Math.min(50,t+5.5))-px(t)-2)}" height="8" fill="none" stroke="${K.ink}" stroke-width=".6"/>`; s+=T(X1,y+18,'replaced every 5–6 years: 9–10 sets over 50 years',{fs:6.2,c:K.mute,a:'end'}); y+=34;
   s+=`<line x1="${X0}" y1="${y}" x2="${X1}" y2="${y}" stroke="${K.dim}" stroke-width=".4"/>`+axisTicks(X0,X1,y,[0,0.2,0.4,0.6,0.8,1].map(p=>({p,v:p*yrs})),v=>`${v} yr`); y+=30;
   s+=T(M,y,wrap('Each refresh is a decision: what leaves the building, and in what state. The pipe and the grid connection outlast the servers and the tenant; what feeds them when the tenant changes is not settled here.',118),{fs:7.6}); y+=40;
-  s+=caps(M,y,'What it is made of'); y+=12; for(const k of ['Over 25 years','Where retired equipment can go']){ const v=D.note('materials',k); if(!v) continue; s+=T(M,y,k,{fs:7.4,w:600})+T(M+150,y,wrap(v,82).slice(0,3),{fs:7}); y+=12+Math.min(3,wrap(v,82).length)*9; }
   y+=12; s+=caps(M,y,'What neighbours would hear, see and feel'); y+=12; let i=0;
   for(const k of ['Sound','The street edge','Who is nearby']){ const v=D.note('social',k); if(!v) continue; i++; s+=num(M+6,y-2.5,i)+T(M+18,y,k,{fs:7.4,w:600})+T(M+150,y,wrap(v,82).slice(0,3),{fs:7}); y+=14+Math.min(3,wrap(v,82).length)*9; }
   y+=10; s+=nearMap(D,M,y,PW-2*M,Math.min(250,PH-60-y));

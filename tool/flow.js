@@ -1,5 +1,5 @@
 /* Beyond Data — the guided path (J.B., 16 Oct 2026: "force users to follow a specific workflow because there's too many branches").
-   One way through: welcome card → site → set-up → what fits → real buildings → heat → electricity → water → materials → people →
+   One way through: welcome card → site → set-up → what fits → real buildings → heat → electricity → water → people →
    each opportunity not ruled out here → what is not possible here → three options → over time → two cities → report.
    Back is allowed to any step already reached; there is no jumping ahead. Each step shows its 3D view as it opens.
    The report is built from what each step showed when it was passed, so it says exactly what the reader saw. */
@@ -13,7 +13,7 @@ const GMAP={arch:{fits:'site',ex:'people'}}; const gOf=(s,t)=>((GMAP[t||((BD.tie
 const BASE=[
  {k:'site',g:'site',t:'Pick a site'},{k:'setup',g:'site',t:'Set up the site'},
  {k:'fits',g:'fits',t:'What fits'},{k:'prec',g:'fits',t:'Real buildings'},
- {k:'heat',g:'ex',t:'Heat'},{k:'energy',g:'ex',t:'Electricity'},{k:'water',g:'ex',t:'Water'},{k:'materials',g:'ex',t:'Materials'},{k:'social',g:'ex',t:'People'},
+ {k:'heat',g:'ex',t:'Heat'},{k:'energy',g:'ex',t:'Electricity'},{k:'water',g:'ex',t:'Water'},{k:'social',g:'ex',t:'People'},
  {k:'opps',g:'opps',t:'Opportunities'},{k:'spec',g:'opps',t:'Could become'},
  {k:'opts',g:'opts',t:'Three options'},{k:'time',g:'opts',t:'Over time'},
  {k:'arat',g:'design',t:'Ratios'},{k:'aprog',g:'design',t:'Programs'},{k:'aarr',g:'design',t:'Arrange'},{k:'acmp',g:'design',t:'Compare'},
@@ -78,7 +78,7 @@ const EXAMPLES=[
  {lab:'An existing downtown tower',sub:'555 W Hastings · one upper floor',sel:{city:'van',tile:'0_2',id:'59013407'},ans:{built:'existing',extent:'part',floor:'upper'}}];
 function welcome(){ let w=$('#welcome'); if(w) w.remove(); w=document.createElement('div'); w.id='welcome'; w.setAttribute('role','dialog'); w.setAttribute('aria-modal','true'); w.setAttribute('aria-labelledby','wTitle');
   w.innerHTML=`<div class="wcard"><div class="kind">Beyond Data</div><h2 id="wTitle">What could a data centre exchange with the city around it?</h2>
-  <p>Pick one lot. The tool walks you through <span class="k">heat, electricity, water, materials and people</span>, then every opportunity that could work there, then three options and a report.</p>
+  <p>Pick one lot. The tool walks you through <span class="k">heat, electricity, water and people</span>, then every opportunity that could work there, then three options and a report.</p>
   <ol class="wsteps">${GROUPS.filter(g=>g[0]!=='people').map(([,l],k)=>`<li><span>${k+1}</span>${l}</li>`).join('')}</ol>
   <div class="wbtns"><button class="pri" id="wEx">See a worked example</button><button class="sec" id="wOwn">Start with my own site</button></div>
   <div id="wList" hidden>${EXAMPLES.map((x,i)=>`<button class="ex" data-i="${i}"><b>${esc(x.lab)}</b><span>${esc(x.sub)}</span></button>`).join('')}</div>
@@ -158,7 +158,7 @@ async function expandOpps(){ const k=F.steps.findIndex(s=>s.k==='opps'); if(k<0)
 /* sweep 20 Oct 2026: a step whose every section is shown only in fuller templates is skipped there (residents: Real buildings, which was an empty page) */
 const DES=['arat','aprog','aarr','acmp'];
 const SKIP={resident:new Set(['prec',...DES]),full:new Set(DES), /* 4 Nov 2026: Community template dropped (J.B. 3 Nov) */
-  arch:new Set(['prec','heat','energy','water','materials','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own steps; the Exchanges stay in Engineering (J.B.). 3 Nov 2026: People (social) shown just before Design, context only, nothing scored (J.B.) */
+  arch:new Set(['prec','heat','energy','water','opps','spec','opts','time','cities'])}; /* 2 Nov 2026: Architecture mode = site, set-up, what fits, then its own steps; the Exchanges stay in Engineering (J.B.). 3 Nov 2026: People (social) shown just before Design, context only, nothing scored (J.B.) */
 async function go(i){ { const t=(BD.tier&&BD.tier())||'full', dir=i>=F.i?1:-1; while(i>0&&i<F.steps.length-1&&SKIP[t]&&SKIP[t].has(F.steps[i].k)) i+=dir; }
   if(i<0||i>=F.steps.length) return; invalidate(); capture(); F.i=i; F.max=Math.max(F.max,i); document.body.classList.remove('wide');
   if(F.steps[i].k==='opps'){ await expandOpps(); }
