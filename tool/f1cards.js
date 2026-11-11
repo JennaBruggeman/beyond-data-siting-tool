@@ -97,5 +97,25 @@ async function withAnswers(over,fn){ await eng(); const A=BD.S.answers, keep={};
 /* the context a card reads: the example lot, as the tool models it */
 function ctx(city){ const M=BD.model(), sel=BD.S.sel||{}, a=sel.a||[], key=zoneKey(city,a);
   return {city,M,sel,a,key,addr:a[0]?titleCase(a[0]):'?',zone:key,status:dcStatus(city,key),arch,eng,withAnswers,K,n0,n1,q,esc,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,titleCase}; }
-BD.f1cards={context,CONTEXT_SRC,arch,eng,withAnswers,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
+/* ---------- rule sheet v1 for the Architecture cards (10 Nov 2026, J.B.): the Emergency hub's own layout (hub.js), the same source as the Rooms,
+   Separations and Exits cards. Only the source of areas and MW changes; every figure keeps its rule (budgets() runs as before, given the hub's
+   program areas, hall floor and MW in place of Arrange's picks and the site model's size). ---------- */
+const V1C=new WeakMap();
+const hubOnP=P=>!!(BD.hub&&P&&(P.boxes||[]).some(b=>b.id==='refuge')&&(!BD.arch||!BD.arch.typology||BD.arch.typology==='emergency_hub'));
+function v1(P){ if(!P) return null; if(V1C.has(P)) return V1C.get(P); let out=null;
+  try{ const H=hubOnP(P)?BD.hub.build(P):null, L=H&&H.hub;
+    if(L&&L.rooms){ const ra=r=>(r[1]-r[0])*(r[3]-r[2]), all=f=>Object.keys(L.rooms).reduce((t,st)=>t+(L.rooms[st]||[]).filter(f).reduce((a,x)=>a+x.r.reduce((b,r)=>b+ra(r),0),0),0);
+      const dock=all(x=>x.id==='dock'&&x.block==='data centre');
+      const areas={refuge:all(x=>/^ref/.test(x.id)&&x.block==='hub'),warming_shelter:all(x=>/^shel/.test(x.id)&&x.block==='hub'),clinic:L.clin||0,hall:L.hall,dock,support:Math.max(0,(L.dcArea||0)-L.hall-dock),dcAll:L.dcArea||0};
+      const worst=Math.max(0,...(L.travel||[]).map(t=>t.worst||0));
+      out={H,L,MW:L.MW,areas,storeys:H.storeys,exitSep:H.exitSep||[],travelWorst:worst||null,travel:L.travel||[],flags:H.flags||[],variant:L.variant||null}; } }
+  catch(e){ console.warn('v1 layout',e); out=null; }
+  V1C.set(P,out); return out; }
+/* budgets() with the hub's areas and MW; the picks, the IT size and the hall floor are put back exactly afterwards */
+function budgetsV1(P){ const V=v1(P); if(!V) return BD.archTest.budgets(P);
+  const A=BD.arch, An=BD.S.answers, keep={picks:A.picks, mw:An.mw, hall:P.s.hallM2};
+  try{ A.picks=(keep.picks||[]).map(q=>V.areas[q.id]!=null?Object.assign({},q,{m2:V.areas[q.id]}):q); An.mw=V.MW; P.s.hallM2=V.areas.hall; return BD.archTest.budgets(P); }
+  finally{ A.picks=keep.picks; if(keep.mw===undefined) delete An.mw; else An.mw=keep.mw; P.s.hallM2=keep.hall; if(BD.modelReset) BD.modelReset(); } }
+const V1CHIP='Draft plan · rule sheet v1';
+BD.f1cards={context,CONTEXT_SRC,arch,eng,withAnswers,v1,budgetsV1,V1CHIP,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
 })();

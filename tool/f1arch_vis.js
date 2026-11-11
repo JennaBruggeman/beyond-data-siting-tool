@@ -1,10 +1,11 @@
 /* Beyond Data — F1 Architecture cards, group 'vis' (CODE_JOB_F1 step 2): 17 Heat flow, 18 Program diagram, 19 Drawing styles, 20 Compare.
    Registers its cards with BD.f1cards (see f1cards.js, f1arch.js). Every figure is read from the tool's functions (BD.archTest.budgets / rules / dcPieces,
-   BD.plan.build, BD.eng via budgets) for the example lot; plans, sections and the exploded view are drawn here from the placement P (read-only use). */
+   BD.plan.build, BD.eng via budgets) for the example lot; plans, sections and the exploded view are drawn here from the placement P (read-only use).
+   10 Nov 2026: with the Emergency hub, areas, MW, plans, sections and the exploded view come from the hub's layout (hub.js, rule sheet v1; C.v1, C.budgetsV1). */
 (function(){
 'use strict';
 const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, T='architecture', n0=C.n0, n1=C.n1, q=C.q;
-const CHIP='Draft plan · rule sheet v0', FONT='IBM Plex Sans,system-ui,sans-serif';
+const CHIP='Draft plan · rule sheet v1', FONT='IBM Plex Sans,system-ui,sans-serif';
 if(!document.getElementById('f1c-vis')){ const st=document.createElement('style'); st.id='f1c-vis';
   st.textContent=`.f1c-vis-sty{width:100%;min-height:560px;justify-content:flex-start;display:flex;flex-direction:column;align-items:center;gap:14px}
 .f1c-vis-sw{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
@@ -37,6 +38,27 @@ function geom(P){ const s=P.s, F=s.F, dir=s.dir<0?-1:1, D=u=>dir<0?u-s.uf:s.uf-u
   const levels=[...new Set(items.map(i=>Math.round(i.z*10)/10))].sort((a,b)=>a-b);
   const hMax=Math.max(s.H||0,...items.map(i=>i.z+i.h));
   return {s,items,lot,lb,lotb,plant,yard:yard&&yard.length>=6?toDX(yard):null,levels,hMax,dir}; }
+/* ---- the same geometry from the Emergency hub's layout (hub.js, rule sheet v1; 10 Nov 2026): every room, corridor, stair and lift on its storey,
+   at the storey's floor level and height; plant from the hub's own plant layout. Groups: data hall, data-centre support (and unassigned floor),
+   refuge, warming shelter, clinic, other hub rooms (lobby, washrooms, service) ---- */
+function grpOf(r){ const b=r.block, id=String(r.id||'');
+  if(b==='data centre') return id==='hall'?['hall','Data hall','hall']:['dcs',short(r.name||'Data-centre support'),'sup'];
+  if(b==='clinic') return ['clinic','Clinic','clin']; if(b==='spare') return ['dcs','Unassigned floor','sup'];
+  if(/^ref/.test(id)) return ['refuge','Refuge','pub']; if(/^shel/.test(id)) return ['warming_shelter','Warming shelter','pub']; return ['hub','Hub rooms','pub']; }
+function geomV1(P,V){ const s=P.s, dir=s.dir<0?-1:1, D=u=>dir<0?u-s.uf:s.uf-u, X=v=>dir<0?-v:v, F=s.F;
+  const toDX=ring=>{ const o=[]; for(let i=0;i<ring.length;i+=2){ const [u,v]=F.toL(ring[i],ring[i+1]); o.push([D(u),X(v)]); } return o; };
+  const rectDX=r=>[[D(r[0]),X(r[2])],[D(r[1]),X(r[2])],[D(r[1]),X(r[3])],[D(r[0]),X(r[3])]];
+  const bb=pts=>({d0:Math.min(...pts.map(p=>p[0])),d1:Math.max(...pts.map(p=>p[0])),x0:Math.min(...pts.map(p=>p[1])),x1:Math.max(...pts.map(p=>p[1]))});
+  const L=V.L, items=[];
+  V.storeys.forEach((S,i)=>{ const h=L.H[i]; [].concat(S.rooms||[],S.corridors||[],S.stairs||[],S.lifts||[]).forEach(r=>{ if(!r.rect) return; const [grp,name,fam]=grpOf(r), pts=rectDX(r.rect);
+    items.push(Object.assign({id:grp,grp,name,fam,z:S.z,h,m2:(r.rect[1]-r.rect[0])*(r.rect[3]-r.rect[2]),pts,room:r.id},bb(pts))); }); });
+  const lot=toDX(s.M.ring), lotb=bb(lot), ib=bb(items.reduce((a,i)=>a.concat(i.pts),[])), pad=3, lb={d0:Math.min(ib.d0-pad,-1),d1:ib.d1+pad,x0:ib.x0-pad,x1:ib.x1+pad};   /* from the front yard line (d 0), so a front yard shows as open ground before the building */
+  const plant=((L.plant&&L.plant.items)||[]).filter(it=>!it.pseudo&&!it.roof&&it.rect).map(it=>({pts:rectDX(it.rect),name:it.n}));
+  const levels=[...new Set(items.map(i=>Math.round(i.z*10)/10))].sort((a,b)=>a-b);
+  const hMax=Math.max(s.H||0,...items.map(i=>i.z+i.h));
+  return {s,items,lot,lb,lotb,plant,yard:null,levels,hMax,dir,v1:true}; }
+/* the cards' geometry: the hub's layout where the typology is the Emergency hub, else Arrange's placement */
+const G1=P=>{ const V=C.v1(P); return V?geomV1(P,V):geom(P); };
 const atLevel=(G,z)=>G.items.filter(i=>i.z<=z+0.01&&z<i.z+i.h-0.01);
 const flagIds=P=>{ const rs=BD.archTest.rules(P), m={}; rs.forEach(r=>{ if(r.sev==='q'&&r.id) m[r.id]=(m[r.id]||0)+1; }); return m; };
 
@@ -94,7 +116,7 @@ const noP=()=>({draw:'<p class="f1v-empty">No lot loaded.</p>'});
 const isN=a=>a&&isFinite(a[0])&&isFinite(a[1]);
 
 /* ================= 17 Heat flow ================= */
-C.add(T,'Heat flow',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const G=geom(P), B=BD.archTest.budgets(P), h=B.heat, av=isN(h.avail)?h.avail:null, need=h.need, mwSized=P.s.M.mwSized;
+C.add(T,'Heat flow',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const V=C.v1(P), G=G1(P), B=C.budgetsV1(P), h=B.heat, av=isN(h.avail)?h.avail:null, need=h.need, mwSized=V?V.MW:P.s.M.mwSized;
   const used=need, left=av?[av[0]-need[1],av[1]-need[0]]:null, inside=(BD.S.answers.inside||'air')==='air', hallT=BD.data.arch&&BD.data.arch.dcTemp?BD.data.arch.dcTemp[inside?'air':'liquid']:null;
   const tmp=p=>{ const t=p&&p.heat; return t&&t.supply_C?{s:`supply ${rg(t.supply_C,'°C')}`,hi:t.supply_C[1]}:t&&t.setpoint_C?{s:`room ${rg(t.setpoint_C,'°C')}`,hi:t.setpoint_C[1]}:{s:null,hi:-1}; };
   /* the drawing: a section with the hall and the programs, then the heat on one scale, then the programs hot to cool */
@@ -131,26 +153,28 @@ C.add(T,'Heat flow',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) re
     rows:[['Size tested',mwSized!=null?n1(mwSized)+' MW IT':q()],['Warming shelter heat',q('no figure in the tool')],['Hall heat temperature',hallT?rg(hallT,'°C')+(inside?' (air)':' (liquid)'):q()]],
     more:[['How each temperature is sourced',`<p>${h.items.map(i=>`${esc(short(i.p.name))}: ${esc(i.p.heat.note||'')} (${esc((i.p.heat.src||[]).join(', '))})`).join('</p><p>')}</p>`],
       ['Why the order goes hot to cool',`<p>A program that needs hotter water takes the heat first; cooler uses can take what is left. The order is by the hottest temperature each program asks for in the library (supply temperature where listed, otherwise room temperature).</p>`]],
-    src:['Heat offered: BD.archTest.budgets(P).heat.avail = BD.eng.calc(...).avail, heat after the heat pump (engine.js; capture and COP: register parts liquid_capture and cop).','Programs’ use: floor area × kWh/m·yr from tool/arch_programs.json (library ids in the more list); clinic and refuge only; shelter has no figure.','Left for neighbours: our arithmetic, offered minus used (low end: offered low minus used high; high end: offered high minus used low).',`Hall temperature: tool/data/arch.json dcTemp (register heat_temp; ${inside?'air':'liquid'}-cooled).`,'Section: drawn from the tool’s placement (Arrange) for the example lot; draft plan, rule sheet v0.'],
+    src:['Heat offered: BD.archTest.budgets(P).heat.avail = BD.eng.calc(...).avail, heat after the heat pump (engine.js; capture and COP: register parts liquid_capture and cop).','Programs’ use: floor area × kWh/m·yr from tool/arch_programs.json (library ids in the more list); clinic and refuge only; shelter has no figure.','Left for neighbours: our arithmetic, offered minus used (low end: offered low minus used high; high end: offered high minus used low).',`Hall temperature: tool/data/arch.json dcTemp (register heat_temp; ${inside?'air':'liquid'}-cooled).`,V?'Section, IT size and program areas: the Emergency hub’s layout (hub.js, rule sheet v1), the same as the Rooms card; heat by the same rules (BD.archTest.budgets with the hub’s areas and MW).':'Section: drawn from the tool’s placement (Arrange) for the example lot; draft plan, rule sheet v0.'],
     missing:miss}; }});
 
 /* ================= 18 Program diagram ================= */
-C.add(T,'Program diagram',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const G=geom(P), B=BD.archTest.budgets(P), rules=BD.archTest.rules(P), pl=BD.plan&&BD.plan.build?BD.plan.build(P):null, fl=flagIds(P);
+C.add(T,'Program diagram',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const V=C.v1(P), G=G1(P), B=C.budgetsV1(P), B0=V?BD.archTest.budgets(P):B, pl=!V&&BD.plan&&BD.plan.build?BD.plan.build(P):null, fl=V?{}:flagIds(P);
+  /* the notes: the hub's own flags where it draws the layout (those with ? are to check), else Arrange's rules */
+  const rules=V?V.flags.map(t=>({sev:/\?/.test(t)?'q':'i',t,src:['hub.js']})):BD.archTest.rules(P);
   const lv=G.levels, W=960, gap=10, pw=Math.min(230,Math.floor((W-gap*(lv.length-1))/lv.length)), ph=Math.round(pw*0.95); let top='';
   lv.forEach((z,i)=>{ const it=atLevel(G,z), p=plan(G,{w:pw,h:ph,items:it,fs:11.5}); top+=`<g transform="translate(${i*(pw+gap)},22)"><text x="0" y="-8" font-size="13" fill="${K.ink}">${z===0?'Ground storey':'Storey at '+n0(z)+' m'}</text>${p.svg}</g>`; });
   const y0=22+ph+34, SH=230;
   const sec=section(G,{W,H:SH,lab:200,labL:200,gap:34,flags:fl,flagWants:Object.keys(fl).map(id=>{ const b=(P.boxes||[]).find(b=>b.id===id); return b?{o:id,t:short(b.p.name),d:'to check (?)',red:true}:null; }).filter(Boolean)});
   const svg=`<svg viewBox="0 0 ${W} ${y0+SH+14}" width="${W}" height="${y0+SH+14}" font-family="${FONT}" role="img" aria-label="Program blocks on each storey, and a section">${top}<text x="0" y="${y0-10}" font-size="15" fill="${K.ink}">Section</text><g transform="translate(0,${y0})">${sec.svg}${sec.scale}</g></svg>`;
   const cap=`<span class="f1c-note">Street at the bottom of each plan. Same scale on every plan. Section across the lot at the plane that meets the most blocks (within 0.5 m of it); where two overlap in view the nearer is on top. Not on it: ${esc((P.boxes||[]).filter(b=>!sec.cut.g.has(b.id)).map(b=>short(b.p.name).toLowerCase()).join(', ')||'none')}.</span>`;
-  const hallM2=G.items.filter(i=>i.fam==='hall').reduce((t,i)=>t+(i.m2||0),0), dcAll=G.items.filter(i=>i.grp==='hall'||i.grp==='dcs').reduce((t,i)=>t+(i.m2||0),0), netProg=pl?pl.programs.reduce((t,p)=>t+p.net,0):null, ask=B.space.prog;
+  const hallM2=V?V.areas.hall:G.items.filter(i=>i.fam==='hall').reduce((t,i)=>t+(i.m2||0),0), dcAll=V?V.areas.dcAll:G.items.filter(i=>i.grp==='hall'||i.grp==='dcs').reduce((t,i)=>t+(i.m2||0),0), netProg=V?V.areas.refuge+V.areas.warming_shelter+V.areas.clinic:pl?pl.programs.reduce((t,p)=>t+p.net,0):null, ask=B0.space.prog;
   const nq=rules.filter(r=>r.sev==='q').length;
   return {draw:svg+keyHtml(famsOf(G),cap),
     lead:'Who uses which floor: the public programs at the street, the clinic above, the data centre behind on its own storeys. Colour is the program; the tool’s rules mark what still needs checking.',
     hero:[{v:n0(ask),u:'m²',l:'programs asked for'},{v:netProg!=null?n0(netProg):q(),u:netProg!=null?'m²':'',l:'net in the plan, after stairs and lifts'},{v:n0(hallM2),u:'m²',l:'data hall floor'},{v:String(nq),l:'notes marked "?" in the rules',red:nq>0}],
     rows:[['Storeys drawn',String(lv.length)],['Data-centre floor, all uses',n0(dcAll)+' m²'],['Height limit',n1(P.s.H)+' m']],
     more:[['Notes from the rules',`<p>${rules.map(r=>`${r.sev==='q'?'<b class="f1c-q">?</b> ':''}${esc(r.t)} <span style="color:${K.mute}">(${esc((r.src||[]).join(', '))})</span>`).join('</p><p>')}</p>`],
-      ['How programs are placed',`<p>Arrange puts each program on the street front where the lot allows and stacks the rest; the data centre keeps the back with its own dock. The blocks here are the tool’s placement as it stands, not a design.</p>`]],
-    src:['Blocks and storeys: the tool’s placement P (BD.archTest.place; data centre by BD.archTest.dcPieces, programs from P.boxes), Emergency hub example: refuge side by side, warming shelter, clinic; draft plan, rule sheet v0.','Programs asked for: BD.archTest.budgets(P).space.prog. Net in the plan: BD.plan.build(P).programs[].net. Floors of pieces: dcPieces m2 (our arithmetic).','Flags: BD.archTest.rules(P); each carries its own sources in the list.','Height limit: the zone (BD.model, P.s.H).'],
+      ['How programs are placed',V?`<p>The Emergency hub’s rule sheet v1 (hub.js) lays the bands out from the street back: refuge, shelter and lobby at the street, the clinic where it fits, the data centre behind and over the hub. Programs asked for are the picks’ sizes; net in the plan is the hub’s rooms for the refuge, shelter and clinic.</p>`:`<p>Arrange puts each program on the street front where the lot allows and stacks the rest; the data centre keeps the back with its own dock. The blocks here are the tool’s placement as it stands, not a design.</p>`]],
+    src:V?['Rooms and storeys: the Emergency hub’s layout (hub.js, rule sheet v1), the same as the Rooms card.','Programs asked for: the picks’ sizes (BD.archTest.budgets(P).space.prog). Net in the plan: the hub’s refuge, shelter and clinic rooms. Data hall and data-centre floor: the hub’s hall and data-centre count (hub.js).','Notes: the hub’s flags (hub.js); those marked ? are to check.','Height limit: the zone (BD.model, P.s.H).']:['Blocks and storeys: the tool’s placement P (BD.archTest.place; data centre by BD.archTest.dcPieces, programs from P.boxes), Emergency hub example: refuge side by side, warming shelter, clinic; draft plan, rule sheet v0.','Programs asked for: BD.archTest.budgets(P).space.prog. Net in the plan: BD.plan.build(P).programs[].net. Floors of pieces: dcPieces m2 (our arithmetic).','Flags: BD.archTest.rules(P); each carries its own sources in the list.','Height limit: the zone (BD.model, P.s.H).'],
     missing:[]}; }});
 
 /* the tool's own 3-D view of Arrange, read-only: the old flow draws it behind the cards, a still is taken from its renderer, accent red drawn in INK for the still only, then restored */
@@ -173,7 +197,7 @@ function axon(G,o){ const k=o.k, zk=k*0.9, c=0.866*k, s5=0.5*k, SXa=(d,xx)=>(xx+
     body+=`<polygon points="${pt(front)}" fill="${mix(f,0.10)}"/><polygon points="${pt(right)}" fill="${mix(f,0.2)}"/><polygon points="${pt(top)}" fill="${f}"/>`; boxes.push({li,pts:[...top,...front,...right]});
     [top,front,right].forEach(a=>polys.push({o:'L'+li,pts:a})); }); });
   return {body,polys,SXa,SYa}; }
-C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const G=geom(P), fl=flagIds(P), W=960, still=await still3d(P);
+C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const V=C.v1(P), G=G1(P), fl=V?{}:flagIds(P), W=960, still=await still3d(P);
   /* plan: the whole site, every block at its footprint, plant yard in grey */
   const pp=plan(G,{w:560,h:420,items:G.items,plant:true,fs:13,noNames:false}), planSvg=`<svg viewBox="0 0 560 420" width="560" height="420" font-family="${FONT}" role="img" aria-label="Plan of the site: every block at its footprint">${pp.svg}${C.scaleBar(14,396,10,pp.k,'10 m')}</svg>`;
   const sec=section(G,{W,H:340,lab:200,labL:200,gap:34,flags:fl,flagWants:Object.keys(fl).map(id=>{ const b=(P.boxes||[]).find(b=>b.id===id); return b?{o:id,t:short(b.p.name),d:'to check (?)',red:true}:null; }).filter(Boolean)});
@@ -192,20 +216,20 @@ C.add(T,'Drawing styles',{chip:CHIP,async build(x){ const P=await x.arch(); if(!
    ${pane('plan',`<div style="display:flex;justify-content:center">${planSvg}</div><p class="f1c-note" style="text-align:center;margin:6px 0 0">Every block at its footprint, street at the bottom; the plant yard in grey. One storey at a time is on the Program diagram card.</p>`)}
    ${pane('section',secSvg,true)}
    ${pane('exploded',`<div style="display:flex;justify-content:center">${exSvg}</div>`,true)}
-   ${pane('3d',still?`<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><img src="${still}" alt="The tool's own 3-D view of the arrangement on the lot" style="max-width:100%;max-height:520px;border:1px solid ${K.hair}"><span class="f1c-note">tool's 3-D view, rule sheet v0</span></div>`:`<p class="f1c-vis-q"><b class="f1c-q">?</b> The tool's 3-D view could not be captured this time.</p>`,true)}
+   ${pane('3d',still?`<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><img src="${still}" alt="The tool's own 3-D view of the arrangement on the lot" style="max-width:100%;max-height:520px;border:1px solid ${K.hair}"><span class="f1c-note">${V?'Arrange’s massing (rule sheet v0): the hub’s layout has no 3-D model yet':'tool’s 3-D view, rule sheet v0'}</span></div>`:`<p class="f1c-vis-q"><b class="f1c-q">?</b> The tool's 3-D view could not be captured this time.</p>`,true)}
    ${keyHtml(famsOf(G),`<span><i style="background:${K.plant};border-color:${K.plant}"></i>plant yard (plan only)</span>`)}</div>`;
   return {draw,lead:'The same scheme in the styles the tool can draw today: plan, section and an exploded view, all from one placement. Use the switch above the drawing. The 3-D pane is a still from the tool’s own renderer.',
     hero:[{v:String(G.levels.length),l:'storeys, by floor level'},{v:n1(P.s.H),u:'m',l:'height limit'}],
     rows:[['Styles drawn','plan · section · exploded'],['3-D massing (the tool’s scene)',still?'still from the tool':q('could not be captured')],['Storeys, with their height',G.levels.map(z=>n0(z)+' m').join(' · ')]],
     more:[['What each style is for',`<p>Plan: where blocks stand on the lot. Section: how they stack against the height limit. Exploded: which program sits on which storey.</p>`],
       ['The exploded view',`<p>Storeys are pulled apart for reading only; blocks keep their footprints and, for a block over 6 m, its slab is drawn 6 m thick.${nmiss>0?` ${nmiss} storey label${nmiss>1?'s':''} could not take a straight leader and ${nmiss>1?'are':'is'} left off; the storeys are listed in the panel.`:''}</p>`]],
-    src:['3-D pane: a still from the tool2019s own 3-D renderer (scene3d.js, Arrange step), read-only; lot line and outline accent red redrawn in ink for the still only.','Plan, section and exploded view: drawn here from the tool’s placement P (BD.archTest.place, dcPieces) for the example lot; draft plan, rule sheet v0.','Height limit: BD.model (zone), P.s.H.','Plant yard: BD.model().plant (the tool’s plant layout).'],
+    src:['3-D pane: a still from the tool2019s own 3-D renderer (scene3d.js, Arrange step), read-only; lot line and outline accent red redrawn in ink for the still only.',V?'Plan, section and exploded view: the Emergency hub’s layout (hub.js, rule sheet v1), every room on its storey; plant from the hub’s plant layout.':'Plan, section and exploded view: drawn here from the tool’s placement P (BD.archTest.place, dcPieces) for the example lot; draft plan, rule sheet v0.','Height limit: BD.model (zone), P.s.H.',V?'Plant: the hub’s plant layout (hub.js).':'Plant yard: BD.model().plant (the tool’s plant layout).'],
     missing:(still?[]:['3-D still from the tool’s scene (capture failed)']).concat(['heat-flow style (see card 17)'])}; }});
 
 /* ================= 20 Compare ================= */
 const LOTS={van:{tile:'1_1',id:'63819485',name:'Vancouver'},edm:{tile:'-1_1',id:'146402',name:'Edmonton'}}, CACHE={};
-async function factsFor(x,P){ const B=BD.archTest.budgets(P), h=B.heat, rules=BD.archTest.rules(P), s=P.s, sel=x.sel, a=sel.a||[];
-  return {city:x.city,addr:x.addr,zone:x.zone,lot:sel.lotArea,mw:s.M.mwSized,H:s.H,floors:s.floors,hall:s.hallM2,prog:B.space.prog,cap:B.space.cap,avail:isN(h.avail)?h.avail.slice():null,need:h.need.slice(),unknown:h.unknown.length,nq:rules.filter(r=>r.sev==='q').length,nr:rules.length,nd:(P.notDrawn||[]).length,nbox:(P.boxes||[]).length}; }
+async function factsFor(x,P){ const V=C.v1(P), B=C.budgetsV1(P), B0=V?BD.archTest.budgets(P):B, h=B.heat, rules=V?V.flags.map(t=>({sev:/\?/.test(t)?'q':'i',t})):BD.archTest.rules(P), s=P.s, sel=x.sel, a=sel.a||[];
+  return {city:x.city,addr:x.addr,zone:x.zone,lot:sel.lotArea,mw:V?V.MW:s.M.mwSized,H:s.H,floors:s.floors,hall:V?V.areas.hall:s.hallM2,prog:B0.space.prog,cap:B.space.cap,avail:isN(h.avail)?h.avail.slice():null,need:h.need.slice(),unknown:h.unknown.length,nq:rules.filter(r=>r.sev==='q').length,nr:rules.length,nd:V?['refuge','warming_shelter','clinic'].filter(k=>!(V.areas[k]>0)).length:(P.notDrawn||[]).length,nbox:(P.boxes||[]).length,v1:!!V}; }
 async function otherCity(cur){ const o=cur==='van'?'edm':'van'; if(CACHE[o]) return CACHE[o]; const L=LOTS[o], Lc=LOTS[cur], keep=BD.S.sel&&{city:BD.S.sel.city,tile:BD.S.sel.tile,id:BD.S.sel.id};
   try{ if(BD.S.city!==o&&BD.setCity) await BD.setCity(o,true); await BD.select({city:o,tile:L.tile,id:L.id,quiet:true}); BD.modelReset();
     const x2=C.ctx(o), P2=await x2.arch(); if(!P2) return null; CACHE[o]=await factsFor(x2,P2); return CACHE[o]; }
@@ -229,6 +253,6 @@ C.add(T,'Compare',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) retu
     hero:[{v:V.avail?rgG(V.avail):q(),l:'GWh/yr offered, Vancouver'},{v:E.avail?rgG(E.avail):q(),l:'GWh/yr offered, Edmonton'}],
     rows:[['Vancouver, left for neighbours',leftV?rg(leftV,'MWh/yr'):q()],['Edmonton, left for neighbours',leftE?rg(leftE,'MWh/yr'):q()],['Programs not placed',`${V.nd} · ${E.nd}`],['Warming shelter heat',q('no figure in the tool')]],
     more:[['What each number means',`<p>Lot area: the picked lot. IT size tested: the size the tool tests on the lot (BD.model mwSized). Data hall floor: the hall’s floor in the placement. Programs asked for: the three programs’ floor area. Heat offered: after the heat pump. Heat used: the programs’ own demand, shelter not counted. Notes marked "?": rules the tool could not settle.</p>`]],
-    src:['Both columns: the tool’s own functions for each example lot (Vancouver 339 1st Ave E, 63819485; Edmonton 64 Airport Rd NW, 146402): BD.model (lot, size, height limit), BD.archTest.place (hall floor), BD.archTest.budgets (programs, heat), BD.archTest.rules (notes).','Heat offered: engine.js calc, after the heat pump (register capture and COP); programs’ use: tool/arch_programs.json kWh/m²·yr × floor area (our arithmetic).','Draft plan, rule sheet v0. Edmonton lot outlines are not drawn on this card.'],
+    src:['Both columns: the tool’s own functions for each example lot (Vancouver 339 1st Ave E, 63819485; Edmonton 64 Airport Rd NW, 146402): BD.model (lot, size, height limit), BD.archTest.place (hall floor), BD.archTest.budgets (programs, heat), BD.archTest.rules (notes).','Heat offered: engine.js calc, after the heat pump (register capture and COP); programs’ use: tool/arch_programs.json kWh/m²·yr × floor area (our arithmetic).',(V.v1&&E.v1?'IT size, data hall floor, heat and notes: the Emergency hub’s layout on each lot (hub.js, rule sheet v1), heat by the same rules (budgets with the hub’s areas and MW). Programs not placed: programs with no rooms in the hub (the clinic is dropped from ladder step 3 on).':'Draft plan, rule sheet v0.')+' Edmonton lot outlines are not drawn on this card.'],
     missing:['plant noise at the lot lines for each city (not in the tool for this placement)','checks passed and to fix per city (the Rooms, Separations and Plant cards hold them)','warming shelter heat demand']}; }});
 })();
