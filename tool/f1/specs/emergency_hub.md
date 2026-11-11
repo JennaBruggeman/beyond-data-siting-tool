@@ -1,6 +1,6 @@
 # Typology spec: Emergency hub
 
-Status: **Passed 9 Nov 2026 (J.B., final gate).** Parts 1–3 final (J.B., 8 Nov; later calls 8–9 Nov written in, including the final-gate decisions on Q5, Q24, Q25). Parts 4–6 and 8 complete. Re-planning the Emergency hub stopped at J.B.'s code level (9 Nov, rule header in Part 3). Any change to parts 1–3 goes to J.B. first.
+Status: **Frozen 11 Nov 2026: hub spec v2, scripts `EH-FREEZE-2026-11-11`** (manifest and hashes: `eh/FROZEN_EH-FREEZE-2026-11-11.md`). Code builds tool/hub.js and the shared-check port from this text and that script set; any case it doesn't cover goes to checks/to_cowork.md, not invented. Changes since rule sheet v1 (8 Nov): `eh/specs/CHANGES_since_rule_sheet_v1_2026-11-11.md`. Passed 9 Nov 2026 (J.B., final gate); parts 1–3 final (J.B., 8 Nov; later calls 8–11 Nov written in). Re-planning stopped at J.B.'s code level (9 Nov) and the code-level reset (11 Nov evening): big moves only. Any change to parts 1–3 goes to J.B. first.
 
 Format for all eight typology specs (MASTER_PLAN Phase B): one file `checks/specs/<typology>.md`, parts 1–8 in this order, tables where a part lists things.
 - Every figure has a source id from `register/formula_register.json` or a named clause, or is marked **drawing choice** or **?**. "Our reading" marks an interpretation of a clause.
@@ -9,7 +9,11 @@ Format for all eight typology specs (MASTER_PLAN Phase B): one file `checks/spec
 
 ## Known weaknesses (read first)
 - **Room sizes:** most rooms are step 6 (no source, drawing choice). Clinic minimums are an Alberta guideline (step 3); CSA Z8000 and ANSI/TIA-942 are paywalled and unread.
-- **Hall storey 6.0 m** carries every height and MW result and has no source (TIA-942 unread): drawing choice.
+- **Hall storey 6.0 m** carries every height result: drawing choice at the low end of what is published (one operator spec sheet 6 m slab to slab; one UK planning set 7.0 m floor to floor; rule 7). MW comes from floor area, not height. TIA-942 unread.
+- **Plant sized to load (11 Nov):** the hub's load leaves fans and space heat out (?); three fits sit within 0.1 MW of a switch point (339 generators, 10004 generators, 1330 transformers) and are flagged. On 1330 and 1360 the rule's small sets don't fit the drawn yard or room, so the next size up is drawn: our reading, J.B. to confirm (1c). 2,500 kVA pads drawn before 11 Nov stay 2.63 × 2.49 m (Eaton 2.67 × 2.62 m: 0.13 m, tight).
+- **Hub 72 h fuel not drawn:** the 3,634 L tank (5.1 × 1.35 m) is sized, not placed: its own KD300 set or a tank feeding the data-centre sets is J.B.'s call (?).
+- **UPS runtime:** battery rooms are drawn for 5 min (Part 1b); DECISIONS (11 Nov) says 10–15 min (FM 5-32 3.5.2.1). Not redrawn: room areas could grow 2–3 times (?).
+- **−25 dB plant room** (Vancouver noise passes) is an assumption (NSW 2021); one maker case study measured 27 dBA (rule 9).
 - **Edmonton:** the NBC 2023 (AE) text is read only where cited; BE general sections 5–7 not re-read for the hub.
 - **Flood plain:** no rule read yet for transformer and generator pads below the FCL (Part 8).
 - **Outdoor air intakes** are not drawn on any fit.
@@ -72,15 +76,21 @@ Rank: 1 never drops; higher numbers drop first. A target can be larger than the 
 | Staff entrance: portal; vestibule and guard point | portal 1.8 × 1.8 m; rest ? | portal 1.8 m (2) | 2 · 6 | arch_acc_gcpsg015RZ, arch_acc_gunneboHiSec |
 | Freight lift (passenger-rated, the staff accessible route) | car ≈ 2.5 × 3.4 m | — | 6 | VBBL 3.8.2.3 (every storey reached) |
 
-### 1c. Plant, sized from the hall (tool rules)
+### 1c. Plant, sized to load (J.B. 11 Nov; `eh/sizing.py`, `eh/hubload.py`)
 
-Heat Q = MW × 1.55 (PUE high end; pue, lbnl2024, uptime2025).
+Load = data-centre MW × 1.55 (PUE high end; pue, lbnl2024, uptime2025) + the hub's own emergency load. Transformer kVA = load kW (power factor 1, our reading).
 
 | Plant | Rule | Size | Source |
 |---|---|---|---|
-| Generators | ⌈Q ÷ 1⌉ + 1 sets of 1,000 kW (2,000 kW sets when Q > 3 MW) | KD1000 8.43 × 2.62 m; 12 h sub-base tank in each set = MW × 1.55 × 12 × 0.263 L/kWh ÷ duty sets (⌈Q⌉, the spare not counted; drawing choice, J.B. 8 Nov, as the tool does) | tool plant.js; rehlkoKD1000, fuel_on_site |
-| Chillers (air-cooled hall) | ⌈Q ÷ 1.489⌉ + 1 | 12.14 × 2.36 × 2.90 m | vertivAFC |
-| Transformer pads | ⌈Q ÷ 2.5⌉ + 1 | 2.63 × 2.49 m | transformers, eatonCA022021 |
+| Hub emergency load | NECB 2020 build-up, room by room on the drawn plan: lighting + receptacle density by space type, plus service hot water a refuge occupant, counted as electric (our reading). Refuge and shelter: fire-station sleeping quarters 2.5 + 2.5 W/m², hot water 500 W a person (dormitory 5.4 + 2.5 as a cross-check); clinic: health-care rows, offices 8.0 or 7.1 + 7.5; shared rooms: corridor, washroom, lounge, lobby, storage, food prep, laundry rows; unmatched rooms take lounge values and are listed on the board. Fans and space heat **?** (not in). People = refuge counted area ÷ 3.5. Fits: 26–94 kW, mostly hot water | W/m², W a person | NECB 2020 Tables 4.2.1.6 and A-8.4.3.2(2) (register necb2020_t4216, necb2020_tA8432; licensed screenshots, local only) |
+| Generators | the smallest of 300 / 1,000 / 2,000 kW sets with at most 3 duty sets (our reading), N + 1. **If the rule's sets don't fit the drawn yard or generator room, the next size up is drawn** (our reading, J.B. to confirm: 1330 and 1360, board row says so) | KD300 on a sub-base tank chosen by fuel volume, set flush with the tank (ADV-10068: 1,855 L 4.10 × 1.35 m; 3,634 L 5.12 × 1.35 m; 7,305 L 6.99 × 1.90 m); KD1000 8.43 × 2.62 m; KD2000 13.5 × 3.5 m | rehlkoKD80_300 (g5650, ADV-10068), rehlkoKD1000, rehlkoKD2000 (maker claims) |
+| Fuel, data centre | 12 h ÷ duty sets (spare not counted; J.B. 8 Nov). 1,000 and 2,000 kW sets: **0.264 L/kWh** (register fuel_on_site: KD2000 G5-626 at full standby load; was 0.263). KD300: its own curve at the set's load share: 27.3 / 50.7 / 67.6 / 83.7 L/h at 25 / 50 / 75 / 100 % (g5650) | L a set | fuel_on_site, rehlkoKD2000, g5650 |
+| Fuel, hub | 72 h on its own fuel (J.B. 11 Nov) on the KD300 curve at the hub's load (the 25 % figure below 25 %): 1,966–2,385 L → the 3,634 L tank, about 5.1 × 1.35 m. Not drawn on the boards (?: own KD300 set or a tank feeding the data-centre sets) | L | g5650, ADV-10068 |
+| Transformer pads | load ≤ 2,500 kVA: the smallest Eaton size that carries it, + 1 spare; above: 2,500 kVA units, N + 1 | pad = cabinet + 4 in: 750 kVA 1.93 × 1.70 m; 1,500 2.36 × 1.91; 2,000 2.67 × 2.01; 2,500 2.67 × 2.62 (older fits: 2.63 × 2.49, tight) | eatonPadmountCA (Table 17.0-13, maker claim; pool chat's reading) |
+| Chillers (air-cooled hall) | ⌈Q ÷ 1.489⌉ + 1 (Q = MW × 1.55) | 12.14 × 2.36 × 2.90 m | vertivAFC. Edmonton: placeholder; option B (glycol dry coolers for free cooling to +5 °C, chillers for the peak) sized on 64 Airport Rd only (`eh/ic31/SIZING_E06B_drycoolers_2026-11-11.md`) |
+| Switch point | headroom under 100 kW (or kVA) before the set count, set size or pad size steps up → the board flags it (fans and space heat could step it up) | — | J.B. 11 Nov |
+
+Board row "Plant sized to load": pass when the drawn sets and pads match the rule (count and size, read from the plant labels) with ≥ 100 kW headroom; flag otherwise, with the reason.
 
 ### 1d. Totals
 Hub (refuge + shelter + shared): about 330–720 m² at grade in the fits. Clinic: 0, 236–306 or 484–604 m². Data centre: hall + about 300–650 m² of support, cores and entrance rooms (fits: 1,135–2,141 m² for 0.4–1.9 MW).
@@ -96,6 +106,29 @@ Hub (refuge + shelter + shared): about 330–720 m² at grade in the fits. Clini
 - It holds a public garden fed by the data centre's waste heat (covered beds, heated paths): heat, season and output "?" until the cascade chat sources them; shown as a planted block with its area and the heat line.
 - Code basis: no tool zone has a maximum front setback or build-to line (`RESEARCH_max_front_setback_RESULT_2026-11-10.md`). Edmonton setbacks must be landscaped (Bylaw 20001 5.60 2.2); no parking, loading or service in a required setback (BE 5.4; IM/IH 5.1–5.2); BE: main public entrance visible from the street (5.3.1). Vancouver: on Schedule C streets the setback is landscaped, nothing built in it (Z&D 10.7.1; Schedule C list not read ?).
 - Lots the building already fills: no change.
+
+### 1f. Room minimums: which shortfalls block (J.B. 11 Nov; `eh/audit_rooms.py` RULES and HARD)
+
+Rooms are drawn to wall centrelines; every size check compares **clear** sizes: half of each bounding wall off, 0.15 m at fire and exterior walls (0.30 m walls), 0.05 m at partitions (0.10 m). Fire walls (our reading): the storey's outside, the public / secure line, and stairs, lifts, shafts and exit passages. Loading bays have no wall between each other.
+
+Only a **sourced** minimum (steps 1–4 of `eh/specs/room_minimums_rule_2026-11-08.md`) can fail: more than 5 % under it = fail; within 5 % either side = tight (D1). Every other minimum (steps 5–6, precedent or drawing choice) reads **"tight, judged"** and never fails. A room with both takes the worse status.
+
+| Room | Sourced minimum (clear) | Step | Citation |
+|---|---|---|---|
+| Loading space | Vancouver Class B 3.4 m wide (10.2 × 3.4 × 3.8 m); Edmonton 3.3 m (9.0 × 3.3 × 4.0 m) | 1 | Parking By-law 5.5.1.2; Zoning Bylaw 20001 s. 5.80 Table 7.2 |
+| Truck aisle, drive | 6.1 m | 1 | Parking By-law 5.4.1 |
+| Exit passage, exit steps | 1.1 m | 1 | VBBL 3.3.1.9, 3.4.3.2 |
+| Corridors | 1.1 m (the 2.0 / 1.8 m spec widths are judged) | 1 | VBBL 3.3.1.9 |
+| Universal WC (hub and clinic) | holds a 1.7 m circle clear of the WC and its 0.9 m transfer space: 1.7 × 3.2 m at least (area 5.3 m²; our arithmetic) | 1 | VBBL 3.8.3.13, 3.8.3.12.(1) |
+| Universal shower | 1.5 m wide, 2.7 m² | 1 | VBBL 3.8.3.17.(1) |
+| UPS, battery, battery HVAC, MV switchgear | 3.0 m (equipment + 1.0 m working space) | 2 | CEC 2-308 (second-hand ?) |
+| DC staff vestibule, portal, guard point | 1.8 m | 2 | GCPSG-015 (portal 1.8 × 1.8 m) |
+| Procedure, exam, consult, medication, clean supply, soiled holding, housekeeping | areas 15.5, 12.0, 12.0, 10.0, 11.0, 13.5, 7.0 m² (widths 3.0 / 1.5 m judged) | 3 | Alberta Health Services clinic guideline (Part 1a) |
+| First aid | 9.3 m² (width 2.7 m judged) | 3 | WorkSafeBC first aid facilities (guidance) |
+| Refuge main room | 175 m² counted (parts under 2.4 m wide not counted) | 4 | 50 people × 3.5 m² (J.B. 8 Nov) |
+| Day shelter | 56 m² (width 4.0 m judged) | 4 | 16 guests × 3.5 m² |
+
+All other minimums in Parts 1a and 1b (stairs 2.4 m, lobbies and docks 2.4 m, offices, meet-me, NOC and break rooms 2.4 m, storage, janitor, garbage, valve rooms 1.5 m, shafts 1.0 m, refuge and shelter 4.0 m width, waiting 4.0 m, data hall 6.0 m) are judged. **Rate for the refuge (11 Nov check):** no current BC Emergency Support Services group-lodging guideline with figures was found online (the 2025 ESS information sheets give none; the archived 2006 provincial guideline was not reachable); the Justice Institute of BC course text *Introduction to Group Lodging* gives 3.5 m² (1.5 × 2.5 m) a person and 0.75 m between beds, citing PHAC 2007 and the North Shore ESS plan 2009: the same 3.5 m² (register jibcGroupLodging). Hub washrooms follow the VBBL table by load (code), not a lodging guide; water a person ?.
 
 ## 2. Variants
 
@@ -125,7 +158,8 @@ Each rule has its dimension and source. "Drawing choice" means no rule; the valu
 **Code level (J.B., 9 Nov, `CODE_LEVEL_RULE_2026-11-09.md`; copy into every typology spec).** Schematic massing and program studies, not construction drawings: the big code moves must work, detailed design is not checked.
 - **Check:** use and approval (zone, conditional use, rezoning, ground-floor rules); envelope (height, floor area, yards, depth, FCL); separations (2 h between data centre and public programs; nothing wet over the hall); exits (two per zone, travel ≤ 45 m, exits apart, dead ends ≤ 6 m, egress doors for rooms over 60 people, exit width by load, no public exits through data-centre space or plant yards); rooms (minimum area and width); washroom counts by load and one universal washroom per hub; loading counts; plant clearances; step-free entry at the lobby.
 - **Don't check** (list under weaknesses as "detailed design, not checked"): washroom fixture layouts, accessible stalls, lavatory clear floor, door swings, grab bars; edge-vs-centre measurement choices and other refinements under 0.5 m; finishes, hardware, signage, lighting, intake and exhaust placement.
-- **Tolerance:** within 0.5 m (or 5 % for areas and room sizes) of a limit → **"tight: check in design"** on the board, not re-planned. Re-plan only when a big-move rule fails by more than that.
+- **Tolerance:** within 0.5 m (or 5 % for areas and room sizes) of a limit, **on either side** (D1, J.B. 10 Nov) → **"tight: check in design"** on the board, not re-planned. Re-plan only when a big-move rule fails by more than that. One place in the scripts: `eh/tfboard._st`.
+- **Code-level reset (J.B. 11 Nov, evening):** exhaust points, duct routes, louvre heights, chemical-exhaust distances to intakes, delivery cart routes beyond "not through the secure yard", gate readings, bollards and bonding are one "check in design" row each, with no re-planning and no new script checks. Still big moves: anything that changes size, MW, area or whether the hub fits a lot. The intake row stays scripted as built (frozen, no new inputs).
 
 1. **Bands, street to rear:** street → hub front (refuge and lobby on the street) → shared lobby → public corridor (spine) → data-centre entrance core → loading → plant yard.
    - The plant yard is never on the public edge (5 Nov rule). Generators, pads and chillers sit in the back yard, or chillers on a lower roof that is not over the hall.
@@ -154,20 +188,24 @@ Each rule has its dimension and source. "Drawing choice" means no rule; the valu
 7. **Storey heights and height:**
    - Vancouver I-2: ground ≥ 6.1 m, upper ≥ 4.0 m (3.1.2.4 / 3.2.2.9, every I-2 lot, J.B. 8 Nov). I-3 sub-area A: 6.0 / 4.0 m (3.1.2.9). Height 18.3 m; Director's increase I-2 3.1.2.5 / I-3 3.1.2.10.
    - Edmonton BE: height 16.0 m (2.120 4.1.1); no storey minimum in the zone.
-   - Hall storey 6.0 m (**drawing choice**; TIA-942 clear height unread, `checks/paywalled_standards.md`). Support storey 4.0 m; clinic storey 4.0–4.5 m.
+   - Hall storey 6.0 m (**drawing choice**, at the low end of what is published): Global Switch technical specification, "6m slab to slab height", 4.3 m clear above a 0.9 m raised floor (operator claim; the page doesn't name the site; register globalSwitchSpec); a UK data-centre planning set (Slough Borough Council, application drawing CD 1.20, sections) shows 7.0 m floor to floor (planning drawing). MW comes from hall area, so it doesn't move; heights on the boards would rise 1.0 m a hall storey at 7.0 m: check in design. TIA-942 clear height unread (`checks/paywalled_standards.md`). Support storey 4.0 m; clinic storey 4.0–4.5 m.
    - Height = highest point − base surface directly beneath (Z&D s. 2). Base surface from existing grades at the site corners (City LiDAR 2022, CGVD28, `eh/grade/vg.py`) where official grades are not on file (our reading).
 8. **Stacking and separations:**
    - Nothing wet over the hall: no chillers on the hall roof (FM 5-32 2.2.1.6, insurer).
    - F-2 over or beside A-2: 2 h. Clinic (D) beside or under F-2: none. A-2 to D: 1 h (VBBL Table 3.1.3.1).
-   - Every data-centre storey over the hub sits on a 2 h floor; label it on the board.
+   - Every data-centre storey over the hub sits on a 2 h floor; label it on the board (`eh/sep2h.py` draws and checks the 2 h walls and floors).
+   - **Data hall beside a public room** (J.B. 11 Nov, our reading; spec text only, no glazing field and no script check): the two may share a solid 2 h wall with no doors and no glazing; a door or glazing needs a data-centre room or the secure corridor between. (A hall–public door already fails T-reach R2.)
 9. **Plant:**
    - Generators and transformers at grade (FM 5-32 2.6.4.3, insurer).
    - Generator tanks 1.5 m to the building and 3.0 m to lot lines for 2,500–50,000 L (CSA B139 Table 2). Sets 2.0 m apart (CSA C282 6.5.1.1).
-   - Transformer pads 1 m from buildings and structures, 1 m apart, 3 m clear in front (BC Hydro ES54 F); **the front faces the drive or yard aisle** (drawing choice, J.B. 8 Nov).
+   - Sizes and counts: Part 1c (sizing to load). Small sets (KD230–300) stand on sub-base tanks, set flush with the tank ends, so the footprint is the tank's; the tank is picked by fuel volume (J.B. 11 Nov).
+   - Transformer pads (BC Hydro ES54 F0-02, read 11 Nov): ≥ 1 m from any building **or other structure**: generator sets, chillers at grade and yard fences count (our reading of "any other structure"); ≥ 1 m between pads; ≥ 3 m unobstructed in front, the best side counted (front not drawn). The old "2.0 m from the sets" is dropped (unsourced). Bonding of metal within 3 m and bollards where vehicles pass: one "check in design" row (`eh/padcheck.py` bond_row).
    - **Chillers (Vertiv Liebert AFC), clear zones** (vertivAFC_clear, SL-70790 s. 4.2.4, Fig. 4.2, maker claim; read from J.B.'s screenshot): 1.5 m on each long (air-intake) side, 2.1 m at each end (panel end and far end), 2.5 m clear above the fans; unit 2.35 m wide. Zones are free of any obstruction (walls, fences, plant). Between units the guide gives no figure: **3.0 m side to side and 4.2 m end to end** (zones not shared, our reading). On a roof, the panel-end zone is roof at the unit's level (s. 4.2.4 notice). **Panel end faces the access path** (drawing choice, J.B. 8 Nov). One chiller with its zones takes 16.3 × 5.4 m. Replaces EVAPCO's figures (other equipment). **Edmonton:** placeholder only, outside the maker's stated range at −30 °C (SL-70790 pp. 9–10; NBC App. C).
    - **Chiller siting** (vertivAFC_siting, SL-70790 p. 34, maker claim): ≥ 5 m from drains and manholes (roof and yard drains count); in free airflow; refrigerant R1234ze is A2L and heavier than air, so a leak pools in rooms or spaces below the unit: keep safety distances from openings where gas could enter (no figure: "?"); away from medium/high-voltage lines (no figure: "?" where chillers sit near transformer pads). Checked on every fit, including chillers on a roof over occupied rooms.
-   - Outdoor air intakes ≥ 7.6 m from loading bays and ≥ 3.0 m from generator exhausts (VBBL Table 6.3.2.9; NBC in Edmonton). **Not drawn yet.**
-   - Generator testing: one set at a time wherever two together exceed 80 dBA at 6.1 m (Vancouver By-law 6555 s. 4.1(c)). Edmonton: 85 / 75 dBA at a non-residential / residential line (Bylaw 14600 s. 21).
+   - **Outdoor air intakes** (J.B. 11 Nov; `eh/intakes.py`, frozen, no new inputs): one per zone (hub, clinic, data-centre support), placed by the script at the best point on its walls (1.5 m up) or roof (0.3 m up); 3-D distances by BCBC Table 6.3.2.9: 7.6 m from truck docks, arterial roads (ARTERIAL_EDGES) and cooling-unit discharge; 1.5 m from drives and streets; generator exhaust 3.0 m hard, 3–10 m "tight: check in design (ASHRAE 62.1, our reading)". Rows say "best spot found; actual HVAC layout may differ".
+   - Generator testing: one set at a time wherever two together exceed 80 dBA at 6.1 m (Vancouver By-law 6555 s. 4.1(c)). Edmonton: 85 / 75 dBA at a non-residential / residential line (Bylaw 14600 s. 21). Small sets (300 kW): no sourced noise figure, row "?" (check in design).
+   - **Vancouver noise passes** read "passes with an enclosed plant room (assumed −25 dB, NSW 2021)" (J.B. 11 Nov). Support read 11 Nov: a louvred generator enclosure with baffles cut the fence-line level by 27 dBA (83 → 56 dBA) on a Northern Virginia data centre (Vibro-Acoustics case study, maker claim, undated; register vibroDCcase); acoustic louvres alone rate about Rw 12 against Rw 33 for enclosure panels (Emtec report to Camden, 25 Feb 2021; register camdenEmtec2021), so openings set what an enclosure achieves. −25 dB stays an assumption: check in design.
+   - **Emergency power** (J.B. 11 Nov): the hub's load is in the set count; the hub runs 72 h on its own fuel, the data centre 12 h (Part 1c). Programs without an emergency role get life-safety power only (CSA C282). UPS 10–15 min (FM 5-32 3.5.2.1; not yet applied to the battery rooms, ?).
 10. **Loading:**
     - Vancouver: counted per class and summed (Parking By-law 5.1.5), Class B (J.B., 8 Nov):
       - data centre, 5.2.5: 1 for the first 465 m², 1 more for any portion of the next 1,860 m² (to 2,325), then 1 per further 2,325 m²;
@@ -223,7 +261,13 @@ Each rule has its dimension and source. "Drawing choice" means no rule; the valu
     | shaft | — | riser and services shafts | no door (access panels) | — |
     | exitpas | the side it serves: public or secure (J.B., 8 Nov) | 2 h exit passage; exit steps inside a street door | corridors of one side only, never both; ends at an exterior door | — |
 
-    **15b. Corridors**
+    **Through-room limits written in after 8 Nov** (rules-vs-scripts decisions, J.B. 10–11 Nov):
+- **D3:** a public room's storage or staff WC may open only off the one public room it serves, which itself opens off a corridor or lobby; never a data-centre room, never off the hall (`reach.SERVES`, narrowed 11 Nov).
+- **D4:** meet-me, janitor and garbage, NOC, storage and staging, shipping and unassigned floor open off a secure corridor (shipping: off E2 or the dock), never off the hall. Rooms that serve the hall only (electrical rooms, fire-suppression cylinders, heat-recovery room) may open off it.
+- **Loading bay reached** (11 Nov): if it touches a corridor, if its row of bays touches the dock lobby, or if it has an outside opening at least the bay's width (truck width read as bay width, our reading).
+- Public and secure rooms never share a door (R2); secure rooms open off a secure corridor (15a).
+
+**15b. Corridors**
 
     | Corridor | Width | Starts | Ends | Must touch |
     |---|---|---|---|---|
@@ -262,6 +306,25 @@ Each rule has its dimension and source. "Drawing choice" means no rule; the valu
 ## 4. Test fits
 One board per variant per lot type, on the representative lots in `eh/reps.json`; scripts in `eh/<fit>/`. Status at J.B.'s code level (9 Nov). History of each re-plan: the boards' banners and `eh/remeasure*/`.
 
+**Status at the freeze (11 Nov, run `eh/ic36/`, scripts EH-FREEZE-2026-11-11).** All 13 fits re-run. No sourced room minimum fails on any board. Plant drawn to the sizing rule (Part 1c) on every fit, except 1330 Glen Dr and 1360 Frances St (next size up, flagged). The one remaining fail is 1330 Glen Dr's drive beside the walkway (4.9 m against 6.1 m, Parking By-law 5.4.1: "doesn't fit outright" without an aisle relaxation, as decided). MW and data-centre areas are unchanged by the 11 Nov fixes; floor area changed only on 1330 (+2 m²: storey-3 electrical rooms 0.25 m deeper over the storey-2 roof) and 1360 (+2 m²: battery HVAC over the transformer alcove).
+
+**Answer key for the engine (Code):** the boards Code should reproduce, with the geometry from each fit's `geom.py` (8238: `geom_mid.py`) and the run output in `eh/ic36/`:
+
+| Board | Lot | Variant, ladder step | Check |
+|---|---|---|---|
+| TestFit_EH_V339 | 339 1st Ave E (I-3) | stacked, side drive, raised; Part 6 step 3 (clinic 5 exams); fits outright | Part 7, row by row (the worked example) |
+| TestFit_EH_V1353 | 1353 Pender St E (I-2, wide-shallow) | turned, stacked; fits outright | bands turned along the street |
+| TestFit_EH_V8238_Outright | 8238 Fraser St (I-2, through) | stacked, height-capped; Part 6 steps 2 and 3 (0.94 MW, clinic dropped) | through lot, 0 m side yards |
+| TestFit_EH_V8980 | 8980 Oak St (I-2, irregular corner, flood plain) | stacked, raised; Part 6 step 2 (0.94 MW) | plant-limited MW, FCL |
+| TestFit_EH_V1330 | 1330 Glen Dr (I-2, small, no lane) | small, side drive; doesn't fit outright (aisle relaxation) | the "doesn't fit" wording and limiting rule |
+| TestFit_EH_V1360 | 1360 Frances St (I-2, small, lane) | plant up (Part 6 step 4a) | generator room and alcoves; sizing fallback |
+| TestFit_EH_E4103 | 4103 97 St NW (BE, corner) | beside, one storey; needs rezoning | Edmonton base plan (64 Airport Rd, 14715 and 10003 reuse it) |
+| TestFit_EH_E15231 | 15231 118 Ave NW (narrow-deep) | beside, smaller data centre | Edmonton narrow lot |
+| TestFit_EH_E16075 | 16075 Fort Rd NW (wide-shallow) | beside, turned, street-front plant yard | Edmonton turned |
+| TestFit_EH_E10004 | 10004 167 St NW (small) | plant up, 3 × KD300 in the generator room | Edmonton small lot, small sets |
+
+The other three (TestFit_EH_E06B, E14715, E10003) are the 4103 plan moved onto other lots (`eh/edm_from4103.py`); use them as regression checks, not as separate cases. **Acceptable differences:** room positions where the rules allow several (a hand choice), as long as every Part 5 status matches; areas within 10 %, dimensions within 0.5 m, counts and statuses exact (J.B. 8 Nov tolerances). Edmonton boards are indicative (tool rectangle, placeholder cooling).
+
 | Lot | Variant | Hall | Refuge + shelter | Clinic | Status | Tight: check in design |
 |---|---|---|---|---|---|---|
 | 339 1st Ave E (I-3) | stacked, side drive, raised | 1.83 MW, 16.3 m | 114 + 16 | 296 m², 5 exams, storey 2 | **fits outright** (side-yard drive by approval, I-3 3.1.2.16) | storey heights; P2–S1 discharges 6.2 m; S1 within 15 m of the street; walkways; generators and pads at 0 margin; rooms at minimum width |
@@ -289,35 +352,45 @@ One board per variant per lot type, on the representative lots in `eh/reps.json`
 All eight drawn fits pass T-reach (R0–R8, re-run 9 Nov), the room-width audit, egress doors (by load and by room area), walkway loads and dead ends (Edmonton secure exits into the plant yard count through a drawn street gate, Q24). Final independent check 9 Nov: `eh/remeasure10/`. Every board still lists its "?" items (noise, intakes, drains, refrigerant-leak distances, fire access, truck turning, steps at doors that drop to grade).
 
 ## 5. Pass/fail tests
-Each test returns **pass**, **tight** (within 0.5 m or 5 % of the limit: "check in design"), **fail**, or **?** (not measurable from the massing). Scripts in `eh/`; every board runs them through `eh/tfboard.py`.
+Checked against every rule change since rule sheet v1 (8 Nov) at the freeze (11 Nov). Each test returns **pass**; **tight** (within 0.5 m or 5 % of a limit, either side, D1: "check in design"); **tight, judged** (under a step 5–6 room minimum: never a fail); **fail** (blocks: more than the band past a hard limit); **flag** (a by-hand label, an approval, or a scripted note J.B. must see); or **?** (not measurable from the massing, or not sourced). Hard code rules block, never warn. Scripts in `eh/` (freeze `EH-FREEZE-2026-11-11`); every board runs them through `eh/tfboard.py`. A typed (by-hand) row whose script fails shows the script's fail reason.
 
 | Test | Rule | Pass when | Script |
 |---|---|---|---|
-| T-use | Part 2; rule 3 | the zone allows each program outright, conditionally, or the board says "needs rezoning" / "approval" | board rows (hand) |
-| T-envelope | rule 7 | height ≤ limit above the base surface; floor area ≤ ratio; building and plant inside the yard lines; storey heights ≥ minimum; slab ≥ FCL on flood-plain lots | `tfboard.measure`; `grade/vg.py` |
-| T-ground | rule 4 | at grade the data centre has entrance rooms only (I-2/I-3 strict reading) | board row (hand) |
-| T-stack, T-wet | rules 5, 8 | 2 h floor between data centre and public programs; nothing wet over the hall | board rows (hand) |
-| T-rooms | Part 1 | every room ≥ its minimum area and minimum clear width (largest square); refuge main room ≥ 175 m² counted | `audit_rooms.py` |
-| T-reach | rule 15d | R0–R8 pass (doors on shared walls, lines kept apart, step-free reach, through-room limits, lobby, dead ends, area caps) | `reach.py` |
-| T-exits | rule 6 | two exits per zone, exits apart, travel ≤ 45 m, stair discharges apart (edge to edge) | `tfboard.measure` |
-| T-deadend | rule 15b | every public, clinic and secure corridor ≤ 6 m along the centreline; a secure exit into a plant yard counts only with a drawn street gate that opens from inside without a key (Q24), with a clear 1.1 m route to it | `deadend.py`, `yardgate.py` |
+| T-use | Part 2; rule 3 | the zone allows each program outright, conditionally (flag), or the board says "needs rezoning" / "approval" | board rows (hand) |
+| T-envelope | rule 7; rule 13 | height ≤ limit above the base surface; floor area ≤ ratio; building and plant inside the yard lines; storey heights ≥ minimum; every room floor ≥ FCL on flood-plain lots (J.B. 10 Nov) | `tfboard.measure`; `grade/vg.py`; `toolflood.py` |
+| T-ground | rule 4 | at grade the data centre has entrance rooms only (I-2/I-3 strict reading); no clinic room at grade on I-3 | `claims.at_grade` |
+| T-stack, T-wet | rule 8 | 2 h floor and walls between data centre and public programs (drawn and dashed); no plant, tank, pad, chiller or wet room over or under the hall, in plan | `sep2h.py`; `claims.off_hall` |
+| T-rooms | Part 1f | every sourced minimum met on **clear** sizes (fail more than 5 % under; tight within 5 %); judged minimums read "tight, judged"; refuge main room ≥ 175 m² counted; shelter ≥ 56 m² | `audit_rooms.py` (CLEAR, HARD) |
+| T-reach | rule 15d (+ D3, D4, bays) | R0–R8 pass | `reach.py` (`dcspace.py` for R2, `cap_area` for R8) |
+| T-zones | rule 6 | two exits reached from every zone (distinct exterior doors, yard doors with a gated route, exit stairs; loading doors and doors with no route to a street not counted) | `tfboard.zone_exits` |
+| T-exits | rule 6 | exits apart (door to door for the smoke path), travel ≤ 45 m on a 0.25 m grid, stair discharges apart edge to edge | `tfboard.measure` |
+| T-deadend | rule 15b | every public, clinic and secure corridor ≤ 6 m along the centreline; a secure exit into a plant yard counts only through a drawn gate to a street or lane that opens from inside (Q24), on a clear 1.1 m route | `deadend.py`, `yardgate.py` |
+| T-yard | rule 6; Q24 | every plant yard (explicit PLANT_YARDS) has no public or clinic door; gates lead to a street or lane; every truck route crosses the yard fence at a drawn vehicle gate; a dock door at a loading space is a loading door only if its room has another exit clear of the bay, never through public rooms or a lift; a route through the DC vestibule needs the "portal allows free exit" row | `yardgate.py` v7, `portal.py` |
 | T-egress | rule 6 | refuge and shelter rooms over 60 people (0.75 m²) have two egress doors ≥ ⅓ diagonal apart, edge to edge | `egress2.py` |
-| T-egress-area | rule 6 | every data hall over 200 m², refuge or shelter room over 200 m² and clinic suite over 300 m² (sprinklered, Table 3.3.1.5.-B), or any of them with travel over 25 m to an egress doorway, has two egress doorways ≥ ⅓ diagonal apart | `egress3.py` |
+| T-egress-area | rule 6 | every data hall over 200 m², refuge or shelter room over 200 m², clinic suite over 300 m² (Table 3.3.1.5.-B, sprinklered), any room over 45 m² with travel over 25 m: two egress doorways ≥ ⅓ diagonal apart | `egress3.py` |
 | T-width | rule 6 | every walkway and passage carries its load × 6.1 mm, ≥ 1.1 m (even split, ≥ ½ with two exits, joined walkways sum) | `walkload.py` |
-| T-ground-route | rule 6 | no public or clinic exit discharges into a drive, court, truck route or plant yard except onto a fenced walkway (small-lot exception flagged) | `dcspace.py` in `reach.py` R2 |
-| T-lobby | rule 15c | lobby on the main street, touches the public corridor, no door or opening into secure rooms; step-free (13 mm, ramp or slope) | `reach.py` R6; board row |
-| T-wc | Part 1 | washroom counts by load, split equally between the sexes and rounded up (3.7.2.2.(1)), each table applied to the persons of each sex, a part increment counting as a whole (Table 3.7.2.2.-A/-B); one universal washroom per hub | board rows (`wc_hub`, `wc_clin`) |
-| T-loading | rule 10 | Class B bays by class (5.2.3, 5.2.5, 5.2.9) or Edmonton Table 7.2 | `tfboard.loading_html` |
-| T-plant | rule 9 | generators 2.0 m apart; tanks 1.5 m to building, 3.0 m to lot lines; pads 1 m apart and from structures, 3 m front to a drive or aisle; chiller clear zones (Vertiv) and nothing wet over the hall | board rows (hand) |
+| T-ground-route | rule 6; D2 | no public or clinic exit route to a street (STREET_EDGES) crosses a drive, court, truck ground or plant yard except on a fenced walkway; the whole route ≥ 1.1 m (small-lot exception flagged) | `dcspace.py` in `reach.py` R2 |
+| T-lobby | rule 15c | lobby on the main street, touches the public corridor, no door into secure rooms; step-free (13 mm, ramp or slope) | `reach.py` R6; board row |
+| T-wc | Part 1a | washroom counts by load, split equally between the sexes (3.7.2.2.(1)), Tables 3.7.2.2.-A/-B; one universal washroom per hub | board rows (hand) |
+| T-loading | rule 10 | drawn count ≥ the count by class (Vancouver) or Table 7.2 (Edmonton); sizes on clear widths through T-rooms | `claims.loading`; `tfboard.loading_html` |
+| T-plant | rule 9 | sets 2.0 m apart; tanks 1.5 m to the building (a covered loading bay is building) and 3.0 m to lot lines; pads ≥ 1 m to any structure (sets, chillers at grade, fences), 1 m apart, best front ≥ 3 m; chiller clear zones (Vertiv) free of walls, plant, fences and taller roofs; plant-up generator rooms: 2.0 m between sets, 1.0 m to side walls | `claims.gens`, `claims.pads` (`padcheck.py`), `claims.chillers`; fit run.py for generator rooms |
+| T-size | Part 1c | drawn sets and pads match the sizing rule in count and size, with ≥ 100 kW (kVA) headroom (else flag) | `tfboard._sizing_row`; `sizing.py`; `hubload.py` |
+| T-fuel | rule 9 (fuel fill) | a fill point on the yard fence or a remote box beside truck ground, or inside the yard only on a gated truck route; hose and pipe limits ? → tight | `fuelfill.py` |
+| T-intakes | rule 9 | each zone's best intake point clears BCBC Table 6.3.2.9 distances (generator exhaust 3 m hard, 3–10 m tight) | `intakes.py` (frozen) |
+| T-noise | rule 9 | Vancouver: one set ≤ 80 dBA at 6.1 m (else flag: test one at a time); passes carry the −25 dB plant-room label; small sets ?; Edmonton ? | board rows |
 
-Not tests (detailed design, Part 3 header): fixture layouts, door swings, intake and exhaust placement, finishes.
+**"Check in design" rows (no test, J.B. 11 Nov reset):** pad bonding and bollards (tight), exhaust points, duct routes, louvre heights, chemical-exhaust distances, delivery cart routes, gate readings. **"?" rows on every board:** hall heat used by the hub (provisional), seismic importance (refuge = post-disaster shelter, IE 1.3; data centre as a communications facility ?), hub emergency power (fans and space heat, tank not drawn), chiller drains, refrigerant leaks and MV/HV distances, truck turning, fire department access. Edmonton boards carry "indicative: tool rectangle, placeholder cooling".
+
+Not tests (detailed design, Part 3 header): fixture layouts, door swings, intake and exhaust placement beyond the intake row, finishes.
 
 ## 6. Doesn't-fit rule
-Apply in order on each lot; stop at the first step that makes every big-move test pass (Part 5). A step's shortfall within the tolerance is "tight", not a reason to go on.
+Apply in order on each lot; stop at the first step that makes every big-move test pass (Part 5). A step's shortfall within the tolerance (D1, either side) is "tight", not a reason to go on. Only a **fail** moves the ladder on: a judged room minimum ("tight, judged"), a "check in design" row, a flag or a "?" never does. Rule 14 is the same ladder in layout order; its numbers differ, and the answer key in Part 4 uses this Part's numbers.
+0. **Plant to load first** (Part 1c): size the sets and pads to the load; if the rule's sets don't fit the yard or generator room, draw the next set size up and flag it (our reading, J.B. to confirm).
 1. **Shrink rooms to their minimums** (area and width, Part 1); spare floor goes refuge → shelter → clinic → unassigned.
 2. **Shrink the data centre below the hub cap** to what the plant yard holds (fewer chillers, smaller hall): label "smaller than the hub cap: plant doesn't fit" (8980 Oak St, 8238 Fraser St: 0.94 MW, two chillers).
 3. **Shrink the clinic** from full (13 exams) to reduced (5); then **drop it** (rank 3) when it can't have two separate exits or its own floor (8238 Fraser St, 1330 Glen Dr). Its floor goes to the refuge first, then hub WCs.
 4. **Merge the day shelter into the refuge** on small lots (the merged room's people count toward the 50).
+4a. **Small lot, plant up** (J.B. 9–10 Nov; 1360 Frances St, 10004 167 St NW): when generators and pads don't fit at grade (FM 5-32; about 750 m² buildable with a lane), generators go in a 2 h room on storey 2 (VBBL 3.6.2.8) and transformers in alcoves on the street or lane (ES54 F3-06), labelled "meets code as read; not FM 5-32 (insurer)" and "exception to the 5 Nov rule, this variant only". Smallest lot with it: about 530 m² with a lane.
 5. **The refuge (50 people) and the data centre's entrance, cores and plant never drop.** If they still fail, the board says **"doesn't fit outright"**, names the limiting rule, and names the relaxation or approval that would make it fit (e.g. 1330 Glen Dr: Parking By-law 5.4.1 aisle 6.1 m vs 4.9 m).
 
 **Limiting rules found in the fits**
@@ -331,7 +404,7 @@ Apply in order on each lot; stop at the first step that makes every big-move tes
 
 ## 7. Worked example: 339 1st Avenue East (I-3, stacked, side drive)
 
-Code checks its steps against these numbers. Source: `eh/v339/geom.py`, `run.py` (re-planned 8 Nov for minimum widths and centreline dead ends; independent re-measure 8 Nov). Board: TestFit_EH_V339 (v96). Weakness: chiller noise, truck turning, fire access and air intakes not done; exterior steps at P2, S1 and the plant-room door not drawn.
+Code checks its steps against these numbers. Source: `eh/v339/geom.py`, `run.py` (re-planned 8 Nov for minimum widths and centreline dead ends; independent re-measure 8 Nov; clinic rooms re-planned 11 Nov, freeze run `eh/ic36/TestFit_EH_V339.dc.html`). Board: TestFit_EH_V339. Hall at 630 m²/MW (tool dc_rooms.json low end), as every fit; the tool's floor test now uses 637 m²/MW (Code, 11 Nov): 1,154 m² would read 1.81 MW (within tight). Weakness: chiller noise, truck turning, fire access and air intakes not done; exterior steps at P2, S1 and the plant-room door not drawn.
 
 | # | Step | Rule | Result on this lot |
 |---|---|---|---|
@@ -340,20 +413,21 @@ Code checks its steps against these numbers. Source: `eh/v339/geom.py`, `run.py`
 | 3 | Storeys | I-3 3.1.2.9; rule 7 | 6.0 (hub) / 4.0 (clinic and DC support) / 6.0 m (hall). Roof 21.2 m CGVD28 |
 | 4 | Ground floor | rule 4, 15 | Refuge 176 m² + second room 237 m² (the main room for the 175 m² minimum; one room since 9 Nov: a 2.0 m strip past WC 2 joins its two parts) (spare floor grown, J.B. 8 Nov), day shelter 66 m² + shelter storage 20 m², lobby 68 m² on 1st Ave E, public corridor 2.0 m with a 2 h exit passage at its far end to the side yard; P1, P2, E1; DC entrance rooms only: S1, S2, E2, staff vestibule, dock lobby; 3 bays open to the truck court |
 | 5 | Hall and MW | 1b; 630 m²/MW | Hall 1,154 m² on storey 3 → 1.83 MW |
-| 6 | Plant | 1c | Q = 1.83 × 1.55 = 2.84 MW → 4 generators (⌈2.84⌉ + 1), 3 chillers (⌈2.84 ÷ 1.489⌉ + 1), 3 transformer pads (⌈2.84 ÷ 2.5⌉ + 1). Tank 2,987 L a set |
-| 7 | Plant layout | rule 9 | All at grade in the back half. Sets 2.0 m apart; tanks ≥ 7.6 m from lot lines; pads 1.0 m apart; chillers in rows 4.3 m side to side (Vertiv zones: 3.0 m needed), ends 2.1 m clear |
+| 6 | Plant | 1c (sizing to load, 11 Nov) | Q = 1.83 × 1.55 = 2.84 MW; hub load 63 kW (lighting 6, receptacles 3, hot water 55 kW; NECB 2020; fans and space heat ?) → load 2.90 MW. Generators: 300 kW sets would need 10 duty, so 1,000 kW: 3 duty + 1 = **4 × KD1000**, headroom 98 kW → **flag** (within 0.1 MW of a switch). Pads: 2,902 kVA > 2,500 → **2 + 1 × 2,500 kVA**. Chillers ⌈2.84 ÷ 1.489⌉ + 1 = 3. Tank 12 h at 0.264 L/kWh ÷ 3 duty = **2,998 L a set**. Hub 72 h at 63 kW (21 % of a KD300, 25 % figure): 27.3 L/h × 72 = 1,966 L → 3,634 L tank (not drawn ?) |
+| 7 | Plant layout | rule 9 | All at grade in the back half. Sets 2.0 m apart (tight, 0 margin); tanks 7.6 m to the building, 9.0 m to lot lines; pads 1.0 m apart (tight), pad 1 1.4 m to the yard fence, best front 4.0 m; chillers in rows 4.3 m side to side (3.0 needed), ends 2.1 m clear (tight) |
 | 8 | Data centre area | 1b | 2,134 m² (hall + support + DC cores + entrance rooms) |
-| 9 | Clinic | 1a; I-3 2.2.6 | Upstairs, 5 exam rooms, 296 m² ≤ 33 % of floor area; 3 WC rooms + 1 universal (32 persons, 16 a sex → 1 a sex; over-provided) |
+| 9 | Clinic | 1a, 1f; I-3 2.2.6 | Upstairs, 5 exam rooms, 296 m² ≤ 33 % of floor area; 3 WC rooms + 1 universal (32 persons, 16 a sex → 1 a sex; over-provided). Re-planned 11 Nov to the sourced (AHS) areas on clear sizes: procedure 5.25 × 3.3 m (16.2 m² clear ≥ 15.5), medication 5.0 × 2.3 m (10.6 ≥ 10.0), soiled holding 5.0 × 3.0 m (13.7 ≥ 13.5); waiting, clean supply and clinic WCs gave the room |
 | 10 | Spare floor | 1a (J.B. 8 Nov) | Ground spare → refuge second room. Storey-2 spare behind the clinic stair and shaft: 246 m² unassigned (the clinic cannot reach it) |
-| 11 | Refuge people | 1a | 413 m² drawn, 401 m² counted (parts under 2.4 m wide left out) ÷ 3.5 = 114 ≥ 50; main room 237 m² ≥ 175; + 16 in the day shelter |
+| 11 | Refuge people | 1a, 1f | clear sizes (11 Nov): 380 m² counted (parts under 2.4 m wide left out) ÷ 3.5 = 108 ≥ 50; largest refuge room 214 m² clear ≥ 175; + the day shelter |
 | 12 | Loading | rule 10 | DC 2,134 m² → 2 (5.2.5); refuge → 1 (5.2.3); clinic < 500 m² → 0 (5.2.9). 3 Class B bays |
 | 13 | Exits apart | rule 6 | Clinic 28.0 ≥ 15.7 m; storey 2 DC 30.6 ≥ 20.4; hall 30.6 ≥ 24.8 (door to door) |
 | 14 | Exterior discharges | rule 6 | Edge to edge (J.B. 9 Nov): P1–P2 30.6 ≥ 6.0; S1–S2 37.8 ≥ 9.0; P2–S1 6.2 ≥ 6.0 (S1 moved 0.4 m east). S1's door is 14.9 m from 1st Ave E at its near edge (15.3 at its centre): within 15 m only at the near edge (?) |
 | 15 | Travel | rule 6 | Worst: hub 23.7, clinic 18.8, storey 2 33.9, hall 29.1 m ≤ 45. Dead ends along the centreline, to the end wall: public 1.5, clinic 1.8, secure 5.5 m ≤ 6 |
 | 16 | Height | rule 7 | 21.2 − base surface 4.9 (under the building's front SE corner) = 16.3 m ≤ 18.3 |
-| 17 | Hub washrooms | Part 1 | Load 640 (area ÷ 0.75) → 320 a sex → 6 M + 11 F; drawn 6 M + 12 F. Every room meets its minimum width (`eh/audit_rooms.py`) |
-| 18 | T-reach | rule 15d | PASS (R0–R7) |
+| 17 | Hub washrooms, rooms | Part 1, 1f | Load 640 (area ÷ 0.75) → 320 a sex → 6 M + 11 F; drawn 6 M + 12 F. Rooms (`eh/audit_rooms.py`, clear sizes): no sourced minimum failed; tight within 5 %: loading spaces 1 and 3 (3.25 m clear vs 3.4), battery, battery HVAC and MV switchgear (2.9 vs 3.0 m); 26 rooms "tight, judged" |
+| 18 | T-reach, zones | rule 15d, 6 | PASS (R0–R8); two exits reached from every zone (hub 5, clinic 2, storey 2 2, hall 2) |
 | 19 | Floor area | I-3 3.1.1.1 | 3,300 m² ÷ 4,503 m² site = 0.73 ≤ 3.00 |
+| 20 | Rows added after rule sheet v1 | Part 5 | intakes pass (hub wall: generator 33.6 m, bays 17.8, arterial 18.0); fuel fill tight (box on the yard fence, limits ?); plant yard pass (no door in); fire separations pass (2 h, `sep2h.py`); generator test noise flag (one set 79.2 dBA ≤ 80; four 85.2: test one at a time); pad bonding and bollards tight (check in design); hall heat, seismic, hub emergency power ? |
 
 ## 8. Open questions for J.B.
 24. ~~Secure exit into the plant yard~~: counts if the yard gate to an open public thoroughfare (street or lane; J.B. 10 Nov: an exit to a lane counts, VBBL Div. A definitions, pool chat's reading, note under the definition not read ?) is drawn and opens from inside without a key; label "our reading". Public and clinic exits still never go through a plant yard (rule 6) (J.B., 9 Nov, final gate). Gates drawn on 4103, 64 Airport Rd and 14715 (1.1 m: tight). Second independent check (`eh/remeasure12/`): no fails; `yardgate.py` v3 then made obstacles never waivable near a door or gate, checks the whole gate against drives, aprons, aisles and walkways, and checks that every truck route crosses the yard fence at a drawn vehicle gate (64 Airport Rd's widened to the full apron). v3 is self-checked only. Independent check of the routes (9 Nov, `eh/remeasure11/`): routes ≥ 1.1 m from every secure yard door, including the DC staff entrance on 64 Airport Rd and 14715 that the first script missed; `eh/yardgate.py` rewritten to read the drawn gates and to fail public or clinic doors into a yard. The check also found the 14715 yard polygon copied from 64 Airport Rd and the drive and apron crossing the yard fence: 14715's yard redrawn, vehicle gates drawn on both. Was: Rule 15b as first written excluded exits into a plant yard for every corridor; rule 6 bans them for public and clinic corridors only. On the three Edmonton fits the secure corridor's second exit passage ends in the plant yard: counted, the dead end is 0.2 m; not counted, 40.2 m (fails). The yard's gate to the street is not drawn either way. Does a secure-line exit into the data centre's own fenced plant yard count, if the yard has a gate to the street? (Boards show it as "to approve".) **Dock door at a loading space (J.B. 10 Nov):** a loading door, not a yard exit, if its room has another required exit whose route does not cross the bay; `eh/yardgate.py` v4 checks this and fails it otherwise. **v5 (J.B. 10 Nov):** that route never passes through public, clinic or shared rooms, and passes the DC entrance vestibule only with a scripted "security portal allows free exit" row (`eh/portal.py`; 10004 and 1360 Frances St now scripted). **v6 (J.B. 10 Nov):** plant yards are an explicit field per fit (`PLANT_YARDS`), never the zoning yard line; the yard check runs on every fit with a plant yard, gate or not (its own board row); routes never through a lift.
