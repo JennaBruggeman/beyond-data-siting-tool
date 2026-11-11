@@ -72,7 +72,7 @@ A buried pipe between the two buildings is needed (length, losses: ?). Hall offe
 
 ## 4. Plant layout
 
-- Power to the twin: BC owner or tenant only (bcUCAs1); Alberta self-supply on the same property (euaS2); EPCOR: no wiring beyond the property (epcorTC2025s44). C282 allows a set on the same property or on an adjoining one (wording in between not recorded) (arch_csa_c282 6.1.1.1). Feeding a second building: CSA C22.1 (paywalled, ?).
+- Power to the twin: BC owner or tenant only (bcUCAs1); Alberta self-supply on the same property (euaS2); EPCOR: no wiring beyond the property (epcorTC2025s44). C282 allows a set on the same property or on an adjoining one (paraphrase of a partial quote; full clause ?) (arch_csa_c282 6.1.1.1). Feeding a second building: CSA C22.1 (paywalled, ?).
 - Generator yard on the far side of the hall from the twin. Yard tanks 3.0 m from the property line, 1.5 m from a building (arch_csa_b139 Table 2); diked tank 7.5 m from a noncombustible building (arch_up_fm0788, insurer); parked fuel truck 15 m (arch_sep_nfcTankVeh).
 - Metro Vancouver: Tier 0/1 engines ≥100 m from a "community care facility" (arch_mv1329 s. 57). Whether an unlicensed shelter counts: ? (our reading: the by-law's term reads like a licensed facility; not confirmed).
 - Noise: property-line limits (bylaw6555; arch_adj_edm14600) do not protect a building on the same lot (our reading). Sleeping rooms facing the yard: no sourced indoor limit (?).

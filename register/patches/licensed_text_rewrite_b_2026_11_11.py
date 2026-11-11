@@ -1,5 +1,6 @@
 """11 Nov 2026 (J.B.): second scope call on licensed text. OP S710 (Finnish insurer's safety regulation) treated as licensed,
-like FM; the EN 253 sentence quoted by Energiforsk 2022:872 paraphrased. Same method as licensed_text_rewrite_2026_11_11.py:
+like FM; the EN 253 sentence quoted by Energiforsk 2022:872 paraphrased;
+the CIBSE guide line quoted in Dudzińska 2021 paraphrased (J.B. 11 Nov 2026, later the same day). Same method as licensed_text_rewrite_2026_11_11.py:
 figures, units, clause and page numbers kept; titles kept. Energiforsk's own sentences stay quoted (report text, not the standard).
 Idempotent: each old passage must be found once, or its paraphrase must already be there.
 """
@@ -21,6 +22,10 @@ E = [
    "4.5 water hazards above: toilets and washrooms, water-based central heating, production processes, roof"),
   ("'built above ground floor or the equipment must be on a raised platform'",
    "the room is above the ground floor, or the equipment stands on a raised platform"),
+ ]),
+ ('arch_tmp_dudzinska2021', [
+  ("CIBSE (cited) for multi-purpose halls 'the optimal operative temperature may be between 12 and 18 °C depending on the type of activity'",
+   "CIBSE (cited) for multi-purpose halls: optimal operative temperature possibly 12 to 18 °C, depending on the activity"),
  ]),
  ('en253Life', [
   ("'EN 253 (2019) states that the service life shall be 30 years at 120 °C'",

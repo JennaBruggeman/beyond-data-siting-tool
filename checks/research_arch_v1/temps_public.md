@@ -59,7 +59,7 @@ Per BRIEF.md. New ids → `temps_public_sources.json` (`arch_tmp_*`). Reused ids
 |---|---|---|---|---|---|
 | Code set point | none (6.2.1.1 good practice) | arch_tmp_nbc62 | 6.2.1.1.(1) | rule (negative) | 90 |
 | Gymnasium design temperature (Poland) | "a design temperature, used in the design of gymnasiums, of 16 °C" (Polish regulation, cited) | arch_tmp_dudzinska2021 | s. 3.1 | peer-reviewed (cites national rule; benchmark outside Canada) | 65 |
-| Multi-purpose halls (CIBSE, cited) | "optimal operative temperature may be between 12 and 18 °C depending on the type of activity" | arch_tmp_dudzinska2021 | s. 3.1 | peer-reviewed (secondary; CIBSE Guide paywalled) | 55 |
+| Multi-purpose halls (CIBSE, cited) | optimal operative temperature possibly 12 to 18 °C, depending on the activity | arch_tmp_dudzinska2021 | s. 3.1 | peer-reviewed (secondary; CIBSE Guide paywalled) | 55 |
 | Sports halls (Trianti-Stourna, cited) | "temperature between 18 and 20 °C" | arch_tmp_dudzinska2021 | s. 3.1 | peer-reviewed (secondary) | 55 |
 | Summer upper limit, low activity | 26 °C (ISO 7730, cited) | arch_tmp_dudzinska2021 | s. 3.2 | peer-reviewed (secondary) | 55 |
 | Climbing gym set point | ? (none found; sports-hall range applies by analogy, our reading) | — | — | — | — |
