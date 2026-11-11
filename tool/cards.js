@@ -112,6 +112,9 @@ function heatEcon(f,p,offer){ const R=E().R, city=f.city, cop=R.cop; // offer: [
     // what the heat can carry in pipe and connection over the pipe's life (for the distance chart and break-even route)
     o.val=[(yr[1]-cH*hp[1])/cP,(yr[0]-cH*hp[0])/cP]; // worst, best
     o.be=[(o.val[1]-ECON.fixed)/ECON.pipe[0],(o.val[0]-ECON.fixed)/ECON.pipe[1]]; // best case, worst case break-even route length
+    /* scope (c), J.B. 11 Nov 2026: break-even pipe cost per metre on this route: the $/m at which the cost of heat equals what it is worth (same method as o.be, solved for $/m: what the heat can carry in pipe, less the fixed connection, ÷ route); no Canadian per-metre source, so the tool's $1,038–2,620 is European × CAD/€ */
+    o.bePM=route>0?[(o.val[1]-ECON.fixed)/route,(o.val[0]-ECON.fixed)/route]:null; // best case, worst case
+    o.bePMmid=route>0?((mTake*(v-pe/mCop)-cH*mMW*cpm(mMW)-(ECON.hpOMfix*mMW+ECON.hpOMvar*mTake)*ECON.eur)/cP-ECON.fixed)/route:null;
     o.status=o.lcoh[1]<=v?'within':o.lcoh[0]<=v?'depends':'beyond';
     if(o.status==='beyond'){ o.close=[]; const need=o.lcoh[0]; o.close.push(`a heat price of about $${need.toFixed(0)}/MWh instead of $${v.toFixed(0)} (gas at about $${(need*ECON.boiler/3.6).toFixed(1)}/GJ instead of $${(ECON.gas[city]/3.6).toFixed(2)}; best case)`);
       if(yr[0]<=0) o.close.push(`electricity below about $${((v-om[0]/take[1])*cop[1]).toFixed(0)}/MWh for the heat pump before any route can start to pay back (now about $${pe.toFixed(0)}, before ${city==='edm'?'wires':'demand'} charges)`);
@@ -119,6 +122,13 @@ function heatEcon(f,p,offer){ const R=E().R, city=f.city, cop=R.cop; // offer: [
   else o.status='unknown';
   return o; }
 BD.heatEcon=heatEcon;
+/* break-even pipe cost as words (scope (c)): middle case, then worst–best; at or below zero the connection and heat pump alone cost more than the heat is worth */
+function bePMtxt(x){ if(!x||!x.bePM) return ''; const m=x.bePMmid, [b,w]=x.bePM, r=v=>v>0?'$'+fmt(Math.round(v/10)*10):'$0';
+  if(b<=0) return 'none: even a free pipe would not pay; the connection and heat pump alone cost more than the heat is worth';
+  if(m<=0) return `none in the middle case; up to about ${r(b)} per metre in the best case only`;
+  if(w<=0) return `about ${r(m)} per metre (none in the worst case, up to ${r(b)} in the best)`;
+  return `about ${r(m)} per metre (${r(w)} to ${r(b)}, worst to best case)`; }
+BD.bePMtxt=bePMtxt;
 const STATUS={within:['costs less than the heat is worth','#4F4F4C'],depends:['depends on the costs','#6F6E69'],beyond:['costs more than the heat is worth','#6F6E69'],unknown:['demand not yet known','#6E6E6B']}; // over the parts' life, at a utility's cost of capital (J.B., 19 Oct)
 /* receiver list grouped by kind (J.B., 16 Oct: "a lot of repetition"): the kind, the shared connection difficulty and the column labels are said
    once per group; a row shows only what differs — name, size, route, and a status word unless it is the greyed "costs more". */
@@ -328,7 +338,8 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
      x.demand?`Money left each year: heat sold × what each MWh is worth after the heat pump's electricity − upkeep = <b>${sm(x.yr[1],0)} to ${sm(x.yr[0],0)}</b>.`:'',
      x.demand?`Years to pay back (simple, no interest): (pipe + connection + heat pump) ÷ money left each year = <b>${isFinite(x.payback[0])?x.payback[0].toFixed(1):'never'} to ${isFinite(x.payback[1])?x.payback[1].toFixed(1):'never'}</b>; middle case ${isFinite(x.payMid)?x.payMid.toFixed(1):'never'}. The range pairs the cheap pipe, efficient heat pump and long running hours against the costly pipe, less efficient heat pump and short running hours.`:'',
      x.demand?`Over the parts' life: pipe ${ECON.life.pipe} years, heat pump ${ECON.life.hp}, at ${(ECON.rate*100).toFixed(1)}% a year real (a BC regulated utility's cost of capital). Cost per MWh of heat = (pipe × ${x.crf[0].toFixed(3)} + heat pump × ${x.crf[1].toFixed(3)} + upkeep) ÷ heat sold + electricity ÷ COP = <b>$${x.lcoh[0].toFixed(0)}–${x.lcoh[1].toFixed(0)}</b> (middle $${x.lcohMid.toFixed(0)}), against <b>$${x.v.toFixed(0)}</b> the heat is worth.`:'',
-     x.demand?`Break-even route length over the pipe's life: <b>${x.be[0]>0?fmt(x.be[0])+' m':'none'}</b> best case, <b>${x.be[1]>0?fmt(x.be[1])+' m':'none'}</b> worst case.`:''].filter(Boolean),
+     x.demand?`Break-even route length over the pipe's life: <b>${x.be[0]>0?fmt(x.be[0])+' m':'none'}</b> best case, <b>${x.be[1]>0?fmt(x.be[1])+' m':'none'}</b> worst case.`:'',
+     x.bePM?`Break-even pipe cost on this ${fmt(x.route)} m route: what the heat can carry over the pipe's life, less the $${fmt(ECON.fixed)} connection, ÷ route = <b>${bePMtxt(x)}</b>; the tool assumes $${fmt(ECON.pipe[0])}–${fmt(ECON.pipe[1])}/m (European figures × CAD/€; no Canadian per-metre cost found).`:''].filter(Boolean),
      'Heat pump capital and upkeep: Danish Energy Agency technology data, sheet 40 (Aug 2026, 2025 €); running hours: Odense, Mäntsälä (our arithmetic from utility figures) and STACK Oslo (claim). Pipe life: EN 253:2019, 30 years at 120 °C (as quoted in Energiforsk 2022:872). Cost of capital: Squamish NEU feasibility study (Compass, FVB, 2010), 5.6% real. Pipe: Persson et al. 2019 (average, 2015 €) and npro (paved urban), DN100, converted at the Bank of Canada 2025 averages (€1 = $1.5782; US$1 = $1.3978), no inflation adjustment. Connection: City of Vancouver NEU connection levy 2026, By-law 9552 Sch. C (fixed part $123,873; $146/kW of peak not included), used as a stand-in for the cost of connecting a building'+(f.city==='edm'?' — no Edmonton connection charge is published, so Vancouver\'s is used for scale':'')+'. Gas: FortisBC Rate 3 (checked 18 Oct 2026) / ATCO 2026 and the Utilities Consumer Advocate. Electricity: BC Hydro tariff 2026 / AESO 2025 pool price plus EPCOR\'s per-kWh transmission and operating-reserve charges (2026 interim rates, to check); demand charges excluded in both cities.')}
   <h3>Payback and distance</h3>${chart(x)}
   ${x.status==='beyond'&&x.close?`<p class="sub">${draft('What would close the gap:')} ${x.close.map(esc).join('; ')}.</p>`:''}
