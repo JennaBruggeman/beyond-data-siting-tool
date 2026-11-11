@@ -53,7 +53,6 @@ const ECON={
  hpOMfix:2100, hpOMvar:3.07, // € per MW·yr and € per MWh, excluding electricity (DEA sheet 40)
  life:{pipe:30,hp:25},    // years: pipe design life 30 yr at 120 °C (EN 253:2019, as quoted in Energiforsk 2022:872 s. 8.2; lower temperatures age slower); heat pump 25 yr (DEA)
  rate:0.056,              // real cost of capital: weighted average for a BCUC-regulated private utility, 5.6% real (Squamish NEU feasibility, Compass/FVB 2010, p. 44)
- co2pipe:2*(39.5+1.03+0.205), // kg CO2e per metre of route: supply and return DN100, A1–A5 (isoplus EPD); trench excluded
  src:['vanStreets2026','edmRoads2026','persson2019','nproCosts','cambridgeApp5','vanNEUlevy2025','fortisBC2026','atcoGas2026','bchTariff2026','isoplusEPD','vanQuebecSt2020','vanNEUguide','torontoDER2016','statcanHeat2011']
 };
 {const m=a=>a.reduce((t,v)=>t+v,0)/a.length; ECON.gasAvg={van:m(ECON.gasMonths.van),edm:m(ECON.gasMonths.edm)}; ECON.gas={van:(ECON.gasFixed.van+ECON.gasAvg.van)*3.6,edm:(ECON.gasFixed.edm+ECON.gasAvg.edm)*3.6};}
@@ -89,7 +88,7 @@ function heatEcon(f,p,offer){ const R=E().R, city=f.city, cop=R.cop; // offer: [
   // big buildings estimated from provincial averages carry a low end (p.lo, make_bigrecv.py: estimate ÷ the factor from the Vancouver check); the low case uses it
   const demandLo=demand&&p.lo&&!p.meas?p.lo*ECON.boiler:demand;
   const v=ECON.heatVal(city), pe=ECON.elec[city]; const net=[v-pe/cop[0],v-pe/cop[1]]; // worst (COP 3.0), best (COP 4.5) $/MWh of heat after the heat pump's electricity
-  const o={route,demand,demandLo,use,v,pe,net,cost:[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]],co2:route*ECON.co2pipe/1000}; o.pipeCost=o.cost.slice();
+  const o={route,demand,demandLo,use,v,pe,net,cost:[ECON.fixed+route*ECON.pipe[0],ECON.fixed+route*ECON.pipe[1]]}; o.pipeCost=o.cost.slice();   /* 11 Nov 2026 (J.B., F10): the pipe's embodied carbon dropped */
   if(demand){ const take=offer?[Math.min(demandLo,offer[0]),Math.min(demand,offer[1])]:[demandLo,demand]; o.take=take; o.capped=!!offer&&demand>offer[0]; // sweep M3, J.B. 18 Oct: a building can only buy the heat that is offered
     // heat pump sized from the heat sold: MW = MWh ÷ full-load hours (more hours → smaller, cheaper unit)
     const cpm=mw=>{ const [[m1,c1],[m3,c3]]=ECON.hpCapex; return (mw<=m1?c1:mw>=m3?c3:c1+(c3-c1)*(mw-m1)/(m3-m1))*ECON.eur; };
@@ -340,7 +339,7 @@ async function openConnection(kind,id){ await opps(); const H=BD._heat; if(!H) r
   <dt>How hard to connect</dt><dd><span class="cls" style="border-color:${DCOL[p.diff.k]};color:${DCOL[p.diff.k]}">${esc(p.diff.t)}</span> ${esc(p.diff.why)}</dd></dl>
   <h3>Building it</h3><dl><dt>Cost</dt><dd>$${fmt(x.cost[0])}–${fmt(x.cost[1])} (pipe in a paved street, DN100 pair, the connection${x.hp?" and the heat pump":""}; a pipe check: Cambridge MA plans $${fmt(ECON.pipeCheck)}/m)</dd>
   <dt>Time</dt><dd>for scale: the NEU's Quebec St extension, about three blocks, ran from 19 May to an expected fall finish in 2020 (City of Vancouver memo)</dd>
-  <dt>Disruption</dt><dd>a trench in the street under a street-use permit; lanes closed block by block${(()=>{ const rp=routePath(p); if(!rp) return ''; const c=Object.entries(rp.cls).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${fmt(v)} m ${k.toLowerCase()}`).join(', '); return c?`. Along this route: ${c} (City ${f.city==='van'?'street use':'functional'} classes)`:''; })()}</dd><dt>Embodied carbon</dt><dd>about ${fmt(x.co2)} t CO₂e for the pipe pair (EPD, pipe only; trench excluded)</dd>
+  <dt>Disruption</dt><dd>a trench in the street under a street-use permit; lanes closed block by block${(()=>{ const rp=routePath(p); if(!rp) return ''; const c=Object.entries(rp.cls).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${fmt(v)} m ${k.toLowerCase()}`).join(', '); return c?`. Along this route: ${c} (City ${f.city==='van'?'street use':'functional'} classes)`:''; })()}</dd>
   <dt>Who pays</dt><dd><div class="scn" id="payer">${[['operator','The data centre'],['receiver','The receiver'],['utility','The city or a utility']].map(([k,t])=>`<button data-v="${k}" aria-pressed="${who===k}">${t}</button>`).join('')}</div><span class="sub">${{operator:'The operator builds and owns the pipe and recovers it through the heat price; if the tenant leaves, the pipe may sit idle.',receiver:'The receiver pays to connect and owns the branch; it carries the risk if the data centre stops sending heat.',utility:'A city utility builds and owns the pipe as part of a network and can find other sources if the data centre leaves (the NEU model).'}[who]}</span></dd>
   <dt>After the tenant leaves</dt><dd>the pipe and the grid connection stay with the land; the receiver falls back on its own heating at full peak (four futures)</dd></dl>
   <h3>Rules</h3>${ladder(L)}

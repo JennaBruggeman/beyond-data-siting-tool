@@ -36395,6 +36395,21 @@
     "arch_only": "Architecture only"
    },
    "where": "register/make_templates.py (T); tool/tiers.js, flow.js, logic.js, report.js, report3.js; register/diagram_template.html"
+  },
+  "not_in_tool": {
+   "date": "11 Nov 2026",
+   "by": "J.B.",
+   "job": "CODE_JOB_F10_drop_embodied_carbon",
+   "why": "embodied carbon is not accurate enough to show; dropped from every part of the tool and the reports",
+   "quantities": [
+    "embodied_it",
+    "embodied_building",
+    "embodied_rule"
+   ],
+   "conditions": [
+    "env_embodied"
+   ],
+   "also": "condition s_conversion keeps its other part (existing_building); the heat pipe EPD figure (cards.js co2pipe) is removed from the tool with the same decision"
   }
  },
  "quantities": [
@@ -37875,7 +37890,8 @@
      "conf": 50,
      "verified": true
     }
-   ]
+   ],
+   "not_in_tool": "not used in the tool (J.B. 11 Nov 2026): embodied carbon dropped from the tool and the reports; the estimate is not accurate enough to show"
   },
   {
    "id": "embodied_building",
@@ -37910,7 +37926,8 @@
      "verified": true
     }
    ],
-   "revised": "2026-10-19"
+   "revised": "2026-10-19",
+   "not_in_tool": "not used in the tool (J.B. 11 Nov 2026): embodied carbon dropped from the tool and the reports; the estimate is not accurate enough to show"
   },
   {
    "id": "noise_level",
@@ -45046,7 +45063,8 @@
      "verified": true
     }
    ],
-   "added": "2026-10-19"
+   "added": "2026-10-19",
+   "not_in_tool": "not used in the tool (J.B. 11 Nov 2026): embodied carbon dropped from the tool and the reports; the estimate is not accurate enough to show"
   },
   {
    "id": "heat_value_split",
@@ -49111,7 +49129,8 @@
     "climate"
    ],
    "constraint": false,
-   "next_action": "the displaced source and its factor; measured water use"
+   "next_action": "the displaced source and its factor; measured water use",
+   "not_in_tool": "not used in the tool (J.B. 11 Nov 2026): embodied carbon dropped from the tool and the reports; the estimate is not accurate enough to show"
   },
   {
    "id": "env_burdens",

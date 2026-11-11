@@ -89,7 +89,6 @@ const GL={
  'kWp':'Kilowatts peak: a solar array\'s rated output in full sun.',
  'blowdown':'Water drained from a cooling tower to stop minerals building up; it goes to the sewer.',
  'cycles of concentration':'How many times the minerals in cooling-tower water concentrate before it is drained; more cycles, less water.',
- 'Embodied carbon':'Emissions from making and building something, as opposed to running it.',
  'floor-space ratio':'Floor area allowed ÷ lot area (FSR).',
  'curtail':'Reduce electricity use when the utility asks.',
  'heat pump':'A machine that lifts heat to a higher temperature using electricity; here, from server cooling water to a heating loop.',

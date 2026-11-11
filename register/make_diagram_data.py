@@ -104,10 +104,14 @@ EX['values'].update({'it_load_actual': ('0.7–2.2 MW average', "≥3.7 MW claim
 EX['match'] = 'Recovered heat → the host tower (retrofit to a 45 °C loop); the downtown steam network is outside the calibrated range'
 
 nodes, edges = [], []
+# 11 Nov 2026 (J.B., F10): parts and conditions the register keeps but the tool no longer uses (meta.not_in_tool) are left out, with their links
+NIT = r['meta'].get('not_in_tool', {}); NIT_Q = set(NIT.get('quantities', [])); NIT_C = set(NIT.get('conditions', []))
 SIDE = {'cooling_type':'dc','plant_schedule':'dc','spare_cooling':'dc','lighting_plan':'dc','start_case':'dc','host_building':'place'}
 for k, (name, desc, src, conf) in INPUTS.items():
     nodes.append({'id': k, 'kind': 'input', 'stage': 'input', 'side': SIDE.get(k, 'place'), 'name': name, 'formula': desc, 'coef': '', 'unit': '', 'sources': [], 'source_text': src, 'conf': conf, 'status': 'read or asked', 'inputs': []})
 for q in r['quantities']:
+    if q['id'] in NIT_Q:
+        continue
     nodes.append({'id': q['id'], 'kind': 'quantity', 'stage': q['stage'], 'name': q['name'], 'formula': q['formula'], 'coef': q.get('coef', ''), 'unit': q['unit'], 'sources': q['sources'], 'source_roles': q.get('source_roles', []), 'conf': q['conf'], 'status': q['status'], 'direction': q.get('direction', ''), 'trial': q.get('trial', ''), 'inputs': [i for i in q['inputs'] if i != '*']})
     for i in q['inputs']:
         if i == '*':
@@ -116,10 +120,10 @@ for q in r['quantities']:
 conds = []
 for h in HEADINGS:
     for c in r['conditions']:
-        if c['heading'] == h:
-            conds.append({'id': c['id'], 'heading': h, 'name': c['name'], 'test': c['test'], 'quantities': c['quantities'], 'move': c.get('move', []), 'parties': c.get('parties', []), 'constraint': c.get('constraint', False), 'note': c.get('note', ''), 'sources': c.get('sources', []), 'next_action': c.get('next_action', '')})
+        if c['heading'] == h and c['id'] not in NIT_C:
+            conds.append({'id': c['id'], 'heading': h, 'name': c['name'], 'test': c['test'], 'quantities': [x for x in c['quantities'] if x not in NIT_Q], 'move': c.get('move', []), 'parties': c.get('parties', []), 'constraint': c.get('constraint', False), 'note': c.get('note', ''), 'sources': c.get('sources', []), 'next_action': c.get('next_action', '')})
 OL_ = r['meta'].get('opportunity_labels', {})
-opps = [{'name': k, 'quantities': v, **({'labels': OL_[k]} if k in OL_ else {})} for k, v in r['opportunity_quantities'].items()]
+opps = [{'name': k, 'quantities': [x for x in v if x not in NIT_Q], **({'labels': OL_[k]} if k in OL_ else {})} for k, v in r['opportunity_quantities'].items()]
 
 # upstream confidence
 def upstream(i, seen=frozenset()):

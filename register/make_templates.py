@@ -163,6 +163,7 @@ ids = [n['id'] for n in D['nodes']]
 # 2 Nov 2026 fix pass: A-eng (engineering only, J.B. triage 30 Oct): hvo_swap, clean_power_price, greywater_neighbours set to F above
 # parts J.B. dropped (register meta.dropped_quantities) leave the templates too
 _DROP = set(json.load(open(os.path.join(H, 'formula_register.json'), encoding='utf-8'))['meta'].get('dropped_quantities', {}))
+_DROP |= set(json.load(open(os.path.join(H, 'formula_register.json'), encoding='utf-8'))['meta'].get('not_in_tool', {}).get('quantities', []))   # 11 Nov 2026 (J.B., F10): kept in the register, not in the tool
 for _k in _DROP: T.pop(_k, None)
 missing = [i for i in ids if i not in T]; extra = [i for i in T if i not in ids]
 assert not missing and not extra, (missing, extra)

@@ -15,7 +15,7 @@ def walk(x):
         for v in x: walk(v)
 walk(m['opportunity_labels']); walk(m['try_menu'])
 used.update(m.get('source_kinds', {}).keys())
-Q = {q['id']: {'name': q['name'], 'formula': q['formula'], 'coef': q.get('coef', ''), 'unit': q['unit'], 'sources': q['sources'], 'conf': q['conf'], 'status': q['status']} for q in r['quantities']}
+Q = {q['id']: {'name': q['name'], 'formula': q['formula'], 'coef': q.get('coef', ''), 'unit': q['unit'], 'sources': q['sources'], 'conf': q['conf'], 'status': q['status']} for q in r['quantities'] if q['id'] not in set(m.get('not_in_tool', {}).get('quantities', []))}   # 11 Nov 2026 (J.B., F10): kept in the register, not in the tool
 for q in Q.values(): used.update(q['sources'])
 out = {'date': m.get('date', ''), 'label_systems': m['label_systems'], 'opportunities': m['opportunity_labels'], 'addons': m['try_menu'],
        'quantities': Q, 'opp_quantities': r.get('opportunity_quantities', {}), 'source_kinds': m.get('source_kinds', {}), 'source_check': m.get('source_check', {}),

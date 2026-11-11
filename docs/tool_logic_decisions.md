@@ -445,3 +445,10 @@ BC Assessment receivers (`src: vanBCA`), field by field:
 - `tool_data_full.json` holds more than the cards show (all 1,842 receivers; routes and costs for the 1,073 within 3 km), but nothing raw.
 
 **Decision (J.B.):** these are City-parcel locations with derived, rounded values, not BC Assessment geometry; allowed under the UBC Library terms (rounded values per building). The files stay as they are, and the older check files that name receivers are not redacted (the tool publishes the same names). New exports name receivers by type only (`checks/tests/eng_redact.js`).
+
+## Embodied carbon dropped from the tool (11 Nov 2026, J.B.; CODE_JOB_F10)
+Not accurate enough to show: the servers' figure rests on one maker's server LCA for all servers and a 10–15 % manufacturing share of our own; the building's on a general-building median (461 kg/m², no data-centre benchmark) applied to the floor-area range, not the building as placed; network, storage, UPS, batteries, chillers and generators are left out. Replaces the open question of 400 vs 461 kg/m².
+- Removed from the tool: the Materials card (both figures, the chart, the 25-year sum, the two gap lines), the Engineering Materials panel, the 25-year materials panel, the heat pipe's embodied carbon on the connection cards, the "new building" trade-off line, the glossary entry, and the logic diagram's parts (embodied_it, embodied_building, embodied_rule) with condition env_embodied.
+- Kept: racks, servers, e-waste, copper, lifespans, and the "?" rows for concrete and steel and rare earths. Operational carbon (grid electricity, heat-pump power) is unchanged.
+- Nothing ranked or scored with it (the decide lists are never summed).
+- The register keeps the entries, marked "not used in the tool" (patch `register/patches/drop_embodied_carbon_2026_11_11.py`; meta.not_in_tool); the builders leave them out of templates.json, logic.json, opps.json and the diagram.

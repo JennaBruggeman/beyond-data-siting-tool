@@ -249,26 +249,21 @@ C.add(T,'Water',{async build(x){
 /* ======================= 11 Materials ======================= */
 C.add(T,'Materials',{async build(x){
   const M=await modelNow(x), e=BD.eng, R=e.R, f=e.siteFacts(), A=BD.S.answers, city=x.city, mw=A.mw||M.mwSized||1;
-  const racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6, ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40], eit=[servers*4.177*0.10/6,servers*4.177*0.15/6], gross=f.gross[1], eb=gross*0.461, ex=A.built==='existing';
-  const y25=[eit[0]*25,eit[1]*25];
-  const W=1000, H0=430; let svg=`<svg viewBox="0 0 ${W} ${H0}" width="${W}" height="${H0}" role="img" aria-label="Embodied carbon of the servers and the building, and how long each part lasts">`;
-  svg+=TXT(0,16,'Embodied carbon, t CO₂e',{fs:15,c:K.ink});
-  const rowsC=[{l:'Servers, each year',lo:eit[0],hi:eit[1],col:K.dc}];
-  if(!ex) rowsC.push({l:'Building, once',lo:eb,hi:eb,col:K.dcSup,val:`${fm(eb)} t`});
-  rowsC.push({l:'Servers over 25 years (our sum)',lo:y25[0],hi:y25[1],col:K.dc,col2:K.dcSup});
-  const b1=rbars(rowsC,{W:520,x0:0,y0:34,pitch:50,pad:130,max:Math.max(eb||0,y25[1]),tf:fm}); svg+=b1.s+TXT(0,34+b1.h+16,'t CO₂e, one scale',{fs:11,c:K.mute});
-  const sx=590, LIFE=[['Servers',5,6],['Cooling and heat pumps',15,25],['Building',25,27],['Pipe network',30,50]];
-  svg+=TXT(sx,16,'How long each part lasts, years',{fs:15,c:K.ink});
-  const b2=rbars(LIFE.map(l=>({l:l[0],lo:l[1],hi:l[2],col:K.dc,col2:K.dcSup,val:`${l[1]}–${l[2]}`})),{W:390,x0:sx,y0:34,pitch:50,pad:80,max:50,tf:fm}); svg+=b2.s+TXT(sx,34+b2.h+16,'years, one scale',{fs:11,c:K.mute});
-  svg+=TXT(0,H0-70,'Not in the tool yet:',{fs:12.5,c:K.red})+TXT(120,H0-70,'tonnes of concrete and steel · embodied carbon of the cooling plant · rare earths in retired equipment',{fs:12.5,c:K.red});
+  /* 11 Nov 2026 (J.B., F10): embodied carbon dropped from the tool (not accurate enough to show); the equipment, waste, copper and lifespans stay */
+  const racks=mw*1000/R.kWPerRack, servers=mw*1000/0.6, ew=[servers*21.2/6/1000,servers*26.3/6/1000], cu=[mw*20,mw*40];
+  const W=1000, H0=330; let svg=`<svg viewBox="0 0 ${W} ${H0}" width="${W}" height="${H0}" role="img" aria-label="How long each part of the data centre lasts">`;
+  const LIFE=[['Servers',5,6],['Cooling and heat pumps',15,25],['Building',25,27],['Pipe network',30,50]];
+  svg+=TXT(0,16,'How long each part lasts, years',{fs:15,c:K.ink});
+  const b2=rbars(LIFE.map(l=>({l:l[0],lo:l[1],hi:l[2],col:K.dc,col2:K.dcSup,val:`${l[1]}–${l[2]}`})),{W:760,x0:0,y0:34,pitch:50,pad:170,max:50,tf:fm}); svg+=b2.s+TXT(0,34+b2.h+16,'years, one scale',{fs:11,c:K.mute});
+  svg+=TXT(0,H0-24,'Not in the tool yet:',{fs:12.5,c:K.red})+TXT(120,H0-24,'tonnes of concrete and steel · rare earths in retired equipment',{fs:12.5,c:K.red});
   svg+='</svg>';
-  const key=`<div class="f1c-key"><span><i style="background:${K.dc}"></i>low end</span><span><i style="background:${K.dcSup}"></i>high end</span><span class="f1c-note">The 25-year servers bar is the tool’s yearly figure × 25: our sum, not a tool figure.</span></div>`;
-  return {draw:`<div class="${NS}wrap">${svg}${key}</div>`,lead:'The building lasts decades; the servers are replaced every five to six years. The tool counts the servers’ embodied carbon each year and the building once.',
-    hero:[{v:fm(racks),l:'racks, at 8 kW each'},{v:fm(servers),l:'servers, at 600 W each'},{v:rg(eit[0],eit[1]),u:'t CO₂e/yr',l:'embodied, servers'},{v:ex?C.q():fm(eb),u:ex?'':'t CO₂e',l:'embodied, building'}],
-    rows:[['Electronic waste',`${rg(ew[0],ew[1],f1)} t/yr, servers alone, six-year refresh`],['Copper in the facility',`${rg(cu[0],cu[1])} t`],['Embodied carbon, servers',`${rg(eit[0],eit[1],f1)} t CO₂e/yr; the 10–15% manufacturing share is our assumption (?)`],['Embodied carbon, building',ex?'an existing building keeps its structure':`${fm(eb)} t CO₂e for ${fm(gross)} m² at 461 kg/m²`],['Concrete and steel',C.q('tonnes not in the tool yet')],['Rare earths in retired equipment',C.q('not in the tool yet')]],
-    more:[['What the building figure covers',`<p>${fm(gross)} m² is the top of the floor-area range the tool reads for this lot (f.gross), not the building sized for ${f1(mw)} MW. A general building median of 461 kg/m²; no data-centre benchmark exists.</p>`],['Lifespans',`<p>Servers about 5–6 years; cooling and heat pumps 15–25; building 25–27 (economic life, Statistics Canada); pipe network 30–50, depending on water temperature.</p>`]],
-    src:['Racks, servers, waste, copper, embodied carbon: tool/engine.js materialsView. '+reg3('srv'),reg3('ew'),reg3('cu'),reg3('eit'),...(ex?[]:[reg3('eb')]),'Lifespans: the "Lifespans" row of the same panel. The 25-year sum is our arithmetic: yearly servers figure × 25.'],
-    missing:['concrete and steel tonnes','embodied carbon of cooling plant','rare earths in retired equipment (logic node rare_earth has no figure)','data-centre building benchmark for embodied carbon']}; }});
+  const key=`<div class="f1c-key"><span><i style="background:${K.dc}"></i>low end</span><span><i style="background:${K.dcSup}"></i>high end</span></div>`;
+  return {draw:`<div class="${NS}wrap">${svg}${key}</div>`,lead:'The building lasts decades; the servers are replaced every five to six years.',
+    hero:[{v:fm(racks),l:'racks, at 8 kW each'},{v:fm(servers),l:'servers, at 600 W each'},{v:rg(ew[0],ew[1],f1),u:'t/yr',l:'electronic waste, servers alone'},{v:`${fm(cu[0])}–${fm(cu[1])}`,u:'t',l:'copper in the facility'}],
+    rows:[['Electronic waste',`${rg(ew[0],ew[1],f1)} t/yr, servers alone, six-year refresh`],['Copper in the facility',`${rg(cu[0],cu[1])} t`],['Concrete and steel',C.q('tonnes not in the tool yet')],['Rare earths in retired equipment',C.q('not in the tool yet')]],
+    more:[['Lifespans',`<p>Servers about 5–6 years; cooling and heat pumps 15–25; building 25–27 (economic life, Statistics Canada); pipe network 30–50, depending on water temperature.</p>`]],
+    src:['Racks, servers, waste, copper: tool/engine.js materialsView. '+reg3('srv'),reg3('ew'),reg3('cu'),'Lifespans: the "Lifespans" row of the same panel.'],
+    missing:['concrete and steel tonnes','rare earths in retired equipment (logic node rare_earth has no figure)']}; }});
 
 /* ======================= 12 Report ======================= */
 C.add(T,'Report',{async build(x){

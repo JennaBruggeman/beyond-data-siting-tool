@@ -42,7 +42,7 @@ const COLS={
  water:[['Water evaporated on site',r=>r.id==='qu2'?NS:r.id==='van4'?'<span class="sub">none stated (operator claim)</span>':r.n.evap[1]?`up to ${fmt(r.n.evap[1])} m³/yr`:'none (no cooling towers)'],['Rain on the roof',r=>r.site&&r.site.roof?`about ${fmt(r.site.roof*r.mm/1000*0.8)} m³/yr`:NIL]],
  materials:[['Electricity over 50 years',r=>r.noPue?NS:rg(r.n.MWh.map(v=>v*50/1e6),'TWh',1)]],
 };
-const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat (25–35 °C) can be reused with heat pumps, but how much is not yet known, so no figure is shown.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials embodied in each reference are not yet compared.'};
+const WHY={heat:'Heat offered needs liquid cooling and a heat pump; air-cooled heat (25–35 °C) can be reused with heat pumps, but how much is not yet known, so no figure is shown.',energy:'Grid carbon: NIR 2026, 2024 consumption intensity in each province.',water:'Evaporation at most 1.5 L per kWh of heat (towers); hybrids wet only above 18 °C, 12.4% of the year in Vancouver and 10.4% in Edmonton (CWEC, computed). Rain at 80% capture, ECCC normals.',materials:'Materials are not yet compared across the references.'};
 function block(tab,f){ const C=COLS[tab]; if(!C) return '';
   const L=refs(f);
   return `<div class="cmp"><div class="tt"><table class="cmpt"><thead><tr><th></th>${C.map(c=>`<th>${esc(c[0])}</th>`).join('')}</tr></thead><tbody>

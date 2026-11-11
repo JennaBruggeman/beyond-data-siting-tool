@@ -7,7 +7,7 @@
 "counts": {
 "inputs": 17,
 "quantities": 225,
-"conditions": 112,
+"conditions": 111,
 "opportunities": 14,
 "sources": 1710
 }
@@ -2079,95 +2079,6 @@
 "edm": 1,
 "both": 1,
 "gen": 1
-}
-},
-{
-"id": "embodied_it",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Embodied carbon, IT",
-"formula": "servers × kg CO2e per server ÷ lifespan",
-"coef": "Dell R760 LCA (2025): 4,177 kg CO2e total (US), manufacturing ≈10–15%; R740 PCF 8,640 ± 8,480 kg Alissa et al. 2025: making the servers is 8.8% of life-cycle GHG on a US-average grid but about 82% on renewable power (their two cases only). The tool's own inference: on Vancouver's low-carbon grid, making the servers is of the same order as running them (at 1 MW the electricity is about 133–147 t/yr at 18.1 g/kWh); in Edmonton running them dominates.",
-"unit": "tCO2e/yr",
-"sources": [
-"dell",
-"dellR760",
-"alissa2025lca"
-],
-"source_roles": [
-{
-"id": "dellR760",
-"term": "4,177 kg CO2e per server (R760 LCA)",
-"role": "claim (total life cycle; × 10–15 % manufacturing share ?)",
-"conf": 50,
-"verified": true,
-"relabel": "30 Oct 2026: coefficient → claim (total life cycle; × 10–15 % manufacturing share ?) (4,177 kg includes US use phase; tool already takes 10–15 %)"
-},
-{
-"id": "dell",
-"term": "R740/R540/R650 footprints and weights",
-"role": "coefficient",
-"conf": 50,
-"verified": true
-}
-],
-"conf": 50,
-"status": "manufacturer LCA (EPEAT-verified)",
-"direction": "",
-"trial": "",
-"inputs": [
-"servers"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 0,
-"gen": 3
-}
-},
-{
-"id": "embodied_building",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Embodied carbon, building",
-"formula": "floor_area × kg CO2e/m²",
-"coef": "Vancouver benchmark 400 kg CO2e/m² (city-set) used for both cities in place of the 461 US median; 461 kg CO2e/m² median for general buildings (no data-centre per-m² benchmark exists). Alissa et al. 2025 (Microsoft data, air-cooled): the building is 0.6% of a data centre's life-cycle GHG on a US-average grid and about 5% on renewable power — so the building shell is small either way; servers and electricity dominate",
-"unit": "tCO2e",
-"sources": [
-"clf",
-"alissa2025lca",
-"vanEmbodied"
-],
-"source_roles": [
-{
-"id": "clf",
-"term": "all coefficients",
-"role": "coefficient",
-"conf": 40,
-"verified": true
-},
-{
-"id": "vanEmbodied",
-"term": "400 kg/m² benchmark",
-"role": "coefficient",
-"conf": 80,
-"verified": true
-}
-],
-"conf": 40,
-"status": "proxy per m²; share confirmed from Alissa et al. 2025",
-"direction": "",
-"trial": "",
-"inputs": [
-"floor_area"
-],
-"upstream": 40,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 1,
-"gen": 2
 }
 },
 {
@@ -10372,41 +10283,6 @@
 }
 },
 {
-"id": "embodied_rule",
-"kind": "quantity",
-"stage": "test",
-"name": "Embodied carbon rule",
-"formula": "Vancouver: new buildings at most 2× the baseline (800 kg CO2e/m² on the absolute path, our calculation); Edmonton: no requirement for private buildings",
-"coef": "VBBL 2025; further 10% cut delayed",
-"unit": "rule",
-"sources": [
-"vanEmbodied"
-],
-"source_roles": [
-{
-"id": "vanEmbodied",
-"term": "rule",
-"role": "rule",
-"conf": 90,
-"verified": true
-}
-],
-"conf": 90,
-"status": "read",
-"direction": "",
-"trial": "",
-"inputs": [
-"embodied_building"
-],
-"upstream": 40,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 1,
-"gen": 0
-}
-},
-{
 "id": "heat_value_split",
 "kind": "quantity",
 "stage": "decide",
@@ -14170,14 +14046,6 @@
 "to": "generator_nox_pm"
 },
 {
-"from": "servers",
-"to": "embodied_it"
-},
-{
-"from": "floor_area",
-"to": "embodied_building"
-},
-{
 "from": "plant_schedule",
 "to": "noise_level"
 },
@@ -14916,10 +14784,6 @@
 {
 "from": "vibration_rank",
 "to": "vibration_target"
-},
-{
-"from": "embodied_building",
-"to": "embodied_rule"
 },
 {
 "from": "price_floor",
@@ -16085,8 +15949,7 @@
 "name": "An existing building to reuse",
 "test": "a building nearby suits conversion; its embodied carbon is kept",
 "quantities": [
-"existing_building",
-"embodied_building"
+"existing_building"
 ],
 "move": [
 "money",
@@ -17822,26 +17685,6 @@
 "parties": [
 "utility",
 "neighbours",
-"climate"
-],
-"constraint": false,
-"note": "",
-"sources": [],
-"next_action": "the displaced source and its factor; measured water use"
-},
-{
-"id": "env_embodied",
-"heading": "9 Environmental",
-"name": "Embodied carbon",
-"test": "new equipment and networks",
-"quantities": [
-"embodied_it",
-"embodied_building"
-],
-"move": [
-"choice"
-],
-"parties": [
 "climate"
 ],
 "constraint": false,
