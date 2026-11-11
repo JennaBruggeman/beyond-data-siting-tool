@@ -97,7 +97,7 @@ function nearCT(f){ const w=BD.wpNear&&BD.wpNear(f,'ct',500); return f.city!=='v
 /* ---------- water ---------- */
 function waterRate(c){ if(c==='van') return {r:X.water.van,known:true,txt:'City of Vancouver 2026 rates as proposed: water $1.445–1.811 per m³ (winter, summer) + sewer $2.811 per m³ (?), both billed on metered water'};
   const o=X.water.edmOld; return {r:[o.w[0]+o.ww[0]+o.san,o.w[1]+o.ww[1]+o.san],known:false,txt:'EPCOR 2026 commercial rates not read: placeholder from the 2022–23 commercial water tiers ($0.95–1.61), the proposed 2025 wastewater treatment ($0.46–1.15) and the proposed sanitary rate ($1.12)'}; }
-function towerUse(f,outside){ const R=E().R, mw=A().mw||1, MWh=mw*R.pue[1]*8760*R.lf, MWh0=mw*R.pue[0]*8760*R.lf; const hyb=outside==='hybrid', share={van:0.124,edm:0.104}[f.city]; if(outside==='dry') return null;
+function towerUse(f,outside){ const R=E().R, mw=A().mw||1, MWh=mw*R.pue[1]*8760*R.lfR[1], MWh0=mw*R.pue[0]*8760*R.lfR[0]; const hyb=outside==='hybrid', share={van:0.124,edm:0.104}[f.city]; if(outside==='dry') return null;
   const evap=MWh*1.5*(hyb?share:1), evap0=MWh0*1.5*(hyb?share:1); return {evap,evap0,mk:[evap0*1.2,evap*2]}; } /* 30 Oct 2026: low end at PUE 1.4, high end at 1.55 */
 function rain(f,outside){ const roof=E().roofArea(f), mm=f.city==='van'?1159.5:422.5, wet=f.city==='van'?124:82.7, v=roof*mm/1000*0.8, tank=roof*wet/1000*0.8; const t=towerUse(f,outside);
   const used=t?Math.min(v,t.mk[0]):0; const wr=waterRate(f.city); if(!used) return {v,tank,used:0,wr};

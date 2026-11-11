@@ -277,7 +277,7 @@ function racksFor(M){ const A=BD.S.answers, mw=A.mw||M.mwSized||1, E=BD.eng.equi
   const all=pts.map(p=>[p[0],p[1],0]).concat(upper);
   const im=new T.InstancedMesh(geo,mat,Math.max(1,all.length)); const m4=new T.Matrix4(), q=new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),ang), sc=new T.Vector3(1,1,1);
   all.forEach(([u,vv,dz],k)=>{ const [x,y]=F.toW(u,vv); m4.compose(V(x,y,z0+dz+S.rack.H/2),q,sc); im.setMatrixAt(k,m4); }); im.count=all.length; im.castShadow=true; state.dc.add(im);
-  if(R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));
+  if(R&&R.lights&&!R.lights[0].parent) R.lights.forEach(l=>R.scene.add(l));   /* 11 Nov 2026: R is null before the 3D view opens (the What fits card runs the layout check without it) */
   state.rooms={E,need,got,floors,capacity:Math.min(need.racks,pts.length)+(floors-1)*Math.max(0,otherFloor),otherFloor,maxRacks:slots1+(floors-1)*Math.max(0,otherFloor)};
   return {obj:im,n:pts.length,drawn:all.length,per:need.racks,racks:E.racks[1],floors}; }
 /* ---------- overlays ---------- */
@@ -462,11 +462,12 @@ function applyCard(){ if(!R) return; const on=!!R.card; R.ctl.autoRotate=on; R.c
   const fk=state.key+'|'+state.tab; if(on&&state.span&&!R.multi&&R.framed!==fk&&state.tab!=='heat'){ R.framed=fk; const sp=state.span*0.95, rf=state.roof||0; R.cam.position.set(sp*1.45,sp*0.95+rf*1.25,sp*1.65); R.ctl.target.set(0,rf*0.45,0); R.ctl.update(); } }
 function cardMode(on){ if(!R) return; R.card=!!on; if(!R.cardWired){ R.cardWired=true; R.ctl.addEventListener('start',()=>{ R.ctl.autoRotate=false; clearTimeout(idleT); }); R.ctl.addEventListener('end',()=>{ clearTimeout(idleT); idleT=setTimeout(()=>{ if(R.card) R.ctl.autoRotate=true; },6000); }); } applyCard(); }
 function layoutCheck(){ const M=BD.model&&BD.model(); if(!T||!M||!M.foot||M.existing||!(M.footArea>200)||!BD.eng) return null;
-  const A=BD.S.answers, keep={mw:A.mw,dc:state.dc,rooms:state.rooms,hallZ:state.hallZ,elec:state.elecRoom,heat:state.heatRoom,opt:state.opt};
+  const A=BD.S.answers, keep={mw:A.mw,dc:state.dc,rooms:state.rooms,hallZ:state.hallZ,elec:state.elecRoom,heat:state.heatRoom,opt:state.opt,c:state.c};
+  if(!state.c) state.c=[0,0];   /* 11 Nov 2026: before the 3D view opens there is no scene centre; the count does not depend on it */
   const Mf=Object.assign({},M,{serverFoot:M.foot}), kw=BD.eng.R.equip.kwRack; let mw=Math.max(0.5,(BD.fitMax&&BD.fitMax())||2), cap=0, floors=1;
   try{ for(let i=0;i<3;i++){ A.mw=mw; state.dc=new T.Group(); state.opt=null; racksFor(Mf); cap=state.rooms.maxRacks; floors=state.rooms.floors; mw=Math.max(0.5,cap*kw[0]/1000); } }
   catch(e){ cap=0; }
-  finally{ A.mw=keep.mw; state.dc=keep.dc; state.rooms=keep.rooms; state.hallZ=keep.hallZ; state.elecRoom=keep.elec; state.heatRoom=keep.heat; state.opt=keep.opt; }
+  finally{ A.mw=keep.mw; state.dc=keep.dc; state.rooms=keep.rooms; state.hallZ=keep.hallZ; state.elecRoom=keep.elec; state.heatRoom=keep.heat; state.opt=keep.opt; state.c=keep.c; }
   return cap?{racks:cap,floors,mw:[cap*kw[0]/1000,cap*kw[1]/1000]}:null; }
 BD.scene3d={layoutCheck,show,showOptions,hide,ensure,demo,cardMode,rig:()=>R /* camera access for scripted recordings (video, 20 Oct 2026) */,snap:(x,y)=>R&&R.nbList?snap(x,y):null,state:()=>state,isOpen:()=>!!wrap&&wrap.style.display!=='none'};
 BD.showModel=()=>{ if(!BD.S.sel) return Promise.resolve(); return show('model',{}).catch(e=>console.warn(e)); };

@@ -12,9 +12,9 @@ let SITES=null;
 async function sites(){ if(SITES) return SITES; try{ const r=await fetch('refs_sites.json'); SITES=r.ok?(await r.json()).sites:{}; }catch(e){ SITES={}; } return SITES; }
 // one scenario's numbers, from the engine's own constants (same formulas as the Two cities tab)
 function nums(mw,city,des,pue){ const R=E().R; const P=pue?[pue,pue]:R.pue;
-  const fac=[mw*P[0],mw*P[1]], MWh=fac.map(v=>v*8760*R.lf), it=mw*8760*R.lf;
+  const fac=[mw*P[0],mw*P[1]], MWh=fac.map((v,i)=>v*8760*R.lfR[i]), it=[mw*8760*R.lfR[0],mw*8760*R.lfR[1]];
   const rec=des.inside&&des.inside!=='air';
-  const avail=rec?[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)]:[0,0];
+  const avail=rec?[it[0]*R.capture[0]*R.cop[1]/(R.cop[1]-1),it[1]*R.capture[1]*R.cop[0]/(R.cop[0]-1)]:[0,0];
   const hp=rec?[avail[0]/R.cop[1],avail[1]/R.cop[0]]:[0,0];
   const towers=des.outside==='towers'||des.outside==='hybrid';
   return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/R.homeHeat[city]),hpco2:hp.map(v=>v*R.grid[city]/1000),

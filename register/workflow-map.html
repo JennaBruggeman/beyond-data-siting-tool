@@ -915,8 +915,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "size",
 "name": "IT load, actual (range)",
-"formula": "IT MW × 8,760 h × 0.6 for every yearly MWh in the tool (M95: aligned to the tool); the 0.20–0.60 utilisation band is context and is not applied",
-"coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ servers' combined maximum ≈ 0.6 (Fan et al. 2007, real data centre); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35",
+"formula": "IT MW × 8,760 h × 0.4–0.6 for every yearly MWh in the tool (M95: aligned to the tool); the 0.20–0.60 utilisation band is context and is not applied",
+"coef": "colocation server utilisation 0.21→0.35 (LBNL 2024); capacity utilisation 0.5 (LBNL); average ÷ servers' combined maximum ≈ 0.6 (Fan et al. 2007, real data centre); leased share proxy: Digital Realty Toronto occupancy 96.4%, 55.8 MW white-space (Q2 2025 supplemental p.24) — occupancy ≠ utilisation; measured whole-building ceiling (City energy report): 555 W Hastings site EUI 1.84 GJ/m² → 37.4 GWh/yr total, 32.5 GWh non-heat ≈ 3.7 MW average for the whole 73,000 m² tower, data centre and offices together — so the ≥3.7 MW of operator nameplate claims cannot all be running at once; 1050 W Pender 11.2 GWh non-heat ≈ 1.3 MW avg; 900 W Hastings 0.57 MW; 111 E 5th 0.45 MW (no data centre yet); Equinix 10-K FY2024 (public filing, other operator): cabinet utilisation = cabinet space billed ÷ total cabinet capacity \"taking into consideration power limitations\" — Americas 81% (116,700 of 144,100 cabinets, 107 IBXs), EMEA 78%, Asia-Pacific 75%, company 78% (79% in 2023); MRR per cabinet Americas $2,550/month; new IBXs built for power and cooling twice that of earlier ones; Vancouver is a leased-only Equinix metro; Calgary CL1–3 and Kamloops KA1 (2020 acquisitions) listed in Schedule III; CALIBRATION: Telia Helsinki snapshot ERF 0.75 and PUE 1.152 with 4.11 MW waste heat imply 4.8 MW actual against 24 MW IT nameplate = 0.20 (one day, hall partly built out) — the low end of the band should be 0.20, not 0.35 ‖ 11 Nov 2026 (J.B.): the tool now applies a load range 0.4–0.6 (low Uptime 2024 survey p. 9, high Fan et al. 2007).",
 "unit": "MW",
 "sources": [
 "dlrQ2_2025",
@@ -1937,10 +1937,11 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "characterise",
 "name": "Load factor (average ÷ the servers' combined maximum power)",
 "formula": "average ÷ sum of each server's measured maximum",
-"coef": "≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr",
+"coef": "0.4–0.6 (J.B. 11 Nov 2026): low end Uptime Global Data Center Survey 2024 p. 9, one in four sites typically under 40 % of available UPS capacity (self-reported, no average; uptime2024Survey); high end ≈ 0.6: real data centre averaged 59.5% of 'actual peak' (sum of machine maxima); its observed peak was 71.9%, so average ÷ observed peak ≈ 0.83 (Fan et al. 2007, Table 3, s. 4.3–4.5; checked 18 Oct 2026); 8,760 h/yr",
 "unit": "—",
 "sources": [
-"fan2007"
+"fan2007",
+"uptime2024Survey"
 ],
 "source_roles": [
 {
@@ -1948,6 +1949,13 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "term": "all coefficients",
 "role": "coefficient",
 "conf": 80,
+"verified": true
+},
+{
+"id": "uptime2024Survey",
+"term": "low end of the load range",
+"role": "coefficient (operator survey)",
+"conf": 50,
 "verified": true
 }
 ],
@@ -1960,7 +1968,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "city": {
 "van": 0,
 "edm": 0,
-"both": 0,
+"both": 1,
 "gen": 1
 }
 },
@@ -12506,8 +12514,8 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kind": "quantity",
 "stage": "test",
 "name": "How much of the IT capacity actually runs",
-"formula": "running IT load = design IT load × 0.6, the load factor (register load_factor); no further share for racks not yet in use",
-"coef": "The tool applies the load factor 0.6 to yearly electricity, cost, carbon, heat offered and cooling water (register load_factor: Fan et al. 2007, one operator's clusters averaged 59.5 % of their machines' combined maximum; J.B. 11 Nov 2026). No sourced share exists for racks not yet in use in one colocation building, so none is applied on top: Guide at VAN3: halls are not always at capacity (empty racks, enclosures being built) and power per area depends on the tenants (tourVAN3, guide's claim); a quarter of surveyed sites typically run under 40% of their UPS capacity (Uptime 2024, operator self-report); LBNL assumes 50% average capacity utilisation for the whole US fleet, unsourced (lbnl2024). Neither gives a typical value for one colocation building.",
+"formula": "running IT load = design IT load × 0.4–0.4–0.6, the load factor (register load_factor); no further share for racks not yet in use",
+"coef": "The tool applies the load factor 0.6 to yearly electricity, cost, carbon, heat offered and cooling water (register load_factor: Fan et al. 2007, one operator's clusters averaged 59.5 % of their machines' combined maximum; J.B. 11 Nov 2026). No sourced share exists for racks not yet in use in one colocation building, so none is applied on top: Guide at VAN3: halls are not always at capacity (empty racks, enclosures being built) and power per area depends on the tenants (tourVAN3, guide's claim); a quarter of surveyed sites typically run under 40% of their UPS capacity (Uptime 2024, operator self-report); LBNL assumes 50% average capacity utilisation for the whole US fleet, unsourced (lbnl2024). Neither gives a typical value for one colocation building. ‖ 11 Nov 2026 (J.B.): the tool now applies a load range 0.4–0.6 (low Uptime 2024 survey p. 9, high Fan et al. 2007).",
 "unit": "share of design IT load",
 "sources": [
 "tourVAN3",

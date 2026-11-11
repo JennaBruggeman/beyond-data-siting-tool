@@ -122,7 +122,7 @@ function sensView(){
   ];
   if(strict) sz.push({lab:'Ground-floor reading',range:'strict ↔ lenient (City to confirm)',lo:MWof(sM,mM,false),hi:MWof(sM,mM,true),base});
   sz.sort((a,b)=>Math.abs(b.hi-b.lo)-Math.abs(a.hi-a.lo));
-  const it=mw*8760*R.lf, capM=mid(...R.capture), copM=mid(...R.cop), heat=(c,p)=>it*c*p/(p-1)/1000;
+  const it=mw*8760*(R.lfR[0]+R.lfR[1])/2, capM=mid(...R.capture), copM=mid(...R.cop), heat=(c,p)=>it*c*p/(p-1)/1000;
   const hb=heat(capM,copM);
   const ht=[
    {lab:'Share of heat captured into liquid',range:`${R.capture[0]}–${R.capture[1]}`,lo:heat(R.capture[0],copM),hi:heat(R.capture[1],copM),base:hb},
@@ -173,8 +173,8 @@ BD.views.time=timeView;
 /* ---------- two cities: the same data centre in Vancouver and Edmonton ---------- */
 function citiesView(){
   const e=E(), R=e.R, A=BD.S.answers, mw=A.mw||5, rng=e.rng; BD.scene3d&&BD.scene3d.hide();
-  const one=c=>{ const fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf), it=mw*8760*R.lf;
-    const avail=[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)], hp=[avail[0]/R.cop[1],avail[1]/R.cop[0]];
+  const one=c=>{ const fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map((v,i)=>v*8760*R.lfR[i]), it=[mw*8760*R.lfR[0],mw*8760*R.lfR[1]];
+    const avail=[it[0]*R.capture[0]*R.cop[1]/(R.cop[1]-1),it[1]*R.capture[1]*R.cop[0]/(R.cop[0]-1)], hp=[avail[0]/R.cop[1],avail[1]/R.cop[0]];
     return {MWh,co2:MWh.map(v=>v*R.grid[c]/1000),avail,homes:avail.map(v=>v/R.homeHeat[c]),hpco2:hp.map(v=>v*R.grid[c]/1000)}; };
   const v=one('van'), d=one('edm');
   const rows=[

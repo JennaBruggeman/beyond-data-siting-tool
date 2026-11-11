@@ -22,7 +22,7 @@ const R={
  grossPerMW:[505,1109],               // check: whole building per MW IT — min–max of the 11 benchmark buildings in bench/benchmarks.json (no register id: unsourced list; test_size_chain.py keeps this in sync)
  cases:{van:[{mw:1.6,n:'Cologix VAN5'}].concat(DS.cases.van), edm:DS.cases.edm}, // operator or applicant figures; VAN5's 1.6 MW has no register id (unsourced list)
  steps:[0.1,0.2,0.3,0.5,0.75,1,1.5,2,2.5,3,4,5,6,8,10,12,15,20,25,30,40], // size slider steps: a tool choice, no source (unsourced list)
- plant:DQ.plant, pue:DQ.pue, lf:DQ.lf, lwUnitDry:DN.lwUnitDry, lwUnit:DN.lwUnit,
+ plant:DQ.plant, pue:DQ.pue, lf:DQ.lf, lfLo:DQ.lfLo, lfR:[DQ.lfLo,DQ.lf] /* load range 0.4–0.6 (J.B. 11 Nov 2026): low Uptime 2024, high Fan 2007; pairs with the low and high PUE */, lwUnitDry:DN.lwUnitDry, lwUnit:DN.lwUnit,
  capture:DH.capture, cop:DH.cop,
  fuelLkWh:DQ.fuelLkWh, fuelHours:DQ.fuelHours, fuelLimit:DQ.fuelLimit,
  homeMWh:DH.homeMWh, gridYear:DH.gridYear, gridBC:DH.gridBC /* 11 Nov 2026: BC Government factor, second labelled BC figure */, homeHeat:DH.homeHeatMWh /* the heat a home needs (F11 B6) */, monthRatio:DH.monthRatio, grid:DH.grid, neuCredit:DH.neuCredit,
@@ -33,7 +33,7 @@ const SRC2={
  env:'formula register: envelope (zone schedules; sources 17, 18)', hall:'register: hall_area (one calibration case, confidence 50); ground-floor rule: I-2 s. 2.2.7; floor heights: Burlington plans, HK TPB A/KC/480, A/KC/510B',
  size:'register: size_fit (built halls: eStruxture VAN-1, Hut 8 Vault, Qu EDM1, Cologix VAN5 — operator claims; LBNL prototypes, Sun et al. 2021; whole-building check: 111 E 5th RTS 19744, Ark UP4 committee report, Cologix VAN4 operator)',
  plant:'register: component_space (manufacturer claims); cooling-unit clearances from maker layout guides (evapcoLayout2026, bacLayout2023); UPS and battery rooms equipment only, switchgear rooms not sourced',
- pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor (Fan et al. 2007)',
+ pue:'register: pue (LBNL 2023; Uptime 2025 industry survey)', lf:'register: load_factor, 0.4–0.6 (low: Uptime 2024 survey p. 9, a quarter of sites under 40 % of UPS capacity; high: Fan et al. 2007, 59.5 %)',
  cap:'register: liquid_capture (LBNL 2014 — direct-to-chip 57–75%: 57–59% typical, 67–75% best; air-cooled: no primary figure)',
  cop:'register: cop (DEA 2026 waste-heat heat pumps to 70 °C, 1–3 MW: 3.0–3.6; observed at Meta Odense, 27 → 70 °C: 4.5 in 2020; from 2021 Fjernvarme Fyn reports Meta\'s heat pumps together with others, about 3.9 combined — Fjernvarme Fyn annual reports)', fuel:'register: fuel_on_site (NFC 2020 Table 4.3.13.4.-B; fuel rate a manufacturer claim; Uptime ≥ 12 h)',
  svc:'register: service_class (BC Hydro primary guide; EPCOR connection guide)', homes:'register: homes_heated (NRCan CEUD residential, 2018–22 average)',
@@ -239,7 +239,7 @@ function mathFits(f){
 function mathNeeds(mw,fac,f){
   const pl=plantPerMW(false), plR=plantPerMW(true), p=R.plant, cN=coolerFor(false), cR=coolerFor(true);
   return mathBox([
-    `Power at the meter at full load: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>. Averaged over a year (× ${R.lf}): <b>${n1(fac[0]*R.lf)}–${n1(fac[1]*R.lf)} MW</b>.`,
+    `Power at the meter at full load: ${mw} MW × PUE ${R.pue[0]} = ${n1(fac[0])} MW; × ${R.pue[1]} = <b>${n1(fac[1])} MW</b>. Averaged over a year (× ${R.lfR[0]}–${R.lfR[1]}): <b>${n1(fac[0]*R.lfR[0])}–${n1(fac[1]*R.lfR[1])} MW</b>.`,
     (()=>{ const z=plantZones(mw,false), ind=plantIndoor(mw,false); return z?`Plant space, ${z.name}: ${z.nLo}–${z.nHi} units of ${z.L} × ${z.W} m with ${z.wall[0]} m end and ${z.wall[1]} m side to a wall, ${z.gap[0]} m end to end and ${z.gap[1]} m side to side (maker layout guides); low: ${z.nLo} units in a ${z.arr[0]} × ${z.arr[1]} block = ${n0(z.lo)} m²; high: ${z.nHi} in one row = ${n0(z.hi)} m²; + UPS ${p.ups[0]}–${p.ups[1]} and batteries ${p.batt[0]}–${p.batt[1]} m² per MW × ${mw} = ${n0(ind[0])}–${n0(ind[1])} m² (equipment only) = <b>${n0(z.lo+ind[0])}–${n0(z.hi+ind[1])} m²</b>.`:''; })(),
     (()=>{ const z=plantZones(mw,true), ind=plantIndoor(mw,true); return z?`With heat recovery (${z.name}, ${z.nLo}–${z.nHi} units with their clear zones), add heat pumps ${p.hp[0]}–${p.hp[1]} + CDUs ${p.cdu[0]}–${p.cdu[1]} m² per MW indoors: <b>${n0(z.lo+ind[0])}–${n0(z.hi+ind[1])} m²</b>.`:''; })(),
     BD.S.answers.gens==='none'?'Standby fuel: none (no generators chosen).':`Standby fuel: ${n1(fac[0])}–${n1(fac[1])} MW × 1,000 (kW) × ${R.fuelHours} h × ${R.fuelLkWh} L per kWh = <b>${n0(fac[0]*1000*R.fuelHours*R.fuelLkWh)}–${n0(fac[1]*1000*R.fuelHours*R.fuelLkWh)} L</b>.`
@@ -306,7 +306,7 @@ function fitsView(){
    <div class="mwscale">${[0.1,1,10,40].map(v=>`<span style="left:${pos01(v)}%">${v}${v===40?' MW':''}</span>`).join('')}</div>
    <div class="src">${VAL.length>1?`The slider runs from ${VAL[0]} to ${VAL[VAL.length-1]} MW: the sizes that pass every rule on this lot with this set-up.`:VAL.length?`Only ${VAL[0]} MW passes every rule on this lot with this set-up.`:'No size passes every rule on this lot with this set-up.'} Bar under the track: what the floor holds. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
-  <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55: industry surveys, not this design); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
+  <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55: industry surveys, not this design); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lfR[0],fac[1]*R.lfR[1],'MW')} (about ${Math.round(R.lfR[0]*100)}–${Math.round(R.lfR[1]*100)} % of full load over a year: low end Uptime 2024 survey, high end Fan et al. 2007); this sets the yearly energy</dd>
   <dt>Plant space</dt><dd>${rng(plA[0],plA[1],'m²')} with ${coolerFor(false).name}; ${rng(plRA[0],plRA[1],'m²')} with heat recovery: cooling units with their clear zones and spacing (maker layout guides); UPS and battery rooms equipment only</dd>
   <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h, Uptime's minimum; ${rng(fuel[0]*2,fuel[1]*4,'L')} at the 24–48 h operators report (claims). Generator tanks over 2,500 L, as here, fall under the fire code's Part 4 (smaller ones under CSA B139, NFC 2020 4.1.1.1.(3)(b)): Part 4 lets a protected storage room hold ${fmt(R.fuelLimit.first)} L on the first storey and ${fmt(R.fuelLimit.low)} L in a basement or upper storey (Table 4.3.13.4.-B). ${fuelAt==='roof'?(fuelOver?`<span class="k">Over the limit:</span> the generators are on the roof, where a tank supplying an engine may hold at most 1,250 L and 2,500 L on one supply line (CSA B139.1.1 6.5.3; register arch_csa_b139); each set's tank would hold about ${fmt(Math.round(fuelPer/100)*100)} L, so this size is blocked with roof generators`:`The generators are on the roof: each set's tank is within the 2,500 L a supply line CSA B139.1.1 6.5.3 allows there (register arch_csa_b139)`):'The generators stand in the yard, outdoors at grade: each set keeps the CSA B139.1.0 Table 2 distances to the property line and the building (register arch_csa_b139)'}}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
@@ -351,7 +351,7 @@ async function recvView(){
     <dl><dt>Heat after the heat pump</dt><dd>${rng(r.avail[0]/1000,r.avail[1]/1000,'GWh/yr')}</dd><dt>Equal to the heating of</dt><dd>${rng(r.homes[0],r.homes[1],'homes')} (space and hot water, provincial average; available, not heated)</dd>
     <dt>Heat-pump electricity</dt><dd>${rng(r.hp[0]/1000,r.hp[1]/1000,'GWh/yr')} → ${rng(r.co2[0],r.co2[1],'t CO₂e/yr')}</dd></dl>${src('lf')}${src('cap')}${src('cop')}${src('homes')}${src('grid')}
     ${mathBox([
-      `Server electricity in a year: ${mw} MW × 8,760 h × ${R.lf} average load = <b>${n0(it)} MWh</b>.`,
+      `Server electricity in a year: ${mw} MW × 8,760 h × ${R.lfR[0]}–${R.lfR[1]} average load = <b>${n0(r.itMWhR[0])}–${n0(r.itMWhR[1])} MWh</b> (load: low end Uptime 2024 survey, high end Fan et al. 2007).`,
       `Heat captured into liquid: ${n0(it)} × ${R.capture[0]} = ${n0(it*R.capture[0])} MWh, up to × ${R.capture[1]} = <b>${n0(it*R.capture[1])} MWh</b>.`,
       `A heat pump adds its own electricity as heat: heat out = captured × COP ÷ (COP − 1). With COP ${R.cop[1]}: × ${(R.cop[1]/(R.cop[1]-1)).toFixed(3)}; with COP ${R.cop[0]}: × ${(R.cop[0]/(R.cop[0]-1)).toFixed(3)}. Low end ${n0(it*R.capture[0])} × ${(R.cop[1]/(R.cop[1]-1)).toFixed(3)} = ${n0(r.avail[0])} MWh; high end ${n0(it*R.capture[1])} × ${(R.cop[0]/(R.cop[0]-1)).toFixed(3)} = <b>${n0(r.avail[1])} MWh</b>.`,
       `Heat-pump electricity = heat out ÷ COP: ${n0(r.avail[0])} ÷ ${R.cop[1]} = ${n0(r.hp[0])} MWh; ${n0(r.avail[1])} ÷ ${R.cop[0]} = <b>${n0(r.hp[1])} MWh</b>.`,
@@ -384,9 +384,9 @@ function optionSet(f,near,nets){
 }
 function calc(o,f,near,nets){
   const r={}; const fac=[o.mw*R.pue[0],o.mw*R.pue[1]];
-  r.fac=fac; r.itMWh=o.mw*8760*R.lf; r.facMWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
+  r.fac=fac; r.itMWhR=[o.mw*8760*R.lfR[0],o.mw*8760*R.lfR[1]]; r.itMWh=r.itMWhR[1]; /* load range 0.4–0.6: low end with the low capture */ r.facMWh=[fac[0]*8760*R.lfR[0],fac[1]*8760*R.lfR[1]];
   r.plant=plantArea(o.mw,o.recover);   /* scope f: clear zones counted (was plantPerMW × MW, equipment only) */
-  if(o.recover){ const cap=[r.itMWh*R.capture[0],r.itMWh*R.capture[1]];
+  if(o.recover){ const cap=[r.itMWhR[0]*R.capture[0],r.itMWhR[1]*R.capture[1]];
     r.avail=[cap[0]*R.cop[1]/(R.cop[1]-1),cap[1]*R.cop[0]/(R.cop[0]-1)];
     r.hp=[r.avail[0]/R.cop[1],r.avail[1]/R.cop[0]];
     r.homes=r.avail.map(v=>v/R.homeHeat[f.city]); /* logic test 19 Oct: a home's 16.81 / 33.14 MWh is energy bought; the heat it needs is that × 0.85 (gas boiler) */ r.co2=r.hp.map(v=>v*R.grid[f.city]/1000);
@@ -581,7 +581,7 @@ async function optionsView(){
      ['Standby fuel, 12 h minimum (24–48 h typical, claims)',o=>BD.S.answers.gens==='none'?'none (no generators chosen)':rng(o.r.fuel[0],o.r.fuel[1],'L')],
      ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?(f.city==='van'?' — about 15 months to a Vancouver decision':' — the City targets 160 calendar days for a complex rezoning (about 5.5 months, after a pre-application meeting), then a Council public hearing'):''}`]]],
    ['The utility and the grid',[
-     ['Power at full load',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],['Power on average',o=>rng(o.r.fac[0]*R.lf,o.r.fac[1]*R.lf,'MW')],
+     ['Power at full load',o=>rng(o.r.fac[0],o.r.fac[1],'MW')],['Power on average',o=>rng(o.r.fac[0]*R.lfR[0],o.r.fac[1]*R.lfR[1],'MW')],
      ['Electricity a year',o=>rng(o.r.facMWh[0]/1000,o.r.facMWh[1]/1000,'GWh')],
      ['Grid connection',()=>f.cpcn?`${state('chg')}downtown supply area (to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application`]]],
    ['Receivers',[
@@ -733,7 +733,7 @@ const SRC3={
 };
 const s3=k=>`<div class="src">${badge(k==='lf'?'lf2':k)}${esc(SRC3[k])}</div>`;
 function energyView(){
-  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lfR[0],fac[1]*8760*R.lfR[1]];
   const roof=roofArea(f), plant=plantArea(mw,false)[1], share=Math.min(0.9,roof?plant/roof:0);
   const kwp=[roof*0.66*(1-share)*0.70*0.16,roof*0.66*(1-share)*0.70*0.20], yld=f.city==='van'?[892,1007]:[944,1244], pvMWh=kwp.map((v,i)=>v*yld[i]/1000);
   const co2=MWh.map(v=>v*R.grid[f.city]/1000);
@@ -741,7 +741,7 @@ function energyView(){
   const Pg=f.M&&f.M.plant&&f.M.plant.s, gInst=Pg&&Pg.g?Pg.gN*Pg.g.mw:null; // installed sets, spares included (sweep M39)
   const ups=[mw*10/60*0.5,mw*15/60*0.5], gen=gInst?[gInst*1000*4,gInst*1000*4]:[fac[0]*1000*4,fac[1]*1000*4];
   let h=tabBar('energy')+`<h2>Power in, power offered</h2><p class="draft">A customer first. What it can give back is <span class="k">flexibility</span>, and only the operator can give it.</p>
-  <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lf*100)}% of full load on average</dd>
+  <h3>What it draws</h3><dl><dt>Power at the meter</dt><dd>${rng(fac[0],fac[1],'MW')} at full load; about ${rng(fac[0]*R.lfR[0],fac[1]*R.lfR[1],'MW')} on average</dd><dt>Electricity a year</dt><dd>${rng(MWh[0]/1000,MWh[1]/1000,'GWh')}, at about ${Math.round(R.lfR[0]*100)}–${Math.round(R.lfR[1]*100)} % of full load on average (Uptime 2024 survey to Fan et al. 2007)</dd>
   ${cost?`<dt>Cost a year</dt><dd>about $${(cost[0]/1e6).toFixed(1)}–${(cost[1]/1e6).toFixed(1)} million if served on BC Hydro's large general service (6.79 ¢/kWh + $13.83/kW a month, the demand charge taken at full load and billed monthly, which is conservative), for a site connected at distribution voltage, as a 2.5–10 MW data centre usually is; the transmission rate (RS 1830, supply at 60 kV or higher) is not applied, and the size at which BC Hydro would require it is not yet sourced (?)</dd>`:`<dt>Price</dt><dd>Alberta pool averaged $43.68/MWh in 2025; with EPCOR's site charges about $49.67/MWh energy only (register: electricity_price), plus distribution and transmission charges not counted</dd>`}
   <dt>Carbon of that electricity</dt><dd>${rng(co2[0],co2[1],'t CO₂e/yr')} at ${R.grid[f.city]} g/kWh (average, consumption; NIR ${R.gridYear})${f.city==='van'&&R.gridBC?`; ${rng(co2[0]*R.gridBC.v/R.grid.van,co2[1]*R.gridBC.v/R.grid.van,'t CO₂e/yr')} at the BC Government’s ${R.gridBC.year} factor, ${R.gridBC.v} g/kWh (imports included; ${R.gridBC.lo}–${R.gridBC.hi} over ${R.gridBC.years})`:''}</dd>
   <dt>Grid connection</dt><dd>${f.cpcn?`${state('chg')}downtown supply area (to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures`:`${state('cj')}needs the utility's answer to a load application; in Virginia, Dominion Energy reports 12–36 months for this (JLARC 2024; a transferred figure, not BC or Alberta)`}</dd></dl>${s3('elec')}${src('grid')}${f.cpcn?src('grid2'):''}
@@ -754,7 +754,7 @@ function energyView(){
   <h3>Standby generators</h3><dl><dt>Testing</dt><dd>about 4 full-load hours a year: ${rng(gen[0]*0.706/1000,gen[1]*0.706/1000,'t CO₂')} and ${rng(gen[0]*14.6/1000,gen[1]*14.6/1000,'kg NOₓ')} a year, testing every installed set (AP-42 factors for uncontrolled diesel engines)</dd></dl>${s3('gen')}
   ${mathBox([
     `Power at the meter: ${mw} MW × PUE ${R.pue[0]}–${R.pue[1]} = <b>${rng(fac[0],fac[1],'MW')}</b>.`,
-    `Electricity a year: ${n1(fac[0])} MW × 8,760 h × ${R.lf} = ${n0(MWh[0])} MWh; ${n1(fac[1])} MW × 8,760 × ${R.lf} = <b>${n0(MWh[1])} MWh</b>.`,
+    `Electricity a year: ${n1(fac[0])} MW × 8,760 h × ${R.lfR[0]} = ${n0(MWh[0])} MWh; ${n1(fac[1])} MW × 8,760 × ${R.lfR[1]} = <b>${n0(MWh[1])} MWh</b> (load ${R.lfR[0]}: Uptime 2024 survey, a quarter of sites under 40 % of UPS capacity; ${R.lfR[1]}: Fan et al. 2007).`,
     cost?`Cost: energy ${n0(MWh[0])} MWh × 1,000 × $0.0679 + demand ${n1(fac[0])} MW × 1,000 × $13.83 × 12 = $${n0(cost[0])}; high end $${n0(cost[1])}.`:'Cost: Alberta pool price plus EPCOR charges; no single-rate estimate.',
     `Carbon: ${n0(MWh[0])}–${n0(MWh[1])} MWh × ${R.grid[f.city]} g/kWh ÷ 1,000 = <b>${rng(co2[0],co2[1],'t CO₂e')}</b>.`,
     `Solar: roof ${n0(roof)} m² × 0.66 usable × (1 − ${share.toFixed(2)} plant) × 0.70 packing × 0.16–0.20 kW/m² = ${n1(kwp[0])}–${n1(kwp[1])} kWp; × ${fmt(yld[0])}–${fmt(yld[1])} kWh per kWp a year (flat to latitude tilt, NRCan) = <b>${rng(pvMWh[0],pvMWh[1],'MWh')}</b>; ÷ the building's use = ${(pvMWh[0]/MWh[1]*100).toFixed(2)}–${(pvMWh[1]/MWh[0]*100).toFixed(2)}%.`,
@@ -766,7 +766,7 @@ function energyView(){
   show3d('energy',{site:f,gridNote:f.cpcn?'Downtown supply area (to Nanaimo St): no new feeder positions before the West End substation (expected July 2032).':''});
 }
 function waterView(){
-  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lf,fac[1]*8760*R.lf];
+  const f=siteFacts(), A=BD.S.answers, mw=A.mw||1, fac=[mw*R.pue[0],mw*R.pue[1]], MWh=[fac[0]*8760*R.lfR[0],fac[1]*8760*R.lfR[1]];
   const towers=A.outside==='towers', hybrid=A.outside==='hybrid';
   // hybrid coolers run wet only when the air is too warm for the loop (30 °C loop, 12 K approach → above 18 °C dry-bulb): CWEC hours per city (J.B. parity audit A2, 16 Oct 2026)
   const DW=BD.data.water, WET=DW.wet, wet=hybrid?WET[f.city][1]:1, CY=DW.cycles; // tool/data/water.json, with register ids

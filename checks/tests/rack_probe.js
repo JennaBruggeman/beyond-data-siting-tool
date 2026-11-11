@@ -14,7 +14,6 @@ const { chromium } = require('playwright');
     if (BD.scene3d.ensure) await BD.scene3d.ensure();
     const M = BD.model(), L = BD.eng.R.layout, keep = L.rackFloor, out = { mwPicked: BD.S.answers.mw, foot: Math.round(M.footArea), nF: M.nF, H: M.H, kwRack: BD.eng.R.equip.kwRack, rackFloor: keep, layout: Object.assign({}, L) };
     out.dbg = { existing: !!M.existing, kit: !!(BD.kit && BD.kit.make), T: !!window.THREE, fitMax: BD.fitMax ? BD.fitMax() : null, built: BD.S.answers.built };
-    try { BD.eng.show3d('model', { site: BD.eng.siteFacts() }); } catch (e) { out.showErr = e.message; } await new Promise(z => setTimeout(z, 3000));
     out.withThinning = BD.scene3d.layoutCheck(); L.rackFloor = 0; out.packed = BD.scene3d.layoutCheck(); L.rackFloor = keep;
     const st = BD.scene3d.state(); out.rooms = st.rooms ? { floors: st.rooms.floors } : null; return out; }, G.answers);
   console.log(JSON.stringify(r, null, 1)); await b.close(); })();
