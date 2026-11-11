@@ -5,7 +5,7 @@ R = pathlib.Path(__file__).resolve().parents[2]
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']
 K = 'nfpa37_2024'
 T = ("STANDARD (US, benchmark; paywalled, read on NFPA Free Access): NFPA 37, Installation and Use of Stationary Combustion Engines and Gas Turbines, 2024 edition (pp. 37-8 to 37-12): "
-     "4.1.1.1 engines easy to reach for maintenance, repair and firefighting; 4.1.1.2 air supply designed so that flue gases are not drawn in from stacks or flues; "
+     "4.1.1.1 engines readily accessible (NFPA 37's defined term) for maintenance, repair and firefighting; 4.1.1.2 air supply designed so that flue gases are not drawn in from stacks or flues; "
      "4.1.2.1.1 engine rooms within structures: walls, floors and ceilings rated at least 1 hour; 4.1.2.1.4 attached engine rooms: common wall at least 1 h; 4.1.2.1.5 openings with self-closing fire doors or dampers to match; "
      "4.1.2.2.2 dedicated detached structures at least 1.5 m (5 ft) from openings in walls and from structures with combustible walls, no minimum where the exposing or exposed wall is 1 h or the detached structure is sprinklered; "
      "4.1.3 on roofs: 4.1.3.1 at least 1.5 m from any openings in the walls of structures; 4.1.3.2 1.5 m from combustible walls unless 1 h (4.1.3.2.1), a fire test (4.1.3.2.2) or engineering calculations (4.1.3.2.3); 4.1.3.3 oil containment curb or dike holding the full lube-oil or fuel capacity; 4.1.3.4 noncombustible surface 300 mm beyond the engine and dike; "

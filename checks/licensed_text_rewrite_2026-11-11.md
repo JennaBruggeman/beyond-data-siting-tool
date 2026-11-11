@@ -8,8 +8,8 @@ Patch: register/patches/licensed_text_rewrite_2026_11_11.py (J.B. 11 Nov 2026: f
 - **Also still quoted:** checks/eng_export/V339/eng_V339.json (a tool export; the next re-export refreshes it), booklet/logic/ALL_PARTS_MATH.md, checks/sweep/ and checks/check2/ results (short lines).
 - **Paraphrases closest to a meaning shift** (reviewed; one fixed):
   - ASHRAE Ch. 45 recirculation: kept the "can" ("can be a serious risk"; the agent's first version said "is"). Fixed.
-  - NFPA 37 4.1.1.1 "readily accessible" → "easy to reach".
-  - FM 1-40 2.2.1.3: levee → "relies on a levee or other built flood defences".
+  - NFPA 37 4.1.1.1: kept "readily accessible (NFPA 37's defined term)" (J.B. 11 Nov; first version said "easy to reach").
+  - FM 1-40 2.2.1.3: the original covers a levee **or other man-made flood-control works**, so the scope stays: "not in an area whose flood protection is a levee or other constructed flood-control works" (J.B. 11 Nov; first version said "relies on a levee or other built flood defences", which changed "protected by").
   - ASHRAE Ch. 52 pipe depth: "within about 50 mm of the surface" → "about 50 mm or less below the surface".
   - EN 12572 decimal commas now points (3,10 → 3.10 m).
 - **Scope calls to confirm.** Treated as in scope (the quoted words may be the standard's): Weyburn fire department's C282 summary, Alberta STANDATA quoting CSA C22.1, the CE Code phrase "in conformance with CSA C282", one C282 quote in a City bulletin, one BS EN 12572-2 figure. Left out: OP S710 (Finnish insurer, like FM, 6 quotes), Energiforsk quoting EN 253, the ASHRAE activity label via EnergyPlus, a City document restating NFPA 96, a trade report on ASHRAE, CCOHS wording, government codes, titles and status labels.

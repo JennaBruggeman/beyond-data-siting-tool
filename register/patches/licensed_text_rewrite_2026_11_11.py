@@ -110,7 +110,7 @@ E = [
  ]),
  (('src', 'nfpa37_2024'), [
   ("4.1.1.1 engines 'readily accessible for maintenance, repair, and firefighting'",
-   "4.1.1.1 engines easy to reach for maintenance, repair and firefighting"),
+   "4.1.1.1 engines readily accessible (NFPA 37's defined term) for maintenance, repair and firefighting"),
   ("4.1.1.2 air supply designed 'to prevent flue gas products from being drawn from stacks or flues'",
    "4.1.1.2 air supply designed so that flue gases are not drawn in from stacks or flues"),
   ("walls, floors and ceilings 'of at least 1-hour fire resistance rating'",
@@ -248,7 +248,7 @@ E = [
   ("freeboard, 'at least 500 ft (152 m) from direct wave impacts' or flows",
    "freeboard, 500 ft (152 m) or more from direct wave impacts or flows"),
   ("2.2.1.3 'not in an area protected by a levee or other man-made flood control works'",
-   "2.2.1.3 not in an area that relies on a levee or other built flood defences"),
+   "2.2.1.3 not in an area whose flood protection is a levee or other constructed flood-control works"),
   ("2.3.1 flood-prone areas 'used solely for nonessential operations'",
    "2.3.1 flood-prone areas used only for nonessential operations"),
  ]),
