@@ -36404,12 +36404,22 @@
    "quantities": [
     "embodied_it",
     "embodied_building",
-    "embodied_rule"
+    "embodied_rule",
+    "water_behind_electricity"
    ],
    "conditions": [
     "env_embodied"
    ],
-   "also": "condition s_conversion keeps its other part (existing_building); the heat pipe EPD figure (cards.js co2pipe) is removed from the tool with the same decision"
+   "also": "condition s_conversion keeps its other part (existing_building); the heat pipe EPD figure (cards.js co2pipe) is removed from the tool with the same decision",
+   "later": [
+    {
+     "date": "11 Nov 2026",
+     "job": "CODE_JOB_F11 A1",
+     "ids": [
+      "water_behind_electricity"
+     ]
+    }
+   ]
   }
  },
  "quantities": [
@@ -37660,7 +37670,8 @@
      "conf": 50,
      "verified": false
     }
-   ]
+   ],
+   "not_in_tool": "not used in the tool (J.B. 11 Nov 2026): water behind the electricity dropped; the source is not indexed and the method is contested"
   },
   {
    "id": "rainwater",

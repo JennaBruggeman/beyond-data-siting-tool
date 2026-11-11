@@ -45,7 +45,7 @@ const SRC2={
 // evidence kind for each source line (shown as a small badge): record = public record or regulator; peer = peer-reviewed or government lab;
 // survey = industry survey; claim = operator or manufacturer claim; physics = physical relation; transfer = figure from elsewhere; assume = assumption
 const EV={env:'record',hall:'filed',size:'claim',plant:'claim',pue:'survey',lf:'peer',cap:'peer',cop:'peer',fuel:'record',svc:'record',homes:'record',grid:'record',neu:'record',reach:'transfer',recv:'record',jobs:'transfer',noise:'record',grid2:'record',floor:'record',
- elec:'record',pv:'peer',batt:'peer',ups:'claim',dr:'record',ev:'claim',gen:'record',ctl:'peer',evap:'physics',wbe:'peer',rain:'record',reuse:'record',wprice:'record',sewer:'record',srv:'peer',ew:'claim',cu:'claim',snd:'claim',lf2:'record',light:'record',so:'transfer',watch:'assume',ppl:'record'};
+ elec:'record',pv:'peer',batt:'peer',ups:'claim',dr:'record',ev:'claim',gen:'record',ctl:'peer',evap:'physics',rain:'record',reuse:'record',wprice:'record',sewer:'record',srv:'peer',ew:'claim',cu:'claim',snd:'claim',lf2:'record',light:'record',so:'transfer',watch:'assume',ppl:'record'};
 const EVL={record:'public record',filed:'filed plans or application',peer:'research or government lab',survey:'industry survey',claim:'operator or maker claim',physics:'physics',transfer:'transferred from elsewhere',assume:'assumption or gap'};
 const badge=k=>{ const e=EV[k]; return e?`<span class="evb ev-${e}" title="${EVL[e]}">${EVL[e]}</span> `:''; };
 const src=k=>`<div class="src">${badge(k)}${esc(SRC2[k])}</div>`;
@@ -301,8 +301,8 @@ function fitsView(){
    <div class="mwscale">${[0.1,1,10,40].map(v=>`<span style="left:${pos01(v)}%">${v}${v===40?' MW':''}</span>`).join('')}</div>
    <div class="src">${VAL.length>1?`The slider runs from ${VAL[0]} to ${VAL[VAL.length-1]} MW: the sizes that pass every rule on this lot with this set-up.`:VAL.length?`Only ${VAL[0]} MW passes every rule on this lot with this set-up.`:'No size passes every rule on this lot with this set-up.'} Bar under the track: what the floor holds. Ticks: built or proposed sites, operator or applicant figures. Steps widen as size grows.</div></div>
   <h3>What that size needs</h3><dl>
-  <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
-  <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, before clearances</dd>
+  <dt>Power at full load</dt><dd>${rng(fac[0],fac[1],'MW')} at the meter (servers × PUE 1.4–1.55: industry surveys, not this design); this sizes the grid connection and the cooling plant</dd><dt>Power on average</dt><dd>${rng(fac[0]*R.lf,fac[1]*R.lf,'MW')} (about ${Math.round(R.lf*100)}% of full load over a year); this sets the yearly energy</dd>
+  <dt>Plant space</dt><dd>${rng(pl[0]*mw,pl[1]*mw,'m²')} with ${coolerFor(false).name}; ${rng(plR[0]*mw,plR[1]*mw,'m²')} with heat recovery — equipment only, no service clearances</dd>
   <dt>Standby fuel</dt><dd>${A.gens==='none'?'none: no generators chosen':`${rng(fuel[0],fuel[1],'L')} for 12 h, Uptime's minimum; ${rng(fuel[0]*2,fuel[1]*4,'L')} at the 24–48 h operators report (claims). Generator tanks over 2,500 L, as here, fall under the fire code's Part 4 (smaller ones under CSA B139, NFC 2020 4.1.1.1.(3)(b)): Part 4 lets a protected storage room hold ${fmt(R.fuelLimit.first)} L on the first storey and ${fmt(R.fuelLimit.low)} L in a basement or upper storey (Table 4.3.13.4.-B). ${fuelAt==='roof'?(fuelOver?`<span class="k">Over the limit:</span> the generators are on the roof, where a tank supplying an engine may hold at most 1,250 L and 2,500 L on one supply line (CSA B139.1.1 6.5.3; register arch_csa_b139); each set's tank would hold about ${fmt(Math.round(fuelPer/100)*100)} L, so this size is blocked with roof generators`:`The generators are on the roof: each set's tank is within the 2,500 L a supply line CSA B139.1.1 6.5.3 allows there (register arch_csa_b139)`):'The generators stand in the yard, outdoors at grade: each set keeps the CSA B139.1.0 Table 2 distances to the property line and the building (register arch_csa_b139)'}}`}</dd>
   <dt>Electrical service</dt><dd>${esc(svc)}</dd>
   ${f.cpcn?`<dt>Grid</dt><dd class="draft">Downtown supply area (downtown peninsula east to Nanaimo St): no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; BC Hydro's application is not yet decided); in between, BC Hydro connects new customers by temporary measures.</dd>`:''}
@@ -572,7 +572,7 @@ async function optionsView(){
   const rows=[
    ['The operator',[
      ['Servers',o=>o.mw.toFixed(1)+' MW'],
-     ['Plant space',o=>rng(o.r.plant[0],o.r.plant[1],'m²')+' (equipment only)'],
+     ['Plant space',o=>rng(o.r.plant[0],o.r.plant[1],'m²')+' (equipment only, no service clearances)'],
      ['Standby fuel, 12 h minimum (24–48 h typical, claims)',o=>BD.S.answers.gens==='none'?'none (no generators chosen)':rng(o.r.fuel[0],o.r.fuel[1],'L')],
      ['Zoning path',()=>`${state(zState)}${esc(f.status.t)}${zs==='no'?(f.city==='van'?' — about 15 months to a Vancouver decision':' — the City targets 160 calendar days for a complex rezoning (about 5.5 months, after a pre-application meeting), then a Council public hearing'):''}`]]],
    ['The utility and the grid',[
@@ -720,7 +720,7 @@ const SRC3={
  elec:'register: electricity_price (BC Hydro large general service rates from 1 Apr 2026; AESO pool 2025)', pv:'register: pv_roof (NRCan municipal PV potential values, kWh per kWp, horizontal to latitude tilt; NREL module density and roof suitability)',
  batt:'register: battery (NREL ATB 2024; Reber 2023 34 ± 15 kWh/m²)', ups:'register: ups_flex (vendor runtimes — operator claims)', dr:'register: peak_relief (BC Hydro Demand Response for Business; AESO reserves)',
  ev:'register: ev_stalls, ev_area (charger ratings; Vancouver and Edmonton parking dimensions)', gen:'register: genset_test (AUC 27938-D01-2023, derived; AP-42 Table 3.4-1 upper bounds)', ctl:'register: workload_control (Crozier & Liska 2025)',
- evap:'register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)', wbe:'register: water_behind_electricity (US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh)', rain:'register: rainwater (ECCC Normals 1991–2020; runoff coefficient 0.8 and a one-wet-month tank assumed; CSA B805 not read)',
+ evap:'register: evaporation, blowdown (physics: heat ÷ latent heat; cycles of concentration 2–6, FEMP/EPA)', rain:'register: rainwater (ECCC Normals 1991–2020; runoff coefficient 0.8 and a one-wet-month tank assumed; CSA B805 not read)',
  reuse:'register: a_reuse_rules, reclaimed_makeup (VBBL 2025; Metro Vancouver UT-019; EPCOR)', wprice:'register: water_supply (City of Vancouver 2026 rates)', sewer:'register: sewer_sink (Bylaw 299 limits; KWL 2014)',
  srv:'LBNL 2024: about 600 W per server (register: servers)', ew:'register: ewaste (server masses 21.2–26.3 kg, 6-year refresh)', cu:'register: copper_tonnes (Copper Development Association 2023 — industry figure)',
  snd:'register: noise_level (screen Lp = Lw − 20 log r − 8; Vertiv Liebert AFC chillers, 1.49 MW each: Lw 102.8–106.1 dB(A), our conversion from Lp at 1 m)', lf:'register: lf_flag (AUC Rule 012 s. 4.5)', light:'register: light_at_window (CIE 150:2017; Edmonton Bylaw 20001 s. 5.120(3); Vancouver: no lux limit)',
@@ -768,21 +768,18 @@ function waterView(){
   const evap=MWh.map(v=>v*1000*DW.evapLkWh*wet/1000); // m³: ≤ 1.5 L/kWh of heat, × the wet share for hybrids
   const mk=[evap[1]*(1+1/(CY[1]-1)),evap[1]*(1+1/(CY[0]-1))], bd=[evap[1]/(CY[1]-1),evap[1]/(CY[0]-1)];
   const roof=roofArea(f), mm=DW.rainMm[f.city==='van'?'van':'edm'], rain=roof*mm/1000*0.8; // 0.8 runoff: assumed in the register (rainwater), unsourced list
-  const wbe=[MWh[0]*1000*1.25/1000,MWh[1]*1000*16.8/1000];
   let h=tabBar('water')+`<h2>Water in, water out</h2><p class="draft">From almost none to a great deal: <span class="k">it depends on the cooling</span>.</p>
   <div class="q"><div class="lab">How it rejects heat</div><div class="seg" data-c="1"><button data-v="dry" aria-pressed="${A.outside!=='towers'&&A.outside!=='hybrid'}">Dry coolers</button><button data-v="towers" aria-pressed="${towers}">Cooling towers</button><button data-v="hybrid" aria-pressed="${A.outside==='hybrid'}">Hybrid</button></div></div>
   <h3>On site</h3><dl>${towers||hybrid?`<dt>Evaporated</dt><dd>up to ${fmt(evap[1])} m³/yr (at most 1.5 L per kWh of heat${hybrid?`, wet only in the ${fmt(WET[f.city][0])} hours a typical year is above 18 °C in ${f.city==='van'?'Vancouver':'Edmonton'} (${(WET[f.city][1]*100).toFixed(1)}%; CWEC, computed)`:''})</dd><dt>Make-up water</dt><dd>${fmt(mk[0])}–${fmt(mk[1])} m³/yr at 2–6 cycles of concentration</dd><dt>Blowdown to the sewer</dt><dd>${fmt(bd[0])}–${fmt(bd[1])} m³/yr</dd>${f.city==='van'?`<dt>Water bill</dt><dd>about $${fmt(mk[0]*4.256)}–$${fmt(mk[1]*4.622)} a year for the make-up water, water and sewer both billed on metered water (City of Vancouver 2026 rates as proposed; sewer rate ?)</dd>`:''}`:`<dt>Evaporated</dt><dd>none for cooling — ${BD.dryName()} reject heat to the air; their fans are the trade (sound, roof space)</dd>`}
   <dt>Rain on the roof</dt><dd>about ${fmt(rain)} m³/yr from ${fmt(roof)} m² at ${mm} mm a year</dd></dl>${s3('evap')}${f.city==='van'?s3('wprice'):''}${s3('rain')}
-  <h3>Behind its electricity</h3><dl><dt>Water used to make its power</dt><dd>${fmt(wbe[0])}–${fmt(wbe[1])} m³/yr (thermal plants ~1.25 L/kWh; hydro reservoirs ~16.8 L/kWh — mostly evaporation from reservoirs)</dd></dl>${s3('wbe')}
   <h3>Other sources and their rules</h3><dl><dt>Reclaimed water</dt><dd>${f.city==='van'?'Metro Vancouver considers supply to industry case by case; no rate':'EPCOR supplied 4,226 ML of reclaimed water to industry in 2024 (Gold Bar)'}</dd>
   <dt>Neighbours' greywater</dt><dd>${f.city==='van'?'not allowed as a cooling source under the Building By-law; residential systems only (2025)':'needs a variance in Alberta'}</dd>
   <dt>The sewer as a heat sink</dt><dd>${f.city==='van'?'warm water must not raise waste entering any sewage facility to 40 °C or more, and a high-volume discharge (over 300 m³ in 30 days) needs a permit (Metro Vancouver Sewer Use Bylaw 299); heat taken from sewage needs a letter of support, first come first served':'non-contact cooling water may go to the sanitary sewer only with EPCOR\'s prior written approval (Drainage Services Bylaw 18100); no EPCOR programme for taking heat from sewage was found'}</dd></dl>${s3('reuse')}${s3('sewer')}
   ${mathBox([
     towers?`Evaporated, at most: ${n0(MWh[1])} MWh of heat × 1,000 × 1.5 L/kWh ÷ 1,000 = <b>${n0(evap[1])} m³</b> (latent heat sets ≈1.5 L per kWh as the ceiling).`:'Dry coolers: no water evaporated for cooling.',
     towers?`Make-up = evaporated × (1 + 1 ÷ (cycles − 1)): at 6 cycles × 1.2 = ${n0(mk[0])} m³; at 2 cycles × 2 = <b>${n0(mk[1])} m³</b>. Blowdown = evaporated ÷ (cycles − 1) = ${n0(bd[0])}–<b>${n0(bd[1])} m³</b>.`:'',
-    `Rain: roof ${n0(roof)} m² × ${mm} mm ÷ 1,000 × 0.8 runoff = <b>${n0(rain)} m³</b>.`,
-    `Water behind the electricity: ${n0(MWh[0])} MWh × 1.25 L/kWh = ${n0(wbe[0])} m³; ${n0(MWh[1])} MWh × 16.8 L/kWh = <b>${n0(wbe[1])} m³</b>.`].filter(Boolean),
-    'Evaporation: physics (latent heat). Cycles: FEMP/EPA. Rain: ECCC Normals 1991–2020; runoff 0.8 assumed. Water behind electricity: US thermoelectric and hydro averages.')}
+    `Rain: roof ${n0(roof)} m² × ${mm} mm ÷ 1,000 × 0.8 runoff = <b>${n0(rain)} m³</b>.`].filter(Boolean),
+    'Evaporation: physics (latent heat). Cycles: FEMP/EPA. Rain: ECCC Normals 1991–2020; runoff 0.8 assumed.')}
   `;
   $('#side').innerHTML=h; wireTabs(); document.querySelectorAll('#side .seg[data-c] button').forEach(b=>b.onclick=()=>{ A.outside=b.dataset.v; BD.modelReset&&BD.modelReset(); waterView(); }); BD.draw();
   show3d('water',{site:f,rain,towers:towers||A.outside==='hybrid',evap:towers?fmt(evap[1])+' m³/yr':''});

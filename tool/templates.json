@@ -732,13 +732,6 @@
    ],
    "why": "engineering"
   },
-  "water_behind_electricity": {
-   "tier": "arch",
-   "parties": [
-    "climate"
-   ],
-   "why": "water used to make its power"
-  },
   "rainwater": {
    "tier": "arch",
    "parties": [
@@ -2164,10 +2157,6 @@
     "characterise"
    ],
    [
-    "water_behind_electricity",
-    "characterise"
-   ],
-   [
     "rainwater",
     "characterise"
    ],
@@ -3060,10 +3049,6 @@
    [
     "evaporation",
     "blowdown"
-   ],
-   [
-    "it_load_actual",
-    "water_behind_electricity"
    ],
    [
     "envelope",
@@ -4492,8 +4477,8 @@
   ]
  },
  "resident_count": 42,
- "full_count": 208,
- "arch_count": 155,
+ "full_count": 207,
+ "arch_count": 154,
  "drivers": {
   "rule": "a part hidden at a template that moves a result shown there: 25% or more (or 3 dB) named as what most of the range comes from; 10-25% (1-3 dB) listed as also behind it; under that, nothing",
   "plain": {

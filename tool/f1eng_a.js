@@ -75,7 +75,7 @@ const keyItem=(bg,t,o)=>`<span><i style="background:${bg};${o||''}"></i>${esc(t)
 /* ===== 3 What fits ===== */
 C.add(T,'What fits',{async build(x){
   const M=await x.eng(); if(!M||!M.ring) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
-  const A=BD.S.answers, f=BD.eng.siteFacts(), fm=BD.fitMax(), fp=BD.fitPlan(), tested=M.mwSized, lo=f.mw[0], hi=f.mw[1];
+  const A=BD.S.answers, f=BD.eng.siteFacts(), fm=BD.fitMax(), fp=BD.fitPlan(), tested=M.mwSized;   /* 11 Nov 2026 (J.B., F11 A2): the 'floor space alone' range is not shown */
   const step=(BD.eng.R.steps||[]).find(s=>s>fm+1e-9), nextMw=step!=null?Math.min(step,Math.round((fm+0.1)*10)/10):Math.round((fm+0.1)*10)/10, nxt=Math.round((fm+0.1)*10)/10;
   /* what stops the next size up: the engine names it (site.js fitMax, BD.fitWhy; J.B. 8 Nov 2026: the engine returns it, the card does not rebuild it) */
   const why=fm==null?null:BD.fitWhy();
@@ -87,23 +87,22 @@ C.add(T,'What fits',{async build(x){
     leaders:[{pts:[BD.centroid(arr(x.sel.ring))],lines:[x.addr,`${n0(x.sel.lotArea)} m² · ${x.zone}`]},
       ...(M.plant&&M.plant.boxes&&M.plant.boxes.length?[{pts:M.plant.boxes.map(q=>BD.centroid(arr(q.ring))),lines:[`${M.plant.boxes.length} ${M.plant.boxes[0].name}`,'in the yard']}]:[]),
       ...(M.foot?[{pts:[BD.centroid(arr(M.foot))],lines:['Building',`${n0(M.footArea)} m² · ${M.nF[0]===M.nF[1]?M.nF[0]:M.nF[0]+'–'+M.nF[1]} storeys`]}]:[])]});
-  const sc=100/Math.max(hi,fm||0,tested||0)/1.12, pct=v=>Math.max(0,Math.min(100,v*sc));
+  const sc=100/Math.max(fm||0,tested||0,0.1)/1.12, pct=v=>Math.max(0,Math.min(100,v*sc));
   const meter=`<div class="f1c-eng-a-mt"><h4>The size this lot allows, in MW of servers</h4><div class="f1c-eng-a-rm"><div class="trk"></div>
-    <div class="band" style="left:${pct(lo)}%;width:${pct(hi)-pct(lo)}%" title="floor space only"></div>
-    ${fm!=null?`<div class="fit" style="left:0;width:${pct(fm)}%"></div>${hi>fm+0.05?`<div class="no" style="left:${pct(fm)}%;width:${pct(hi)-pct(fm)}%"></div>`:''}<div class="tk" style="left:calc(${pct(tested)}% - 1px)"></div>`:`<div class="no" style="left:${pct(lo)}%;width:${pct(hi)-pct(lo)}%"></div>`}
-    <span class="lt" style="left:0">0</span><span class="lb" style="left:${pct(lo)}%">${n1(lo)}</span><span class="lb" style="left:${pct(hi)}%;transform:translateX(-100%)">${n1(hi)} MW</span>
+    ${fm!=null?`<div class="fit" style="left:0;width:${pct(fm)}%"></div><div class="tk" style="left:calc(${pct(tested)}% - 1px)"></div>`:''}
+    <span class="lt" style="left:0">0</span>${fm!=null?`<span class="lb" style="left:${pct(fm)}%;transform:translateX(-100%)">${n1(fm)} MW</span>`:''}
     ${fm!=null?`<span class="lt" style="left:${pct(tested)}%;transform:translateX(-50%)">tested ${n1(tested)} MW</span>`:''}</div>
-    <div class="f1c-key" style="margin-top:6px">${keyItem(K.dcSup,'floor space alone holds '+n1(lo)+'–'+n1(hi)+' MW')}${fm!=null?keyItem(K.ink,'largest size that passes every check: '+n1(fm)+' MW'):''}${hi>(fm||0)+0.05?keyItem(K.red,'floor space is there, a rule is not met'):''}</div>
+    <div class="f1c-key" style="margin-top:6px">${fm!=null?keyItem(K.ink,'largest size that passes every check: '+n1(fm)+' MW'):''}</div>
     <p class="f1c-eng-a-note"><b class="f1c-eng-a-red">What limits it.</b> <span class="f1c-eng-a-red">${esc(bind)}</span></p></div>`;
   const key=`<div class="f1c-key">${keyItem(K.dcSup,'lot','opacity:.5')}${keyItem('#fff','building','border:1px dashed '+K.ink2)}${keyItem(K.dcSup,'generators')}${(M.plant&&M.plant.boxes||[]).some(q=>q.name!=='standby generators')?keyItem(K.dc,'cooling plant'):''}${keyItem(K.bld,'neighbouring buildings')}</div>`;
   const cool=M.plant&&M.plant.s&&M.plant.s.k?`${M.plant.s.n} ${M.plant.s.k.name}${M.plant.coolRoofIndoor>0&&!(M.plant.boxes||[]).some(q=>q.name===M.plant.s.k.name)?', indoors in a plant room':''}`:'?';
   const meas=fp&&fp.measure?fp.measure.t:'';
   return {draw:`<div class="f1c-eng-a-wrap">${pl.svg}${key}${meter}</div>`,
     lead:`Servers are only part of what has to fit. The size shown is the largest where the building, the cooling plant, the generators and the loading all fit${meas?' '+meas:''}.`,
-    hero:[{v:fm!=null?n1(fm):C.q(),u:fm!=null?' MW':'',l:'largest size that fits'},{v:n1(tested),u:' MW',l:'size tested here'},{v:`${n1(lo)}–${n1(hi)}`,u:' MW',l:'floor space alone',red:false}],
-    rows:[['Largest that fits',fm!=null?`${n1(fm)} MW of servers${fp&&fp.asIs!=null&&fp.asIs<fm?`; ${n1(fp.asIs)} MW without the plant room`:''}`:'none with these choices'],['Floor space alone',`${rng(lo,hi)} MW (${rng(f.gross[0],f.gross[1],0)} m² gross)`],['Building',`${n0(M.footArea)} m² footprint, ${M.nF[0]===M.nF[1]?M.nF[0]:M.nF[0]+'–'+M.nF[1]} storeys, ${n1(M.H)} m`],['Cooling plant',cool],['Generators',M.plant&&M.plant.s&&M.plant.s.g?`${M.plant.s.gN} sets of ${n1(M.plant.s.g.mw)} MW, ${A.genAt||'yard'}`:'none']],
-    more:[['How the size is found',`<p>The tool tries sizes from 0.1 MW up to the most the floor holds and keeps the largest where its set-up checks pass: building height, loading, plant and generators placed, fuel on site, noise, and a floor test for the hall, UPS and battery rooms (site.js fitMax). Floor space alone gives the wider range shown in light blue.</p>`],['Warnings at this size',`<p>${(M.warn||[]).length?esc(M.warn.join(' ')):'none'}</p>`]],
-    src:['Size range, floor space alone: BD.eng.siteFacts().mw (engine.js; ranges of m² per MW, register size_fit).','Largest that fits and the plant-room note: BD.fitMax(), BD.fitPlan() (site.js; 0.1 MW search, conservative floor test; register arch_dc_hall, arch_dc_electrical, arch_dc_battery).',`What stops the next size: ${bindSrc||'the tool’s checks'}, run at ${n1(nxt)} MW with the answers restored after.`,'Building, plant boxes and lot: BD.model() (site.js, plant.js).',C.CONTEXT_SRC(x.city)],
+    hero:[{v:fm!=null?n1(fm):C.q(),u:fm!=null?' MW':'',l:'largest size that fits'},{v:n1(tested),u:' MW',l:'size tested here'}],
+    rows:[['Largest that fits',fm!=null?`${n1(fm)} MW of servers${fp&&fp.asIs!=null&&fp.asIs<fm?`; ${n1(fp.asIs)} MW without the plant room`:''}`:'none with these choices'],['Building',`${n0(M.footArea)} m² footprint, ${M.nF[0]===M.nF[1]?M.nF[0]:M.nF[0]+'–'+M.nF[1]} storeys, ${n1(M.H)} m`],['Cooling plant',cool],['Generators',M.plant&&M.plant.s&&M.plant.s.g?`${M.plant.s.gN} sets of ${n1(M.plant.s.g.mw)} MW, ${A.genAt||'yard'}`:'none']],
+    more:[['How the size is found',`<p>The tool tries sizes from 0.1 MW up to the most the floor holds and keeps the largest where its set-up checks pass: building height, loading, plant and generators placed, fuel on site, noise, and a floor test for the hall, UPS and battery rooms (site.js fitMax).</p>`],['Warnings at this size',`<p>${(M.warn||[]).length?esc(M.warn.join(' ')):'none'}</p>`]],
+    src:['Largest that fits and the plant-room note: BD.fitMax(), BD.fitPlan() (site.js; 0.1 MW search, conservative floor test; register arch_dc_hall, arch_dc_electrical, arch_dc_battery).',`What stops the next size: ${bindSrc||'the tool’s checks'}, run at ${n1(nxt)} MW with the answers restored after.`,'Building, plant boxes and lot: BD.model() (site.js, plant.js).',C.CONTEXT_SRC(x.city)],
     missing:[]}; }});
 
 /* ===== 4 Cooling ===== */
@@ -136,15 +135,15 @@ C.add(T,'Cooling',{async build(x){
   const draw=`<div class="f1c-eng-a-wrap"><div class="f1c-eng-a-cmp">
     <h4>Inside: how the heat leaves the servers <span style="font-weight:400;color:${K.mute}">· outside held at ${esc(nmO[po].toLowerCase())}</span></h4>
     ${row('Heat captured in liquid','share of the servers’ heat, and MW at this size',I,['air','plate','immersion'],pi,s=>[s.captureMW[0],s.captureMW[1]],v=>v[1]===0?'none: all to the air':rg(v,'MW'),{names:nmI,extra:s=>s.capture[1]===0?'':`${n0(s.capture[0])}–${n0(s.capture[1])}% of the heat`.replace(/^(\d+)–\1%/,'$1%')})}
-    ${row('Plant space','m² for UPS, batteries, cooling units (and heat pump, liquid loop)',I,['air','plate','immersion'],pi,s=>s.space,v=>rg(v,'m²',0),{names:nmI})}
+    ${row('Plant space','m² for UPS, batteries, cooling units (and heat pump, liquid loop); equipment only, no service clearances',I,['air','plate','immersion'],pi,s=>s.space,v=>rg(v,'m²',0),{names:nmI})}
     <h4>Outside: how the heat leaves the building <span style="font-weight:400;color:${K.mute}">· inside held at ${esc(nmI[pi].toLowerCase())}</span></h4>
     ${row('Water used','make-up water, m³ a year',O,['dry','towers','hybrid'],po,s=>s.water,v=>v[1]===0?'none for cooling':rg(v,'m³/yr',0),{names:nmO})}
     ${row('Plant noise','sound power of the cooling units, dBA; the bar starts at 90',O,['dry','towers','hybrid'],po,s=>s.lw,v=>rg(v,'dBA'),{names:nmO,min:90,extra:s=>s.mit?'needs '+s.mit:'needs no measure'})}
-    ${row('Plant space','m² for UPS, batteries, cooling units',O,['dry','towers','hybrid'],po,s=>s.space,v=>rg(v,'m²',0),{names:nmO})}
+    ${row('Plant space','m² for UPS, batteries, cooling units; equipment only, no service clearances',O,['dry','towers','hybrid'],po,s=>s.space,v=>rg(v,'m²',0),{names:nmO})}
     </div>
     <div class="f1c-key" style="margin-top:14px"><span><i style="background:${K.ink}"></i>your pick (the tool’s default, kept here)</span><span><i style="background:${K.faint}"></i>the others</span><span><i style="background:${K.faint};opacity:.45"></i>range, low to high</span></div>
     ${winter?`<p class="f1c-eng-a-note"${winter.bad?' style="border-left:2px solid #CC746C;padding-left:10px"':''}><b>Air-cooled chillers in design winter:</b> ${winter.bad?'<span style="color:#CC746C">':''}${C.esc(winter.txt)}${winter.bad?'</span>':''}.</p>`:''}
-    <p class="f1c-eng-a-note"><b>Electricity is not compared.</b> The tool uses one PUE range for every cooling type (R.pue, ${BD.eng.R.pue[0]}–${BD.eng.R.pue[1]}): per-type figures <b class="f1c-q">?</b> <span class="f1c-qn">not in the tool yet</span></p></div>`;
+    <p class="f1c-eng-a-note"><b>Electricity is not compared.</b> The tool uses one PUE range for every cooling type (R.pue, ${BD.eng.R.pue[0]}–${BD.eng.R.pue[1]}; industry surveys, not this design): per-type figures <b class="f1c-q">?</b> <span class="f1c-qn">not in the tool yet</span></p></div>`;
   const insFail=INSIDE.filter(([k])=>!I[k].fit).map(([k])=>nmI[k]), outFail=OUTSIDE.filter(([k])=>!O[k].fit).map(([k])=>nmO[k]);
   return {draw,lead:'Trade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.',
     hero:[{v:nmI[pi],l:'inside, now'},{v:nmO[po],l:'outside, now'},{v:`${M.plant.s.n}`,u:` ${M.plant.s.k.name}`,l:'cooling units placed'}],

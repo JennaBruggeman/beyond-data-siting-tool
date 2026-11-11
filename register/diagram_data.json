@@ -1807,49 +1807,6 @@
 }
 },
 {
-"id": "water_behind_electricity",
-"kind": "quantity",
-"stage": "characterise",
-"name": "Water behind the electricity",
-"formula": "E × w_grid",
-"coef": "US thermoelectric ~1.25 L/kWh; hydro ~16.8 L/kWh; BC as a range O-09 (30 Oct 2026): 1.25 and 16.8 L/kWh are not in femp; their source is not indexed (?).",
-"unit": "L/yr",
-"sources": [
-"femp",
-"cerProfiles2026"
-],
-"source_roles": [
-{
-"id": "femp",
-"term": "all coefficients",
-"role": "cited, but holds no grid water figures (?)",
-"conf": 60,
-"verified": true
-},
-{
-"id": "cerProfiles2026",
-"term": "research pass 16 Oct 2026 (regulator)",
-"role": "pending build",
-"conf": 50,
-"verified": false
-}
-],
-"conf": 60,
-"status": "in hand",
-"direction": "",
-"trial": "",
-"inputs": [
-"it_load_actual"
-],
-"upstream": 50,
-"city": {
-"van": 0,
-"edm": 0,
-"both": 1,
-"gen": 1
-}
-},
-{
 "id": "rainwater",
 "kind": "quantity",
 "stage": "characterise",
@@ -14018,10 +13975,6 @@
 "to": "blowdown"
 },
 {
-"from": "it_load_actual",
-"to": "water_behind_electricity"
-},
-{
 "from": "envelope",
 "to": "rainwater"
 },
@@ -17676,8 +17629,7 @@
 "test": "WUE, evaporation, source, stress",
 "quantities": [
 "evaporation",
-"blowdown",
-"water_behind_electricity"
+"blowdown"
 ],
 "move": [
 "money"
