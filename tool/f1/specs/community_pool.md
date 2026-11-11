@@ -4,7 +4,7 @@
 
 **Post-gate addition, 10 Nov 2026 (no rule changed):** Edmonton lot types drawn (Part 4, "Edmonton lot types"): 15231 118 Ave NW (narrow-deep), 16075 Fort Rd NW (wide-shallow), 10003 63 Ave NW (irregular); 10004 167 St NW (small) doesn't fit. Self-checked and independently checked 10 Nov. For J.B. to note, not a change to parts 1–3.
 
-Status before the gate: **parts 1–3 FINAL (J.B., 9 Nov 2026; her ten decisions written in, marked "J.B., 9 Nov"), with the independent check's corrections of 9 Nov written in (rounding, labels, minimum compositions: no rule changed).** Part 4: two of six fits drawn (self-checked); the small-lot question is open (Part 4). Parts 5–7 to follow. Any change to parts 1–3 goes to J.B. first. Format and host rules copied from `eh/specs/emergency_hub.md` (FINAL 8–9 Nov); where this spec says "as hub rule n" the hub's rule applies unchanged.
+Status before the gate: **parts 1–3 FINAL (J.B., 9 Nov 2026; her ten decisions written in, marked "J.B., 9 Nov"), with the independent check's corrections of 9 Nov written in (rounding, labels, minimum compositions: no rule changed).** Parts 5–7 passed 11 Nov 2026 (J.B.). Any change to parts 1–3 goes to J.B. first. Format and host rules copied from `eh/specs/emergency_hub.md` (FINAL 8–9 Nov); where this spec says "as hub rule n" the hub's rule applies unchanged.
 
 The typology: **a public 25 m pool (4 lanes) and a fitness gym sharing one desk, staff rooms, change rooms and plant, in one building with the data centre.** Core = the pool (the heat user). The gym shrinks first, then drops. On small lots the pool becomes a **learner pool (13 × 7 m, "smaller program")** so that every lot type fits through a variant (J.B., 9 Nov); 25 m × 4 lanes everywhere else. One connected building, never separate buildings (J.B., 7 Nov).
 
@@ -23,7 +23,7 @@ The typology: **a public 25 m pool (4 lanes) and a fitness gym sharing one desk,
 - **Pool size and hall height** come from a UK design guide (Sport England 2013, benchmark). No Canadian source for the smallest public lap pool was found. Canadian lane widths read (Swimming Canada 2.5 m) are competition rules, not community pools.
 - **Pool structure:** the tank is 0.9–1.8 m deep; on Vancouver flood-plain lots with the slab at the FCL the tank bottom sits in fill or below grade. Allowed below the FCL (rule 12, J.B. 10 Nov); groundwater and uplift when drained not read (?).
 - **Pool water and supply temperatures (J.B., 10 Nov, from the main chat's research):** limit ≤ 37 °C pool water, ≤ 40 °C hot tub (BC Guidelines for Pool Operations v3 2025, 5.2, citing the Pool Regulation). Design water (Sport England DGN App. 2 Table 4, PWTAG 2009, UK benchmark): main pool 29 °C, learner pool 31–32 °C. **Supply = water temperature + the exchanger approach; the approach is not sourced (?)**, so the supply temperature is written as "29 °C + approach" (main) and "31–32 °C + approach" (learner). The pool is the low-grade user: any hall heat above about 30 °C plus the approach can serve it.
-- **Heat:** the pool's heat demand (≈440 MWh/yr) is our arithmetic from a non-Canadian preprint (low confidence; `checks/research_typ/community_pool.md` §3). It is about 2 % of the hall's heat at the hub cap, so it does not decide the layout.
+- **Heat (11 Nov, J.B.):** whole-centre heat = Ontario BPS 2024 medians (417–608 kWh/m² gas × pool block gross) with CIBSE TM46 (1,130 kWh/m²) as the high cross-check, both provisional; the ≈ 440 MWh/yr from a non-Canadian preprint is pool water only (low confidence). Under 3 % of the hall's heat at the hub cap (TM46 up to about 5 %): it does not decide the layout.
 - **Most room widths and several room sizes are step 6** (drawing choice). No Canadian pool-building standard with room sizes was found (?). Sport England p. 38 (benchmark) puts changing and sanitary area at about the water area, well above the Eastglen-based rooms used here.
 - **Independent check (9 Nov, separate agent, from the register extracts and the two fit geometries):** bathing loads, change-room, shower and WC counts, hall dimensions, Eastglen and Calgary figures, separations, loading rows and the fit areas all re-derived and confirmed; corrections made: rounding of bathing loads (now rounded down throughout), the Vancouver 50/50 split labelled as the AB rule, change-room minimums stated with their composition, the gym egress sentence, Edmonton bay dimensions, two first-aid rooms on the Edmonton fit (now one). It could not check clauses outside the extracts (VBBL Tables 3.3.1.5.-B and 6.3.2.9, 3.7.2.2.(15), WorkSafeBC, ASHRAE): those stand on the hub spec's register additions.
 - **Old boards:** `TestFit_CP_E06B` and `TestFit_CP_V339` (5 Nov) are **OUT OF DATE** (pre hub cap, strict ground floor, widths, dead ends, egress doors, Vertiv zones) and labelled so; replaced by the six Part 4 boards.
@@ -246,12 +246,135 @@ Re-run 10 Nov (late): the three fits that gain a yard. The others: building alre
 | 10003 63 Ave NW | building and plant yard 12.7 m back to the tool rectangle's rear edge | 533 m², 12.7 m deep **on the assumed street side (?)**: the real frontage is on another side, so the yard may face no street | no; pool service apron fenced beside it | row status "?"; hall MW unchanged 1.59 |
 | 16075 Fort Rd NW | **not moved** (J.B.: only if the rear exits can be re-planned without losing the hall) | would be about 9 m | — | rear strip holds P1, P2 and corridor exits plus the transformer pads and S2: moving back leaves the pads no place (yard full of generators, court needed for trucks); for J.B. |
 
-## 5. Pass/fail tests — as hub Part 5, plus T-wet (rule 2: nothing wet over the hall, pool hall single storey, hall not over or under it), T-bather (rule 5 / R9, in `cpfit.reach_cp`); T-cap (hub R8, geometry field CAPS; Edmonton BE only; reported as a red flag, not a fail, for caps listed in CAPS_FLAG: the pool, Q11), T-chem (rule 9: chlorine door exterior only, 3 m to intakes; by hand), T-egress on the pool hall (bathing load + staff, `cpfit.egress_cp`), T-exitpas (a door into an exit passage ends the travel distance, `cpfit.patch_exitpas`).
+**Parts 5–7 PASSED (J.B., 11 Nov 2026); gate points 1–8 done (point 7: 1050 pads re-checked on EH-FREEZE-2026-11-11b, see Part 6c).** **J.B.'s gate points (11 Nov):** (1) Ontario 2024 re-run on the restored file: done, no changes. (2) Pool heat on the boards = Ontario range (main) with TM46 as the high cross-check, provisional; 440 MWh stays pool water only: done (live 1794437453-9d76). (3) **Answer key:** the engine's ladder step and verdict must match each fit exactly; MW within ±10 %. (4) **D1 for room minimums:** a shortfall of 5 % or less on a sourced minimum reads "tight: check in design". (5) No new hand-drawn fits; when the engine runs, check its drawings at the 25 m pool's minimum lot and at other sizes with no fit. (6) Fuel: no 72 h figure for the pool (life-safety power only). (7) Re-run 1050's pad check once EH-FREEZE-2026-11-11b is in. (8) Pool-hall orientation: E11 for pool and cascade (J.B. 11 Nov, accepted); 1515 and 8980 answer-key differences, orientation only. Heat row: a figure, shown "provisional", no pass/fail (J.B. 11 Nov; live 1794437909-be92).
 
-## 6. Doesn't-fit rule (J.B. 9 Nov)
-After the ladder (rule 15): a lot with less than about 710–750 m² of buildable ground, or narrower than about 20 m, reports **"Doesn't fit the Community pool. The Emergency hub fits from about 512 m² of buildable ground with generators upstairs (Vancouver, 1360 Frances St; about 408 m² in Edmonton, '?' until the Alberta code and EPCOR rules are read; meets code as read, not FM 5-32, insurer), or about 750 m² with generators at grade."** (wording J.B. 10 Nov, corrected the same day to buildable area: **lots are compared on buildable area**; the hub's figures are from its small variant on 1360 Frances St, TestFit_EH_V1360, and its Edmonton reading). The pool's own floor is our arithmetic from the 1050 Georgia St E fit (drawn at 24 × 37 m with a lane, buildable about 858 m²), not a code figure; it is approximate (±40 m²).
+## 5. Pass/fail tests (every layout)
 
-## 7. Worked example — after Part 4.
+Each test returns **pass**, **tight** (within 0.5 m or 5 % of the limit, either side: "check in design"), **fail**, **flag** (shown in red, doesn't block; J.B.'s decisions), or **?** (not measurable from the massing). Hard rules (code, equipment + clearances, guideline, sourced rate × count: room-minimums steps 1–4) block; steps 5–6 (precedent, drawing choice) read "tight, judged" at worst. A mixed row takes the worse status. The engine runs the hub's Part 5 tests unchanged, plus the pool's.
+
+### 5a. Hub tests, unchanged (hub spec Part 5)
+T-use, T-envelope, T-ground, T-stack, T-rooms, T-reach (R0–R8), T-exits, T-deadend (with the yard-gate rule, Q24), T-egress, T-egress-area, T-width, T-ground-route (D2: no public exit onto truck ground), T-lobby, T-wc, T-loading, T-plant (generators, tanks, chillers), T-yardgate and T-vgate (`eh/yardgate.py` v7), T-front-yard (Part 1 rule 1f).
+
+### 5b. Pool tests
+
+| Test | Rule (part / clause) | Pass when | Fail / tight / flag | Script now |
+|---|---|---|---|---|
+| T-pool-size | 1a; NBC(AE) 7.2.3.15 (Vancouver: AB rule, our extension) | tank 25 × 8.5 m (learner 13 × 7 m); pool hall clear ≥ 12.1 × 28.6 m = 346 m² (learner 10.6 × 16.6 = 176 m²) | fail past 0.5 m / 5 %; tight within | `eh/audit_rooms.py` CLEAR + cpfit room rules |
+| T-pool-volume | rule 2 (drawing choice, our reading) | pool hall is one storey with nothing above it; never over or under data-centre space | fail | `claims.off_hall` (+ storey overlap) |
+| T-wet | rule 2; FM 5-32 2.2.1.6 | nothing wet (tank, deck, change rooms, showers, pool plant, chemical rooms, programs mechanical) over the data hall, in plan, any storey above | fail | `claims.off_hall` |
+| T-bather (R9) | rule 5; BC Guidelines 3.1, 5.1; AB 7.2.3.38 (our extension) | every door into the pool enclosure is from a change room, the universal change room, a staff room (lifeguard / first aid), pool storage, the pool plant (locked) or outside; none from the lobby, gym, public corridor or any secure room | fail | `cpfit.reach_cp` |
+| T-bath-load | 1 (bathing load); NBC(AE) 7.2.4.1–2; BC Guidelines 8.7 | bathing load computed from the drawn tank (Edmonton area ÷ 1.5; Vancouver D ÷ 2.5 + S ÷ 0.93, rounded down) + 25 gym users, 50/50 | — (feeds T-change, T-wc, T-egress) | `cpfit.bathers` |
+| T-change | 1a (composition); NBC(AE) 7.2.4.3, 7.2.4.7; BC 5.1 | each change room ≥ dressing (0.5 / 0.32 m² a bather a sex) + showers × 1.2 + WCs × 1.5 + 10 m² (allowance ?), ≥ 3.0 m wide; showers AB ≥ 3 a room and 1 per 50 / BC 2 + 1 per 50 over 100; one universal dressing and shower room | fail (steps 1–4); tight, judged on the 10 m² allowance | cpfit composition row, `audit_rooms.py` |
+| T-wc (pool) | 1a; VBBL / NBC Table 3.7.2.2.-A | WCs a sex on the bathers + gym share of each sex; non-bather WCs outside the wet area (AB 7.2.4.10) incl. one universal washroom | fail | cpfit washroom rows |
+| T-egress-pool | rule 6; Table 3.3.1.5.-B; 3.1.17.1.(1)(a) | pool hall (A-3, > 200 m²) has two egress doorways ≥ ⅓ diagonal apart; load = bathing load + staff; exits from the deck never only through the change rooms | fail | `cpfit.egress_cp` |
+| T-exitpas | rule 6 | a door into an exit passage ends the travel distance | — | `cpfit.patch_exitpas` |
+| T-chem | rules 1, 9, 11, 12; AB 7.2.3.45, 7.2.3.39; VBBL 2.2.10.3.(3); DECISIONS 11 Nov | chlorine room at grade with an outward door to the outside only (no door or operable window into the building) and an outside wall wide enough for the door (≥ door + 0.2 m); acid store separate, off the pool plant or outside, never off a public room; **no chemical-room door on a public street face** (a screened chemical court counts as not on the face: our reading, fix A); both at or above the FCL (hard) | fail | new (engine): door/wall geometry + street edges; FCL in `cpfit._auto` |
+| T-chem-route | rule 9; DECISIONS 11 Nov | a delivery route from a street or lane reaches the chlorine, acid and pool-plant doors without crossing the data centre's secure yard or truck court | fail | `eh/dcspace.py` route (as the fuel check) |
+| T-plant-pool | rule 9; ES54 F0-02 | pads ≥ 1 m from the building and from any other structure (a generator set or fence counts: our reading, J.B.), ≥ 1 m apart, ≥ 3 m clear in front on one side (front not drawn: best side, our reading) | fail past 0.5 m | `padcheck.analyse` (hub `claims.pads` to take it over) |
+| T-fuel | J.B. 10 Nov | a 3.0 m lane (3.5 pass) from a vehicle-gated route to within 3.0 m of every set, or a remote fill box on the yard fence ("?") | fail / ? | `fuelroute.py` |
+| T-cap | hub R8; Bylaw 20001 3.12.1 | Edmonton BE: pool (Community Service) gross area with walls vs 500 m² | **flag** (Q11), never fail | `reach.cap_area` + `capwalls` |
+| T-hrr | 1d (cascade rule); DECISIONS 11 Nov | a heat-recovery room on the secure line ≥ 5.6 m²/MW of heat and ≥ 17 m² (drawing choice), ≥ 3.0 m wide | tight, judged when under the drawing-choice minimum | `cpfit._batch11` |
+| T-heat | J.B. 11 Nov | the board states whole-centre heat (Ontario range, TM46 high) and its share of the hall's heat as a figure labelled "provisional": no pass/fail | — (figure) | `cpfit._batch11` |
+| T-ladder | rule 15 | the board names the ladder step used (1–9) and, at step 9, the limiting rule | — | engine |
+
+### 5c. "Check in design" rows (one row each, status tight, never blocking; code-level reset, J.B. 11 Nov)
+Outdoor air intakes, louvre heights, chemical and generator exhaust points and distances (10 m chlorine and acid, our reading; 3 m generator, 3–10 m tight), duct routes (the acid store on its own duct, never through the chlorine room); pad bonding and bollards (ES54 F0-02.02–.03); pool-hall pressure and self-closing doors (ASHRAE ch. 6); delivery cart and forklift clearance at the chemical doors (BC 9.9); door routes through narrow parts of rooms; steps at exterior doors; gate hardware readings; noise (chillers; generator test one at a time); truck turning; fire department access; chiller drains and refrigerant; heat-recovery hand-over to programs mechanical; tank groundwater and uplift.
+
+---
+
+## 6. Doesn't-fit rule
+
+Apply the ladder (rule 15) in order on each lot; stop at the first step where every blocking test in Part 5 passes. A shortfall within the tolerance is "tight", not a reason to go on. Lots are compared on **buildable area** (inside the yard lines), as the hub.
+
+### 6a. Minimum lot per variant (our arithmetic unless marked "fit")
+Building width sums use drawn sizes that give the clear minimums (pool hall 12.3 × 28.8 m drawn = 12.1 × 28.6 clear).
+
+| Variant | Minimum buildable width (across the pool hall) | Minimum buildable depth | Minimum buildable area | Lane or second street | Basis |
+|---|---|---|---|---|---|
+| **25 m pool, stacked (Vancouver) or beside (Edmonton)** | ≈ 17.3 m: hall 12.3 + public corridor 2.0 + stair 3.0 (hall along the depth) | ≈ 28.8 m hall + ≈ 13 m DC entrance core, bay and dock band + plant yard (≈ 12 m at a small data centre) ≈ 54 m | ≈ 950–1,050 m² (pool block at grade ≈ 650 + DC entrance rooms ≈ 100 + one bay ≈ 35 + plant yard ≈ 170) (?) | none needed; without one, + a 6.1 m side drive in the width (Vancouver 5.4.1) | our arithmetic; smallest 25 m fits: 1353 Pender St E (wide-shallow, turned), 15231 118 Ave NW (narrow-deep, 37 m wide) — both well above it |
+| **25 m pool, turned (wide-shallow)** | frontage ≈ 28.8 m hall + lobby/desk ≈ 6 m ≈ 35 m along the street | ≈ 17.3 m + the service band behind (≈ 15–20 m) ≈ 33–37 m | as above | as above | our arithmetic; fit: 1353 (35 m deep, lane) |
+| **Learner pool (small)** | ≈ 15.6 m: hall 10.6 + corridor 2.0 + stair 3.0 | ≈ 16.6 m hall + service band ≈ 20 m ≈ 37 m | **≈ 710–750 m²** (fit-derived, ±40 m²) | needs a lane (or + 6.1 m drive: ≈ 21.7 m width) | fit: 1050 Georgia St E (24 × 37 m with a lane, ≈ 858 m² buildable) — **currently failing on pad 1 (ES54)** |
+| **Doesn't fit** | narrower than ≈ 15.6 m buildable, or under ≈ 710–750 m² buildable | — | — | — | card `TestFit_CP_DoesntFit` (10004 167 St NW: 436 m², 10.5–12.0 m wide) |
+
+### 6b. Lot types that can never take it
+- **Edmonton small lots** like 10004 167 St NW (rectangle 10 × 40 m, ≈ 436 m² buildable): under every floor above.
+- **Any lot under ≈ 15.6 m of buildable width** (learner hall 10.6 + corridor + stair), whatever its area: the learner hall can't turn (its short side is the 10.6 m hall).
+- **Vancouver small lots under ≈ 710 m² buildable** (the median small lot, 13.8 m buildable width, fails on width first).
+- Zoning never stops the fit: the pool is a **rezoning** on every lot in both cities (Part 2), so no zone is excluded; boards say so.
+
+### 6c. Limiting rules found in the fits
+| Lot | Limiting rule | Effect |
+|---|---|---|
+| 1050 Georgia St E (I-2, smallest that fits) | ground budget; one shared bay (5.1.5 approval); transformer pad front clearance (ES54 F0-02) | learner pool, gym dropped, data centre 0.15 MW on storey 2. Drawn 2,500 kVA pads fail (pad 1: 1.0 m front). Re-check on EH-FREEZE-2026-11-11b (sizing rule 1 + 1 × 300 kVA, Eaton pad 1.93 × 1.50 m): in the drawn spot still no 3 m front; moved to the yard's east strip (turned, fronts north and south) 4.0 m front each, 1.0 m apart, 1.0 m to the sets, 0.76 m to the lane fence: **fits, tight** (not yet drawn) |
+| 1353 Pender St E (I-2, wide-shallow) | pads and exit spacing; lot lines on both sides | 1.30 MW; bays stay tight (no room to widen) |
+| 8980 Oak St (irregular corner, flood plain) | plant yard shape; FCL and the step-free ramp | 1.47 MW; ramp outside in a 1.7 m strip |
+| 64 Airport Rd NW, 10003 63 Ave NW (Edmonton, beside) | the pool block and gym take the ground (beside, one storey) | 1.59–1.60 MW (under the hub cap 1.68) |
+| 15231, 16075 (Edmonton, stacked plan) | BE 500 m² cap (flag, Q11); 16075: one street, no lane (chemical court, fix A) | 1.46 MW |
+| 10004 167 St NW (Edmonton small) | buildable area 436 m² and width 10.5–12.0 m | doesn't fit; points to the hub fit |
+
+### 6d. Board message (unchanged, J.B. 10 Nov)
+"Doesn't fit the Community pool. The Emergency hub fits from about 512 m² of buildable ground with generators upstairs (Vancouver, 1360 Frances St; about 408 m² in Edmonton, '?' until the Alberta code and EPCOR rules are read; meets code as read, not FM 5-32, insurer), or about 750 m² with generators at grade."
+
+---
+
+## 7. Worked example: 339 1st Avenue East (I-3, stacked, side drive) — the pool on the hub's example lot
+
+Source: `community_pool/fits/v339/geom.py`, `run.py` (11 Nov batch, published 1794430909-99df). Board: TestFit_CP_V339_stacked. The engine reproduces each number.
+
+| # | Step | Rule | Result on this lot |
+|---|---|---|---|
+| 1 | Lot and yards | I-3 3.1.2.2–8 | 5-sided lot, 4,503 m² (tool tiles). Front 0.6 m from the slanted front line, sides 7.6, rear 3.1; depth and width ≤ 61 m |
+| 2 | Use | Part 2 | Swimming Pool not listed in I-3 → **needs rezoning** (approval row); Fitness Centre Conditional |
+| 3 | Variant | Part 2 | Stacked (I-3 2.2.11 strict), side drive (no lane: 6.1 m drive in the NW side yard, 3.1.2.16), raised ground floor (slab 5.2 ≥ FCL 4.6). 25 m pool (buildable width ≫ 17.3 m) |
+| 4 | Ladder step | rule 15 | Step 1 (full program); spare floor rule 14: fitness 236 m², multipurpose 69, own dry change 44 |
+| 5 | Bathing load | Part 1; BC 8.7 | D 70.8 m² ÷ 2.5 + S 141.7 ÷ 0.93 = 180 bathers (rounded down) + 25 gym → 103 a sex |
+| 6 | Ground floor | rules 1, 2, 4, 5 | Pool hall 12.45 × 28.8 m drawn (≥ 12.1 × 28.6 clear) at grade, single volume; change rooms 61.1 m² each behind the desk; lobby 61 m² on 1st Ave E; desk 39 m²; pool plant 107 m² (≥ 70.8); chlorine 9 m² and acid store on the south wall (side yard), outside doors only; data centre at grade only S1, S2, E2, staff vestibule, dock lobby; 3 bays to the truck court |
+| 7 | Storeys | I-3 3.1.2.9; rule 7 | 6.0 / 4.0 / 6.0 m (tight: at the minimums); roof 21.2 m; height 21.2 − 5.3 = 15.9 ≤ 18.3 m |
+| 8 | Hall and MW | 1d; 630 m²/MW | Hall on storey 3, 1,195 m² → **1.90 MW** (one hall storey, hub cap) |
+| 9 | Plant | 1d | Q = 1.90 × 1.55 = 2.94 MW → 4 generators (⌈2.94⌉ + 1), 3 chillers (⌈2.94 ÷ 1.489⌉ + 1), 3 pads (⌈2.94 ÷ 2.5⌉ + 1); tank 3,092 L a set |
+| 10 | Plant layout | rule 9; ES54 | All at grade in the back half, 59–90 m from 1st Ave E. Sets 2.0 m apart; tanks 7.6 m to the building, 6.4 to lot lines; pads 1.0 m apart, ≥ 1.6 m to structures, 4.0 m clear in front; chillers 4.3 m side to side (3.0 needed) |
+| 11 | Heat-recovery room | 1d (cascade rule) | Storey-2 room 25 m² (2.6 m wide: tight, judged) on the secure line; heat-pump footprint 16.5 m² for 2.94 MW of heat |
+| 12 | Separations | rule 8 | Pool A-3 and gym A-2 to the data centre F-2: 2 h; pool to gym 1 h floor; chlorine room 1 h |
+| 13 | Wet and volume | rule 2 | Pool hall single volume; change rooms, pool plant and mechanical under the hall on a 2 h floor; nothing wet over the hall (script) |
+| 14 | Bather path | rule 5, R9 | Deck reached only through the change rooms, the universal change room, the lifeguard office, pool storage and the locked plant door: **PASS** |
+| 15 | Washrooms and showers | Part 1 | 103 a sex → 3 M + 5 F WCs in the change rooms; 3 showers a room + universal; 2 non-bather WC rooms incl. the universal washroom |
+| 16 | Loading | rule 10 | Data centre 2,090 m² → 2 (5.2.5); pool and gym → 1 (5.2.3) → 3 Class B bays, 3 drawn |
+| 17 | Exits | rule 6 | Pool hall 190 people: 2 doors 27.5 ≥ 10.5 m apart; exits apart gym 15.6 ≥ 9.0, storey 2 DC 46.1 ≥ 28.8, hall 46.0 ≥ 28.8; travel ≤ 43.6 m (≤ 45); dead ends ≤ 5.0 m |
+| 18 | Floor area | I-3 3.1.1.1 | 3,775 m² ÷ 4,503 = 0.84 ≤ 3.00; non-industrial 1,685 ≤ 4,503 |
+| 19 | Fuel and yards | J.B. 10 Nov; Q24 | Fuel lane 3.5 m from the gated drive to every set; yard gate to the street drawn |
+| 20 | Check in design | Part 5c | intakes and exhausts, bonding, steps into the south side yard, noise, truck turning, fire access, tank groundwater |
+| 21 | Heat row (a figure, "provisional") | J.B. 11 Nov | whole centre ≈ 438–736 MWh/yr fuel (Ontario medians × 1,050–1,210 m²), TM46 ≈ 1,186–1,367; 1.7–2.9 % of 25,746 MWh/yr hall heat (TM46 up to 5.3 %); pool water alone ≈ 440 (low confidence) |
+
+---
+
+## Engine restatements of parts 1–3 (passed with parts 5–7, J.B. 11 Nov)
+
+Each item: where it is, what it says, and the stated rule (proposed) or "check in design" (code-level detail). Parts 1–3 stay as passed until J.B. gates these wordings.
+
+| # | Where | As written | Proposed for the engine |
+|---|---|---|---|
+| 1 | Rule 1 | pool hall "on the sunny side where the lot allows — drawing choice" | **E11 (J.B. 11 Nov, pool and cascade):** long side on the street when the buildable street width less any drive on buildable ground ≥ hall length + 7.1 m (≈ 36 m for the 25 m pool, ≈ 23.7 m learner), otherwise end-on; drawing choice, fitted to the fits. Sun: check in design. Answer-key differences accepted (orientation only): 1515 Boundary Rd, 8980 Oak St (the 339 plan reused end-on) |
+| 2 | Rule 1 | pool plant, chlorine and acid rooms "away from the generator yard and the loading dock" | Stated rule: chemical rooms share no wall with a generator, boiler or heating room (AB 7.2.3.39); their outside wall faces a side yard, rear yard, lane or screened court, never a public street face (T-chem). Distance to the generator yard and dock: check in design |
+| 3 | Rule 4 | Edmonton: "the zone after rezoning decides (?); drawn beside" | Stated rule: Edmonton → beside variant (everything at grade, one storey) unless the lot's buildable area is under the beside floor, then the Vancouver stacked plan (as 15231, 16075) |
+| 4 | Rule 5 | the four R5 skips, "our reading" | Stated rule (already exact): R5 not raised for (a) storage opening only off the pool hall, (b) the pool's own bay in its service court, (c) rooms inside the enclosure (reached by R9), (d) the acid store off the pool plant; plus D3 (storage or staff WC off the one room it serves) |
+| 5 | Rule 8 | pool hall at −15 to −40 Pa, self-closing doors, "drawing note only" | Check in design |
+| 6 | Rule 9 | pool-hall exhaust to data-centre intakes "drawn on opposite faces" (no figure) | Check in design (intake row) |
+| 7 | Rule 9 | chemical delivery "with forklift clearance (BC 9.9) from the service side, never across the public edge (drawing choice)" | Stated rule: T-chem-route (route from a street or lane to the chemical doors, not through the secure yard or truck court). Forklift clearance: check in design |
+| 8 | Rule 9 | chlorine exhaust ≥ 3 m from intakes, no intake below | Check in design (10 m our reading, DECISIONS 11 Nov) |
+| 9 | Rule 11 | chlorine door and delivery "on the service side" | Stated rule: T-chem (no chemical door on a public street face) |
+| 10 | Rule 15 step 4 | data centre below the hub cap "to what the plant yard and ground hold" | Stated rule: reduce the hall in steps of 0.05 MW (31.5 m² of hall) and re-size the plant until T-plant and T-envelope pass; label "smaller than the hub cap" |
+| 11 | Part 1f | "service ground ... in whichever order the fit uses; beside the building where the fit has it so" | Stated rule: try the plant yard behind the building; if the buildable depth is less than building depth + plant yard depth, put it beside; the building sits against it either way |
+| 12 | Part 1f | plant yard "trimmed to the last plant unit + 3.0 m clear (?)" | Stated rule as written (computable); the 3.0 m stays a drawing choice |
+| 13 | Part 2, Turned | "plant found another place first, a screened street-front yard last" | Stated rule: order of plant places tried: rear yard → side yard → roof (chillers only, never over the hall or pool hall) → screened street-front yard (flag) |
+| 14 | Part 2, Small | 25 m pool "tried first and fails on width where the buildable width is under about 17 m" | Stated rule: try 25 m; if buildable width < 17.3 m and depth < 17.3 m (turned), go to the learner pool (ladder step 8) |
+| 15 | Part 1a | targets ("Eastglen 19 m²", "61 m² a sex") | Stated rule: rooms are placed at their minimum; spare floor follows rule 14; targets are reporting only |
+| 16 | Part 1a | minimums "?" (desk, offices, storage, laundry, programs mechanical) | Stated rule: use the drawn fits' sizes as step-6 minimums (drawing choice); shortfalls read "tight, judged" |
+| 17 | Part 1a | change-room "10 m² lavatories and circulation (allowance, ?)" | Stated rule as written; the allowance is step 6 (judged) |
+| 18 | Part 1c | bather path "(our reading of BC 3.1)" | Stated rule: R9 (already exact) |
+| 19 | Part 4 / boards | rows "by hand": separations, chlorine rooms, yards, zoning, construction | Stated rules for the engine: separations from the group pair of each shared wall or floor (Table 3.1.3.1: A-3/A-2 ↔ F-2 2 h, A-3 ↔ A-2 1 h, chlorine 1 h); yards from the yard lines; chlorine rooms by T-chem; zoning and construction stay board rows from the zone tables |
+| 20 | Q24 / fuel | gate "opens from inside without a key", fill-box hose, turning | Check in design (gate readings, hose, turning) |
+| 21 | Part 2, Corner / Through | "pool front on the main street" | Stated rule: main street = the street edge with the higher road class; tie → longer frontage |
+| 22 | Part 1 learner | depth "< 1.5 m assumed (?)" | Stated rule: learner pool all S (shallow) for the bathing load; depth itself check in design |
 
 ## 8. Open questions for J.B.
 All eleven decided (9–10 Nov). Research still open: exchanger approach (supply temperature), balance tank or pit below the FCL, tank groundwater and uplift.

@@ -1,6 +1,6 @@
 # Typology spec: Heat cascade
 
-Status: **Passed 10 Nov 2026 (J.B., final gate).** Parts 1–3 final (9 Nov), with the 10 Nov decisions written in (deck reading, flood level, heat order). Six fits drawn (339, 11814, 1353, 1515, 443; 1330 drawn to show it does not fit) and 1360 by arithmetic; every pass, tight or fail row measured by script; two independent checks (9 and 10 Nov) acted on. What stays open is listed at the end ("Open at the final gate"). Any change goes to J.B. first. **11 Nov: parts 5–7, the engine readings 3-E (E1–E20, E-host) and the answer key 4-K drafted for the layout engine: FOR J.B.'S GATE, NOT PASSED.** The [E#] marks in Parts 1–3 point to 3-E; the passed text is otherwise unchanged.
+Status: **Passed 10 Nov 2026 (J.B., final gate).** Parts 1–3 final (9 Nov), with the 10 Nov decisions written in (deck reading, flood level, heat order). Six fits drawn (339, 11814, 1353, 1515, 443; 1330 drawn to show it does not fit) and 1360 by arithmetic; every pass, tight or fail row measured by script; two independent checks (9 and 10 Nov) acted on. What stays open is listed at the end ("Open at the final gate"). Any change goes to J.B. first. **Parts 5–7, the engine readings 3-E (E1–E20, E-host) and the answer key 4-K: passed 11 Nov 2026 (J.B., gate for the layout engine)**, with her answers written in (D1 on sourced minimums, both Vancouver paths, host floor, answer key, no new hand fits, 36.0 m rule a drawing choice, E13 checked by Code). The [E#] marks in Parts 1–3 point to 3-E; the passed text is otherwise unchanged.
 
 Format: MASTER_PLAN Phase B, copied from `eh/specs/emergency_hub.md` (the Emergency hub spec). Same conventions:
 - Every figure has a source id from `register/formula_register.json`, a `typ_heat_cascade_*` id from `checks/research_typ/heat_cascade_sources.json`, or a named clause, or is marked **drawing choice** or **?**. "Our reading" marks an interpretation of a clause; "our arithmetic" a calculation from sourced inputs.
@@ -179,7 +179,7 @@ Rules 2–3, 5–7, 9–13 and 15 (one outline per storey; shared lobby; corrido
 
 16. **Heat order and pipe run** (J.B., 10 Nov; decides the diagram and plant adjacency, not the plan): heat-recovery room → **spa** (water 40 °C: BC Pool Operations v3 5.2 limit for a hot tub, PWTAG 2009 design via Sport England DGN App. 2 Table 4) → **pool** (water 29 °C design for a main pool, PWTAG 2009, UK benchmark; BC limit ≤ 37 °C) → **greenhouse** (bench 35–40 °C, ASABE EP406) and **heated edge** (mean fluid 17–19 °C light snow, ≤ 17 K step, ASHRAE ch. 52). **Supply = water temperature + exchanger margin (?)**. The spa needs the top ASHRAE liquid-cooling class (> 45 °C; HPAC trade report, 2014) or a heat pump (our reading). Layout rule kept: the pool plant and the greenhouse's heat-transfer point adjoin the heat-recovery room's wall or a shared service corridor (drawing choice) [E19]. Boards: `tfchk.heat_order_row`.
 
-### 3-E. Engine readings of Parts 1–3 — PROPOSED 11 Nov, FOR J.B.'S GATE
+### 3-E. Engine readings of Parts 1–3 — PASSED 11 Nov (J.B.)
 Rules in Parts 1–3 that a computer could not follow as written ("placed by design", "where the lot allows", "may", "?" sizes), each turned into a stated rule or, under the code-level reset, a "check in design" row. Marked **[E#]** in the text above. The fits are unchanged. No reading turns a drawn fit into a fail; E19 was measured on all eight drawn fits, the others were read against the drawings, not re-measured.
 
 | # | Where | As written | Stated rule (or check in design) |
@@ -190,13 +190,13 @@ Rules in Parts 1–3 that a computer could not follow as written ("placed by des
 | E4 | 1a spare floor | "(2) a larger pool deck toward Eastglen's 1.12" | Spare floor in order: greenhouse at grade (if not placed) → pool deck grown until deck : tank = 1.12 → spa rest area to its 25 m² target → unassigned (outside doors only) |
 | E5 | 1e | "fenced or kerbed from any side drive"; "bed and path layout: drawing choice" | Fence or kerb: check in design (one row). Beds and paths not drawn; report area and depth only |
 | E6 | 2 | "A lot can carry more than one variant" | One base form + any flags. Base: stacked (Vancouver I-2/I-3); turned (A1 wide_shallow, either city); beside (Edmonton, otherwise). Flags: corner, through lot, side drive, raised ground floor, large lot, height-capped, covered or snow-melt edge; greenhouse up and lite come from the ladder |
-| E7 | 2b Lite | "(a) zoning … the outright-path variant in every Vancouver zone" | Vancouver runs two ladders: rezoning path from step 1 (pool flagged), outright path from step 4; both reported. Target pictures: 339, 1353, 1515 rezoning; 443 outright |
+| E7 | 2b Lite | "(a) zoning … the outright-path variant in every Vancouver zone" | Vancouver runs two ladders: rezoning path from step 1 (pool flagged), outright path from step 4; both reported (J.B. 11 Nov). Target pictures: 339, 1353, 1515 rezoning; 443 outright |
 | E8 | 2b Turned; rule 1 | "plant found another place first, a screened street-front yard last"; "plant yard never on the edge side or the greenhouse side" | Plant yard tried in order: rear → side away from the main street and the greenhouse → chillers on a roof off the hall → a screened street-front yard (flag). Tested by T-edge and T-gen-gh (3.0 m) |
 | E9 | 2b Large lot | "the edge grows into the open land along the street (drawing choice), the rest stays open" | The land between the street and the building is the front public yard (1e); nothing else drawn |
 | E10 | 2b Corner | "Edge and lobby on the main street" | Main street = the tool's address frontage; with none, the longer street frontage (proposed; same as the hub's rule if it has one, ?) |
-| E11 | rule 1 | "the pool hall's long side on the street where the lot allows" | Long side on the street when the buildable street width, less any drive on buildable ground, is ≥ 36.0 m (pool hall 28.9 m + a 7.1 m spa or lobby band beside it); otherwise end-on. Measured on the seven fits with a pool: end-on on V339 (30.6 m) and E15231 (30.9 m), long side on the other five (≥ 68 m) |
+| E11 | rule 1 | "the pool hall's long side on the street where the lot allows" | **One rule for the pool and the cascade (J.B. 11 Nov, settled with the pool chat, NOTE_TO_CASCADE_pool_hall_orientation_2026-11-11.md):** long side on the street when the buildable street width, less any drive on buildable ground, is ≥ the pool hall's drawn length + 7.1 m (a spa or lobby band beside it): 28.9 + 7.1 = 36.0 m for the 25 m pool hall here; 16.6 + 7.1 ≈ 23.7 m for the pool's learner-pool hall; otherwise end-on. Which side of the building gets the sun: check in design (no sun rule for the pool hall). Measured on the seven fits with a pool: end-on on V339 (30.6 m) and E15231 (30.9 m), long side on the other five (≥ 68 m) **Drawing choice, fitted to the existing fits** (J.B. 11 Nov) |
 | E12 | rule 1 | "pool plant, chemical rooms and programs mechanical on a side or lane wall" | On an exterior wall adjoining the pool hall, on the side away from the main street (the lane side if there is one); chemical-room doors must pass T-chem-street and T-chem-deliv |
-| E13 | rule 1 | "greenhouse on the sunny side (south or west face, off the hall's shadow)" | Greenhouse on the building face whose outward direction is nearest south, else west (lot north from the tool), and never north of a hall storey. Light: flag, not measured. **Not checked against the fits** (north not read on 443, 1515, 11814): J.B. to confirm before Code uses it |
+| E13 | rule 1 | "greenhouse on the sunny side (south or west face, off the hall's shadow)" | Greenhouse on the building face whose outward direction is nearest south, else west (lot north from the tool), and never north of a hall storey. Light: flag, not measured. **Not checked against the fits** (north not read on 443, 1515, 11814): Code checks it once the engine reads north (J.B. 11 Nov) |
 | E14 | rule 1 chlorine room | "≥ 3.0 m from any air intake … away from the edge's seating (drawing choice) and from the generator intakes" | Code-level reset: distances to intakes and seating are check in design (T-chem-design). Kept as tests: at grade on an outside wall, exterior door only (rule 15), not on a street face, deliveries off DC ground |
 | E15 | rule 8 | "The hot pool's 1.8 m deck is at its entry steps, placed by design" | The spa hall's largest rectangle holds the pool + 1.8 m on one end + 0.9 m elsewhere, either orientation (T-spa). Which end faces the change rooms: check in design |
 | E16 | rule 8 | "Greenhouse gutter 4–5.5 m (?)" | Greenhouse at grade takes the ground storey height; greenhouse up: 5.5 m (top of the range, conservative for height) |
@@ -204,7 +204,7 @@ Rules in Parts 1–3 that a computer could not follow as written ("placed by des
 | E18 | rule 14 step 3 | "Eastglen storage trimmed by rank within the pool" | Every rank-4 room at its minimum (1a) |
 | E19 | rules 1b, 16 | "the heat-recovery room on the secure line against the wet block"; "pool plant and heat-transfer point adjoin the heat-recovery room's wall or a shared service corridor (drawing choice)" | Placement goal, not a test (code-level reset): the heat-recovery room goes on the secure line at the spot nearest the pool plant in plan, any storey; the distance is reported in T-heat. Fits as drawn: 0 m on V339, V1353 and V1515; 5.7–21.3 m on V443 and the four Edmonton fits (no fit changes; nothing fails) |
 | E20 | 2a Vancouver FC-2, I-1C | "not re-read today (?)" | T-use returns ? for these zones until re-read |
-| E-host | Part 6 | (new) | A no-lane lot below the hub's no-lane floor does not take the cascade either (it carries the hub's entrance, drive and walk). Our reading, from 1330 |
+| E-host | Part 6 | (new) | A no-lane lot below the hub's no-lane floor does not take the cascade either (it carries the hub's entrance, drive and walk). Our reading, from 1330; accepted by J.B. 11 Nov |
 
 ---
 
@@ -245,8 +245,8 @@ Not checked on any of these: truck turning templates, fire access, intakes, nois
 | 16075 Fort Rd NW | none: the drawn rectangle is full; the real lot (≈ 9.7 m deeper) not read | ? | ? | ? |
 | 15231, 11814, 1353, 443 | none: the building already fills the depth | — | — | no change |
 
-### 4-K. Answer key for the engine — PROPOSED 11 Nov, FOR J.B.'S GATE
-The fits above are the engine's target pictures. Run on the same lot, the engine must match: **path, base form and flags, ladder step, verdict and limiting rule**. Proposed acceptable differences: MW within ±10 %; any arrangement inside the bands; the number of tight rows. Every room at or above its minimum. Row counts re-run 11 Nov on the current shared eh/ (board live f26a).
+### 4-K. Answer key for the engine — PASSED 11 Nov (J.B.)
+The fits above are the engine's target pictures. Run on the same lot, the engine must match: **path, base form and flags, ladder step, verdict and limiting rule**. **J.B. 11 Nov: the ladder step and the verdict must match exactly; MW within ±10 %.** Also allowed: any arrangement inside the bands; the number of tight rows. Every room at or above its minimum. Row counts re-run 11 Nov on the current shared eh/ (board live f26a).
 
 | Fit | Path · form · flags | Step | MW | Rows: pass / tight / fail / ? / flag / approval | Verdict and limiting rule |
 |---|---|---|---|---|---|
@@ -262,16 +262,16 @@ The fits above are the engine's target pictures. Run on the same lot, the engine
 | E10003 | one · beside · irregular corner | 1 | 1.06 | 21 / 8 / 0 / 21 / 11 / 1 | fits on the assumed frontage (flag); rezoning + 3.18 |
 | E10004 | one · — | 8 | — | not drawn (arithmetic) | doesn't fit: area floor, step 5 |
 
-## 5–7. Pass/fail tests, doesn't-fit rule, worked example — DRAFT 11 Nov, FOR J.B.'S GATE, NOT PASSED
+## 5–7. Pass/fail tests, doesn't-fit rule, worked example — PASSED 11 Nov 2026 (J.B.)
 Written for the layout engine (J.B. 11 Nov; MASTER_PLAN parts 5–7; Code's note `NOTE_TO_POOL_AND_CASCADE_engines_2026-11-11.md`). The frozen fits (Part 4) are the engine's target pictures and test cases; nothing in them changes here. Their answer key is 4-K. The readings that make Parts 1–3 computable are 3-E (E1–E20).
 
 ### Weaknesses of 5–7 (read first)
 - **The floors in 6b are necessary, not sufficient.** 1330 Glen Dr passes the area floor on arithmetic and still fails when drawn (drive 4.9 m beside the exit walk). The engine must draw and test above the floors; a floor only rules a lot out.
-- **Untested ranges.** No Edmonton lite or small fit was ever drawn: Edmonton is proven only at 2,924 m² buildable and up (full cascade) and disproven at 436. Vancouver lite is proven at 1,715 m² (443) and disproven at 959 (1330). Between those, the engine runs with no target picture.
+- **Untested ranges.** No Edmonton lite or small fit was ever drawn: Edmonton is proven only at 2,924 m² buildable and up (full cascade) and disproven at 436. Vancouver lite is proven at 1,715 m² (443) and disproven at 959 (1330). **J.B. 11 Nov: no new hand-drawn fits; when the engine runs, the cascade chat checks its drawings on those lots.**
 - **One target picture still fails:** V1515 (chemical deliveries cross data-centre ground; plans A and B wait for J.B.).
 - **Two tests are hand rows today, not scripts:** T-chem-street and T-chem-deliv (both big moves under the code-level reset). The engine needs them scripted; the rule is stated below.
-- **Tolerance on hard room minimums is inconsistent.** D1 (10 Nov) makes 0.5 m or 5 % "tight" on either side of every limit, but `tfhc.width_row` fails any room below a sourced minimum (steps 1–4) with no band. No fit sits in that band today, so no board changes either way. **J.B. to say which governs** (proposed: D1 everywhere, so a hard minimum short by ≤ 5 % reads tight).
-- **Vancouver has two paths** (rezoning with the pool, outright without it, E7). Each Vancouver target picture shows one path only.
+- **Tolerance on sourced room minimums: settled (J.B. 11 Nov, D1 governs, all typologies).** ≤ 5 % short of a sourced minimum (steps 1–4) reads "tight: check in design"; more than 5 % is a hard fail. `tfhc.width_row` changed to match; re-run on all nine fits, no row changed (no room sits in the band).
+- **Vancouver has two paths** (rezoning with the pool, outright without it, E7; J.B. 11 Nov: the engine runs both and reports both). Each Vancouver target picture shows one path only, so the other path on 339, 1353, 1515 and 443 has no target picture.
 - **The floor items are our arithmetic** from Part 1 and the doesn't-fit budgets (1330, 1360, 10004), not sourced minimums: plant yard 137 m² is the most compact arrangement found; DC entrance 73 m²; lean program totals from Part 1d.
 
 ### 5. Pass/fail tests
@@ -281,7 +281,7 @@ Each test returns **pass**, **tight** (within 0.5 m or 5 % of the limit, either 
 
 | Test | Rule | Pass when | Script today |
 |---|---|---|---|
-| T-rooms (cascade) | Part 1a; rule 8 wall convention | every room at or above its minimum area and clear width (clear sizes: 0.15 m off fire and exterior walls, 0.05 m off partitions). Below a step 1–4 minimum: **fail**; below a step 5–6 minimum only: tight, judged. Rooms whose minimum is "?" use the Target (E1) | `tfhc.width_row` (HARD table), `eh/audit_rooms.clear_geom` |
+| T-rooms (cascade) | Part 1a; rule 8 wall convention | every room at or above its minimum area and clear width (clear sizes: 0.15 m off fire and exterior walls, 0.05 m off partitions). More than 5 % below a step 1–4 minimum: **fail**; within 5 % of it: tight (D1, J.B. 11 Nov); below a step 5–6 minimum only: tight, judged. Rooms whose minimum is "?" use the Target (E1) | `tfhc.width_row` (HARD table), `eh/audit_rooms.clear_geom` |
 | T-ground | rule 4; I-2 2.2.7, I-3 2.2.11 | Vancouver: at grade only stairs, lifts, the DC vestibule, dock lobby, loading spaces and shafts | `tfchk.at_grade_row` |
 | **T-wet** | rule 8; FM 5-32 2.2.1.6 | no pool, spa hall, steam, sauna, spa rest area, pre-swim showers, public or universal change room or growing house over or under any hall storey (overlap ≤ 0.05 m²); chillers not on the hall roof | `tfchk.wet_hall_row` |
 | **T-spa** | Part 1a; rule 8 (E15) | the spa hall's largest rectangle holds the hot pool (5 × 8 m, or 6.0 × 6.67 m as drawn) + 1.8 m on one end + 0.9 m elsewhere, either orientation; water ≥ 40 m² | `tfchk.spa_fit_row`; `deck_q_row` (?, every spa board) |
@@ -330,13 +330,13 @@ A shortfall within the tight band (0.5 m or 5 %) is tight, not a reason to go on
 - C: 0 where a roof off the hall holds the chillers (16.3 × 10.7 m for two, Vertiv zones); otherwise 175 m² at grade.
 - P: Part 1d lean totals (step 1: spa 297 + pool 815 + greenhouse 181 − sharing 204); Edmonton + 33 m² for the larger dressing rate. Step 2–3 takes the greenhouse (181) up. Step 4: spa + greenhouse (478; Edm with 40-bather change rooms at 0.5 m²). Step 5: the spa block at its minimum with no corridor (1360 and 10004 budgets).
 - W and D are buildable sizes: the largest room fits inside the buildable with the 1.8 m edge in front. **No lane and no second street: add 7.6 m to W** (6.1 m drive + 1.5 m walk) where the drive takes buildable ground.
-- **Host floor (inherited from the hub; our reading, E-host):** the cascade carries the hub's DC entrance, drive and walk, so a no-lane lot below the hub's no-lane floor (≈ 1,010 m² buildable and ≥ 26.7 m frontage, hub Part 6) does not fit either. This is the floor that catches 1330.
+- **Host floor (inherited from the hub; our reading, accepted by J.B. 11 Nov, E-host):** the cascade carries the hub's DC entrance, drive and walk, so a no-lane lot below the hub's no-lane floor (≈ 1,010 m² buildable and ≥ 26.7 m frontage, hub Part 6) does not fit either. This is the floor that catches 1330.
 
 **6c. Lot types that can never take it**
 | Lot type | Why | Message |
 |---|---|---|
 | Buildable area below the step-5 floor: Vancouver ≈ 549 m² + edge (514 with 2 bays by approval), Edmonton ≈ 470 m² + edge | the spa needs its own ground: no data storage at grade (I-2 2.2.7, I-3 2.2.11), nothing wet under the hall (rule 8) or over it (FM 5-32 2.2.1.6), generators and pads at grade (FM 5-32) | "Doesn't fit the heat cascade" + the shared small-lot message (hub: 512 / ≈ 408 ? / 750 m²). Seen: 1360 Frances St (484), 10004 167 St NW (400–436) |
-| No lane, no second street, frontage under 26.7 m or buildable under ≈ 1,010 m² | the 6.1 m drive (Parking By-law 5.4.1) and the 1.5 m exit walk take the frontage (host floor) | doesn't fit outright; names the aisle relaxation. Seen: 1330 Glen Dr |
+| No lane, no second street, frontage under 26.7 m or buildable under ≈ 1,010 m² | the 6.1 m drive (Parking By-law 5.4.1) and the 1.5 m exit walk take the frontage (host floor, accepted J.B. 11 Nov) | doesn't fit outright; names the aisle relaxation. Seen: 1330 Glen Dr |
 | Buildable width under 7.1 m (14.7 m with a drive on buildable ground) | no spa hall fits (step 5 floor) | doesn't fit |
 | **Every Vancouver lot, full cascade outright** | Swimming Pool not listed in I-2 or I-3 | never outright: the full cascade is always the rezoning path; the outright path is lite (E7) |
 | **Every Edmonton lot** | data centre not in BE | needs rezoning (approval row), not doesn't-fit |
