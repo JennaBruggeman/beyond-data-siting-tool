@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-11T04:52:29.505Z",
- "commit": "9a30df9",
+ "made": "2026-11-11T05:24:10.709Z",
+ "commit": "8216cf0",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -1273,13 +1273,13 @@
     {
      "kind": "hero",
      "label": "if liquid-cooled: cost of heat (worth $40)",
-     "value": "$67",
+     "value": "$72",
      "unit": "/MWh",
      "key": null,
      "red": true,
      "range": null,
      "numbers": [
-      67
+      72
      ]
     },
     {
@@ -1324,6 +1324,69 @@
      "numbers": [
       1427,
       4928
+     ]
+    },
+    {
+     "kind": "row",
+     "label": "If liquid: Loop temperature, cases",
+     "value": "W32 (cooler): supply up to 32 °C, return 43–48 °C · W40 (between): supply up to 40 °C, return 51–56 °C · W45 (warmer): supply up to 45 °C, return 56–61 °C (supply: ASHRAE Thermal Guidelines for Data Processing Environments, 5th ed. (2021), Table 3.1, p. 47; return: supply + 11–16 K, NREL ESIF, ASHRAE gives none)",
+     "key": null,
+     "range": {
+      "low": 43,
+      "high": 48
+     },
+     "numbers": [
+      32,
+      32,
+      43,
+      48,
+      40,
+      40,
+      51,
+      56,
+      45,
+      45,
+      56,
+      61,
+      5,
+      2021,
+      3.1,
+      47,
+      11,
+      16
+     ]
+    },
+    {
+     "kind": "row",
+     "label": "If liquid: Heat pump COP, cost of heat",
+     "value": "60 °C radiators 3.0–4.5, 70 °C baseboards 3.0–4.5 used for the cost of heat: the cooler case (W32), capped at the realised 3–4.5 (register cop). Note: Lorenz gives 60 °C radiators 8.7–13.0, 70 °C baseboards 5.9–8.3 (η 0.40–0.50): theoretical, small lift; not reached by built heat pumps in the register. Warmer case (W45, return 56–61 °C): within a few kelvin of the sinks; the tool computes no COP there (?), and 60 °C radiators could take part of it directly.",
+     "key": null,
+     "range": {
+      "low": 3,
+      "high": 4.5
+     },
+     "numbers": [
+      60,
+      3,
+      4.5,
+      70,
+      3,
+      4.5,
+      32,
+      3,
+      4.5,
+      60,
+      8.7,
+      13,
+      70,
+      5.9,
+      8.3,
+      0.4,
+      0.5,
+      45,
+      56,
+      61,
+      60
      ]
     },
     {
@@ -1392,7 +1455,7 @@
    "more": [
     {
      "title": "If liquid-cooled: what this costs, as the tool states it",
-     "text": "Best set-up the tool findsliquid cooling, one pipe to 1 building: [an office building]Cost per MWh of heat$67 ($51–86)What the heat is worth$40/MWh (the gas it replaces)Pipe1,099 mCapital (pipe and heat pump)$4 millionCounted: the pipe, the connection, a heat pump and its upkeep, at today’s energy prices over the parts’ life (30 and 25 years, 5.6% a year). Not counted: inflation, demand charges, and who pays."
+     "text": "Best set-up the tool findsliquid cooling, one pipe to 1 building: [an office building]Cost per MWh of heat$72 ($54–93)What the heat is worth$40/MWh (the gas it replaces)Pipe1,099 mCapital (pipe and heat pump)$4 millionCounted: the pipe, the connection, a heat pump and its upkeep, at today’s energy prices over the parts’ life (30 and 25 years, 5.6% a year). Not counted: inflation, demand charges, and who pays."
     },
     {
      "title": "How the heat figure is worked out",
@@ -1416,7 +1479,7 @@
    ],
    "sources": [
     "Heat offered, homes, carbon, plant: tool/engine.js calc() with recover on (the Heat tab’s \"Heat this size could offer\"); capture and COP ranges from R.capture and R.cop (research or government lab register: liquid_capture (LBNL 2014 — direct-to-chip 57–75%: 57–59% typical, 67–75% best; air-cooled: no primary figure)…).",
-    "Supply temperature: the sink supply temperatures the tool tests, cards.js HS.sinks (City of Vancouver NE connectivity standards 2013 s. 4.3: 60 °C panel radiators, 70 °C baseboards); the servers’ liquid loop leaves at 37.5 °C (NREL ESIF, Van Geet 2019). Copied from cards.js; the tool does not export them.",
+    "Supply temperature: the sink supply temperatures the tool tests, cards.js HS.sinks (City of Vancouver NE connectivity standards 2013 s. 4.3: 60 °C panel radiators, 70 °C baseboards); the liquid loop as a case pair, W32 (cooler) and W45 (warmer), W40 between: supply maximums ASHRAE Thermal Guidelines for Data Processing Environments, 5th ed. (2021), Table 3.1, p. 47 (W32–W+ named as district-heating candidates, p. 48); return = supply + 11–16 K (NREL ESIF, Van Geet 2019; ASHRAE gives no return). The cost of heat uses the cooler case, its COP capped at the realised 3–4.5 (cards.js loopCOPcost; the Lorenz figures are shown as a theoretical note).",
     "Share of the year: ECON.hpFLH 4400–7100 full-load hours of 8,760 (tool/cards.js).",
     "Cost: cards.js heatEcon and bestHeat (pipe, heat pump, upkeep, cost of capital 5.6%); worth = gas price ÷ boiler efficiency (ECON.gas, ECON.boiler). Receivers: BC Assessment-based building list and City data as the tool holds them.",
     "Plan: Site context (streets as the ground between lots, neighbouring lots and building footprints): City of Vancouver property parcels and building footprints (open data), as the \"Your parcel\" card draws them."
@@ -1462,7 +1525,7 @@
     "the lot, on the small map",
     "Plan view; the tool’s 3-D scene is not drawn into the card."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nto [an office building], 885 m (could)\n0\n20 m\nN ↑\nHeat pump and heat loop\nwhere they go is not modelled (?)\n3 standby generators\nin the yard · not part of the heat\nData hall building\n3 storeys, 18.3 m · where the heat is made\nReceivers within 1 km: 133 (tool list)\nIf liquid-cooled (comparison, not the pick)\nwith air picked, the tool has no figure\n0\n5\n10\n15\n20\nHeat captured from the servers\n4,993–9,855\nHeat offered, after the heat pump\n6,420–14,783\nHeat pump electricity\n1,427–4,928\nGWh a year, one scale\nbuilding (dashed: footprint)\nyard plant\nthe lot, on the small map\nPlan view; the tool’s 3-D scene is not drawn into the card.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nHeat offered\n\nAir cooling is picked. The tool captures no heat in liquid and has no figure for reusing heat from air cooling. For comparison, a 2.5 MW hall with liquid cooling and a heat pump could offer 6,400–14,800 MWh a year. At today’s prices that heat costs more to deliver than it is worth.\n\nnone\nheat captured in liquid (air cooling is picked)\n?\nheat offered with air cooling · not in the tool yet\n6,400–14,800MWh/yr\nif liquid-cooled: heat offered (comparison)\n$67/MWh\nif liquid-cooled: cost of heat (worth $40)\nHeat captured in liquid, as picked\nnone: air cooling\nHeat offered with air cooling\n?\nthe tool has no figure for reusing heat from air cooling\nIf liquid: Heat captured from the servers\n4,993–9,855 MWh/yr\nIf liquid: Heat pump electricity\n1,427–4,928 MWh/yr\nHeat pump COP\n3–4.5 (the tool’s range)\nIf liquid: Equal to homes’ heating\n449–1,034 homes\nIf liquid: Heat pump size\n0.9–3.4 MW\nIf liquid: Carbon of the heat pump power\n26–89 t CO₂e/yr at 18.1 g/kWh (NIR, 2024, preliminary); 33–112 at the BC Government’s 22.8 g/kWh (imports included)\nIf liquid-cooled: what this costs, as the tool states it\nHow the heat figure is worked out\nBack\nNext\n7 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nto [an office building], 885 m (could)\n0\n20 m\nN ↑\nHeat pump and heat loop\nwhere they go is not modelled (?)\n3 standby generators\nin the yard · not part of the heat\nData hall building\n3 storeys, 18.3 m · where the heat is made\nReceivers within 1 km: 133 (tool list)\nIf liquid-cooled (comparison, not the pick)\nwith air picked, the tool has no figure\n0\n5\n10\n15\n20\nHeat captured from the servers\n4,993–9,855\nHeat offered, after the heat pump\n6,420–14,783\nHeat pump electricity\n1,427–4,928\nGWh a year, one scale\nbuilding (dashed: footprint)\nyard plant\nthe lot, on the small map\nPlan view; the tool’s 3-D scene is not drawn into the card.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nHeat offered\n\nAir cooling is picked. The tool captures no heat in liquid and has no figure for reusing heat from air cooling. For comparison, a 2.5 MW hall with liquid cooling and a heat pump could offer 6,400–14,800 MWh a year. At today’s prices that heat costs more to deliver than it is worth.\n\nnone\nheat captured in liquid (air cooling is picked)\n?\nheat offered with air cooling · not in the tool yet\n6,400–14,800MWh/yr\nif liquid-cooled: heat offered (comparison)\n$72/MWh\nif liquid-cooled: cost of heat (worth $40)\nHeat captured in liquid, as picked\nnone: air cooling\nHeat offered with air cooling\n?\nthe tool has no figure for reusing heat from air cooling\nIf liquid: Heat captured from the servers\n4,993–9,855 MWh/yr\nIf liquid: Heat pump electricity\n1,427–4,928 MWh/yr\nIf liquid: Loop temperature, cases\nW32 (cooler): supply up to 32 °C, return 43–48 °C · W40 (between): supply up to 40 °C, return 51–56 °C · W45 (warmer): supply up to 45 °C, return 56–61 °C (supply: ASHRAE Thermal Guidelines for Data Processing Environments, 5th ed. (2021), Table 3.1, p. 47; return: supply + 11–16 K, NREL ESIF, ASHRAE gives none)\nIf liquid: Heat pump COP, cost of heat\n60 °C radiators 3.0–4.5, 70 °C baseboards 3.0–4.5 used for the cost of heat: the cooler case (W32), capped at the realised 3–4.5 (register cop). Note: Lorenz gives 60 °C radiators 8.7–13.0, 70 °C baseboards 5.9–8.3 (η 0.40–0.50): theoretical, small lift; not reached by built heat pumps in the register. Warmer case (W45, return 56–61 °C): within a few kelvin of the sinks; the tool computes no COP there (?), and 60 °C radiators could take part of it directly.\nHeat pump COP\n3–4.5 (the tool’s range)\nIf liquid: Equal to homes’ heating\n449–1,034 homes\nIf liquid: Heat pump size\n0.9–3.4 MW\nIf liquid: Carbon of the heat pump power\n26–89 t CO₂e/yr at 18.1 g/kWh (NIR, 2024, preliminary); 33–112 at the BC Government’s 22.8 g/kWh (imports included)\nIf liquid-cooled: what this costs, as the tool states it\nHow the heat figure is worked out\nBack\nNext\n7 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 8,
@@ -1510,13 +1573,13 @@
     {
      "kind": "hero",
      "label": "if liquid-cooled: cheapest group, middle case",
-     "value": "$67",
+     "value": "$72",
      "unit": "/MWh",
      "key": null,
      "red": false,
      "range": null,
      "numbers": [
-      67
+      72
      ]
     },
     {
@@ -1677,7 +1740,7 @@
     "the lot",
     "Dashed circle: 1 km. Map to 1.5 km; the tool searches to 3,000 m."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n300 m\nN ↑\nThe 9 nearest buildings with a known heat demand (click one for its connection card)\nAir cooling is picked: the tool prices no connection for it. Cost and status below are for a liquid-cooled hall (comparison, not the pick).\n\tBuilding\tDistance\tHeat taken\t$/MWh (liquid)\tStatus (liquid)\n1\t[a commercial building]\t56 m\t825 MWh/yr\t$96\tbeyond\n2\t[a care building]\t119 m\t469 MWh/yr\t$162\tbeyond\n3\t[an apartment building]\t134 m\t997 MWh/yr\t$77\tbeyond\n4\t[an apartment building]\t196 m\t551 MWh/yr\t$176\tbeyond\n5\t[a school building]\t222 m\t733 MWh/yr\t$114\tbeyond\n6\t[a commercial building]\t230 m\t655 MWh/yr\t$324\tbeyond\n7\t[an apartment building]\t233 m\t972 MWh/yr\t$110\tbeyond\n8\t[an office building]\t255 m\t1,621 MWh/yr\t$117\tbeyond\n9\t[a commercial building]\t278 m\t1,530 MWh/yr\t$108\tbeyond\nDistrict energy networks nearby\n\nNeighbourhood Energy Utility · the lot is inside its service area · compulsory\n\nwithin\ndepends\nbeyond\nunknown\ndistrict energy area\nthe lot\nDashed circle: 1 km. Map to 1.5 km; the tool searches to 3,000 m.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nWho could take it\n\n1055 buildings lie within 3,000 m. With air cooling the tool prices no connection (?). If liquid-cooled: None costs less to connect than its heat is worth at today’s prices.\n\n1055\nbuildings within 3 km\n?\nconnections priced with air cooling · not in the tool yet\n1\ndistrict energy networks nearby\n$67/MWh\nif liquid-cooled: cheapest group, middle case\nPriced with air cooling\n?\nthe tool prices no connection for air cooling\nIf liquid: within\n0\nIf liquid: depends\n0\nIf liquid: beyond\n989\nunknown (no demand figure)\n66\nIf liquid: heat the lot could offer\n6,420–14,783 MWh/yr\nWhat the heat is worth\n$40/MWh\nIf liquid: Break-even pipe cost\nnone in the middle case; up to about $300 per metre in the best case only, for the cheapest receiver ([a commercial building], 1,535 m by street); the tool assumes $1,038–2,620 per metre (European figures × CAD/€; no Canadian per-metre cost found ?)\nWhat the words mean\nCounted and not counted\nBack\nNext\n8 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0\n300 m\nN ↑\nThe 9 nearest buildings with a known heat demand (click one for its connection card)\nAir cooling is picked: the tool prices no connection for it. Cost and status below are for a liquid-cooled hall (comparison, not the pick).\n\tBuilding\tDistance\tHeat taken\t$/MWh (liquid)\tStatus (liquid)\n1\t[a commercial building]\t56 m\t825 MWh/yr\t$96\tbeyond\n2\t[a care building]\t119 m\t469 MWh/yr\t$162\tbeyond\n3\t[an apartment building]\t134 m\t997 MWh/yr\t$77\tbeyond\n4\t[an apartment building]\t196 m\t551 MWh/yr\t$176\tbeyond\n5\t[a school building]\t222 m\t733 MWh/yr\t$114\tbeyond\n6\t[a commercial building]\t230 m\t655 MWh/yr\t$324\tbeyond\n7\t[an apartment building]\t233 m\t972 MWh/yr\t$110\tbeyond\n8\t[an office building]\t255 m\t1,621 MWh/yr\t$117\tbeyond\n9\t[a commercial building]\t278 m\t1,530 MWh/yr\t$108\tbeyond\nDistrict energy networks nearby\n\nNeighbourhood Energy Utility · the lot is inside its service area · compulsory\n\nwithin\ndepends\nbeyond\nunknown\ndistrict energy area\nthe lot\nDashed circle: 1 km. Map to 1.5 km; the tool searches to 3,000 m.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nWho could take it\n\n1055 buildings lie within 3,000 m. With air cooling the tool prices no connection (?). If liquid-cooled: None costs less to connect than its heat is worth at today’s prices.\n\n1055\nbuildings within 3 km\n?\nconnections priced with air cooling · not in the tool yet\n1\ndistrict energy networks nearby\n$72/MWh\nif liquid-cooled: cheapest group, middle case\nPriced with air cooling\n?\nthe tool prices no connection for air cooling\nIf liquid: within\n0\nIf liquid: depends\n0\nIf liquid: beyond\n989\nunknown (no demand figure)\n66\nIf liquid: heat the lot could offer\n6,420–14,783 MWh/yr\nWhat the heat is worth\n$40/MWh\nIf liquid: Break-even pipe cost\nnone in the middle case; up to about $300 per metre in the best case only, for the cheapest receiver ([a commercial building], 1,535 m by street); the tool assumes $1,038–2,620 per metre (European figures × CAD/€; no Canadian per-metre cost found ?)\nWhat the words mean\nCounted and not counted\nBack\nNext\n8 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 9,
@@ -2493,7 +2556,7 @@
     "339 1ST AVE E · VANCOUVER",
     "03",
     "Heat",
-    "Best set-up found: $67 per MWh of heat against $40 it is worth.",
+    "Best set-up found: $72 per MWh of heat against $40 it is worth.",
     "1",
     "1",
     "Servers",
@@ -2512,7 +2575,7 @@
     "989 within 3 km with a knownheat demand",
     "EVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET",
     "what the heat is worth (the gas it replaces): $40/MWh",
-    "best set-up found: $67/MWh",
+    "best set-up found: $72/MWh",
     "0",
     "1,250",
     "2,500",
@@ -2921,7 +2984,7 @@
     "11 letter pages, drawn by the tool from this lot and the picks above. Scroll sideways for the rest.",
     "Print the report"
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-11\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n12–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 6–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-11\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n377–388 m²\nPLANT SPACE (COOLING UNITS WITH CLEAR ZONES; UPS AND BATTERIES EQUIPMENT ONLY)\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n12–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in12–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 16 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nPeople\njobs, and a street edge\nEquipment\nservers replaced every 5–6 years\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n222–369 t CO₂e a year\nConventional, this site\n222–369 t CO₂e a year\nEdmonton, same design\n4,245–7,049 t CO₂e a year\nEdmonton, conventional\n4,245–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $67 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,100 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $67/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 12–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n12–20 GWh\nConventional, this site\n12–20 GWh\nCologix VAN4, Vancouver,claim\n13–20 GWh\nVancouver, modelled\n12–20 GWh\nEdmonton, same design\n12–20 GWh\nEdmonton, conventional\n12–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this site(at most)\n30,551 "
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nBEYOND DATA · SITE REPORT\n2026-11-11\n339 1st Ave E\nVancouver · I-3 · 4,503 m² lot\nReport level: How it is worked out\n2.5 MW\nSERVERS\nthe most that fits here with itsplant: 2.5 MW\n12–20\nGWH OF ELECTRICITY A YEAR\n3.5–3.9 MW at the meter at fullload\nnone\nHEAT RECOVERED\nliquid cooling would offer 6–15GWh a year\n989\nBUILDINGS WITHIN 3 KM\nwith a known heat demand; 66more not yet known\nThis report reads one lot for one data centre. It shows what fits, what moves in and out, who gains and whogives up, and what the lot could become. Every figure is a range from published sources, not a design or aquote; operators' figures are their claims.\nIn the drawings: the data centre in red, its lot in pink with a dash-dot line; ochre, heat; blue, power and water; dashed, possible. Neighbours at their measured heights.\nA REPORT FOR EACH TEMPLATE; THIS ONE IN INK\nThe lot\nWhat fits\nWhat moves in and out\nHeat\nPower\nWater\nOver time, and next door\nOpportunities\nCould become\nThree options\nTwo cities\nHow it is worked out\nSources\nWhat it means for me\n6 sections\nHow it is worked out\n11 sections\nWhat it could hold\n4 sections\nGenerated by the Beyond Data tool · Vancouver · figures as of 2026-11-11\n01 · Cover\naddress, the site drawn, four numbers\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n01\nWhat fits\nA data centre sized for this lot, with the room its plant, generators and loading need.\nPLAN\nN\n0\n12.5\n25 m\nSECTION\ngenerators in the yard\n18.3 m\n3 storeys\nthe zone allows 45.7 m\nHOW MUCH FITS ON THIS LOT, MW OF SERVERS\nfloor space only, 0.8–3.5\n2.5 with its plant and yard\nthis report: 2.5 MW\n0\n1\n3\n4\n5\nBUILDING AREA PER MW, AGAINST BUILT DATA CENTRES\nthis lot, about 620 m²/MW\n0\n500\n1,000\n1,500\n2,000\n10 benchmark buildings: median 680 m² of building per MW ofIT, middle half 582–814 (public records and operator claims).\nTHE LOT\nZone\nI-3: Case by case\nLot\n4,503 m²\nFloor area available\n1,550 m²\nLargest that fits\n2.5 MW of servers, with its plant,generators and loading with an enclosedplant room (needed for the noise by-law)\nSize tested\n2.5 MW of servers\nSet-up\nnew building, air cooling inside, air-cooledchillers outside\n4,503 m²\nLOT\n670 m²\nBUILDING FOOTPRINT\n18.3 m\nBUILDING HEIGHT\n377–388 m²\nPLANT SPACE (COOLING UNITS WITH CLEAR ZONES; UPS AND BATTERIES EQUIPMENT ONLY)\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n01\n02 · What fits\nplan, section, how big\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n02\nWhat moves in and out\n12–20 GWh of electricity a year in; all of it leaves as heat, to the air.\nENERGY, TO SCALE (GWH A YEAR)\nElectricity in12–20 GWh\nData centre\n2.5 MW of servers\nHeat to the airabout 16 GWh\nAll the electricity a data centre uses ends as heat. Air-cooled, it all leaves by the chillers to the air; aliquid-cooled set-up could offer some of it to buildings.\nIT ALSO TAKES IN\nIT ALSO GIVES OFF OR COULD GIVE\nWater\nlittle: air-cooled chillers evaporate none\nSound\nroof plant and generators; see Over time, and next door\nRain on the roof\nabout 780 m³ a year could be caught\nFlexibility\nload it could shift for the grid; see Power\nLand\n4,503 m² lot\nPeople\njobs, and a street edge\nEquipment\nservers replaced every 5–6 years\nTHE CARBON IN THAT ELECTRICITY, SAME SERVERS\nThis design\n222–369 t CO₂e a year\nConventional, this site\n222–369 t CO₂e a year\nEdmonton, same design\n4,245–7,049 t CO₂e a year\nEdmonton, conventional\n4,245–7,049 t CO₂e a year\nGrid carbon: NIR 2026, 2024 consumption intensity in each province. Alberta's grid carries about 20 times BC's carbon per kWh.\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n02\n03 · What moves in and out\nelectricity, heat, water, carbon\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n03\nHeat\nBest set-up found: $72 per MWh of heat against $40 it is worth.\n1\n1\nServers\n2.5 MW; air-cooled: heat leavesat 25–35 °C\n3\n3\nHeat pump\nlifts the warm water to heatingtemperatures, COP 3.0–4.5; drawnas if liquid-cooled\n4\n4\nTwin pipe\nto 1 building, 1,100 m along thestreets\n5\n5\nBuildings\n989 within 3 km with a knownheat demand\nEVERY BUILDING WITHIN 3 KM, AS IF LIQUID-COOLED: COST PER MWH OF HEAT AGAINST DISTANCE BY STREET\nwhat the heat is worth (the gas it replaces): $40/MWh\nbest set-up found: $72/MWh\n0\n1,250\n2,500\n3,750\n5,000 m\n$10\n$30\n$100\n$300\n$1,000\n$3,000\n$10,000\n$30,000\n$100,000\n$ per MWh (log scale)\nEach dot is one building, by type. Below the line, a building's heat would pay for its pipe, connection and heat pump over their life. Middle case; each dot's range is on its card in the tool.\nBY TYPE\nnon-market housing\n390\ncommercial\n247\napartment\n195\nschool\n93\noffice\n63\ncare home\n32\nrecreation centre\n13\nhotel\n12\ncampus\n6\nhospital\n4\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n03\n04 · Heat\nwho could take it, at what cost\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n04\nPower\nA customer first: 3.5–3.9 MW at the meter. What it gives back is flexibility, and only theoperator can give it.\n1\n1\nThe meter\n3.5–3.9 MW at full load; 12–20 GWh ayear\n2\n2\nStandby generators\n3 sets of about 2 MW, for outages;tested monthly\n3\n3\nThe grid\nthe utility's feeder\nELECTRICITY A YEAR, THE SAME SERVERS\nThis design\n12–20 GWh\nConventional, this site\n12–20 GWh\nCologix VAN4, Vancouver,claim\n13–20 GWh\nVancouver, modelled\n12–20 GWh\nEdmonton, same design\n12–20 GWh\nEdmonton, conventional\n12–20 GWh\nWHAT IT COULD GIVE THE GRID AND NEIGHBOURS, TESTED ON THIS LOT\nEV charging hub\nnot ruled out\nnot yet known: grid headroom at the parcel\n339 1st Ave E, Vancouver · How it is worked out · 2026-11-11\n04\n05 · Power\nthe meter, generators, the grid\nBEYOND DATA · SITE REPORT\n339 1ST AVE E · VANCOUVER\n05\nWater\nAir-cooled chillers evaporate no water; the roof could catch rain for other uses.\nWATER A YEAR: WHAT THE COOLING EVAPORATES AGAINST THE RAIN ON THE ROOF\nThis design\nnone evaporated\n780 m³ of rain\nCooling towers instead, this site(at most)\n30,551 "
   }
  ],
  "errors": [],
