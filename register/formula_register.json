@@ -38741,7 +38741,7 @@
    "inputs": [
     "receivers"
    ],
-   "coef": "heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals and care homes: the heat search uses CEUD 2023 \"Health Care and Social Assistance\" (BC 1.096, AB 2.348 GJ/m², heating only, the whole sector); SCIEU 2024 hospitals (BC 1.90, AB 2.46 GJ/m²) is total energy, not heating, shown for comparison only (2 Nov 2026); type medians NRCan ENERGY STAR; delivered fuel, not useful heat: × 0.85 boiler efficiency, our assumption within NRCan's rated range (existing 0.55–0.89, new 0.90–0.98; src_fill_eer2016_317, src_fill_nrcanComBoiler, src_fill_nrcanFurnace, src_fill_nrcanHeatingGas2012; rated, not measured in use ?); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1.40 GJ/m² (estimate; 1,048 added). Condominiums not caught in Edmonton; non-disclosing buildings not caught in Vancouver (BC Assessment to follow) | 20 Oct 2026 (J.B.; make_bigrecv.py, bca/bca_derive.py): Vancouver buildings over the same thresholds that did not disclose are added from BC Assessment: homes x 16.81 MWh + other floor area x CEUD 2023 BC intensity, worked out on J.B.'s computer and rounded (inputs not shown). Roll joined to the City's folio on its last 12 digits (99.4% non-residential, 99.96% residential rows matched); strata buildings counted once per parcel (each strata lot's row repeats the building's gross area); strata lot areas x 1.15 for the size test (BCA's own common-area allowance, commercial guide, borrowed). Check against 238 measured Vancouver buildings: estimate / measured median 1.74, quartiles 1.0 and 3.2. Shown as a range in both cities: estimate / 1.7 to the estimate (J.B. 20 Oct); Edmonton could not be checked (no measured data published). 699 added in Vancouver (others within 40 m of a measured building or another receiver)",
+   "coef": "Housing receivers (City non-market housing list): homes × 14.29 MWh (BC) / 28.17 MWh (AB), the heat a home needs (register homes_heated; J.B. 11 Nov 2026). The BC Assessment receivers below keep homes × 16.81 MWh (energy bought; derived offline, not re-run) and other floor area × CEUD energy intensity, so they are on the energy-bought basis (?). heating-only intensity, CEUD 2023: BC 0.57 / AB 1.40 GJ/m² overall; offices 0.45 / 1.13; heat is 48–63% of energy in BC, 62–83% in Alberta; hospitals and care homes: the heat search uses CEUD 2023 \"Health Care and Social Assistance\" (BC 1.096, AB 2.348 GJ/m², heating only, the whole sector); SCIEU 2024 hospitals (BC 1.90, AB 2.46 GJ/m²) is total energy, not heating, shown for comparison only (2 Nov 2026); type medians NRCan ENERGY STAR; delivered fuel, not useful heat: × 0.85 boiler efficiency, our assumption within NRCan's rated range (existing 0.55–0.89, new 0.90–0.98; src_fill_eer2016_317, src_fill_nrcanComBoiler, src_fill_nrcanFurnace, src_fill_nrcanHeatingGas2012; rated, not measured in use ?); 2023 a warm year | 19 Oct 2026 (make_bigrecv.py): large buildings added at the Vancouver GHG by-law reporting thresholds in both cities (commercial ≥ 4,645 m², multi-family and hotels ≥ 9,290 m²). Vancouver: owner-reported floor area × reported heat energy intensity (measured, disclosed buildings only: 200 added). Edmonton: assessment gross area of Other Residential × 0.777 GJ/m² and Commercial × 1.40 GJ/m² (estimate; 1,048 added). Condominiums not caught in Edmonton; non-disclosing buildings not caught in Vancouver (BC Assessment to follow) | 20 Oct 2026 (J.B.; make_bigrecv.py, bca/bca_derive.py): Vancouver buildings over the same thresholds that did not disclose are added from BC Assessment: homes x 16.81 MWh + other floor area x CEUD 2023 BC intensity, worked out on J.B.'s computer and rounded (inputs not shown). Roll joined to the City's folio on its last 12 digits (99.4% non-residential, 99.96% residential rows matched); strata buildings counted once per parcel (each strata lot's row repeats the building's gross area); strata lot areas x 1.15 for the size test (BCA's own common-area allowance, commercial guide, borrowed). Check against 238 measured Vancouver buildings: estimate / measured median 1.74, quartiles 1.0 and 3.2. Shown as a range in both cities: estimate / 1.7 to the estimate (J.B. 20 Oct); Edmonton could not be checked (no measured data published). 699 added in Vancouver (others within 40 m of a measured building or another receiver)",
    "sources": [
     "energize",
     "edmBench",
@@ -38944,13 +38944,13 @@
      "added": "2 Nov 2026"
     }
    ],
-   "revised": "2026-10-20"
+   "revised": "2026-11-11"
   },
   {
    "id": "homes_heated",
    "name": "Homes heated",
    "unit": "homes",
-   "formula": "homes = Q_available ÷ (space + water heating GJ per household); BC 60.5 GJ (16.81 MWh), AB 119.3 GJ (33.14 MWh), CEUD residential 2018–22 average",
+   "formula": "homes = Q_available ÷ the heat a home needs; the heat a home needs = space + water heating energy per household × 0.85 boiler efficiency (our assumption) = 14.29 MWh (BC), 28.17 MWh (AB); energy per household BC 60.5 GJ (16.81 MWh), AB 119.3 GJ (33.14 MWh), CEUD residential 2018–22 average. One figure everywhere: homes equivalent, housing receivers, the explainer (J.B. 11 Nov 2026)",
    "inputs": [
     "heat_delivered"
    ],
@@ -38977,7 +38977,8 @@
      "conf": 80,
      "verified": true
     }
-   ]
+   ],
+   "revised": "2026-11-11"
   },
   {
    "id": "greenhouse_area",

@@ -17,7 +17,7 @@ function nums(mw,city,des,pue){ const R=E().R; const P=pue?[pue,pue]:R.pue;
   const avail=rec?[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)]:[0,0];
   const hp=rec?[avail[0]/R.cop[1],avail[1]/R.cop[0]]:[0,0];
   const towers=des.outside==='towers'||des.outside==='hybrid';
-  return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/(R.homeMWh[city]*0.85)),hpco2:hp.map(v=>v*R.grid[city]/1000),
+  return {MWh,co2:MWh.map(v=>v*R.grid[city]/1000),avail,homes:avail.map(v=>v/R.homeHeat[city]),hpco2:hp.map(v=>v*R.grid[city]/1000),
     evap:towers?MWh.map(v=>v*1.5*(des.outside==='hybrid'?{van:0.124,edm:0.104}[city]:1)):[0,0],rec}; }
 function refs(f){ const A=BD.S.answers, mw=A.mw||1, here={inside:A.inside||'air',outside:A.outside||'dry'}, conv={inside:'air',outside:'dry'};
   const S=SITES||{}; const other=f.city==='van'?'edm':'van';

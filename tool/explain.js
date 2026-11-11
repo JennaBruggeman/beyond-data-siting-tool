@@ -121,7 +121,7 @@ const TOPICS={
    {t:'Lifting it with a heat pump',p:`A heat pump raises it to about 70 °C for a network. Each unit of electricity gives ${K(R.cop[0]+'–'+R.cop[1])} units of heat.`,v:anim('recover'),
     extra:h=>bars(h,[{label:'Electricity in',v:1,c:C.power},{label:'Heat out',lo:R.cop[0],hi:R.cop[1],c:C.heat}],'MWh','Heat pump output per MWh of electricity'),src:['cop']},
    {t:'What this size could offer',p:`About ${K(rg(r.avail[0]/1000,r.avail[1]/1000,'GWh a year'))}, the space and water heating of ${rg(r.homes[0],r.homes[1],'homes')} in ${city}. Offered is not used: the buildings still have to take it.`,
-    v:h=>bars(h,[{label:'Vancouver',lo:r.avail[0]/R.homeMWh.van,hi:r.avail[1]/R.homeMWh.van,c:C.water},{label:'Edmonton',lo:r.avail[0]/R.homeMWh.edm,hi:r.avail[1]/R.homeMWh.edm,c:C.heat}],'homes','Homes heated by the same heat, each city'),src:['homes']},
+    v:h=>bars(h,[{label:'Vancouver',lo:r.avail[0]/R.homeHeat.van,hi:r.avail[1]/R.homeHeat.van,c:C.water},{label:'Edmonton',lo:r.avail[0]/R.homeHeat.edm,hi:r.avail[1]/R.homeHeat.edm,c:C.heat}],'homes','Homes heated by the same heat, each city'),src:['homes']},
    {t:'Who is within 1.5 km',p:parts.length?`${K(parts.reduce((t,p)=>t+p.v,0)+' buildings')} that could take heat, by kind. Distance and price decide which are worth a pipe.`:'No listed receivers within 1.5 km.',
     v:h=>parts.length?donut(h,parts,[String(parts.reduce((t,p)=>t+p.v,0)),'buildings'],'Receivers within 1.5 km by kind'):svg(h,560,120,'none'),src:['recv']},
   ]; }},

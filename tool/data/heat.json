@@ -21,6 +21,17 @@
    "fjfAars2020"
   ]
  },
+ "homeHeatMWh": {
+  "v": {
+   "van": 14.29,
+   "edm": 28.17
+  },
+  "src": [
+   "homes_heated",
+   "ceud"
+  ],
+  "_note": "11 Nov 2026 (J.B., F11 B6): the heat a home needs, used everywhere (homes equivalent, housing receivers, the explainer): CEUD 2018-22 energy for space and water heating per household (homeMWh: BC 16.81, Alberta 33.14 MWh) × 0.85 boiler efficiency (our assumption; about 40 % of a BC home's heating energy is electricity, near 100 % efficient)"
+ },
  "homeMWh": {
   "v": {
    "van": 16.81,

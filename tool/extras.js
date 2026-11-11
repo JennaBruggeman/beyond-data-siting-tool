@@ -175,7 +175,7 @@ function citiesView(){
   const e=E(), R=e.R, A=BD.S.answers, mw=A.mw||5, rng=e.rng; BD.scene3d&&BD.scene3d.hide();
   const one=c=>{ const fac=[mw*R.pue[0],mw*R.pue[1]], MWh=fac.map(v=>v*8760*R.lf), it=mw*8760*R.lf;
     const avail=[it*R.capture[0]*R.cop[1]/(R.cop[1]-1),it*R.capture[1]*R.cop[0]/(R.cop[0]-1)], hp=[avail[0]/R.cop[1],avail[1]/R.cop[0]];
-    return {MWh,co2:MWh.map(v=>v*R.grid[c]/1000),avail,homes:avail.map(v=>v/(R.homeMWh[c]*0.85)),hpco2:hp.map(v=>v*R.grid[c]/1000)}; };
+    return {MWh,co2:MWh.map(v=>v*R.grid[c]/1000),avail,homes:avail.map(v=>v/R.homeHeat[c]),hpco2:hp.map(v=>v*R.grid[c]/1000)}; };
   const v=one('van'), d=one('edm');
   const rows=[
    ['Grid carbon',`${R.grid.van} g/kWh`,`${R.grid.edm} g/kWh`,'NIR 2026, consumption intensity, 2024','record'],
