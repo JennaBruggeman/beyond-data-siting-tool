@@ -5,7 +5,7 @@ Probe: checks/tests/floor_rack_probe.js (339 1st Ave E, golden answers, read-onl
 ## Weaknesses first
 - **The "Hall holds 3.6–4.0 MW" line is misleading.** The rack layout counts racks on the building of the 2.5 MW set-up. A 3.6–4.0 MW set-up needs more generators, a deeper yard and so a smaller building. On that building the same layout places far fewer racks (table below). The line went into your report; it should not stand as a capacity.
 - **What sets 2.5 MW, more exactly:** the generator yard, through the floor. At 2.6 MW a fourth set is needed, the yard goes to 23 m and the building footprint drops from 842 to 672 m². The tool stops it with the 21.7 m cap. With the cap lifted, the floor test stops it, but only because the building shrank. On the 2.5 MW building the floor test would allow up to 2.64 MW.
-- **Why the footprint drops 170 m² for a 1.3 m deeper yard:** not checked. The yard arrangement changes from 3 to 4 sets (?).
+- **Footprint drop, checked in the build (checks/tests/yard_probe.js):** the lot is 30.9 m wide and a KD2000 set 13.5 m long, so one set fits per row (plant.js rowDepth). Each set adds a row 5.49 m deep (3.49 m set + 2 m gap) across the full width: 5.49 × 30.9 ≈ 170 m². The 2.5 MW yard is 17.5 m (not 21.7): 17.5 → 23.0 → 28.4 m for 3, 4 and 5 sets.
 - **Built-hall figures are trust 40** (from the (d) note: derived, operator claims, floor may include support rooms).
 - **The layout's row-break rule is coarse.** Any spacing from 3.4 m² per rack up gives the same count (runs of 2 racks, then 3 gaps). A finer rule is needed if the layout takes a built-hall spacing.
 
@@ -52,3 +52,6 @@ The 2.3 m² per rack you quote is the rows only. Across the whole hall floors th
 - The engine.js "Rack layout check" line and the Engineering card change wording.
 - The row-break rule needs finer steps first.
 - Estimate: about half a day, plus a 339 re-export.
+
+## Built 11 Nov 2026 (1b6bd7b)
+As proposed. 339: 2.5 MW unchanged; Racks needed 313–353, placed on 2 hall floors of 1,683 m² (4.8–5.4 m² a rack); Why it stops names the yard. Golden identical, F1 gate clean.
