@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-11T01:33:55.981Z",
- "commit": "7def2ff",
+ "made": "2026-11-11T01:48:59.223Z",
+ "commit": "08d47d0",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -1271,15 +1271,15 @@
     {
      "kind": "row",
      "label": "If liquid: Equal to homes’ heating",
-     "value": "674–1,035 homes",
+     "value": "674–1,034 homes",
      "key": null,
      "range": {
       "low": 674,
-      "high": 1035
+      "high": 1034
      },
      "numbers": [
       674,
-      1035
+      1034
      ]
     },
     {
@@ -1386,7 +1386,7 @@
     "the lot, on the small map",
     "Plan view; the tool’s 3-D scene is not drawn into the card."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nto [a commercial building], 763 m (could)\n0\n20 m\nN ↑\nHeat pump and heat loop\nwhere they go is not modelled (?)\n3 standby generators\nin the yard · not part of the heat\nData hall building\n3 storeys, 18.3 m · where the heat is made\nReceivers within 1 km: 133 (tool list)\nIf liquid-cooled (comparison, not the pick)\nwith air picked, the tool has no figure\n0\n5\n10\n15\n20\nHeat captured from the servers\n7,490–9,855\nHeat offered, after the heat pump\n9,630–14,783\nHeat pump electricity\n2,140–4,928\nGWh a year, one scale\nbuilding (dashed: footprint)\nyard plant\nthe lot, on the small map\nPlan view; the tool’s 3-D scene is not drawn into the card.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nHeat offered\n\nAir cooling is picked. The tool captures no heat in liquid and has no figure for reusing heat from air cooling. For comparison, a 2.5 MW hall with liquid cooling and a heat pump could offer 9,600–14,800 MWh a year. At today’s prices that heat costs more to deliver than it is worth.\n\nnone\nheat captured in liquid (air cooling is picked)\n?\nheat offered with air cooling · not in the tool yet\n9,600–14,800MWh/yr\nif liquid-cooled: heat offered (comparison)\n$63/MWh\nif liquid-cooled: cost of heat (worth $40)\nHeat captured in liquid, as picked\nnone: air cooling\nHeat offered with air cooling\n?\nthe tool has no figure for reusing heat from air cooling\nIf liquid: Heat captured from the servers\n7,490–9,855 MWh/yr\nIf liquid: Heat pump electricity\n2,140–4,928 MWh/yr\nHeat pump COP\n3–4.5 (the tool’s range)\nIf liquid: Equal to homes’ heating\n674–1,035 homes\nIf liquid: Heat pump size\n1.4–3.4 MW\nIf liquid: Carbon of the heat pump power\n39–89 t CO₂e/yr at 18.1 g/kWh\nIf liquid-cooled: what this costs, as the tool states it\nHow the heat figure is worked out\nBack\nNext\n7 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nto [a commercial building], 763 m (could)\n0\n20 m\nN ↑\nHeat pump and heat loop\nwhere they go is not modelled (?)\n3 standby generators\nin the yard · not part of the heat\nData hall building\n3 storeys, 18.3 m · where the heat is made\nReceivers within 1 km: 133 (tool list)\nIf liquid-cooled (comparison, not the pick)\nwith air picked, the tool has no figure\n0\n5\n10\n15\n20\nHeat captured from the servers\n7,490–9,855\nHeat offered, after the heat pump\n9,630–14,783\nHeat pump electricity\n2,140–4,928\nGWh a year, one scale\nbuilding (dashed: footprint)\nyard plant\nthe lot, on the small map\nPlan view; the tool’s 3-D scene is not drawn into the card.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nHeat offered\n\nAir cooling is picked. The tool captures no heat in liquid and has no figure for reusing heat from air cooling. For comparison, a 2.5 MW hall with liquid cooling and a heat pump could offer 9,600–14,800 MWh a year. At today’s prices that heat costs more to deliver than it is worth.\n\nnone\nheat captured in liquid (air cooling is picked)\n?\nheat offered with air cooling · not in the tool yet\n9,600–14,800MWh/yr\nif liquid-cooled: heat offered (comparison)\n$63/MWh\nif liquid-cooled: cost of heat (worth $40)\nHeat captured in liquid, as picked\nnone: air cooling\nHeat offered with air cooling\n?\nthe tool has no figure for reusing heat from air cooling\nIf liquid: Heat captured from the servers\n7,490–9,855 MWh/yr\nIf liquid: Heat pump electricity\n2,140–4,928 MWh/yr\nHeat pump COP\n3–4.5 (the tool’s range)\nIf liquid: Equal to homes’ heating\n674–1,034 homes\nIf liquid: Heat pump size\n1.4–3.4 MW\nIf liquid: Carbon of the heat pump power\n39–89 t CO₂e/yr at 18.1 g/kWh\nIf liquid-cooled: what this costs, as the tool states it\nHow the heat figure is worked out\nBack\nNext\n7 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 8,
@@ -1733,15 +1733,19 @@
     {
      "kind": "row",
      "label": "UPS batteries held",
-     "value": "0–0.1 MWh",
+     "value": "0.4–0.6 MWh (10–15 min at full load, FM 5-32; our arithmetic)",
      "key": null,
      "range": {
-      "low": 0,
-      "high": 0.1
+      "low": 0.4,
+      "high": 0.6
      },
      "numbers": [
-      0,
-      0.1
+      0.4,
+      0.6,
+      10,
+      15,
+      5,
+      -32
      ]
     },
     {
@@ -1846,7 +1850,7 @@
     "planned or project",
     "other mapped station"
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nWhat the hall draws\n0\n1.3\n2.5\n3.8\n5\nServers (IT load)\n2.5 MW\nAt the meter, full load\n3.5–3.9 MW\nAt the meter, on average\n2.1–2.3 MW\nMW, one scale\nPUE: one range for every cooling type (industry surveys, not this design)\n1\n1.25\n1.5\n1.75\n2\n1.4–1.55\nPer-type figures (air, liquid to the chip, immersion):\n?\nnot in the tool yet\nSubstations nearby, straight-line distance\n0\n1.3\n2.5\n3.8\n5\nMurrin\n1.1 km\nEast Vancouver, utility project\n1.9 km\nWest End, planned\n3 km\nNearest other mapped transformer station (map year 1986)\n0.6 km\nkm from the lot, one scale\nSpare capacity at each substation\n?\nno utility publishes it\nrange, low end to high end (dark to light)\nsubstation in service\nplanned or project\nother mapped station\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nElectricity\n\nA 2.5 MW hall draws 3.5–3.9 MW at the meter. The grid connection is the utility’s answer, and no utility publishes how much room each substation has.\n\n3.5–3.9MW\nat the meter, full load\n18–20GWh/yr\nelectricity a year\n1.1km\nto Murrin\n1.4–1.55\nPUE, every cooling type (industry surveys, not this design)\nPower on average\n2.1–2.3 MW (60% of full load)\nElectrical service\nwithin a single primary service\nCost a year\n$1.8–2 million (BC Hydro large general service)\nCarbon of that power\n333–369 t CO₂e/yr at 18.1 g/kWh\nGrid connection\ndowntown supply area: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; not yet decided)\nGenerators installed\n3 sets × 2 MW\nUPS batteries held\n0–0.1 MWh\nSubstation spare capacity\n?\nno utility publishes it\nPUE by cooling type\n?\none range is used for all types\nPower factor and service size\nSubstations, as the tool holds them\nBack\nNext\n9 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nWhat the hall draws\n0\n1.3\n2.5\n3.8\n5\nServers (IT load)\n2.5 MW\nAt the meter, full load\n3.5–3.9 MW\nAt the meter, on average\n2.1–2.3 MW\nMW, one scale\nPUE: one range for every cooling type (industry surveys, not this design)\n1\n1.25\n1.5\n1.75\n2\n1.4–1.55\nPer-type figures (air, liquid to the chip, immersion):\n?\nnot in the tool yet\nSubstations nearby, straight-line distance\n0\n1.3\n2.5\n3.8\n5\nMurrin\n1.1 km\nEast Vancouver, utility project\n1.9 km\nWest End, planned\n3 km\nNearest other mapped transformer station (map year 1986)\n0.6 km\nkm from the lot, one scale\nSpare capacity at each substation\n?\nno utility publishes it\nrange, low end to high end (dark to light)\nsubstation in service\nplanned or project\nother mapped station\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nElectricity\n\nA 2.5 MW hall draws 3.5–3.9 MW at the meter. The grid connection is the utility’s answer, and no utility publishes how much room each substation has.\n\n3.5–3.9MW\nat the meter, full load\n18–20GWh/yr\nelectricity a year\n1.1km\nto Murrin\n1.4–1.55\nPUE, every cooling type (industry surveys, not this design)\nPower on average\n2.1–2.3 MW (60% of full load)\nElectrical service\nwithin a single primary service\nCost a year\n$1.8–2 million (BC Hydro large general service)\nCarbon of that power\n333–369 t CO₂e/yr at 18.1 g/kWh\nGrid connection\ndowntown supply area: no new 12 kV feeder positions from fiscal 2027 until the West End substation (expected July 2032; not yet decided)\nGenerators installed\n3 sets × 2 MW\nUPS batteries held\n0.4–0.6 MWh (10–15 min at full load, FM 5-32; our arithmetic)\nSubstation spare capacity\n?\nno utility publishes it\nPUE by cooling type\n?\none range is used for all types\nPower factor and service size\nSubstations, as the tool holds them\nBack\nNext\n9 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 10,
