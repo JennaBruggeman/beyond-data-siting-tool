@@ -57,10 +57,20 @@ function pack(F,region,forbid,u0,u1,v0,v1,k,count,rot){
 function boxOf(F,p,k,base,kind){ const r=BD.geo.rectW(F,p.u-p.L/2,p.u+p.L/2,p.v-p.W/2,p.v+p.W/2);
   const wu=p.L===k.L?k.wall[0]:k.wall[1], wv=p.L===k.L?k.wall[1]:k.wall[0];
   const c=BD.geo.rectW(F,p.u-p.L/2-wu,p.u+p.L/2+wu,p.v-p.W/2-wv,p.v+p.W/2+wv); return {ring:r,clear:c,h:k.H,base,kind,name:k.name}; }
+/* scope (f), J.B. 11 Nov 2026: yard area of the cooling units WITH their clear zones and spacing, from the same units, wall clearances and gaps the
+   plant layout uses (plant_units.json: EVAPCO layout manual for dry, chiller and hybrid units; BAC J74 for tower walls; tower gaps set above, no register id ?).
+   Low: units for the low PUE, in the most compact block (rows × columns), zones shared between neighbours, wall clearance round the block.
+   High: units for the high PUE (as sizeFor), in one row (the longer of the two single-row layouts). Generators are not counted here (Backup power). */
+function zoneArea(mw,A){ const s=sizeFor(mw,A), k=s.k, g=k.gap||[0,0], w=k.wall||[0,0];
+  const pue=BD.eng?BD.eng.R.pue:BD.data.equipment.pue, nLo=spare(Math.max(1,Math.ceil(mw*pue[0]/k.mw)),A.spares||'n1'), nHi=s.n;
+  const blk=(r,c)=>(c*k.L+(c-1)*g[0]+2*w[0])*(r*k.W+(r-1)*g[1]+2*w[1]);
+  let lo=null; for(let r=1;r<=nLo;r++){ const c=Math.ceil(nLo/r), a=blk(r,c); if(!lo||a<lo.a) lo={a,r,c}; }
+  const hi=Math.max(blk(1,nHi),blk(nHi,1));
+  return {lo:lo.a,hi,nLo,nHi,arr:[lo.r,lo.c],unit:k.L*k.W,name:k.name,L:k.L,W:k.W,wall:w.slice(),gap:g.slice(),gapSrc:k===KIND.towerS||k===KIND.towerL?'set in plant.js, no register id (?)':'evapcoLayout2026'}; }
 function localBounds(F,ring){ let a=1e9,b=-1e9,c=1e9,d=-1e9; for(let i=0;i<ring.length;i+=2){ const [u,v]=F.toL(ring[i],ring[i+1]); a=Math.min(a,u); b=Math.max(b,u); c=Math.min(c,v); d=Math.max(d,v); } return [a,b,c,d]; }
 
 BD.plant={
- KIND,SRC,sizeFor,pack,boxOf,localBounds,
+ KIND,SRC,sizeFor,zoneArea,pack,boxOf,localBounds,
  /* before the footprint: decide how much plant goes in the yard and reserve a plant yard strip for it */
  place(m){
   const A=BD.S.answers, F=m.F; if(!F) return;
