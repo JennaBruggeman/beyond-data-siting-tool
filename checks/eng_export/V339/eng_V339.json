@@ -1,8 +1,8 @@
 {
  "lot": "V339",
  "address": "339 1st Ave E",
- "made": "2026-11-11T04:32:51.991Z",
- "commit": "c925a43",
+ "made": "2026-11-11T04:52:29.505Z",
+ "commit": "9a30df9",
  "toolDirty": false,
  "by": "checks/tests/eng_export.js (F9)",
  "answers": {
@@ -226,7 +226,7 @@
     {
      "kind": "row",
      "label": "Hall holds",
-     "value": "3.6–4 MW (500 racks at 7.1–8 kW, the tool’s rack layout on 2 hall floors)",
+     "value": "3.6–4.0 MW (500 racks at 7.1–8 kW, the tool’s rack layout on 2 hall floors)",
      "key": null,
      "range": {
       "low": 3.6,
@@ -254,7 +254,7 @@
     {
      "kind": "row",
      "label": "Why the gap",
-     "value": "the hall could hold 3.6–4 MW, but the size is set outside the hall: at 2.6 MW, the generators need a plant yard 23 m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard).",
+     "value": "the hall could hold 3.6–4.0 MW, but the size is set outside the hall: at 2.6 MW, the generators need a plant yard 23 m deep, deeper than any generator yard the tool has tested (21.7 m, measured on 339 1st Ave E at 1.8 MW); generator noise at the lot lines is not modelled, so a deeper yard is not offered (plant.js bigYard).",
      "key": null,
      "range": {
       "low": 3.6,
@@ -265,7 +265,10 @@
       4,
       2.6,
       23,
-      21.7
+      21.7,
+      339,
+      1,
+      1.8
      ]
     },
     {
@@ -363,7 +366,7 @@
     "largest size that passes every check: 2.5 MW",
     "What limits it. At 2.6 MW: the generators need a plant yard 23 m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard)."
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n339 1st Ave E\n4,503 m² · I-3\nBuilding\n842 m² · 3 storeys\n0\n20 m\nN ↑\nlot\nbuilding\ngenerators\nneighbouring buildings\nThe size this lot allows, in MW of servers\n0\n2.5 MW\ntested 2.5 MW\nlargest size that passes every check: 2.5 MW\n\nWhat limits it. At 2.6 MW: the generators need a plant yard 23 m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard).\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nWhat fits\n\nServers are only part of what has to fit. The size shown is the largest where the building, the cooling plant, the generators and the loading all fit with an enclosed plant room (needed for the noise by-law).\n\n2.5 MW\nlargest size that fits\n2.5 MW\nsize tested here\nHall holds\n3.6–4 MW (500 racks at 7.1–8 kW, the tool’s rack layout on 2 hall floors)\nLargest that fits\n2.5 MW of servers\nWhy the gap\nthe hall could hold 3.6–4 MW, but the size is set outside the hall: at 2.6 MW, the generators need a plant yard 23 m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard).\nBuilding\n842 m² footprint, 3 storeys, 18.3 m\nCooling plant\n4 air-cooled chillers, indoors in a plant room\nGenerators\n3 sets of 2 MW, yard\nHow the size is found\nWarnings at this size\nBack\nNext\n3 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\n339 1st Ave E\n4,503 m² · I-3\nBuilding\n842 m² · 3 storeys\n0\n20 m\nN ↑\nlot\nbuilding\ngenerators\nneighbouring buildings\nThe size this lot allows, in MW of servers\n0\n2.5 MW\ntested 2.5 MW\nlargest size that passes every check: 2.5 MW\n\nWhat limits it. At 2.6 MW: the generators need a plant yard 23 m deep, deeper than the 21.7 m of the tested lots (plant.js bigYard).\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nWhat fits\n\nServers are only part of what has to fit. The size shown is the largest where the building, the cooling plant, the generators and the loading all fit with an enclosed plant room (needed for the noise by-law).\n\n2.5 MW\nlargest size that fits\n2.5 MW\nsize tested here\nHall holds\n3.6–4.0 MW (500 racks at 7.1–8 kW, the tool’s rack layout on 2 hall floors)\nLargest that fits\n2.5 MW of servers\nWhy the gap\nthe hall could hold 3.6–4.0 MW, but the size is set outside the hall: at 2.6 MW, the generators need a plant yard 23 m deep, deeper than any generator yard the tool has tested (21.7 m, measured on 339 1st Ave E at 1.8 MW); generator noise at the lot lines is not modelled, so a deeper yard is not offered (plant.js bigYard).\nBuilding\n842 m² footprint, 3 storeys, 18.3 m\nCooling plant\n4 air-cooled chillers, indoors in a plant room\nGenerators\n3 sets of 2 MW, yard\nHow the size is found\nWarnings at this size\nBack\nNext\n3 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 4,
@@ -511,9 +514,9 @@
     "Air-cooled chillers (pick)",
     "none for cooling",
     "Cooling towers",
-    "36,661–61,101 m³/yr",
+    "22,075–61,101 m³/yr",
     "Hybrid coolers",
-    "4,546–7,577 m³/yr",
+    "2,737–7,577 m³/yr",
     "Plant noise",
     "sound power of the cooling units, dBA; the bar starts at 90",
     "Air-cooled chillers (pick)",
@@ -592,12 +595,12 @@
       {
        "option": "Cooling towers",
        "picked": false,
-       "value": "36,661–61,101 m³/yr"
+       "value": "22,075–61,101 m³/yr"
       },
       {
        "option": "Hybrid coolers",
        "picked": false,
-       "value": "4,546–7,577 m³/yr"
+       "value": "2,737–7,577 m³/yr"
       }
      ]
     },
@@ -644,7 +647,7 @@
      ]
     }
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at air-cooled chillers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm²: cooling units in the yard with their clear zones and spacing (maker layout guides), plus UPS, batteries (and heat pump, liquid loop) indoors, equipment only\nAir (pick)\n377–388 m²\nLiquid to the chip\n391–520 m²\nImmersion\n391–520 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nAir-cooled chillers (pick)\nnone for cooling\nCooling towers\n36,661–61,101 m³/yr\nHybrid coolers\n4,546–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nAir-cooled chillers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm²: cooling units in the yard with their clear zones and spacing (maker layout guides), plus UPS and batteries indoors, equipment only\nAir-cooled chillers (pick)\n377–388 m²\nCooling towers\n270–308 m²\nHybrid coolers\n687–702 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55; industry surveys, not this design): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nAir-cooled chillers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nAir-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nInside: how the heat leaves the servers · outside held at air-cooled chillers\nHeat captured in liquid\nshare of the servers’ heat, and MW at this size\nAir (pick)\nnone: all to the air\nLiquid to the chip\n1.4–1.9 MW57–75% of the heat\nImmersion\n2.5 MW100% of the heat\nPlant space\nm²: cooling units in the yard with their clear zones and spacing (maker layout guides), plus UPS, batteries (and heat pump, liquid loop) indoors, equipment only\nAir (pick)\n377–388 m²\nLiquid to the chip\n391–520 m²\nImmersion\n391–520 m²\nOutside: how the heat leaves the building · inside held at air\nWater used\nmake-up water, m³ a year\nAir-cooled chillers (pick)\nnone for cooling\nCooling towers\n22,075–61,101 m³/yr\nHybrid coolers\n2,737–7,577 m³/yr\nPlant noise\nsound power of the cooling units, dBA; the bar starts at 90\nAir-cooled chillers (pick)\n108.8–112.1 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nCooling towers\n107.6–110.9 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nHybrid coolers\n111.3–114.6 dBAneeds a plant room to the NSW 2021 terms (−25 dB)\nPlant space\nm²: cooling units in the yard with their clear zones and spacing (maker layout guides), plus UPS and batteries indoors, equipment only\nAir-cooled chillers (pick)\n377–388 m²\nCooling towers\n270–308 m²\nHybrid coolers\n687–702 m²\nyour pick (the tool’s default, kept here)\nthe others\nrange, low to high\n\nAir-cooled chillers in design winter: within the maker’s stated range: design −7 °C (BCBC App. C Table C-2, January 2.5 %); stated down to −28.9 °C at widest, −20 °C with R1234ze.\n\nElectricity is not compared. The tool uses one PUE range for every cooling type (R.pue, 1.4–1.55; industry surveys, not this design): per-type figures ?\nnot in the tool yet\n\nThis card in the interactive logic diagram\nSources and assumptions\nSet-up\nCooling\n\nTrade-offs, not a verdict. Each side is compared with the other held at the current pick; the pick drives every later card. Here the tool’s default pick stays.\n\nAir\ninside, now\nAir-cooled chillers\noutside, now\n4 air-cooled chillers\ncooling units placed\nChillers in design winter\nwithin the stated range\nPicked inside\nAir (the tool’s default)\nPicked outside\nAir-cooled chillers (the dry option: with an air-cooled hall the tool places air-cooled chillers, not dry coolers)\nSize tested\n2.5 MW of servers\nFail the fit check here\nnone\nHow each figure is found\nBack\nNext\n4 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 5,
@@ -2003,12 +2006,16 @@
     {
      "kind": "hero",
      "label": "make-up water if towers",
-     "value": "61,101",
+     "value": "22,075–61,101",
      "unit": "m³/yr",
      "key": null,
      "red": false,
-     "range": null,
+     "range": {
+      "low": 22075,
+      "high": 61101
+     },
      "numbers": [
+      22075,
       61101
      ]
     },
@@ -2032,7 +2039,7 @@
     },
     {
      "kind": "row",
-     "label": "Evaporated, at most",
+     "label": "Evaporated",
      "value": "none",
      "key": null,
      "range": null,
@@ -2041,14 +2048,14 @@
     {
      "kind": "row",
      "label": "Make-up water if towers",
-     "value": "36,661–61,101 m³/yr at 2–6 cycles",
+     "value": "22,075–61,101 m³/yr at 2–6 cycles",
      "key": null,
      "range": {
-      "low": 36661,
+      "low": 22075,
       "high": 61101
      },
      "numbers": [
-      36661,
+      22075,
       61101,
       2,
       6
@@ -2131,10 +2138,10 @@
     "Air-cooled chillers (the pick)",
     "none",
     "Cooling towers",
-    "up to 30,551 m³/yr",
+    "18,396–30,551 m³/yr",
     "Hybrid coolers",
-    "up to 3,788 m³/yr",
-    "m³ a year, at most, one scale",
+    "2,281–3,788 m³/yr",
+    "m³ a year, low to high (load 0.4–0.6, PUE 1.4–1.55), one scale",
     "If towers: make-up water against rain on the roof",
     "0k",
     "25k",
@@ -2142,7 +2149,7 @@
     "75k",
     "100k",
     "Make-up water, cooling towers",
-    "36,661–61,101",
+    "22,075–61,101",
     "Rain on the roof (0.8 runoff)",
     "781 m³/yr",
     "m³ a year, one scale",
@@ -2164,17 +2171,17 @@
       {
        "option": "Cooling towers",
        "picked": false,
-       "value": "up to 30,551 m³/yr"
+       "value": "18,396–30,551 m³/yr"
       },
       {
        "option": "Hybrid coolers",
        "picked": false,
-       "value": "up to 3,788 m³/yr"
+       "value": "2,281–3,788 m³/yr"
       }
      ]
     }
    ],
-   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nEvaporated for cooling, by how the heat leaves the building\n0k\n13k\n25k\n38k\n50k\nAir-cooled chillers (the pick)\nnone\nCooling towers\nup to 30,551 m³/yr\nHybrid coolers\nup to 3,788 m³/yr\nm³ a year, at most, one scale\nIf towers: make-up water against rain on the roof\n0k\n25k\n50k\n75k\n100k\nMake-up water, cooling towers\n36,661–61,101\nRain on the roof (0.8 runoff)\n781 m³/yr\nm³ a year, one scale\nRoof and rain\nRoof 842 m² · 1159.5 mm of rain a year\nFire-fighting water volume\n?\nnot sized in the tool\nthe picked cooling\nthe other types\nrain\nLot plan: roof and context; the roof is the footprint the tool uses for rain.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nWater\n\nWith air-cooled chillers the heat leaves to the air: no water is evaporated for cooling. The pick drives the figures; towers or hybrid coolers would use water.\n\nnone\nevaporated for cooling\n781m³/yr\nrain on the roof\n61,101m³/yr\nmake-up water if towers\n?\nfire-fighting water · not in the tool yet\nThe pick\nAir-cooled chillers\nEvaporated, at most\nnone\nMake-up water if towers\n36,661–61,101 m³/yr at 2–6 cycles\nBlowdown to the sewer\nnone\nRain on the roof\n781 m³/yr from 842 m² at 1159.5 mm\nFire-fighting water\n?\nthe volume is not sized in the tool\nOther sources and their rules\nHybrid coolers\nBack\nNext\n10 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
+   "screenText": "Beyond Data\nEngineering\nSite\nSet-up\nExchanges\nReport\n339 1st Ave E · I-3\nVancouver\nEdmonton\nHow it works\nClose\nExample lot · read-only\nEvaporated for cooling, by how the heat leaves the building\n0k\n13k\n25k\n38k\n50k\nAir-cooled chillers (the pick)\nnone\nCooling towers\n18,396–30,551 m³/yr\nHybrid coolers\n2,281–3,788 m³/yr\nm³ a year, low to high (load 0.4–0.6, PUE 1.4–1.55), one scale\nIf towers: make-up water against rain on the roof\n0k\n25k\n50k\n75k\n100k\nMake-up water, cooling towers\n22,075–61,101\nRain on the roof (0.8 runoff)\n781 m³/yr\nm³ a year, one scale\nRoof and rain\nRoof 842 m² · 1159.5 mm of rain a year\nFire-fighting water volume\n?\nnot sized in the tool\nthe picked cooling\nthe other types\nrain\nLot plan: roof and context; the roof is the footprint the tool uses for rain.\nThis card in the interactive logic diagram\nSources and assumptions\nExchanges\nWater\n\nWith air-cooled chillers the heat leaves to the air: no water is evaporated for cooling. The pick drives the figures; towers or hybrid coolers would use water.\n\nnone\nevaporated for cooling\n781m³/yr\nrain on the roof\n22,075–61,101m³/yr\nmake-up water if towers\n?\nfire-fighting water · not in the tool yet\nThe pick\nAir-cooled chillers\nEvaporated\nnone\nMake-up water if towers\n22,075–61,101 m³/yr at 2–6 cycles\nBlowdown to the sewer\nnone\nRain on the roof\n781 m³/yr from 842 m² at 1159.5 mm\nFire-fighting water\n?\nthe volume is not sized in the tool\nOther sources and their rules\nHybrid coolers\nBack\nNext\n10 / 11\n1\nYour city\n2\nYour parcel\n3\nWhat fits\n4\nCooling\n5\nBackup power\n6\nNoise\n7\nHeat offered\n8\nWho could take it\n9\nElectricity\n10\nWater\n11\nReport"
   },
   {
    "n": 11,
