@@ -1,9 +1,10 @@
-"""30 Oct 2026: J.B. 'data center operators have to test generators monthly'. Source found (check 1, Claude): a fire department summary of CSA C282."""
+"""30 Oct 2026: J.B. 'data center operators have to test generators monthly'. Source found (check 1, Claude): a fire department summary of CSA C282.
+11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
 R = pathlib.Path(__file__).resolve().parents[2]; D = '30 Oct 2026'
 K = 'weyburnC282'
 TXT = ("SECONDARY (fire department summary of a paywalled standard): Weyburn Fire Department, 'Emergency Power Systems Requirements' (undated; posted Apr 2024 ?), citing CSA C282 'Emergency Electrical Power Supply for Buildings': "
-       "'The emergency electrical power shall be thoroughly tested monthly', running the set at 'at least 30% of the rated load for 60 minutes' with transfer switches operated under load; an annual 2-hour full-load test; weekly tests for health-care facilities. "
+       "a thorough monthly test of the emergency electrical power, running the set at no less than 30% of rated load for 60 minutes with transfer switches operated under load; an annual 2-hour full-load test; weekly tests for health-care facilities. "
        "Applies to emergency (life-safety) power systems; whether a data centre's standby generators for IT load fall under C282 is not stated (?; Vancouver bulletin 2000-015 points emergency generator rooms to C282). "
        "CSA C282 itself not read (paywalled) — https://weyburn.ca/wp-content/uploads/2024/04/Emergency-Power-Systems-Requirements.pdf")
 for f, pretty in (('register/formula_register.json', True), ('tool/opps.json', False)):

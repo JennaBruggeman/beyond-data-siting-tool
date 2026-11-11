@@ -3,7 +3,8 @@
    its local source; figures re-read from it (pdftotext) and two more quoted (flue exhaust rate; wind range). Check 4: build agent, the upload itself.
 2. Screenshots of 62.1-2022 pp. 8-11 (s. 5.1-5.8, incl. s. 5.4 and Table 5-1, p. 10): register ashrae621_2022 was read 1 Nov from a pdftotext copy.
    Check 2: build agent re-read every Table 5-1 figure and 5.4.1 against the page images (not an independent agent: marked so).
-   Two other screenshots uploaded with them are not 62.1 pages (a blank browser window; a tool screenshot): not used."""
+   Two other screenshots uploaded with them are not 62.1 pages (a blank browser window; a tool screenshot): not used.
+11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
 R = pathlib.Path(__file__).resolve().parents[2]
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
@@ -14,12 +15,12 @@ def log(k, entry):
     if not any(c.get('date') == D and c.get('check') == entry['check'] and c.get('by') == entry['by'] for c in cl): cl.append(entry)
 
 K = 'arch_ashrae621ag'
-ADD = (" ‖ LOCAL COPY (J.B. upload, 3 Nov 2026): " + UP + "fda2b3e6-62_1_2022_ag_20240430.pdf (11 pp.; 'Approved by ASHRAE and the American National "
-       "Standards Institute on April 30, 2024', p. i). Re-read: Table B-1 (p. 4) 'Diesel generators, diesel truck loading area or dock, diesel bus parking/idling area' "
+ADD = (" ‖ LOCAL COPY (J.B. upload, 3 Nov 2026): " + UP + "fda2b3e6-62_1_2022_ag_20240430.pdf (11 pp.; approved by ASHRAE and ANSI on 30 Apr 2024, p. i). "
+       "Re-read: Table B-1 (p. 4) diesel generators, diesel truck loading areas or docks and diesel bus parking or idling areas "
        "2000 × e, fn. b e = 1 − VOC removal efficiency of the odour filter (80 % filter: DF 400); Class 2 10, Class 3 50, Class 4 (kitchen grease hoods) 300; "
-       "B1.1 Exception f: 'The minimum separation distances for heat rejection equipment shall conform to Table 5-1' (p. 1); B1.3 Class 3, Class 4, cooling-tower and "
+       "B1.1 Exception f: minimum separation distances for heat rejection equipment are those of Table 5-1 (p. 1); B1.3 Class 3, Class 4, cooling-tower and "
        "combustion exhaust the full distance L from operable openings to occupiable spaces, other exhaust half L (p. 2); B1.4 no credit for vertical separation under 65 ft (20 m) (p. 2); "
-       "B2.1 flue vents: 'assume a value of 250 cfm per million Btu/h (0.00043 m3/s per kW) of combustion input' unless the maker gives actual rates; with no local wind data, "
+       "B2.1 flue vents: take 250 cfm per million Btu/h (0.00043 m3/s per kW) of combustion input unless the maker gives actual rates; with no local wind data, "
        "UH varied from 1.5 to 10 m/s (p. 4).")
 if 'LOCAL COPY (J.B. upload, 3 Nov 2026)' not in S[K]: S[K] = S[K] + ADD
 log(K, {'check': 4, 'by': 'Claude (build agent)', 'date': D, 'where': 'J.B. upload fda2b3e6-62_1_2022_ag_20240430.pdf, pdftotext pp. 1-4',

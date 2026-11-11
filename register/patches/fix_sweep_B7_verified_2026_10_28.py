@@ -1,6 +1,7 @@
 """Second-check batch 7 (J.B. 28 Oct 2026): 50 'Found' sources; 38 rerun after the web limit reset (B7_a6.json). Check 1 =
 checks/sweep/sweep_results.csv; check 2 = checks/sweep/B7_a*.json. Corrections only where both checks agree; a finding
-from one check only is marked '?'. Text and citations only: no engine value changes."""
+from one check only is marked '?'. Text and citations only: no engine value changes.
+11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
 R = pathlib.Path(__file__).resolve().parents[2]
 REPL = {
@@ -15,7 +16,7 @@ REPL = {
  'armaElectronics': [('"Blade (rack mount), desktop and floor standing servers" covered, for consumer, industrial or commercial use;', '"Blade (rack mount), desktop and floor standing servers" covered, for consumer, industrial or commercial use (wording from the Electronics Products, Definitions and Fees PDF, https://files.albertarecycling.ca/Electronics_Products-Definitions-and-Fees.pdf, not the registry page; single check ?);')],
  'arupManx2013': [('https://planningportal.im/md/docs/1314840.md', 'https://planningportal.im/md/docs/1314840.md (a copy of the Isle of Man public register ?; school limits are 35 dB internal and 45 dB external)')],
  'ashrae': [('free-cooling hours by bin from CWEC hourly weather (Formulas sheet)', 'free-cooling hours by bin from CWEC hourly weather (our own calculation, not from ASHRAE; Formulas sheet)')],
- 'ashraeCh45': [("exhaust-to-intake recirculation 'can be a serious problem'", "exhaust-to-intake recirculation 'can be a serious problem' (?: the 2019 edition reads 'can be an even more serious problem' and describes intake on one side, discharge on the other; SI 2015 copy not re-checked)")],
+ 'ashraeCh45': [("exhaust-to-intake recirculation can be a serious risk", "exhaust-to-intake recirculation can be a serious risk (?: the 2019 edition rates it even more serious and describes intake on one side, discharge on the other; SI 2015 copy not re-checked)")],
  'ashraeLife': [('ch.37 Table 4 (median service life): centrifugal chiller >25 yr; cooling tower galvanized >22;', 'ch.37 Table 3 (median service life): centrifugal chiller >25 yr; cooling tower metal >22; Table 4 (Akalin 1978, which ASHRAE footnotes as possibly outdated):')],
  'atb2024_batt': [('NREL Annual Technology Baseline 2024', 'NREL Annual Technology Baseline 2024 (page now names the publisher NLR; a newer 2024b version exists ?)')],
  'atcoGas2026': [('(riders excluded)', '(riders excluded ?: the UCA says rate riders are included in delivery charges; delivery figures need the ATCO Gas North rate schedule, not on this page)')],

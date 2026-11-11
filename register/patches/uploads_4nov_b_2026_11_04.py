@@ -4,7 +4,8 @@ prEN 12572-1/-2:2025 (DRAFT, not in force), ASHRAE Handbook HVAC Applications 20
 public-edge benchmark) and ch. 6 Indoor Swimming Pools, CSA Z8000:24 screenshots (Clause 9.2, Table 9.2, Clause 12).
 Check 1: Claude reading (pdftotext -layout; screenshots read as images). Check 2: scripted re-find in a fresh extraction
 (pdftotext -raw; tesseract OCR), checks/research_arch_v1/checkV2_result_uploads_4nov_b.json; same agent, no independent agent available.
-Uploads and screenshots are not committed; paths point to J.B.'s upload folder. Summary: checks/research_arch_v1/uploads_4nov_b.md."""
+Uploads and screenshots are not committed; paths point to J.B.'s upload folder. Summary: checks/research_arch_v1/uploads_4nov_b.md.
+11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
@@ -23,7 +24,7 @@ KIND = {
  'arch_up4_csaZ8000_9': 'standard',
 }
 NOTE = {
- 'ashrae2015ch51': " ‖ SUPERSEDED for the public edge (4 Nov 2026): 2023 edition ch. 52 (arch_up4_ashraeCh52); Table 1 and Table 3 values re-found unchanged in 2023; the 2015 sentence 'usually 630 to 950 W/m2, which includes back and edge losses' is not in the 2023 text, which gives Table 7 instead (440 / 555 / 665 W/m² at 300 / 230 / 150 mm, mean fluid 55 °C)",
+ 'ashrae2015ch51': " ‖ SUPERSEDED for the public edge (4 Nov 2026): 2023 edition ch. 52 (arch_up4_ashraeCh52); Table 1 and Table 3 values re-found unchanged in 2023; the 2015 figure of usually 630 to 950 W/m² (back and edge losses included) is not in the 2023 text, which gives Table 7 instead (440 / 555 / 665 W/m² at 300 / 230 / 150 mm, mean fluid 55 °C)",
  'arch_hce_ashraeCh51Cold': " ‖ 2023 EDITION (4 Nov 2026, arch_up4_ashraeCh52): every Table 1 and Table 3 figure above re-found unchanged (Table 3 on p. 52.6); still no Canadian city",
  'arch_up2_en12572_3': " ‖ 4 Nov 2026: second upload (10252feb-BS_EN_12572-3_2017_4_Nov_2026_07-03PM_UTC.pdf) has the same text (pdftotext diff empty); Parts 1 and 2 now read: arch_up4_en12572_1, arch_up4_en12572_2",
  'arch_pub_en12572cat': " ‖ STANDARD TEXT (4 Nov 2026, arch_up4_en12572_2 cl. 4.1 p. 5): 4 500 mm maximum, 4 000 mm where it is possible to stand on top, confirmed",
