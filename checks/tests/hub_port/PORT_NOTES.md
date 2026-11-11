@@ -8,7 +8,7 @@ Port: `tool/hubchecks.js` (reach, dcspace, portal, yardgate v7, clear sizes from
 - `port_test.js`: JS against ref/ on the 13 boards plus 8238 mid.
 
 ## Result (boards re-run on EH-FREEZE-2026-11-11b)
-- T-reach: every finding the same, on every board, with and without SERVES.
+- T-reach: every finding the same on every call the boards made (all with SERVES off, as the hub runs; the pool and cascade setting is not exercised).
 - Public routes to a street (dcspace.route): all 263 calls the boards made, same result and reason.
 - Plant yards, gates, vehicle gates, dock doors: all the same (30 items).
 - Portal row: same on both boards that have one (1360, 10004).
