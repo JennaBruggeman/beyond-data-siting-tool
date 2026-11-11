@@ -189,73 +189,73 @@
    {
     "claim": "2.2.1 quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate power systems and their associated fuel supply systems outside important buildings.'",
+    "evidence": "power systems and their fuel supply systems to be located outside important buildings.",
     "fix": ""
    },
    {
     "claim": "2.2.1.1 outdoor tanks per DS 7-88",
     "verdict": "CONFIRMED",
-    "evidence": "'Arrange outdoor fuel tanks in accordance with Data Sheet 7-88'",
+    "evidence": "outdoor fuel tanks arranged per Data Sheet 7-88",
     "fix": ""
    },
    {
     "claim": "2.2.2 indoor main tanks fire-rated, liquid-tight, containment, emergency drainage (DS 7-32)",
     "verdict": "CONFIRMED",
-    "evidence": "'isolate them by using fire-rated, liquid-tight construction, containment, and emergency drainage in accordance with Data Sheet 7-32'",
+    "evidence": "isolate them with fire-rated, liquid-tight construction, containment and emergency drainage per Data Sheet 7-32",
     "fix": ""
    },
    {
-    "claim": "2.2.2.1 double-walled or concrete-encased 'not considered an alternative'",
+    "claim": "2.2.2.1 double-walled or concrete-encased tanks do not replace containment",
     "verdict": "CONFIRMED",
-    "evidence": "'Secondary containment (double-walled) tanks or tanks encased in concrete are not considered an alternative to containment and emergency drainage'",
+    "evidence": "double-walled (secondary containment) tanks or concrete-encased tanks do not count as a substitute for containment and emergency drainage",
     "fix": ""
    },
    {
     "claim": "2.2.3 A 1-hour cutoff room quote",
     "verdict": "CONFIRMED",
-    "evidence": "'provide a minimum 1-hour fire-rated cutoff room located along an outside wall with openings accessible to firefighters' (applies to fuel pumps and generators)",
+    "evidence": "a fire-rated cutoff room of at least 1 hour, along an outside wall, with openings firefighters can reach (applies to fuel pumps and generators)",
     "fix": ""
    },
    {
     "claim": "2.2.3 B 3-hour vault quote",
     "verdict": "CONFIRMED",
-    "evidence": "'provide a 3-hour fire-rated, liquid-tight, concrete or masonry vault'",
+    "evidence": "a concrete or masonry vault, 3-hour fire-rated and liquid-tight",
     "fix": ""
    },
    {
     "claim": "2.2.4 containment regardless of location",
     "verdict": "CONFIRMED",
-    "evidence": "'Provide a containment and emergency drainage system for the generator/pump rooms or vaults, regardless of location'",
+    "evidence": "containment and emergency drainage for generator/pump rooms or vaults wherever they are located",
     "fix": ""
    },
    {
     "claim": "2.2.8 above 0.2% (500-yr) flood + 0.3-0.6 m",
     "verdict": "CONFIRMED",
-    "evidence": "'above the predicted 0.2% annual exceedance (500-year) flood elevation and include at least 1 to 2 ft (0.3 to 0.6 m) of freeboard'",
+    "evidence": "above the predicted 0.2% annual exceedance (500-year) flood elevation with at least 1 to 2 ft (0.3 to 0.6 m) of freeboard",
     "fix": ""
    },
    {
     "claim": "2.2.12 switchgear/transfer switches separate room, min 1 h, liquid-tight if adjacent",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate electrical switchgear and transfer switches in a separate room ... minimum 1-hour fire rating ... If ... adjacent ... provide liquid-tight construction'",
+    "evidence": "electrical switchgear and transfer switches in a separate room ... fire rating at least 1 hour ... where ... adjacent ... liquid-tight construction",
     "fix": ""
    },
    {
     "claim": "2.3.2.1 welded schedule 40 or 2-hour sealed chases",
     "verdict": "CONFIRMED",
-    "evidence": "'schedule 40 ... with welded fittings in all areas outside of the tank room, pump room, and generator room'; B 'sealed pipe chases/shafts with at least a 2-hour fire rating'",
+    "evidence": "schedule 40 pipe ... welded fittings everywhere outside the tank, pump and generator rooms; B sealed pipe chases/shafts rated at least 2 hours",
     "fix": ""
    },
    {
-    "claim": "2.3.2.3 'multiple generators in isolated areas'",
+    "claim": "2.3.2.3 several generators in separated areas",
     "verdict": "CONFIRMED",
-    "evidence": "'cannot automatically be shut down under any circumstances, provide multiple generators in isolated areas'",
+    "evidence": "where it cannot be shut down automatically in any case, several generators in separated areas",
     "fix": ""
    },
    {
     "claim": "2.4.4 exhaust quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Arrange exhaust systems to exit the building in the shortest, most direct route.'",
+    "evidence": "exhaust systems to leave the building by the shortest, most direct route.",
     "fix": ""
    }
   ],
@@ -275,19 +275,19 @@
    {
     "claim": "1.0 not-applicable quote; see DS 3-7, 5-23",
     "verdict": "CONFIRMED",
-    "evidence": "'Recommendations contained in this data sheet are not applicable to engines used to drive fire pumps or emergency electric power generators. ... Data Sheet 3-7 ... and Data Sheet 5-23'",
+    "evidence": "the data sheet's recommendations do not apply to engines driving fire pumps or emergency electric power generators. ... Data Sheet 3-7 ... and Data Sheet 5-23",
     "fix": ""
    },
    {
     "claim": "2.3.9.1 standby engines: weekly blow-down",
     "verdict": "CONFIRMED",
-    "evidence": "2.3.9 'Engines in Standby Service'; '1. Once a week, blow down engines with wet liners' (wet-liner engines only)",
+    "evidence": "2.3.9 'Engines in Standby Service'; 1. weekly blow-down of engines with wet liners (wet-liner engines only)",
     "fix": "say 'weekly blow-down of wet-liner engines'"
    },
    {
     "claim": "2.3.9.1 monthly test run at least 30 minutes",
     "verdict": "CONFIRMED",
-    "evidence": "'5. Test start/run systems monthly. ... Run engine for at least 30 minutes'",
+    "evidence": "5. monthly test of start/run systems ... engine run at least 30 minutes",
     "fix": ""
    },
    {
@@ -299,7 +299,7 @@
   ],
   "kind_change": null,
   "scope_flag": "2.3.9.1 sits inside a data sheet whose 1.0 excludes emergency generator engines (they go to DS 5-23); scope is also ICEs >=500 hp. Using 2.3.9.1 for data-centre standby gensets is outside the sheet's stated scope: background only.",
-  "new_text": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 13-26, Internal Combustion Engines, FM Global, January 2011, interim revision July 2020: 1.0 'Recommendations contained in this data sheet are not applicable to engines used to drive fire pumps or emergency electric power generators' (see DS 3-7, 5-23); scope: inspection and maintenance of ICEs >=500 hp (373 kW); 2.3.9.1 engines in standby service: weekly blow-down of wet-liner engines, monthly test run at least 30 minutes (background only: emergency generator engines are excluded by 1.0). No siting or separation rule — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; 2.3.9.1 flagged as out of scope for emergency gensets; blow-down is wet-liner engines only."
+  "new_text": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 13-26, Internal Combustion Engines, FM Global, January 2011, interim revision July 2020: 1.0 the data sheet does not apply to engines driving fire pumps or emergency electric power generators (see DS 3-7, 5-23); scope: inspection and maintenance of ICEs >=500 hp (373 kW); 2.3.9.1 engines in standby service: weekly blow-down of wet-liner engines, monthly test run at least 30 minutes (background only: emergency generator engines are excluded by 1.0). No siting or separation rule — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; 2.3.9.1 flagged as out of scope for emergency gensets; blow-down is wet-liner engines only."
  },
  "arch_up_fm0788": {
   "where_read": "text extract uploads_txt/FMDS0788.txt (J.B. upload; PDF /root/.claude/uploads/.../173bf056-FMDS0788.pdf)",
@@ -313,97 +313,97 @@
    {
     "claim": "1.0 outdoor tanks >2.5 m3",
     "verdict": "CONFIRMED",
-    "evidence": "'located outdoors (external to buildings) and are greater than 90 ft3 (2.5 m3) in volume'",
+    "evidence": "outdoor tanks (outside buildings) larger than 90 ft3 (2.5 m3)",
     "fix": ""
    },
    {
     "claim": "Table 1 fire-resistive 1L (min 1.5 m) / 0.5L (min 1.5 m)",
     "verdict": "CONFIRMED",
-    "evidence": "'Dike wall to buildings of fire-resistive construction 1L (min. of 5 ft [1.5 m]) 0.5L (min. of 5 ft [1.5 m])'",
+    "evidence": "dike wall to fire-resistive buildings: 1L (min. 5 ft [1.5 m]); 0.5L (min. 5 ft [1.5 m])",
     "fix": ""
    },
    {
     "claim": "Table 1 noncombustible 1L (min 7.5 m) / 0.5L (min 4.5 m)",
     "verdict": "CONFIRMED",
-    "evidence": "'noncombustible construction or open process structures 1L (min. of 25 ft [7.5 m]) 0.5L (min. of 15 ft [4.5 m])'",
+    "evidence": "noncombustible buildings or open process structures: 1L (min. 25 ft [7.5 m]); 0.5L (min. 15 ft [4.5 m])",
     "fix": ""
    },
    {
     "claim": "Table 1 combustible 2L (min 15 m) / 1L (min 7.5 m)",
     "verdict": "CONFIRMED",
-    "evidence": "'combustible construction 2L (min. of 50 ft [15 m]) 1L (min. of 25 ft [7.5 m])'",
+    "evidence": "combustible buildings: 2L (min. 50 ft [15 m]); 1L (min. 25 ft [7.5 m])",
     "fix": ""
    },
    {
     "claim": "tank to tank 0.5D (min 1 m)",
     "verdict": "CONFIRMED",
-    "evidence": "'Tank to tank spacing within the diked area 0.5D (min. 3 ft [1 m])'",
+    "evidence": "tank-to-tank spacing inside the dike: 0.5D (min. 3 ft [1 m])",
     "fix": ""
    },
    {
     "claim": "unloading station no containment 23 m / 15 m",
     "verdict": "CONFIRMED",
-    "evidence": "'Tank truck and railcar unloading stations with no containment, to tank or buildings 75 ft [23 m] 50 ft [15 m]'",
+    "evidence": "unloading stations for tank trucks and railcars without containment, to tanks or buildings: 75 ft [23 m]; 50 ft [15 m]",
     "fix": ""
    },
    {
     "claim": "2.4.1 above design flood elevation, no direct wave action",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate tanks above the design flood elevation and where they will not be subject to direct wave action'",
+    "evidence": "tanks above the design flood elevation and out of reach of direct wave action",
     "fix": ""
    },
    {
     "claim": "2.5.3 DS 1-20 construction or deluge 12 mm/min",
     "verdict": "CONFIRMED",
-    "evidence": "'A. ... Data Sheet 1-20 ... B. Provide deluge water spray ... 0.3 gpm/ft2 (12 mm/min)'",
+    "evidence": "A. ... Data Sheet 1-20 ... B. deluge water spray ... 0.3 gpm/ft2 (12 mm/min)",
     "fix": ""
    },
    {
     "claim": "2.6.1 buried 1.5 m from foundations, 0.6 m from tanks",
     "verdict": "CONFIRMED",
-    "evidence": "'at least 5 ft (1.5 m) from building foundations and 2 ft (0.6 m) from other tanks and pipelines'",
+    "evidence": "no closer than 5 ft (1.5 m) to building foundations and 2 ft (0.6 m) to other tanks and pipelines",
     "fix": ""
    },
    {
     "claim": "2.7.1 double-walled UL 2080/2085, impact barriers, anti-siphon, 90%/95%",
     "verdict": "CONFIRMED",
-    "evidence": "'UL 2080, UL 2085, EN BS 12285'; 'protected against vehicle impact'; 'prevent siphon flow'; 'alarm ... 90% ... stops delivery ... 95%'",
+    "evidence": "UL 2080, UL 2085, EN BS 12285; guarded against vehicle impact; anti-siphon; alarm at 90%, delivery stopped at 95%",
     "fix": ""
    },
    {
     "claim": "2.7.3 <=113 m3 '5 ft (1.5 m)' quote, 1 m between tanks",
     "verdict": "CONFIRMED",
-    "evidence": "'A. A minimum of 5 ft (1.5 m) from building walls or openings. B. A minimum of 3 ft (1 m) from adjacent tanks of the same type.'",
+    "evidence": "A. at least 5 ft (1.5 m) from building walls or openings. B. at least 3 ft (1 m) from neighbouring tanks of the same type.",
     "fix": ""
    },
    {
     "claim": "2.7.2 >=113 m3 per Table 1",
     "verdict": "CONFIRMED",
-    "evidence": "'capacity of 30,000 gal (113 m3) or more away from other buildings and tanks in accordance with ... Table 1'",
+    "evidence": "tanks of 30,000 gal (113 m3) or more spaced from other buildings and tanks per ... Table 1",
     "fix": ""
    },
    {
     "claim": "2.9.1 hydrants within 60 m",
     "verdict": "CONFIRMED",
-    "evidence": "'Provide hydrants or monitor nozzles within 200 ft (60 m) of tanks'",
+    "evidence": "hydrants or monitor nozzles within 200 ft (60 m) of tanks",
     "fix": ""
    },
    {
     "claim": "2.9.2 two directions",
     "verdict": "CONFIRMED",
-    "evidence": "'reached by hose or monitor streams from at least two directions'",
+    "evidence": "reachable by hose or monitor streams from two or more directions",
     "fix": ""
    },
    {
     "claim": "2.10.1.7 vents >=1.8 m (flash >38 C); 1.5 m openings / 4.5 m air intakes",
     "verdict": "CONFIRMED",
-    "evidence": "'a minimum of 6 ft (1.8 m) aboveground level for liquids with flash points above 100°F (38°C)'; 'at least 5 ft (1.5 m) from building openings and 15 ft (4.5 m) from powered air-intake devices'",
+    "evidence": "at least 6 ft (1.8 m) above ground for liquids with flash points over 100°F (38°C); 5 ft (1.5 m) minimum to building openings and 15 ft (4.5 m) to powered air intakes",
     "fix": ""
    },
    {
     "claim": "2.2.3 supports 2-hour",
     "verdict": "CONFIRMED",
-    "evidence": "'Supports are to have a fire resistance of 2 hours or the expected fire duration (whichever is longer)'",
+    "evidence": "supports fire-resistant for 2 hours or the expected fire duration, whichever is longer",
     "fix": ""
    }
   ],
@@ -423,55 +423,55 @@
    {
     "claim": "1.0 covers data-centre UPS; Li-ion fire/explosion in DS 5-33",
     "verdict": "CONFIRMED",
-    "evidence": "'DC battery systems used for standby operations ... data centers ... uninterruptable power supplies'; 'For lithium-ion ... refer to ... Data Sheet 5-33'",
+    "evidence": "DC battery systems for standby use ... data centres ... uninterruptible power supplies; lithium-ion ... see ... Data Sheet 5-33",
     "fix": ""
    },
    {
     "claim": "2.2.1 not exposed to mechanical damage, heat, dust, moisture, hazardous processes",
     "verdict": "CONFIRMED",
-    "evidence": "'not be exposed to mechanical damage, heat, dust accumulations, moisture, or hazardous processes'",
+    "evidence": "kept clear of mechanical damage, heat, dust build-up, moisture and hazardous processes",
     "fix": ""
    },
    {
     "claim": "2.2.3 above 500-yr flood + 0.3-0.6 m",
     "verdict": "CONFIRMED",
-    "evidence": "'above the predicted 0.2% annual exceedance (500-year) flood elevation. Include 1 to 2 ft (0.3 to 0.6 m) of freeboard'",
+    "evidence": "above the predicted 0.2% annual exceedance (500-year) flood elevation, with 1 to 2 ft (0.3 to 0.6 m) of freeboard",
     "fix": ""
    },
    {
     "claim": "2.2.4 quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate lead-acid and nickel-cadmium batteries in a minimum one-hour fire-rated room.'",
+    "evidence": "lead-acid and nickel-cadmium batteries in a room fire-rated at least one hour.",
     "fix": ""
    },
    {
     "claim": "2.2.5 flooded batteries upper floors, seal penetrations within 3 m",
     "verdict": "CONFIRMED",
-    "evidence": "'seal all floor penetrations within 10 ft (3 m) of the battery rack'",
+    "evidence": "all floor penetrations within 10 ft (3 m) of the battery rack sealed",
     "fix": ""
    },
    {
     "claim": "2.3.2.1 Li-ion not where >70 C",
     "verdict": "CONFIRMED",
-    "evidence": "'do not place lithium-ion batteries in locations where temperatures higher than 158°F (70°C) are expected'",
+    "evidence": "lithium-ion batteries kept out of places expected to exceed 158°F (70°C)",
     "fix": ""
    },
    {
     "claim": "2.3.2.1.1 A HVAC quote",
     "verdict": "CONFIRMED",
-    "evidence": "'such as data centers UPS battery rooms ... A. Provide HVAC systems separate from the equipment areas'",
+    "evidence": "e.g. data centre UPS battery rooms ... A. HVAC systems separate from those of the equipment areas",
     "fix": ""
    },
    {
     "claim": "2.3.2.3 A >=5.1 L/s per m2, suction at roof level",
     "verdict": "CONFIRMED",
-    "evidence": "'not less than 1 cfm/ft2 (5.1 LPS/m2) of floor area of the room with suction points located at the roof level, or B. ... IEEE 1635' (option A of two)",
+    "evidence": "at least 1 cfm/ft2 (5.1 LPS/m2) of room floor area, suction points at roof level, or B. ... IEEE 1635 (option A of two)",
     "fix": ""
    },
    {
     "claim": "2.4.2 non-Li-ion sprinklers HC-2 quick response",
     "verdict": "CONFIRMED",
-    "evidence": "'Design the automatic sprinkler system for an HC-2 occupancy and use quick-response sprinklers'",
+    "evidence": "sprinkler system designed for HC-2 occupancy with quick-response sprinklers",
     "fix": ""
    }
   ],
@@ -485,61 +485,61 @@
    {
     "claim": "FM DS 1-20, April 2025, completely revised",
     "verdict": "CONFIRMED",
-    "evidence": "'1-20 April 2025'; 'April 2025. This document has been completely revised.'",
+    "evidence": "'1-20 April 2025'; April 2025, complete revision",
     "fix": ""
    },
    {
     "claim": "1.0 applies where exposing and exposed buildings are on the same property",
     "verdict": "WRONG",
-    "evidence": "'This data sheet is applicable to fire exposures on adjacent property and to situations where the fire exposure and exposed building are on the same property.'",
+    "evidence": "covers fire exposure from adjacent property and cases where the exposing fire and exposed building are on the same property.",
     "fix": "applies both to exposures from adjacent property and on the same property"
    },
    {
     "claim": "2.2.1-2.2.3 no-exposure cases (sprinklered; noncombustible/fire-resistive and vacant or noncombustible contents; SFR without unprotected openings)",
     "verdict": "CONFIRMED",
-    "evidence": "2.2.1 'protected by automatic sprinklers ... verified to be adequate and reliable, no fire exposure exists'; 2.2.2; 2.2.3 'Stable Fire-Resistive (SFR) ... no unprotected wall or roof openings'",
+    "evidence": "2.2.1 where automatic sprinklers protect it ... confirmed adequate and reliable, there is no fire exposure; 2.2.2; 2.2.3 Stable Fire-Resistive (SFR) ... without unprotected wall or roof openings",
     "fix": ""
    },
    {
     "claim": "2.2.4 order sprinklers, separation per DS 1-42, exposed-wall protection",
     "verdict": "CONFIRMED",
-    "evidence": "'listed in order of preference' A sprinklers; B 'separation ... in accordance with Data Sheet 1-42'; C exposed walls",
+    "evidence": "in order of preference: A sprinklers; B separation ... per Data Sheet 1-42; C exposed walls",
     "fix": ""
    },
    {
     "claim": "no distance tables in this edition",
     "verdict": "CONFIRMED",
-    "evidence": "List of Tables: only 2.4.1, A-1, A-2; history: 'former Tables 1a, 1b, 1c, and 2 are no longer used'",
+    "evidence": "List of Tables: only 2.4.1, A-1, A-2; history: former Tables 1a, 1b, 1c and 2 dropped",
     "fix": ""
    },
    {
     "claim": "2.2.8 dumpsters 9 m quote, unless blank, 1-hour, no combustible eaves",
     "verdict": "CONFIRMED",
-    "evidence": "'at least 30 ft (9 m) from exposed buildings, unless the exposed walls are (1) blank ... (2) minimum 1-hour fire rated and (3) have no combustible roof eaves'",
+    "evidence": "no closer than 30 ft (9 m) to exposed buildings unless the exposed walls are (1) blank ... (2) fire-rated at least 1 hour and (3) without combustible roof eaves",
     "fix": ""
    },
    {
     "claim": "2.2.11 chain link quote per DS 10-6",
     "verdict": "CONFIRMED",
-    "evidence": "'Install metal chain link fencing around the yard in accordance with Data Sheet 10-6'",
+    "evidence": "metal chain-link fence around the yard per Data Sheet 10-6",
     "fix": ""
    },
    {
     "claim": "2.3.1-2.3.3 3/4-hour doors/shutters; rated glazing",
     "verdict": "CONFIRMED",
-    "evidence": "2.3.1.2 C 'Noncombustible or minimum 3/4-hour fire-rated'; 2.3.2.3 C 'minimum 3/4-hour automatic closing shutters'; D listed 3/4-hour glass",
+    "evidence": "2.3.1.2 C noncombustible or fire-rated at least 3/4 hour; 2.3.2.3 C automatic-closing shutters rated at least 3/4 hour; D listed 3/4-hour glass",
     "fix": ""
    },
    {
     "claim": "Table A-1 quote",
     "verdict": "CONFIRMED",
-    "evidence": "Table A-1 Combustible Walls: 'Any wall with windows that can be opened'",
+    "evidence": "Table A-1 Combustible Walls: any wall with operable windows",
     "fix": ""
    }
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 1-20, Protection Against Exterior Fire Exposure, FM Global, April 2025 (completely revised): 1.0 applies to exposures from adjacent property and where the exposure and exposed building are on the same property; 2.2.1–2.2.3 no exposure where the exposing building is adequately sprinklered, or noncombustible/fire-resistive and vacant or with noncombustible contents, or SFR walls/roof without unprotected openings; 2.2.4 order: sprinklers, then separation 'in accordance with Data Sheet 1-42', then exposed-wall protection (no distance tables in this edition); 2.2.8 dumpsters 'at least 30 ft (9 m) from exposed buildings' unless walls blank, min 1-hour, no combustible eaves; 2.2.11 'metal chain link fencing around the yard' per DS 10-6; 2.3.1–2.3.3 exposed-wall doors and windows (¾-hour doors/shutters; rated glazing); Table A-1 combustible walls include 'Any wall with windows that can be opened' — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ CHECK 2 (1 Nov 2026, fixed): 1.0 scope covers adjacent property too, not only same property; all other items confirmed."
+  "new_text": "INSURER GUIDANCE (not law): FM Property Loss Prevention Data Sheet 1-20, Protection Against Exterior Fire Exposure, FM Global, April 2025 (completely revised): 1.0 applies to exposures from adjacent property and where the exposure and exposed building are on the same property; 2.2.1–2.2.3 no exposure where the exposing building is adequately sprinklered, or noncombustible/fire-resistive and vacant or with noncombustible contents, or SFR walls/roof without unprotected openings; 2.2.4 order: sprinklers, then separation per Data Sheet 1-42, then exposed-wall protection (no distance tables in this edition); 2.2.8 dumpsters 30 ft (9 m) minimum from exposed buildings unless walls blank, min 1-hour, no combustible eaves; 2.2.11 metal chain-link fence around the yard per DS 10-6; 2.3.1–2.3.3 exposed-wall doors and windows (¾-hour doors/shutters; rated glazing); Table A-1 combustible walls include any wall with operable windows — J.B. upload 2 Nov 2026 (PDF not in repo; text extract read) ‖ CHECK 2 (1 Nov 2026, fixed): 1.0 scope covers adjacent property too, not only same property; all other items confirmed."
  },
  "arch_up_fm0157": {
   "where_read": "text extract uploads_txt/FMDS0157.txt (J.B. upload; PDF /root/.claude/uploads/.../e54f1d2e-FMDS0157.pdf)",
@@ -553,31 +553,31 @@
    {
     "claim": "2.2.25.1 quote (FM 4483)",
     "verdict": "CONFIRMED",
-    "evidence": "'Use FM Approved, wall-mounted BIPV façade systems.'; 'FM 4483, Examination Standard for Wall Mounted Building Integrated Photovoltaic Systems'",
+    "evidence": "wall-mounted BIPV façade systems to be FM Approved; 'FM 4483, Examination Standard for Wall Mounted Building Integrated Photovoltaic Systems'",
     "fix": ""
    },
    {
     "claim": "2.2.17.1 noncombustible or FM Approved envelopes (FM 4411)",
     "verdict": "CONFIRMED",
-    "evidence": "2.2.17 'Other High-Performance Building Envelopes'; 'Use noncombustible or FM Approved systems'; 'FM Approval 4411, Cavity Wall Systems'",
+    "evidence": "2.2.17 'Other High-Performance Building Envelopes'; systems to be noncombustible or FM Approved; 'FM Approval 4411, Cavity Wall Systems'",
     "fix": ""
    },
    {
     "claim": "2.2.17.1.1 Note glass-glass BIPV considered combustible",
     "verdict": "CONFIRMED",
-    "evidence": "'Note: Materials such as glass-glass building integrated photovoltaics ... are considered combustible.'",
+    "evidence": "Note: materials like glass-glass building integrated photovoltaics ... count as combustible.",
     "fix": ""
    },
    {
     "claim": "2.2.7.1 plastic skylights/light bands noncombustible or FM Approved (FM 4431)",
     "verdict": "CONFIRMED",
-    "evidence": "2.2.7 'Plastic Light Bands and Skylights'; 'Use noncombustible or FM Approved products'; 'FM 4431, Skylights'",
+    "evidence": "2.2.7 'Plastic Light Bands and Skylights'; products to be noncombustible or FM Approved; 'FM 4431, Skylights'",
     "fix": ""
    },
    {
     "claim": "3.2.25 quote",
     "verdict": "CONFIRMED",
-    "evidence": "'No standardized testing is globally available for BIPV facades systems.'",
+    "evidence": "no globally available standardized test exists for BIPV façade systems.",
     "fix": ""
    },
    {
@@ -589,7 +589,7 @@
    {
     "claim": "FlexPV peak HRR about 11 MW within 100 s",
     "verdict": "CONFIRMED",
-    "evidence": "'The peak HRR measured approximately 11 MW within 100 seconds of ignition for both OC and MP tests'",
+    "evidence": "peak HRR about 11 MW within 100 seconds of ignition in both OC and MP tests",
     "fix": ""
    }
   ],
@@ -607,27 +607,27 @@
     "fix": ""
    },
    {
-    "claim": "2.2.1.1 site and access routes outside 500-yr zones 'by both elevation and footprint'",
+    "claim": "2.2.1.1 site and access routes outside 500-yr zones in both elevation and footprint",
     "verdict": "CONFIRMED",
-    "evidence": "'entire site and all access routes ... are outside 0.2% annual exceedance (500-year) flood zones (by both elevation and footprint)'",
+    "evidence": "whole site and every access route ... outside 0.2% annual exceedance (500-year) flood zones, in both elevation and footprint",
     "fix": ""
    },
    {
     "claim": "2.2.1.2 freeboard 0.3-0.6 m, 152 m from wave impacts or >2 m/s",
     "verdict": "CONFIRMED",
-    "evidence": "'1 to 2 ft (0.3 to 0.6 m) of freeboard ... at least 500 ft (152 m) from direct wave impacts and or high flood-flow velocities (i.e., above 7 fps [2 m/s])'",
+    "evidence": "1 to 2 ft (0.3 to 0.6 m) of freeboard ... no closer than 500 ft (152 m) to direct wave impacts and or high flood-flow velocities (over 7 fps [2 m/s])",
     "fix": ""
    },
    {
     "claim": "2.2.1.3 levee quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Select a site that is not in an area protected by a levee or other man-made flood control works.'",
+    "evidence": "choose a site outside any area protected by a levee or other constructed flood-control works.",
     "fix": ""
    },
    {
     "claim": "2.2.2.9 >=0.3 m above 100-yr stormwater elevation",
     "verdict": "CONFIRMED",
-    "evidence": "'at least 1 ft (0.3 m) above the 100-year storm water elevation'",
+    "evidence": "no less than 1 ft (0.3 m) above the 100-year storm water elevation",
     "fix": ""
    },
    {
@@ -637,39 +637,39 @@
     "fix": ""
    },
    {
-    "claim": "2.3.1 'used solely for nonessential operations'",
+    "claim": "2.3.1 only for nonessential operations",
     "verdict": "CONFIRMED",
-    "evidence": "'ensure they are used solely for nonessential operations'",
+    "evidence": "make sure they serve only nonessential operations",
     "fix": ""
    },
    {
     "claim": "2.3.3 A emergency power above 500-yr + freeboard",
     "verdict": "CONFIRMED",
-    "evidence": "'above the predicted 0.2% ... Include 1 to 2 ft (0.3 to 0.6 m) of freeboard. A. Emergency power equipment'",
+    "evidence": "above the predicted 0.2% ... with 1 to 2 ft (0.3 to 0.6 m) of freeboard: A. emergency power equipment",
     "fix": ""
    },
    {
     "claim": "2.6.3 HVAC, chillers above",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate climate-control utilities, such as ... (HVAC) systems, chillers ... above'",
+    "evidence": "climate-control utilities, e.g. ... (HVAC) systems, chillers ... placed above",
     "fix": ""
    },
    {
     "claim": "2.6.5 boilers above",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate boilers, their controls and supporting equipment ... above'",
+    "evidence": "boilers, their controls and support equipment ... placed above",
     "fix": ""
    },
    {
     "claim": "2.7.1 generators, transformers, batteries, UPS, switchboards above + 0.3-0.6 m",
     "verdict": "CONFIRMED",
-    "evidence": "'switchboards, motors, generators, transformers ... batteries, battery chargers, uninterrupted power systems (UPSs)'",
+    "evidence": "switchboards, motors, generators, transformers ... batteries, battery chargers and UPSs",
     "fix": ""
    },
    {
     "claim": "2.7.3.1 otherwise IPX8",
     "verdict": "CONFIRMED",
-    "evidence": "'rated for use while being continuously submerged ... IP rating of IPX8'",
+    "evidence": "rated for continuous submersion ... IPX8 rating",
     "fix": ""
    }
   ],
@@ -689,7 +689,7 @@
    {
     "claim": "1.0 precedence over DS 9-16 (passive) and DS 10-6 s. 2.2.1",
     "verdict": "CONFIRMED",
-    "evidence": "'recommendations on passive building protection in this data sheet (9-1) take precedence over those in Data Sheet 9-16'; 'take precedence over those on protection of “all properties” in Section 2.2.1, Data Sheet 10-6'",
+    "evidence": "9-1's passive building protection recommendations override those of Data Sheet 9-16; they also override the “all properties” protection items in Section 2.2.1 of Data Sheet 10-6",
     "fix": ""
    },
    {
@@ -701,91 +701,91 @@
    {
     "claim": "2.3.1.1 A fence/wall quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Use metal fences of heavy industrial-grade construction with bars spaced closely together. Chain-link fences and gates should not be used. Walls should be reinforced masonry or concrete construction.'",
+    "evidence": "metal fences, heavy industrial grade, with closely spaced bars; chain-link fences and gates should be avoided; walls should be reinforced masonry or concrete.",
     "fix": ""
    },
    {
     "claim": "A anti-climb, pedestrian gates outward, vehicle gates sliding/cantilevered one lane, barriers protect cooling etc.",
     "verdict": "CONFIRMED",
-    "evidence": "'anti-climb measures'; 'swing in the outward direction'; 'sliding or cantilevered and only wide enough to accommodate one vehicle lane'; 'also protect cooling equipment, generators, fuel tanks, and utilities'",
+    "evidence": "anti-climb measures; pedestrian gates swing outward; vehicle gates sliding or cantilevered, one vehicle lane wide at most; barriers also shield cooling equipment, generators, fuel tanks and utilities",
     "fix": ""
    },
    {
     "claim": "B guard houses enclosed, secondary egress, ballistic and bollards if needed",
     "verdict": "CONFIRMED",
-    "evidence": "'enclosed guard houses'; 'secondary means of egress'; 'If needed ... ballistic-resistant ... protect guard houses with bollards'",
+    "evidence": "'enclosed guard houses'; 'secondary means of egress'; if needed ... ballistic-resistant ... bollards around guard houses",
     "fix": ""
    },
    {
     "claim": "C parking away, separate visitor/employee entrances, screening area",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate parking away from the building'; 'separate entrances to the site for external visitors and employees'; 'Establish a screening area'",
+    "evidence": "parking set away from the building; separate site entrances for outside visitors and employees; a screening area",
     "fix": ""
    },
    {
     "claim": "D continuous lighting incl. transformers and emergency generators",
     "verdict": "CONFIRMED",
-    "evidence": "'Protective lighting that is continuous ... 9. Building utility services (e.g., transformers, emergency generators)'",
+    "evidence": "continuous protective lighting ... 9. building utility services (e.g. transformers, emergency generators)",
     "fix": ""
    },
    {
-    "claim": "2.3.1.2 lights on roof or poles; cameras entry/exit, parking, 'Neighboring property', garbage bins, power and cooling",
+    "claim": "2.3.1.2 lights on roof or poles; cameras entry/exit, parking, neighbouring property, garbage bins, power and cooling",
     "verdict": "CONFIRMED",
-    "evidence": "'Mount lights on the roof or poles'; '• Entry and exit points • Parking lots • Neighboring property ... • Garbage bins • Power and cooling facilities'",
+    "evidence": "lights mounted on the roof or on poles; cameras on entry and exit points, parking lots, neighbouring property ... garbage bins, power and cooling facilities",
     "fix": ""
    },
    {
     "claim": "2.3.2.1 C metal doors, force-resistant glazing, deadbolt >=1 in., tamper-proof hinges",
     "verdict": "CONFIRMED",
-    "evidence": "'metal facing or solid metal door'; 'force-resistant glazing'; 'bolt that extends at least 1 in.'; 'Hinges that are tamper-proof from the exterior'",
+    "evidence": "metal-faced or solid metal door; force-resistant glazing; bolt throw of at least 1 in.; hinges that cannot be tampered with from outside",
     "fix": ""
    },
    {
     "claim": "2.3.2.1 D quote",
     "verdict": "CONFIRMED",
-    "evidence": "'Do not use locks that require electrical power, e.g. electromagnetic locks, to secure physical access.'",
+    "evidence": "locks that need electrical power (e.g. electromagnetic locks) are not to be used to secure physical access.",
     "fix": ""
    },
    {
     "claim": "I openings >0.3 m tamper-proof grills",
     "verdict": "CONFIRMED",
-    "evidence": "'Protect openings larger than 12 in. (0.3 m) with tamper-proof grills'",
+    "evidence": "openings over 12 in. (0.3 m) protected with tamper-proof grills",
     "fix": ""
    },
    {
     "claim": "O camera coverage of perimeter, roof access, exterior equipment",
     "verdict": "CONFIRMED",
-    "evidence": "'complete coverage of the perimeter of the building, roof access points, and exterior equipment'",
+    "evidence": "full camera coverage of the building perimeter, roof access points and exterior equipment",
     "fix": ""
    },
    {
     "claim": "2.3.3 walls deck to deck, limited interior windows (tempered/wired), no signs on high-value rooms, one visitor at a time",
     "verdict": "CONFIRMED",
-    "evidence": "2.3.3.3 'from the floor deck to the ceiling deck'; 2.3.3.4 'limited interior windows ... tempered or wired glass'; 'Do not post signs identifying high-value rooms'; 'only one visitor at a time ... secured-controlled area'",
+    "evidence": "2.3.3.3 floor deck to ceiling deck; 2.3.3.4 few interior windows ... tempered or wired glass; no signs naming high-value rooms; one visitor at a time ... secured-controlled area",
     "fix": ""
    },
    {
     "claim": "2.3.3.6 air openings >620 cm2 barred",
     "verdict": "CONFIRMED",
-    "evidence": "'When an opening exceeds 96 in2 (620 cm2), protect the opening with physical devices (e.g., steel bars ...)'",
+    "evidence": "openings larger than 96 in2 (620 cm2) protected with physical devices (e.g. steel bars ...)",
     "fix": ""
    },
    {
     "claim": "2.3.5.2 cables not in public areas",
     "verdict": "CONFIRMED",
-    "evidence": "'Do not locate circuits and cables in public areas.'",
+    "evidence": "circuits and cables not to run through public areas.",
     "fix": ""
    },
    {
     "claim": "2.3.7.2 monitors constantly attended, footage >=90 days",
     "verdict": "CONFIRMED",
-    "evidence": "'Locate the video monitors in a constantly attended area'; 'at least 90 days or the maximum allowable time'",
+    "evidence": "video monitors in an area that is always attended; footage kept at least 90 days or the longest time allowed",
     "fix": ""
    },
    {
     "claim": "3.1.5 tours hourly when unoccupied, one per shift with video",
     "verdict": "CONFIRMED",
-    "evidence": "'tours performed hourly in unoccupied areas and twice-hourly during normal business hours'; 'reduced to at least one tour per shift' (general guidelines)",
+    "evidence": "tours hourly in unoccupied areas and twice-hourly in normal business hours; can drop to at least one tour per shift (general guidelines)",
     "fix": ""
    }
   ],
@@ -799,55 +799,55 @@
    {
     "claim": "FM DS 9-16 Burglary and Theft, January 2000, interim revision April 2025 (reaffirmed)",
     "verdict": "CONFIRMED",
-    "evidence": "'9-16 January 2000 Interim Revision April 2025'; 'Reaffirmed to be technically correct.'",
+    "evidence": "'9-16 January 2000 Interim Revision April 2025'; reaffirmed as technically correct",
     "fix": ""
    },
    {
     "claim": "1.0 scope manufacturing, warehouse, limited mercantile",
     "verdict": "CONFIRMED",
-    "evidence": "'burglary and theft losses in manufacturing and warehouse facilities, and, to a limited extent, mercantile locations'",
+    "evidence": "burglary and theft losses at manufacturing and warehouse facilities and, to a limited degree, mercantile locations",
     "fix": ""
    },
    {
     "claim": "2.1.1.1 level = sum of components; Table 1 Levels 2-5",
     "verdict": "CONFIRMED",
-    "evidence": "'determined by adding the classification numbers'; Table 1 levels 5, 4, 2, 4, 3, 2",
+    "evidence": "found by summing the classification numbers; Table 1 levels 5, 4, 2, 4, 3, 2",
     "fix": ""
    },
    {
     "claim": "2.1.1.2 (1) lighting quote",
     "verdict": "CONFIRMED",
-    "evidence": "'lighting an area of ten ft (three m) on either side of fences, and areas within 40 ft (12 m) of building entrances'",
+    "evidence": "light a ten ft (three m) band on each side of fences, and areas within 40 ft (12 m) of building entrances",
     "fix": ""
    },
    {
     "claim": "(2) windows blocked/barred, bars inside glass, flat bars <=13 cm vertical",
     "verdict": "CONFIRMED",
-    "evidence": "'not fronting main roads should be blocked or protected'; 'located on the inside of windows'; 'spaced no more than five in. (13 cm) apart vertically'",
+    "evidence": "windows not facing main roads should be blocked or protected; bars on the inside of windows; vertical spacing no more than five in. (13 cm)",
     "fix": ""
    },
    {
     "claim": "(3) fence quote",
     "verdict": "CONFIRMED",
-    "evidence": "'flush with the ground and a minimum of 7 ft (2 m) in height, with barbed wire at the top tilted toward the outside'",
+    "evidence": "meeting the ground with no gap, at least 7 ft (2 m) high, topped with barbed wire angled outward",
     "fix": ""
    },
    {
     "claim": "(4) doors >=1.5 in. (4 cm), deadbolt, source prints '1 in. (25 cm)'",
     "verdict": "CONFIRMED",
-    "evidence": "'a minimum of 11⁄2 in. (4 cm) thick'; 'extends at least 1 in. (25 cm)' (source unit error; 1 in. = 2.5 cm)",
+    "evidence": "at least 11⁄2 in. (4 cm) thick; bolt throw at least 1 in. (25 cm) (source unit error; 1 in. = 2.5 cm)",
     "fix": ""
    },
    {
     "claim": "(5) tenant cutoffs quote",
     "verdict": "CONFIRMED",
-    "evidence": "'solid masonry construction, complete from the floor to the underside of the roof'",
+    "evidence": "solid masonry running from the floor to the underside of the roof",
     "fix": ""
    },
    {
     "claim": "3.4.3.1 Perimeter 5/4/2/1; walls >=5.5 m need not be protected (P5); reinforced/precast concrete (P2, P4)",
     "verdict": "CONFIRMED",
-    "evidence": "'Walls at least two stories (18 ft or 5.5 m) above ground or adjoining roofs need not be protected'; P4 'reinforced or precast concrete need not be protected'; P2 'Reinforced concrete, brick, brick veneer, or precast concrete walls need not be protected'; 'no Perimeter 3'",
+    "evidence": "walls two or more stories (18 ft or 5.5 m) above ground or adjoining roofs do not need protection; P4 reinforced or precast concrete needs no protection; P2 reinforced concrete, brick, brick veneer or precast concrete walls need no protection; 'no Perimeter 3'",
     "fix": ""
    }
   ],

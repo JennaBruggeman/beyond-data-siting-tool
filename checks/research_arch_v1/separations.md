@@ -62,7 +62,7 @@ Diesel is normally Class II (flash point 37.8–60 °C, NFC 4.1.2.1.(3)); diesel
 | what | value | source id | where | kind | conf |
 |---|---|---|---|---|---|
 | Building and fire codes | no energy-storage provisions in NBC 2020, BCBC 2024, NBC(AE), NFC 2020, NFC(AE) 2023, VBBL 2025 (re-checked today: no "energy storage", "lithium" or "stationary battery") | nfpa855tia (existing) | full texts | rule (absence) | 85 |
-| CEC outdoor batteries, public wording | "shall not be located within" 3 m of a means of egress and 1.5 m of windows, vents, doors (not vehicle doors), unless UL 9540A-evaluated and per maker's instructions | arch_sep_abStandataESS | Rule 64-926, as quoted in STANDATA 21-ECV-064-900-ESS (Oct 2023) | government guide | 75 |
+| CEC outdoor batteries, public wording | must not be within 3 m of a means of egress and 1.5 m of windows, vents, doors (not vehicle doors), unless UL 9540A-evaluated and per maker's instructions | arch_sep_abStandataESS | Rule 64-926, as quoted in STANDATA 21-ECV-064-900-ESS (Oct 2023) | government guide | 75 |
 | Residential only | 1 m from dwelling windows/doors; 1 m between systems; not under a required exit; not in or opening onto sleeping areas | arch_sep_abStandataESS | Rule 64-1100 4), 7), 8), 10) | government guide | 75 |
 | BC bulletin | TSBC ESS bulletin "rescinded … on March 4, 2025" (CEC 2024 in force) | arch_sep_tsbcESS | notice page | government notice | 70 |
 | UPS batteries | outside the ESS definition (C22.2 No. 107.3) | cec2024ESS (existing) | App. B | — | — |

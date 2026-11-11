@@ -256,7 +256,7 @@ Sources as listed per row; FM 5-32 is insurer guidance, not law.
 | ASHRAE 62.1 Table 5-1 | flue 5 m; cooling tower exhaust 7.5 m; loading 7.5 m | ASHRAE 62.1-2022 | benchmark | benchmark | — | register ashrae621_2022 |
 | Noise at property line | quiet zone 55 dBA day / 45 night | By-law 6555 s. 2.1 | applies | — | plant away from residential edges | register van6555zones |
 | Noise at property line | residential 65 dB(A) day / 50 night; non-residential 75 / 60 | Bylaw 14600 ss. 19–22 | — | applies | — | register arch_adj_edm14600 |
-| Nothing wet over the hall | "Do not route cooling or domestic liquid piping above areas containing critical/high-value equipment" | FM 5-32 2.2.1.6 | insurer | insurer | pool, kitchen, washrooms never above the hall | register arch_up2_fm0532 (insurer) |
+| Nothing wet over the hall | no cooling or domestic liquid piping routed above areas with critical or high-value equipment | FM 5-32 2.2.1.6 | insurer | insurer | pool, kitchen, washrooms never above the hall | register arch_up2_fm0532 (insurer) |
 | Hall walls (FM) | 1 h rooms; 2 h between multiple halls | FM 5-32 2.2.4.1–2.2.4.1.1 | insurer | insurer | stricter than code for hall-to-hall | register fmDS0532 (insurer) |
 
 ## Open (?)

@@ -78,9 +78,9 @@ Codes read from repo copies: NBC 2020 (nbc.txt), BCBC 2024 (bcbc2024.txt), VBBL 
 ### What FM 5-32 already gives (from fm.txt, not repeated elsewhere)
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
-| Intrusion alarm | FM Approved **Level 1** or better for data rooms with emergency doors exiting outside the secure area; **Level 2** "if previous experience indicates this need"; line supervision or local alarm; response per FM-15 | fmDS0532 | 2.8.9.2.1–2.8.9.2.3 | insurer guide | 90 |
-| Air intakes | "Do not expose the air intake(s) of the building to combustible materials" | fmDS0532 | 2.2.1.3.1 | insurer guide | 90 |
-| Rooftop PV | "becoming increasingly common at data centers" (context only) | fmDS0532 | 3.5 | insurer guide | 85 |
+| Intrusion alarm | FM Approved **Level 1** or better for data rooms with emergency doors exiting outside the secure area; **Level 2** where past experience shows the need; line supervision or local alarm; response per FM-15 | fmDS0532 | 2.8.9.2.1–2.8.9.2.3 | insurer guide | 90 |
+| Air intakes | keep the building's air intake(s) away from combustible materials | fmDS0532 | 2.2.1.3.1 | insurer guide | 90 |
+| Rooftop PV | more and more common on data centres (context only) | fmDS0532 | 3.5 | insurer guide | 85 |
 
 ### FM DS 1-15, roof PV (read)
 | what | value | source id | where | kind | conf. |
@@ -88,7 +88,7 @@ Codes read from repo copies: NBC 2020 (nbc.txt), BCBC 2024 (bcbc2024.txt), VBBL 
 | Scope | roof PV only; **BIPV facades go to DS 1-57** | arch_sec2_fm115 | 1.0 | insurer guide | 90 |
 | Array size | max 46 × 46 m (150 × 150 ft) | arch_sec2_fm115 | 2.1.1.4 B | insurer guide | 85 |
 | Gaps | ≥1.2 m aisle between arrays; ≥1.2 m to expansion joints; ≥1.8 m to skylights | arch_sec2_fm115 | 2.1.1.4 C–E | insurer guide | 85 |
-| Frames | "Use only noncombustible frames and mounting systems" | arch_sec2_fm115 | 2.1.1.4 A | insurer guide | 85 |
+| Frames | frames and mounting systems to be noncombustible only | arch_sec2_fm115 | 2.1.1.4 A | insurer guide | 85 |
 | Roof rating | an FM Class 1A roof loses that rating under PV unless the system is FM Approved | arch_sec2_fm115 | 2.0 | insurer guide | 75 |
 
 ### Other insurers (public)
@@ -96,8 +96,8 @@ Codes read from repo copies: NBC 2020 (nbc.txt), BCBC 2024 (bcbc2024.txt), VBBL 
 |---|---|---|---|---|---|
 | AXA XL exposure method | separation = (NFPA 80A guide number × height) + 1.5 m; worked example 21 m for a 30.5 × 7.6 m wall, 25% openings, severe | arch_sec2_axaPrc205 | "Position" | insurer guide (2020) | 70 |
 | AXA XL wall protection | within half the distance: blank 3 h wall; openings within 1.5 m filled or 3 h shutters; within 3 m 1½ h; beyond half: wired glass + water curtain | arch_sec2_axaPrc205 | "Means of Protection" | insurer guide | 65 |
-| OP Insurance (Finland) S710 | "Any unmanned data centre should be located in the middle of a building in a windowless room" | arch_sec2_opS710 | 4.2 | insurer guide (2018, EU) | 65 |
-| OP S710 walls and alarm | "Class 3 anti-burglar wall"; construction not removable from outside without breaking; alarm ≥ Class 3 (EN 50131-1) to a 24 h centre, sirens inside and out | arch_sec2_opS710 | 4.2 | insurer guide | 65 |
+| OP Insurance (Finland) S710 | an unmanned data centre should sit in the middle of a building, in a room without windows | arch_sec2_opS710 | 4.2 | insurer guide (2018, EU) | 65 |
+| OP S710 walls and alarm | a Class 3 burglar-resistant wall; construction not removable from outside without breaking; alarm ≥ Class 3 (EN 50131-1) to a 24 h centre, sirens inside and out | arch_sec2_opS710 | 4.2 | insurer guide | 65 |
 | OP S710 what's above | consider washrooms, heating water and the roof above the hall | arch_sec2_opS710 | 4.5 | insurer guide | 65 |
 | Zurich, Allianz public reports | **no** construction, security or mixed-use guidance; Zurich: hail-rated roofs, avoid combustible insulation (quotes from staff) | arch_sec2_zurich2026; arch_sec2_allianz2025 | whitepaper; pp. 19–27 | insurer report | 60 |
 | Munich Re, Swiss Re | not searched ? | — | — | — | — |
@@ -108,7 +108,7 @@ Codes read from repo copies: NBC 2020 (nbc.txt), BCBC 2024 (bcbc2024.txt), VBBL 
 ### Construction (codes and FM)
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
-| FM | "Construct data centers of noncombustible or FM Approved materials" | fmDS0532 | 2.2.1.1 | insurer guide | 90 |
+| FM | data centres built of noncombustible or FM Approved materials | fmDS0532 | 2.2.1.1 | insurer guide | 90 |
 | Combustible cladding on a noncombustible building | allowed if ≤3 storeys **or** sprinklered, **and** the wall passes CAN/ULC-S134: flame ≤5 m above the opening, ≤35 kW/m² at 3.5 m (N, B, V, A identical) | arch_sec2_nbc3155 | 3.1.5.5.(1); A-3.1.5.5 | rule | 90 |
 | Near a lot line | where limiting distance allows ≤10% unprotected openings, Table 3.2.3.7 construction governs | arch_sec2_nbc3155 | 3.1.5.5.(2) | rule | 85 |
 | Combustible parts inside the wall | same test, or 25 mm masonry/concrete cladding | arch_sec2_nbc3155 | 3.1.5.6 | rule | 85 |

@@ -1,13 +1,14 @@
 """3 Nov 2026 (overnight): a check round for the 260 register sources that had fewer than two recorded checks.
 Results: checks/research_arch_v1/checkLow_result_low_0..2.json (brief CHECK_LOW_BRIEF.md). Applies new_text, kind changes, scope flags; logs the check as the next number."""
 import json, pathlib, glob
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 from collections import Counter
 R = pathlib.Path(__file__).resolve().parents[2]
 D = '3 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 C = Counter(); nt = nk = 0
 for f in sorted(glob.glob(str(R / 'checks/research_arch_v1/checkLow_result_*.json'))):
-    for k, r in json.load(open(f)).items():
+    for k, r in clean(json.load(open(f))).items():
         if k not in S: continue
         for c in r.get('claims', []): C[c.get('verdict', '?')] += 1
         if r.get('new_text'): S[k] = r['new_text']; nt += 1

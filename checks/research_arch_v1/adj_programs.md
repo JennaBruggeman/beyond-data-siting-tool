@@ -13,7 +13,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation, not the source'
 - **Alberta pool rules live in the building code** (NBC(AE) Part 7, Alberta only): chemical storage not near heating equipment and no direct public access; chlorine-gas room at ground level, outside door, 1 h, exhaust ≥3 m from any air intake and intake not below it. No such clauses in NBC, BCBC or VBBL.
 - **Edmonton risk assessment:** a Sensitive Use (incl. "critical infrastructure", "large gatherings of people", populations needing help to evacuate) within 1.5 km of an IH site or a site "storing ... Dangerous Goods" may need one (Bylaw 20001 s. 7.140 subs. 8). A data centre's diesel store could trigger 8.1.1 itself (our reading ?).
 - **Greenhouse status differs by code.** NBC 2020: a greenhouse is G-3, and a G-3 building "shall not contain" A-1, A-3 or B occupancies; 1 h to A-2/A-4/C, 2 h to F-1. BCBC: "farm building" must be "located on land devoted to the practice of farming", so a greenhouse on a data-centre site is likely not a farm building and falls under Part 3 (our reading). AB has no Group G at all.
-- **NFPA 75 (2024) 6.1.3.2:** rating "commensurate with the exposure but not less than 1 hour" (quoted in NFPA's own public-input report). J.B.'s 2 h is not confirmed; NFPA 75 applies on "a documented risk assessment" basis.
+- **NFPA 75 (2024) 6.1.3.2:** rating matched to the exposure, at least 1 hour (quoted in NFPA's own public-input report). J.B.'s 2 h is not confirmed; NFPA 75 applies on the basis of a written risk assessment.
 
 ## (a) Rules table
 
@@ -119,8 +119,8 @@ Labels: "?" = not confirmed. "our reading" = our interpretation, not the source'
 
 | rule | applies to | requirement | clause | codes | differences / source |
 |---|---|---|---|---|---|
-| IT room rating | data hall ↔ rest of building | "The fire resistance rating shall be commensurate with the exposure but not less than 1 hour for both" ("both" has no clear antecedent, per PI 50) | NFPA 75-2024 6.1.3.2 (as quoted in public input) | — | arch_adj_nfpa75PI. When 6.1.3 applies: ? |
-| When NFPA 75 applies | data hall | "A documented risk assessment shall be the basis for implementation of this standard" | NFPA 75-2024 1.3.1 (as quoted) | — | arch_adj_nfpa75PI. Not adopted by NBC/BCBC/AB (our reading ?) |
+| IT room rating | data hall ↔ rest of building | the fire resistance rating must match the exposure and be at least 1 hour for both ("both" has no clear antecedent, per PI 50) | NFPA 75-2024 6.1.3.2 (as quoted in public input) | — | arch_adj_nfpa75PI. When 6.1.3 applies: ? |
+| When NFPA 75 applies | data hall | the standard must be applied on the basis of a written risk assessment | NFPA 75-2024 1.3.1 (as quoted) | — | arch_adj_nfpa75PI. Not adopted by NBC/BCBC/AB (our reading ?) |
 | FM DS 5-32, TIA-942, ISO/IEC 22237 | data centre siting | not read (FM free-download link failed; iso.org page failed; TIA's own paper only says follow TIA-942) | — | — | logged in paywalled_standards.md |
 
 ## (b) Searched for and NOT found

@@ -8,9 +8,10 @@ second method (fresh render and OCR, page image read), not by an independent age
 arch_up2_b805 are replaced by arch_csa_b52, arch_csa_c448 and arch_csa_b805 (one entry per standard; meta.id_aliases).
 11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
-C2 = json.load(open(R / 'checks/agents/2026-11-03_build2_check2.json'))
+C2 = clean(json.load(open(R / 'checks/agents/2026-11-03_build2_check2.json')))
 D = '3 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 UP = '/root/.claude/uploads/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/'
@@ -37,7 +38,7 @@ WHERE1 = {'arch_csa_c282': 'page images, PDF pp. 8–15', 'arch_csa_b139': 'page
           'arch_nfpa_2001': 'reader screenshots PDF pp. 17–28', 'arch_nfpa_76': 'reader screenshots PDF pp. 29–46'}
 src = {}
 for f in ('heights_basement_sources.json', 'uploads_sources.json'):
-    src.update(json.load(open(A / f)))
+    src.update(clean(json.load(open(A / f))))
 n = 0
 def log(k, entry):
     cl = m['check_log'].setdefault(k, [])

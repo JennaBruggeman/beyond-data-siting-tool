@@ -2,6 +2,7 @@
 Research: checks/research_arch_v1/{prog_wet,prog_grow,prog_public,prog_housing,sys,fish_species,temps_public}.md and _sources.json.
 Texts already carry checks 2 and 3 (checkV2_result_*, checkV3_result_*); this patch adds them and logs checks 1-3."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 D = '2 Nov 2026'
@@ -15,8 +16,8 @@ def bad(res, k):
     return [c for c in r.get('claims', []) if c.get('verdict') in ('WRONG', 'NOT FOUND', 'UNREACHABLE')], r
 n = 0
 for st in STEMS:
-    src = json.load(open(A / f'{st}_sources.json'))
-    r2 = json.load(open(A / f'checkV2_result_{st}.json')); r3 = json.load(open(A / f'checkV3_result_{st}.json'))
+    src = clean(json.load(open(A / f'{st}_sources.json')))
+    r2 = clean(json.load(open(A / f'checkV2_result_{st}.json'))); r3 = clean(json.load(open(A / f'checkV3_result_{st}.json')))
     for k, v in src.items():
         if k not in S: n += 1
         S[k] = v

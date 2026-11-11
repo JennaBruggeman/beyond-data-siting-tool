@@ -3,12 +3,13 @@ heights_precedents_sources.json, ids arch_hp_*). Check 1 by the research agent (
 (checks/research_arch_v1/checkV2_result_heights_precedents.json): every quoted figure re-found; no WRONG or NOT FOUND; three wording fixes
 (VA OPC 'every plate that states a height'; NEU Table 2 thresholds are net floor area; FAO pump quote p. 29–30 ?)."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 F = 'checks/research_arch_v1/checkV2_result_heights_precedents.json'
 D = '4 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
-src = json.load(open(A / 'heights_precedents_sources.json')); res = json.load(open(R / F))
+src = clean(json.load(open(A / 'heights_precedents_sources.json'))); res = clean(json.load(open(R / F)))
 FIX = {
  'arch_hp_vaOPC2009': ("every room plate (", "every plate that states a height ("),
  'arch_hp_vanNEUConn2020': ("Table 2 minimum room 20 × 10 ft (6 × 3 m) for buildings <13,940 m²", "Table 2 minimum room 20 × 10 ft (6 × 3 m) for buildings <13,940 m² net floor area"),

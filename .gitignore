@@ -49,3 +49,7 @@ checks/**/*_edm_*.png
 # Screenshot folders (J.B., 9 Nov 2026, after the purge): new screenshots here are never committed. Files already tracked (Vancouver) stay tracked.
 checks/f1/*.png
 checks/agents/*_shots/
+
+# Hub port test geometry: Edmonton fits carry lot outlines from the Altalis-based tiles (course use only), never in git (11 Nov 2026)
+checks/tests/hub_port/geom/e*.json
+checks/tests/hub_port/ref/e*.json

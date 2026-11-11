@@ -279,7 +279,7 @@
    {
     "claim": "4.7 night design 16 °C",
     "verdict": "CONFIRMED",
-    "evidence": "16 °C (60 °F) 'generally meets the needs of most plants'",
+    "evidence": "16 °C (60 °F) is adequate for most plants",
     "fix": ""
    },
    {
@@ -305,25 +305,25 @@
    {
     "claim": "Addendum ag to 62.1-2022, approved 30 Apr 2024",
     "verdict": "CONFIRMED",
-    "evidence": "'Approved by ASHRAE and the American National Standards Institute on April 30, 2024'",
+    "evidence": "approved by ASHRAE and ANSI on 30 April 2024",
     "fix": ""
    },
    {
     "claim": "New App. B method (RP-1635)",
     "verdict": "CONFIRMED",
-    "evidence": "foreword: replaces Normative Appendix B method 'with a new method based on ASHRAE Research Project (RP) 1635'",
+    "evidence": "foreword: replaces Normative Appendix B method with a new one based on ASHRAE Research Project (RP) 1635",
     "fix": ""
    },
    {
     "claim": "Diesel generators ... dilution factor 2000",
     "verdict": "WRONG",
-    "evidence": "row value is '2000 × e'; footnote b 'e = 1 - the VOC removal efficiency of the odor filter' ('if the filter is 80% efficient, e = 0.2 and DF = 400')",
+    "evidence": "row value is 2000 × e; footnote b sets e as 1 minus the VOC removal efficiency of the odour filter (an 80% efficient filter gives e = 0.2 and DF = 400)",
     "fix": "DF = 2000 × e; 2000 only with no odour filter (e = 1)"
    },
    {
-    "claim": "Heat rejection equipment 'shall conform to Table 5-1'",
+    "claim": "Heat rejection equipment must meet Table 5-1",
     "verdict": "CONFIRMED",
-    "evidence": "B1.1 exception f 'The minimum separation distances for heat rejection equipment shall conform to Table 5-1.'",
+    "evidence": "B1.1 exception f: heat rejection equipment must meet the minimum separation distances in Table 5-1.",
     "fix": ""
    },
    {
@@ -335,7 +335,7 @@
   ],
   "kind_change": "STANDARD (US, public addendum): benchmark outside Canada unless a Canadian code adopts it",
   "scope_flag": null,
-  "new_text": "STANDARD (US, public addendum): ASHRAE, Addendum ag to ANSI/ASHRAE Standard 62.1-2022 (approved 30 Apr 2024): new App. B method (RP-1635); minimum dilution factor 'Diesel generators, diesel truck loading area or dock, diesel bus parking/idling area' 2000 × e (fn. b: e = 1 − VOC removal efficiency of the odour filter; 2000 with no filter, 400 with an 80% filter); heat rejection equipment 'shall conform to Table 5-1'; Table 5-1 itself not reproduced (in main standard) — https://www.ashrae.org/file%20library/technical%20resources/standards%20and%20guidelines/standards%20addenda/62_1_2022_ag_20240430.pdf ‖ CHECK 2 (31 Oct 2026, fixed): diesel DF is 2000 × e, not a flat 2000"
+  "new_text": "STANDARD (US, public addendum): ASHRAE, Addendum ag to ANSI/ASHRAE Standard 62.1-2022 (approved 30 Apr 2024): new App. B method (RP-1635); minimum dilution factor for diesel generators, diesel truck loading areas or docks and diesel bus parking or idling areas 2000 × e (fn. b: e = 1 − VOC removal efficiency of the odour filter; 2000 with no filter, 400 with an 80% filter); heat rejection equipment follows Table 5-1; Table 5-1 itself not reproduced (in main standard) — https://www.ashrae.org/file%20library/technical%20resources/standards%20and%20guidelines/standards%20addenda/62_1_2022_ag_20240430.pdf ‖ CHECK 2 (31 Oct 2026, fixed): diesel DF is 2000 × e, not a flat 2000"
  },
  "arch_ashrae621v": {
   "where_read": "WebFetch of the register URL, 31 Oct 2026",
@@ -355,7 +355,7 @@
    {
     "claim": "flue 250 cfm per million Btu/h",
     "verdict": "CONFIRMED",
-    "evidence": "'assume a value of 250 cfm per million Btu/h (0.43 L/s per kW) of combustion input'",
+    "evidence": "take 250 cfm per million Btu/h (0.43 L/s per kW) of combustion input",
     "fix": ""
    },
    {
@@ -367,7 +367,7 @@
   ],
   "kind_change": "STANDARD (US, public addendum); note superseded by addendum ag to 62.1-2022 (new App. B method)",
   "scope_flag": "Older Appendix B method; replaced in 62.1-2022 by addendum ag (see arch_ashrae621ag).",
-  "new_text": "STANDARD (US, public addendum; App. B method later replaced by addendum ag to 62.1-2022): ASHRAE, Addendum v to ANSI/ASHRAE Standard 62.1-2016 (approved 23/27 Jun 2018, ANSI 25 Jul 2018): Normative App. B Table B2-1 minimum separation distance L: 'Significant contaminant or odor intensity (Class 3) 15 (5)' ft (m); 'Noxious or dangerous particles (Class 4) 30 (10)'; flue exhaust rate assumption 250 cfm per million Btu/h. Table 5-1 not reproduced (?) — https://www.ashrae.org/File Library/Technical Resources/Standards and Guidelines/Standards Addenda/62.1-2016/62_1_2016_v_20180731.pdf ‖ CHECK 2 (31 Oct 2026, fixed): figures confirmed; marked US and superseded method"
+  "new_text": "STANDARD (US, public addendum; App. B method later replaced by addendum ag to 62.1-2022): ASHRAE, Addendum v to ANSI/ASHRAE Standard 62.1-2016 (approved 23/27 Jun 2018, ANSI 25 Jul 2018): Normative App. B Table B2-1 minimum separation distance L: Class 3 (significant contaminant or odour intensity) 15 ft (5 m); Class 4 (noxious or dangerous particles) 30 ft (10 m); flue exhaust rate assumption 250 cfm per million Btu/h. Table 5-1 not reproduced (?) — https://www.ashrae.org/File Library/Technical Resources/Standards and Guidelines/Standards Addenda/62.1-2016/62_1_2016_v_20180731.pdf ‖ CHECK 2 (31 Oct 2026, fixed): figures confirmed; marked US and superseded method"
  },
  "arch_bcHarsVch": {
   "where_read": "WebFetch of the register URL, 31 Oct 2026",

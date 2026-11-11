@@ -39,7 +39,7 @@ Labels: "?" = not confirmed. "our reading" = our interpretation. "our arithmetic
 | Separation from F-2 (D clinic) | "—" (none); NBC and AB note (8): 1 h where built under 3.2.2.57; BCBC: "-", no note | arch_hsg_nbc3131D | Table 3.1.3.1 | rule | 90 |
 | Separation from F-2 (if B-2, overnight) | 2 h | arch_hsg_nbc3131D | Table 3.1.3.1 | rule | 90 |
 | Health-care HVAC, power | HVAC in health care facilities → CSA Z317.2; essential electrical → CSA Z32 (both paywalled); cooling-tower discharge per Z317.2 (NBC 6.3.2.15.(6)) | arch_adj_csaZ3172; arch_adj_csaZ32 | scope pages | standard (scope only) | 50 |
-| CSA Z8000 scope | "planning, design, and construction of HCFs", incl. "Facilities providing outpatient diagnosis and treatment services" | arch_hsg_sccZ8000 | SCC notice (Z8000:18 reaffirmation) | standard (scope only) | 60 |
+| CSA Z8000 scope | planning, designing and building HCFs, incl. outpatient diagnosis and treatment facilities | arch_hsg_sccZ8000 | SCC notice (Z8000:18 reaffirmation) | standard (scope only) | 60 |
 | Zoning, Vancouver I-3 | Health Care Office C "only in sub-area A"; "not permitted at the ground floor, except for entrances" | van_zdb_i3 | 2.1; 2.2.6 | rule | 95 |
 | Zoning, Vancouver I-2 | Health Care Office C; "general office and health care office combined must not exceed the greater of 235 m² or 33.3%" of gross floor area | van_zdb_i2 | 2.1; 3.1.1.1(b)(ii) | rule | 90 |
 | Zoning, Vancouver I-1C | Health Care Office C; Health Enhancement Centre C | van_zdb_i1c | 2.1 | rule | 90 |

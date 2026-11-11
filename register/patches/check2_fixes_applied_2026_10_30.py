@@ -2,8 +2,9 @@
 Register text rewritten to what the sources say; kinds and role labels corrected; display-text edits in tool code applied by a separate step.
 Judgement calls are NOT applied: they stay as an open note on the source and go to J.B. (checks/check2/judgement_calls_2026_10_30.md)."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]; D = '30 Oct 2026'
-FX = json.load(open(R / 'checks/check2/fixes_proposed_2026_10_30.json'))
+FX = clean(json.load(open(R / 'checks/check2/fixes_proposed_2026_10_30.json')))
 def newtext(k, v, cur):
     base = v['new_text'] if v.get('new_text') else cur.split(' ‖ ')[0]
     tail = f" ‖ CHECK 2 fixes applied ({D}): {v.get('summary') or 'none needed'}"

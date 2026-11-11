@@ -100,8 +100,8 @@ Pattern (from the cases above, not a rule): the data centre keeps the heat excha
 |---|---|---|---|---|---|
 | ETS room for utility only | Vancouver: "designated solely for the placement of NEU equipment"; Edmonton: "a dedicated room" for City's exclusive use | arch_ho_vanNEUconn2020; arch_ho_edmC17943 | s. 6.1; s. 13(4) | guide; rule | 85 |
 | Utility access hardware | card reader + electric strike on ETS door (Blatchford) | arch_ho_breMultiUnit2025 | s. 6.4.5 | design guide | 80 |
-| Data hall: nothing else inside | "Only ITE and support equipment shall be permitted in the ITE room"; "Access to the ITE area shall be restricted to authorized persons" | nfpa75_2024 (existing register) | 7.1.1; 6.3.2 | standard (US benchmark) | 80 |
-| Data-centre air systems separate | air-handling "independent from those connected to other building spaces" | fmDS0532 (existing register) | 2.6.6.2.2 | insurer guidance | 75 |
+| Data hall: nothing else inside | the ITE room must hold only ITE and support equipment; access to the ITE area must be limited to authorized persons | nfpa75_2024 (existing register) | 7.1.1; 6.3.2 | standard (US benchmark) | 80 |
+| Data-centre air systems separate | air-handling kept independent of the systems serving other building spaces | fmDS0532 (existing register) | 2.6.6.2.2 | insurer guidance | 75 |
 | Choose location by ownership | "shall include consideration of ... the ownership and maintenance of the equipment" | arch_ho_hntasTS1 | cl. 1.3.4 (draft) | government draft (UK) | 60 |
 | Access-controlled external enclosure | listed as a mitigation for external consumer connections | arch_ho_hntasTS1 | cl. 1.6.5, Fig. 13c | government draft (UK) | 55 |
 | Two-door shared room straddling a secure line | no source found | — | — | — | ? |

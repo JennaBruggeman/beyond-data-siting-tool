@@ -3,12 +3,13 @@ Research: checks/research_arch_v1/dc_rooms.md and dc_rooms_sources.json. Texts a
 checkV3_result_dc_rooms.json); this patch adds the arch_dc_* sources with their kinds, logs checks 1-3, and adds Architecture-only quantities
 for each room the research sizes. Rooms with no size rule are listed in arch_dc_rooms with '?'. Figures the tool shows: tool/data/dc_rooms.json."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 D = '2 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
-src = json.load(open(A / 'dc_rooms_sources.json'))
-r2 = json.load(open(A / 'checkV2_result_dc_rooms.json')); r3 = json.load(open(A / 'checkV3_result_dc_rooms.json'))
+src = clean(json.load(open(A / 'dc_rooms_sources.json')))
+r2 = clean(json.load(open(A / 'checkV2_result_dc_rooms.json'))); r3 = clean(json.load(open(A / 'checkV3_result_dc_rooms.json')))
 # kind from the label each source text starts with (research brief: kinds named in the text)
 KIND = [('OPERATOR CLAIM', 'operator claim'), ('MAKER CLAIM', 'manufacturer claim'), ('INSURER GUIDANCE', 'insurer guidance'), ('RULE', 'rule'),
         ('DESIGN GUIDE', 'design guide'), ('GOVERNMENT REPORT', 'government'), ('FILED PLANNING PAPER', 'filed plans'), ('FILED PLANS', 'filed plans')]

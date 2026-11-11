@@ -131,14 +131,11 @@ Compiled 29 Oct 2026. Primary documents only.
 
 **Quotes**
 
-- **NFPA 855 §15.3.1.** "Individual ESS units shall be separated from each other by a minimum of 3 ft (914 mm) unless"
-  - "smaller separation distances are documented to be adequate based on fire and explosion testing complying with 9.1.515.13."
-  - Text as printed in the TIA, including its strike/insert artefact.
+- **NFPA 855 §15.3.1.** [para] Individual ESS units must be at least 3 ft (914 mm) from each other, unless fire and explosion testing complying with 9.1.515.13 documents that a smaller distance is adequate.
+  - Clause reference as printed in the TIA, including its strike/insert artefact.
 - **§15.13.1.2.**
-  - "Lead-acid and nickel-cadmium batteries used in standby power systems and listed to UL 1973 shall not require"
-  - "UL 9540A testing when installed with a charging system listed to UL 1012, UL 60950-1, or UL 62368-1,"
-  - "or a UPS listed to UL 1778."
-- **TIA 23-2.** "Each ESS unit shall be spaced a minimum of 3 ft (0.9m) from other units, except as provided in 9.5.3.1.1.3 (6)."
+  - [para] Lead-acid and nickel-cadmium batteries in standby power systems, listed to UL 1973, do not need UL 9540A testing when installed with a charging system listed to UL 1012, UL 60950-1 or UL 62368-1, or with a UPS listed to UL 1778.
+- **TIA 23-2.** [para] Each ESS unit must be at least 3 ft (0.9 m) from other units, except as 9.5.3.1.1.3 (6) allows.
 - **Vertiv SL-71251, Table 5.1.**
   - Front: 36 in (914 mm) to any obstruction [para].
   - Above: 18 in (457 mm) [para].

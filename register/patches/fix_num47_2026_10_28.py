@@ -3,10 +3,11 @@
 (BAC p. C16/C18 by web fetch; ATCO 1.045 matches the value already in tool/cards.js from the 18 Oct rate-schedule read).
 Only items marked resolved 'yes' or 'partly' are applied, and '?' stays on whatever was not confirmed."""
 import json, pathlib, glob
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 NEW = {}
 for f in sorted(glob.glob(str(R / 'checks/sweep/num47/a*.json'))):
-    for a in json.load(open(f)):
+    for a in clean(json.load(open(f))):
         if a['resolved'] in ('yes', 'partly') and a.get('proposed_text'): NEW[a['id']] = a['proposed_text']
 for p, pretty in ((R / 'register/formula_register.json', True), (R / 'tool/opps.json', False)):
     d = json.loads(p.read_text()); n = 0

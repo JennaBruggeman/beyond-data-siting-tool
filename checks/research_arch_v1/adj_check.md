@@ -258,7 +258,7 @@ Check of 31 Oct 2026, done as set out in ADJ_CHECK_BRIEF.md. The three files wer
 | Key finding: AB pool rules in Part 7 | CONFIRMED | — | — |
 | Key finding: Edmonton 1.5 km | CONFIRMED | 7.140 8.1.1 / 8.1.2.2 exact (b.txt). Sensitive Use definition exact. | — |
 | Key finding: greenhouse status differs by code | **WRONG** | NBC also limits Group G to "land that is associated with and devoted to the practice of farming" (Agricultural occupancy definition). So the BC versus NBC contrast is false. | "In no code is a greenhouse on a data-centre site Group G; it is classified under Part 3." |
-| Key finding: NFPA 75 6.1.3.2 | CONFIRMED | Public-input report: PI 50 and PI 95 quote it; PI 95 proposes "for both verticle and horizontal separations" | — |
+| Key finding: NFPA 75 6.1.3.2 | CONFIRMED | Public-input report: PI 50 and PI 95 quote it; PI 95 proposes wording that names both vertical and horizontal separations | — |
 | BC CCLR s. 13(1) | CONFIRMED | Full sentence ends "while children are under the supervision of employees" | — |
 | s. 17 | CONFIRMED | — | — |
 | s. 16(1)(a), 16(2.1)(b), 16(3)(a) | CONFIRMED | 16(3)(a): "enclosed in a manner that is suitable … and will ensure that children are free of harm" | — |

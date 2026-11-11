@@ -324,13 +324,13 @@
    {
     "claim": "Outdoor engines at least 5 ft from wall openings and from structures with combustible walls",
     "verdict": "CONFIRMED",
-    "evidence": "'at least 5 ft from opening in walls and at least 5 ft from structures having combustible walls'",
+    "evidence": "at least 5 ft from wall openings and at least 5 ft from structures with combustible walls",
     "fix": ""
    },
    {
     "claim": "Reducible with a 1-hour wall or a tested enclosure",
     "verdict": "CORRECTED",
-    "evidence": "'A minimum separation shall not be required where ... (1) ... fire resistance rating of at least 1 hr. (2) ... noncombustible ... demonstrated ...'",
+    "evidence": "no minimum separation is required where (1) the wall has a fire resistance rating of at least 1 hr, or (2) the enclosure is noncombustible and this is demonstrated",
     "fix": "Separation is not required (eliminated), not merely reduced; enclosure must be noncombustible and shown by full-scale fire test or calculation (A.4.1.4(2))."
    },
    {
@@ -398,43 +398,43 @@
    {
     "claim": "Roof air 'considerably hotter', reducing capacity of cooling towers and air-cooled condensers",
     "verdict": "CONFIRMED",
-    "evidence": "'air can be considerably hotter and at a higher wet-bulb temperature ... reduce the capacity of cooling towers and air-cooled condensers'",
+    "evidence": "roof-level air can be considerably hotter, with a higher wet-bulb temperature, which lowers the capacity of cooling towers and air-cooled condensers",
     "fix": ""
    },
    {
-    "claim": "Obstructions next to horizontal-discharge units 'can drastically reduce equipment performance'",
+    "claim": "Obstructions next to horizontal-discharge units can sharply cut equipment performance",
     "verdict": "CONFIRMED",
-    "evidence": "'Obstructions immediately adjacent to these horizontal-flow cooling towers can drastically reduce equipment performance'",
+    "evidence": "obstructions right beside these horizontal-flow cooling towers can sharply cut equipment performance",
     "fix": ""
    },
    {
-    "claim": "Recirculation 'can be a serious problem' for same-housing intake/exhaust (2015 SI wording not re-checked ?)",
+    "claim": "Recirculation can be a serious risk for same-housing intake/exhaust (2015 SI wording not re-checked ?)",
     "verdict": "CONFIRMED",
-    "evidence": "2015 SI: 'Exhaust-to-intake recirculation can be a serious problem for equipment that has an intake and exhaust on the same housing'",
-    "fix": "Remove '?'; 2015 SI wording confirmed. Also: 'Recirculation is even more serious than reduction in airflow rate'."
+    "evidence": "2015 SI: exhaust-to-intake recirculation can be a serious risk for equipment with intake and exhaust on one housing",
+    "fix": "Remove '?'; 2015 SI wording confirmed. Also: it ranks recirculation as more serious than reduced airflow."
    },
    {
     "claim": "Caused by adverse wind, upwind obstruction or close downwind obstruction",
     "verdict": "CONFIRMED",
-    "evidence": "'caused by adverse wind direction, local disturbance of the airflow by an upwind obstruction, or by a close downwind obstruction'",
+    "evidence": "causes: adverse wind direction, local airflow disturbance from an upwind obstruction, or a close downwind obstruction",
     "fix": ""
    },
    {
     "claim": "Wilson 1979 flat-roof zones: R = Bs^0.67 BL^0.33; Hc=0.22R at Xc=0.5R; Lc=0.9R; Lr=R; approximate",
     "verdict": "CONFIRMED",
-    "evidence": "Eqs (1)–(5): 'Hc = 0.22R ... Xc = 0.5R ... Lc = 0.9R ... Lr = R'; 'These equations are approximate'",
-    "fix": "Add: turbulence from upwind obstacles 'can decrease the coefficients ... by up to a factor of two'."
+    "evidence": "Eqs (1)–(5): 'Hc = 0.22R ... Xc = 0.5R ... Lc = 0.9R ... Lr = R'; the equations are stated to be approximate",
+    "fix": "Add: turbulence from upwind obstacles can lower the coefficients by as much as a factor of two."
    },
    {
     "claim": "Cooling towers as far as possible from intakes, operable windows, outdoor public areas (Legionella)",
     "verdict": "CONFIRMED",
-    "evidence": "'keeping cooling towers as far away as possible from intakes, operable windows, and outdoor public areas'",
-    "fix": "Source attributes this to ASHRAE Guideline 12; 'No specific minimum separation distance is provided'."
+    "evidence": "place cooling towers as far as possible from intakes, operable windows and outdoor public areas",
+    "fix": "Source attributes this to ASHRAE Guideline 12; it gives no specific minimum separation distance."
    },
    {
     "claim": "Fundamentals 2025 Ch. 24: orient cooling towers to prevailing winds; leeward recirculation and reentrainment",
     "verdict": "CONFIRMED",
-    "evidence": "'Cooling towers and similar equipment should be oriented to take advantage of prevailing wind directions, if possible'; 'Exhaust Reentrainment' section",
+    "evidence": "cooling towers and similar equipment should, where possible, be oriented to make use of prevailing wind directions; 'Exhaust Reentrainment' section",
     "fix": ""
    }
   ],

@@ -101,9 +101,9 @@ URL: https://www.vertiv.com/4a6b21/globalassets/products/thermal-management/room
   - Tier III: "A redundant delivery path for power and cooling is added to the redundant critical components of Tier II facilities"
   - N+1 and 2N are not defined in this article.
 - **TIA** (ANSI/TIA-942 page, tiaonline.org, no date shown). https://tiaonline.org/?p=16534
-  - Rated-2: "A data center which has redundant capacity components and a single, non-redundant distribution path serving the computer equipment."
-  - Rated-3: "…redundant capacity components and multiple independent distribution paths serving the computer equipment. Typically, only one distribution path serves the computer equipment at any time."
-  - Rated-4: "…which all are active. The data center allows concurrent maintainability and one (1) fault anywhere in the installation without causing downtime."
+  - Rated-2 [para]: a data centre with redundant capacity components and one non-redundant distribution path to the computer equipment.
+  - Rated-3 [para]: redundant capacity components and several independent distribution paths to the computer equipment; usually only one path serves the equipment at a time.
+  - Rated-4 [para]: all paths active; allows concurrent maintainability and one (1) fault anywhere in the installation without downtime.
 - **Maker definition** (Fuji Electric Corp. of America, UPS maker; no date, no author): "What are N+1, 2N, and 2(N+1) redundancy?" https://americas.fujielectric.com/what-are-n1-2n-and-2n1-redundancy/
   - N+1: "The system has N units to handle the full load, plus 1 additional (spare) unit for redundancy."
   - 2N: "The system has two completely independent sets of N components, each capable of handling the full load."

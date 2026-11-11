@@ -7,12 +7,13 @@ Check 1: Claude reading (pdftotext -layout; screenshots read as images). Check 2
 Uploads and screenshots are not committed; paths point to J.B.'s upload folder. Summary: checks/research_arch_v1/uploads_4nov_b.md.
 11 Nov 2026: quoted text replaced by paraphrase (licensed_text_rewrite_2026_11_11.py)"""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 F = 'checks/research_arch_v1/checkV2_result_uploads_4nov_b.json'
 D = '4 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
-src = json.load(open(A / 'uploads_4nov_b_sources.json')); res = json.load(open(R / F))
+src = clean(json.load(open(A / 'uploads_4nov_b_sources.json'))); res = clean(json.load(open(R / F)))
 KIND = {
  'arch_up4_en12572_1': 'standard (European, benchmark outside Canada)',
  'arch_up4_en12572_2': 'standard (European, benchmark outside Canada)',

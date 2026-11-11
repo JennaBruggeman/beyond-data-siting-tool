@@ -2,6 +2,7 @@
 Adds 85 sources as CHECK 1 (agent read, figures quoted with page/section); check 2 open. Also two corrections the spatial agent found:
 Bylaw 1329's exhaust clause is s. 13 (not s. 12), and its sensitive receptors are 'a hospital, an elementary school, a day care facility or a community care facility'."""
 import json, pathlib, glob, re
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 D = '30 Oct 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']
@@ -10,7 +11,7 @@ KIND = [('OPERATOR CLAIM', 'operator claim'), ('MAKER CLAIM', 'manufacturer clai
         ('DESIGN GUIDE', 'design guide'), ('GOVERNMENT', 'government'), ('COUNCIL', 'government'), ('UNIVERSITY', 'university summary'), ('RESEARCH INSTITUTE', 'research institute')]
 n = 0
 for f in sorted(glob.glob(str(R / 'checks/research_arch_v1/*_sources.json'))):
-    for k, v in json.load(open(f)).items():
+    for k, v in clean(json.load(open(f))).items():
         if k in d['new_sources']: continue
         if k in ('arch_sep_cahsc42301_6', 'arch_sep_carbAtcm93115', 'arch_sep_waEcologyHIA2025', 'arch_sep_ccr2480'): continue  # dropped 31 Oct 2026 (J.B.)
         d['new_sources'][k] = v; n += 1

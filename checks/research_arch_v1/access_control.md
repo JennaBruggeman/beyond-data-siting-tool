@@ -83,7 +83,7 @@ Codes column: N = NBC, B = BCBC, V = VBBL, A = NBC(AE). "our reading" = not stat
 
 | what | value | source id | where | kind | conf. |
 |---|---|---|---|---|---|
-| FM 5-32 | "Provide supervision of the data center … in accordance with Data Sheet 9-1"; FM-approved intrusion alarm if data rooms have emergency doors leading outside the secure area | arch_acc_fmSecurity | 2.2.1.7; 2.8.9.2.1 | insurer guide | 85 |
+| FM 5-32 | data centre to be supervised per Data Sheet 9-1; FM-approved intrusion alarm if data rooms have emergency doors leading outside the secure area | arch_acc_fmSecurity | 2.2.1.7; 2.8.9.2.1 | insurer guide | 85 |
 | FM DS 9-1 | not read (free at fm.com) ? | — | — | — | — |
 | RCMP camera placement | parking, perimeter, entrances and exits; domes for entrances, stairwells, lobbies, screening; cameras out of public reach | arch_acc_gcpsg011 | 6.1; 7.1.1; 7.3.2 | gov. guide | 85 |
 | RCMP monitoring | "within, or immediately adjacent to," a Security Operations Centre | arch_acc_gcpsg011 | 5.1.3 | gov. guide | 85 |

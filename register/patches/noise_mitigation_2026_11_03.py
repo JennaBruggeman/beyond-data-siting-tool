@@ -3,6 +3,7 @@ Research: checks/research_arch_v1/noise_mitigation.md and noise_mitigation_sourc
 (checkV2_result_noise_mitigation.json, checkV3_result_noise_mitigation.json); this patch adds the sources, logs checks 1-3, and records the
 mitigation rules in the noise_level and noise_limit quantities (formula, coef, sources, source_roles). Tool code: engine.js noiseCheck."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 D = '2 Nov 2026'      # date of the research and of checks 2 and 3
@@ -15,8 +16,8 @@ KIND = [('OPERATOR CLAIM', 'operator claim'), ('MAKER CLAIM', 'manufacturer clai
 def bad(res, k):
     r = res.get(k) or {}
     return [c for c in r.get('claims', []) if c.get('verdict') in ('WRONG', 'NOT FOUND', 'UNREACHABLE')], r
-src = json.load(open(A / f'{ST}_sources.json'))
-r2 = json.load(open(A / f'checkV2_result_{ST}.json')); r3 = json.load(open(A / f'checkV3_result_{ST}.json'))
+src = clean(json.load(open(A / f'{ST}_sources.json')))
+r2 = clean(json.load(open(A / f'checkV2_result_{ST}.json'))); r3 = clean(json.load(open(A / f'checkV3_result_{ST}.json')))
 n = 0
 for k, v in src.items():
     if k not in S: n += 1

@@ -3,9 +3,10 @@ Research: checks/research_arch_v1/zones.md and zones_sources.json (check 1 by th
 'ADD TO EXISTING ENTRY' are appended to the existing register text. Check 2 (checks/agents/2026-11-03_zones_check2.json): the build agent, not the research
 agent, re-found every figure tool/data/zones.json uses in the local by-law texts (regex on whitespace-normalised text)."""
 import json, pathlib, re
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
-Z = json.load(open(R / 'checks/research_arch_v1/zones_sources.json'))
-C2 = json.load(open(R / 'checks/agents/2026-11-03_zones_check2.json'))
+Z = clean(json.load(open(R / 'checks/research_arch_v1/zones_sources.json')))
+C2 = clean(json.load(open(R / 'checks/agents/2026-11-03_zones_check2.json')))
 D = '3 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 PRE = re.compile(r'^ADD TO EXISTING ENTRY \(([^)]*)\):\s*')

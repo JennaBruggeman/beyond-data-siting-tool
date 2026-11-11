@@ -1,13 +1,14 @@
 """31 Oct 2026: agent check of the new Architecture-mode sources (round of 1 Nov 2026).
 Results: checks/research_arch_v1/check2_result_0..3.json. Applies new_text, kind changes and scope flags; logs check 2."""
 import json, pathlib, glob
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 D = '2 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 from collections import Counter
 C = Counter(); n_txt = n_kind = 0
 for f in sorted(glob.glob(str(R / 'checks/research_arch_v1/checkR6_result_*.json'))):
-    res = json.load(open(f))
+    res = clean(json.load(open(f)))
     for k, r in res.items():
         if k not in S: continue
         for c in r.get('claims', []): C[c.get('verdict', '?')] += 1

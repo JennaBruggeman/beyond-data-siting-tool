@@ -1,11 +1,12 @@
 """3 Nov 2026: facility spec research (heights_conservatory_edge.md, heights_conservatory_edge_sources.json), check 1 by the research agent. Check 2 pending."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_arch_v1'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 KIND = [('OPERATOR CLAIM','operator claim'),('MAKER CLAIM','manufacturer claim'),('BROKER CLAIM','broker claim'),('DEVELOPER CLAIM','developer claim'),
         ('PERMIT','rule'),('GOV','government'),('RULE','rule'),('REGULATOR','government'),('UTILITY','utility record'),('INSTITUTION','institution'),('ENG','engineer claim'),('LEAD','lead (not evidence)')]
-src = json.load(open(A / 'heights_conservatory_edge_sources.json')); n = 0
+src = clean(json.load(open(A / 'heights_conservatory_edge_sources.json'))); n = 0
 for k, v in src.items():
     if k.startswith('_'): continue
     if k not in S: n += 1

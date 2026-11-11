@@ -109,15 +109,15 @@
     "fix": null
    },
    {
-    "claim": "2.0 Class 1A rating 'negated once PV panels are placed above it' unless system FM Approved",
+    "claim": "2.0 Class 1A rating lost once PV panels are installed above it unless system FM Approved",
     "verdict": "CONFIRMED",
-    "evidence": "'will have the FM Approved Class 1A rating negated once PV panels are placed above it'",
+    "evidence": "the roof's FM Approved Class 1A rating is cancelled once PV panels are installed above it",
     "fix": null
    },
    {
-    "claim": "2.1.1.4 A 'Use only noncombustible frames and mounting systems'",
+    "claim": "2.1.1.4 A noncombustible frames and mounting systems only",
     "verdict": "CONFIRMED",
-    "evidence": "'Use only noncombustible frames and mounting systems. Use PV panels that are glass backed.'",
+    "evidence": "noncombustible frames and mounting systems only; PV panels to be glass backed.",
     "fix": "Add the second sentence: glass-backed panels."
    },
    {
@@ -147,13 +147,13 @@
    {
     "claim": "3.2 encapsulants, backsheets and adhesives 'can ignite'",
     "verdict": "WRONG",
-    "evidence": "3.2: 'Components of common rigid PV panels—such as plastic frames, backsheets and adhesives—can ignite.' Encapsulants are in 1.2.1: 'These encapsulants provide additional fuel that can worsen a roof-level fire.'",
+    "evidence": "3.2: parts of common rigid PV panels, such as plastic frames, backsheets and adhesives, can ignite. Encapsulants are in 1.2.1: they add fuel that can make a roof-level fire worse.",
     "fix": "3.2 names plastic frames, backsheets and adhesives; encapsulants (EVA) are fuel per 1.2.1."
    }
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "INSURER GUIDE: FM Property Loss Prevention Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision): 1.0 roof PV only; 'See ... Data Sheet 1-57, Plastics in Construction, for wall-mounted, building-integrated photovoltaic (BIPV) façade systems'; 2.0 an FM Approved Class 1A roof has the rating 'negated once PV panels are placed above it' unless the system is FM Approved; 2.1.1.4 A 'Use only noncombustible frames and mounting systems. Use PV panels that are glass backed.'; B arrays max 150 x 150 ft (46 x 46 m); C min 4 ft (1.2 m) aisle to next array; D 4 ft to expansion joints; E 6 ft (1.8 m) to skylights; 3.2 'plastic frames, backsheets and adhesives' 'can ignite'; 1.2.1 encapsulants (EVA) 'provide additional fuel' — https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/01-construction/fmds0115.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 3.2 names plastic frames, backsheets and adhesives, not encapsulants (those are 1.2.1); glass-backed panels and 1.8 m added."
+  "new_text": "INSURER GUIDE: FM Property Loss Prevention Data Sheet 1-15, Roof-Mounted Solar Photovoltaic Panels, April 2026 (full revision): 1.0 roof PV only; wall-mounted building-integrated photovoltaic (BIPV) façades referred to Data Sheet 1-57, Plastics in Construction; 2.0 an FM Approved Class 1A roof loses that rating once PV panels are placed above it unless the system is FM Approved; 2.1.1.4 A noncombustible frames and mounting systems only, and glass-backed PV panels; B arrays max 150 x 150 ft (46 x 46 m); C min 4 ft (1.2 m) aisle to next array; D 4 ft to expansion joints; E 6 ft (1.8 m) to skylights; 3.2 plastic frames, backsheets and adhesives can ignite; 1.2.1 encapsulants (EVA) add fuel — https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/01-construction/fmds0115.pdf ‖ CHECK 2 (1 Nov 2026, fixed): 3.2 names plastic frames, backsheets and adhesives, not encapsulants (those are 1.2.1); glass-backed panels and 1.8 m added."
  },
  "arch_sec2_fmBipv2025": {
   "where_read": "WebFetch of FM technical report PDF (URL in text), first 100,000 of 105,233 characters, 1 Nov 2026",
@@ -265,51 +265,51 @@
     "fix": null
    },
    {
-    "claim": "4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'",
+    "claim": "4.2 an unmanned data centre sits in the middle of a building, in a room without windows",
     "verdict": "CONFIRMED",
     "evidence": "verbatim",
     "fix": null
    },
    {
-    "claim": "'It must not be possible to remove the construction or any part of it from the outside without breaking it'",
+    "claim": "no part of the construction can be removed from outside without breaking it",
     "verdict": "CONFIRMED",
     "evidence": "verbatim",
     "fix": null
    },
    {
-    "claim": "'A Class 3 anti-burglar wall'",
+    "claim": "a Class 3 burglar-resistant wall",
     "verdict": "CONFIRMED",
-    "evidence": "'A Class 3 anti-burglar wall must fulfil the above requirements.'",
+    "evidence": "a Class 3 anti-burglar wall must meet the requirements above.",
     "fix": null
    },
    {
     "claim": "crime detection at least Class 3 (SFS-EN 50131-1), 24 h manned centre, duplicated transmission, anti-mask, sirens inside and outside",
     "verdict": "CONFIRMED",
-    "evidence": "'of at least Class 3 (SFS-EN 50131-1)'; 'manned around the clock'; 'at least duplicated'; 'anti-mask detection feature'; 'a local alarm (a siren) both inside and outside the premises'",
+    "evidence": "at least Class 3 (SFS-EN 50131-1); centre staffed at all hours; 'at least duplicated'; 'anti-mask detection feature'; local siren alarm both inside and outside the premises",
     "fix": null
    },
    {
     "claim": "4.4/4.9 ventilation plant and standby power in separate fire compartments",
     "verdict": "CONFIRMED",
-    "evidence": "4.4 'machinery of which must be located in a separate fire compartment'; 4.9 'Any auxiliary power machinery must be located in a fire compartment of its own' (fuel too)",
+    "evidence": "4.4 its machinery must sit in a separate fire compartment; 4.9 auxiliary power machinery must have its own fire compartment (fuel too)",
     "fix": null
    },
    {
     "claim": "4.5 consider toilets, heating water, roof above the hall",
     "verdict": "CONFIRMED",
-    "evidence": "4.5 lists 'toilets and washrooms, water-circulation central heating', 'production processes, roof' — 'roof above the hall' is a paraphrase",
+    "evidence": "4.5 lists toilets and washrooms, water-circulating central heating, 'production processes, roof' — 'roof above the hall' is a paraphrase",
     "fix": "Use the source's wording."
    },
    {
     "claim": "above ground floor or raised",
     "verdict": "CONFIRMED",
-    "evidence": "'The premises must be built above ground floor or the equipment must be on a raised platform.'",
+    "evidence": "the premises must be above the ground floor, or the equipment must stand on a raised platform.",
     "fix": null
    }
   ],
   "kind_change": "INSURER GUIDE (benchmark outside Canada, Finland)",
   "scope_flag": "Finnish insurer rule; benchmark only, not binding in BC or Alberta.",
-  "new_text": "INSURER GUIDE (benchmark outside Canada, Finland): OP Insurance Ltd / A-Insurance Ltd (Finland), Safety Regulation S710 'Data centres', valid from 1 Jan 2018: 4.2 'Any unmanned data centre should be located in the middle of a building in a windowless room'; 'It must not be possible to remove the construction or any part of it from the outside without breaking it'; 'A Class 3 anti-burglar wall'; high-protection centres need an insurer-approved crime detection system, at least Class 3 (SFS-EN 50131-1), to a 24 h manned centre, duplicated transmission, anti-mask detectors, local sirens inside and outside; 4.4/4.9 ventilation plant and standby power in separate fire compartments; 4.5 water hazards above: 'toilets and washrooms, water-circulation central heating', production processes, roof; 'built above ground floor or the equipment must be on a raised platform' — https://www.op.fi/documents/20556/65462/Data+centres+S710/e7c01200-baf9-44ef-b89a-db06a715cf8c ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 4.5 put in source wording; kind marked as benchmark outside Canada."
+  "new_text": "INSURER GUIDE (benchmark outside Canada, Finland): OP Insurance Ltd / A-Insurance Ltd (Finland), Safety Regulation S710 'Data centres', valid from 1 Jan 2018: 4.2 an unmanned data centre sits in the middle of a building, in a room without windows; no part of the construction can be removed from outside without breaking it; a Class 3 burglar-resistant wall; high-protection centres need an insurer-approved crime detection system, at least Class 3 (SFS-EN 50131-1), to a 24 h manned centre, duplicated transmission, anti-mask detectors, local sirens inside and outside; 4.4/4.9 ventilation plant and standby power in separate fire compartments; 4.5 water hazards above: toilets and washrooms, water-based central heating, production processes, roof; the room is above the ground floor, or the equipment stands on a raised platform — https://www.op.fi/documents/20556/65462/Data+centres+S710/e7c01200-baf9-44ef-b89a-db06a715cf8c ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed; 4.5 put in source wording; kind marked as benchmark outside Canada."
  },
  "arch_sec2_zurich2026": {
   "where_read": "WebFetch of Zurich NA whitepaper page (URL in text), 1 Nov 2026",

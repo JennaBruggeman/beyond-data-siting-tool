@@ -46,7 +46,7 @@ Closes (or narrows) the three "Open" items in checks/architecture_adjacency_draf
 
 ### Short answer
 - **No code defines "emergency generator".** NFC 4.3.13.1.(1)(b) uses the term without a definition. Whether an IT-only standby set counts is **unresolved**: no authority interpretation found.
-- **CSA C282 scope (publisher's page):** its mandatory scope is generator sets where an emergency supply "is required by the National Building Code of Canada", but Note 3 says its normative provisions "are not limited to" those installations, and Note 6 says other systems "should meet the requirements of this Standard, where practical". So C282 **can** reach IT sets, but as "should", not "shall" (our reading).
+- **CSA C282 scope (publisher's page):** its mandatory scope is generator sets where the National Building Code of Canada requires an emergency supply, but Note 3 says its normative provisions reach beyond those installations, and Note 6 says other systems should meet the Standard where practical. So C282 **can** reach IT sets, but as "should", not "shall" (our reading).
 - **City of Vancouver Bulletin 2000-015-BU/EL** (rev. 2015/2020): an emergency generator room may hold only the set and emergency-supply equipment; it rejects reading "equipment" as any load the generator feeds. Its diagram shows the C282 generator also feeding "Non-Life Safety Loads / Equipment" through a separate transfer switch (ATS2). Our reading: in Vancouver, one set may feed both life-safety and IT loads, but then it is a C282 emergency generator and its room is a 3.6.2.8 room (2 h, generator equipment only).
 - Tool: if the IT sets also carry life-safety loads, treat them as emergency generators (2 h room; fuel under NFC 4.3.13.1.(1)(b)). If IT-only: "?" — indoor tanks above B139 sizes may then need an industrial occupancy (4.3.13.1.(1)(a)).
 
@@ -71,8 +71,8 @@ Closes (or narrows) the three "Open" items in checks/architecture_adjacency_draf
 "standby" grep: no hit in nfc.txt or nfc_ab2023.txt; in nbc.txt, bcbc2024.txt and vbbl2025_v1.txt only for water-heater "standby loss" and a cooling-tower "Standby (wet)" mode. **"Standby generator" appears in none of the five codes.**
 
 ### Other sources
-- CSA C282:24 store page, Clause 1.1 scope and Notes 3, 5, 6 (publisher; standard itself paywalled). Note 5: "equipment other than 'life safety equipment' could be connected to the generator set (see Clause 6.4.1)". Clause 1.2 excludes battery supplies.
-- SCC notice of intent (new C282 edition in development): scope wording "emergency generators … required by the National Building Code of Canada (NBCC)".
+- CSA C282:24 store page, Clause 1.1 scope and Notes 3, 5, 6 (publisher; standard itself paywalled). Note 5: loads beyond life safety equipment can also be connected to the generator set (see Clause 6.4.1). Clause 1.2 excludes battery supplies.
+- SCC notice of intent (new C282 edition in development): scope covers emergency generators that the National Building Code of Canada (NBCC) requires.
 - Practitioner commentary, not an authority: A. Tsisserev (chair, CE Code Technical Committee), IAEI Magazine, 10 Jul 2019: generators "used for a standby or backup power supply" should be installed to C282, citing Notes 3 and 6 and CE Code Rule 46-202(3)(c) (CEC not checked: paywalled; J.B.'s copy covers Section 64 only).
 
 ### Searched, not found

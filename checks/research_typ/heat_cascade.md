@@ -6,7 +6,7 @@ Research 4 Nov 2026 per `checks/research_typ/BRIEF.md`. Check 1 only. Sources: e
 
 - Four stages, one heat loop, each stage takes the water the stage above has cooled. Cascading = "lower and lower water temperatures are used in successive steps" (Lund 2005).
 - Space temperatures fall 40 → 28 → 20 → 0 °C, but **supply** temperatures don't fall in the same order: the greenhouse wants 35–40 °C at the bench, the pool's supply is not sourced (?). Two orders are offered (below).
-- The edge is the natural tail: a snow-melt slab gives ≈190–210 W/m² at a mean fluid of only 17–19 °C in light snow (ASHRAE 2023 Table 6), and ASHRAE says snow melt "may be tied to the return piping" of a district system. Built precedent: Klamath Falls sidewalks on the district-heating return side.
+- The edge is the natural tail: a snow-melt slab gives ≈190–210 W/m² at a mean fluid of only 17–19 °C in light snow (ASHRAE 2023 Table 6), and ASHRAE says snow melt can be connected to a district system's return piping. Built precedent: Klamath Falls sidewalks on the district-heating return side.
 - Known load ≈510–590 MWh/yr for typical sizes + 100 m² of edge, spa ? (our arithmetic): 6–11 % of V339's hall heat, 2–4 % of E06B's. The pool takes ≈80 % of it.
 - Liquid-cooled heat (50–60 °C): no heat pump for any stage (our reading). Air-cooled (25–35 °C): one heat pump at the top of the cascade; the edge's light-snow mode can run on raw hall heat.
 - Floor area ≈1,090–1,510 m² + the edge. Fits E06B with a pool variance flag; V339 blocked by the pool (rezoning, ground area).
@@ -67,8 +67,8 @@ Hall heat (tool run): V339 5,393–8,278 MWh/yr at 1.4 MW → **≈6.2–11.0 %*
 
 - **Order A (brief, by space temperature):** spa → pool → greenhouse → edge.
 - **Order B (by supply temperature):** spa → greenhouse (35–40 °C bench) → pool → edge. Use B unless a source shows the pool exchanger needs ≥35 °C (pool supply ?).
-- Snow-melt fluid ΔT "less than 17 K" (ASHRAE p. 52.13), so the edge loop takes one 17 K step at most.
-- Edge on the return: "the snow-melting system may be tied to the return piping of the district" (ASHRAE pp. 52.12–52.13; Klamath Falls precedent below).
+- Snow-melt fluid ΔT under 17 K (ASHRAE p. 52.13), so the edge loop takes one 17 K step at most.
+- Edge on the return: the snow-melting system can be connected to the district's return piping (ASHRAE pp. 52.12–52.13; Klamath Falls precedent below).
 - Summer: spa and pool still draw heat; greenhouse little; edge none. Winter peaks coincide for greenhouse and edge (our reading).
 
 ### Heat pumps by hall cooling type (register heat_temp: air 25–35 °C, liquid 50–60 °C)

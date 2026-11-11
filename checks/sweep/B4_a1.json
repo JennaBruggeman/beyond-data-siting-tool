@@ -137,14 +137,14 @@
   "values": [
    {"blank_context": "NFPA ___-___", "value": "855-2023", "quote": "NFPA® 855 ... 2023 Edition", "where": "TIA 23-1 header"},
    {"blank_context": "TIA ___-___ and ___-___", "value": "23-1 and 23-2", "quote": "TIA 23-1 ... TIA 23-2", "where": "TIA headers"},
-   {"blank_context": "ESS units separated by at least ___ ft (___ m)", "value": "3 ft (914 mm)", "quote": "Individual ESS units shall be separated from each other by a minimum of 3 ft (914 mm)", "where": "TIA 23-1, 15.3.1 (prints mm; 0.9 m would be a conversion, not printed)"},
-   {"blank_context": "less with fire testing", "value": "supported", "quote": "smaller separation distances are documented to be adequate based on fire and explosion testing", "where": "TIA 23-1, 15.3.1"},
-   {"blank_context": "rooftop units ___ ft apart", "value": "3 ft (0.9 m)", "quote": "spaced a minimum of 3 ft (0.9m) from other units", "where": "TIA 23-2, new 9.5.3.1.1.3 (applies to individual units of 20 kWh or less)"},
-   {"blank_context": "≥___ ft from roof edge", "value": "5 ft (1.5 m)", "quote": "but not less than 5 ft (1.5 m)", "where": "TIA 23-2, 9.5.3.1.1.2 (distance equal to system height, minimum 5 ft)"},
+   {"blank_context": "ESS units separated by at least ___ ft (___ m)", "value": "3 ft (914 mm)", "quote": "Individual ESS units must be at least 3 ft (914 mm) apart", "where": "TIA 23-1, 15.3.1 (prints mm; 0.9 m would be a conversion, not printed)"},
+   {"blank_context": "less with fire testing", "value": "supported", "quote": "unless fire and explosion testing documents that smaller separations are adequate", "where": "TIA 23-1, 15.3.1"},
+   {"blank_context": "rooftop units ___ ft apart", "value": "3 ft (0.9 m)", "quote": "at least 3 ft (0.9m) from other units", "where": "TIA 23-2, new 9.5.3.1.1.3 (applies to individual units of 20 kWh or less)"},
+   {"blank_context": "≥___ ft from roof edge", "value": "5 ft (1.5 m)", "quote": "and no less than 5 ft (1.5 m)", "where": "TIA 23-2, 9.5.3.1.1.2 (distance equal to system height, minimum 5 ft)"},
    {"blank_context": "Hydro One quotes §___: ___ ft (___ m) to lot lines ..., reducible to ___ ft", "value": "not stated in TIAs", "quote": "", "where": "Hydro One document and NFPA 855 base text not checked"},
-   {"blank_context": "NFC ___, BC Fire Code ___, VBBL ___, BCBC ___, NFC – ___ AE, count of NFPA standards, ___ Oct, UL ___/___A", "value": "not checked against these sources", "quote": "UL 9540A or equivalent test standards", "where": "TIA 23-1, 15.13.1 (UL 9540A only)"}
+   {"blank_context": "NFC ___, BC Fire Code ___, VBBL ___, BCBC ___, NFC – ___ AE, count of NFPA standards, ___ Oct, UL ___/___A", "value": "not checked against these sources", "quote": "UL 9540A or an equivalent test standard", "where": "TIA 23-1, 15.13.1 (UL 9540A only)"}
   ],
-  "unsupported_wording": "In TIA 23-2, the 3 ft rooftop spacing applies only to individual units of 20 kWh or less; the claim omits this. The roof-edge rule is 'equal to system height, but not less than 5 ft', and TIA 23-2 also sets a 10 ft (3 m) clearance from the rooftop fire-service access point. The TIAs do not print the 15.3.1 reference cleanly (it reads '9.1.515.13', an apparent typo). Not verified here: the Hydro One quote, the code-citation statements (NFC, BCFC, VBBL, BCBC, NFC-AE) and the 'UL ___/___A' pair (only UL 9540A is seen).",
+  "unsupported_wording": "In TIA 23-2, the 3 ft rooftop spacing applies only to individual units of 20 kWh or less; the claim omits this. The roof-edge rule is the system height, and no less than 5 ft, and TIA 23-2 also sets a 10 ft (3 m) clearance from the rooftop fire-service access point. The TIAs do not print the 15.3.1 reference cleanly (it reads '9.1.515.13', an apparent typo). Not verified here: the Hydro One quote, the code-citation statements (NFC, BCFC, VBBL, BCBC, NFC-AE) and the 'UL ___/___A' pair (only UL 9540A is seen).",
   "note": "Code-absence statements rely on Claude's own earlier check of local texts and are outside these sources."
  },
  {

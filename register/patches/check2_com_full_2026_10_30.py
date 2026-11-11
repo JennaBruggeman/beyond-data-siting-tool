@@ -3,12 +3,13 @@ For the 128 sources that had no earlier check on record, this read is logged as 
 Logs results and attaches each difference to its source as a visible 'CHECK 2' (or 'CHECK 1') note; no values the tool shows are changed here.
 Value-changing fixes are listed for J.B. in checks/check2/check2_fixlist_com_full.md."""
 import json, glob, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 S = '/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/check3'
 D = '30 Oct 2026'
 res, first = {}, {}
 for g in sorted(glob.glob(S + '/com_*.json') + glob.glob(S + '/full_*.json')):
-    inp = json.load(open(g)); out = json.load(open(S + '/result_' + g.split('/')[-1]))
+    inp = clean(json.load(open(g))); out = clean(json.load(open(S + '/result_' + g.split('/')[-1])))
     for k, v in out.items():
         res[k] = ('result_' + g.split('/')[-1], v); first[k] = inp.get(k, {}).get('this_read_counts_as') == 'check 1'
 def note(v):

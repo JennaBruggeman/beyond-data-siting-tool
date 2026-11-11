@@ -2,12 +2,13 @@
 This patch LOGS the results and attaches each correction to its source entry as a visible 'CHECK 2' note; it does not yet
 rewrite values the tool shows. Value-changing fixes are listed separately for J.B. (check2_fixlist_resident.md)."""
 import json, glob, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 S = '/tmp/claude-0/-home-claude/82c630bc-5b47-5e5a-a9e1-cf3abcc90b3b/scratchpad/check2'
 D = '29 Oct 2026'
 res = {}
 for f in sorted(glob.glob(S + '/result_res_*.json')):
-    for k, v in json.load(open(f)).items(): res[k] = (f.split('/')[-1], v)
+    for k, v in clean(json.load(open(f))).items(): res[k] = (f.split('/')[-1], v)
 
 def note(v):
     parts = []

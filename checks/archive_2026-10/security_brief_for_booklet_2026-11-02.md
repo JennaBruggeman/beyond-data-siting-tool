@@ -29,7 +29,7 @@ From the Beyond Data tool research, 30 Oct – 2 Nov 2026. Every point carries i
 - **Biometric and card locks on exit routes** must release on fire alarm, on power loss, and within 15 s of pushing the door (National Building Code 3.4.6.16, rule). Vancouver also wants a written sequence of operation. This limits how sealed a secure line can be in a fire.
 - FM 9-1 says no locks that need power (insurer) — it yields to the code on exit doors.
 - **Privacy:** federal guidance on biometrics asks for consent and another way in for people who decline (guidance; data rule, not architecture).
-- **Access rules in the standards:** NFPA 75 (US): access to the IT area "restricted to authorized persons"; only IT and support equipment in the IT room. NFPA 855: battery rooms locked but reachable by firefighters.
+- **Access rules in the standards:** NFPA 75 (US): only authorized persons may enter the IT area; only IT and support equipment in the IT room. NFPA 855: battery rooms locked but reachable by firefighters.
 
 ## Guards and the control room
 - 24/7 on-site guards: claimed by Cologix, Equinix, eStruxture, Digital Realty (operator). **No rule requires guards**; RCMP: by threat and risk assessment.

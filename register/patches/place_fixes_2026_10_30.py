@@ -1,11 +1,12 @@
 """30 Oct 2026: place-stage fixes (checks/findings_place.md), J.B. said 'yes'. Register side only; the screen fixes are in tool/*.js.
 Also P-09: tool/make_tool_opps.py read a missing file, so opps.json had drifted; source kinds/check marks written only to opps.json are moved into the register."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']
 old = R / 'checks/place_check/opps_before_p09.json'
 if old.exists():
-    o = json.loads(old.read_text())
+    o = clean(json.loads(old.read_text()))
     for k, v in o.get('source_kinds', {}).items(): m['source_kinds'].setdefault(k, v)
     for k, v in o.get('source_check', {}).items(): m['source_check'].setdefault(k, v)
 Q = {q['id']: q for q in d['quantities']}

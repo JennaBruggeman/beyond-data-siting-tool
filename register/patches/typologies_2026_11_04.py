@@ -5,6 +5,7 @@ WRONG at check 2 (all page numbers or truncated quotes; no figure changed): edmD
 edmCustomMfg (pp. 1013-1014), edmShelterDefs (pp. 1051, 1057), vanS2Accessory (Principal Building p. 31), terenius2023 ('as-is' pp. 16, 19),
 vanFireHall5Report ('fire hall at grade and second floor'; separate entries App. D p. 1). bcbc3131 note on F-1 completed (D/F-1, E/F-1 3 h)."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 A = R / 'checks/research_typ'
 D = '4 Nov 2026'
@@ -15,10 +16,10 @@ KIND = [('OPERATOR CLAIM','operator claim'),('MAKER CLAIM','manufacturer claim')
         ('UNIVERSITY','university summary'),('RESEARCH INSTITUTE','research institute'),('SECONDARY','secondary (not primary for the facility)'),
         ('DESIGN BENCHMARK','government (US)'),('DESIGN GUIDE','design guide (benchmark, outside Canada)'),
         ('GOV','government'),('RULE','rule'),('REGULATOR','government'),('UTILITY','utility record'),('INSTITUTION','institution'),('ENG','engineer claim'),('LEAD','lead (not evidence)')]
-res = json.load(open(A / 'checkV2_result.json'))
+res = clean(json.load(open(A / 'checkV2_result.json')))
 n_new = n1 = n2 = 0
 for f in sorted(A.glob('*_sources.json')):
-    src = json.load(open(f)); md = 'checks/research_typ/' + f.name.replace('_sources.json', '.md')
+    src = clean(json.load(open(f))); md = 'checks/research_typ/' + f.name.replace('_sources.json', '.md')
     for k, v in src.items():
         if k.startswith('_'): continue
         if k not in S: n_new += 1

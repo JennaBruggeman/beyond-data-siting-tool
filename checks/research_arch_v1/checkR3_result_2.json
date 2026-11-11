@@ -499,21 +499,21 @@
     "fix": null
    },
    {
-    "claim": "scope: 'required by the National Building Code of Canada (NBCC)' and CSA Z32 Clause 6; battery supplies excluded",
+    "claim": "scope: where the National Building Code of Canada (NBCC) requires it, and CSA Z32 Clause 6; battery supplies excluded",
     "verdict": "CONFIRMED",
-    "evidence": "indirect only: SCC notice of intent for the new edition gives 'is required by the National Building Code of Canada (NBCC)', Z32 Clause 6 health care, and excludes battery/UPS supplies (not the :24 store page)",
+    "evidence": "indirect only: SCC notice of intent for the new edition gives the scope as where the National Building Code of Canada (NBCC) requires it, Z32 Clause 6 health care, and excludes battery/UPS supplies (not the :24 store page)",
     "fix": null
    },
    {
     "claim": "Note 3 wording 'an generator set'",
     "verdict": "UNREACHABLE",
-    "evidence": "IAEI 2019 quotes an earlier edition's Note 3 as '... where an emergency generator is used' - the :24 wording could not be checked",
+    "evidence": "IAEI 2019 quotes an earlier edition's Note 3 as referring to use of an emergency generator - the :24 wording could not be checked",
     "fix": null
    }
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "STANDARD (publisher scope page; standard paywalled): CSA C282:24, Clause 1.1: applies to 'generator sets and associated equipment for providing an emergency electrical power supply' where 'an emergency electrical power supply is required by the National Building Code of Canada (NBCC)', and HCF essential systems per CSA Z32 Clause 6; Note 3 'Normative provisions of this Standard are not limited to the installations where an generator set is used as the NBCC required emergency power supply source'; Note 5 other equipment 'could be connected to the generator set (see Clause 6.4.1)'; Note 6 other systems 'should meet the requirements of this Standard, where practical' (Annex E); Clause 1.2 excludes battery supplies — https://www.csagroup.org/store/product/CSA_C282%3A24/ ‖ CHECK 2 (1 Nov 2026, ok): store page not re-reachable (redirect host blocked); scope wording supported only indirectly by the SCC notice; Notes 3, 5, 6 unverified (?)"
+  "new_text": "STANDARD (publisher scope page; standard paywalled): CSA C282:24, Clause 1.1: applies to generator sets and related equipment supplying emergency electrical power where the National Building Code of Canada (NBCC) requires such a supply, and HCF essential systems per CSA Z32 Clause 6; Note 3: the normative provisions are not limited to installations where a generator set is the emergency power source the NBCC requires; Note 5 other equipment may be connected to the generator set (see Clause 6.4.1); Note 6 other systems should meet the Standard where practical (Annex E); Clause 1.2 excludes battery supplies — https://www.csagroup.org/store/product/CSA_C282%3A24/ ‖ CHECK 2 (1 Nov 2026, ok): store page not re-reachable (redirect host blocked); scope wording supported only indirectly by the SCC notice; Notes 3, 5, 6 unverified (?)"
  },
  "arch_open_sccC282": {
   "where_read": "WebFetch of the SCC notice page (1 Nov 2026)",
@@ -525,9 +525,9 @@
     "fix": null
    },
    {
-    "claim": "scope 'emergency generators … required by the National Building Code of Canada (NBCC)'",
+    "claim": "scope: emergency generators required by the National Building Code of Canada (NBCC)",
     "verdict": "CONFIRMED",
-    "evidence": "'applies to the design, installation, operation, maintenance, and testing of emergency generators' ... 'is required by the National Building Code of Canada (NBCC)'",
+    "evidence": "covers design, installation, operation, maintenance and testing of emergency generators ... where the National Building Code of Canada (NBCC) requires them",
     "fix": null
    },
    {
@@ -575,9 +575,9 @@
     "fix": "mark 'rejects' as our reading"
    },
    {
-    "claim": "C282: rooms 'used solely for the generator sets and all auxiliary equipment'",
+    "claim": "C282: rooms used only for the generator sets and their auxiliary equipment",
     "verdict": "CONFIRMED",
-    "evidence": "'used solely for the generator sets and all auxiliary equipment'",
+    "evidence": "only for the generator sets and all their auxiliary equipment",
     "fix": null
    },
    {
@@ -589,7 +589,7 @@
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "GOVERNMENT BULLETIN: City of Vancouver Building Bulletin 2000-015-BU/EL 'Emergency Generator Rooms', rev. 5 Oct 2015 (attachment rev. 30 Nov 2020), CBO and Deputy City Electrician: room 'contains only the generating set' and 'equipment related to the emergency power supply system'; rejects (our reading: it adopts the narrower reading against) reading 'equipment' as 'any electrical equipment supplied by the emergency generator that includes life safety and non-life safety loads'; C282: rooms 'used solely for the generator sets and all auxiliary equipment'; diagram ATS2 'Transfer switch for equipment not defined by CE Code Rule 46-002 as life safety system' — https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all quotes, dates and signatories confirmed; 'rejects' marked as our reading"
+  "new_text": "GOVERNMENT BULLETIN: City of Vancouver Building Bulletin 2000-015-BU/EL 'Emergency Generator Rooms', rev. 5 Oct 2015 (attachment rev. 30 Nov 2020), CBO and Deputy City Electrician: room 'contains only the generating set' and 'equipment related to the emergency power supply system'; rejects (our reading: it adopts the narrower reading against) reading 'equipment' as 'any electrical equipment supplied by the emergency generator that includes life safety and non-life safety loads'; C282: rooms used only for the generator sets and their auxiliary equipment; diagram ATS2 'Transfer switch for equipment not defined by CE Code Rule 46-002 as life safety system' — https://vancouver.ca/files/cov/2000-015-emergency-generator-rooms.pdf ‖ CHECK 2 (1 Nov 2026, fixed): all quotes, dates and signatories confirmed; 'rejects' marked as our reading"
  },
  "arch_open_iaeiTsisserev": {
   "where_read": "WebFetch of the IAEI Magazine article (1 Nov 2026)",
@@ -621,19 +621,19 @@
    {
     "claim": "cites CE Code Rule 46-202(3)(c)",
     "verdict": "WRONG",
-    "evidence": "body text cites 'Rule 42-202(3)'; the block quote is headed '46-202 Types of emergency power supply' with c) 'in conformance with CSA C282' - the article is internally inconsistent",
+    "evidence": "body text cites 'Rule 42-202(3)'; the block quote is headed '46-202 Types of emergency power supply' with item c) requiring conformance with CSA C282 - the article is internally inconsistent",
     "fix": "say 'cites CE Code Rule 46-202 (printed once as 42-202(3)) item (c)'"
    },
    {
     "claim": "(note) Notes quoted are from an earlier C282 edition",
     "verdict": "CONFIRMED",
-    "evidence": "article's Note 3: 'where an emergency generator is used' vs register's C282:24 'where an generator set is used'",
+    "evidence": "article's Note 3 refers to an emergency generator, where the register's C282:24 refers to a generator set",
     "fix": null
    }
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "PRACTITIONER COMMENTARY (not an authority): A. Tsisserev (chair, CE Code Technical Committee), 'Application and installation requirements for emergency generators: the discussion continues', IAEI Magazine, 10 Jul 2019: standby/backup generators should follow C282 (Notes 3, 6); cites CE Code Rule 46-202, item c) 'in conformance with CSA C282' (body text prints it as 'Rule 42-202(3)'); quotes an earlier C282 edition's Notes — https://iaeimagazine.org/columns/canadian/application-and-installation-requirements-for-emergency-generators-the-discussion-continues/ ‖ CHECK 2 (1 Nov 2026, fixed): rule number printed inconsistently in the article; Notes quoted are pre-2024 wording"
+  "new_text": "PRACTITIONER COMMENTARY (not an authority): A. Tsisserev (chair, CE Code Technical Committee), 'Application and installation requirements for emergency generators: the discussion continues', IAEI Magazine, 10 Jul 2019: standby/backup generators should follow C282 (Notes 3, 6); cites CE Code Rule 46-202, item c), which requires conformance with CSA C282 (body text prints it as 'Rule 42-202(3)'); quotes an earlier C282 edition's Notes — https://iaeimagazine.org/columns/canadian/application-and-installation-requirements-for-emergency-generators-the-discussion-continues/ ‖ CHECK 2 (1 Nov 2026, fixed): rule number printed inconsistently in the article; Notes quoted are pre-2024 wording"
  },
  "arch_open_bcfcPage": {
   "where_read": "WebFetch of the BC Fire Code page (1 Nov 2026)",
@@ -851,103 +851,103 @@
    {
     "claim": "2.2.4.1 one-hour walls for data processing, network/fibre, tape, generator rooms",
     "verdict": "CONFIRMED",
-    "evidence": "'Provide one-hour fire-rated interior walls and partitions ... Data processing equipment rooms, Network/fiber optic rooms, Tape cartridge storage rooms, Emergency/standby power generation rooms'",
+    "evidence": "recommends one-hour fire-rated interior walls and partitions around data processing equipment rooms, network/fibre optic rooms, tape cartridge storage rooms and emergency/standby power generation rooms",
     "fix": null
    },
    {
     "claim": "2.2.4.1.1 two-hour compartmentation",
     "verdict": "CONFIRMED",
-    "evidence": "'If multiple data processing equipment rooms are within the data center, provide two-hour fire-rated interior walls for compartmentation'",
+    "evidence": "where the data centre holds more than one data processing equipment room, two-hour fire-rated interior walls to compartment them",
     "fix": null
    },
    {
     "claim": "2.2.4.3 slab to slab or roof",
     "verdict": "CONFIRMED",
-    "evidence": "'from the structural floor of the room to the structural floor above (or to the roof)'",
+    "evidence": "walls run from the room's structural floor up to the structural floor above (or the roof)",
     "fix": null
    },
    {
     "claim": "2.2.2.1 windows/doors, tempered or wired glass, ¾-hour doors",
     "verdict": "CONFIRMED",
-    "evidence": "'use tempered or wired glass for windows and minimum ¾-hour fire-rated doors'",
+    "evidence": "windows in tempered or wired glass; doors fire-rated at least ¾ hour",
     "fix": null
    },
    {
     "claim": "2.2.5.2 ceilings ≤30 ft (9 m)",
     "verdict": "CONFIRMED",
-    "evidence": "'Limit the maximum height of ceilings in data centers to 30 ft (9 m)'",
+    "evidence": "data centre ceilings no higher than 30 ft (9 m)",
     "fix": null
    },
    {
     "claim": "2.2.13.1 flood site, 500 ft (152 m), 2 m/s",
     "verdict": "CONFIRMED",
-    "evidence": "'above the predicted 0.2% annual exceedance (500-year) flood elevation and includes 1 to 2 ft (0.3 to 0.6 m) of freeboard' ... 'at least 500 ft (152 m) from direct wave impacts and/or high flood-flow velocities (i.e., above 7 fps [2 m/s])'",
+    "evidence": "site above the predicted 0.2% annual exceedance (500-year) flood elevation with 1 to 2 ft (0.3 to 0.6 m) of freeboard ... no closer than 500 ft (152 m) to direct wave impacts and/or high flood-flow velocities (over 7 fps [2 m/s])",
     "fix": null
    },
    {
     "claim": "2.6.4.3 generator location order",
     "verdict": "CONFIRMED",
-    "evidence": "'A. In a separate, purpose-built building with adequate protection B. In the yard with adequate space separation to important buildings C. At the ground-floor level in the data center'",
+    "evidence": "A. a separate purpose-built building with adequate protection; B. the yard, with adequate space separation from important buildings; C. the data centre's ground floor",
     "fix": null
    },
    {
     "claim": "2.6.4.3.1 not roof or basement",
     "verdict": "CONFIRMED",
-    "evidence": "'Do not locate emergency generators at roof level or in basement areas.'",
+    "evidence": "emergency generators not to be placed at roof level or in basements",
     "fix": null
    },
    {
     "claim": "2.6.4.4 24-hour fuel or refuelling plan",
     "verdict": "CONFIRMED",
-    "evidence": "'A. A 24-hour fuel supply B. A documented service interruption plan (SIP) ... refueled ... for 24 hours'",
+    "evidence": "A. 24-hour fuel supply, or B. a documented service interruption plan (SIP) for refuelling ... for 24 hours",
     "fix": null
    },
    {
     "claim": "2.6.4.4.1 buried, then outdoor aboveground",
     "verdict": "CONFIRMED",
-    "evidence": "'A. Buried tanks B. Outdoor aboveground tanks'",
+    "evidence": "A. buried tanks, then B. outdoor aboveground tanks",
     "fix": null
    },
    {
     "claim": "2.6.4.4.1.1 no tanks inside, basement or roof",
     "verdict": "CONFIRMED",
-    "evidence": "'Do not locate diesel fuel tanks inside the data center, including the basement, or at roof level.'",
+    "evidence": "diesel fuel tanks not to be placed inside the data centre (basement included) or at roof level",
     "fix": null
    },
    {
     "claim": "2.6.6.2.2 independent air paths",
     "verdict": "CONFIRMED",
-    "evidence": "'independent from those connected to other building spaces'",
+    "evidence": "kept separate from those serving other building spaces",
     "fix": null
    },
    {
     "claim": "2.6.6.2.3 ≥3 mm w.g. positive pressure",
     "verdict": "CONFIRMED",
-    "evidence": "'at least 0.05 in. (3 mm) water gauge ... relative to adjacent areas'",
+    "evidence": "positive pressure of at least 0.05 in. (3 mm) water gauge ... against adjacent areas",
     "fix": null
    },
    {
     "claim": "2.2.1.3.1 air intakes",
     "verdict": "CONFIRMED",
-    "evidence": "'Do not expose the air intake(s) of the building to combustible materials.'",
+    "evidence": "keep the building's air intake(s) away from exposure to combustible materials",
     "fix": null
    },
    {
     "claim": "2.6.5.1 UPS per DS 5-28",
     "verdict": "CONFIRMED",
-    "evidence": "'in accordance with Data Sheet 5-28, DC Battery Systems'",
+    "evidence": "per Data Sheet 5-28, DC Battery Systems",
     "fix": null
    },
    {
-    "claim": "Li-ion: 'cooling the surroundings is a critical factor' (3.x)",
+    "claim": "Li-ion: cooling the surroundings is critical (3.x)",
     "verdict": "CONFIRMED",
-    "evidence": "3.3.3.3.2 Battery Back-Up Units (BBUs): gaseous systems 'not recommended'; 'FM research has shown that cooling the surroundings is a critical factor'",
+    "evidence": "3.3.3.3.2 Battery Back-Up Units (BBUs): gaseous systems not recommended; FM research found cooling of the surroundings to be critical",
     "fix": "clause is 3.3.3.3.2 and concerns BBUs"
    }
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "INSURER GUIDANCE: FM Property Loss Prevention Data Sheet 5-32, Data Centers and Related Facilities, Factory Mutual Insurance Company, January 2026, interim revision July 2026 (free at fm.com/datasheets (?, not checked); J.B. upload 1 Nov 2026): 2.2.4.1 'Provide one-hour fire-rated interior walls and partitions' for data processing equipment rooms, network/fibre rooms, tape storage rooms and emergency/standby power generation rooms; 2.2.4.1.1 'If multiple data processing equipment rooms are within the data center, provide two-hour fire-rated interior walls for compartmentation'; 2.2.4.3 rated walls from structural floor to structural floor above or roof; 2.2.2.1 minimize interior windows and doors to the data room, tempered or wired glass, minimum ¾-hour doors; 2.2.5.2 ceilings at most 30 ft (9 m); 2.2.13.1 'Select a building site that is above the predicted 0.2% annual exceedance (500-year) flood elevation and includes 1 to 2 ft (0.3 to 0.6 m) of freeboard', at least 500 ft (152 m) from direct wave impacts or flood flow above 2 m/s; 2.6.4.3 locate generators, in order of preference, 'In a separate, purpose-built building', 'In the yard with adequate space separation to important buildings', 'At the ground-floor level in the data center'; 2.6.4.3.1 'Do not locate emergency generators at roof level or in basement areas'; 2.6.4.4 24-hour fuel supply, or a refuelling plan for 24 h; 2.6.4.4.1 buried tanks preferred, then outdoor aboveground; 2.6.4.4.1.1 'Do not locate diesel fuel tanks inside the data center, including the basement, or at roof level'; 2.6.6.2.2 air-handling equipment and air paths 'independent from those connected to other building spaces'; 2.6.6.2.3 positive pressure of at least 3 mm water gauge in data rooms relative to adjacent areas; 2.2.1.3.1 'Do not expose the air intake(s) of the building to combustible materials'; 2.6.5.1 UPS batteries per Data Sheet 5-28; Li-ion battery back-up units (BBUs): gaseous agents 'not recommended' as they don't cool, and 'cooling the surroundings is a critical factor' (3.3.3.3.2). An insurer's recommendations: what an FM-insured operator would be held to, not a code requirement. ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed against the upload; Li-ion clause number and BBU scope corrected; 'free' note unverified"
+  "new_text": "INSURER GUIDANCE: FM Property Loss Prevention Data Sheet 5-32, Data Centers and Related Facilities, Factory Mutual Insurance Company, January 2026, interim revision July 2026 (free at fm.com/datasheets (?, not checked); J.B. upload 1 Nov 2026): 2.2.4.1 one-hour fire-rated interior walls and partitions for data processing equipment rooms, network/fibre rooms, tape storage rooms and emergency/standby power generation rooms; 2.2.4.1.1 two-hour fire-rated interior walls to compartment the data centre where it has more than one data processing equipment room; 2.2.4.3 rated walls from structural floor to structural floor above or roof; 2.2.2.1 minimize interior windows and doors to the data room, tempered or wired glass, minimum ¾-hour doors; 2.2.5.2 ceilings at most 30 ft (9 m); 2.2.13.1 site above the predicted 0.2% annual exceedance (500-year) flood elevation plus 1 to 2 ft (0.3 to 0.6 m) of freeboard, at least 500 ft (152 m) from direct wave impacts or flood flow above 2 m/s; 2.6.4.3 locate generators, in order of preference, in a separate purpose-built building, in the yard with enough space separation from important buildings, or on the ground floor of the data centre; 2.6.4.3.1 no emergency generators at roof level or in basements; 2.6.4.4 24-hour fuel supply, or a refuelling plan for 24 h; 2.6.4.4.1 buried tanks preferred, then outdoor aboveground; 2.6.4.4.1.1 no diesel fuel tanks inside the data centre (basement included) or at roof level; 2.6.6.2.2 air-handling equipment and air paths separate from those serving other parts of the building; 2.6.6.2.3 positive pressure of at least 3 mm water gauge in data rooms relative to adjacent areas; 2.2.1.3.1 keep the building's air intakes clear of exposure to combustible materials; 2.6.5.1 UPS batteries per Data Sheet 5-28; Li-ion battery back-up units (BBUs): gaseous agents not recommended as they don't cool, and cooling the surroundings is critical (3.3.3.3.2). An insurer's recommendations: what an FM-insured operator would be held to, not a code requirement. ‖ CHECK 2 (1 Nov 2026, fixed): all clauses confirmed against the upload; Li-ion clause number and BBU scope corrected; 'free' note unverified"
  },
  "nfpa37_2024": {
   "where_read": "not re-opened: NFPA Free Access needs a login; no public NFPA page checked; other copies not used per brief (data/raw/codes/nfpa855_2026_screens.pdf exists but was not used)",
@@ -979,7 +979,7 @@
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "STANDARD (US, benchmark; paywalled, read on NFPA Free Access): NFPA 37, Installation and Use of Stationary Combustion Engines and Gas Turbines, 2024 edition (pp. 37-8 to 37-12): 4.1.1.1 engines 'readily accessible for maintenance, repair, and firefighting'; 4.1.1.2 air supply designed 'to prevent flue gas products from being drawn from stacks or flues'; 4.1.2.1.1 engine rooms within structures: walls, floors and ceilings 'of at least 1-hour fire resistance rating'; 4.1.2.1.4 attached engine rooms: common wall at least 1 h; 4.1.2.1.5 openings with self-closing fire doors or dampers to match; 4.1.2.2.2 dedicated detached structures at least 1.5 m (5 ft) from openings in walls and from structures with combustible walls, no minimum where the exposing or exposed wall is 1 h or the detached structure is sprinklered; 4.1.3 on roofs: 4.1.3.1 at least 1.5 m from any openings in the walls of structures; 4.1.3.2 1.5 m from combustible walls unless 1 h (4.1.3.2.1), a fire test (4.1.3.2.2) or engineering calculations (4.1.3.2.3); 4.1.3.3 oil containment curb or dike holding the full lube-oil or fuel capacity; 4.1.3.4 noncombustible surface 300 mm beyond the engine and dike; 4.1.4 outdoors: 4.1.4.1 'at least 1.5 m (5 ft) from any openings in the walls of structures' (no exceptions); 4.1.4.2 1.5 m from structures having combustible walls, except 4.1.4.2.1 (structure within 1.5 m rated at least 1 h), 4.1.4.2.2 (fire test) or 4.1.4.2.2.3 (? numbering) (calculations) — the exceptions apply to combustible walls only, not to openings (our reading of the clause structure); 6.3.2.2 fuel tanks not in a room of their own at most 2,500 L; larger tanks in a room per 6.3.5 or 6.3.6 (read later, see below); 6.3.2.3 aggregate in a structure at most 5,000 L unless the excess is in such a room; 6.3.2.2.1 and 6.3.2.3.1 any size within engine rooms if engineered with fire detection, suppression and containment. Roof installation is permitted by NFPA 37 (contrast FM Global 5-32 2.6.4.3.1). ‖ pp. 37-13 to 37-18 (read 1 Nov 2026): 6.3.3 outdoor tanks follow NFPA 30 (not read ?); 6.3.4 roof tanks on noncombustible supports with spill containment for the largest tank; 6.3.5 rooms holding only tanks up to 5,000 L: walls, floor, ceiling 'not less than 1 hour', 380 mm clearance round each tank, self-closing 1 h door if it opens inside, spill containment, ventilation keeping vapours at or below 25 % of the LFL and discharging outside 'without recirculation'; 6.3.6 over 5,000 L: 3 h walls, floor, ceiling, 3 h self-closing doors, curbs at openings; 6.5.5 'Overflows, vents, fuel piping, and fuel tanks shall not be located at or near engine air intake, exhaust piping, mufflers, or filters'; 6.6.3.3 fill pipe on an exterior wall 'at least 600 mm (24 in.) from any building opening at the same or lower level'; 6.7.1.1 tank vent pipe outside, at least 600 mm from any building opening at the same or lower level; 8.2.3.1 exhaust 'shall terminate outside the structure at a point where hot gases, sparks, or products of combustion will discharge to a safe location' — no distance to windows or air intakes is given; 8.2.3.2 not directed toward combustible materials or structures; 8.3.1 unlisted exhaust pipes 457 mm from combustible materials; 8.3–8.4 refer to NFPA 211 (not read ?); 11.1 a fire risk evaluation covers each engine installation's design and layout. ‖ CHECK 2 (1 Nov 2026, fixed): not re-checkable (NFPA login); only internal fixes: stale '(not read ?)' removed, odd clause number flagged"
+  "new_text": "STANDARD (US, benchmark; paywalled, read on NFPA Free Access): NFPA 37, Installation and Use of Stationary Combustion Engines and Gas Turbines, 2024 edition (pp. 37-8 to 37-12): 4.1.1.1 engines readily accessible (NFPA 37's defined term) for maintenance, repair and firefighting; 4.1.1.2 air supply designed so that flue gases are not drawn in from stacks or flues; 4.1.2.1.1 engine rooms within structures: walls, floors and ceilings rated at least 1 hour; 4.1.2.1.4 attached engine rooms: common wall at least 1 h; 4.1.2.1.5 openings with self-closing fire doors or dampers to match; 4.1.2.2.2 dedicated detached structures at least 1.5 m (5 ft) from openings in walls and from structures with combustible walls, no minimum where the exposing or exposed wall is 1 h or the detached structure is sprinklered; 4.1.3 on roofs: 4.1.3.1 at least 1.5 m from any openings in the walls of structures; 4.1.3.2 1.5 m from combustible walls unless 1 h (4.1.3.2.1), a fire test (4.1.3.2.2) or engineering calculations (4.1.3.2.3); 4.1.3.3 oil containment curb or dike holding the full lube-oil or fuel capacity; 4.1.3.4 noncombustible surface 300 mm beyond the engine and dike; 4.1.4 outdoors: 4.1.4.1 1.5 m (5 ft) minimum from openings in structure walls (no exceptions); 4.1.4.2 1.5 m from structures having combustible walls, except 4.1.4.2.1 (structure within 1.5 m rated at least 1 h), 4.1.4.2.2 (fire test) or 4.1.4.2.2.3 (? numbering) (calculations) — the exceptions apply to combustible walls only, not to openings (our reading of the clause structure); 6.3.2.2 fuel tanks not in a room of their own at most 2,500 L; larger tanks in a room per 6.3.5 or 6.3.6 (read later, see below); 6.3.2.3 aggregate in a structure at most 5,000 L unless the excess is in such a room; 6.3.2.2.1 and 6.3.2.3.1 any size within engine rooms if engineered with fire detection, suppression and containment. Roof installation is permitted by NFPA 37 (contrast FM Global 5-32 2.6.4.3.1). ‖ pp. 37-13 to 37-18 (read 1 Nov 2026): 6.3.3 outdoor tanks follow NFPA 30 (not read ?); 6.3.4 roof tanks on noncombustible supports with spill containment for the largest tank; 6.3.5 rooms holding only tanks up to 5,000 L: walls, floor, ceiling rated at least 1 hour, 380 mm clearance round each tank, self-closing 1 h door if it opens inside, spill containment, ventilation keeping vapours at or below 25 % of the LFL and discharging outside with no recirculation; 6.3.6 over 5,000 L: 3 h walls, floor, ceiling, 3 h self-closing doors, curbs at openings; 6.5.5 overflows, vents, fuel piping and fuel tanks kept away from engine air intakes, exhaust piping, mufflers and filters; 6.6.3.3 fill pipe on an exterior wall 600 mm (24 in.) minimum from building openings at the same or a lower level; 6.7.1.1 tank vent pipe outside, at least 600 mm from any building opening at the same or lower level; 8.2.3.1 exhaust ends outside the structure where hot gases, sparks and combustion products discharge safely — no distance to windows or air intakes is given; 8.2.3.2 not directed toward combustible materials or structures; 8.3.1 unlisted exhaust pipes 457 mm from combustible materials; 8.3–8.4 refer to NFPA 211 (not read ?); 11.1 a fire risk evaluation covers each engine installation's design and layout. ‖ CHECK 2 (1 Nov 2026, fixed): not re-checkable (NFPA login); only internal fixes: stale '(not read ?)' removed, odd clause number flagged"
  },
  "nfpa75_2024": {
   "where_read": "not re-opened: NFPA Free Access needs a login; no public NFPA page checked; other copies not used per brief (data/raw/codes/nfpa855_2026_screens.pdf exists but was not used)",
@@ -1033,7 +1033,7 @@
    {
     "claim": "5.4.1 intakes incl. natural-ventilation openings, Table 5-1 or Appendix B",
     "verdict": "CONFIRMED",
-    "evidence": "'Outdoor air intakes (including openings that are required as part of a natural ventilation system)' ... 'a. the separation distance in Table 5-1 or b. the calculation methods in Normative Appendix B'",
+    "evidence": "outdoor air intakes, including openings needed for natural ventilation, ... meet either (a) the Table 5-1 separation distance or (b) the Normative Appendix B calculation methods",
     "fix": null
    },
    {
@@ -1051,11 +1051,11 @@
    {
     "claim": "B1.3 full L for Class 3/4, cooling tower, combustion exhaust from operable openings; half L otherwise",
     "verdict": "CONFIRMED",
-    "evidence": "'shall be half of the distance (L)' ... 'Class 3, Class 4, cooling tower, or combustion appliance/equipment exhaust ... equal to the distance (L)'; B1.3 says 'operable openings to occupiable spaces'",
+    "evidence": "other exhaust must be half the distance (L) ... Class 3, Class 4, cooling-tower and combustion appliance or equipment exhaust must be the full distance (L); B1.3 says 'operable openings to occupiable spaces'",
     "fix": null
    },
    {
-    "claim": "B1.3 'both those on the subject property and those on adjacent properties'",
+    "claim": "B1.3 applies to the subject property and adjacent properties equally",
     "verdict": "WRONG",
     "evidence": "phrase is in the B1 general paragraph (about outlets vs intakes and operable windows, skylights, doors), not in B1.3",
     "fix": "attribute to B1"
@@ -1063,13 +1063,13 @@
    {
     "claim": "B1.4 no vertical credit within 20 m",
     "verdict": "CONFIRMED",
-    "evidence": "'exhausts located less than 65 ft (20 m) vertically below outdoor air intakes or operable windows and doors' ... 'no credit may be taken for any vertical separation'",
+    "evidence": "for exhausts less than 65 ft (20 m) vertically below outdoor air intakes or operable windows and doors ... vertical separation earns no credit",
     "fix": null
    },
    {
     "claim": "B1.6 property line half L; exception Class 3/4/combustion ≥3 m above grade by a public way",
     "verdict": "CONFIRMED",
-    "evidence": "'half of the distance (L)'; 'no minimum separation is required if exhaust termination is at least 10 ft (3 m) above grade'",
+    "evidence": "half the distance (L); no minimum separation needed where the exhaust ends at least 10 ft (3 m) above grade",
     "fix": null
    },
    {
@@ -1081,7 +1081,7 @@
    {
     "claim": "6.1.4.2 MERV 11 where PM2.5 exceeded",
     "verdict": "CONFIRMED",
-    "evidence": "'a MERV of not less than 11' (or ISO ePM2.5)",
+    "evidence": "MERV 11 or higher (or ISO ePM2.5)",
     "fix": null
    },
    {
@@ -1093,6 +1093,6 @@
   ],
   "kind_change": null,
   "scope_flag": null,
-  "new_text": "STANDARD (US, benchmark; J.B. upload 1 Nov 2026): ANSI/ASHRAE Standard 62.1-2022, Ventilation and Acceptable Indoor Air Quality: 5.4.1 outdoor air intakes (incl. natural-ventilation openings) at least the Table 5-1 distance from each source, or per Normative Appendix B; Table 5-1 (p. 10): Class 2 exhaust/relief outlet 3 m; Class 3 5 m; Class 4 10 m; evaporative heat-rejection (cooling tower) exhaust 7.5 m, intake or basin 5 m; driveway, street or parking 1.5 m; garage entry or loading area 5 m; garbage or dumpsters 5 m; thoroughfare with high traffic 7.5 m; truck loading area or dock, bus parking/idling 7.5 m; vents, chimneys and flues from combustion appliances and equipment 5 m; surface below intake 0.3 m; 5.4.1.2 fuel-burning equipment distances follow NFPA 54, NFPA 31, NFPA 211 (not read ?); Appendix B (p. 40–41): B1 applies to operable windows, skylights and doors 'both those on the subject property and those on adjacent properties'; B1.3 Class 3, Class 4, cooling-tower and combustion exhaust must be the full distance L from operable openings to occupiable spaces (other exhaust half L); B1.4 no credit for vertical separation where exhaust is less than 20 m below an intake or window; B1.6 exhaust to property line half L, except Class 3/4 or combustion exhaust at least 3 m above grade beside a public way; Table B-1 Class 3 5 m, Class 4 10 m; 6.1.4.2 outdoor air filtered to MERV 11 or better where PM2.5 exceeds the national standard. The 2022 edition has no generator-specific row (the 'diesel generator' dilution factor is in a later addendum, see arch_ashrae621ag); this edition's combustion-flue row (5 m) is our closest reading for generator exhaust (?). ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; adjacent-property phrase moved to B1 (general), where it sits"
+  "new_text": "STANDARD (US, benchmark; J.B. upload 1 Nov 2026): ANSI/ASHRAE Standard 62.1-2022, Ventilation and Acceptable Indoor Air Quality: 5.4.1 outdoor air intakes (incl. natural-ventilation openings) at least the Table 5-1 distance from each source, or per Normative Appendix B; Table 5-1 (p. 10): Class 2 exhaust/relief outlet 3 m; Class 3 5 m; Class 4 10 m; evaporative heat-rejection (cooling tower) exhaust 7.5 m, intake or basin 5 m; driveway, street or parking 1.5 m; garage entry or loading area 5 m; garbage or dumpsters 5 m; thoroughfare with high traffic 7.5 m; truck loading area or dock, bus parking/idling 7.5 m; vents, chimneys and flues from combustion appliances and equipment 5 m; surface below intake 0.3 m; 5.4.1.2 fuel-burning equipment distances follow NFPA 54, NFPA 31, NFPA 211 (not read ?); Appendix B (p. 40–41): B1 applies to operable windows, skylights and doors on the subject property and on adjacent properties alike; B1.3 Class 3, Class 4, cooling-tower and combustion exhaust must be the full distance L from operable openings to occupiable spaces (other exhaust half L); B1.4 no credit for vertical separation where exhaust is less than 20 m below an intake or window; B1.6 exhaust to property line half L, except Class 3/4 or combustion exhaust at least 3 m above grade beside a public way; Table B-1 Class 3 5 m, Class 4 10 m; 6.1.4.2 outdoor air filtered to MERV 11 or better where PM2.5 exceeds the national standard. The 2022 edition has no generator-specific row (the diesel-generator dilution factor is in a later addendum, see arch_ashrae621ag); this edition's combustion-flue row (5 m) is our closest reading for generator exhaust (?). ‖ CHECK 2 (1 Nov 2026, fixed): all figures confirmed; adjacent-property phrase moved to B1 (general), where it sits"
  }
 }

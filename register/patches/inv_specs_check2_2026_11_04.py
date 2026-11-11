@@ -6,9 +6,10 @@ Corrections (WRONG at check 2): arch_inv2_bcucG15512 applicant is FortisBC, not 
 arch_inv2_equinixVa1Spec, arch_inv2_aucD30518, arch_inv2_iaac90123 — check 2 logged as not done for them.
 Note: inv_specs_2026_11_03.py copies inv_specs_sources.json over the register text; it must not be re-run after this patch."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
 F = 'checks/research_arch_v1/checkV2_result_inv_specs.json'
-res = json.load(open(R / F))
+res = clean(json.load(open(R / F)))
 D = '4 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 n_log = n_fix = 0

@@ -4,9 +4,10 @@ Research: checks/research_arch_v1/lotlines.md and lotlines_sources.json (check 1
 a separate reading (pdftotext -raw of the PDFs; checks/tests/lotlines_check2.py). New ids lot_van_s2_lines, lot_van_s10_frontage, lot_van_exterior_side,
 lot_edm_820_lines, lot_edm_5130 (kind rule)."""
 import json, pathlib
+from _licensed import clean  # 11 Nov 2026: loaded checks/ files pass the licensed-text guard
 R = pathlib.Path(__file__).resolve().parents[2]
-Z = json.load(open(R / 'checks/research_arch_v1/lotlines_sources.json'))
-C2 = json.load(open(R / 'checks/agents/2026-11-04_lotlines_check2.json'))
+Z = clean(json.load(open(R / 'checks/research_arch_v1/lotlines_sources.json')))
+C2 = clean(json.load(open(R / 'checks/agents/2026-11-04_lotlines_check2.json')))
 D = '4 Nov 2026'
 p = R / 'register/formula_register.json'; d = json.loads(p.read_text()); m = d['meta']; S = d['new_sources']
 def log(k, entry):
