@@ -275,3 +275,14 @@
 @media (max-width:900px){.f1t-bands{grid-template-columns:1fr}}
 @media (max-width:900px){.f1t-grid,.f1t-vars{grid-template-columns:repeat(2,minmax(0,1fr))}.f1t-top{grid-template-columns:1fr}.f1t-wrap{padding:24px 16px 48px}}
 @media (max-width:560px){.f1t-grid,.f1t-vars{grid-template-columns:1fr}.f1t-cap th,.f1t-cap td{display:block;width:auto;padding:4px 0}.f1t-cap tr{display:block;padding:10px 0;border-bottom:1px solid var(--f-hair)}.f1t-cap th,.f1t-cap td{border:0}.f1t-cap td:nth-child(2),.f1t-cap th{width:auto}}
+/* lot picker after Start (milestone 1, 12 Nov 2026) */
+.f1v-pick{max-width:560px;margin:56px auto;padding:0 16px;display:flex;flex-direction:column;gap:14px}
+.f1v-pick h2{font-weight:300;font-size:32px;margin:0}
+.f1v-pick .lead{color:var(--f-ink2);margin:0}
+.f1v-pick .f1v-city{align-self:flex-start}
+.f1v-pick input{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--f-rule);border-radius:4px;width:100%;box-sizing:border-box}
+.f1v-hits{list-style:none;margin:0;padding:0;border-top:1px solid var(--f-rule)}
+.f1v-hits li{border-bottom:1px solid var(--f-rule)}
+.f1v-hits button{background:none;border:0;width:100%;text-align:left;padding:10px 4px;font:inherit;color:var(--f-ink);cursor:pointer}
+.f1v-hits button:hover{background:#F4F3F0}
+.f1v-pick .sub{color:var(--f-mute);font-size:13px;margin:0}

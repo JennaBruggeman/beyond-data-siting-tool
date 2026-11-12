@@ -99,6 +99,15 @@ const SNSRC='Street names: Vancouver, the City’s Public streets file (HBLOCK, 
    (the cards' example: Arrange with the hub's programs); plan.js stays for other typologies */
 const hubOn=P=>!!(BD.hub&&P&&(P.boxes||[]).some(b=>b.id==='refuge')&&(!BD.arch||!BD.arch.typology||BD.arch.typology==='emergency_hub'));
 const PLC=new WeakMap();
+/* J.B. 12 Nov 2026: "doesn't fit" names the reason, from the size search's stopping rule (hub.js doesntFit: what stops each step of the program ladder) */
+function noFitWhy(P){ const PL=planOf(P), H=PL&&PL.hub, lim=(H&&H.doesntFit&&H.doesntFit.limiting)||[], fl=((PL&&PL.flags)||(H&&H.flags)||[]).filter(f=>/^Not built yet: the turned|^Doesn.t fit/.test(f)&&!/^Doesn.t fit here/.test(f));
+  return {lim, extra:fl, head:hubOn(P)?'The Emergency hub doesn’t fit on this lot.':'The tool has no layout for this lot.'}; }
+function noFitCard(P){ const w=noFitWhy(P);
+  const list=w.lim.length?`<ol class="f1c-nofit">${w.lim.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:`<p class="f1v-empty">The size search gave no reason (?).</p>`;
+  return {draw:`<div style="max-width:620px;margin:40px auto;text-align:left"><p class="f1v-empty" style="text-align:left;margin:0 0 10px">${esc(w.head)} ${w.lim.some(t=>/^step \d/.test(t))?'What stops it, at each step of the program ladder (the hub drops a part at each step and tries again):':'What stops it:'}</p>${list}${w.extra.map(t=>`<p class="f1v-empty" style="text-align:left">${esc(t)}</p>`).join('')}</div>`,
+    lead:w.head+' '+(w.lim.length?(/^step \d/.test(w.lim[w.lim.length-1])?'At the last step: ':'Why: ')+w.lim[w.lim.length-1].replace(/^step \d+ \([^)]*\): /,'')+'.':''),
+    rows:w.lim.map(t=>{ const m=/^step (\d+) \(([^)]*)\): (.*)$/.exec(t); return m?[`Step ${m[1]}: ${m[2]}`,esc(m[3])]:['Why',esc(t)]; }),
+    src:['Why it doesn’t fit: hub.js layout(), the program ladder (spec Part 1: full program; clinic to 5 exam rooms; no clinic; shelter merged into the refuge; shared loading by approval), each step’s first rule that fails.'],missing:[]}; }
 function planOf(P){ if(!P) return null; if(PLC.has(P)) return PLC.get(P); const v=hubOn(P)?BD.hub.build(P):(BD.plan?BD.plan.build(P):null); PLC.set(P,v); return v; }
 const TT=s=>s==='tight'?' · tight: check in design':s==='fail'?' (to fix)':'';   /* J.B. 9 Nov: within 0.5 m (or 5 %) of a limit */
 const tLine=H=>{ if(!H||!H.treach) return null; const T=H.treach, de=T.dead.filter(c=>!c.ok), wf=T.width.rows.filter(r=>r.sev==='fail'), dt=T.dead.filter(c=>c.status==='tight'), wt=T.width.rows.filter(r=>r.sev==='tight');
@@ -169,7 +178,7 @@ const stTitle=(pl,st)=>{ const blocks=[]; st.rooms.forEach(o=>{ const b=o.block=
 
 /* ======================= 14 Rooms ======================= */
 C.add(T,'Rooms',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return noFitCard(P);
   const {PL,mp,zs,stor}=pl; let nDoors=0, nExit=0; const roomRows=[];
   let groups='', titles='', sched='';
   stor.forEach(st=>{ const S=st.S; groups+=`<g data-z="${st.z}" style="${st.i?'display:none':''}">${pl.layer(st,'color')}</g>`; titles+=stTitle(pl,st);
@@ -224,7 +233,7 @@ function gapStrip(a,b){ const du=Math.max(b[0]-a[1],a[0]-b[1]), dv=Math.max(b[2]
 const sepHours=(R,id)=>{ const r=R.find(q=>q.id===id&&/fire separation from the data centre/i.test(q.t)&&!/\?/.test(q.t.replace(/\(F-2\)/,''))), m=r&&/(\d+(?:\.\d+)?) h fire separation/.exec(r.t); return m?+m[1]:null; };
 
 C.add(T,'Separations',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return noFitCard(P);
   const {mp,ox,zs,stor,pt,pr}=pl, R=BD.archTest.rules(P), f1=pl.f1;
   if(pl.PL.hub&&pl.PL.hub.rooms){ /* hub: 2 h where data-centre rooms (F-2) share a wall with the hub (A-2), 1 h hub to clinic (A-2 to D); clinic beside F-2: none (VBBL Table 3.1.3.1, spec rule 8) */
     const shE=(a,b)=>{ const e=0.03; if(Math.abs(a[1]-b[0])<e||Math.abs(a[0]-b[1])<e){ const at=Math.abs(a[1]-b[0])<e?a[1]:a[0], f=Math.max(a[2],b[2]), t=Math.min(a[3],b[3]); if(t-f>0.3) return [at,at,f,t]; }
@@ -274,7 +283,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
 
 /* ======================= 16 Exits ======================= */
 C.add(T,'Exits',{chip:CHIP,async build(x){
-  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return {draw:'<p class="f1v-empty">The tool has no plan for this lot (no layout placed).</p>'};
+  const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; await sgReady(x); const pl=planFor(x,P); if(!pl) return noFitCard(P);
   const {PL,mp,zs,stor,pt}=pl, f1=pl.f1, van=x.city==='van', RULES_GRID=(PL.rules&&PL.rules.grid&&PL.rules.grid.why)||'', clause=van?'VBBL 3.4.2.3':'NBC 3.4.2.3', reg=van?'register vbbl25_3423':'register arch_nbc3432';
   const ES=PL.exitSep||[]; let groups='', titles='', nExit=0, nDim=0; const dropped=[];
   if(PL.hub&&PL.hub.rooms){ const HB=PL.hub, TL=tLine(HB);
@@ -415,7 +424,8 @@ C.add(T,'Report',{chip:CHIP,async build(x){
   const pages=[...bi.filter(p=>p.t!=='Sources'),...todo.map(p=>Object.assign(p,{built:false})),...bi.filter(p=>p.t==='Sources')];
   const cnt={note:0,q:0,bad:0}; R.forEach(r=>{ cnt[r.sev]=(cnt[r.sev]||0)+1; });
   const sheet=p=>{ let body=`<div class="wh">${esc(p.w)}</div>`+'<div class="ln"></div>'.repeat(3);
-    if(p.t==='Plans'&&PL){ const S=PL.storeys[0]; body=`<div class="wh">${esc(p.w)}</div><div class="wh" style="color:${K.mute}">${PL.storeys.length} storeys, ${S.rooms.length} rooms on the ground storey</div>`+'<div class="ln"></div>'.repeat(2); }
+    if(p.t==='Plans'&&PL&&!(PL.storeys&&PL.storeys.length)) body=`<div class="wh">${esc(p.w)}</div><div class="wh" style="color:${K.mute}">the typology does not fit on this lot: no plans</div>`;
+    if(p.t==='Plans'&&PL&&PL.storeys&&PL.storeys.length){ const S=PL.storeys[0]; body=`<div class="wh">${esc(p.w)}</div><div class="wh" style="color:${K.mute}">${PL.storeys.length} storeys, ${S.rooms.length} rooms on the ground storey</div>`+'<div class="ln"></div>'.repeat(2); }
     if(p.t==='Code checks'){ body=`<div class="wh">${esc(p.w)}</div><div class="wh" style="color:${K.mute}">${R.length} rules for this layout: ${cnt.note||0} noted, ${cnt.q||0} with a ?, ${cnt.bad||0} to fix</div>`+'<div class="ln"></div>'.repeat(2); }
     return `<div class="${NS}pg${p.built?'':' todo'}"><div class="sheet"><div class="hd">Beyond Data · Architecture · ${esc(x.addr)}</div><div class="ti">${esc(p.t)}</div>${body}</div><div class="no"><span>${p.built?'built':''}</span>${p.built?'':'<b>not built yet</b>'}</div></div>`; };
   const draw=`<div class="${NS}wrap"><div class="${NS}pages">${pages.map(sheet).join('')}</div>

@@ -775,6 +775,18 @@ $('#q').addEventListener('keydown',e=>{ const items=[...document.querySelectorAl
 const ABBR={AVENUE:'AVE',STREET:'ST',WEST:'W',EAST:'E',NORTH:'N',SOUTH:'S',NORTHWEST:'NW',SOUTHWEST:'SW',NORTHEAST:'NE',SOUTHEAST:'SE',ROAD:'RD',DRIVE:'DR',BOULEVARD:'BLVD',CRESCENT:'CRES',PLACE:'PL',COURT:'CRT',TRAIL:'TR',LANE:'LN',WAY:'WY'};
 const normTok=t=>ABBR[t]||t;
 const toks=s=>s.toUpperCase().replace(/[.,#]/g,' ').split(/\s+/).filter(Boolean).map(normTok);
+/* 12 Nov 2026 (milestone 1, Start on any lot): the address search as a function the card viewer uses too (same matching as the search box) */
+async function addrHits(city,v){ const q=toks(v); const k=/^\d/.test(q[0])?q[0][0]:'x'; const rows=await shard(city,k);
+  const num=/^\d/.test(q[0])?q[0]:null, words=num?q.slice(1):q, seen=new Set();
+  const streetOK=t=>words.every(w=>t.some(x=>x.startsWith(w)));
+  const hits=[]; for(const r of rows){ if(!r._t) r._t=toks(r[0]); const t=r._t;
+    if(num&&t[0]!==num&&!(q.length===1&&t[0].startsWith(num))) continue;
+    if(streetOK(t)&&!seen.has(r[0])){ seen.add(r[0]); hits.push(r); if(hits.length>=8) break; } }
+  let near=false;
+  if(!hits.length&&num&&words.length){ const n=+num, all=[];
+    for(const k2 of '123456789'){ for(const r of await shard(city,k2)){ if(!r._t) r._t=toks(r[0]); if(streetOK(r._t.slice(1))&&!seen.has(r[0])){ seen.add(r[0]); all.push([Math.abs(+r._t[0]-n),r]); } } }
+    all.sort((a,b)=>a[0]-b[0]); for(const [,r] of all.slice(0,5)) hits.push(r); near=!!hits.length; }
+  return {hits,near}; }
 async function search(){
   const v=$('#q').value.trim(); const res=$('#res');
   if(v.length<3){ res.hidden=true; return; }
@@ -805,7 +817,7 @@ $('#c-van').onclick=()=>setCity('van'); $('#c-edm').onclick=()=>setCity('edm');
 window.addEventListener('resize',draw); if(window.ResizeObserver) new ResizeObserver(()=>draw()).observe(mapEl);
 window.addEventListener('load',draw); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) draw(); });
 
-window.BD={S,$,esc,fmt,getJSON,pathOf,draw,centroid,pip,area,statusOf,lowD,loadTile:(c,k)=>loadTile(c,k),card:()=>card(),select:sel=>select(sel),intro:()=>intro(),clearSel:()=>clearSel(),setCity:(c,k)=>setCity(c,k)};
+window.BD={S,$,esc,fmt,getJSON,addrHits,pathOf,draw,centroid,pip,area,statusOf,lowD,loadTile:(c,k)=>loadTile(c,k),card:()=>card(),select:sel=>select(sel),intro:()=>intro(),clearSel:()=>clearSel(),setCity:(c,k)=>setCity(c,k)};
 (async function init(){
   resize();
   const h=(location.hash||'').slice(1).match(/^(van|edm)-(m?\d+)_(m?\d+)-(.+)$/);

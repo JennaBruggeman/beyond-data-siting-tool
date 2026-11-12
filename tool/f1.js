@@ -41,7 +41,7 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
     <figure class="f1-heroimg"><img src="f1/img/hero.png" alt="339 1st Ave E, Vancouver, in the tool's 3-D view: the data centre's massing, cooling plant and generators among the neighbouring buildings"><figcaption class="f1-cap">339 1st Ave E, Vancouver. The tool's 3-D view: a data centre's massing, cooling plant and generators among its neighbours.</figcaption></figure></section>
    <div class="f1-lines"><p>Vancouver and Edmonton, built to the same depth.</p><p>Four templates, each a workflow that ends in its own report.</p><p>Every figure has a source, or a “?” where it doesn’t yet.</p><p>Trade-offs, not verdicts. Code limits block; options are flagged.</p></div>
    <section id="f1-work"><div class="f1-sechead"><h2>Templates</h2><span>Each template’s workflow shows one idea per card, then makes a report.</span></div>
-    ${TPL.map(t=>`<div class="f1-row"><h3>${t.name}</h3><div><p class="who">${esc(t.who)}</p><div class="ract"><button class="f1-btn" data-start="${t.id}"${t.tier?'':' disabled'}>Start</button><button class="f1-link" data-see="${t.id}">See the workflow</button><button class="f1-link" data-logic="${t.tab}">Logic diagram →</button></div>${t.tier?'':'<div class="note">Start opens when the Municipal cards are built.</div>'}</div>
+    ${TPL.map(t=>`<div class="f1-row"><h3>${t.name}</h3><div><p class="who">${esc(t.who)}</p><div class="ract"><button class="f1-btn" data-start="${t.id}">Start</button><button class="f1-link" data-see="${t.id}">See the workflow</button><button class="f1-link" data-logic="${t.tab}">Logic diagram →</button></div></div>
       <div class="meta">${t.cards.length} steps<br>report</div><img src="f1/img/${t.img}.png" alt="${t.name}: the tool's 3-D view of 339 1st Ave E, Vancouver" loading="lazy"></div>`).join('')}
     <div class="f1-typstrip"><span>8 typologies: data centres that share their building with the city</span><button data-go="typ">See the typologies →</button></div></section>
    <section class="f1-how" id="f1-how"><div><h2>How it works</h2><p>One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.</p><button class="f1-link" data-go="logic">Open the interactive logic diagram</button></div>${howSvg()}</section>
@@ -55,36 +55,49 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
     if(g.dataset.go==='logic'){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:'all'}); return; }
     if(g.dataset.go==='work'){ L.querySelector('#f1-work').scrollIntoView({behavior:'smooth'}); return; }
     if(g.dataset.go==='top'){ e.preventDefault(); L.scrollTo({top:0,behavior:'smooth'}); return; }
-    if(g.dataset.start){ const t=TPL.find(x=>x.id===g.dataset.start); if(!t||!t.tier) return; /* step 1: the cards are not built, so Start opens the old tool in this template, at its site picker */
-      if(BD.setTier) BD.setTier(t.tier); L.remove(); return; }
+    if(g.dataset.start){ const t=TPL.find(x=>x.id===g.dataset.start); if(!t) return; /* milestone 1 (J.B. 12 Nov 2026): Start opens the new cards on a lot the user picks (was the old tool) */
+      viewer(t.id,{pick:true}); return; }
     if(g.dataset.see) viewer(g.dataset.see); });
   L.querySelectorAll('a[href^="#f1-"]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const s=L.querySelector(a.getAttribute('href')); if(s) s.scrollIntoView({behavior:'smooth'}); }));
   if(BD.f1intro) BD.f1intro.first(); /* the intro plays by itself on the first visit only (f1intro.js; not under automation) */ }
 
 /* ---------- card viewer (STYLE.md §4 shell) ---------- */
-const V={t:null,i:0,city:'van',where:''};
-async function loadLot(city){ const S=LOTS[city]; V.where='…'; V.ready=false; draw();
+const V={t:null,i:0,city:'van',where:'',own:null,pick:false,pcity:'van',hits:[]};   /* own: the lot picked after Start {city,tile,id,label}; pick: the lot picker is showing */
+async function loadLot(city){ const S=V.own||LOTS[city]; V.where='…'; V.ready=false; draw();
   try{ if(BD.S.city!==city&&BD.setCity) await BD.setCity(city,true); await BD.select({city:S.city,tile:S.tile,id:S.id,quiet:true}); BD.modelReset(); const M=BD.model(), a=BD.S.sel&&BD.S.sel.a;
     V.where=[a&&a[0]?titleCase(a[0]):S.id, M&&M.Z&&(M.Z.zone||M.Z.key)].filter(Boolean).join(' · '); }
   catch(e){ V.where=S.id+' (lot not loaded: '+String(e.message||e).slice(0,60)+')'; }
   V.ready=true; draw(); }
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
-function viewer(id){ V.t=TPL.find(x=>x.id===id); V.i=0; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
+function viewer(id,opt){ V.t=TPL.find(x=>x.id===id); V.i=0; V.pick=!!(opt&&opt.pick); V.own=null; V.hits=[]; V.ready=false; let W=document.getElementById('f1v'); if(!W){ W=document.createElement('div'); W.id='f1v'; W.setAttribute('role','dialog'); W.setAttribute('aria-modal','true'); document.body.appendChild(W);
     W.addEventListener('click',e=>{ const fg=e.target.closest('[data-fig]'); if(fg&&BD.f1logic){ const c=V.t.cards[V.i], k=fg.dataset.k||'', ids=k?[k]:(BD.f1logic.figIds?BD.f1logic.figIds(c.t,V.t.tab,fg.dataset.fig||''):BD.f1logic.cardIds(c.t,V.t.tab));
         BD.f1logic.open({tab:V.t.tab,label:c.t+' · '+(fg.dataset.fig||''),ids,lot:V.where,sel:k||(ids.length===1?ids[0]:null),val:(fg.querySelector('.v')||fg).innerText.replace(/\s+/g,' ').trim()}); return; } /* F5 1(c), 8 Nov 2026; F6: a figure with one part opens at that part */
       const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
       if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t,V.t.tab),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
+      if(d.relot!=null){ V.pick=true; V.hits=[]; draw(); return; } if(d.pcity){ V.pcity=d.pcity; V.hits=[]; draw(); return; }
+      if(d.hit!=null){ const h=V.hits[+d.hit]; if(!h) return; V.own={city:V.pcity,tile:h[1],id:h[2],label:h[0]}; V.city=V.pcity; V.pick=false; V.i=0; draw(); loadLot(V.city); return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });
     document.addEventListener('keydown',e=>{ if(!document.getElementById('f1v')) return; if(e.key==='Escape') document.getElementById('f1v').remove(); if(e.key==='ArrowRight'&&V.i<V.t.cards.length-1){ V.i++; draw(); } if(e.key==='ArrowLeft'&&V.i>0){ V.i--; draw(); } }); }
-  draw(); loadLot(V.city); }
-function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return; const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap), spec=BD.f1cards&&BD.f1cards.get(t.id,c.t);
+  draw(); if(!V.pick) loadLot(V.city); }
+/* the lot picker (milestone 1): city, then an address from the City's records (the old tool's search, BD.addrHits) */
+function pickHtml(){ return `<div class="f1v-pick"><h2>Choose a lot</h2><p class="lead">${esc(V.t.name)}: pick the city, then type an address. The cards then run on that lot.</p>
+  <div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-pcity="${l.city}" aria-pressed="${l.city===V.pcity}">${l.name}</button>`).join('')}</div>
+  <input id="f1pick-q" type="search" placeholder="${V.pcity==='van'?'e.g. 339 1st Ave E':'e.g. 64 Airport Rd NW'}" autocomplete="off" aria-label="Address">
+  <ul class="f1v-hits" role="listbox">${V.hits.map((h,k)=>`<li><button data-hit="${k}">${esc(h[0])}</button></li>`).join('')}</ul>
+  ${V.near?'<p class="sub">No exact match in the City’s records; nearest on that street.</p>':''}${V.own?'':`<p class="sub">Or see the cards on an example lot: close this and use “See the workflow”.</p>`}</div>`; }
+function wirePick(W){ const q=W.querySelector('#f1pick-q'); if(!q) return; q.focus(); let tm=null;
+  q.addEventListener('input',()=>{ clearTimeout(tm); tm=setTimeout(async()=>{ const v=q.value.trim(); if(v.length<3||!BD.addrHits) return; const r=await BD.addrHits(V.pcity,v); V.hits=r.hits||[]; V.near=!!r.near;
+    const ul=W.querySelector('.f1v-hits'); if(ul) ul.innerHTML=V.hits.length?V.hits.map((h,k)=>`<li><button data-hit="${k}">${esc(h[0])}</button></li>`).join(''):`<li class="sub">No match in ${V.pcity==='van'?'Vancouver':'Edmonton'}: try the number and street.</li>`; },180); }); }
+function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return;
+  if(V.pick){ W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${V.t.name}</span><span class="f1v-where"></span><button class="f1v-x" data-x aria-label="Close">Close</button></header><div class="f1v-body">${pickHtml()}</div>`; wirePick(W); return; }
+  const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap), spec=BD.f1cards&&BD.f1cards.get(t.id,c.t);
   W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${t.name}</span>
      <nav class="f1v-chap" aria-label="Chapters">${t.chaps.map((h,k)=>`<button data-chap="${esc(h)}" class="${k<ci?'past':k===ci?'now':''}"${k===ci?' aria-current="step"':''}>${esc(h)}</button>`).join('')}</nav>
      <span class="f1v-where">${esc(V.where)}</span>
-     <div class="f1v-city" role="group" aria-label="Example lot">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>
+     ${V.own?`<button class="f1v-how" data-relot>Change lot</button>`:`<div class="f1v-city" role="group" aria-label="Example lot">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>`}
      <button class="f1v-how" data-how="all">How it works</button><button class="f1v-x" data-x aria-label="Close the cards">Close</button></header>
-   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips"><span class="f1v-chip">${spec?esc(spec.chip||'Example lot · read-only'):'Preview · not built yet'}</span></div>
+   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips"><span class="f1v-chip">${spec?esc(V.own?'Your lot':(spec.chip||'Example lot · read-only')):'Preview · not built yet'}</span></div>
      <div class="f1v-draw">${spec?'<p class="f1v-empty">Drawing…</p>':''}${spec?'':`<p class="f1v-empty">This card’s drawing and figures are built in ${STEPNAME[t.step]} of the site build. It will read the example lot above and what the cards before it chose.</p>`}</div>
      <button class="f1v-how" data-how="card">This card in the interactive logic diagram</button><details class="f1v-src"><summary>Sources and assumptions</summary><p>Nothing on this card yet. Every figure will come from the tool, with its source here, or show as a red “?”.</p></details></main>
     <aside class="f1v-panel"><div class="chap">${esc(c.chap)}</div><h2>${esc(c.t)}</h2><div class="f1c-body">${spec?'':`<p class="lead">${t.name} · card ${V.i+1} of ${n}.</p>`}</div><div class="grow"></div>
