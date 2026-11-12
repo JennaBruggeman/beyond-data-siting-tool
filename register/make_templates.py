@@ -18,6 +18,7 @@ MUNI = {'parcel', 'zone', 'zoning_status', 'rezoning_price', 'envelope', 'floor_
 T = {
  # inputs
  'parcel': (R, 'host city neighbours', 'where: the one thing a resident always gives'),
+ 'resident_facilities': (R, 'neighbours public', 'the data centres on record, one picked at a time (Resident step 0, J.B. 12 Nov 2026)'),
  # 8 Nov 2026: Municipal and Architecture (Cowork's reply on municipal_logic_parts.md)
  'loading_need': (C, 'city neighbours', 'how many loading spaces the zone asks for'),
  'roof_equipment_rule': (C, 'city neighbours', 'what may stand on the roof above the height limit'),

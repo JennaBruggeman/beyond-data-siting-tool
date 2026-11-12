@@ -1,0 +1,1692 @@
+{
+ "_about": "Data-centre inventory for the Resident template (Resident step 0, J.B. 12 Nov 2026), from checks/research_arch_v1/inv_van.md and inv_edm.md (research 2–3 Nov 2026, check 2) and the main chat’s 12 Nov addresses and floors. Built by checks/tests/inventory_load.py; register part resident_facilities. Cells as the inventory words them, with their labels; type, one size figure, floors and placement added as marked there.",
+ "van": [
+  {
+   "id": "van1",
+   "n": 1,
+   "city": "van",
+   "name": "VAN1",
+   "operator": "Cologix",
+   "addrText": "555 W Hastings (Harbour Centre), floor 9 unit 985 (GOV BP-2018-06132, operator not named; tied to VAN1 by 'dry cooler (985)' on the Cologix page, our reading)",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cologixVan1Web, read 2 Nov 2026)",
+   "building": "floors in a 28-storey mixed tower",
+   "sizeText": "site capacity 520 kW (web) vs 400 kW (Apr 2026 sheet) ?; 5,000 ft², 2 suites (OC)",
+   "cooling": "perimeter CRAC + glycol in-row units, rooftop dry coolers, N+1 chilled water, 50 ton; 13.8 kV dual feeders; generators: not on web page, 'N/N+1 Generator/UPS' on Apr 2026 sheet (OC cologixVAN1_2026)",
+   "heat": "none claimed",
+   "serves": "colocation, carrier hotel, Azure ExpressRoute (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     9
+    ],
+    "text": "floor 9, unit 985 (GOV BP-2018-06132; the permit names no operator, tied to VAN1 by “dry cooler (985)”: our reading)",
+    "src": [
+     "vanPermits"
+    ]
+   },
+   "size": {
+    "mw": [
+     0.4,
+     0.52
+    ],
+    "scope": "site capacity",
+    "label": "operator claim: 400 kW on the Apr 2026 sheet, 520 kW on the web page",
+    "src": [
+     "arch_inv_cologixVan1Web"
+    ]
+   },
+   "src": [
+    "arch_inv_cologixVan1Web",
+    "cologixVAN1_2026",
+    "vanPermits"
+   ],
+   "inMap": true,
+   "addr": "555 Hastings St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59013407"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van2",
+   "n": 2,
+   "city": "van",
+   "name": "VAN5",
+   "operator": "Cologix",
+   "addrText": "555 W Hastings (Harbour Centre)",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cologixVan5Web; arch_inv_cologixBrochure2026, Mar 2026)",
+   "building": "floors in a tower",
+   "sizeText": "1.6 MW, 10.8K–12.7K ft² (OC; page inconsistent); \"Site Capacity 6.23 MW\" (scope ?)",
+   "cooling": "glycol DX, rooftop dry coolers, N+1 (OC)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "size": {
+    "mw": [
+     1.6,
+     1.6
+    ],
+    "scope": "capacity",
+    "label": "operator claim (the “6.23 MW site capacity” may be the whole building: not used)",
+    "src": [
+     "arch_inv_cologixBrochure2026",
+     "arch_inv_cologixVan5Web"
+    ]
+   },
+   "src": [
+    "arch_inv_cologixBrochure2026",
+    "arch_inv_cologixVan5Web"
+   ],
+   "inMap": true,
+   "addr": "555 Hastings St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59013407"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van3",
+   "n": 3,
+   "city": "van",
+   "name": "VAN-2",
+   "operator": "eStruxture",
+   "addrText": "555 W Hastings, Suite 2605",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_estruxVanIndex, 2 Nov 2026)",
+   "building": "4 halls on 2 floors of a 28-floor multi-tenant building (OC arch_sec2_estruxVan2)",
+   "sizeText": "2.14 MW critical IT; 14,500 ft² (OC)",
+   "cooling": "glycol loop, rooftop dry coolers + N+1 chillers and cooling towers (OC, sources/01)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     26
+    ],
+    "text": "suite 2605, floor 26 (OC); the operator says 2 floors: the second is not published",
+    "src": [
+     "arch_sec2_estruxVan2"
+    ]
+   },
+   "size": {
+    "mw": [
+     2.14,
+     2.14
+    ],
+    "scope": "critical IT",
+    "label": "operator claim",
+    "src": [
+     "arch_inv_estruxVanIndex"
+    ]
+   },
+   "src": [
+    "arch_inv_estruxVanIndex",
+    "arch_sec2_estruxVan2"
+   ],
+   "inMap": true,
+   "addr": "555 Hastings St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59013407"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van4",
+   "n": 4,
+   "city": "van",
+   "name": "Vancouver Data Centre",
+   "operator": "Canadian Web Hosting",
+   "addrText": "555 W Hastings",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cwhColo, 2 Nov 2026)",
+   "building": "in a tower",
+   "sizeText": "?",
+   "cooling": "UPS + diesel generators (OC)",
+   "heat": "?",
+   "serves": "hosting / colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "src": [
+    "arch_inv_cwhColo"
+   ],
+   "inMap": true,
+   "addr": "555 Hastings St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59013407"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van5",
+   "n": 5,
+   "city": "van",
+   "name": "Spencer Building Carrier Hotel",
+   "operator": "operator 'Spencer Building Carrier Hotel (SBCH)', owner 'Polaris Realty (Canada) Limited' (BRK arch_inv_jllSpencer2023; permits name neither)",
+   "addrText": "515 W Hastings (Harbour Centre East Tower)",
+   "status": "permitted",
+   "statusText": "permitted: BP-2022-05512 issued 14 Apr 2023; generator permit BP-2024-01976, 1 Oct 2024 (GOV sources/11); BRK: \"Anticipated delivery Q4 2024\" (©2023); operating today ?",
+   "building": "floors 6, 8, 9 of a heritage tower (storey count ? — '8-storey' conflicts with a floor 9), Office to Bulk Data Storage (F2); SFU campus on floors 2, 3, 7 (GOV)",
+   "sizeText": "5 MW critical (2.5 MW × 2 halls), ±23,400 ft², ±12,400 ft² white space (BRK arch_inv_jllSpencer2023)",
+   "cooling": "2 × 4 MW generators (2N), air-cooled chillers N+1, 10+ MW utility (BRK); generators moved to a new L8 roof well, chiller platform widened ~93 to ~129 ft (GOV)",
+   "heat": "none claimed",
+   "serves": "carrier hotel / colocation, marketed 'Available for Lease' (BRK)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     6,
+     8,
+     9
+    ],
+    "text": "floors 6, 8, 9 (GOV permit BP-2022-05512; BRK)",
+    "src": [
+     "vanPermits",
+     "arch_inv_jllSpencer2023"
+    ]
+   },
+   "size": {
+    "mw": [
+     5,
+     5
+    ],
+    "scope": "critical IT",
+    "label": "broker claim (2 halls × 2.5 MW)",
+    "src": [
+     "arch_inv_jllSpencer2023"
+    ]
+   },
+   "src": [
+    "arch_inv_jllSpencer2023",
+    "vanPermits"
+   ],
+   "inMap": true,
+   "addr": "515 Hastings St W",
+   "parcel": {
+    "tile": "-1_2",
+    "id": "59011894"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van6",
+   "n": 6,
+   "city": "van",
+   "name": "VAN2",
+   "operator": "Cologix",
+   "addrText": "1050 W Pender",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cologixVan2Web, 2 Nov 2026)",
+   "building": "2nd floor of a 22-storey office tower (OC cologixVAN2fr)",
+   "sizeText": "site capacity 2 MW; 15K ft² (OC)",
+   "cooling": "free-cooling DX CRAC with airside economizers, 180 ton N+1; N+1 diesel generators, ≥24 h fuel; 2 × 750 kW UPS; 12.5 kV (OC cologixVAN2fr); GOV: extra generator in basement room 2017, 5 rooftop condensers 2018 (BP-2016-04613, DB-2017-05827)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     2
+    ],
+    "text": "2nd floor (OC spec sheet)",
+    "src": [
+     "cologixVAN2fr"
+    ]
+   },
+   "size": {
+    "mw": [
+     2,
+     2
+    ],
+    "scope": "site capacity",
+    "label": "operator claim",
+    "src": [
+     "arch_inv_cologixVan2Web"
+    ]
+   },
+   "src": [
+    "arch_inv_cologixVan2Web",
+    "cologixVAN2fr",
+    "vanPermits"
+   ],
+   "inMap": true,
+   "addr": "1050 Pender St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59211964"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van7",
+   "n": 7,
+   "city": "van",
+   "name": "VAN4",
+   "operator": "Cologix",
+   "addrText": "175 W Cordova",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cologixVan4Web; acquired 3 Nov 2021, arch_inv_cologixVan4Pr2021)",
+   "building": "whole leased 4-storey heritage concrete office building, single tenant (OC cologixVAN4_2026)",
+   "sizeText": "site capacity 6.5 MW (web 2 Nov 2026; earlier read gave 4 MW ?); 40K / 58K / 68K ft² (OC, inconsistent)",
+   "cooling": "pumped refrigerant + air-cooled chilled water (OC); GOV: two 4,000-gal fuel tanks in basement, two rooftop generators, load bank, condensers and screen, BC Hydro room (BP-2021-06112, $28.5 M, Jun 2022); new air-cooled chillers, roof fuel tank removed (DP-2022-00689)",
+   "heat": "none claimed",
+   "serves": "colocation, interconnection (OC); VANIX (OC vanixFacilities)",
+   "opened": "? (pre-2021 as Zayo/Unitel ?)",
+   "typeRaw": "b",
+   "type": "standalone",
+   "size": {
+    "mw": [
+     4,
+     6.5
+    ],
+    "scope": "site capacity",
+    "label": "operator claim: 4 MW (2021 release) and 6.5 MW (web page, 2 Nov 2026) differ",
+    "src": [
+     "arch_inv_cologixVan4Pr2021",
+     "arch_inv_cologixVan4Web"
+    ]
+   },
+   "src": [
+    "arch_inv_cologixVan4Pr2021",
+    "arch_inv_cologixVan4Web",
+    "cologixVAN4_2026",
+    "vanPermits",
+    "vanixFacilities"
+   ],
+   "inMap": true,
+   "addr": "175 Cordova St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "58915707"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van8",
+   "n": 8,
+   "city": "van",
+   "name": "Vancouver Vault (VAN1)",
+   "operator": "Hut 8",
+   "addrText": "900 W Hastings (services page and FAQ) or 1700-666 Burrard (vault page) ?",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_hut8VaultWeb, 2 Nov 2026)",
+   "building": "former Bank of Canada vault, \"seismically engineered\" (OC); TeraGo \"Data Center\" in 2 basement units, 900 W Hastings, 2018 (GOV BP-2018-03485)",
+   "sizeText": "1 MW design; 693 kW IT; 6,210 ft², 4,155 ft² white space (OC)",
+   "cooling": "5 × 50 t chillers, chilled-water loop, outdoor chiller; 560 kW UPS; one 600 kW generator, >48 h; Tier I (OC)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     "basement"
+    ],
+    "text": "2 basement units (GOV BP-2018-03485, TeraGo “Data Center”)",
+    "src": [
+     "vanPermits",
+     "arch_inv_hut8VaultWeb"
+    ]
+   },
+   "size": {
+    "mw": [
+     0.693,
+     0.693
+    ],
+    "scope": "IT",
+    "label": "operator claim (1 MW design)",
+    "src": [
+     "arch_inv_hut8VaultWeb"
+    ]
+   },
+   "src": [
+    "arch_inv_hut8VaultWeb",
+    "vanPermits"
+   ],
+   "inMap": true,
+   "addr": "900 W Hastings St",
+   "addrNote": "address from the operator’s page and FAQ (OC arch_inv_hut8VaultWeb; main chat 12 Nov 2026: the vault page’s 1700-666 Burrard is not repeated on the current page, dropped)",
+   "parcel": {
+    "tile": "0_2",
+    "id": "59012094"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van9",
+   "n": 9,
+   "city": "van",
+   "name": "Vancouver colocation",
+   "operator": "Hut 8 (VAN2 on services page, VAN1 on its own page ?)",
+   "addrText": "701 W Georgia (services page) or 900 W Hastings (facility FAQ) ?",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_hut8ColoWeb, 2 Nov 2026)",
+   "building": "downtown office building ?",
+   "sizeText": "0.6 MW design; 329 kW IT; 900 ft² (OC, implausible ratio)",
+   "cooling": "118 t CRAC N+1; 2 × 900 kW UPS (2N); 435 kW from 2 generators, >24 h; Tier I (FAQ) vs 'Tier I & Tier III-grade' (body) (OC)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "size": {
+    "mw": [
+     0.329,
+     0.329
+    ],
+    "scope": "IT",
+    "label": "operator claim (0.6 MW design)",
+    "src": [
+     "arch_inv_hut8ColoWeb"
+    ]
+   },
+   "src": [
+    "arch_inv_hut8ColoWeb"
+   ],
+   "inMap": true,
+   "addr": "701 W Georgia St",
+   "addrNote": "address from a directory listing (DIR arch_inv3_dcmapRackforce; the operator’s current page gives none; main chat 12 Nov 2026)",
+   "parcel": {
+    "tile": "-1_2",
+    "id": "60011596"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van10",
+   "n": 10,
+   "city": "van",
+   "name": "VAN-1",
+   "operator": "eStruxture",
+   "addrText": "55 E 7th Ave (Mount Pleasant)",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_estruxVan1Web, 2 Nov 2026)",
+   "building": "whole 3-storey concrete building, \"12\" thick seismic shear wall\" (OC); GOV BP-2019-00595: part of 2nd floor office to radio communications, new rooftop chiller",
+   "sizeText": "2.4 MW; 10,000 ft² total, 7,500 ft² cabinet; up to 30 kW/cabinet (OC estruxtureVAN1ds; 30 kW also on web page)",
+   "cooling": "rear-door coolers; 40 t + N+1 250 t loops; free cooling \"8+ months\"; dedicated 2.5 MVA unit substation; diesel 24 h (web) / ≥28 h (sheet) (OC)",
+   "heat": "none claimed",
+   "serves": "colocation (OC)",
+   "opened": "? (Backbone Data Vault until 2019, GOV)",
+   "typeRaw": "b",
+   "type": "standalone",
+   "size": {
+    "mw": [
+     2.4,
+     2.4
+    ],
+    "scope": "critical IT",
+    "label": "spec sheet (operator)",
+    "src": [
+     "estruxtureVAN1ds"
+    ]
+   },
+   "src": [
+    "arch_inv_estruxVan1Web",
+    "estruxtureVAN1ds",
+    "vanPermits"
+   ],
+   "inMap": false,
+   "addr": null,
+   "addrNote": "address 55 E 7th Ave is not in the City’s address records the tool searches (?): listed, not placed",
+   "parcel": null
+  },
+  {
+   "id": "van11",
+   "n": 11,
+   "city": "van",
+   "name": "Uniserve VAN-1",
+   "operator": "Uniserve",
+   "addrText": "333 Terminal Ave (Suite 209 per filings, sources/01)",
+   "status": "operating",
+   "statusText": "operating ? (OC arch_inv_uniserve2016: $500k upgrade, Nov 2016, 'outside of the city power grid' claim ?; OBS fieldJB 11 Oct 2026)",
+   "building": "suite in a multi-tenant mid-rise (schools, studios, MCFD) (OBS)",
+   "sizeText": "?",
+   "cooling": "Cummins generator in a parkade stall; 2 Modapower enclosures in a cage between 333 and 369 (OBS)",
+   "heat": "?",
+   "serves": "ISP / colocation ?",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "src": [
+    "arch_inv_uniserve2016",
+    "fieldJB"
+   ],
+   "inMap": true,
+   "addr": "333 Terminal Ave",
+   "parcel": {
+    "tile": "1_1",
+    "id": "63019333"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van12",
+   "n": 12,
+   "city": "van",
+   "name": "Uniserve VAN-2",
+   "operator": "Uniserve",
+   "addrText": "369 Terminal Ave",
+   "status": "proposed",
+   "statusText": "proposed / fit-out: Offer to Lease 3 Sep 2025 (OC arch_inv_uniserveOtl), \"immediately advance construction\" (OC arch_inv_uniserve2mw, 15 Sep 2025); permit not found ?",
+   "building": "space in an existing building ?",
+   "sizeText": "2 MW initial; 10,000 ft²; $12 M budget, $2 M landlord incentives (OC)",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "enterprise, AI, sovereign cloud (OC)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "size": {
+    "mw": [
+     2,
+     2
+    ],
+    "scope": "initial",
+    "label": "operator claim",
+    "src": [
+     "arch_inv_uniserve2mw",
+     "arch_inv_uniserveOtl"
+    ]
+   },
+   "src": [
+    "arch_inv_uniserve2mw",
+    "arch_inv_uniserveOtl"
+   ],
+   "inMap": true,
+   "addr": "369 Terminal Ave",
+   "parcel": {
+    "tile": "1_1",
+    "id": "63019469"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van13",
+   "n": 13,
+   "city": "van",
+   "name": "Atlas Cloud",
+   "operator": "Atlas Cloud Enterprises",
+   "addrText": "308 E 5th Ave",
+   "status": "?",
+   "statusText": "? (16 racks claimed; listing inactive; no permits 2017–26, sources/01)",
+   "building": "leased former packing plant (OC atlasCloud)",
+   "sizeText": "16 racks (OC)",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "colocation; crypto mining in 2018 (OC CSE)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "atlasCloud"
+   ],
+   "inMap": true,
+   "addr": "308 5Th Ave E",
+   "parcel": {
+    "tile": "1_1",
+    "id": "64319806"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van14",
+   "n": 14,
+   "city": "van",
+   "name": "VAN3",
+   "operator": "Cologix",
+   "addrText": "2828 Natal St",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cologixVan3Web, 2 Nov 2026; OBS tourVAN3)",
+   "building": "converted 2-storey industrial building behind a fence (OBS)",
+   "sizeText": "site capacity 5 MW; 42K ft² (OC)",
+   "cooling": "hot-aisle containment, N+1, Tier III (OC); guide: outside-air free cooling + magnetic-bearing chillers, 2N (guide claim, tourVAN3)",
+   "heat": "none claimed",
+   "serves": "multi-tenant colocation, VANIX (OC)",
+   "opened": null,
+   "typeRaw": "c",
+   "type": "standalone",
+   "fenced": {
+    "text": "J.B. saw a fence and gate",
+    "src": [
+     "fieldJB",
+     "tourVAN3"
+    ]
+   },
+   "size": {
+    "mw": [
+     5,
+     5
+    ],
+    "scope": "site capacity",
+    "label": "operator claim",
+    "src": [
+     "arch_inv_cologixVan3Web",
+     "tourVAN3"
+    ]
+   },
+   "src": [
+    "arch_inv_cologixVan3Web",
+    "fieldJB",
+    "tourVAN3"
+   ],
+   "inMap": true,
+   "addr": "2828 Natal St",
+   "parcel": {
+    "tile": "4_0",
+    "id": "30366446"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van15",
+   "n": 15,
+   "city": "van",
+   "name": "3448 Cornett Rd (formerly 2772 Natal)",
+   "operator": "operator not named ?",
+   "addrText": "3448 Cornett Rd",
+   "status": "approved",
+   "statusText": "approved: DP-2024-00980 issued 25 Feb 2026 (GOV arch_inv_vanDp3448Cornett); construction ?",
+   "building": "new purpose-built 3-storey, rooftop mechanical, 20.7 m (GOV)",
+   "sizeText": "4,620 m² (49,720 ft²), FSR 1.27; MW ?",
+   "cooling": "rooftop mechanical (GOV); rest ?",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "c",
+   "type": "standalone",
+   "src": [
+    "arch_inv_vanDp3448Cornett"
+   ],
+   "inMap": true,
+   "addr": "3448 Cornett Rd (City records: 2772 Natal St)",
+   "addrNote": "placed at 2772 Natal St, the address the inventory gives as its former one",
+   "parcel": {
+    "tile": "4_0",
+    "id": "66430302"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van16",
+   "n": 16,
+   "city": "van",
+   "name": "3438 Lougheed Hwy",
+   "operator": "operator not named ?",
+   "addrText": "3438 Lougheed Hwy",
+   "status": "approved",
+   "statusText": "approved: DP-2026-00565, 5 Oct 2026, with conditions (GOV arch_inv_vanDp3438Lougheed)",
+   "building": "existing industrial building, bakery to Bulk Data Storage (unit 100) + office (unit 200)",
+   "sizeText": "30,490 ft² total; MW ?",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_vanDp3438Lougheed"
+   ],
+   "inMap": true,
+   "addr": "3438 Lougheed Hwy",
+   "parcel": {
+    "tile": "4_0",
+    "id": "65030256"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van17",
+   "n": 17,
+   "city": "van",
+   "name": "M3, 111 E 5th Ave + 2060 Quebec St",
+   "operator": "TELUS (OC) / Westbank applicant (GOV); 'owned by Westbank and a partner' (Allied, 18 Aug 2025, developer claim)",
+   "addrText": "111 E 5th Ave",
+   "status": "proposed",
+   "statusText": "proposed: pulled from 23 Jul 2026 hearing, referred back to staff 21 Jul 2026; engagement only 'after the election', no new dates posted (GOV arch_inv_van111E5Syc); TELUS: \"open at the end of 2026\" (OC arch_inv_telusMay2026) — these conflict ?",
+   "building": "existing 3-storey office, converted (year built ?); 3 above + 2 below grade (GOV van_rts19744)",
+   "sizeText": "up to 40 MW (applicant, GOV rr1 p.17); site 2,767.3 m²; 8,305 m² above grade (draft CD-1 by-law cap, City; below grade ?) [was 4.2 FSR × site = 11,622.6 m², our arithmetic, replaced 4 Nov 2026 per J.B.]; 20 m (GOV)",
+   "cooling": "closed-loop liquid cooling (OC, cluster-wide); rooftop mechanical with screening; BC Hydro primary service (GOV)",
+   "heat": "NEU delivery \"a material condition of the proposed use\"; City/NEU pays nothing (GOV rr1 cond. 1.11); 150,000-home equivalent, cluster-wide (OC)",
+   "serves": "AI / sovereign compute (OC)",
+   "opened": "end 2026 (OC) ?",
+   "typeRaw": "b",
+   "type": "standalone",
+   "size": {
+    "mw": [
+     40,
+     40
+    ],
+    "scope": "up to",
+    "label": "applicant figure in a City report (GOV)",
+    "src": [
+     "arch_inv_telusMay2026",
+     "arch_inv_van111E5Syc"
+    ]
+   },
+   "src": [
+    "arch_inv_telusMay2026",
+    "arch_inv_van111E5Syc",
+    "van_rts19744"
+   ],
+   "inMap": true,
+   "addr": "111 5Th Ave E",
+   "parcel": {
+    "tile": "0_1",
+    "id": "64418603"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van18",
+   "n": 18,
+   "city": "van",
+   "name": "150 W Georgia (Creative Energy site)",
+   "operator": "TELUS (OC); applicant and owner Creative Energy Vancouver Platforms Inc. (GOV rr6); Westbank project lead (GOV SYC)",
+   "addrText": "120–150 W Georgia, 720–770 Beatty, 701 Expo Blvd",
+   "status": "use approved",
+   "statusText": "use approved: Bulk Data Storage added by Council 28 Sep 2023 (GOV arch_inv_van150WGeorgiaSyc, arch_inv_vanRr6_2023); \"proposed Telus Data Centre\" (GOV arch_open_vanMotionDigital, 15 Jul 2026); \"online in 2029\" (OC)",
+   "building": "on the Creative Energy steam-plant site; data storage allowed 'throughout the building' (GOV rr6 p. 2); form ?",
+   "sizeText": "sub-area A 59,233 m², B 3,961 m² (whole CD-1, not DC only); heights 63.4 m / 28.7 m (GOV); MW ?",
+   "cooling": "closed-loop liquid (OC, cluster-wide)",
+   "heat": "Creative Energy synergy (GOV rr6 p.5); downtown district energy (OC)",
+   "serves": "AI / sovereign compute (OC)",
+   "opened": "2029 (OC)",
+   "typeRaw": "a ? (c if a stand-alone block)",
+   "type": "?",
+   "src": [
+    "arch_inv_van150WGeorgiaSyc",
+    "arch_inv_vanRr6_2023",
+    "arch_open_vanMotionDigital"
+   ],
+   "inMap": true,
+   "addr": "150 Georgia St W",
+   "parcel": {
+    "tile": "0_2",
+    "id": "16259997"
+   },
+   "placed": "placed by address in the City’s records (our method)"
+  },
+  {
+   "id": "van19",
+   "n": 19,
+   "city": "van",
+   "name": "TELUS Data Centre (next to TELUS Garden)",
+   "operator": "TELUS",
+   "addrText": "? (building next to TELUS Garden, 510 W Georgia area ?)",
+   "status": "operating",
+   "statusText": "operating in 2013 (GOV arch_ho_bcucC113); now ?",
+   "building": "?",
+   "sizeText": "?",
+   "cooling": "?",
+   "heat": "1,400 kW year-round base heat to the TELUS Garden thermal system, at no charge (GOV BCUC C-1-13, applicant statement)",
+   "serves": "telecom / enterprise ?",
+   "opened": null,
+   "typeRaw": "a ?",
+   "type": "?",
+   "src": [
+    "arch_ho_bcucC113"
+   ],
+   "inMap": false,
+   "addr": null,
+   "addrNote": "address not confirmed: the BCUC order puts the data centre “in a building adjacent to the Project site” (the TELUS Garden block); no source names the building (main chat 12 Nov 2026)",
+   "parcel": null
+  },
+  {
+   "id": "van20",
+   "n": 20,
+   "city": "van",
+   "name": "VAN-3",
+   "operator": "eStruxture",
+   "addrText": "4590 Canada Way, Burnaby",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_estruxVanIndex); DC build 2023–24 (OC arch_inv_estruxVan3Sheet)",
+   "building": "converted 1974 single-storey warehouse + 2-storey office on 83,000 ft² land; 'Perimeter secured by 10’ fence' (OC)",
+   "sizeText": "10 MW total, 2 data halls (IT not stated); 55,000 ft² building, 25,000 ft² cabinet (OC)",
+   "cooling": "raised floor, hot/cold aisle; 25 kV BC Hydro, single entrance; generators N+1 / A+B+C, 48 h at full load (OC)",
+   "heat": "none claimed",
+   "serves": "colocation, shared and dedicated suites (OC)",
+   "opened": "2024 ?",
+   "typeRaw": "c",
+   "type": "standalone",
+   "fenced": {
+    "text": "“Perimeter secured by 10’ fence” (operator claim)",
+    "src": [
+     "arch_inv_estruxVan3Sheet"
+    ]
+   },
+   "size": {
+    "mw": [
+     10,
+     10
+    ],
+    "scope": "total",
+    "label": "spec sheet (operator); the web page says 13 MW",
+    "src": [
+     "arch_inv_estruxVan3Sheet",
+     "arch_inv_estruxVanIndex"
+    ]
+   },
+   "src": [
+    "arch_inv_estruxVan3Sheet",
+    "arch_inv_estruxVanIndex"
+   ],
+   "inMap": false,
+   "where": "Burnaby",
+   "addr": "4590 Canada Way, Burnaby"
+  },
+  {
+   "id": "van21",
+   "n": 21,
+   "city": "van",
+   "name": "VA1",
+   "operator": "Equinix",
+   "addrText": "4185 Still Creek Dr, Unit B, Burnaby",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_equinixVa1, 2 Nov 2026)",
+   "building": "unit in a 2-storey reinforced-concrete building (OC)",
+   "sizeText": "343 m² (3,692 ft²) colocation (OC)",
+   "cooling": "cooling N+1, generators N+1 (autonomy \"Unknown\"), UPS N (OC)",
+   "heat": "none claimed",
+   "serves": "colocation, interconnection (OC)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_equinixVa1"
+   ],
+   "inMap": false,
+   "where": "Burnaby",
+   "addr": "4185 Still Creek Dr, Unit B, Burnaby"
+  },
+  {
+   "id": "van22",
+   "n": 22,
+   "city": "van",
+   "name": "SFU Water Tower Building Data Centre (Cedar)",
+   "operator": "SFU",
+   "addrText": "Burnaby Mountain campus (street ?)",
+   "status": "operating",
+   "statusText": "operating 2017 (ENG arch_inv_snaSfuWtb); now ?",
+   "building": "renovated former BC Hydro control centre (UTILITY arch_inv_bchSfu2019)",
+   "sizeText": "2,044 m²; 2.0 MVA utility, 30 kW/cabinet (ENG)",
+   "cooling": "2 × 1 MVA diesel generators (ENG); cooling ratio 1.07 (UTILITY)",
+   "heat": "not stated",
+   "serves": "university research computing",
+   "opened": "2017",
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_bchSfu2019",
+    "arch_inv_snaSfuWtb"
+   ],
+   "inMap": false,
+   "where": "Burnaby",
+   "addr": "Burnaby Mountain campus"
+  },
+  {
+   "id": "van23",
+   "n": 23,
+   "city": "van",
+   "name": "6700 Southridge Dr",
+   "operator": "TransLink",
+   "addrText": "6700 Southridge Dr, Burnaby",
+   "status": "rezoning",
+   "statusText": "rezoning recommended to First Reading 8 Jun / Public Hearing 23 Jun 2020 (GOV staff report arch_inv_burnabyRz1926, Council 25 May 2020); adoption and build ?",
+   "building": "new 4-storey data centre + office (GOV)",
+   "sizeText": "1,098 m² data/storage of 3,746 m² (GOV)",
+   "cooling": "not in report",
+   "heat": "not in report",
+   "serves": "transit control (SkyTrain Control Centre)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_burnabyRz1926"
+   ],
+   "inMap": false,
+   "where": "Burnaby",
+   "addr": "6700 Southridge Dr, Burnaby"
+  },
+  {
+   "id": "van24",
+   "n": 24,
+   "city": "van",
+   "name": "Coquitlam Data Centre",
+   "operator": "Canadian Web Hosting (eSecureData DC3, same building ?)",
+   "addrText": "1478 Hartley Ave, Coquitlam",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_cwhColo; arch_inv_esecureDc3)",
+   "building": "custom facility, reinforced concrete block on bedrock (OC arch_inv_esecureDc3)",
+   "sizeText": "7,600 ft² (OC)",
+   "cooling": "UPS + diesel generators, tested monthly (OC)",
+   "heat": "?",
+   "serves": "hosting / colocation (OC)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_cwhColo",
+    "arch_inv_esecureDc3"
+   ],
+   "inMap": false,
+   "where": "Coquitlam",
+   "addr": "1478 Hartley Ave, Coquitlam"
+  },
+  {
+   "id": "van25",
+   "n": 25,
+   "city": "van",
+   "name": "University Data Centre",
+   "operator": "UBC",
+   "addrText": "Pharmaceutical Sciences Building (street ?), UBC (Electoral Area A)",
+   "status": "operating",
+   "statusText": "operating (INSTITUTION arch_inv_ubcItColo, updated 22 Apr 2025); completed Nov 2012 (sources/01)",
+   "building": "basement of a university building (BC Hydro case, sources/13)",
+   "sizeText": "5,000 ft², 110 racks",
+   "cooling": "\"leading-edge cooling\" (no detail)",
+   "heat": "waste heat recycled into the building (UTILITY, sources/13)",
+   "serves": "university research and admin",
+   "opened": "2012",
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "src": [
+    "arch_inv_ubcItColo"
+   ],
+   "inMap": false,
+   "where": "UBC (Electoral Area A)",
+   "addr": "Pharmaceutical Sciences Building"
+  }
+ ],
+ "edm": [
+  {
+   "id": "edm1",
+   "n": 1,
+   "city": "edm",
+   "name": "Qu EDM1",
+   "operator": "Qu Data Centres (earlier Primus, then Rogers ?)",
+   "addrText": "10200 102 Ave NW (Edmonton City Centre West), 3rd floor ? · 53.54358, −113.49570 (Qu gives only \"Financial Core\"; permits here name Primus and Powerhouse data rooms, not Qu; Qu at this address = LEAD only)",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_quEdmPage, read 2 Nov 2026)",
+   "building": "floors in a downtown office/retail building (PERMIT \"office/retail building\", 3rd floor)",
+   "sizeText": "OC: 18,000 ft² building, 15,712 ft² raised floor; 2.5 MW (listing) vs 1 MW (FAQ) ?",
+   "cooling": "OC: 248 tons N+1 cooling, type ?; \"N+1 1MW Generators (x3)\", 24 h fuel (EDM1 spec sheet via sources/01 §11; register says not carried: quEDM1_2026 open item)",
+   "heat": "none stated",
+   "serves": "colocation: government, financial, enterprise (OC)",
+   "opened": "? (in use by 2011: PERMIT \"Primus Data Centre\")",
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     3
+    ],
+    "text": "3rd floor: our reading from the permit unit number (Powerhouse unit 302G, 2019)",
+    "src": [
+     "arch_inv_edmPermitRows"
+    ]
+   },
+   "size": {
+    "mw": [
+     1,
+     2.5
+    ],
+    "scope": "capacity",
+    "label": "operator claims differ: 1 MW (FAQ), 2.5 MW (listing)",
+    "src": [
+     "arch_inv_quEdmPage"
+    ]
+   },
+   "src": [
+    "arch_inv_edmPermitRows",
+    "arch_inv_leadDirectory",
+    "arch_inv_quEdmPage",
+    "quEDM1_2026"
+   ],
+   "permitNotes": "PERMIT 2013: \"add a fuel tank room in basement level and roof top concrete pad and curbs\"",
+   "xy": [
+    53.54358,
+    -113.4957
+   ],
+   "inMap": true,
+   "addr": "10200 102 Ave NW (Edmonton City Centre West), 3rd floor ?",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)",
+   "alsoTenant": "also Wolfpaw (directory listing: DIR arch_inv3_dcmapWolfpawEdm2; main chat 12 Nov 2026)"
+  },
+  {
+   "id": "edm2",
+   "n": 2,
+   "city": "edm",
+   "name": "Qu EDM2",
+   "operator": "Qu Data Centres (permits: Rogers EDC2)",
+   "addrText": "17204 114 Ave NW, Armstrong Industrial · 53.56421, −113.61885 (permits name Rogers, not Qu; Qu at this address = LEAD + J.B. site visit, no operator sign ?)",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_quEdmPage)",
+   "building": "converted industrial: warehouse with addition (PERMIT 2015, 2020)",
+   "sizeText": "OC: 35,000 ft² building; raised floor 19,000 + 14,196 ft²; 8 MW design (page) / 2.5 MW Tier II, 3 MW Tier III (sheet) ?",
+   "cooling": "OC: 1,450 tons N+1; Uptime Tier III. OBS: cooling units on a raised platform, \"Munters\" casings, electrical pad. PERMIT: \"2 generator buildings\" (2019), exterior self-enclosed generator (2020)",
+   "heat": "none stated",
+   "serves": "colocation: provincial government, oil and gas, health, finance (OC)",
+   "opened": "? (data-centre addition 2015, PERMIT)",
+   "typeRaw": "c",
+   "type": "standalone",
+   "fenced": {
+    "text": "palisade gate (J.B. site visit)",
+    "src": [
+     "fieldJB"
+    ]
+   },
+   "size": {
+    "mw": [
+     2.5,
+     3
+    ],
+    "scope": "capacity",
+    "label": "spec sheet (operator): 2.5 MW Tier II, 3 MW Tier III; the web page says 8 MW design",
+    "src": [
+     "arch_inv_quEdmPage"
+    ]
+   },
+   "src": [
+    "arch_inv_edmPermitRows",
+    "arch_inv_leadDirectory",
+    "arch_inv_quEdmPage",
+    "fieldJB"
+   ],
+   "permitNotes": "PERMIT 2020: Hall 7 & 8 in \"empty warehouse\", $4.0 M, 9,519 ft²",
+   "xy": [
+    53.56421,
+    -113.61885
+   ],
+   "inMap": true,
+   "addr": "17204 114 Ave NW, Armstrong Industrial",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)",
+   "alsoTenant": "also Wolfpaw (directory listing: DIR arch_inv3_dcmapWolfpawEdm2; main chat 12 Nov 2026)"
+  },
+  {
+   "id": "edm3",
+   "n": 3,
+   "city": "edm",
+   "name": "Wolfpaw EDM1",
+   "operator": "Wolfpaw Services",
+   "addrText": "303, 10060 Jasper Ave NW (Rice Howard Place / Scotia Place, tower 1, 3rd floor) · 53.54137, −113.49260",
+   "status": "operating",
+   "statusText": "operating (PERMIT 2023; yegixStatus OC)",
+   "building": "floors in an office tower",
+   "sizeText": "? (PERMIT 2023 expansion 1,916 ft²)",
+   "cooling": "OC: \"Dual Power Grid\", \"Natural Gas & Diesel Backup Generator\", \"Redundant UPS\" (arch_inv_wolfpawPage)",
+   "heat": "none stated",
+   "serves": "colocation, hosting; YEGIX exchange site (OC)",
+   "opened": null,
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     3
+    ],
+    "text": "suite 303, 3rd floor (GOV 2023 permit)",
+    "src": [
+     "arch_inv_edmPermitRows"
+    ]
+   },
+   "src": [
+    "arch_inv_edmPermitRows",
+    "arch_inv_wolfpawPage",
+    "yegixStatus"
+   ],
+   "permitNotes": "sources/01 placed it at 10155 102 St (Commerce Place); the 2023 permit and YEGIX put it at Scotia Place: corrected",
+   "xy": [
+    53.54137,
+    -113.4926
+   ],
+   "inMap": true,
+   "addr": "303, 10060 Jasper Ave NW (Rice Howard Place / Scotia Place, tower 1, 3rd floor)",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm4",
+   "n": 4,
+   "city": "edm",
+   "name": "The Internet Centre",
+   "operator": null,
+   "addrText": "4130 95 St NW, Strathcona Industrial Park · 53.47743, −113.47613",
+   "status": "operating",
+   "statusText": "operating (OC arch_inv_incentreAbout)",
+   "building": "one unit in a single-storey multi-tenant row (OBS fieldJB)",
+   "sizeText": "OC: \"a secure 3,000 sqft data centre\"",
+   "cooling": "PERMIT 2024: \"two new RTU's (AC Only)\". OBS: two rooftop condensing units. 180 kW diesel = LEAD only ?",
+   "heat": "none stated",
+   "serves": "own ISP, phone, cloud hosting, colocation (OC)",
+   "opened": "? (2010 = LEAD only)",
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_edmPermitRows",
+    "arch_inv_incentreAbout",
+    "arch_inv_leadDirectory",
+    "fieldJB"
+   ],
+   "permitNotes": "PERMIT building type \"Communication Buildings\"",
+   "xy": [
+    53.47743,
+    -113.47613
+   ],
+   "inMap": true,
+   "addr": "4130 95 St NW, Strathcona Industrial Park",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm5",
+   "n": 5,
+   "city": "edm",
+   "name": "Rogers West Edmonton data hall",
+   "operator": "Rogers Communications (earlier Shaw)",
+   "addrText": "10450 178 St NW, Morin Industrial · 53.54813, −113.63011",
+   "status": "operating",
+   "statusText": "operating (PERMIT 30 Jul 2025, data hall expansion)",
+   "building": "data hall inside an industrial / former broadcast building (BE zone)",
+   "sizeText": "PERMIT: expansion 7,617 ft²",
+   "cooling": "PERMIT 2016: \"1 hr rated UPS Room\" in Shaw control room",
+   "heat": "?",
+   "serves": "telecom / enterprise (our reading from owner) ?",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_edmPermitRows"
+   ],
+   "permitNotes": "Not on the Qu page; whether it is in the Rogers sale to InfraRed = LEAD only ?",
+   "xy": [
+    53.54813,
+    -113.63011
+   ],
+   "inMap": true,
+   "addr": "10450 178 St NW, Morin Industrial",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm6",
+   "n": 6,
+   "city": "edm",
+   "name": "Kyndryl Acheson-Edmonton",
+   "operator": "Kyndryl",
+   "addrText": "9672 279 St, Acheson, Parkland County (street number LEAD only; site seen by J.B.) · ?",
+   "status": "operating",
+   "statusText": "operating ? (OBS fieldJB: plant in use; no operator page found)",
+   "building": "purpose-built? windowless precast, ≈114 × 62 m (OBS; OSM footprint)",
+   "sizeText": "?",
+   "cooling": "OBS: two generator enclosures \"DG-1\", four pad-mount transformers, cooling plant with pipe racks. Two 550-ton water-cooled chillers = LEAD only",
+   "heat": "?",
+   "serves": "enterprise / managed IT (our reading from operator) ?",
+   "opened": null,
+   "typeRaw": "c",
+   "type": "standalone",
+   "src": [
+    "arch_inv_leadDirectory",
+    "fieldJB"
+   ],
+   "permitNotes": "FortisAlberta territory (sources/01 §14)",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "9672 279 St, Acheson, Parkland County (street number LEAD only; site seen by J.B.)"
+  },
+  {
+   "id": "edm7",
+   "n": 7,
+   "city": "edm",
+   "name": "EPCOR Data Centre",
+   "operator": "EPCOR",
+   "addrText": "10423 101 St NW, EPCOR Tower, P1 level · 53.54753, −113.49186",
+   "status": "?",
+   "statusText": "? (PERMIT fit-out 2011; nothing later)",
+   "building": "below-grade floor of a 28-storey office tower",
+   "sizeText": "PERMIT: 3,911 ft², $3.4 M",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "enterprise (utility's own)",
+   "opened": "2011 ?",
+   "typeRaw": "a",
+   "type": "tower",
+   "floors": {
+    "list": [
+     "P1"
+    ],
+    "text": "P1 level, below grade (City permit 2011)",
+    "src": [
+     "arch_inv_edmPermitRows"
+    ]
+   },
+   "src": [
+    "arch_inv_edmPermitRows"
+   ],
+   "permitNotes": "—",
+   "xy": [
+    53.54753,
+    -113.49186
+   ],
+   "inMap": true,
+   "addr": "10423 101 St NW, EPCOR Tower, P1 level",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm8",
+   "n": 8,
+   "city": "edm",
+   "name": "Alberta Pensions Administration data centre",
+   "operator": "APA Corp.",
+   "addrText": "5103 Windermere Blvd SW · 53.43315, −113.59381",
+   "status": "?",
+   "statusText": "? (PERMIT 2009 \"New Data Center\")",
+   "building": "room in a 3-storey office building",
+   "sizeText": "PERMIT: 2,200 ft², $2.0 M",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "enterprise (provincial pensions)",
+   "opened": "2009 ?",
+   "typeRaw": "a (low-rise)",
+   "type": "tower",
+   "typeNote": "low-rise",
+   "floors": {
+    "list": [],
+    "text": "floors not published"
+   },
+   "src": [
+    "arch_inv_edmPermitRows"
+   ],
+   "permitNotes": "—",
+   "xy": [
+    53.43315,
+    -113.59381
+   ],
+   "inMap": true,
+   "addr": "5103 Windermere Blvd SW",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm9",
+   "n": 9,
+   "city": "edm",
+   "name": "Churchill Data Centre",
+   "operator": "?",
+   "addrText": "6707 59 St NW, Roper Industrial · 53.50354, −113.42351",
+   "status": "?",
+   "statusText": "? (PERMIT 2011 only)",
+   "building": "in an industrial building (Laird Electric site)",
+   "sizeText": "?",
+   "cooling": "PERMIT 2011: \"2 new rooftop units\"",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_edmPermitRows"
+   ],
+   "permitNotes": "—",
+   "xy": [
+    53.50354,
+    -113.42351
+   ],
+   "inMap": true,
+   "addr": "6707 59 St NW, Roper Industrial",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm10",
+   "n": 10,
+   "city": "edm",
+   "name": "ThinkTel Edmonton",
+   "operator": "ThinkTel",
+   "addrText": "10250 101 St NW (HSBC Bank Place) ?",
+   "status": "?",
+   "statusText": "? (OC names Edmonton only; 64 rows at this address in the 16 Oct 2026 export, none name a data centre or server room; address = LEAD only)",
+   "building": "tower floor ?",
+   "sizeText": "?",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "telecom colocation ?",
+   "opened": null,
+   "typeRaw": "a ?",
+   "type": "?",
+   "src": [
+    "arch_inv_edmPermitRows",
+    "arch_inv_leadDirectory"
+   ],
+   "permitNotes": "negative permit check",
+   "xy": null,
+   "inMap": false,
+   "addrNote": "address or location not confirmed (?): listed, not placed",
+   "addr": "10250 101 St NW (HSBC Bank Place) ?"
+  },
+  {
+   "id": "edm11",
+   "n": 11,
+   "city": "edm",
+   "name": "Sobeys Data Centre",
+   "operator": "Sobeys",
+   "addrText": "12831 163 St NW, Mistatim Industrial · 53.58830, −113.59705",
+   "status": "closed",
+   "statusText": "closed: demolished (PERMIT 26 Aug 2021)",
+   "building": "stand-alone \"Business and Personal Services\" building",
+   "sizeText": "?",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "enterprise (grocer's own)",
+   "opened": null,
+   "typeRaw": "b",
+   "type": "standalone",
+   "src": [
+    "arch_inv_edmPermitRows"
+   ],
+   "permitNotes": "end-of-life case (edmPermits)",
+   "xy": [
+    53.5883,
+    -113.59705
+   ],
+   "inMap": true,
+   "addr": "12831 163 St NW, Mistatim Industrial",
+   "placed": "City permit geocode (arch_inv_edmPermitRows)"
+  },
+  {
+   "id": "edm12",
+   "n": 12,
+   "city": "edm",
+   "name": "Meta Sturgeon County campus",
+   "operator": "Meta (GLDC on the AESO list, our reading)",
+   "addrText": "Alberta's Industrial Heartland, Sturgeon County; next to Greenlight plant (E½ 10-56-22-W4) ? · street address LEAD only",
+   "status": "announced",
+   "statusText": "announced 8 Jul 2026 (arch_inv_goaNumbers); grid: 970 MW Phase 1 allocation (GoA relay, arch_inv_goaNumbers; AESO P2936 60 + 910 MW); plant approved 25 Jun 2026 (arch_inv_aucGreenlight); construction start: news only ?",
+   "building": "campus",
+   "sizeText": "GOV relaying OC: 2.9 M ft² facility space, 1,750 acres; 970 MW Phase 1; 1,800 MW full build-out",
+   "cooling": "power: grid + Greenlight gas plant 932 MW nameplate (GoA) / 1,864 MW (AUC, two stages); 250 MW Capital Power supply deal; cooling ?",
+   "heat": "?",
+   "serves": "AI / hyperscale (own use)",
+   "opened": null,
+   "typeRaw": "c (rural campus)",
+   "type": "standalone",
+   "typeNote": "rural campus",
+   "size": {
+    "mw": [
+     970,
+     970
+    ],
+    "scope": "grid allocation, phase 1",
+    "label": "provincial government relaying the operator",
+    "src": [
+     "arch_inv_aucGreenlight",
+     "arch_inv_goaNumbers"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_aucGreenlight",
+    "arch_inv_goaNumbers",
+    "arch_inv_leadDirectory"
+   ],
+   "permitNotes": "water: \"less water annually than a typical golf course\" (Meta claim); ~$60 M local road and water infrastructure",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Alberta's Industrial Heartland, Sturgeon County; next to Greenlight plant (E½ 10-56-22-W4) ?"
+  },
+  {
+   "id": "edm13",
+   "n": 13,
+   "city": "edm",
+   "name": "Beacon Heartland AI Hub",
+   "operator": "Beacon AI Centers / Heartland Power Generation LP",
+   "addrText": "Sec. 15-56-22-W4, ~7 km east of Gibbons, Sturgeon County (arch_inv_aucHeartlandNotice)",
+   "status": "plant approved",
+   "statusText": "power plant approved with conditions, 23 Oct 2026 (arch_inv_aucHeartlandDecision); data halls: county permit ?",
+   "building": "campus with co-located plant",
+   "sizeText": "REG (applicant): ~800 MWe to data halls; AESO P3175 400 MW DTS, ISD under review (aesoList)",
+   "cooling": "REG: 920 MWe plant, 200 × 4.6 MWe Jenbacher J624 gas engines; cooling ?",
+   "heat": "?",
+   "serves": "AI / HPC",
+   "opened": "? (Beacon: \"as early as 2027\" OC)",
+   "typeRaw": "c (rural campus)",
+   "type": "standalone",
+   "typeNote": "rural campus",
+   "size": {
+    "mw": [
+     800,
+     800
+    ],
+    "scope": "to data halls",
+    "label": "applicant figure in a regulator filing",
+    "src": [
+     "aesoList"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_aucHeartlandDecision",
+    "arch_inv_aucHeartlandNotice"
+   ],
+   "permitNotes": "noise impact assessment completed (limits ?); IAAC Initial Project Description filed (arch_inv_aucHeartlandApp); project number 90123 not confirmed ?",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Sec. 15-56-22-W4, ~7 km east of Gibbons, Sturgeon County (arch_inv_aucHeartlandNotice)"
+  },
+  {
+   "id": "edm14",
+   "n": 14,
+   "city": "edm",
+   "name": "Keephills data centre",
+   "operator": "TransAlta (MOU: CPP Investments, Brookfield)",
+   "addrText": "TransAlta Keephills site, Parkland County · ?",
+   "status": "proposed",
+   "statusText": "proposed: Stage 1; ASP and LUB approved Sep 2025; no DP (arch_inv_transaltaKeephills); 230 MW Phase 1 allocated ? (our arithmetic: 1,200 − 970; AESO P3083 115 + 115 MW, ISD under review)",
+   "building": "campus at a power plant",
+   "sizeText": "OC: ~230 MW, up to 1 GW; AESO P3083/P3095/P3152 (aesoList)",
+   "cooling": "OC: on-site generation and gas infrastructure; cooling ?",
+   "heat": "?",
+   "serves": "? (no tenant named)",
+   "opened": null,
+   "typeRaw": "c (rural)",
+   "type": "standalone",
+   "typeNote": "rural",
+   "size": {
+    "mw": [
+     230,
+     230
+    ],
+    "scope": "phase 1",
+    "label": "operator claim",
+    "src": [
+     "aesoList"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_transaltaKeephills"
+   ],
+   "permitNotes": "Parkland LUB 5.80: noise impact assessment may be required (arch_inv_parklandLUB)",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "TransAlta Keephills site, Parkland County"
+  },
+  {
+   "id": "edm15",
+   "n": 15,
+   "city": "edm",
+   "name": "Sundance data load",
+   "operator": "? (TransAlta = LEAD only)",
+   "addrText": "Wabamun planning area, Parkland County ?",
+   "status": "proposed",
+   "statusText": "proposed: AESO P3136 401 MW, ISD under review (aesoList)",
+   "building": "?",
+   "sizeText": "401 MW requested",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "c ?",
+   "type": "?",
+   "size": {
+    "mw": [
+     401,
+     401
+    ],
+    "scope": "requested from the grid",
+    "label": "AESO connection list",
+    "src": [
+     "aesoList"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_leadDirectory"
+   ],
+   "permitNotes": "Highvale DC district amendments for power-linked investment proposed Jan 2025, decision not on the page (arch_inv_parklandHighvale); \"Boreal Technology Hub\" application (arch_inv_parklandDCpage) may be this or E14 ?",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Wabamun planning area, Parkland County ?"
+  },
+  {
+   "id": "edm16",
+   "n": 16,
+   "city": "edm",
+   "name": "Genesee Data Centre (AESO DC 1 and DC 2)",
+   "operator": "Capital Power + unnamed developer",
+   "addrText": "Genesee Mine Permit Area, Leduc County (GP overlay) · ?",
+   "status": "proposed",
+   "statusText": "proposed, not advancing immediately (arch_inv_cpGeneseeWinter2025; Summer 2026 \"continuing to evaluate\"); no DP in Leduc County (arch_inv_leducCountyDC, 26 Jun 2026)",
+   "building": "campus at a power plant",
+   "sizeText": "OC: up to 1,500 MW; AESO P2942 1,000 + P2946 500 MW, ISD under review",
+   "cooling": "OC: dedicated power facility considered",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "c (rural)",
+   "type": "standalone",
+   "typeNote": "rural",
+   "size": {
+    "mw": [
+     1500,
+     1500
+    ],
+    "scope": "up to",
+    "label": "operator claim",
+    "src": [
+     "arch_inv_cpGeneseeWinter2025",
+     "arch_inv_leducCountyDC"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_cpGeneseeWinter2025",
+    "arch_inv_leducCountyDC"
+   ],
+   "permitNotes": "data centres (\"information service\") permitted in GP overlay under LUB 14-25 (arch_inv_leducCountyDC); TA25-0001 outcome not shown (arch_inv_leducTA25)",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Genesee Mine Permit Area, Leduc County (GP overlay)"
+  },
+  {
+   "id": "edm17",
+   "n": 17,
+   "city": "edm",
+   "name": "Beacon Saunders Lake AI Hub",
+   "operator": "Beacon AI Centers",
+   "addrText": "Leduc County near Beaumont ? (address LEAD only)",
+   "status": "proposed",
+   "statusText": "proposed: AESO P2935 400 MW, ISD under review (aesoList); Leduc County: none approved (26 Jun 2026)",
+   "building": "campus ?",
+   "sizeText": "400 MW requested",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "AI",
+   "opened": null,
+   "typeRaw": "c ?",
+   "type": "?",
+   "size": {
+    "mw": [
+     400,
+     400
+    ],
+    "scope": "requested from the grid",
+    "label": "AESO connection list",
+    "src": [
+     "aesoList"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "arch_inv_leadDirectory"
+   ],
+   "permitNotes": "—",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Leduc County near Beaumont ? (address LEAD only)"
+  },
+  {
+   "id": "edm18",
+   "n": 18,
+   "city": "edm",
+   "name": "Beacon Harry Smith AI Hub",
+   "operator": "Beacon AI Centers",
+   "addrText": "Acheson, Parkland County ? (OC names \"Acheson\"; address LEAD only)",
+   "status": "proposed",
+   "statusText": "proposed ? (OC 2025 only; not on AESO extract by this name; no Parkland record found)",
+   "building": "?",
+   "sizeText": "?",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "AI",
+   "opened": null,
+   "typeRaw": "c ?",
+   "type": "?",
+   "src": [
+    "aesoList",
+    "arch_inv_beaconRelease2025",
+    "arch_inv_leadDirectory"
+   ],
+   "permitNotes": "—",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Acheson, Parkland County ? (OC names \"Acheson\"; address LEAD only)"
+  },
+  {
+   "id": "edm19",
+   "n": 19,
+   "city": "edm",
+   "name": "Lynx data load (two phases)",
+   "operator": "?",
+   "addrText": "Fort Saskatchewan planning area ?",
+   "status": "proposed",
+   "statusText": "proposed: AESO P3198 + P3204, 1,800 MW each, ISD under review (aesoList)",
+   "building": "?",
+   "sizeText": "3,600 MW requested",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "?",
+   "opened": null,
+   "typeRaw": "c ?",
+   "type": "?",
+   "size": {
+    "mw": [
+     3600,
+     3600
+    ],
+    "scope": "requested from the grid",
+    "label": "AESO connection list",
+    "src": [
+     "aesoList"
+    ]
+   },
+   "src": [
+    "aesoList"
+   ],
+   "permitNotes": "—",
+   "xy": null,
+   "inMap": false,
+   "where": "outside the City of Edmonton (region)",
+   "addr": "Fort Saskatchewan planning area ?"
+  },
+  {
+   "id": "edm20",
+   "n": 20,
+   "city": "edm",
+   "name": "Sovereign Cloud data load",
+   "operator": "?",
+   "addrText": "Edmonton planning area ?",
+   "status": "proposed",
+   "statusText": "proposed: AESO P3174 74.9 MW, stage 2, ISD 2029-12-31 (aesoList)",
+   "building": "?",
+   "sizeText": "74.9 MW (just under the 75 MW \"large data centre\" line, alta117_2026)",
+   "cooling": "?",
+   "heat": "?",
+   "serves": "cloud ?",
+   "opened": null,
+   "typeRaw": "?",
+   "type": "?",
+   "size": {
+    "mw": [
+     74.9,
+     74.9
+    ],
+    "scope": "requested from the grid",
+    "label": "AESO connection list",
+    "src": [
+     "alta117_2026"
+    ]
+   },
+   "src": [
+    "aesoList",
+    "alta117_2026"
+   ],
+   "permitNotes": "—",
+   "xy": null,
+   "inMap": false,
+   "addrNote": "address or location not confirmed (?): listed, not placed",
+   "addr": "Edmonton planning area ?"
+  },
+  {
+   "id": "edm21",
+   "n": 21,
+   "city": "edm",
+   "name": "EETP AI data centre",
+   "operator": "Walton Global (Stantec agent)",
+   "addrText": "Edmonton Energy & Technology Park, NE Edmonton · ? (253 ha, edmLDA26)",
+   "status": "proposed",
+   "statusText": "proposed: ASP amendment (file LDA26-0225 and received 6 Jul 2026 not on the page ?); engagement to 25 Oct 2026; hearing TBD (edmLDA26, edm_dcpage)",
+   "building": "campus ?",
+   "sizeText": "?",
+   "cooling": "power generation = Major Utility (City)",
+   "heat": "?",
+   "serves": "AI",
+   "opened": null,
+   "typeRaw": "c",
+   "type": "standalone",
+   "src": [
+    "edmLDA26",
+    "edm_dcpage"
+   ],
+   "permitNotes": "City: AI data centre \"a heavy industrial use\"; rezoning and second hearing needed",
+   "xy": null,
+   "inMap": false,
+   "addrNote": "address or location not confirmed (?): listed, not placed",
+   "addr": "Edmonton Energy & Technology Park, NE Edmonton"
+  }
+ ]
+}
