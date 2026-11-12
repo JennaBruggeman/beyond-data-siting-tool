@@ -190,7 +190,7 @@ Code level header as the hub's (check / don't check / 0.5 m tolerance; `CODE_LEV
     1. Full program: pool (4 lanes, 1.8 m deck) + gym 186 m² + options, at grade (Edmonton) or stacked (Vancouver).
     2. Drop the climbing wall and the own dry change (shared change is the default).
     3. Gym over the change block (storey 2).
-    4. Data centre below the hub cap, to what the plant yard and ground hold (label "smaller than the hub cap").
+    4. Data centre below the hub cap (the 2,325 m² floor cap, one hall storey; DECISIONS 12 Nov), to what the plant yard and ground hold (label "smaller than the 2,325 m² floor cap").
     5. Drop the gym (rank 3): its floor goes to pool storage, then "unassigned".
     6. Shared loading by approval (5.1.5).
     7. Height-capped (support 4.0 m, one hall storey).
@@ -284,7 +284,9 @@ Outdoor air intakes, louvre heights, chemical and generator exhaust points and d
 
 ## 6. Doesn't-fit rule
 
-Apply the ladder (rule 15) in order on each lot; stop at the first step where every blocking test in Part 5 passes. A shortfall within the tolerance is "tight", not a reason to go on. Lots are compared on **buildable area** (inside the yard lines), as the hub.
+Apply the ladder (rule 15) in order on each lot; stop at the first step where every blocking test in Part 5 passes.
+
+**Data-centre size (hub correction, DECISIONS 12 Nov): the hub cap is the 2,325 m² floor cap, not a MW figure:** at most 2,325 m² of data-centre floor (hall, support and data-centre rooms on every storey; Vancouver Parking By-law 5.2.5 loading step, used in both cities) and one hall storey per lot. MW follows from the hall that fits. The hall grows in 0.05 MW steps (31.5 m² of hall) from what is drawn until the 2,325 m² floor cap or another rule stops it (exit spacing, the plant yard holding the re-sized plant, the battery room, the ground), re-sizing the plant at each step (eh/sizing.py); where a lot can't hold even the drawn hall, it shrinks in the same steps. The board names the stopping rule. "About 1.9 MW" was only the early fits' result. A shortfall within the tolerance is "tight", not a reason to go on. Lots are compared on **buildable area** (inside the yard lines), as the hub.
 
 ### 6a. Minimum lot per variant (our arithmetic unless marked "fit")
 Building width sums use drawn sizes that give the clear minimums (pool hall 12.3 × 28.8 m drawn = 12.1 × 28.6 clear).
@@ -308,7 +310,8 @@ Building width sums use drawn sizes that give the clear minimums (pool hall 12.3
 | 1050 Georgia St E (I-2, smallest that fits) | ground budget; one shared bay (5.1.5 approval); transformer pad front clearance (ES54 F0-02) | learner pool, gym dropped, data centre 0.15 MW on storey 2. Drawn 2,500 kVA pads fail (pad 1: 1.0 m front). Re-check on EH-FREEZE-2026-11-11b (sizing rule 1 + 1 × 300 kVA, Eaton pad 1.93 × 1.50 m): in the drawn spot still no 3 m front; moved to the yard's east strip (turned, fronts north and south) 4.0 m front each, 1.0 m apart, 1.0 m to the sets, 0.97 m to the lane lot line: **fits, tight** (drawn 11 Nov late, 2 × KD300 sets) |
 | 1353 Pender St E (I-2, wide-shallow) | exit spacing (VBBL 3.4.2.3: hall exits S1–S2 29.3 m ≥ ½ diagonal); hall never over the pool hall (rule 2); lot lines on both sides | 1.35 MW by the 0.05 MW step rule (J.B. 12 Nov; was 1.30): hall west over the gym to u 16.85, exits tight (29.3 vs 28.8); 1.40 needs 30.5 m; yard holds 3 + 1 × 1,000 kW (to about 1.9 MW), so the yard no longer limits; bays stay tight |
 | 8980 Oak St (irregular corner, flood plain) | plant yard shape; FCL and the step-free ramp | 1.47 MW; ramp outside in a 1.7 m strip |
-| 64 Airport Rd NW, 10003 63 Ave NW (Edmonton, beside) | the pool block and gym take the ground (beside, one storey) | 1.59–1.60 MW (under the hub cap 1.68) |
+| 64 Airport Rd NW (Edmonton, beside) | the ground: the pool block, gym and plant yard fill the lot (not the cap: data centre 1,551 of 2,325 m²) | 1.59 MW |
+| 10003 63 Ave NW (Edmonton, beside, large lot) | re-check on the floor cap (12 Nov, not yet drawn): exit spacing stops it at 1.75 MW (battery room +0.6 m); 1.80 MW fails exits (30.0 vs 29.3 m) | 1.60 MW drawn; 1.75 MW proposed |
 | 15231, 16075 (Edmonton, stacked plan) | BE 500 m² cap (flag, Q11); 16075: one street, no lane (chemical court, fix A) | 1.46 MW |
 | 10004 167 St NW (Edmonton small) | buildable area 436 m² and width 10.5–12.0 m | doesn't fit; points to the hub fit |
 
@@ -362,7 +365,7 @@ Each item: where it is, what it says, and the stated rule (proposed) or "check i
 | 7 | Rule 9 | chemical delivery "with forklift clearance (BC 9.9) from the service side, never across the public edge (drawing choice)" | Stated rule: T-chem-route (route from a street or lane to the chemical doors, not through the secure yard or truck court). Forklift clearance: check in design |
 | 8 | Rule 9 | chlorine exhaust ≥ 3 m from intakes, no intake below | Check in design (10 m our reading, DECISIONS 11 Nov) |
 | 9 | Rule 11 | chlorine door and delivery "on the service side" | Stated rule: T-chem (no chemical door on a public street face) |
-| 10 | Rule 15 step 4 | data centre below the hub cap "to what the plant yard and ground hold" | Stated rule: reduce the hall in steps of 0.05 MW (31.5 m² of hall) and re-size the plant until T-plant and T-envelope pass; label "smaller than the hub cap" |
+| 10 | Rule 15 step 4 | data centre below the hub cap "to what the plant yard and ground hold" | Stated rule: the hub cap is the 2,325 m² floor cap (one hall storey; DECISIONS 12 Nov). Grow (or reduce) the hall in steps of 0.05 MW (31.5 m² of hall), re-sizing the plant, until the floor cap or T-plant, T-envelope, exit spacing or the battery room stops it; the board names the stopping rule; label "smaller than the 2,325 m² floor cap" where it stops short |
 | 11 | Part 1f | "service ground ... in whichever order the fit uses; beside the building where the fit has it so" | Stated rule: try the plant yard behind the building; if the buildable depth is less than building depth + plant yard depth, put it beside; the building sits against it either way |
 | 12 | Part 1f | plant yard "trimmed to the last plant unit + 3.0 m clear (?)" | Stated rule as written (computable); the 3.0 m stays a drawing choice |
 | 13 | Part 2, Turned | "plant found another place first, a screened street-front yard last" | Stated rule: order of plant places tried: rear yard → side yard → roof (chillers only, never over the hall or pool hall) → screened street-front yard (flag) |
