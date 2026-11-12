@@ -695,13 +695,15 @@ function gens(Q, hubKw, size) {
   if (fp == null) { const t = TANK300.find(t => t[0] >= tank) || null; fp = t ? t[1] : null; note = t ? t[2] : 'no standard tank holds it ?'; }
   return { kw, model, duty, n: duty + 1, tank_l: tank, footprint: fp, tank_note: note, load_kw: load };
 }
-/* EH-FREEZE-2026-11-11c: Vancouver up to 1,500 kVA on BC Hydro's pad, 2.21 x 2.21 m (ES54 Table 1); above, and in Edmonton, the Eaton pad */
-const BCH_PAD = [2.21, 2.21];
+/* Vancouver up to 1,500 kVA on BC Hydro's pad (11d: F3-04.01 up to 500 kVA, F3-05.01 to 1,500 kVA); above, and in Edmonton, the Eaton pad */
+let PADRULE = '11d';   /* '11c': one 2.21 m pad up to 1,500 kVA (ES54 Table 1), for testing against the 11c boards; '11d': the outdoor pad drawings */
+const BCH_PAD_11C = [[2.21, 2.21], 'BC Hydro ES54 Table 1, "750 ≤ PMT ≤ 1500 kVA"'];
+const BCH_PAD = { 500: [[1.68, 1.58], 'BC Hydro ES54 F3-04.01'], 1500: [[2.20, 2.20], 'BC Hydro ES54 F3-05.01'] };   /* freeze 11d: the ES54 outdoor pad drawings */
 function transformers(Q, hubKw, city = 'v') {
   const kva = Q * 1000 + (hubKw || 0); let size, fp, duty;
   if (kva <= 2500) { [size, fp] = TX.find(t => t[0] >= kva); duty = 1; } else { [size, fp] = TX[TX.length - 1]; duty = Math.ceil(kva / 2500 - 1e-9); }
   let src = 'Eaton CA08104001E, cabinet + 4 in (our reading)';
-  if (city === 'v' && size <= 1500) { fp = BCH_PAD; src = 'BC Hydro ES54 Table 1'; }
+  if (city === 'v' && size <= 1500) [fp, src] = PADRULE === '11c' ? BCH_PAD_11C : size <= 500 ? BCH_PAD[500] : BCH_PAD[1500];
   return { kva: size, duty, n: duty + 1, pad: fp, pad_src: src, load_kva: kva };
 }
 function switchMargin(g, t) { return [g.duty * g.kw - g.load_kw, (t.duty === 1 ? t.kva : t.duty * 2500) - t.load_kva]; }
@@ -715,7 +717,7 @@ function hubSet(hubKw) {
   return { model, kw, load: hubKw / kw, need_l: need, tank_l: tank, footprint: fp, src, enclosure: ENCLOSURE[model] || null };
 }
 /* EH-FREEZE-2026-11-11c: outdoors the hub set stands in its enclosure (G12-625, KD80 126 x 46 x 65 in); KD100 assumed the same */
-const ENCLOSURE = { KD80: [[3.200, 1.168], 'G12-625'], KD100: [[3.200, 1.168], 'G12-625, KD80 size assumed ?'] };
+const ENCLOSURE = { KD80: [[3.200, 1.168], 'G12-625'], KD100: [[3.200, 1.168], 'G12-625'] };
 const CAB_KW = { 10: 186.6, 15: 124.4 }, CAB_L = 0.6, CAB_W = 0.75, CAB_FRONT = 0.914, CAB_WALL = 0.025, DOOR_END = 1.1;
 const battCabinets = (mw, minutes = 15) => Math.max(1, Math.ceil(mw * 1000 / CAB_KW[minutes] - 1e-9));
 function battRoom(n, L, W) {
@@ -866,7 +868,7 @@ function sizingRow(G, cfg, m) {
 function hubsetRow(G, cfg, m) {
   const hs = m.hub_set, [nm, r, where] = hubgen(G), src = 'J.B. 11 Nov (own set); eh/sizing.hub_set';
   let fp = hs.footprint ? `${f2(hs.footprint[0])} × ${f2(hs.footprint[1])} m` : '?';
-  if (hs.enclosure) { const e_ = hs.enclosure; fp = `drawn in its enclosure ${f2(e_[0][0])} × ${f2(e_[0][1])} m (${e_[1]}; the open set is ${fp})`; }
+  if (hs.enclosure) { const e_ = hs.enclosure; fp = `in its enclosure ${f2(e_[0][0])} × ${f2(e_[0][1])} m outdoors (${e_[1]}, KD80/100/130 4.5 L); open set ${fp} indoors (G5-641/642)`; }
   let txt = `hub load ${n0(m.hub.kw)} kW (NECB 2020 build-up; fans and space heat ?) → ${hs.model} (${hs.kw} kW standby, ${f0(hs.load * 100)} % load; `
     + `Rehlko ${hs.src}, maker claim): 72 h at that load on its curve ${n0(hs.need_l)} L in a sub-base tank`
     + (hs.tank_l ? ` (${n0(hs.tank_l)} L, ADV-10068)` : ' (tank sizes not published ?: drawn under the enclosure)') + `, set ${fp}. `;
@@ -1823,12 +1825,12 @@ function commonChecks(G, cfg, m) {
   return rows.map(r => [S_(r[0])].concat(r.slice(1)));
 }
 
-const api = { kind, LINE, CIRC, reach,
+const api = { kind, LINE, CIRC, reach, setPadRule: r => { PADRULE = r; },
   gens, transformers, switchMargin, kd300lh, hubTank, hubSet, battCabinets, battRoom, hubLoad, RULES, HARD, hard, rule, auditGeom,
   st_, t_, measureSizing, sizingRow, hubsetRow, batteryRow, widthRow, pyFixed,
   corridors, egress2, egress3, walkload, sep2hWalls, sep2hText, padAnalyse, bondRow, intakeCheck, intakeRow, fuelFill, claimApply, CLAIMS, finalizeRows,
   zoneExits, egressRow, areaRow, walkRow, reachRow, commonChecks, TIES, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
-  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11c port (every shared board check)' };
+  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11d port (every shared board check)' };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hubchecks = api; }
 })(typeof window !== 'undefined' ? window : null);

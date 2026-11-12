@@ -2,6 +2,7 @@
    into a ported check (ref_tests/calls.json from capture_tests.py), run again in JS on the same input, result compared with the Python's.
    Usage: node port_tests_replay.js   Writes ref_tests/replay_result.json. */
 const H = require('../../../tool/hubchecks.js'), fs = require('fs'), path = require('path');
+if (process.env.BD_FREEZE === '11c') H.setPadRule('11c');   /* test against the 11c boards (ic39) */
 const C = JSON.parse(fs.readFileSync(path.join(__dirname, 'ref_tests', 'calls.json'), 'utf8').replace(/Infinity/g, '1e999'));   /* Python writes Infinity; JSON has no such token (no room or text holds the word) */
 const norm = s => String(s).replace(/(\d)\.0(?!\d)/g, '$1');
 const J = x => norm(JSON.stringify(x));

@@ -5,6 +5,7 @@
    Messages are compared after one normalization: Python writes 7.0 where JS writes 7 (JSON keeps no int/float difference).
    Usage: node port_test.js [fit ...]   Writes port_test_result.json beside it. */
 const H = require('../../../tool/hubchecks.js'), fs = require('fs'), path = require('path');
+if (process.env.BD_FREEZE === '11c') H.setPadRule('11c');   /* test against the 11c boards (ic39) */
 const REF = path.join(__dirname, 'ref');
 const only = process.argv.slice(2);
 const norm = s => String(s).replace(/(\d)\.0(?!\d)/g, '$1');
@@ -14,8 +15,8 @@ const ACCEPTED = [['v339', 'clear', '1|ref '],
   /* accepted by J.B. (11 Nov 2026): 2 h wall totals 0.02 m apart where shapely starts a union outline ring (Python drops a 0.02 m stub there); every status the same */
   ['v1360', 'more', 'sep2h.walls'], ['v8238_mid', 'more', 'sep2h.walls'], ['v8980', 'more', 'sep2h.walls'], ['v8980', 'more', 'sep2h.text']];
 const accepted = (fit, d) => ACCEPTED.some(([f, c, w]) => f === fit && d.check === c && d.what.startsWith(w));
-/* the answer key: the 11c boards (Claude Link eh/ic38/) */
-const IC37DIR = process.env.BD_IC37 || 'C:/Users/bangp/Desktop/Claude Link/eh/ic38';
+/* the answer key: the 11d boards (Claude Link eh/ic39/) */
+const IC37DIR = process.env.BD_IC37 || 'C:/Users/bangp/Desktop/Claude Link/eh/ic39';
 const IC37 = { v339: 'TestFit_EH_V339.dc.html', v1330: 'TestFit_EH_V1330.dc.html', v1353: 'TestFit_EH_V1353.dc.html', v1360: 'TestFit_EH_V1360.dc.html',
   v8238_mid: 'TestFit_EH_V8238_Outright.dc.html',   /* the Outright board is the mid variant (geom_mid.py); geom.py has no ic38 board */
   v8980: 'TestFit_EH_V8980.dc.html', e06b: 'TestFit_EH_E06B.dc.html', e10003: 'TestFit_EH_E10003.dc.html',
@@ -97,12 +98,12 @@ for (const f of fs.readdirSync(REF).filter(f => f.endsWith('.json')).sort()) {
     for (const [k, py] of Object.entries(R.rows)) {
       const j = FN[k]();
       if (j[0] === py[0] && j[1] === py[1] && j[3] === py[3]) out.rows[0]++; else diff('rows', k + ' (vs the board run)', [py[0], py[3]], [j[0], j[3]]);
-      if (ic) { const b = ic.find(r => r[1] === j[1]); if (b && b[0] === j[0] && b[2] === j[3] + ' · ' + j[2]) out.board[0]++;   /* a board row prints text · source */ else diff('board', k + ' (vs ic38)', b ? [b[0], b[2]] : 'row not on the ic38 board', [j[0], j[3]]); }
+      if (ic) { const b = ic.find(r => r[1] === j[1]); if (b && b[0] === j[0] && b[2] === j[3] + ' · ' + j[2]) out.board[0]++;   /* a board row prints text · source */ else diff('board', k + ' (vs ' + path.basename(IC37DIR) + ')', b ? [b[0], b[2]] : 'row not on the ic38 board', [j[0], j[3]]); }
     }
     /* the re-run reproduces the ic38 board, every row */
     if (ic && R.board_rows) {
       const a = JSON.stringify(R.board_rows), b = JSON.stringify(ic);
-      if (a === b) out.board[0]++; else { const n = Math.max(ic.length, R.board_rows.length); for (let i = 0; i < n; i++) if (JSON.stringify(ic[i]) !== JSON.stringify(R.board_rows[i])) { diff('board', 're-run vs ic38 row ' + i, ic[i] || null, R.board_rows[i] || null); break; } }
+      if (a === b) out.board[0]++; else { const n = Math.max(ic.length, R.board_rows.length); for (let i = 0; i < n; i++) if (JSON.stringify(ic[i]) !== JSON.stringify(R.board_rows[i])) { diff('board', 're-run vs ' + path.basename(IC37DIR) + ' row ' + i, ic[i] || null, R.board_rows[i] || null); break; } }
     }
   }
   /* ---- remaining board scripts and the board's own rows (dead ends, egress, walkways, 2 h walls, pads, intakes, fuel fill, claims) ---- */
