@@ -14,6 +14,9 @@
 'use strict';
 const TRm = (typeof module !== 'undefined' && module.exports) ? require('./treach.js') : null;
 const TR = () => (root && root.BD && root.BD.treach) || TRm;
+/* the shared hub checks, ported from the frozen scripts (tool/hubchecks.js, EH-FREEZE-2026-11-11b; spec v2 step 1, 11 Nov 2026) */
+const HCm = (typeof module !== 'undefined' && module.exports) ? require('./hubchecks.js') : null;
+const HC = () => (root && root.BD && root.BD.hubchecks) || HCm;
 const r2 = x => Math.round(x * 100) / 100, up1 = x => Math.ceil(x * 10 - 1e-6) / 10, sum = a => a.reduce((s, x) => s + x, 0);
 const ra = r => (r[1] - r[0]) * (r[3] - r[2]);
 
@@ -226,7 +229,9 @@ function layout(S0) {
     flags.push(`Refuge and day shelter as Community Service (Bylaw 20001 s. 8.10, our reading): ${Math.round(rs)} m² ${rs <= 500 ? '≤' : '>'} 500 m² per establishment (3.12.1)`); }
   Object.assign(res, out, { variant, ground });
   res.toUV = (a, b) => [r2(uf - dir * (a0 + a)), r2(res.bOrigin + sv * b)];
+  res.fromUV = (u, v) => [r2((uf - u) / dir - a0), r2((v - res.bOrigin) * sv)];   /* the lot frame back into the layout frame (the inverse of toUV) */
   finish(res, S);
+  try { res.v2 = v2Checks(res, S); } catch (e) { res.v2 = { error: String(e && e.message || e) }; }
   return res;
 }
 
@@ -933,6 +938,36 @@ function grades(L, S) { const out = { datum: S.gradeDatum || '?' };
     if (at) { out.base = r2(lo); out.baseAt = at; out.roof = r2(out.slab + roofRel); out.height = r2(out.roof - lo); out.hLimit = S.hLimit; out.heightStatus = S.hLimit ? (TR() ? TR().judge(out.height, S.hLimit, 'max', 'm') : (out.height <= S.hLimit + 1e-6 ? 'pass' : 'fail')) : null; out.heightOk = S.hLimit ? out.heightStatus !== 'fail' : null; out.baseWhy = RULES.base.why; let lo0 = 1e9; for (let a = 0; a <= L.Da + 1e-9; a += 1) for (let b = 0; b <= L.W + 1e-9; b += 1) { const [u, v] = L.toUV(Math.min(a, L.Da), Math.min(b, L.W)), z = zFan0(u, v); if (z != null && z < lo0) lo0 = z; } out.baseFan0 = lo0 < 1e9 ? r2(lo0) : null; }
   }
   return out; }
+
+/* ---------- spec v2, step 1 (11 Nov 2026): the frozen board checks on the tool's own layout ----------
+   The layout is handed to the ported checks in the boards' geometry format (layout frame: a from the front building line, b across):
+   rooms, doors, storey heights, the lot outline and its street and lane edges, plant at grade, the truck court as data-centre ground.
+   What rule sheet v1 doesn't draw yet is left out, so the checks that need it say so: plant yards and gates (step 4: yards, Q24 gates),
+   kVA on the pads and the hub's own set (step 2: sizing), 2 h wall marks (step 3/4), fuel fill (step 5). Rows only; the cards don't use them yet. */
+function v2Checks(L, S) {
+  const H = HC(); if (!H || !L.G || !L.fromUV) return null;
+  const G = { S: {}, D: L.D, H: L.H, SLAB: 0.0 };
+  Object.keys(L.G.S).forEach(k => { G.S[k] = L.G.S[k].map(x => ({ id: x.id, n: x.n, g: x.g, r: x.r, core: !!x.core, stair: !!x.stair })); });
+  G.LOTPOLY = S.ring.map(p => L.fromUV(p[0], p[1]));
+  G.STREET_EDGES = S.edges.filter(e => e.abuts === 'street' || e.abuts === 'alley').map(e => [L.fromUV(e.a[0], e.a[1]), L.fromUV(e.b[0], e.b[1])]);
+  G.PLANT = ((L.plant && L.plant.items) || []).filter(it => !it.pseudo && !it.roof).map(it => ({ id: it.id, n: it.n, r: it.r }));
+  G.DCSPACE = L.truck && L.truck.court ? [L.truck.court] : [];
+  if (L.truck && L.truck.court) G.COURT = L.truck.court;
+  const st1 = G.S['1'] || [], van = S.city === 'van';
+  const cfg = { city: S.city, code: van ? 'VBBL' : 'NBC 2023 (AE)', refuge_ids: st1.filter(x => x.g === 'pub' && /^ref/.test(x.id)).map(x => x.id),
+    shelter_ids: st1.filter(x => x.g === 'pub' && /^shel/.test(x.id)).map(x => x.id), small_lot: !!(S.lotType && S.lotType[0] === 'small'), zones: L.zones || [] };
+  const m = H.measureSizing(G, cfg);
+  m.exits = (L.apart || []).filter(a => a.apart_m != null).map(a => [a.zone, a.apart_m, a.need_m, a.need_m, !!((L.zones || []).find(z => z.name === a.zone) || {}).pubCor]);
+  m.discharges = (L.discharge || []).map(d => [d.a, d.b, d.d, d.need]);
+  m.travel = (L.travel || []).map(t => [t.zone, t.worst == null ? Infinity : t.worst, t.worst == null ? (t.why || 'no exit reached') : '-']);
+  m.zone_exits = (L.zones || []).map(z => [z.name].concat(H.zoneExits(G, z.st, z.ids)));
+  m.nb = L.nb; m.ref = m.ref_counted;
+  const area = x => x.r.reduce((a, r) => a + (r[1] - r[0]) * (r[3] - r[2]), 0), sts = Object.keys(G.S).map(Number);
+  m.dc = sts.reduce((a, st) => a + G.S[st].filter(x => ['hall', 'sup'].includes(x.g) || (st > 1 && x.g === 'spare')).reduce((b, x) => b + area(x), 0), 0);
+  m.gen1 = 78 - 20 * Math.log10(6.1 / 7); m.genall = m.gen1 + 10 * Math.log10(m.ngen);
+  const rows = H.commonChecks(G, cfg, m);
+  return { rows, cfg, notDrawn: ['plant yards and gates (step 4)', 'pad kVA labels and the hub set (step 2)', '2 h wall marks (steps 3–4)', 'fuel fill (step 5)'], version: H.version };
+}
 
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
 function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); return fromSite(S); }
