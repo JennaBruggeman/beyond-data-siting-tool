@@ -1,6 +1,6 @@
 # Hub checks port: JS vs the frozen Python (11 Nov 2026)
 
-Port: `tool/hubchecks.js`, from the scripts of **EH-FREEZE-2026-11-11b** (Claude Link `eh/FROZEN_EH-FREEZE-2026-11-11b.md`; it supersedes the first freeze).
+Port: `tool/hubchecks.js`, now at **EH-FREEZE-2026-11-11d** (12 Nov 2026: boards eh/ic40; BC Hydro pads from ES54 F3-04.01 / F3-05.01; the live Claude Link scripts match the 11d manifest's 24 hashes). Also verified on 11c final (boards eh/ic39, scripts from eh/frozen_EH-FREEZE-2026-11-11c overlaid; JS run with `setPadRule('11c')`, env BD_FREEZE=11c). Built first from the scripts of **EH-FREEZE-2026-11-11b** (Claude Link `eh/FROZEN_EH-FREEZE-2026-11-11b.md`; it supersedes the first freeze).
 
 | Script (sha256, 16) | What is ported |
 |---|---|
@@ -60,3 +60,8 @@ Skipped (6): calls one test makes with `audit_rooms.CLEAR = False` (old centreli
 - Reach with SERVES on (pool and cascade setting): only the failure tests' D3 cases (passed).
 - A non-rectangular clear shape whose true area is exactly halfway could round 0.1 m² differently in the text. None on the boards.
 - ref/ (137 MB) and ref_tests/ (3.7 MB) are git-ignored: re-create them with the two capture scripts.
+
+## 11c and 11d (12 Nov 2026)
+- **11c final (ic39):** every board check and every failure-test call matches (accepted differences aside). Changes ported: city-aware pads, the hub set in its enclosure (G12-625) and the check that fails an outdoor set drawn smaller than its enclosure, the 11c row wording.
+- **11d (ic40):** same result. Change ported: BC Hydro pads 1.68 × 1.58 m up to 500 kVA (F3-04.01) and 2.20 × 2.20 m for 750–1,500 kVA (F3-05.01); Eaton above 1,500 kVA and in Edmonton.
+- ic38 was an interim 11c (hub chat): not used.
