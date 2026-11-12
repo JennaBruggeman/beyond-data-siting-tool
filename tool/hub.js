@@ -91,6 +91,10 @@ const PRG = {
 const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 3, 6], [175, 4, 7], [200, 4, 8], [250, 5, 9], [300, 5, 10], [350, 6, 11], [400, 6, 12]];
 /* 12 Nov 2026 (J.B., decisions log): hall density by cooling type (site.js hallDensity: air 630, liquid and immersion about 150, Schneider RD99,
    maker's reference design); outside the tool (node tests) the spec's 630 */
+/* battery room (step 2, spec item 24, 12 Nov 2026): the larger of 3.8 m² per MW + the 3.0 m strip (F11 B4) and the room the 15-min cabinets need:
+   Vertiv EnergyCore Li5 124.4 kW a cabinet for 15 min (R.equip.cabKW; maker claim), two rows 0.6 m a cabinet facing one 0.914 m aisle, 1.1 m at the door end
+   (hubchecks battRoom, eh/sizing.py), in a 3.0 m strip (2.9 m clear, 0.1 m wall) */
+function batRoomM2(mw, d) { d = d || PRG.bat.w; const n = Math.max(1, Math.ceil(mw * 1000 / 124.4 - 1e-9)), len = Math.ceil(n / 2) * 0.6 + 1.1 + 0.2; return r2(Math.max(mw * 3.8 + 1.0 * PRG.bat.w, len * d)); }   /* d: the depth the room is packed at (its length = m² ÷ d); 0.2 m of walls */
 function HPM() { return (typeof BD !== 'undefined' && BD.hallDensity) ? BD.hallDensity() : RULES.hallPerMW.v; }
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
 function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : 3 + Math.ceil((p - 50) / 50); }   // VBBL Table 3.7.2.2.-B, p = persons OF EACH SEX ('over 50: 3 + 1 per extra 50'): a partial increment counts, so 51–100 → 4 (J.B. 8 Nov: our reading, conservative)
@@ -205,8 +209,11 @@ function layout(S0) {
       let mw = S.mwStart || r2(RULES.cap.m2 / HPM()), L = tryMW(mw);   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
       if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
       /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
+      const big0 = L.plant && !L.plant.ok ? { MW: L.MW, why: L.plant.why || L.plant.whyAll || 'reason not recorded (?)' } : null;   /* step 2 (12 Nov 2026): the stopping rule named when the plant yard sets the size */
       let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - Math.max(0.25, L.MW * 0.06)); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail || L2.MW >= L.MW - 0.01) break; L = L2; }   /* the narrow layout's hall is set by the footprint: no smaller hall to try */
       if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
+      if (big0 && L.plant && L.plant.ok && L.MW < big0.MW - 1e-3 && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'plant yard', at: L.MW, tried: big0.MW, why: big0.why };
+        flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard stops it at ${L.MW.toFixed(2)} MW (at ${big0.MW.toFixed(2)} MW: ${big0.why}; J.B. 12 Nov 2026)`); }
       L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
     }
     return { out: null, why }; };
@@ -219,7 +226,9 @@ function layout(S0) {
     if (sp0 && (ltype === 'wide_shallow' || frw > aMax)) { const Wfull = r2(sp0[1] - sp0[0]);
       for (let cut = 8; cut <= Wfull - 20 && !out; cut += 2) { const t = ladder({ maxW: r2(Wfull - cut), Wfull, turned: true }); if (t.out) { out = t.out; out.turnedYard = cut; } }
       if (out) { variant.flags.push('turned'); variant.notBuilt = variant.notBuilt.filter(x => x !== 'turned');
-        flags.push(`Turned (spec Part 2): the building takes ${out.W} m of the ${Wfull} m width; the plant stands in a yard about ${out.turnedYard} m wide beside it, the bands still along the street (drawing choice; a screened street-front yard not drawn)`); } }
+        flags.push(`Turned (spec Part 2): the building takes ${out.W} m of the ${Wfull} m width; the plant stands in a yard about ${out.turnedYard} m wide beside it, the bands still along the street (drawing choice; a screened street-front yard not drawn)`); }
+      if (out && out.dcArea < RULES.cap.m2 - 0.5 && !out.sizeStop) { out.sizeStop = { rule: 'turned plant yard', at: out.MW, yard: out.turnedYard };
+        flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard beside the building (${out.turnedYard} m wide, the narrowest that holds the plant) sets the building's width, ${out.MW.toFixed(2)} MW (J.B. 12 Nov 2026)`); } }
   }
   if (!out) { res.doesntFit = { limiting: why }; res.variant = variant; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
     const front = streets.find(e => e.kind === 'front'), fw = front ? Math.hypot(front.b[0] - front.a[0], front.b[1] - front.a[1]) : null;
@@ -420,7 +429,7 @@ function stackedRest(C, B, W, Da) {
     sec(2, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true }), sec(2, 'dcor', 'Secure corridor', 'scor', [SC], { corridor: true }));
   const mw = C.mw, q = (W * Da - 2 * SW * SL - RULES.e2.w * RULES.e2.l);
   const MWest = q / HPM();
-  const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = r2(MWest * 3.8 + 1.0 * PRG.bat.w)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32), 3.8 m² per MW at the high end; was 1.8 for about 5 min */;
+  const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = batRoomM2(MWest, dcFrontD)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32); step 2 (12 Nov): at least the 15-min cabinets in two rows */;
   const frontL = [{ id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: upsM2 }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batM2 },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }];
   const frontR = [{ id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w }, { id: 'valv', n: 'Sprinkler valve room, cylinders', w: PRG.valv.w },
@@ -562,7 +571,7 @@ function narrowLot(C) {
     sec(2, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true }),
     sec(2, 'dcor', 'Secure corridor', 'scor', [[0, aE, Wr, r2(Wr + cw)], [0, cw, SW, Wr], [r2(aE - cw), aE, xL, Wr], [r2(aE - cw), aE, r2(Wr + cw), P.W]].concat(stub ? [stub] : []).filter(r => r[1] - r[0] > 0.01 && r[3] - r[2] > 0.01), { corridor: true }));
   const hallR0 = subAll([[0, aE, 0, P.W]], [S1r]).concat(stub ? [stub] : []), MWest = sum(hallR0.map(ra)) / HPM();
-  const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = r2(MWest * 3.8 + 1.0 * PRG.bat.w)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32), 3.8 m² per MW at the high end; was 1.8 for about 5 min */;
+  const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = batRoomM2(MWest)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32); step 2 (12 Nov): at least the 15-min cabinets in two rows */;
   const sideL = [{ id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: upsM2 }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batM2 },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }, { id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w },
     { id: 'valv', n: 'Sprinkler valve room, cylinders', w: PRG.valv.w }, { id: 'jan', n: 'Janitor (DC)', w: PRG.jan.w }, { id: 'dwc', n: 'DC staff WC, shower', w: PRG.dwc.w }, { id: 'garb', n: 'Garbage and recycling', w: PRG.garb.w }];
@@ -687,7 +696,7 @@ function besideW(C, W) {
   R.push(sec('hall', 'Data hall (one storey)', 'hall', [[aB, aH, 0, W]]), sec('scor', 'Secure corridor', 'scor', [[aH, aS, 0, W]], { corridor: true }));
   const MWest = (dH * W) / HPM();
   const tot = hubArea + clin + dH * W + W * (cw + dS), nb = st.shared ? 1 : (tot < 2500 ? 0 : tot <= 7500 ? 1 : 2);
-  const sI = [{ id: 'pas3', n: 'Exit passage (2 h) from the secure corridor to the rear', fix: pw }, { id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: r2(MWest * 3.3 + 3.0) }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: r2(MWest * 1.8 + 3.0) },
+  const sI = [{ id: 'pas3', n: 'Exit passage (2 h) from the secure corridor to the rear', fix: pw }, { id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: r2(MWest * 3.3 + 3.0) }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batRoomM2(MWest) },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }, { id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w },
     { id: 'valv', n: 'Sprinkler valve room, cylinders', w: PRG.valv.w }, { id: 'pas4', n: 'Exit passage (2 h) from the middle of the secure corridor to the rear', fix: pw }, { id: 'noc', n: 'Security control room / NOC', w: PRG.noc.w }, { id: 'doff', n: 'DC offices', w: PRG.doff.w, m2: PRG.doff.m2 }, { id: 'brk', n: 'DC break room', w: PRG.brk.w, m2: PRG.brk.m2 },
     { id: 'dwc', n: 'DC staff WC, shower', w: PRG.dwc.w }, { id: 'jan', n: 'Janitor (DC)', w: PRG.jan.w }, { id: 'garb', n: 'Garbage and recycling', w: PRG.garb.w }, { id: 'ship', n: 'Shipping, receiving, storage and staging (one room)', w: PRG.ship.w, m2: PRG.ship.m2, grow: true }]
@@ -710,10 +719,17 @@ function besideW(C, W) {
 
 /* ---------- plant (rule 9): generators, transformer pads, chillers with Vertiv clear zones, packed in the yard behind the building ---------- */
 function plantLayout(C, W, Da, MW, rooms) {
-  const Q = MW * 1.55, big = Q > 3, nG = Math.ceil(Q / (big ? 2 : 1)) + 1, nC = Math.ceil(Q / 1.489) + 1, nT = Math.ceil(Q / 2.5) + 1;
-  const tank = MW * 1.55 * 1000 * 12 * ((typeof BD !== 'undefined' && BD.data && BD.data.equipment && BD.data.equipment.fuelLkWh) || 0.264) / Math.ceil(Q / (big ? 2 : 1));   /* 11 Nov 2026 (J.B.): fuel rate from tool/data/equipment.json (Rehlko KD2000 G5-626); was 0.263 written here */
+  /* step 2 (spec v2 items 21-24, 12 Nov 2026): sizing to load from the shared rule (hubchecks.gens / transformers / hubSet, ported from eh/sizing.py at
+     EH-FREEZE-2026-11-11d): the data centre on its own sets (smallest size with at most 3 duty sets, N+1); transformers carry the data centre and the
+     hub; the hub's own set at grade in its enclosure. Without the ported rule (node tests of the old layout) the earlier fixed sizes stand. */
+  const HX = HC(), Q = MW * 1.55, city = C.S && C.S.city === 'edm' ? 'e' : 'v';
+  const hubKw = HX ? HX.hubLoad({ S: rooms }, Math.floor((rooms && rooms[1] ? rooms[1] : []).filter(x => x.g === 'pub' && /^ref/.test(x.id)).reduce((a, x) => a + x.r.reduce((b, r) => b + (r[1] - r[0]) * (r[3] - r[2]), 0), 0) / 3.5)).kw : 0;
+  const gz = HX ? HX.gens(Q, 0) : null, tz = HX ? HX.transformers(Q, hubKw, city) : null, hs = HX ? HX.hubSet(hubKw) : null;
+  const big = gz ? gz.kw >= 2000 : Q > 3, setKW = gz ? gz.kw : big ? 2000 : 1000;
+  const nG = gz ? gz.n : Math.ceil(Q / (big ? 2 : 1)) + 1, nC = Math.ceil(Q / 1.489) + 1, nT = tz ? tz.n : Math.ceil(Q / 2.5) + 1;
+  const tank = gz ? gz.tank_l : MW * 1.55 * 1000 * 12 * ((typeof BD !== 'undefined' && BD.data && BD.data.equipment && BD.data.equipment.fuelLkWh) || 0.264) / Math.ceil(Q / (big ? 2 : 1));   /* 11 Nov 2026 (J.B.): fuel rate 0.264 (Rehlko KD2000 G5-626) */
   const tankLot = tank >= 2500 && tank <= 50000 ? 3.0 : tank < 2500 ? null : null, tankBld = tank >= 2500 ? 1.5 : null;
-  const G = { l: 8.43, w: 2.62 }, T = { l: 2.49, w: 2.63 }, CH = { l: 12.14, w: 2.36, side: 1.5, end: 2.1 };
+  const G = gz && gz.footprint ? { l: gz.footprint[0], w: gz.footprint[1] } : { l: 8.43, w: 2.62 }, T = tz ? { l: tz.pad[0], w: tz.pad[1] } : { l: 2.49, w: 2.63 }, CH = { l: 12.14, w: 2.36, side: 1.5, end: 2.1 };
   const aP = r2(Da + RULES.aisle.w), items = [], why = [];
   /* turned (F2b): the yard beside the building also holds plant; the building and its rear aisle are kept clear, 1.5 m around (tanks to the building, CSA B139) */
   const side = !!C.maxW || !!C.keeps, Wscan = C.maxW ? (C.Wfull || W) : W;
@@ -738,19 +754,25 @@ function plantLayout(C, W, Da, MW, rooms) {
     return null; };
   /* transformer pads: front row on the yard aisle (front faces the aisle, 3 m clear in front: the aisle; 1 m apart and from structures; BC Hydro ES54 F) */
   for (let i = 0; i < nT; i++) { const p = tryPlace({ L: T.l, Wd: T.w, gap: 1.0 }, side ? null : aP); if (!p) { why.push(`transformer pad ${i + 1} of ${nT}`); break; }
-    items.push({ id: 't' + (i + 1), n: `Transformer pad ${i + 1}`, kind: 'pad', r: p.r, z: p.r, keep: grow(p.r, 1.0), front: 'faces the yard aisle' }); }
+    items.push({ id: 't' + (i + 1), n: `Transformer pad ${i + 1}${tz ? `, ${tz.kva.toLocaleString('en-CA')} kVA (${tz.pad_src})` : ''}`, kind: 'pad', r: p.r, z: p.r, keep: grow(p.r, 1.0), front: 'faces the yard aisle' }); }
   /* generators at grade (FM 5-32 2.6.4.3): sets 2.0 m apart (CSA C282 6.5.1.1); tanks 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2) */
   for (let i = 0; i < nG; i++) { const p = tryPlace({ L: G.l, Wd: G.w, gap: 2.0, lot: tankLot, rot: true }); if (!p) { why.push(`generator ${i + 1} of ${nG}`); break; }
-    items.push({ id: 'g' + (i + 1), n: `Generator ${i + 1}, ${big ? '2,000' : '1,000'} kW, sub-base tank`, kind: 'gen', r: p.r, z: p.r, keep: grow(p.r, 2.0) }); }
+    items.push({ id: 'g' + (i + 1), n: `Generator ${i + 1}, ${setKW.toLocaleString('en-CA')} kW${gz ? ' ' + gz.model : ''}, sub-base tank`, kind: 'gen', r: p.r, z: p.r, keep: grow(p.r, 2.0) }); }
+  /* the hub's own set (J.B. 11 Nov; spec item 22): at grade in its enclosure, 2.0 m from the other sets (CSA C282 6.5.1.1). Where the yard can't hold it the
+     data centre is not made smaller for it: flagged instead (the spec's HUBGEN room upstairs is not drawn yet ?) */
+  let hubSetOut = null;
+  if (hs && hs.kw) { const e = hs.enclosure ? hs.enclosure[0] : hs.footprint; const p = e ? tryPlace({ L: e[0], Wd: e[1], gap: 2.0, rot: true }) : null;
+    if (p) items.push({ id: 'h1', n: `Hub generator, ${hs.model} (${hs.kw} kW standby), in its enclosure`, kind: 'gen', hub: true, r: p.r, z: p.r, keep: grow(p.r, 2.0) });
+    else hubSetOut = `the hub's own set (${hs.model}) does not fit in the yard at grade: its own 2 h room is not drawn yet (?)`; }
   /* chillers (Vertiv Liebert AFC): 1.5 m on each long side, 2.1 m at each end, zones not shared (3.0 / 4.2 m between units, our reading); long axis along a, panel end to the yard aisle */
   const lowRoof = C.lowRoof || null; let onRoof = 0;
   for (let i = 0; i < nC; i++) { let p = roof ? null : tryPlace({ L: CH.l, Wd: CH.w, zone: r => [r2(r[0] - CH.end), r2(r[1] + CH.end), r2(r[2] - CH.side), r2(r[3] + CH.side)], zoneR: r => [r2(r[0] - CH.side), r2(r[1] + CH.side), r2(r[2] - CH.end), r2(r[3] + CH.end)], gap: 0, rot: true });
     if (!p && lowRoof) { for (const rr of (lowRoof.rs || [lowRoof.r])) { roof = rr; p = tryPlace({ L: CH.l, Wd: CH.w, zone: r => [r2(r[0] - CH.end), r2(r[1] + CH.end), r2(r[2] - CH.side), r2(r[3] + CH.side)], zoneR: r => [r2(r[0] - CH.side), r2(r[1] + CH.side), r2(r[2] - CH.end), r2(r[3] + CH.end)], gap: 0, rot: true }, null, true); if (p) break; } if (p) onRoof++; }
     if (!p) { why.push(`chiller ${i + 1} of ${nC}`); break; }
     items.push({ id: 'c' + (i + 1), n: `Chiller ${i + 1} (${roof ? (lowRoof.what || 'on the hub roof') + ', ' + lowRoof.z + ' m' : 'at grade'})`, kind: 'chiller', roof: !!roof, r: p.r, z: p.z, keep: p.z, panel: p.rot ? 'end toward the side (long axis across the lot: panel end to an access path ?)' : 'end toward the yard aisle' }); }
-  const ok = !why.length; if (onRoof) why.length = 0;
+  const ok = !why.length, whyAll = why.length ? why.join(', ') + ' do not fit in the yard or on the lower roof' : null; if (onRoof) why.length = 0;
   for (let i = items.length - 1; i >= 0; i--) if (items[i].pseudo) items.splice(i, 1);
-  return { ok, why: why.length ? why.join(', ') + ' do not fit in the yard' : null, Q: r2(Q), nG, nC, nT, setKW: big ? 2000 : 1000, tank: Math.round(tank), tankLot, tankBld, items, aisle: [Da, aP],
+  return { ok, why: why.length ? why.join(', ') + ' do not fit in the yard' : null, whyAll, Q: r2(Q), nG, nC, nT, setKW, gen: gz, tx: tz, hubSet: hs, hubKw: r2(hubKw), hubSetOut, tank: Math.round(tank), tankLot, tankBld, items, aisle: [Da, aP],
     rules: ['generators and pads at grade (FM 5-32 2.6.4.3, insurer)', 'sets 2.0 m apart (CSA C282 6.5.1.1)', `tank ${Math.round(tank)} L a set: 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2)`,
       'pads 1 m apart and from structures, 3 m clear in front, front to the aisle (BC Hydro ES54 F; drawing choice)', 'chiller clear zones 1.5 m long sides, 2.1 m ends, 2.5 m above (open sky); 3.0 / 4.2 m between units (Vertiv SL-70790 s. 4.2.4, our reading)',
       'chillers ≥ 5 m from drains: drains not drawn (?); A2L leak distance ? ; MV/HV distance ?', 'chillers at grade, never on the hall roof (FM 5-32 2.2.1.6)'] };
@@ -969,7 +991,7 @@ function v2Checks(L, S) {
   m.dc = sts.reduce((a, st) => a + G.S[st].filter(x => ['hall', 'sup'].includes(x.g) || (st > 1 && x.g === 'spare')).reduce((b, x) => b + area(x), 0), 0);
   m.gen1 = 78 - 20 * Math.log10(6.1 / 7); m.genall = m.gen1 + 10 * Math.log10(m.ngen);
   const rows = H.commonChecks(G, cfg, m);
-  return { rows, cfg, notDrawn: ['plant yards and gates (step 4)', 'pad kVA labels and the hub set (step 2)', '2 h wall marks (steps 3–4)', 'fuel fill (step 5)'], version: H.version };
+  return { rows, cfg, notDrawn: ['plant yards and gates (step 4)', '2 h wall marks (steps 3–4)', 'fuel fill (step 5)'], version: H.version };
 }
 
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
@@ -992,7 +1014,7 @@ function grown(S) {
   return { L: L0, S }; }
 function fromSite(S0) {
   const G = grown(S0), S = G.S; let L = G.L;
-  if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop) { L.sizeStop = L1.sizeStop; L.flags.push(L1.flags.find(f => /^Data centre smaller than the 2,325/.test(f))); } }
+  if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop && !L.sizeStop) { L.sizeStop = L1.sizeStop; L.flags.push(L1.flags.find(f => /^Data centre smaller than the 2,325 m² floor cap: exit spacing/.test(f))); } }
   if (L.rooms && !L.v2) withV2(L, S);
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
