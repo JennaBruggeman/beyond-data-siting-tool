@@ -777,7 +777,13 @@ const HARD = { 'loading space': [true, null], 'exit passage|exit steps': [true, 
 const CORRIDOR_CODE = 1.1;
 function hard(n) { const l = n.toLowerCase(); for (const R of RULES) if (R[0].test(l)) { const h = HARD[R[4]] || [false, false]; return [!!h[0], !!h[1]]; } return [false, false]; }
 function rule(n) { const l = n.toLowerCase(); for (const R of RULES) if (R[0].test(l)) return [R[1], R[2], R[3]]; return null; }
+/* 12 Nov 2026 (speed, hub.js): the same rooms are audited by the battery and width rows; the result is cached per room set (read-only callers; same rows) */
+const AUDIT_CACHE = new WeakMap();
 function auditGeom(S, name = '', fold = '') {
+  const c = AUDIT_CACHE.get(S), k = name + '|' + fold; if (c && c.has(k)) return c.get(k);
+  const out = auditGeom0(S, name, fold); if (c) c.set(k, out); else AUDIT_CACHE.set(S, new Map([[k, out]])); return out;
+}
+function auditGeom0(S, name = '', fold = '') {
   const rows = [];
   for (const st of Object.keys(S).map(Number).sort((a, b) => a - b)) {
     const rooms = S[String(st)];

@@ -94,6 +94,12 @@ const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 
 /* battery room (step 2, spec item 24, 12 Nov 2026): the larger of 3.8 m² per MW + the 3.0 m strip (F11 B4) and the room the 15-min cabinets need:
    Vertiv EnergyCore Li5 124.4 kW a cabinet for 15 min (R.equip.cabKW; maker claim), two rows 0.6 m a cabinet facing one 0.914 m aisle, 1.1 m at the door end
    (hubchecks battRoom, eh/sizing.py), in a 3.0 m strip (2.9 m clear, 0.1 m wall) */
+/* step 3 (spec v2 item 4, 12 Nov 2026): rooms are drawn to wall centrelines and checked on clear sizes (spec: 0.15 m off fire and exterior walls, 0.05 m off
+   partitions). A room with a sourced minimum (steps 1-4) is drawn with the worst case, 0.15 m a side, so its clear size meets the minimum whatever walls it
+   gets; judged sizes (steps 5-6) stay as drawn (they read tight, judged). d = the depth of the row the room is packed in. */
+const WALLX = 0.3;
+function progOf(x) { return PRG[x.prog] || PRG[x.id] || PRG[(x.id || '').replace(/\d+$/, '')] || null; }
+function sizedW(x, d) { const p = progOf(x), a = p && p.step != null && p.step <= 4 ? WALLX : 0; return Math.max((x.w || 0) + a, x.m2 ? up1(x.m2 / Math.max(0.5, d - a) + a) : 0); }
 function batRoomM2(mw, d) { d = d || PRG.bat.w; const n = Math.max(1, Math.ceil(mw * 1000 / 124.4 - 1e-9)), len = Math.ceil(n / 2) * 0.6 + 1.1 + 0.2; return r2(Math.max(mw * 3.8 + 1.0 * PRG.bat.w, len * d)); }   /* d: the depth the room is packed at (its length = m² ÷ d); 0.2 m of walls */
 function HPM() { return (typeof BD !== 'undefined' && BD.hallDensity) ? BD.hallDensity() : RULES.hallPerMW.v; }
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
@@ -205,12 +211,16 @@ function layout(S0) {
     { k: 5, t: 'shared loading by approval (Parking By-law 5.1.5)', exams: 0, shelter: false, shared: true }];
   const ladder = extra => { const why = [];
     for (const st of lad) {
-      const tryMW = mw => (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {}));
-      let mw = S.mwStart || r2(RULES.cap.m2 / HPM()), L = tryMW(mw);   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
+      const tryMW = mw => { const X = (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {})); X.mwUsed = mw; return X; };
+      let mw = S.mwExact || S.mwStart || r2(RULES.cap.m2 / HPM()), L = tryMW(mw);   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
       if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
       /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
       const big0 = L.plant && !L.plant.ok ? { MW: L.MW, why: L.plant.why || L.plant.whyAll || 'reason not recorded (?)' } : null;   /* step 2 (12 Nov 2026): the stopping rule named when the plant yard sets the size */
-      let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - Math.max(0.25, L.MW * 0.06)); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail || L2.MW >= L.MW - 0.01) break; L = L2; }   /* the narrow layout's hall is set by the footprint: no smaller hall to try */
+      let guard = S.mwExact ? 99 : 0, mFail = null; while (L.plant && !L.plant.ok && guard++ < 16) {   /* S.mwExact (pushBack's trials): the size is settled, no search */
+        mFail = mw; mw = r2(L.MW - Math.max(0.25, L.MW * 0.06)); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail || L2.MW >= L.MW - 0.01) break; L = L2; }
+      /* 12 Nov 2026 (hub re-run of 339; freeze 11e rule): the coarse steps can jump a sizing switch point (3 MW facility: 2,000 kW sets and a 4th chiller above,
+         1,000 kW below), so back from the last size that failed in 0.05 MW steps, the plant re-sized and placed at each, the largest that fits kept */
+      if (mFail != null && !S.mwExact && L.plant && L.plant.ok) { for (let m = r2(mFail - 0.05), k = 0; m > mw + 1e-6 && k < 40; m = r2(m - 0.05), k++) { const L2 = tryMW(m); if (!L2.fail && L2.plant && L2.plant.ok && L2.MW > L.MW + 1e-3) { L = L2; break; } } }   /* the narrow layout's hall is set by the footprint: no smaller hall to try */
       if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
       if (big0 && L.plant && L.plant.ok && L.MW < big0.MW - 1e-3 && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'plant yard', at: L.MW, tried: big0.MW, why: big0.why };
         flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard stops it at ${L.MW.toFixed(2)} MW (at ${big0.MW.toFixed(2)} MW: ${big0.why}; J.B. 12 Nov 2026)`); }
@@ -342,20 +352,21 @@ function stackedRows(C) {
   if (r2(sp[1] - sp[0]) < W - 0.01) { W = r2(sp[1] - sp[0]); B = build(W, Da); if (B.fail) return B; }
   const bOrigin = C.sv < 0 ? sp[1] : sp[0];
   C.mapUV = (a, b) => [C.uOf(C.a0 + a), bOrigin + C.sv * b];
-  const L = stackedRest(C, B, W, Da);
+  const L = stackedRest(C, B, W, Da, true);
   if (L.fail) return L;
   Object.assign(L, { W, Da, bOrigin });
   /* hub cap: data centre ≤ 2,325 m² */
-  let guard = 0; while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 60) { const Da2 = r2(L.Da - 0.5); if (Da2 < minDa) break; const L2 = stackedRest(C, B, W, Da2); if (L2.fail) break; Object.assign(L2, { W, Da: Da2, bOrigin }); Object.assign(L, L2); L.capped = true; }
+  let guard = 0; while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 60) { const Da2 = r2(L.Da - 0.5); if (Da2 < minDa) break; const L2 = stackedRest(C, B, W, Da2, true); if (L2.fail) break; Object.assign(L2, { W, Da: Da2, bOrigin }); Object.assign(L, L2); L.capped = true; }
   /* 10 Nov 2026 fix (J.B.: the cap holds on every lot; 1515 Boundary Rd was 3,392 m²): where the depth can't come down further, the building narrows
      1 m at a time from the far side (the drive side stays; the rest of the land stays open, as the large-lot rule); if it still can't, the hub doesn't fit */
   if (L.dcArea > RULES.cap.m2 + 0.5) { let W2 = W; const Da0 = L.Da;
-    while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 260) { W2 = r2(W2 - 1); if (W2 < 15) break; const B2 = build(W2, Da0); if (B2.fail) continue; const L2 = stackedRest(C, B2, W2, Da0); if (L2.fail) continue;
+    while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 260) { W2 = r2(W2 - 1); if (W2 < 15) break; const B2 = build(W2, Da0); if (B2.fail) continue; const L2 = stackedRest(C, B2, W2, Da0, true); if (L2.fail) continue;
       Object.assign(L2, { W: W2, Da: Da0, bOrigin }); Object.assign(L, L2); L.capped = true; L.capW = { from: W, to: W2 }; }
     if (L.dcArea > RULES.cap.m2 + 0.5) return { fail: `the data centre stays ${Math.round(L.dcArea)} m² at the smallest depth and width tried, over the hub cap of ${RULES.cap.m2} m² (J.B. 8 Nov)` }; }
+  L.plant = plantLayout(C, L.W, L.Da, L.MW, L.rooms);
   return L;
 }
-function stackedRest(C, B, W, Da) {
+function stackedRest(C, B, W, Da, noPlant) {
   const { st, van } = C, cw = RULES.cor.w, SW = RULES.stair.w, SL = RULES.stair.l, sm = RULES.smallRoom.w;
   const R = B.R.slice(), aB = B.aB, aC = B.aC, aR = B.aR, dF = B.dF;
   /* loading count (rule 10) needs the areas: first the rooms, then the bays */
@@ -461,7 +472,7 @@ function stackedRest(C, B, W, Da) {
   const rooms = { 1: R, 2: R2, 3: R3 };
   const H = [C.ground, RULES.storeyH.up, RULES.storeyH.hall];
   const truck = { court: [r2(aB + bayL), r2(Da + RULES.aisle.w), 0, W], covered: [r2(aB + bayL), Da, 0, W], why: 'bays open to a covered truck court under storeys 2–3, reached from the drive; 6.1 m yard aisle behind the building (Parking By-law 5.4.1 aisle; drawing choice)' };
-  const plant = plantLayout(C, W, Da, MW, rooms);
+  const plant = noPlant ? null : plantLayout(C, W, Da, MW, rooms);   /* noPlant: the cap's depth search (12 Nov 2026, speed): the plant is placed once on the depth kept */
   return { rooms, H, hall, MW, dcArea, hubArea, clin, nb, nDC, nRef, nCl, clinWhy, shared: st.shared, truck, plant, aB, aC, aR, dF, kind: 'stacked', storeyNames: ['Hub at grade; data-centre entrance rooms only', 'Clinic over the hub; data-centre support', 'One data-hall storey'] };
 }
 /* ---------- NARROW (F2b, 10 Nov 2026): the stacked hub with its bands running back from the street (RULES.narrow) ----------
@@ -738,17 +749,18 @@ function plantLayout(C, W, Da, MW, rooms) {
   /* candidate test in the local frame: inside the yard (and off the drive), clear of everything placed (with their keep-outs) */
   let roof = null;   /* chillers on the lower roof over the hub block when the yard cannot hold them (spec rule 1: a lower roof not over the hall) */
   const okRect = (r, keepLot) => { if (roof) return r[0] >= roof[0] - 1e-6 && r[1] <= roof[1] + 1e-6 && r[2] >= roof[2] - 1e-6 && r[3] <= roof[3] + 1e-6; for (let a = r[0]; a <= r[1] + 1e-9; a += Math.max(0.5, (r[1] - r[0]) / 6)) for (let b = r[2]; b <= r[3] + 1e-9; b += Math.max(0.5, (r[3] - r[2]) / 6)) { const [u, v] = C.mapUV(Math.min(a, r[1]), Math.min(b, r[3])); if (!C.inYard(u, v) || C.inDrive(u, v)) return false; } return true; };
+  const ptD = (a, b) => { const p = C.mapUV(a, b); let m = 1e9; for (let i = 0; i < C.S.ring.length; i++) m = Math.min(m, dSeg(p, C.S.ring[i], C.S.ring[(i + 1) % C.S.ring.length])); return m; };
   const hit = (r, s) => r[0] < s[1] - 1e-6 && r[1] > s[0] + 1e-6 && r[2] < s[3] - 1e-6 && r[3] > s[2] + 1e-6;
   const grow = (r, d) => [r[0] - d, r[1] + d, r[2] - d, r[3] + d];
-  const lotDist = r => { let m = 1e9; for (const [a, b] of [[r[0], r[2]], [r[0], r[3]], [r[1], r[2]], [r[1], r[3]], [(r[0] + r[1]) / 2, r[2]], [(r[0] + r[1]) / 2, r[3]], [r[0], (r[2] + r[3]) / 2], [r[1], (r[2] + r[3]) / 2]]) { const p = C.mapUV(a, b); for (let i = 0; i < C.S.ring.length; i++) m = Math.min(m, dSeg(p, C.S.ring[i], C.S.ring[(i + 1) % C.S.ring.length])); } return m; };
+  const lotDist = r => { let m = 1e9; for (const [a, b] of [[r[0], r[2]], [r[0], r[3]], [r[1], r[2]], [r[1], r[3]], [(r[0] + r[1]) / 2, r[2]], [(r[0] + r[1]) / 2, r[3]], [r[0], (r[2] + r[3]) / 2], [r[1], (r[2] + r[3]) / 2]]) m = Math.min(m, ptD(a, b)); return m; };
   const span = r2(Math.max(40, C.aMax + 60));
   const tryPlace = (it0, aFix) => { for (const rot of (it0.rot ? [false, true] : [false])) { const it = rot ? Object.assign({}, it0, { L: it0.Wd, Wd: it0.L, zone: it0.zoneR }) : it0;
     const aS0 = roof ? roof[0] : aFix != null ? aFix : side ? 0 : aP, aS1 = roof ? roof[1] : aFix != null ? aFix : Da + span;
     for (let a = aS0; a <= aS1; a = r2(a + 0.5)) for (let b = roof ? roof[2] : -10; b <= (roof ? roof[3] : Wscan + 10); b = r2(b + 0.5)) {
       const r = [a, r2(a + it.L), b, r2(b + it.Wd)], z = it.zone ? it.zone(r) : r;
+      if (items.some(o => !!o.roof === !!roof && (hit(z, o.keep) || hit(o.z, it.keepFor ? it.keepFor(r) : grow(r, 0)) || hit(grow(r, it.gap || 0), o.r)))) continue;   /* the cheap test first (12 Nov 2026: same result, much faster) */
       if (!okRect(r) || (it.zone && !okRect(z))) continue;
       if (it.lot != null && lotDist(r) < it.lot - 1e-6) continue;
-      if (items.some(o => !!o.roof === !!roof && (hit(z, o.keep) || hit(o.z, it.keepFor ? it.keepFor(r) : grow(r, 0)) || hit(grow(r, it.gap || 0), o.r)))) continue;
       return { r, z, rot };
     } }
     return null; };
@@ -1014,7 +1026,7 @@ function grown(S) {
   return { L: L0, S }; }
 function fromSite(S0) {
   const G = grown(S0), S = G.S; let L = G.L;
-  if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop && !L.sizeStop) { L.sizeStop = L1.sizeStop; L.flags.push(L1.flags.find(f => /^Data centre smaller than the 2,325 m² floor cap: exit spacing/.test(f))); } }
+  if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop && !L.sizeStop) { L.sizeStop = L1.sizeStop; const ff = L1.flags.find(f => /^Data centre smaller than the 2,325 m² floor cap/.test(f)); if (ff) L.flags.push(ff); } }
   if (L.rooms && !L.v2) withV2(L, S);
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
@@ -1031,8 +1043,8 @@ function pushBack(S, L) {
   if (room < 0.5) { L.frontYard = { depth: 0, why: 'the hub already reaches the rear yard line' }; return L; }
   /* the largest move that keeps the same hub: the full move first, then halving to 0.5 m (assumes a smaller move fits where a larger one does) */
   const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length + (X.apart || []).filter(a => a.status === 'fail').length;   /* exit spacing counted (12 Nov 2026: the moved hub can be narrower or wider) */
-  const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && Math.abs(X.MW - L.MW) <= 0.01;   /* same MW (J.B. 10 Nov: same building, moved) */
-  const tryS = sh => layout(Object.assign({}, S, { frontShift: sh, noV2: true }));
+  const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && Math.abs(X.MW - L.MW) <= 0.01 && (!X.plant || X.plant.ok);   /* same MW (J.B. 10 Nov: same building, moved) */
+  const tryS = sh => layout(Object.assign({}, S, { frontShift: sh, noV2: true, mwExact: L.mwUsed || undefined }));   /* the same size, not searched again (12 Nov 2026) */
   let best = null; { const Lh = tryS(room); if (ok(Lh)) best = [room, Lh]; }
   if (!best) { let lo = 0, hi = room;   /* bisection on a 0.5 m grid: lo always fits (0 = the first pass), hi does not */
     while (hi - lo > 0.5 + 1e-9) { let mid = Math.round(lo + hi) / 2; if (mid <= lo) mid = r2(lo + 0.5); if (mid >= hi) mid = r2(hi - 0.5); const Lm = tryS(mid); if (ok(Lm)) { lo = mid; best = [mid, Lm]; } else hi = mid; } }
