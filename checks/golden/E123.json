@@ -1378,7 +1378,7 @@
     "genLines": [
      "18 generator sets of about 2 MW carry 34.4 MW; with spares, <b>19</b>. Placed: 0 on the roof, 3 in the yard.",
      "Each about 13.493 × 3.488 m, 4.777 m high; 1.5 m from the building, 2 m between sets (1 m clear all round, CSA C282 6.5.1.1; register arch_csa_c282).",
-     "Fuel in each set's sub-base tank: about 6000 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
+     "Fuel in each set's sub-base tank: about 6100 L. In the yard: 3 m from the property line and 1.5 m from the building (CSA B139.1.0 Table 2; register arch_csa_b139). On a roof: at most 1,250 L a tank and 2,500 L a supply line (B139.1.1 6.5.3). FM 5-32 (insurer guidance, not law): not on the roof or in a basement.",
      "<span class=\"src\">Standby diesel generator sets in Sound Level 2 enclosures with sub-base tanks. Basis units: Rehlko (Kohler) KD2000, 2,000 kW standby (data-centre continuous rating the same), 13.49 × 3.49 m, up to 4.78 m high (G5-626, rev 6/24); KD1000, 1,000 kW, 8.43 × 2.62 m, 3.71 m high with the 12 h tank (G6-154, 12/23). Both EPA Tier 2, cULus (UL 2200, CSA C22.2 No. 100); manufacturer claims. Chosen 29 Oct 2026 as the middle of Cat, Rehlko and Generac: 2 MW 18.5–38.4 m² per MW, 1 MW 19.5–22.4. 1 m clear around each set (Cummins application manual; not checked ?); 1.5 m from wall openings…"
     ],
     "short": "Doesn't fit: 16 of 19 generators do not fit in the yard. Try for the generators: a smaller footprint (set the coverage in step 2) or the roof; or a smaller size.",
@@ -1387,13 +1387,14 @@
     "genYard": 19,
     "genRoof": 0,
     "genTank": {
-     "L": 6033.22,
+     "L": 6056.16,
      "bld": 1.5,
      "pl": 3,
      "over": false
     },
     "skew": 3,
     "endExtra": 1.626785,
+    "genPerRow": 6,
     "truck": null,
     "bigYard": 26,
     "yard": "[ring 8]",
