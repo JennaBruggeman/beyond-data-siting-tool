@@ -131,7 +131,11 @@ function snap(x,y){ let best=null; for(const nb of R.nbList){ const b=nb.b; cons
 /* ---------- the data-centre model ---------- */
 /* ---------- equipment kit and envelope (29 Oct 2026) ---------- */
 const KITOF={'dry coolers':'dry','air-cooled chillers':'chill','hybrid coolers':'hybrid','cooling tower cells':'tower','standby generators':'genset'};
-function kitUnit(b){ const k=KITOF[b.name]; if(!k||!BD.kit) return null; const r=b.ring; if(!r||r.length<8) return null;
+/* J.B. 12 Nov 2026 (two levels of equipment drawing): the detailed kit models (plant units, the hall fit-out) show only on the Engineering
+   template; Architecture, Municipal and Resident see plant and rooms as plain massing. The open template: the card viewer's, else the old
+   interface's tier ('full' is Engineering there). Counts and checks are computed the same either way. */
+function kitOK(){ const v=BD.f1&&BD.f1.cur?BD.f1.cur():null; if(v) return v==='engineering'; const t=BD.tier&&BD.tier(); return t==='full'||t==='engineering'; }
+function kitUnit(b){ const k=KITOF[b.name]; if(!k||!BD.kit||!kitOK()) return null; const r=b.ring; if(!r||r.length<8) return null;
   const p=i=>[r[2*i],r[2*i+1]], P0=p(0), P1=p(1), P2=p(2), e1=[P1[0]-P0[0],P1[1]-P0[1]], e2=[P2[0]-P1[0],P2[1]-P1[1]], l1=Math.hypot(...e1), l2=Math.hypot(...e2);
   const along=l1>=l2?e1:e2, L=Math.max(l1,l2), W=Math.min(l1,l2); let cx=0,cy=0; const n=Math.min(4,r.length/2); for(let i=0;i<n;i++){ cx+=r[2*i]; cy+=r[2*i+1]; } cx/=n; cy/=n;
   let g; try{ g=BD.kit.make(k); }catch(e){ return null; } const s=g.userData.spec;
@@ -199,8 +203,8 @@ function dcMass(M){ if(!BD.dcRooms||!M||!M.F||M.existing||!M.serverFoot||!M.nF||
   if(M.hallTop){ const ftf=BD.eng.R.ftf, k=Math.max(1,M.hallData||1); z0=g0?ftf.ground:0; for(let j=0;j<k;j++) fh.push(j===0&&!g0?ftf.ground:ftf.up[1]); } /* hall fix storeys (site.js hallOptions) */
   else { const n=Math.max(1,M.nF[0]), h=M.H/n, k=Math.max(1,M.hallData||n-g0); z0=g0*h; for(let j=0;j<k;j++) fh.push(h); } /* as the envelope and the racks draw them (H/n) */
   return BD.dcRooms.layout({F,u:[a,b],v:[c,d],z0,fh,mw,end:'hi',ground:z0}); }
-function dcView(){ const eq=(BD.S.dcView||'massing')==='equip', on=state.tab!=='arch'; if(state.massG) state.massG.visible=on&&!eq; if(state.eqG) state.eqG.visible=on&&(eq||!state.massG);
-  const g=document.getElementById('v3dv'); if(g){ g.style.display=on&&state.massG&&state.eqG?'':'none'; g.querySelectorAll('button').forEach(b=>{ const a=(b.dataset.dv==='equip')===eq; b.style.cssText=`font:inherit;font-size:12px;padding:2px 9px;margin-left:4px;border-radius:4px;cursor:pointer;color:#1F2022;border:1px solid ${a?'#CC746C':'#D7D7D4'};background:${a?'rgba(204,116,108,.25)':'transparent'}`; }); } }
+function dcView(){ const eq=kitOK()&&(BD.S.dcView||'massing')==='equip', on=state.tab!=='arch'; if(state.massG) state.massG.visible=on&&!eq; if(state.eqG) state.eqG.visible=on&&kitOK()&&(eq||!state.massG);
+  const g=document.getElementById('v3dv'); if(g){ g.style.display=on&&state.massG&&state.eqG&&kitOK()?'':'none';   /* the massing / equipment switch: Engineering only */ g.querySelectorAll('button').forEach(b=>{ const a=(b.dataset.dv==='equip')===eq; b.style.cssText=`font:inherit;font-size:12px;padding:2px 9px;margin-left:4px;border-radius:4px;cursor:pointer;color:#1F2022;border:1px solid ${a?'#CC746C':'#D7D7D4'};background:${a?'rgba(204,116,108,.25)':'transparent'}`; }); } }
 function massLabels(){ const L=state.mass; if(!L||!state.massG||!state.massG.visible) return; const seen=new Set();
   for(const p of L.pieces.slice().reverse()){ if(seen.has(p.id)) continue; seen.add(p.id); if(p.id==='rest'&&p.m2<20) continue; /* drawing */ /* no label on a sliver */ const r=L.rooms.find(x=>x.id===p.id), c=BD.centroid(p.ring), top=V(c[0],c[1],p.base+p.h);
     label(r?`${p.name} · ${BD.fmt(Math.round(r.m2))} m²${p.id==='hall'?'':' (first hall floor)'}`:p.name,top.clone().add(new T.Vector3(0,p.id==='hall'?8:14,0)),'#6E6E6B',{prio:p.id==='hall'?7:p.id==='rest'||p.id==='gst'?3:6,from:top}); } } /* drawing */

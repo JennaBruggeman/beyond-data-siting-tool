@@ -99,6 +99,6 @@ function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return; co
 /* first screen: the landing page, unless a parcel link was opened, ?old is in the address, or a script asked to skip it (f1_capture.js) */
 function boot(){ if(!BD||!BD.S||!BD.select) return setTimeout(boot,200); let skip=false; try{ skip=localStorage.getItem('bd-f1-skip')==='1'; }catch(e){}
   if(skip||/[?&]old\b/.test(location.search)||BD.S.sel) return; landing(); }
-BD.f1={landing,viewer,TPL};
+BD.f1={landing,viewer,TPL,cur:()=>(document.getElementById('f1v')&&V.t)?V.t.id:null};   /* cur: the open template (12 Nov 2026: the 3D kit shows on Engineering only) */
 boot();
 })();
