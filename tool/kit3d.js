@@ -57,10 +57,10 @@ const SPEC={
  transformer:{name:'Pad-mounted transformer 2,500 kVA (customer-owned)',L:2.565,W:2.515,H:1.854,pad:[2.667,2.616],src:'Eaton CA08104001E (Apr 2016) p. 17.0-18, Table 17.0-13, 2,500 kVA: cabinet 73 × 101 × 99 in (A height × B width × C depth) = 1.854 × 2.565 × 2.515 m; pad B + 4 in × C + 4 in = 2.667 × 2.616 m (Figure 17.0-12, our reading). The rule (J.B. 12 Nov 2026): above 1,500 kVA in Vancouver, and all of Edmonton, a customer-owned pad-mounted unit, our reading (BC Hydro’s standard stops at 1,500 kVA; EPCOR’s standard not read). Replaces the unit-substation model (CA022021EN).',
    rows:{150:[50,68,49],225:[50,72,53],300:[50,72,55],500:[50,72,61],750:[64,72,63],1000:[64,72,64],1500:[73,89,71],2000:[73,101,75],2500:[73,101,99]},   /* kVA: A height, B width, C depth (in), Table 17.0-13 */
    unsure:['cabinet doors and cooling fins drawn as a typical pad-mounted unit; the sheet gives the outline only']},
- transformerBCH500:{name:'BC Hydro three-phase pad, 500 kVA and smaller',L:1.68,W:1.58,H:0.2,src:'BC Hydro ES54 F3-04.01 (R.6 Feb 2017), three-phase transformer pad 500 kVA and smaller: 1680 × 1580 mm, 200 mm thick (ES54 Section F, p. 16; J.B. 12 Nov 2026). On it, BC Hydro’s own unit (size not published in ES54): drawn to its pad, 0.1 m in from each edge, label "BC Hydro’s unit, drawn to its pad (ES54)" (J.B. 12 Nov 2026); height 1.5 m, a drawing choice. Used in Vancouver up to 500 kVA.',
-   unsure:['unit height 1.5 m: drawing choice (not published)']},
- transformerBCH:{name:'BC Hydro three-phase pad, 750 kVA and larger (to 1,500 kVA)',L:2.20,W:2.20,H:0.2,src:'BC Hydro ES54 F3-05.01 (R.8 Sep 2017), three-phase transformer pad 750 kVA and larger: 2200 × 2200 mm, 200 mm thick (ES54 Section F, p. 21; J.B. 12 Nov 2026). The drawing gives no top limit; above 1,500 kVA the unit is customer-owned (Eaton pad-mount, our reading: Eaton’s 2,500 kVA cabinet, 2.57 m, cannot sit on a 2.20 m pad). On it, BC Hydro’s own unit (size not published in ES54): drawn to its pad, 0.1 m in from each edge, label "BC Hydro’s unit, drawn to its pad (ES54)" (J.B. 12 Nov 2026); height 1.5 m, a drawing choice. Used in Vancouver from 750 to 1,500 kVA.',
-   unsure:['unit height 1.5 m: drawing choice (not published)']},
+ transformerBCH500:{name:'BC Hydro three-phase pad, 500 kVA and smaller',L:1.68,W:1.58,H:0.2,src:'BC Hydro ES54 F3-04.01 (R.6 Feb 2017), three-phase transformer pad 500 kVA and smaller: 1680 × 1580 mm, 200 mm thick (ES54 Section F, p. 16; J.B. 12 Nov 2026). On it, BC Hydro’s own unit (size not published in ES54): drawn to its pad, 0.1 m in from each edge, label "BC Hydro’s unit, drawn to its pad (ES54)" (J.B. 12 Nov 2026); height from a comparable pad-mounted unit (Eaton CA08104001E Table 17.0-13, dimension A for the same kVA: 500 kVA 50 in, 750–1,000 kVA 64 in, 1,500 kVA 73 in), our reading. Used in Vancouver up to 500 kVA.',
+   unsure:[]},
+ transformerBCH:{name:'BC Hydro three-phase pad, 750 kVA and larger (to 1,500 kVA)',L:2.20,W:2.20,H:0.2,src:'BC Hydro ES54 F3-05.01 (R.8 Sep 2017), three-phase transformer pad 750 kVA and larger: 2200 × 2200 mm, 200 mm thick (ES54 Section F, p. 21; J.B. 12 Nov 2026). The drawing gives no top limit; above 1,500 kVA the unit is customer-owned (Eaton pad-mount, our reading: Eaton’s 2,500 kVA cabinet, 2.57 m, cannot sit on a 2.20 m pad). On it, BC Hydro’s own unit (size not published in ES54): drawn to its pad, 0.1 m in from each edge, label "BC Hydro’s unit, drawn to its pad (ES54)" (J.B. 12 Nov 2026); height from a comparable pad-mounted unit (Eaton CA08104001E Table 17.0-13, dimension A for the same kVA: 500 kVA 50 in, 750–1,000 kVA 64 in, 1,500 kVA 73 in), our reading. Used in Vancouver from 750 to 1,500 kVA.',
+   unsure:[]},
  switchgear:{name:'Low-voltage switchgear (6 sections drawn)',L:0.813,W:1.778,H:2.438,src:'Siemens Type WL (Siemens Canada catalogue §12): 32 in wide, 96 in high; at least 70 in deep when cable-connected at 3200 A or more; UL 1558, CSA C22.2 No. 31',unsure:['catalogue date not printed']},
  ups:{name:'UPS, 1 MW frame',L:3.6,W:0.9,H:1.97,src:'Schneider Galaxy VX 1000 kW (990-5451L-001): 3600 × 900 × 1970 mm',unsure:['panel divisions drawn; ?']},
  battery:{name:'Lithium-ion battery cabinet',L:0.6,W:0.75,H:2.0,src:'Vertiv EnergyCore Li5, 18 modules (SL-71271 R06/26): 600 × 750 × 2000 mm, 31.1 kWh, 263 kW; CSA mark (UL 1973), tested to UL 9540A; about 4 cabinets per MW for 5 min at end of life (our calculation)',unsure:['axes not labelled on the sheet; 2000 read as height','only one maker\'s cabinet sheet could be read']},
@@ -124,10 +124,10 @@ function vcoil(s,pads){ const g=new T.Group(), L=s.L, H=s.H, cw=2.383, deck=H-0.
 /* pad-mounted transformer (J.B. 12 Nov 2026): concrete pad, cabinet with front doors, cooling fins at the back. dims: the Eaton row for
    the kVA (A height, B width, C depth in inches) or a given cabinet [B, C, A] in metres; the pad: cabinet + 4 in, or the spec's own pad */
 /* BC Hydro pad (ES54 F3-04.01 / F3-05.01) with BC Hydro's own unit on it (J.B. 12 Nov 2026): ES54 doesn't publish the unit's size, so the
-   cabinet is drawn fitted to its pad, 0.1 m in from each edge, labelled "BC Hydro's unit, drawn to its pad (ES54)". Height: BCH_H, a drawing
-   choice (no published figure; Eaton's sizes apply only above 1,500 kVA and in Edmonton). */
-const BCH_H = 1.5;   /* drawing choice */
-function bchPad(s){ const g=padmount(s, null, [s.L-0.2, s.W-0.2, BCH_H]); g.userData.label='BC Hydro’s unit, drawn to its pad (ES54)'; return g; }
+   cabinet is drawn fitted to its pad, 0.1 m in from each edge, labelled "BC Hydro's unit, drawn to its pad (ES54)"; its height is Eaton's
+   for the same kVA (CA08104001E Table 17.0-13, dimension A), labelled "height from a comparable pad-mounted unit (Eaton), our reading". */
+function bchPad(s,kva){ const r=SPEC.transformer.rows[kva]||SPEC.transformer.rows[kva<=500?500:1000], g=padmount(s, null, [s.L-0.2, s.W-0.2, r[0]*0.0254]);
+  g.userData.label='BC Hydro’s unit, drawn to its pad (ES54); height from a comparable pad-mounted unit (Eaton), our reading'; return g; }
 function padmount(s,kva,cab){ const g=new T.Group(), inch=0.0254;
   let B, C, A; if(cab){ [B,C,A]=cab; } else { const r=s.rows[kva]||s.rows[2500]; A=r[0]*inch; B=r[1]*inch; C=r[2]*inch; }
   const PL=cab?s.L:B+4*inch, PW=cab?s.W:C+4*inch, ph=0.2;   /* pad 200 mm, as ES54's pads (Eaton gives none: our reading) */
@@ -182,8 +182,8 @@ const B={
    for(const x of [-L/2+0.3,L/2-0.3]) for(const z of [-W/2-0.05,W/2+0.05]) lug(g,x,0.1,z);
    return g; },
  transformer(o){ return padmount(SPEC.transformer, (o&&o.kva)||2500); },
- transformerBCH500(o){ return bchPad(SPEC.transformerBCH500); },
- transformerBCH(o){ return bchPad(SPEC.transformerBCH); },
+ transformerBCH500(o){ return bchPad(SPEC.transformerBCH500, (o&&o.kva)||500); },
+ transformerBCH(o){ return bchPad(SPEC.transformerBCH, (o&&o.kva)||1000); },
  genset80(o){ const s=SPEC.genset80, g=new T.Group(), L=s.L, W=s.W, H=s.H, need=(o&&o.need_l)||s.fullLoadLh*72, tk=need/1000/(L*W);   /* tank: 72 h fuel ÷ footprint (the hub's way) */
    box(g,L,tk,W,0,0,0,M.dark);                                            // sub-base tank
    box(g,L,H,W,0,tk,0,M.body); box(g,L+0.04,0.05,W+0.04,0,tk+H-0.05,0,M.shade); // enclosure (65 in) on the tank, roof edge
