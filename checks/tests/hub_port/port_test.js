@@ -10,7 +10,9 @@ const only = process.argv.slice(2);
 const norm = s => String(s).replace(/(\d)\.0(?!\d)/g, '$1');
 const res = {}; let totalBad = 0;
 /* accepted by J.B. (11 Nov 2026): shapely leaves one inside corner of the 339 refuge's fire-wall inset unrounded where its outline starts (library quirk) */
-const ACCEPTED = [['v339', 'clear', '1|ref ']];
+const ACCEPTED = [['v339', 'clear', '1|ref '],
+  /* accepted by J.B. (11 Nov 2026): 2 h wall totals 0.02 m apart where shapely starts a union outline ring (Python drops a 0.02 m stub there); every status the same */
+  ['v1360', 'more', 'sep2h.walls'], ['v8238_mid', 'more', 'sep2h.walls'], ['v8980', 'more', 'sep2h.walls'], ['v8980', 'more', 'sep2h.text']];
 const accepted = (fit, d) => ACCEPTED.some(([f, c, w]) => f === fit && d.check === c && d.what.startsWith(w));
 /* the answer key: the 11b boards (Claude Link eh/ic37/) */
 const IC37DIR = process.env.BD_IC37 || 'C:/Users/bangp/Desktop/Claude Link/eh/ic37';
@@ -135,5 +137,5 @@ for (const f of fs.readdirSync(REF).filter(f => f.endsWith('.json')).sort()) {
   console.log(fit.padEnd(10), ['reach', 'yard', 'route', 'portal', 'clear', 'sizing', 'audit', 'rows', 'board', 'more'].map(k => `${k} ${out[k][0]}${out[k][1] ? '/' + out[k][1] + ' DIFF' : ''}`).join('  '));
 }
 fs.writeFileSync(path.join(__dirname, 'port_test_result.json'), JSON.stringify(res, null, 1));
-console.log((totalBad ? `${totalBad} differences (port_test_result.json)` : 'all match') + `; accepted: ${Object.values(res).reduce((n, o) => n + ((o.accepted || []).length), 0)} (339 refuge corner)`);
+console.log((totalBad ? `${totalBad} differences (port_test_result.json)` : 'all match') + `; accepted: ${Object.values(res).reduce((n, o) => n + ((o.accepted || []).length), 0)} (339 refuge corner; 2 h wall stubs)`);
 process.exit(totalBad ? 1 : 0);

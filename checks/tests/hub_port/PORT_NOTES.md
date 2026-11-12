@@ -26,8 +26,8 @@ Port: `tool/hubchecks.js`, from the scripts of **EH-FREEZE-2026-11-11b** (Claude
 - **Failure tests:** 531 replayed calls match (the 458 earlier plus dead ends, egress, pads, intakes, claims called directly by the tests); 6 centreline-mode calls skipped as before.
 - **To match Python exactly** the JS reproduces: CPython's set order (tuple hash and set table) where the dead-end script takes the first of two equally near centreline cells; Python's correctly rounded `math.hypot`; GEOS's point-to-segment arithmetic for distances; and how shapely splits outlines (pieces cut at every room corner on an outline).
 
-### Not matched, for J.B. (no status changes)
-- **2 h walls on 1360, 8238 mid, 8980** (sep2h): Python's wall line is cut where shapely starts each union outline ring, leaving a 0.02 m stub alone, below the script's 0.05 m filter; JS keeps the stub joined to its wall. Totals differ by 0.02 m (8980 storey 2 prints 13.8 m in Python, 13.9 m in JS). All three rows pass either way. Where a union ring starts depends on shapely's internal union order; same kind of library quirk as the 339 corner.
+### Accepted difference 2 (J.B. 11 Nov 2026: listed, no status changes)
+- **2 h walls on 1360, 8238 mid, 8980** (sep2h): Python's wall line is cut where shapely starts each union outline ring, leaving a 0.02 m stub alone, below the script's 0.05 m filter; JS keeps the stub joined to its wall. Totals differ by 0.02 m (8980 storey 2 prints 13.8 m in Python, 13.9 m in JS). All three rows pass either way. Where a union ring starts depends on shapely's internal union order; same kind of library quirk as the 339 corner. A search across all 17 board storeys found no simple rule for the ring start (it follows shapely's internal union order). Listed in `port_test.js` (ACCEPTED).
 
 ## How it's tested
 1. **Boards** (`capture_ref.py` → `port_test.js`): each hub board's own run.py re-run from Claude Link `eh/`; the geometry its checks saw and every result recorded; JS run on the same geometry. 13 boards plus the 8238 mid variant.
