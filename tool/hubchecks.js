@@ -19,7 +19,7 @@ const T = x => !(x == null || x === false || x === 0 || x === '' || (Array.isArr
 const get = (G, k, d) => (G[k] === undefined || G[k] === null) ? d : G[k];
 const isRect = s => s.length === 4 && s.every(v => typeof v === 'number');
 const f1 = x => (Math.round(x * 10 + (x >= 0 ? 1e-9 : -1e-9)) / 10).toFixed(1);   // Python '%.1f' (ties: see PORT_NOTES)
-const pyRound1 = x => Math.round(x * 10) / 10, pyRound2 = x => Math.round(x * 100) / 100;
+const pyRound1 = x => Number(pyFixed(x, 1)), pyRound2 = x => Number(pyFixed(x, 2));   // Python round(x, n): exact binary value, ties to even
 function pyRoundInt(x) { const f = Math.floor(x), d = x - f; return d > 0.5 ? f + 1 : d < 0.5 ? f : (f % 2 === 0 ? f : f + 1); }   // round half to even
 const pyList = a => '[' + a.map(s => `'${s}'`).join(', ') + ']';
 const storeys = G => Object.keys(G.S).map(Number).sort((a, b) => a - b);
@@ -529,6 +529,8 @@ function resolve(G, out) {
 /* ---------- audit_rooms.py: clear sizes (J.B. 11 Nov: rooms drawn to wall centrelines; sizes are clear sizes) ---------- */
 const STEP = 0.05, T_FIRE = 0.30, T_PART = 0.10;
 function lineOf(x, st) { const k = kind(x, st); if (x.core || x.stair || ['pcore', 'score', 'shaft', 'exitpas'].includes(k)) return 'F'; return LINE[k] === undefined ? null : LINE[k]; }
+/* sorted distinct values, kept as computed (edge ± inset in floating point, as GEOS computes them); equal within 1e-9 counts once */
+const uniqRaw = a => { const s = [...a].sort((p, q) => p - q); return s.filter((v, i) => i === 0 || v - s[i - 1] > 1e-9); };
 const uniq = a => { const s = [...a].map(v => Math.round(v * 1e9) / 1e9).sort((p, q) => p - q); return s.filter((v, i) => i === 0 || v - s[i - 1] > 1e-9); };
 const inRects = (rs, p) => rs.some(r => r[0] <= p[0] && p[0] <= r[1] && r[2] <= p[1] && p[1] <= r[3]);
 /* boundary of a union of rectangles: maximal axis-aligned edges, each with its inside side */
@@ -600,9 +602,17 @@ function clearGeom(x, rooms, st) {
   const bx = new Set(), by = new Set();
   for (const r of rs) for (const d of [0, T_PART / 2, -T_PART / 2]) { bx.add(r[0] + d); bx.add(r[1] + d); by.add(r[2] + d); by.add(r[3] + d); }
   for (const r of fireR.concat(partR)) { bx.add(r[0]); bx.add(r[1]); by.add(r[2]); by.add(r[3]); }
-  const X = uniq(bx), Y = uniq(by), cellsIn = [];
-  let area = 0;
-  for (let i = 0; i < X.length - 1; i++) for (let j = 0; j < Y.length - 1; j++) { const p = [(X[i] + X[i + 1]) / 2, (Y[j] + Y[j + 1]) / 2]; if (member(p)) { area += (X[i + 1] - X[i]) * (Y[j + 1] - Y[j]); cellsIn.push([X[i], X[i + 1], Y[j], Y[j + 1]]); } }
+  const X = uniqRaw(bx), Y = uniqRaw(by), cellsIn = [];
+  let aI = 0;   /* exact: coordinates in 0.0001 m units, integer products, one division at the end (the nearest double to the true area) */
+  const I = v => Math.round(v * 1e4);
+  for (let i = 0; i < X.length - 1; i++) for (let j = 0; j < Y.length - 1; j++) { const p = [(X[i] + X[i + 1]) / 2, (Y[j] + Y[j + 1]) / 2]; if (member(p)) { aI += (I(X[i + 1]) - I(X[i])) * (I(Y[j + 1]) - I(Y[j])); cellsIn.push([X[i], X[i + 1], Y[j], Y[j + 1]]); } }
+  let area = aI / 1e8;
+  /* a rectangular clear shape: shapely's area is (x1 - x0)(y1 - y0) on the float corners (rect edge ± inset), whatever the ring's start;
+     use the same product so a true halfway area (8.85) rounds as the Python does */
+  if (cellsIn.length) {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity; for (const c of cellsIn) { x0 = Math.min(x0, c[0]); x1 = Math.max(x1, c[1]); y0 = Math.min(y0, c[2]); y1 = Math.max(y1, c[3]); }
+    if ((I(x1) - I(x0)) * (I(y1) - I(y0)) === aI) area = (x1 - x0) * (y1 - y0);
+  }
   /* 0.05 m cells whose centre lies strictly inside the clear shape (shapely prepared contains) */
   const inside = p => { const e = 1e-9; return [[e, 0], [-e, 0], [0, e], [0, -e]].every(([a, b]) => inRects(cellsIn, [p[0] + a, p[1] + b])); };
   const cs = new Set();
@@ -636,7 +646,273 @@ function clearSize(x, rooms, st) {
   return { A: g.area, w: pyRound2(maxSquare(g.cells)), bigW, bigL, cells: g.cells };
 }
 
-const api = { kind, LINE, CIRC, reach, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
+/* ================= EH-FREEZE-2026-11-11b additions (J.B. 11 Nov 2026, late: hold lifted) =================
+   sizing.py     fe04e6175b6a4aae  plant sized to load, KD300 curve, Eaton pads, hub set (KD80–300), battery cabinets
+   hubload.py    4cd41a1240bcd17c  hub emergency load, NECB 2020 build-up
+   audit_rooms.py 6dabc907ecf9d514 room minimums (RULES, HARD, audit_geom) on clear sizes
+   tfboard.py    b01e2d4abc7fb12a  _st (D1), _t, measure (the sizing part), _sizing_row, _hubset_row, _battery_row, _width_row */
+
+/* Python number formatting: f'{x:,.0f}', f'{x:,.1f}', f'{x:.2f}' (round half to even on exact ties, as Python) */
+function pyFixed(x, d) {
+  /* toFixed rounds the exact binary value correctly except on an exact tie, where it rounds up; Python rounds a tie to even.
+     A tie only when the exact decimal expansion is ...5000... after the d-th digit (read from toFixed(d + 30), exact digits). */
+  const e = Math.abs(x).toFixed(Math.min(100, d + 30)), dot = e.indexOf('.'), tail = e.slice(dot + 1 + d);
+  if (/^50*$/.test(tail)) {
+    const keep = e.slice(0, dot + 1 + d).replace(/\.$/, ''), last = Number(keep.slice(-1));
+    const down = (last % 2 === 0) ? keep : null;
+    if (down !== null) return (x < 0 && Number(down) !== 0 ? '-' : '') + down;
+  }
+  return x.toFixed(d);
+}
+const comma = s => { const neg = s.startsWith('-'), t = neg ? s.slice(1) : s, [i, f] = t.split('.'); return (neg ? '-' : '') + i.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (f !== undefined ? '.' + f : ''); };
+const n0 = x => comma(pyFixed(x, 0)), n1 = x => comma(pyFixed(x, 1)), f2 = x => pyFixed(x, 2), f0 = x => pyFixed(x, 0);
+const pyF = v => Number.isInteger(v) ? v.toFixed(1) : String(v);   // repr of a Python float written in the script (3.0 -> '3.0')
+
+/* ---------- sizing.py ---------- */
+const GEN = [[300, 'KD300', null], [1000, 'KD1000', [8.43, 2.62]], [2000, 'KD2000', [13.5, 3.5]]];
+const TANK300 = [[1855, [4.100, 1.350], 'ADV-10068 sheet 1, 490 gal'], [3634, [5.116, 1.350], 'sheet 1, 960 gal'], [7305, [6.985, 1.900], 'sheet 3, 1,930 gal']];
+const TX = [[150, [1.829, 1.346]], [225, [1.930, 1.448]], [300, [1.930, 1.499]], [500, [1.930, 1.651]], [750, [1.930, 1.702]],
+  [1000, [1.930, 1.727]], [1500, [2.362, 1.905]], [2000, [2.667, 2.007]], [2500, [2.667, 2.616]]];
+const L_PER_KWH = 0.264, DC_HOURS = 12, HUB_HOURS = 72;
+const KD300_LH = [[0.25, 27.3], [0.50, 50.7], [0.75, 67.6], [1.00, 83.7]];
+function curve(c, f) { f = Math.max(0.25, Math.min(1.0, f)); for (let i = 0; i < c.length - 1; i++) { const [a, la] = c[i], [b, lb] = c[i + 1]; if (f <= b + 1e-9) return la + (lb - la) * (f - a) / (b - a); } return c[c.length - 1][1]; }
+const kd300lh = f => curve(KD300_LH, f);
+function hubTank(hubKw) { const f = hubKw == null ? 1.0 : hubKw / 300.0, need = kd300lh(f) * HUB_HOURS, t = TANK300.find(t => t[0] >= need) || null; return { need_l: need, tank_l: t ? t[0] : null, footprint: t ? t[1] : null }; }
+function gens(Q, hubKw, size) {
+  const load = Q * 1000 + (hubKw || 0); let kw, model, fp, duty;
+  for ([kw, model, fp] of GEN) { duty = Math.max(1, Math.ceil(load / kw - 1e-9)); if ((size == null && duty <= 3) || kw === size || kw === GEN[GEN.length - 1][0]) break; }
+  let tank = Q * 1000 * DC_HOURS * L_PER_KWH / duty, note = '';
+  if (kw === 300) tank = kd300lh(load / duty / kw) * DC_HOURS;
+  if (fp == null) { const t = TANK300.find(t => t[0] >= tank) || null; fp = t ? t[1] : null; note = t ? t[2] : 'no standard tank holds it ?'; }
+  return { kw, model, duty, n: duty + 1, tank_l: tank, footprint: fp, tank_note: note, load_kw: load };
+}
+function transformers(Q, hubKw) {
+  const kva = Q * 1000 + (hubKw || 0); let size, fp, duty;
+  if (kva <= 2500) { [size, fp] = TX.find(t => t[0] >= kva); duty = 1; } else { [size, fp] = TX[TX.length - 1]; duty = Math.ceil(kva / 2500 - 1e-9); }
+  return { kva: size, duty, n: duty + 1, pad: fp, load_kva: kva };
+}
+function switchMargin(g, t) { return [g.duty * g.kw - g.load_kw, (t.duty === 1 ? t.kva : t.duty * 2500) - t.load_kva]; }
+const HUBSETS = [[80, 'KD80', [[0.25, 7.3], [0.50, 15.1], [0.75, 22.1], [1.00, 28.0]], [2.27, 1.149], 'G5-641'],
+  [100, 'KD100', [[0.25, 9.5], [0.50, 18.7], [0.75, 26.7], [1.00, 32.9]], [2.27, 1.149], 'G5-642'], [300, 'KD300', KD300_LH, null, 'g5650']];
+function hubSet(hubKw) {
+  const h = HUBSETS.find(([kw]) => hubKw <= kw + 1e-9);
+  if (!h) return { model: '?', kw: null, need_l: null, footprint: null, src: 'load over 300 kW ?' };
+  const [kw, model, c, fp0, src] = h, need = curve(c, hubKw / kw) * HUB_HOURS; let fp = fp0, tank = null;
+  if (fp == null) { const t = TANK300.find(t => t[0] >= need) || null; fp = t ? t[1] : null; tank = t ? t[0] : null; }
+  return { model, kw, load: hubKw / kw, need_l: need, tank_l: tank, footprint: fp, src };
+}
+const CAB_KW = { 10: 186.6, 15: 124.4 }, CAB_L = 0.6, CAB_W = 0.75, CAB_FRONT = 0.914, CAB_WALL = 0.025, DOOR_END = 1.1;
+const battCabinets = (mw, minutes = 15) => Math.max(1, Math.ceil(mw * 1000 / CAB_KW[minutes] - 1e-9));
+function battRoom(n, L, W) {
+  [L, W] = [Math.max(L, W), Math.min(L, W)];
+  const d1 = CAB_WALL + CAB_W + CAB_FRONT, d2 = 2 * (CAB_WALL + CAB_W) + CAB_FRONT, l1 = n * CAB_L + DOOR_END, l2 = Math.ceil(n / 2) * CAB_L + DOOR_END;
+  if (L >= l1 - 1e-6 && W >= d1 - 1e-6) return [true, 1, l1, d1, 0.0];
+  if (L >= l2 - 1e-6 && W >= d2 - 1e-6) return [true, 2, l2, d2, 0.0];
+  return [false, 2, l2, d2, Math.max(L < l2 ? (l2 - L) / l2 : 0, W < d2 ? (d2 - W) / d2 : 0)];
+}
+
+/* ---------- hubload.py ---------- */
+const HL_TYPES = [[/stair|lift|shaft/, 'excluded (stairs, lifts, shafts)', 0, 0, 0, null], [/exit passage|corridor/, 'corridor', 4.4, 0, 0, null],
+  [/lobby/, 'lobby', 9.0, 1, 0, null], [/refuge|shelter|rest area|day room/, 'refuge: fire station sleeping quarters', 2.5, 2.5, 500, 'people'],
+  [/\bwcs?\b|washroom|shower|toilet/, 'washroom', 6.8, 1, 0, null], [/exam|consult|procedure|first aid|treatment/, 'healthcare exam/treatment', 15.1, 10, 90, 20],
+  [/nurse/, "healthcare nurses' station", 12.6, 2.5, 45, 20], [/recovery/, 'healthcare recovery room', 13.5, 10, 180, 20],
+  [/patient/, 'healthcare patient room', 7.3, 10, 90, 20], [/kitchen|food/, 'food preparation', 11.7, 10, 0, null], [/laundry/, 'laundry', 5.7, 20, 0, null],
+  [/office/, 'office', 8.0, 7.5, 0, null], [/lounge|waiting/, 'lounge', 6.3, 1, 0, null], [/storage|cot|medication|clean supply|soiled|housekeeping|janitor/, 'storage', 5.5, 1, 0, null]];
+const HL_OTHER = ['other (lounge values)', 6.3, 1, 0, null];
+function hubLoad(G, people) {
+  let li = 0, rc = 0, sw = 0, used = false; const other = new Set();
+  for (const st of storeys(G)) for (const x of roomsOf(G, st)) {
+    if (!['pub', 'clin', 'circ'].includes(x.g)) continue;
+    if (x.g === 'circ' && x.n.toLowerCase().includes('secure')) continue;
+    const A = x.r.reduce((s, r) => s + rArea(r), 0), l = x.n.toLowerCase(), t = HL_TYPES.find(t => t[0].test(l)), [lab, a, b, s, occ] = t ? t.slice(1) : HL_OTHER;
+    li += A * a; rc += A * b;
+    if (s && occ === 'people' && !used) { sw += people * s; used = true; } else if (s && typeof occ === 'number') sw += A / occ * s;
+    if (lab.startsWith('other')) other.add(x.n.split(' (')[0]);
+  }
+  return { kw: (li + rc + sw) / 1000, light: li / 1000, plug: rc / 1000, swh: sw / 1000, other: [...other].sort() };
+}
+
+/* ---------- audit_rooms.py: room minimums ---------- */
+const RULES = [
+  [/loading space/, 3.4, null, 'Class B 3.4 m (Parking By-law 5.5.1.2)', 'loading space'], [/exit passage|exit steps/, 1.1, null, 'VBBL 3.3.1.9 / 3.4.3.2 1.1 m', 'exit passage|exit steps'],
+  [/mechanical|panel|shaft|riser/, 1.0, null, 'access; our judgment ?', 'mechanical|panel|shaft|riser'], [/truck aisle|drive/, 6.1, null, '6.1 m aisle (5.4.1)', 'truck aisle|drive'],
+  [/corridor/, 1.8, null, 'spec Part 3: 2.0 public/secure, 1.8 clinic; code 1.1', 'corridor'], [/stair/, 2.4, null, 'two 1.1 m flights side by side ~2.4 m; our arithmetic ?', 'stair'],
+  [/dock|lobby/, 2.4, null, 'two people passing with a trolley; our judgment ?', 'dock|lobby'], [/freight lift|lift e2/, 2.4, null, 'spec car 2.5 x 3.4 is the car, shaft drawn 2.4+ (drawing choice ?)', 'freight lift|lift e2'],
+  [/lift/, 2.0, null, 'accessible car ~1.7 + shaft; our judgment ?', 'lift'],
+  [/universal wc|universal washroom|clinic universal/, 1.7, 5.3, 'J.B.: 1,700 mm circle clear of the WC and its 900 mm transfer space (VBBL 3.8.3.13): 1.7 x 3.2 at least, our arithmetic', 'universal wc|universal washroom|clinic universal'],
+  [/shower/, 1.5, 2.7, 'VBBL 3.8.3.17 1.5 x 0.9 + 0.9 clear', 'shower'], [/\bwcs?\b|washroom|toilet/, 1.5, null, 'single WC 1.5; our judgment ?', '\\bwcs?\\b|washroom|toilet'],
+  [/procedure/, 3.0, 15.5, 'J.B. 8 Nov: 3.0 m (step 6); AHS 15.5 m2', 'procedure'], [/exam|consult/, 3.0, 12.0, 'J.B. 8 Nov: 3.0 m (step 6); AHS 12.0 m2', 'exam|consult'],
+  [/medication/, 1.5, 10.0, 'audit 1.5 m ?; AHS 10.0 m2', 'medication'], [/clean supply/, 1.5, 11.0, 'audit 1.5 m ?; AHS 11.0 m2', 'clean supply'],
+  [/soiled/, 1.5, 13.5, 'audit 1.5 m ?; AHS 13.5 m2', 'soiled'], [/housekeeping/, 1.5, 7.0, 'audit 1.5 m ?; AHS 7.0 m2', 'housekeeping'],
+  [/shipping|receiving/, 2.4, null, 'trolley + aisle; our judgment ?', 'shipping|receiving'], [/cylinder/, 1.5, null, 'cylinders + access; our judgment ?', 'cylinder'],
+  [/first aid/, 2.7, 9.3, 'J.B. 8 Nov: 2.7 m (step 6); WorkSafeBC 9.3 m2', 'first aid'], [/data hall/, 6.0, null, 'two rack rows + aisles 6.0 m; our arithmetic ?', 'data hall'],
+  [/ups|battery|switchgear|electrical|\bmv\b/, 3.0, null, 'J.B. 8 Nov: 3.0 m (CEC 2-308 second-hand ?)', 'ups|battery|switchgear|electrical|\\bmv\\b'],
+  [/meet-me|noc|office|lounge|break|staff room/, 2.4, null, 'J.B. 8 Nov: 2.4 m (step 6)', 'meet-me|noc|office|lounge|break|staff room'],
+  [/medication|clean|soiled|housekeeping|janitor|storage|cot|garbage|valve/, 1.5, null, 'J.B. 8 Nov: 1.5 m (step 6)', 'medication|clean|soiled|housekeeping|janitor|storage|cot|garbage|valve'],
+  [/vestibule|portal|guard/, 1.8, null, '1.8 m portal (GCPSG-015)', 'vestibule|portal|guard'],
+  [/shelter/, 4.0, 56.0, 'J.B. 8 Nov: 4.0 m; room minimums rule: shelter 16 guests x 3.5 m2 = 56 m2 (fix batch 10 Nov, finding 8)', 'shelter'],
+  [/refuge|shelter|waiting|rest area/, 4.0, null, 'J.B. 8 Nov: 4.0 m refuge and shelter (waiting: our judgment ?)', 'refuge|shelter|waiting|rest area'],
+  [/mechanical|panel|shaft|riser/, 1.0, null, 'access; our judgment ?', 'mechanical|panel|shaft|riser']];
+const HARD = { 'loading space': [true, null], 'exit passage|exit steps': [true, null], 'truck aisle|drive': [true, null],
+  'universal wc|universal washroom|clinic universal': [true, true], 'shower': [true, true], 'procedure': [false, true], 'exam|consult': [false, true],
+  'medication': [false, true], 'clean supply': [false, true], 'soiled': [false, true], 'housekeeping': [false, true], 'first aid': [false, true],
+  'ups|battery|switchgear|electrical|\\bmv\\b': [true, null], 'vestibule|portal|guard': [true, null], 'shelter': [false, true] };
+const CORRIDOR_CODE = 1.1;
+function hard(n) { const l = n.toLowerCase(); for (const R of RULES) if (R[0].test(l)) { const h = HARD[R[4]] || [false, false]; return [!!h[0], !!h[1]]; } return [false, false]; }
+function rule(n) { const l = n.toLowerCase(); for (const R of RULES) if (R[0].test(l)) return [R[1], R[2], R[3]]; return null; }
+function auditGeom(S, name = '', fold = '') {
+  const rows = [];
+  for (const st of Object.keys(S).map(Number).sort((a, b) => a - b)) {
+    const rooms = S[String(st)];
+    for (const x of rooms) {
+      const rs = x.r, A0 = rs.reduce((s, r) => s + rArea(r), 0);
+      const big = rs.reduce((m, r) => rArea(r) > rArea(m) ? r : m, rs[0]), L = Math.max(big[1] - big[0], big[3] - big[2]), shb = Math.min(big[1] - big[0], big[3] - big[2]);
+      const c = clearSize(x, rooms, st), A = c.A, w = c.w, LW = localWidth(c.cells), bigW = c.bigW, bigL = c.bigL;
+      const nl = x.n.toLowerCase(), ru = !(['spare', 'sup'].includes(x.g) && nl.includes('refuge')) ? rule(x.n) : null, issue = [], kind = [];
+      let basis;
+      if (ru) {
+        let [mw, ma, b] = ru; basis = b;
+        if (mw === 3.4 && fold.startsWith('e')) { mw = 3.3; basis = 'Edmonton Zoning Bylaw Table 7.2: 9.0 x 3.3 m'; }
+        const [hw, ha] = hard(x.n);
+        if (w + 1e-6 < mw) { issue.push(`clear width ${f2(w)} < ${pyF(mw)}`); kind.push(hw ? 'hard' : 'judged'); }
+        if (/corridor/.test(nl) && w + 1e-6 < CORRIDOR_CODE) { issue.push(`clear width ${f2(w)} < ${pyF(CORRIDOR_CODE)} (code)`); kind.push('hard'); }
+        if (ma && A + 1e-6 < ma) { issue.push(`area ${pyFixed(A, 1)} < ${pyF(ma)}`); kind.push(ha ? 'hard' : 'judged'); }
+        if (/universal wc|clinic universal/.test(nl) && !(bigW >= 1.7 - 1e-6 && bigL >= 3.2 - 1e-6)) { issue.push(`${f2(bigW)} x ${f2(bigL)}: needs 1.7 x 3.2 (1.7 m circle beside a 1.6 x 1.5 m WC + 0.9 m transfer zone, our arithmetic ?)`); kind.push('hard'); }
+      } else basis = 'no rule';
+      const ispub = nl.includes('refuge') && !nl.includes('staff') && x.g === 'pub';
+      let thin = 0; if (ispub) for (const v of LW.values()) if (v < 2.4 - 1e-6) thin += STEP * STEP;
+      const cnt = A - thin, note = ispub && thin > 0.05 ? `${pyFixed(thin, 1)} m2 under 2.4 m wide, not counted (counts ${pyFixed(cnt, 1)})` : '';
+      if (L / Math.max(shb, 0.01) > 6 && rs.length === 1 && !/corridor|passage|stair|aisle|drive|shaft|riser|lift/.test(nl)) { issue.push(`very long and thin (${pyFixed(L, 1)} x ${pyFixed(shb, 1)})`); kind.push('judged'); }
+      rows.push({ st, id: x.id, n: x.n, A: pyRound1(A), A_centre: pyRound1(A0), Acount: pyRound1(cnt), w: pyRound2(w), L: pyRound2(L), issue, kind, basis, note, clear: true });
+    }
+  }
+  const pubref = rows.filter(r => r.n.toLowerCase().includes('refuge') && !r.n.toLowerCase().includes('staff') && !r.n.toLowerCase().startsWith('unassigned'));
+  if (pubref.length) {
+    const mr = pubref.reduce((m, r) => r.Acount > m.Acount ? r : m, pubref[0]), small = name.startsWith('1330') || name === 'small';
+    if (mr.Acount + 1e-6 < 175 && !(small && pubref.reduce((s, r) => s + r.Acount, 0) >= 175)) { mr.issue.push(`refuge main room counts ${pyF(mr.Acount)} m2 < 175 (J.B. 8 Nov)`); mr.kind.push('hard'); }
+  }
+  return rows;
+}
+
+/* ---------- tfboard.py: D1 and the rows ---------- */
+const TIGHT = 'tight: check in design (J.B. 9 Nov: within 0.5 m or 5 % of the limit)';
+/* D1 (J.B. 10 Nov late): within 0.5 m (lengths) or 5 % of the limit (rel) on EITHER side is tight; past it by more is fail.
+   Returns 'pass' | 'fail' | 'tight', or {st:'tight', over, unit} when past the limit (the Python's _Tight). */
+function st_(ok, margin, rel, limit) {
+  const tol = rel && limit ? 0.05 * limit : 0.5;
+  if (!ok) { if (-tol - 1e-9 <= margin && margin <= 1e-9) return { st: 'tight', over: -margin, unit: rel ? '' : ' m' }; return 'fail'; }
+  return margin < tol - 1e-9 ? 'tight' : 'pass';
+}
+const S_ = s => typeof s === 'object' ? s.st : s;
+function t_(s, txt) { if (typeof s === 'object' && s.over != null) return txt + ` — tight: over by ${f2(s.over)}${s.unit}, fix in design (J.B. 10 Nov: within 0.5 m or 5 % past the limit; never compliant)`; return txt + (S_(s) === 'tight' ? ' — ' + TIGHT : ''); }
+const rArea2 = x => x.r.reduce((s, r) => s + rArea(r), 0);
+/* the sizing part of tfboard.measure (MW from the hall at 630 m² a MW, Q × 1.55, people from the counted refuge, hub load, sets) */
+function measureSizing(G, cfg) {
+  let hall = 0; for (const st of storeys(G)) for (const x of roomsOf(G, st)) if (x.g === 'hall') hall += rArea2(x);
+  const MW = hall / 630, Q = MW * 1.55, m = { hall, MW, Q };
+  const rr = auditGeom({ 1: roomsOf(G, 1) }).filter(r => (cfg.refuge_ids || []).includes(r.id));
+  m.ref_counted = rr.reduce((s, r) => s + r.Acount, 0); m.ref_main = rr.length ? Math.max(...rr.map(r => r.Acount)) : 0.0;
+  m.people = Math.trunc(Math.floor(m.ref_counted / 3.5));
+  m.hub = hubLoad(G, m.people);
+  const g = gens(Q, 0.0), t = transformers(Q, m.hub.kw);
+  Object.assign(m, { sz_gen: g, sz_tx: t, ngen: g.n, genkw: g.kw, ntx: t.n, tank: g.tank_l });
+  if (cfg.sizing_fallback_kw) { const d = gens(Q, 0.0, cfg.sizing_fallback_kw); m.ngen = d.n; m.genkw = d.kw; m.tank = d.tank_l; }
+  m.hub_tank = hubTank(m.hub.kw); m.hub_set = hubSet(m.hub.kw); m.sz_margin = switchMargin(g, t);
+  return m;
+}
+function hubgen(G) {
+  const p = (G.PLANT || []).filter(x => x.id.startsWith('h'));
+  if (p.length) return [p[0].n, Array.isArray(p[0].r[0]) ? p[0].r[0] : p[0].r, 'grade'];
+  const hg = get(G, 'HUBGEN', null); return hg ? [hg[1], hg[0], 'room'] : [null, null, null];
+}
+function sizingRow(G, cfg, m) {
+  const g = m.sz_gen, t = m.sz_tx, dg = (G.PLANT || []).filter(p => p.n.includes('enerator') && !p.id.startsWith('h'));
+  let ng = dg.length; const kws = [], kvas = [], add = (a, v) => { if (!a.includes(v)) a.push(v); };
+  for (const p of dg) { const k = /([\d,]+) kW/.exec(p.n); add(kws, k ? parseInt(k[1].replace(/,/g, ''), 10) : 1000); }
+  if (!ng) for (const st of storeys(G)) for (const x of roomsOf(G, st)) if (x.n.toLowerCase().startsWith('generator room')) {
+    let k = /(\d+) sets/.exec(x.n); ng += k ? parseInt(k[1], 10) : 0; k = /([\d,]+) kW/.exec(x.n); add(kws, k ? parseInt(k[1].replace(/,/g, ''), 10) : 1000);
+  }
+  const tp = (G.PLANT || []).filter(p => p.id.startsWith('t')), nt = tp.length;
+  for (const p of tp) { const k = /([\d,]+) kVA/.exec(p.n); add(kvas, k ? parseInt(k[1].replace(/,/g, ''), 10) : 2500); }
+  const dkw = kws.length === 1 ? kws[0] : null, dkva = kvas.length === 1 ? kvas[0] : null;
+  const fp = g.footprint ? `${f2(g.footprint[0])} × ${f2(g.footprint[1])} m` : '?', hb = m.hub, [gm, tm] = m.sz_margin;
+  let txt = `data centre ${n1(m.MW)} MW × 1.55 = ${n1(m.Q)} MW on its own sets: generators ${g.duty} + 1 spare × ${comma(String(g.kw))} kW `
+    + `(${g.model}, ${fp}${g.tank_note ? ', ' + g.tank_note : ''}; 12 h fuel ${n0(g.tank_l)} L a duty set); transformers carry the data centre and the hub `
+    + `${n0(hb.kw)} kW (normal power, our reading): ${t.duty} + 1 × ${comma(String(t.kva))} kVA (pad ${f2(t.pad[0])} × ${f2(t.pad[1])} m). `
+    + `Drawn: ${ng} × ${dkw ? comma(String(dkw)) : '?'} kW sets, ${nt} × ${dkva ? comma(String(dkva)) : '?'} kVA pads. Rule: smallest set size with at most 3 duty sets `
+    + `(our reading), N+1; Rehlko KD230–300 ADV-10068 and g5650 fuel curve, KD1000, KD2000 (fuel 0.264 L/kWh, register fuel_on_site); Eaton CA08104001E (maker claims). `
+    + `Headroom before a step up: generators ${n0(gm)} kW, transformers ${n0(tm)} kVA`;
+  const near = gm < 100 || tm < 100, sameG = ng === g.n && dkw === g.kw, sameT = nt === t.n && dkva === t.kva, fb = cfg.sizing_fallback;
+  if (!sameG && fb) txt += ' — ' + fb + ' (next size up: J.B. 11 Nov)'; else if (!(sameG && sameT)) txt += ' — differs from the drawing: board fix pending';
+  if (near) txt += ' — within 0.1 MW of a sizing switch point (fans and space heat ? could step it up): ' + TIGHT.replace('J.B. 9 Nov', 'D1, J.B. 11 Nov');
+  const st = (!sameG && fb) || !(sameG && sameT) ? 'flag' : (near ? 'tight' : 'pass');
+  return [st, 'Plant sized to load', 'J.B. 11 Nov (sizing to load); eh/sizing.py', txt];
+}
+function hubsetRow(G, cfg, m) {
+  const hs = m.hub_set, [nm, r, where] = hubgen(G), src = 'J.B. 11 Nov (own set); eh/sizing.hub_set';
+  const fp = hs.footprint ? `${f2(hs.footprint[0])} × ${f2(hs.footprint[1])} m` : '?';
+  let txt = `hub load ${n0(m.hub.kw)} kW (NECB 2020 build-up; fans and space heat ?) → ${hs.model} (${hs.kw} kW standby, ${f0(hs.load * 100)} % load; `
+    + `Rehlko ${hs.src}, maker claim): 72 h at that load on its curve ${n0(hs.need_l)} L in a sub-base tank`
+    + (hs.tank_l ? ` (${n0(hs.tank_l)} L, ADV-10068)` : ' (tank sizes not published ?: drawn at the set footprint)') + `, set ${fp}. `;
+  if (!nm) return ['fail', 'Hub generator (72 h)', src, txt + 'Not drawn.'];
+  const ok = nm.includes(hs.model);
+  txt += `Drawn: ${nm} (${where === 'grade' ? 'at grade; clearances with the other sets (Generator tanks row)' : 'in its own 2 h room'}, ${f2(r[1] - r[0])} × ${f2(r[3] - r[2])} m)`;
+  if (!ok) return ['fail', 'Hub generator (72 h)', src, txt + ' — model differs from the rule'];
+  if (where === 'room') {
+    const rm = []; for (const st of storeys(G)) for (const x of roomsOf(G, st)) for (const q of x.r) if (q[0] <= r[0] + 1e-6 && q[1] >= r[1] - 1e-6 && q[2] <= r[2] + 1e-6 && q[3] >= r[3] - 1e-6) rm.push(q);
+    if (!rm.length) return ['fail', 'Hub generator (72 h)', src, txt + ' — not inside a drawn room'];
+    const q = rm[0], side = (r[1] - r[0]) < (r[3] - r[2]) ? Math.min(r[0] - q[0], q[1] - r[1]) : Math.min(r[2] - q[2], q[3] - r[3]);
+    const s = st_(side >= 1.0 - 1e-6, side - 1.0);
+    return [S_(s), 'Hub generator (72 h)', src, t_(s, txt + `; ${n1(side)} m to the side walls (≥ 1.0, our reading)`)];
+  }
+  return ['pass', 'Hub generator (72 h)', src, txt];
+}
+function batteryRow(G, cfg, m) {
+  const rows = auditGeom(G.S, cfg.small_lot ? 'small' : '', cfg.city === 'edm' ? 'e' : 'v');
+  const br = rows.filter(r => r.n.toLowerCase().startsWith('battery room') && !r.n.toLowerCase().includes('hvac'));
+  const n15 = battCabinets(m.MW, 15), n10 = battCabinets(m.MW, 10);
+  const src = 'J.B. 11 Nov (10–15 min, FM 5-32 3.5.2.1); tool/engine.js R.equip.cabKW, tool/dcrooms.js; Vertiv EnergyCore Li5 31.1 kWh (maker claim)';
+  if (!br.length) return ['fail', 'Battery cabinets (UPS 10–15 min)', src, `${n15} cabinets for 15 min: no battery room drawn`];
+  const r = br.reduce((a, b) => b.A > a.A ? b : a, br[0]), [fits, rws, l, d, sh] = battRoom(n15, r.L, r.w);
+  const txt = `data centre ${n1(m.MW)} MW: ${n15} cabinets for 15 min (${n10} for 10 min; 124.4 / 186.6 kW a cabinet, our arithmetic); `
+    + `${rws === 1 ? 'one row' : 'two rows facing one 0.914 m aisle (our reading)'} needs ${pyFixed(l, 1)} × ${f2(d)} m clear; `
+    + `${r.n.split(',')[0]} (storey ${r.st}) is ${pyFixed(r.L, 1)} × ${f2(r.w)} m clear`;
+  if (fits) return ['pass', 'Battery cabinets (UPS 10–15 min)', src, txt];
+  const s = st_(false, -sh, true, 1.0);
+  return [S_(s), 'Battery cabinets (UPS 10–15 min)', src, txt + ` — short by ${f0(sh * 100)} %`];
+}
+function widthRow(G, cfg) {
+  const rows = auditGeom(G.S, cfg.small_lot ? 'small' : '', cfg.city === 'edm' ? 'e' : 'v'), bad = rows.filter(r => r.issue.length);
+  const minw = r => { const ru = rule(r.n); return ru ? ru[0] : null; };
+  const near = rows.filter(r => !r.issue.length && minw(r) && r.w < 1.05 * minw(r) - 1e-9);
+  const src0 = 'J.B. 8 Nov minimum widths (mostly step 6, drawing choice); eh/audit_rooms.py';
+  if (!bad.length && near.length) return ['tight', 'Room widths and shapes', src0, `all ${rows.length} rooms meet their minimum clear width; ${near.length} sit within 5 % of it (` + [...new Set(near.map(r => r.n.split(' (')[0].replace(/[0-9 ]+$/, '')))].sort().join(', ') + ') — ' + TIGHT];
+  if (!bad.length) return ['pass', 'Room widths and shapes', src0, `all ${rows.length} rooms meet their minimum clear width; universal WCs hold the 1.7 m circle beside the WC transfer zone (our arithmetic ?)`];
+  function issSt(r, iss, k) {
+    if (k === 'judged') return 'judged';
+    const ru = rule(r.n);
+    if (iss.startsWith('clear width') && iss.includes('(code)')) return S_(st_(false, r.w - CORRIDOR_CODE, true, CORRIDOR_CODE));
+    if (iss.startsWith('clear width') && ru) return S_(st_(false, r.w - ru[0], true, ru[0]));
+    if (iss.startsWith('area') && ru && ru[1]) return S_(st_(false, r.A - ru[1], true, ru[1]));
+    if (iss.startsWith('refuge main room counts')) return S_(st_(false, r.Acount - 175, true, 175));
+    if (iss.includes('needs 1.7 x 3.2')) { const [W_, L_] = iss.split(':')[0].split(' x ').map(Number); return S_(st_(false, -Math.max((1.7 - W_) / 1.7, (3.2 - L_) / 3.2, 0.0), true, 1.0)); }
+    return 'fail';
+  }
+  const roomSt = r => { const o = r.issue.map((i, k) => issSt(r, i, (r.kind || [])[k] || 'hard')); return o.includes('fail') ? 'fail' : (o.includes('tight') ? 'tight' : 'judged'); };
+  const sts = bad.map(roomSt), stw = sts.includes('fail') ? 'fail' : 'tight';
+  const nm = r => (Object.keys(G.S).length > 1 ? `st${r.st} ` : '') + r.n.split(' (')[0].split(',')[0];
+  const ls = (r, want) => r.issue.filter((i, k) => ((r.kind || [])[k] === 'judged') === (want === 'judged')).map(i => i.split(':')[0]).join(', ');
+  const fl = bad.filter((r, i) => sts[i] === 'fail'), tl = bad.filter((r, i) => sts[i] === 'tight'), jl = bad.filter(r => (r.kind || []).includes('judged'));
+  const txt = 'clear sizes inside the walls (J.B. 11 Nov); only sourced minimums (steps 1-4) fail, steps 5-6 read tight, judged (J.B. 11 Nov). '
+    + `${fl.length} more than 5 % under a sourced minimum (fail): ` + (fl.map(r => `${nm(r)} (${ls(r, 'hard')})`).join('; ') || 'none')
+    + ` · ${tl.length} 5 % or less under a sourced minimum (tight: check in design, D1): ` + (tl.map(nm).join(', ') || 'none')
+    + ` · ${jl.length} under a judged minimum (tight, judged): ` + (jl.map(nm).join(', ') || 'none') + ` · ${rows.length} rooms checked`;
+  return [stw, 'Room widths and shapes', 'J.B. 8 Nov minimum widths; eh/audit_rooms.py', txt];
+}
+
+const api = { kind, LINE, CIRC, reach,
+  gens, transformers, switchMargin, kd300lh, hubTank, hubSet, battCabinets, battRoom, hubLoad, RULES, HARD, hard, rule, auditGeom,
+  st_, t_, measureSizing, sizingRow, hubsetRow, batteryRow, widthRow, pyFixed, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
   clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11 port (yardgate v7, reach, dcspace, portal, clear sizes)' };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hubchecks = api; }
