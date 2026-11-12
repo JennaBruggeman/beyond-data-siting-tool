@@ -695,10 +695,14 @@ function gens(Q, hubKw, size) {
   if (fp == null) { const t = TANK300.find(t => t[0] >= tank) || null; fp = t ? t[1] : null; note = t ? t[2] : 'no standard tank holds it ?'; }
   return { kw, model, duty, n: duty + 1, tank_l: tank, footprint: fp, tank_note: note, load_kw: load };
 }
-function transformers(Q, hubKw) {
+/* EH-FREEZE-2026-11-11c: Vancouver up to 1,500 kVA on BC Hydro's pad, 2.21 x 2.21 m (ES54 Table 1); above, and in Edmonton, the Eaton pad */
+const BCH_PAD = [2.21, 2.21];
+function transformers(Q, hubKw, city = 'v') {
   const kva = Q * 1000 + (hubKw || 0); let size, fp, duty;
   if (kva <= 2500) { [size, fp] = TX.find(t => t[0] >= kva); duty = 1; } else { [size, fp] = TX[TX.length - 1]; duty = Math.ceil(kva / 2500 - 1e-9); }
-  return { kva: size, duty, n: duty + 1, pad: fp, load_kva: kva };
+  let src = 'Eaton CA08104001E, cabinet + 4 in (our reading)';
+  if (city === 'v' && size <= 1500) { fp = BCH_PAD; src = 'BC Hydro ES54 Table 1'; }
+  return { kva: size, duty, n: duty + 1, pad: fp, pad_src: src, load_kva: kva };
 }
 function switchMargin(g, t) { return [g.duty * g.kw - g.load_kw, (t.duty === 1 ? t.kva : t.duty * 2500) - t.load_kva]; }
 const HUBSETS = [[80, 'KD80', [[0.25, 7.3], [0.50, 15.1], [0.75, 22.1], [1.00, 28.0]], [2.27, 1.149], 'G5-641'],
@@ -708,8 +712,10 @@ function hubSet(hubKw) {
   if (!h) return { model: '?', kw: null, need_l: null, footprint: null, src: 'load over 300 kW ?' };
   const [kw, model, c, fp0, src] = h, need = curve(c, hubKw / kw) * HUB_HOURS; let fp = fp0, tank = null;
   if (fp == null) { const t = TANK300.find(t => t[0] >= need) || null; fp = t ? t[1] : null; tank = t ? t[0] : null; }
-  return { model, kw, load: hubKw / kw, need_l: need, tank_l: tank, footprint: fp, src };
+  return { model, kw, load: hubKw / kw, need_l: need, tank_l: tank, footprint: fp, src, enclosure: ENCLOSURE[model] || null };
 }
+/* EH-FREEZE-2026-11-11c: outdoors the hub set stands in its enclosure (G12-625, KD80 126 x 46 x 65 in); KD100 assumed the same */
+const ENCLOSURE = { KD80: [[3.200, 1.168], 'G12-625'], KD100: [[3.200, 1.168], 'G12-625, KD80 size assumed ?'] };
 const CAB_KW = { 10: 186.6, 15: 124.4 }, CAB_L = 0.6, CAB_W = 0.75, CAB_FRONT = 0.914, CAB_WALL = 0.025, DOOR_END = 1.1;
 const battCabinets = (mw, minutes = 15) => Math.max(1, Math.ceil(mw * 1000 / CAB_KW[minutes] - 1e-9));
 function battRoom(n, L, W) {
@@ -823,7 +829,7 @@ function measureSizing(G, cfg) {
   m.ref_counted = rr.reduce((s, r) => s + r.Acount, 0); m.ref_main = rr.length ? Math.max(...rr.map(r => r.Acount)) : 0.0;
   m.people = Math.trunc(Math.floor(m.ref_counted / 3.5));
   m.hub = hubLoad(G, m.people);
-  const g = gens(Q, 0.0), t = transformers(Q, m.hub.kw);
+  const g = gens(Q, 0.0), t = transformers(Q, m.hub.kw, cfg.city === 'edm' ? 'e' : 'v');
   Object.assign(m, { sz_gen: g, sz_tx: t, ngen: g.n, genkw: g.kw, ntx: t.n, tank: g.tank_l });
   if (cfg.sizing_fallback_kw) { const d = gens(Q, 0.0, cfg.sizing_fallback_kw); m.ngen = d.n; m.genkw = d.kw; m.tank = d.tank_l; }
   m.hub_tank = hubTank(m.hub.kw); m.hub_set = hubSet(m.hub.kw); m.sz_margin = switchMargin(g, t);
@@ -847,9 +853,9 @@ function sizingRow(G, cfg, m) {
   const fp = g.footprint ? `${f2(g.footprint[0])} × ${f2(g.footprint[1])} m` : '?', hb = m.hub, [gm, tm] = m.sz_margin;
   let txt = `data centre ${n1(m.MW)} MW × 1.55 = ${n1(m.Q)} MW on its own sets: generators ${g.duty} + 1 spare × ${comma(String(g.kw))} kW `
     + `(${g.model}, ${fp}${g.tank_note ? ', ' + g.tank_note : ''}; 12 h fuel ${n0(g.tank_l)} L a duty set); transformers carry the data centre and the hub `
-    + `${n0(hb.kw)} kW (normal power, our reading): ${t.duty} + 1 × ${comma(String(t.kva))} kVA (pad ${f2(t.pad[0])} × ${f2(t.pad[1])} m). `
+    + `${n0(hb.kw)} kW (normal power, our reading): ${t.duty} + 1 × ${comma(String(t.kva))} kVA (pad ${f2(t.pad[0])} × ${f2(t.pad[1])} m, ${t.pad_src}). `
     + `Drawn: ${ng} × ${dkw ? comma(String(dkw)) : '?'} kW sets, ${nt} × ${dkva ? comma(String(dkva)) : '?'} kVA pads. Rule: smallest set size with at most 3 duty sets `
-    + `(our reading), N+1; Rehlko KD230–300 ADV-10068 and g5650 fuel curve, KD1000, KD2000 (fuel 0.264 L/kWh, register fuel_on_site); Eaton CA08104001E (maker claims). `
+    + `(our reading), N+1; Rehlko KD230–300 ADV-10068 and g5650 fuel curve, KD1000, KD2000 (fuel 0.264 L/kWh, register fuel_on_site; maker claims). `   /* EH-FREEZE-2026-11-11c wording: the pad source now sits with the pad */
     + `Headroom before a step up: generators ${n0(gm)} kW, transformers ${n0(tm)} kVA`;
   const near = gm < 100 || tm < 100, sameG = ng === g.n && dkw === g.kw, sameT = nt === t.n && dkva === t.kva, fb = cfg.sizing_fallback;
   if (!sameG && fb) txt += ' — ' + fb + ' (next size up: J.B. 11 Nov)'; else if (!(sameG && sameT)) txt += ' — differs from the drawing: board fix pending';
@@ -859,14 +865,19 @@ function sizingRow(G, cfg, m) {
 }
 function hubsetRow(G, cfg, m) {
   const hs = m.hub_set, [nm, r, where] = hubgen(G), src = 'J.B. 11 Nov (own set); eh/sizing.hub_set';
-  const fp = hs.footprint ? `${f2(hs.footprint[0])} × ${f2(hs.footprint[1])} m` : '?';
+  let fp = hs.footprint ? `${f2(hs.footprint[0])} × ${f2(hs.footprint[1])} m` : '?';
+  if (hs.enclosure) { const e_ = hs.enclosure; fp = `drawn in its enclosure ${f2(e_[0][0])} × ${f2(e_[0][1])} m (${e_[1]}; the open set is ${fp})`; }
   let txt = `hub load ${n0(m.hub.kw)} kW (NECB 2020 build-up; fans and space heat ?) → ${hs.model} (${hs.kw} kW standby, ${f0(hs.load * 100)} % load; `
     + `Rehlko ${hs.src}, maker claim): 72 h at that load on its curve ${n0(hs.need_l)} L in a sub-base tank`
-    + (hs.tank_l ? ` (${n0(hs.tank_l)} L, ADV-10068)` : ' (tank sizes not published ?: drawn at the set footprint)') + `, set ${fp}. `;
+    + (hs.tank_l ? ` (${n0(hs.tank_l)} L, ADV-10068)` : ' (tank sizes not published ?: drawn under the enclosure)') + `, set ${fp}. `;
   if (!nm) return ['fail', 'Hub generator (72 h)', src, txt + 'Not drawn.'];
   const ok = nm.includes(hs.model);
   txt += `Drawn: ${nm} (${where === 'grade' ? 'at grade; clearances with the other sets (Generator tanks row)' : 'in its own 2 h room'}, ${f2(r[1] - r[0])} × ${f2(r[3] - r[2])} m)`;
   if (!ok) return ['fail', 'Hub generator (72 h)', src, txt + ' — model differs from the rule'];
+  if (where === 'grade' && hs.enclosure) {   /* EH-FREEZE-2026-11-11c: outdoors the drawn rectangle is the enclosure */
+    const L_ = Math.max(r[1] - r[0], r[3] - r[2]), W_ = Math.min(r[1] - r[0], r[3] - r[2]), [eL, eW] = hs.enclosure[0];
+    if (L_ < eL - 0.05 || W_ < eW - 0.05) return ['fail', 'Hub generator (72 h)', src, txt + ` — drawn smaller than its enclosure (${f2(eL)} × ${f2(eW)} m)`];
+  }
   if (where === 'room') {
     const rm = []; for (const st of storeys(G)) for (const x of roomsOf(G, st)) for (const q of x.r) if (q[0] <= r[0] + 1e-6 && q[1] >= r[1] - 1e-6 && q[2] <= r[2] + 1e-6 && q[3] >= r[3] - 1e-6) rm.push(q);
     if (!rm.length) return ['fail', 'Hub generator (72 h)', src, txt + ' — not inside a drawn room'];
@@ -1817,7 +1828,7 @@ const api = { kind, LINE, CIRC, reach,
   st_, t_, measureSizing, sizingRow, hubsetRow, batteryRow, widthRow, pyFixed,
   corridors, egress2, egress3, walkload, sep2hWalls, sep2hText, padAnalyse, bondRow, intakeCheck, intakeRow, fuelFill, claimApply, CLAIMS, finalizeRows,
   zoneExits, egressRow, areaRow, walkRow, reachRow, commonChecks, TIES, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
-  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11b port (every shared board check)' };
+  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11c port (every shared board check)' };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hubchecks = api; }
 })(typeof window !== 'undefined' ? window : null);
