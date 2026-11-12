@@ -231,7 +231,7 @@ function layout(S0) {
   res.toUV = (a, b) => [r2(uf - dir * (a0 + a)), r2(res.bOrigin + sv * b)];
   res.fromUV = (u, v) => [r2((uf - u) / dir - a0), r2((v - res.bOrigin) * sv)];   /* the lot frame back into the layout frame (the inverse of toUV) */
   finish(res, S);
-  try { res.v2 = v2Checks(res, S); } catch (e) { res.v2 = { error: String(e && e.message || e) }; }
+  if (!S.noV2) withV2(res, S);   /* 12 Nov 2026: pushBack's trial layouts skip the v2 rows (its same-hub test doesn't read them); added once to the layout kept */
   return res;
 }
 
@@ -971,9 +971,11 @@ function v2Checks(L, S) {
 
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
 function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); return fromSite(S); }
+function withV2(L, S) { try { L.v2 = v2Checks(L, S); } catch (e) { L.v2 = { error: String(e && e.message || e) }; } return L; }
 function fromSite(S) {
-  let L = layout(S);
+  let L = layout(S.frontYard ? Object.assign({}, S, { noV2: true }) : S);
   if (S.frontYard && L.rooms) L = pushBack(S, L);
+  if (L.rooms && !L.v2) withV2(L, S);
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
 }
@@ -990,7 +992,7 @@ function pushBack(S, L) {
   /* the largest move that keeps the same hub: the full move first, then halving to 0.5 m (assumes a smaller move fits where a larger one does) */
   const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length;
   const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && Math.abs(X.MW - L.MW) <= 0.01;   /* same MW (J.B. 10 Nov: same building, moved) */
-  const tryS = sh => layout(Object.assign({}, S, { frontShift: sh }));
+  const tryS = sh => layout(Object.assign({}, S, { frontShift: sh, noV2: true }));
   let best = null; { const Lh = tryS(room); if (ok(Lh)) best = [room, Lh]; }
   if (!best) { let lo = 0, hi = room;   /* bisection on a 0.5 m grid: lo always fits (0 = the first pass), hi does not */
     while (hi - lo > 0.5 + 1e-9) { let mid = Math.round(lo + hi) / 2; if (mid <= lo) mid = r2(lo + 0.5); if (mid >= hi) mid = r2(hi - 0.5); const Lm = tryS(mid); if (ok(Lm)) { lo = mid; best = [mid, Lm]; } else hi = mid; } }
