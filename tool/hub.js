@@ -89,6 +89,9 @@ const PRG = {
 };
 /* VBBL Table 3.7.2.2.-A, WCs a sex (M, F) by persons of that sex (spec Part 1) */
 const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 3, 6], [175, 4, 7], [200, 4, 8], [250, 5, 9], [300, 5, 10], [350, 6, 11], [400, 6, 12]];
+/* 12 Nov 2026 (J.B., decisions log): hall density by cooling type (site.js hallDensity: air 630, liquid and immersion about 150, Schneider RD99,
+   maker's reference design); outside the tool (node tests) the spec's 630 */
+function HPM() { return (typeof BD !== 'undefined' && BD.hallDensity) ? BD.hallDensity() : RULES.hallPerMW.v; }
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
 function wcB(p) { return p <= 25 ? 1 : p <= 50 ? 2 : 3 + Math.ceil((p - 50) / 50); }   // VBBL Table 3.7.2.2.-B, p = persons OF EACH SEX ('over 50: 3 + 1 per extra 50'): a partial increment counts, so 51–100 → 4 (J.B. 8 Nov: our reading, conservative)
 const wcBload = load => wcB(Math.ceil(load / 2));   // 3.7.2.2.(1): the load split equally between the sexes; Table B per sex (J.B. 9 Nov, as the code reads)
@@ -199,10 +202,10 @@ function layout(S0) {
   const ladder = extra => { const why = [];
     for (const st of lad) {
       const tryMW = mw => (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {}));
-      let mw = S.mw || 1.8, L = tryMW(mw);
+      let mw = S.mwStart || r2(RULES.cap.m2 / HPM()), L = tryMW(mw);   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
       if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
       /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
-      let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - 0.25); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail || L2.MW >= L.MW - 0.01) break; L = L2; }   /* the narrow layout's hall is set by the footprint: no smaller hall to try */
+      let guard = 0; while (L.plant && !L.plant.ok && guard++ < 16) { mw = r2(L.MW - Math.max(0.25, L.MW * 0.06)); if (mw < 0.3) break; const L2 = tryMW(mw); if (L2.fail || L2.MW >= L.MW - 0.01) break; L = L2; }   /* the narrow layout's hall is set by the footprint: no smaller hall to try */
       if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
       L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
     }
@@ -320,7 +323,7 @@ function stackedRows(C) {
   /* first pass for the hub rows, then the depth from the hall the MW needs */
   let B = build(W, 0); if (B.fail) return B;
   const aB = B.aB, cores = 2 * SW * SL + RULES.e2.w * RULES.e2.l;
-  const hallNeed = RULES.hallPerMW.v * C.mw;
+  const hallNeed = HPM() * C.mw;
   let Da = up1((hallNeed + cores) / W);
   const minDa = r2(aB + RULES.dcFront.d + RULES.cor.w + 6.0);   // a storey-2 back row of at least 6 m (drawing choice)
   Da = Math.max(Da, minDa, r2(aB + B.bayL + 0.1));
@@ -416,7 +419,7 @@ function stackedRest(C, B, W, Da) {
   R2.push(sec(2, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }), sec(2, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }),
     sec(2, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true }), sec(2, 'dcor', 'Secure corridor', 'scor', [SC], { corridor: true }));
   const mw = C.mw, q = (W * Da - 2 * SW * SL - RULES.e2.w * RULES.e2.l);
-  const MWest = q / RULES.hallPerMW.v;
+  const MWest = q / HPM();
   const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = r2(MWest * 3.8 + 1.0 * PRG.bat.w)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32), 3.8 m² per MW at the high end; was 1.8 for about 5 min */;
   const frontL = [{ id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: upsM2 }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batM2 },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }];
@@ -443,7 +446,7 @@ function stackedRest(C, B, W, Da) {
   /* storey 3: one hall storey over the whole footprint, S1, S2, E2 through it */
   const cut = [S1r, S2r, E2r], hallR = subAll([[0, Da, 0, W]], cut);
   const R3 = [sec(3, 'hall', 'Data hall (one storey)', 'hall', hallR), sec(3, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }), sec(3, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }), sec(3, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true })];
-  const hall = sum(hallR.map(ra)), MW = hall / RULES.hallPerMW.v;
+  const hall = sum(hallR.map(ra)), MW = hall / HPM();
   /* data-centre floor (Cowork's count, labelled: hall, support, DC cores, entrance rooms, unassigned upper floors) */
   const dcArea = sum(R.filter(x => x.block === 'data centre' && x.kind !== 'bay').map(x => sum(x.r.map(ra)))) + sum(R2.filter(x => x.block === 'data centre' || (x.block === 'spare' && x.r[0][0] >= aB - 0.01)).map(x => sum(x.r.map(ra)))) + sum(R3.map(x => sum(x.r.map(ra))));
   const rooms = { 1: R, 2: R2, 3: R3 };
@@ -558,7 +561,7 @@ function narrowLot(C) {
   R2.push(sec(2, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }), sec(2, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }),
     sec(2, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true }),
     sec(2, 'dcor', 'Secure corridor', 'scor', [[0, aE, Wr, r2(Wr + cw)], [0, cw, SW, Wr], [r2(aE - cw), aE, xL, Wr], [r2(aE - cw), aE, r2(Wr + cw), P.W]].concat(stub ? [stub] : []).filter(r => r[1] - r[0] > 0.01 && r[3] - r[2] > 0.01), { corridor: true }));
-  const hallR0 = subAll([[0, aE, 0, P.W]], [S1r]).concat(stub ? [stub] : []), MWest = sum(hallR0.map(ra)) / RULES.hallPerMW.v;
+  const hallR0 = subAll([[0, aE, 0, P.W]], [S1r]).concat(stub ? [stub] : []), MWest = sum(hallR0.map(ra)) / HPM();
   const upsM2 = r2(MWest * 3.3 + 1.0 * PRG.ups.w), batM2 = r2(MWest * 3.8 + 1.0 * PRG.bat.w)   /* F11 B4 (J.B. 11 Nov 2026): 10–15 min (FM 5-32), 3.8 m² per MW at the high end; was 1.8 for about 5 min */;
   const sideL = [{ id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: upsM2 }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batM2 },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }, { id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w },
@@ -586,7 +589,7 @@ function narrowLot(C) {
   /* storey 3: the hall over the hub (and the lift lobby in front of E2); the rear stays two storeys */
   const R3 = [sec(3, 'hall', 'Data hall (one storey, over the hub)', 'hall', hallR0), sec(3, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }),
     sec(3, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }), sec(3, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true })];
-  const hall = sum(hallR0.map(ra)), MW = hall / RULES.hallPerMW.v;
+  const hall = sum(hallR0.map(ra)), MW = hall / HPM();
   const rooms = { 1: R, 2: R2, 3: R3 };
   const hubArea = sum(R.filter(x => x.block === 'hub' && !x.core && x.kind !== 'exitpas').map(x => sum(x.r.map(ra))));
   const dcArea = sum(R.filter(x => x.block === 'data centre' && x.kind !== 'bay').map(x => sum(x.r.map(ra)))) + sum(R2.filter(x => x.block === 'data centre' || x.dcSide).map(x => sum(x.r.map(ra)))) + sum(R3.map(x => sum(x.r.map(ra))));
@@ -670,7 +673,7 @@ function besideW(C, W) {
   /* data centre behind: hall | secure corridor | support row with the dock, bay and vestibule at the rear (truck aisle) */
   const bayL = van ? 10.2 : 9.0, bayW = van ? 3.4 : 3.3, dS = C.dS || Math.max(bayL, 9.0);
   const supportGuess = 520;
-  const hallNeed = RULES.hallPerMW.v * C.mw;
+  const hallNeed = HPM() * C.mw;
   let dH = up1(hallNeed / W);
   const cap = RULES.cap.m2; if (dH * W + W * (cw + dS) > cap) dH = Math.floor((cap - W * (cw + dS)) / W * 10) / 10;
   let Da = r2(aB + dH + cw + dS);
@@ -682,7 +685,7 @@ function besideW(C, W) {
   const aH = r2(aB + dH), aS = r2(aH + cw);
   const sec = (id, n, kind, rects, o) => room(1, id, n, kind === 'hall' ? 'hall' : kind === 'bay' ? 'load' : 'sup', kind, rects, Object.assign({ block: 'data centre' }, o || {}));
   R.push(sec('hall', 'Data hall (one storey)', 'hall', [[aB, aH, 0, W]]), sec('scor', 'Secure corridor', 'scor', [[aH, aS, 0, W]], { corridor: true }));
-  const MWest = (dH * W) / RULES.hallPerMW.v;
+  const MWest = (dH * W) / HPM();
   const tot = hubArea + clin + dH * W + W * (cw + dS), nb = st.shared ? 1 : (tot < 2500 ? 0 : tot <= 7500 ? 1 : 2);
   const sI = [{ id: 'pas3', n: 'Exit passage (2 h) from the secure corridor to the rear', fix: pw }, { id: 'ups', n: `UPS room (${Math.ceil(MWest) + 1} modules, N+1)`, w: PRG.ups.w, m2: r2(MWest * 3.3 + 3.0) }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: r2(MWest * 1.8 + 3.0) },
     { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }, { id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }, { id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w },
@@ -697,7 +700,7 @@ function besideW(C, W) {
     else if (x.id === 'dock') R.push(sec('dock', x.n, 'dock', [x.rr])); else if (x.id === 'ves') R.push(sec('ves', x.n, 'entry', [x.rr])); else R.push(sec(x.id, x.n, 'sroom', [x.rr], { prog: x.id })); });
   /* bays shorter than the row: the strip in front of each bay joins the dock lobby side (open to the bay) */
   R.filter(x => x.kind === 'bay').forEach(x => { const r = x.r[0]; if (r[0] > aS + 0.01) R.find(y => y.id === 'dock').r.push([aS, r[0], r[2], r[3]]); });
-  const hall = dH * W, MW = hall / RULES.hallPerMW.v;
+  const hall = dH * W, MW = hall / HPM();
   const dcArea = sum(R.filter(x => x.block === 'data centre' && x.kind !== 'bay').map(x => sum(x.r.map(ra))));
   const rooms = { 1: R };
   const truck = { court: [Da, r2(Da + RULES.aisle.w), 0, W], covered: null, why: 'bays open to a 6.1 m truck aisle behind the building (Parking By-law 5.4.1 aisle, Vancouver’s figure used in Edmonton ?)' };
@@ -972,9 +975,24 @@ function v2Checks(L, S) {
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
 function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); return fromSite(S); }
 function withV2(L, S) { try { L.v2 = v2Checks(L, S); } catch (e) { L.v2 = { error: String(e && e.message || e) }; } return L; }
-function fromSite(S) {
-  let L = layout(S.frontYard ? Object.assign({}, S, { noV2: true }) : S);
-  if (S.frontYard && L.rooms) L = pushBack(S, L);
+/* 12 Nov 2026 (J.B., decisions log; the stated rule of the pool spec, rule 15 step 4, for every engine): the data centre grows to the 2,325 m² floor
+   cap; where exit spacing fails at that size the hall comes back 0.05 MW (about 31.5 m² of hall) at a time until it passes, and the stopping rule
+   is named. If no size within 1 MW of the cap passes, the size at the cap is kept with its failure shown (growth is not what fails it). */
+function grown(S) {
+  const lay = S1 => layout(Object.assign({}, S1, { noV2: true })), fails = X => (X.apart || []).filter(a => a.status === 'fail');
+  const L0 = lay(S); if (!L0.rooms || !fails(L0).length) return { L: L0, S };
+  let L = L0, S1 = S;
+  for (let g = 0; g < 20; g++) { const m = r2(L.MW - 0.05); if (m < 0.3) break; const S2 = Object.assign({}, S, { mwStart: m }), L2 = lay(S2);
+    if (!L2.rooms || L2.MW >= L.MW - 1e-3) break; L = L2; S1 = S2;
+    if (!fails(L).length) { const f = fails(L0)[0];
+      L.sizeStop = { rule: 'exit spacing', at: L.MW, capMW: L0.MW, capM2: Math.round(L0.dcArea), why: `${f.zone} exits ${f.apart_m} m apart at ${L0.MW} MW, ${f.need_m} m needed` };
+      L.flags.push(`Data centre smaller than the 2,325 m² floor cap: exit spacing stops it at ${L.MW.toFixed(2)} MW (at the cap, ${L0.MW.toFixed(2)} MW and ${Math.round(L0.dcArea)} m², the ${f.zone} exits are ${f.apart_m} m apart, ${f.need_m} m needed; J.B. 12 Nov 2026, grown in 0.05 MW steps)`);
+      return { L, S: S1 }; } }
+  L0.flags.push('Exit spacing fails at the 2,325 m² floor cap and at every size tried down to 1 MW less: kept at the cap with the failure shown (?)');
+  return { L: L0, S }; }
+function fromSite(S0) {
+  const G = grown(S0), S = G.S; let L = G.L;
+  if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop) { L.sizeStop = L1.sizeStop; L.flags.push(L1.flags.find(f => /^Data centre smaller than the 2,325/.test(f))); } }
   if (L.rooms && !L.v2) withV2(L, S);
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
@@ -990,7 +1008,7 @@ function pushBack(S, L) {
   const used = Math.max(...ends), room = Math.floor((L.site.aFull - used) * 2) / 2;
   if (room < 0.5) { L.frontYard = { depth: 0, why: 'the hub already reaches the rear yard line' }; return L; }
   /* the largest move that keeps the same hub: the full move first, then halving to 0.5 m (assumes a smaller move fits where a larger one does) */
-  const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length;
+  const nF = X => ((X.treach && X.treach.reach) || []).length + (X.travel || []).filter(t => t.status === 'fail').length + (X.apart || []).filter(a => a.status === 'fail').length;   /* exit spacing counted (12 Nov 2026: the moved hub can be narrower or wider) */
   const ok = X => X.rooms && X.kind === L.kind && !!X.narrow === !!L.narrow && (X.ladder && X.ladder.step) === (L.ladder && L.ladder.step) && JSON.stringify(X.variant && X.variant.flags) === JSON.stringify(L.variant && L.variant.flags) && nF(X) <= nF(L) && Math.abs(X.MW - L.MW) <= 0.01;   /* same MW (J.B. 10 Nov: same building, moved) */
   const tryS = sh => layout(Object.assign({}, S, { frontShift: sh, noV2: true }));
   let best = null; { const Lh = tryS(room); if (ok(Lh)) best = [room, Lh]; }
