@@ -25,6 +25,15 @@ const pyList = a => '[' + a.map(s => `'${s}'`).join(', ') + ']';
 const storeys = G => Object.keys(G.S).map(Number).sort((a, b) => a - b);
 const roomsOf = (G, st) => G.S[String(st)] || [];
 const hyp = Math.hypot;
+/* Python's math.hypot is correctly rounded (vector_norm, 3.10+); JS Math.hypot may be one unit off. Exact x² + y² in double-double,
+   square root, one correction step: the correctly rounded result, so near-ties fall as in Python. */
+function twoProd(a, b) { const p = a * b, S = 134217729, ah = a * S - (a * S - a), al = a - ah, bh = b * S - (b * S - b), bl = b - bh; return [p, ((ah * bh - p) + ah * bl + al * bh) + al * bl]; }
+function twoSum(a, b) { const s = a + b, bb = s - a; return [s, (a - (s - bb)) + (b - bb)]; }
+function pyHypot(x, y) {
+  x = Math.abs(x); y = Math.abs(y); if (x === 0) return y; if (y === 0) return x; if (!isFinite(x) || !isFinite(y)) return Infinity;
+  const [px, ex] = twoProd(x, x), [py_, ey] = twoProd(y, y), [s, es] = twoSum(px, py_), lo = es + ex + ey, [hi, lo2] = twoSum(s, lo);
+  let r = Math.sqrt(hi); const [rr, er] = twoProd(r, r); r += ((hi - rr) - er + lo2) / (2 * r); return r;
+}
 const minOf = (a, f) => { let m = Infinity; for (const x of a) { const v = f(x); if (v < m) m = v; } return m; }, maxOf = (a, f) => { let m = -Infinity; for (const x of a) { const v = f(x); if (v > m) m = v; } return m; };
 
 /* ---------- reach.py: kinds and lines ---------- */
@@ -910,10 +919,905 @@ function widthRow(G, cfg) {
   return [stw, 'Room widths and shapes', 'J.B. 8 Nov minimum widths; eh/audit_rooms.py', txt];
 }
 
+/* ================= remaining board scripts (J.B. 11 Nov 2026: port in full, same method) =================
+   deadend.py aa10e3fde2181264 · egress2.py 6384340c3f170537 · egress3.py 0899ee81148da1ed · walkload.py a128dc3a63b22752 ·
+   sep2h.py 1d79eead43134f8b · padcheck.py 525e0b7d6624c81b · intakes.py 8e232c5089540c2d · fuelfill.py 293b18fe176c12f0 ·
+   claims.py ea19cf7902a44e16 · tfboard.py b01e2d4abc7fb12a (zone_exits, _egress_row, _area_row, _walk_row, common_checks) */
+
+/* ---------- small geometry kit (what the scripts ask shapely for: distances, boundary pieces, clipped areas) ---------- */
+const ptInPoly = (p, P) => insideP(p, P);
+function segSegD(a, b, c, d) {
+  const cross = (o, p, q) => (p[0] - o[0]) * (q[1] - o[1]) - (p[1] - o[1]) * (q[0] - o[0]);
+  const d1 = cross(c, d, a), d2 = cross(c, d, b), d3 = cross(a, b, c), d4 = cross(a, b, d);
+  if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) && ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))) return 0;
+  return Math.min(segD(a, c, d), segD(b, c, d), segD(c, a, b), segD(d, a, b));
+}
+const rectPoly = r => [[r[0], r[2]], [r[1], r[2]], [r[1], r[3]], [r[0], r[3]]];
+/* GEOS's own distance arithmetic (Distance::pointToSegment, segmentToSegment), so float ties fall as shapely's */
+const gPP = (p, a) => Math.sqrt((p[0] - a[0]) * (p[0] - a[0]) + (p[1] - a[1]) * (p[1] - a[1]));
+function gPS(p, A, B) {
+  if (A[0] === B[0] && A[1] === B[1]) return gPP(p, A);
+  const len2 = (B[0] - A[0]) * (B[0] - A[0]) + (B[1] - A[1]) * (B[1] - A[1]), r = ((p[0] - A[0]) * (B[0] - A[0]) + (p[1] - A[1]) * (B[1] - A[1])) / len2;
+  if (r <= 0.0) return gPP(p, A); if (r >= 1.0) return gPP(p, B);
+  const s = ((A[1] - p[1]) * (B[0] - A[0]) - (A[0] - p[0]) * (B[1] - A[1])) / len2; return Math.abs(s) * Math.sqrt(len2);
+}
+function gSS(A, B, C, D) {
+  if (A[0] === B[0] && A[1] === B[1]) return gPS(A, C, D);
+  if (C[0] === D[0] && C[1] === D[1]) return gPS(D, A, B);
+  let no = false;
+  if (Math.max(A[0], B[0]) < Math.min(C[0], D[0]) || Math.min(A[0], B[0]) > Math.max(C[0], D[0]) || Math.max(A[1], B[1]) < Math.min(C[1], D[1]) || Math.min(A[1], B[1]) > Math.max(C[1], D[1])) no = true;
+  else { const den = (B[0] - A[0]) * (D[1] - C[1]) - (B[1] - A[1]) * (D[0] - C[0]); if (den === 0) no = true; else { const rn = (A[1] - C[1]) * (D[0] - C[0]) - (A[0] - C[0]) * (D[1] - C[1]), sn = (A[1] - C[1]) * (B[0] - A[0]) - (A[0] - C[0]) * (B[1] - A[1]), s = sn / den, r = rn / den; if (r < 0 || r > 1 || s < 0 || s > 1) no = true; } }
+  return no ? Math.min(gPS(A, C, D), gPS(B, C, D), gPS(C, A, B), gPS(D, A, B)) : 0.0;
+}
+const gBox = r => [[r[1], r[2]], [r[1], r[3]], [r[0], r[3]], [r[0], r[2]]];   /* shapely box(), ccw: (maxx, miny) first */
+const gRing = P => P.map((p, i) => [p, P[(i + 1) % P.length]]);
+function gPolyD(A, B) { if (A.some(p => insideP(p, B)) || B.some(p => insideP(p, A))) return 0; let m = Infinity; for (const [a, b] of gRing(A)) for (const [c, d] of gRing(B)) m = Math.min(m, gSS(a, b, c, d)); return m; }
+function gPolySegs(A, segs) { let m = Infinity; for (const [c, d] of segs) { if (insideP(c, A) || insideP(d, A)) return 0; for (const [a, b] of gRing(A)) m = Math.min(m, gSS(a, b, c, d)); } return m; }
+const polyOf = s => isRect(s) ? rectPoly(s) : s.map(p => [p[0], p[1]]);
+const edgesOf = P => P.map((p, i) => [p, P[(i + 1) % P.length]]);
+/* distance between two polygons (0 when they overlap or touch), as shapely's distance */
+function polyD(A, B) {
+  if (A.some(p => ptInPoly(p, B)) || B.some(p => ptInPoly(p, A))) return 0;
+  let m = Infinity; for (const [a, b] of edgesOf(A)) for (const [c, d] of edgesOf(B)) m = Math.min(m, segSegD(a, b, c, d));
+  return m;
+}
+function polySegsD(A, segs) {
+  let m = Infinity; for (const [c, d] of segs) { if (ptInPoly(c, A) || ptInPoly(d, A)) return 0; for (const [a, b] of edgesOf(A)) m = Math.min(m, segSegD(a, b, c, d)); }
+  return m;
+}
+/* the parts of segment [a, b] outside a set of convex polygons (flat-capped buffers of gate or street lines) */
+function segMinus(a, b, cuts) {
+  let iv = [[0, 1]];
+  for (const C of cuts) {
+    let t0 = 0, t1 = 1; const n = C.length; let inside = true;
+    for (let i = 0; i < n && inside; i++) {   /* Cyrus–Beck against a convex polygon (any orientation) */
+      const p = C[i], q = C[(i + 1) % n], cx = C.reduce((s, z) => s + z[0], 0) / n, cy = C.reduce((s, z) => s + z[1], 0) / n;
+      let nx = q[1] - p[1], ny = -(q[0] - p[0]); if ((cx - p[0]) * nx + (cy - p[1]) * ny > 0) { nx = -nx; ny = -ny; }   /* outward normal */
+      const num = (a[0] - p[0]) * nx + (a[1] - p[1]) * ny, den = (b[0] - a[0]) * nx + (b[1] - a[1]) * ny;
+      if (Math.abs(den) < 1e-15) { if (num > 0) inside = false; continue; }
+      const t = -num / den; if (den < 0) t0 = Math.max(t0, t); else t1 = Math.min(t1, t);
+      if (t0 > t1) inside = false;
+    }
+    if (!inside || t1 - t0 < 1e-12) continue;
+    iv = iv.flatMap(([s, e]) => (t1 <= s || t0 >= e) ? [[s, e]] : [[s, Math.max(s, t0)], [Math.min(e, t1), e]].filter(([x, y]) => y - x > 1e-12));
+  }
+  return iv.map(([s, e]) => [[a[0] + (b[0] - a[0]) * s, a[1] + (b[1] - a[1]) * s], [a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e]]);
+}
+/* a segment buffered with flat caps (cap_style=2): the rectangle around it */
+function flatBuf(a, b, d) { const L = hyp(b[0] - a[0], b[1] - a[1]) || 1, nx = -(b[1] - a[1]) / L * d, ny = (b[0] - a[0]) / L * d; return [[a[0] + nx, a[1] + ny], [b[0] + nx, b[1] + ny], [b[0] - nx, b[1] - ny], [a[0] - nx, a[1] - ny]]; }
+/* area of a polygon clipped to an axis-aligned box (Sutherland–Hodgman) */
+function clipArea(P, bx) {
+  let poly = P.slice();
+  const edges = [[p => p[0] >= bx[0], (p, q) => { const t = (bx[0] - p[0]) / (q[0] - p[0]); return [bx[0], p[1] + t * (q[1] - p[1])]; }],
+    [p => p[0] <= bx[1], (p, q) => { const t = (bx[1] - p[0]) / (q[0] - p[0]); return [bx[1], p[1] + t * (q[1] - p[1])]; }],
+    [p => p[1] >= bx[2], (p, q) => { const t = (bx[2] - p[1]) / (q[1] - p[1]); return [p[0] + t * (q[0] - p[0]), bx[2]]; }],
+    [p => p[1] <= bx[3], (p, q) => { const t = (bx[3] - p[1]) / (q[1] - p[1]); return [p[0] + t * (q[0] - p[0]), bx[3]]; }]];
+  for (const [inside, cut] of edges) {
+    const out = []; for (let i = 0; i < poly.length; i++) { const p = poly[i], q = poly[(i + 1) % poly.length]; if (inside(p)) { out.push(p); if (!inside(q)) out.push(cut(p, q)); } else if (inside(q)) out.push(cut(p, q)); }
+    poly = out; if (!poly.length) return 0;
+  }
+  let s = 0; for (let i = 0; i < poly.length; i++) { const p = poly[i], q = poly[(i + 1) % poly.length]; s += p[0] * q[1] - q[0] * p[1]; } return Math.abs(s) / 2;
+}
+/* union area of axis-aligned rectangles inside a box (exact, compressed grid) */
+function rectUnionArea(rs, bx) {
+  const C = rs.map(r => [Math.max(r[0], bx[0]), Math.min(r[1], bx[1]), Math.max(r[2], bx[2]), Math.min(r[3], bx[3])]).filter(r => r[1] > r[0] && r[3] > r[2]);
+  if (!C.length) return 0;
+  const xs = uniqRaw(C.flatMap(r => [r[0], r[1]])), ys = uniqRaw(C.flatMap(r => [r[2], r[3]])); let a = 0;
+  for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < ys.length - 1; j++) { const p = [(xs[i] + xs[i + 1]) / 2, (ys[j] + ys[j + 1]) / 2]; if (C.some(r => r[0] <= p[0] && p[0] <= r[1] && r[2] <= p[1] && p[1] <= r[3])) a += (xs[i + 1] - xs[i]) * (ys[j + 1] - ys[j]); }
+  return a;
+}
+/* pieces of a union-of-rectangles boundary lying within dist of a set of rectangles: [[a, b] point pairs], merged where they join */
+function boundaryNear(rs, near, dist) {
+  const out = [];
+  for (const e of boundary(rs)) {
+    const iv = [];
+    for (const q of near) {
+      const dd = e.o === 'v' ? Math.max(q[0] - e.c, 0, e.c - q[1]) : Math.max(q[2] - e.c, 0, e.c - q[3]);
+      if (dd > dist + 1e-12) continue;
+      const ext = Math.sqrt(Math.max(0, dist * dist - dd * dd)), lo = (e.o === 'v' ? q[2] : q[0]) - ext, hi = (e.o === 'v' ? q[3] : q[1]) + ext;
+      const a = Math.max(e.a, lo), b = Math.min(e.b, hi); if (b > a + 1e-12) iv.push([a, b]);
+    }
+    iv.sort((p, q) => p[0] - q[0]); const M = [];
+    for (const v of iv) { const l = M[M.length - 1]; if (l && v[0] <= l[1] + 1e-12) l[1] = Math.max(l[1], v[1]); else M.push(v.slice()); }
+    for (const [a, b] of M) out.push(e.o === 'v' ? [[e.c, a], [e.c, b]] : [[a, e.c], [b, e.c]]);
+  }
+  return out;
+}
+/* join pieces that meet end to end into chains (GEOS returns merged lines); returns chains as point lists */
+function chains(pieces) {
+  const key = p => `${Math.round(p[0] * 1e6)},${Math.round(p[1] * 1e6)}`, used = new Array(pieces.length).fill(false), out = [];
+  const deg = new Map(); for (const [a, b] of pieces) for (const p of [a, b]) deg.set(key(p), (deg.get(key(p)) || 0) + 1);
+  const grow = (ch, atEnd) => { for (;;) { const end = atEnd ? ch[ch.length - 1] : ch[0]; if (deg.get(key(end)) !== 2) return; let found = false;
+    for (let j = 0; j < pieces.length; j++) if (!used[j]) { const [a, b] = pieces[j]; const nxt = key(a) === key(end) ? b : key(b) === key(end) ? a : null;
+      if (nxt) { used[j] = true; if (atEnd) ch.push(nxt); else ch.unshift(nxt); found = true; break; } }
+    if (!found) return; } };
+  for (let i = 0; i < pieces.length; i++) { if (used[i]) continue; used[i] = true; const ch = [pieces[i][0], pieces[i][1]]; grow(ch, true); grow(ch, false); out.push(ch); }
+  return out;
+}
+const chainLen = ch => ch.slice(1).reduce((s, p, i) => s + hyp(p[0] - ch[i][0], p[1] - ch[i][1]), 0);
+
+/* ---------- deadend.py ---------- */
+const DG0 = 0.05;
+function inload(rooms, u, v, o) {
+  const pts = o === 'v' ? [[u + 0.3, v], [u - 0.3, v]] : [[u, v + 0.3], [u, v - 0.3]];
+  return rooms.some(x => x.g === 'load' && x.r.some(r => pts.some(p => r[0] < p[0] && p[0] < r[1] && r[2] < p[1] && p[1] < r[3])));
+}
+function pubOk(G, st, d, k) { if (dcGround(G, outsidePoint(G, st, d[3], d[4], d[5]))) return false; if (k === 'scor') return true; return dcRoute(G, st, d[3], d[4], d[5])[0]; }
+function exitIdent(G, rooms, K, st, other, d, k, strict) {
+  const r2k = v => pyRound2(v);
+  if (other === 'OUT' || other === 'YARD') {
+    if (inload(rooms, d[3], d[4], d[5])) return new Set();
+    if ((k === 'pcor' || k === 'ccor' || strict) && !pubOk(G, st, d, k)) return new Set();
+    return new Set([`OUT|${st}|${r2k(d[3])}|${r2k(d[4])}`]);
+  }
+  if (!(other in K)) return new Set();
+  const x = rooms.find(y => y.id === other);
+  if ((K[other] === 'pcore' || K[other] === 'score') && x.stair) return new Set([`stair|${other}`]);
+  if (K[other] === 'lobby' && k !== 'pcor') return new Set();
+  if (K[other] !== 'exitpas' && K[other] !== 'lobby') return new Set();
+  const seen = new Set([other]), todo = [other], outs = new Set();
+  while (todo.length) {
+    const c = todo.pop();
+    for (const e of G.D) {
+      if (e[0] !== st || !(c === e[1] || c === e[2])) continue;
+      const o2 = e[1] === c ? e[2] : e[1];
+      if (o2 === 'OUT' || o2 === 'YARD') { if (!inload(rooms, e[3], e[4], e[5]) && !((k === 'pcor' || k === 'ccor' || strict) && !pubOk(G, st, e, k))) outs.add(`OUT|${st}|${r2k(e[3])}|${r2k(e[4])}`); }
+      else if (o2 in K && !seen.has(o2) && (K[o2] === 'exitpas' || K[o2] === 'lobby') && (K[o2] === K[other] || K[other] === 'lobby')) { seen.add(o2); todo.push(o2); }
+    }
+  }
+  return outs;
+}
+const ck = (a, b) => a + ',' + b, cxy = s => s.split(',').map(Number);
+function cline(r) {
+  const a0 = pyRoundInt(r[0] / DG0), a1 = pyRoundInt(r[1] / DG0), b0 = pyRoundInt(r[2] / DG0), b1 = pyRoundInt(r[3] / DG0);
+  const am = Math.floor((a0 + a1 - 1) / 2), bm = Math.floor((b0 + b1 - 1) / 2), w = r[1] - r[0], h = r[3] - r[2], out = new PySet();
+  if (w >= h / 1.5) { const c = new PySet(); for (let a = a0; a < a1; a++) c.add(a, bm); out.merge(c); }
+  if (h >= w / 1.5) { const c = new PySet(); for (let b = b0; b < b1; b++) c.add(am, b); out.merge(c); }
+  return out.order();
+}
+function lpath(p, q) {
+  const out = new Set(); let [a, b] = p;
+  let step = q[0] >= a ? 1 : -1; while (a !== q[0]) { out.add(ck(a, b)); a += step; }
+  step = q[1] >= b ? 1 : -1; while (b !== q[1]) { out.add(ck(a, b)); b += step; }
+  out.add(ck(q[0], q[1])); return out;
+}
+/* Python's min(set, key=...) keeps the first minimum in the set's own order (CPython hash order, not insertion). setOrder() gives that
+   order for a set of (int, int) tuples, so ties fall the same way. */
+function centreline(rs) {
+  const CL = rs.map(r => [r, cline(r)]), cells = new Set(); for (const [, c] of CL) for (const z of c) cells.add(z);
+  for (let i = 0; i < CL.length; i++) for (let j = i + 1; j < CL.length; j++) {
+    const [r, ci] = CL[i], [q, cj] = CL[j], ou = Math.min(r[1], q[1]) - Math.max(r[0], q[0]), ov = Math.min(r[3], q[3]) - Math.max(r[2], q[2]);
+    let m;
+    if ((Math.abs(r[1] - q[0]) < 1e-6 || Math.abs(q[1] - r[0]) < 1e-6) && ov > 0.3) { const ue = Math.abs(r[1] - q[0]) < 1e-6 ? r[1] : r[0]; m = [ue, (Math.max(r[2], q[2]) + Math.min(r[3], q[3])) / 2]; }
+    else if ((Math.abs(r[3] - q[2]) < 1e-6 || Math.abs(q[3] - r[2]) < 1e-6) && ou > 0.3) { const ve = Math.abs(r[3] - q[2]) < 1e-6 ? r[3] : r[2]; m = [(Math.max(r[0], q[0]) + Math.min(r[1], q[1])) / 2, ve]; }
+    else continue;
+    for (const [rr, cc] of [[r, ci], [q, cj]]) {
+      const ma = Math.min(Math.max(Math.floor(m[0] / DG0), pyRoundInt(rr[0] / DG0)), pyRoundInt(rr[1] / DG0) - 1);
+      const mb = Math.min(Math.max(Math.floor(m[1] / DG0), pyRoundInt(rr[2] / DG0)), pyRoundInt(rr[3] / DG0) - 1);
+      const tgt = pyMin(setOrder(cc), c => { const [x, y] = cxy(c); return Math.abs(x - ma) + Math.abs(y - mb); });
+      for (const z of lpath([ma, mb], cxy(tgt))) cells.add(z);
+    }
+  }
+  return [cells, CL];
+}
+const pyMin = (arr, f) => { let best = null, bv = Infinity, n = 0; for (const x of arr) { const v = f(x); if (v < bv) { bv = v; best = x; n = 1; } else if (v === bv) n++; } if (n > 1) TIES.push(bv); return best; };
+const pyMax = (arr, f) => { let best = null, bv = -Infinity; for (const x of arr) { const v = f(x); if (v > bv) { bv = v; best = x; } } return best; };
+function project(CL, u, v) {
+  let best = null;
+  for (const [r, cc] of CL) {
+    if (!(r[0] - 1e-6 <= u && u <= r[1] + 1e-6 && r[2] - 1e-6 <= v && v <= r[3] + 1e-6) || !cc.length) continue;
+    const dist = c => { const [x, y] = cxy(c); return pyHypot((x + 0.5) * DG0 - u, (y + 0.5) * DG0 - v); };
+    const c = pyMin(setOrder(cc), dist), dd = dist(c);
+    if (best === null || dd < best[0]) best = [dd, c];
+  }
+  return best ? best[1] : null;
+}
+function dijkstraCells(cells, src) {
+  const D = new Map(); for (const q of src) D.set(q, 0.0);
+  const heap = src.map(q => [0.0, q]); heap.sort((a, b) => a[0] - b[0]);
+  /* plain binary heap */
+  const H = []; const push = e => { H.push(e); let i = H.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (H[i][0] < H[p][0]) { [H[i], H[p]] = [H[p], H[i]]; i = p; } else break; } };
+  const pop = () => { const t = H[0], l = H.pop(); if (H.length) { H[0] = l; let i = 0; for (;;) { const a = 2 * i + 1, b = a + 1; let m = i; if (a < H.length && H[a][0] < H[m][0]) m = a; if (b < H.length && H[b][0] < H[m][0]) m = b; if (m === i) break; [H[i], H[m]] = [H[m], H[i]]; i = m; } } return t; };
+  for (const e of heap) push(e);
+  while (H.length) {
+    const [dd, c] = pop(); if (dd > D.get(c)) continue; const [x, y] = cxy(c);
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const n = ck(x + dx, y + dy); if (cells.has(n) && dd + DG0 < (D.has(n) ? D.get(n) : 1e9)) { D.set(n, dd + DG0); push([dd + DG0, n]); } }
+  }
+  return D;
+}
+function corridors(G, opt) {
+  const strict = !!(opt && opt.strict), out = [];
+  for (const st of Object.keys(G.S).map(Number)) {   /* Python: G.S.items() order (storeys as written) */
+    const rooms = roomsOf(G, st), K = {}; for (const x of rooms) K[x.id] = kind(x, st);
+    const groups = new Map();
+    for (const x of rooms) if (['pcor', 'ccor', 'scor'].includes(K[x.id])) { if (!groups.has(K[x.id])) groups.set(K[x.id], []); groups.get(K[x.id]).push(x); }
+    for (const [k, xs] of groups) {
+      const xid = xs.map(y => y.id).join('+'), xr = xs.flatMap(y => y.r), ids = new Set(xs.map(y => y.id));
+      const [cells, CL] = centreline(xr), ex = new Map(), idn = new Map();
+      for (const d of G.D) {
+        if (d[0] !== st || !(ids.has(d[1]) || ids.has(d[2])) || (ids.has(d[1]) && ids.has(d[2]))) continue;
+        const other = ids.has(d[1]) ? d[2] : d[1], ident = exitIdent(G, rooms, K, st, other, d, k, strict);
+        if (!ident.size) continue;
+        const c0 = project(CL, d[3], d[4]); if (c0 === null) continue;
+        const kk = `${other}|${pyRound2(d[3])}|${pyRound2(d[4])}`; ex.set(kk, [c0]); idn.set(kk, ident);
+      }
+      const dmap = new Map(); for (const [kk, c] of ex) dmap.set(kk, dijkstraCells(cells, c));
+      const names = [...dmap.keys()], two = new Set();
+      for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
+        const a = dmap.get(names[i]), b = dmap.get(names[j]);
+        if ([...idn.get(names[i])].some(z => idn.get(names[j]).has(z))) continue;
+        const reach_ = ex.get(names[j]).filter(q => a.has(q)).map(q => a.get(q)); if (!reach_.length) continue;
+        const L = Math.min(...reach_); for (const c of cells) if (a.has(c) && b.has(c) && a.get(c) + b.get(c) <= L + 1e-6) two.add(c);
+      }
+      let worst;
+      if (two.size) {
+        for (const kk of names) if ([...dmap.get(kk).keys()].some(c => two.has(c))) for (const c of ex.get(kk)) two.add(c);
+        const rest = new Set([...cells].filter(c => !two.has(c))), seen = new Set();
+        for (const c0 of [...rest]) {
+          if (seen.has(c0)) continue; const comp = new Set([c0]), q = [c0]; seen.add(c0);
+          while (q.length) { const [x, y] = cxy(q.pop()); for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const n = ck(x + dx, y + dy); if (rest.has(n) && !seen.has(n)) { seen.add(n); comp.add(n); q.push(n); } } }
+          const touch = [...comp].filter(c => { const [x, y] = cxy(c); return [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => two.has(ck(x + dx, y + dy))); });
+          let groupsN = 0; const left = new Set(touch);
+          while (left.size) { groupsN++; const f = left.values().next().value; left.delete(f); const s2 = [f]; while (s2.length) { const [x, y] = cxy(s2.pop()); for (const dx of [-1, 0, 1]) for (const dy of [-1, 0, 1]) { const n = ck(x + dx, y + dy); if (left.has(n)) { left.delete(n); s2.push(n); } } } }
+          if (groupsN >= 2) for (const c of comp) two.add(c);
+        }
+        const dt = dijkstraCells(cells, [...two]);
+        for (const c of cells) if (!dt.has(c)) { let m = Infinity; for (const kk of names) if (dmap.get(kk).has(c)) m = Math.min(m, dmap.get(kk).get(c)); dt.set(c, m); }
+        worst = dt.size ? Math.max(...dt.values()) : 0.0;
+      } else if (names.length) worst = Math.max(...dmap.get(names[0]).values());
+      else worst = Infinity;
+      out.push([st, xid, k, names.length, worst < Infinity ? pyRound2(worst + (names.length ? DG0 / 2 : 0)) : Infinity, [...new Set(names.map(n => n.split('|')[0]))].sort()]);
+    }
+  }
+  return out;
+}
+
+/* ---------- egress2.py, egress3.py ---------- */
+const dseg = d => { const w = (d.length > 6 ? d[6] : 0.9) / 2; return d[5] === 'v' ? [[d[3], d[4] - w], [d[3], d[4] + w]] : [[d[3] - w, d[4]], [d[3] + w, d[4]]]; };
+const pts21 = s => { const o = []; for (let t = 0; t <= 20; t++) o.push([s[0][0] + (s[1][0] - s[0][0]) * t / 20, s[0][1] + (s[1][1] - s[0][1]) * t / 20]); return o; };
+function segDist21(a, b) { let m = Infinity; for (const p of pts21(a)) for (const q of pts21(b)) m = Math.min(m, hyp(p[0] - q[0], p[1] - q[1])); return m; }
+function egress2(G) {
+  const out = [];
+  for (const st of storeys(G)) for (const x of roomsOf(G, st)) {
+    const K = {}; for (const y of roomsOf(G, st)) K[y.id] = kind(y, st);
+    const n = x.n.toLowerCase();
+    if (x.g !== 'pub' || !(n.includes('refuge') || n.includes('shelter')) || n.includes('staff') || n.includes('storage')) continue;
+    const A = x.r.reduce((s, r) => s + rArea(r), 0), load = Math.floor(A / 0.75);
+    const u0 = Math.min(...x.r.map(r => r[0])), u1 = Math.max(...x.r.map(r => r[1])), v0 = Math.min(...x.r.map(r => r[2])), v1 = Math.max(...x.r.map(r => r[3])), diag = hyp(u1 - u0, v1 - v0);
+    const other = d => d[1] === x.id ? d[2] : d[1];
+    const doors = G.D.filter(d => d[0] === st && (d[1] === x.id || d[2] === x.id) && (['OUT', 'YARD'].includes(other(d)) || ['lobby', 'pcor', 'ccor', 'exitpas'].includes(K[other(d)])));
+    let best = 0.0; for (let i = 0; i < doors.length; i++) for (let j = i + 1; j < doors.length; j++) best = Math.max(best, segDist21(dseg(doors[i]), dseg(doors[j])));
+    const need = A > 45 + 1e-9, ok = !need || (doors.length >= 2 && best >= diag / 3 - 1e-6);
+    const row = [x.id, pyRound1(A), need && load <= 60 ? pyRound1(A / 0.75) : load, doors.length, pyRound1(best), pyRound1(diag / 3), ok ? 'ok' : 'FAIL']; row.f2 = need && load <= 60; out.push(row);
+  }
+  return out;
+}
+const LIM3 = { 'F-2': 200, 'A': 200, 'D': 300 };
+function egress3(G) {
+  const out = [];
+  for (const st of Object.keys(G.S).map(Number)) {
+    const rooms = roomsOf(G, st), K = {}; for (const y of rooms) K[y.id] = kind(y, st);
+    const units = [];
+    for (const x of rooms) { const n = x.n.toLowerCase(); if (x.g === 'hall') units.push(['F-2', x.n, new Set([x.id]), x.r]); else if (x.g === 'pub' && (n.includes('refuge') || n.includes('shelter')) && !n.includes('staff') && !n.includes('storage')) units.push(['A', x.n, new Set([x.id]), x.r]); }
+    const cl = rooms.filter(x => x.g === 'clin' || x.id === 'ccor');
+    if (cl.length) units.push(['D', 'Clinic suite', new Set(cl.map(x => x.id)), cl.flatMap(x => x.r)]);
+    for (const [grp, name, ids, rs] of units) {
+      const A = rs.reduce((s, r) => s + rArea(r), 0), okK = ['lobby', 'pcor', 'ccor', 'scor', 'exitpas', 'pcore', 'score'];
+      const oth = d => ids.has(d[1]) ? d[2] : d[1];
+      let doors = G.D.filter(d => d[0] === st && (ids.has(d[1]) !== ids.has(d[2])) && (['OUT', 'YARD'].includes(oth(d)) || okK.includes(K[oth(d)])));
+      if (grp === 'D') doors = doors.filter(d => K[oth(d)] !== 'ccor');
+      const u0 = Math.min(...rs.map(r => r[0])), u1 = Math.max(...rs.map(r => r[1])), v0 = Math.min(...rs.map(r => r[2])), v1 = Math.max(...rs.map(r => r[3])), diag = hyp(u1 - u0, v1 - v0);
+      let best = 0.0; for (let i = 0; i < doors.length; i++) for (let j = i + 1; j < doors.length; j++) best = Math.max(best, segDist21(dseg(doors[i]), dseg(doors[j])));
+      let far = 0.0;
+      for (const r of rs) for (let i = 0; i < Math.trunc((r[1] - r[0]) / 0.5) + 1; i++) for (let j = 0; j < Math.trunc((r[3] - r[2]) / 0.5) + 1; j++) {
+        const p = [Math.min(r[0] + i * 0.5, r[1]), Math.min(r[2] + j * 0.5, r[3])];
+        far = Math.max(far, doors.length ? Math.min(...doors.map(d => hyp(p[0] - d[3], p[1] - d[4]))) : 1e9);
+      }
+      const need = A > LIM3[grp] || far > 25, ok = !need || (doors.length >= 2 && best >= diag / 3 - 1e-6);
+      out.push({ st, grp, name, A: pyRound1(A), lim: LIM3[grp], need, n: doors.length, apart: pyRound1(best), third: pyRound1(diag / 3), far: pyRound1(far), ok, doors: doors.map(d => [d[1], d[2], d[3], d[4]]) });
+    }
+  }
+  return out;
+}
+
+/* ---------- walkload.py ---------- */
+function walkload(G) {
+  const S1 = roomsOf(G, 1), K = {}; for (const x of S1) K[x.id] = kind(x, 1);
+  const ra = x => x.r.reduce((s, r) => s + rArea(r), 0);
+  const hub = Math.ceil(S1.filter(x => x.g === 'pub' && (x.n.toLowerCase().includes('refuge') || x.n.toLowerCase().includes('shelter')) && !x.n.toLowerCase().includes('storage')).reduce((s, x) => s + ra(x), 0) / 0.75);
+  const clin1 = Math.ceil(S1.filter(x => x.g === 'clin').reduce((s, x) => s + ra(x), 0) / 9.3), clin2 = Math.ceil(roomsOf(G, 2).filter(x => x.g === 'clin').reduce((s, x) => s + ra(x), 0) / 9.3);
+  const pub = ['pub', 'circ'], byId = id => S1.find(x => x.id === id);
+  const hubExits = G.D.filter(d => d[0] === 1 && ['OUT', 'YARD'].includes(d[2]) && byId(d[1]) && pub.includes(byId(d[1]).g) && !byId(d[1]).core);
+  const W = (get(G, 'WALK', []) || []).slice(), touch = (a, b) => a[0] <= b[1] + 1e-6 && b[0] <= a[1] + 1e-6 && a[2] <= b[3] + 1e-6 && b[2] <= a[3] + 1e-6;
+  let groups = [];
+  for (const w of W) { const g = groups.filter(x => x.some(y => touch(w, y))); const nw = [w].concat(...g); groups = groups.filter(x => !g.includes(x)).concat([nw]); }
+  const per = new Map();
+  for (const w of W) {
+    const on = G.D.filter(d => d[0] === 1 && ['OUT', 'YARD'].includes(d[2]) && inShape(w, ...outsidePoint(G, 1, d[3], d[4], d[5])));
+    let share = 0.0; const full = new Map(), names = [];
+    for (const d of on) {
+      const x = byId(d[1]); let s, f, cat;
+      if (x.core && x.stair && x.g === 'sup') { const loads = storeys(G).filter(st => st >= 2).map(st => Math.ceil(roomsOf(G, st).filter(y => ['sup', 'hall', 'spare'].includes(y.g) && !y.core).reduce((a, y) => a + ra(y), 0) / 46.0)); f = loads.length ? Math.max(...loads) : 0; s = f / 2; cat = 'dc'; }
+      else if (x.core && x.g === 'circ' && clin2) { s = clin2 / 2; f = clin2; cat = 'clin2'; }
+      else if (x.g === 'clin' || (K[d[1]] === 'exitpas' && clin1 && G.D.some(e => e[0] === 1 && (e[1] === d[1] || e[2] === d[1]) && K[e[2] === d[1] ? e[1] : e[2]] === 'ccor'))) { s = clin1 / 2; f = clin1; cat = 'clin1'; }
+      else if (pub.includes(x.g)) { s = hub / Math.max(hubExits.length, 1); f = hub; cat = 'hub'; }
+      else { s = 0; f = 0; cat = 'none'; }
+      share += s; full.set(cat, f); names.push(d[1]);
+    }
+    per.set(w, [share, full, names]);
+  }
+  const out = [];
+  for (const grp of groups) {
+    const share = grp.reduce((a, w) => a + per.get(w)[0], 0), full = new Map(), names = [];
+    for (const w of grp) { for (const [k, v] of per.get(w)[1]) full.set(k, v); names.push(...per.get(w)[2]); }
+    const fl = [...full.values()].reduce((a, b) => a + b, 0), width = Math.min(...grp.map(w => Math.min(w[1] - w[0], w[3] - w[2])));
+    const need = Math.max(1.1, share * 0.0061), needf = Math.max(1.1, fl * 0.0061);
+    out.push([grp.map(w => w.map(v => pyRound2(v))), names, pyRoundInt(share), fl, pyRound2(width), pyRound2(need), pyRound2(needf), width + 1e-6 >= need ? 'ok' : 'FAIL']);
+  }
+  return [out, hub, hubExits.length];
+}
+
+/* ---------- sep2h.py ---------- */
+const HUBPLANT = new Set(['pmec', 'mec']);
+const side2h = x => (['pub', 'circ'].includes(x.g) || HUBPLANT.has(x.id)) ? 'hub' : x.g === 'clin' ? null : ['sup', 'hall', 'load', 'plant'].includes(x.g) ? 'dc' : null;
+function sep2hWalls(G, cfg) {
+  const out = new Map();
+  for (const st of Object.keys(G.S).map(Number)) {
+    const rooms = roomsOf(G, st), H_ = rooms.filter(x => side2h(x) === 'hub').flatMap(x => x.r), D_ = rooms.filter(x => side2h(x) === 'dc').flatMap(x => x.r);
+    if (!H_.length || !D_.length) continue;
+    const w = chains(boundaryNear(H_, D_, 0.02));
+    const L = w.map(chainLen).filter(l => l > 0.05).reduce((a, b) => a + b, 0);
+    if (L < 0.3) continue;
+    const marks = ((cfg.two_hour || {})[String(st)] || (cfg.two_hour || {})[st] || []);
+    let U = 0;
+    for (const ch of w) {   /* the wall line outside every mark (marks buffered 0.2 m, round) */
+      const segs = [];
+      for (let i = 0; i < ch.length - 1; i++) {
+        const a = ch[i], b = ch[i + 1], o = Math.abs(a[0] - b[0]) < 1e-9 ? 'v' : 'h';
+        const e = o === 'v' ? { o, c: a[0], a: Math.min(a[1], b[1]), b: Math.max(a[1], b[1]) } : { o, c: a[1], a: Math.min(a[0], b[0]), b: Math.max(a[0], b[0]) };
+        const cut = [];
+        for (const q of marks) { const dd = o === 'v' ? Math.max(q[0] - e.c, 0, e.c - q[1]) : Math.max(q[2] - e.c, 0, e.c - q[3]); if (dd > 0.2) continue; const ext = Math.sqrt(0.04 - dd * dd); cut.push([(o === 'v' ? q[2] : q[0]) - ext, (o === 'v' ? q[3] : q[1]) + ext]); }
+        cut.sort((p, q) => p[0] - q[0]); let cur = e.a;
+        for (const [lo, hi] of cut) { if (lo > cur) segs.push(o === 'v' ? [[e.c, cur], [e.c, Math.min(lo, e.b)]] : [[cur, e.c], [Math.min(lo, e.b), e.c]]); cur = Math.max(cur, hi); if (cur >= e.b) break; }
+        if (cur < e.b) segs.push(o === 'v' ? [[e.c, cur], [e.c, e.b]] : [[cur, e.c], [e.b, e.c]]);
+      }
+      U += chains(segs.filter(([a, b]) => hyp(a[0] - b[0], a[1] - b[1]) > 1e-9)).map(chainLen).filter(l => l > 0.3).reduce((a, b) => a + b, 0);
+    }
+    out.set(st, [L, U]);
+  }
+  return out;
+}
+function sep2hText(G, cfg) {
+  const W = sep2hWalls(G, cfg);
+  if (!W.size) return ['pass', 'no storey where hub rooms meet data-centre rooms [script]'];
+  const bad = [...W.values()].some(([, u]) => u > 0.3);
+  const t = [...W.entries()].sort((a, b) => a[0] - b[0]).map(([st, [L, u]]) => `storey ${st}: 2 h walls between the hub and the data-centre rooms, cores, bays and plant beside it, ${pyFixed(L, 1)} m` + (u > 0.3 ? `, ${pyFixed(u, 1)} m NOT marked` : ', all dashed')).join('; ');
+  return [bad ? 'fail' : 'pass', t + ' [script, eh/sep2h.py]'];
+}
+/* Python iterates a set in its hash-table order, and min() keeps the first minimum, so a tie (a door exactly between two centreline
+   cells) falls by that order. PySet reproduces CPython's set table (Objects/setobject.c: set_add_entry, set_insert_clean,
+   set_table_resize, set_merge; LINEAR_PROBES 9, PERTURB_SHIFT 5) and its tuple hash (xxHash lanes, Objects/tupleobject.c) for
+   tuples of two small ints, so the cells come out in Python's order. */
+const TIES = [];
+const M64 = (1n << 64n) - 1n, XP1 = 11400714785074694791n, XP2 = 14029467366897019727n, XP5 = 2870177450012600261n;
+function pyHashInt(n) { const h = BigInt(n === -1 ? -2 : n); return h & M64; }
+function pyHashTuple2(a, b) {
+  let acc = XP5;
+  for (const v of [a, b]) { const lane = pyHashInt(v); acc = (acc + lane * XP2) & M64; acc = ((acc << 31n) | (acc >> 33n)) & M64; acc = (acc * XP1) & M64; }
+  acc = (acc + (2n ^ (XP5 ^ 3527539n))) & M64;
+  if (acc === M64) return 1546275796n;
+  return acc;
+}
+class PySet {
+  constructor() { this.mask = 7; this.table = new Array(8).fill(null); this.fill = 0; this.used = 0; }
+  static key(a, b) { return a + ',' + b; }
+  insertClean(table, mask, e) {
+    let perturb = e.h, i = Number(e.h & BigInt(mask));
+    for (;;) {
+      if (table[i] === null) { table[i] = e; return; }
+      if (i + 9 <= mask) for (let j = 0; j < 9; j++) { i++; if (table[i] === null) { table[i] = e; return; } }
+      perturb >>= 5n; i = Number((BigInt(i) * 5n + 1n + perturb) & BigInt(mask));
+    }
+  }
+  resize(minused) {
+    let n = 8; while (n <= minused) n <<= 1;
+    const old = this.table, nt = new Array(n).fill(null), nm = n - 1;
+    for (const e of old) if (e !== null) this.insertClean(nt, nm, e);
+    this.table = nt; this.mask = nm; this.fill = this.used;
+  }
+  addEntry(e) {
+    let perturb = e.h, i = Number(e.h & BigInt(this.mask));
+    for (;;) {
+      let probes = (i + 9 <= this.mask) ? 9 : 0, idx = i;
+      do {
+        const t = this.table[idx];
+        if (t === null) { this.table[idx] = e; this.fill++; this.used++; if (this.fill * 5 < this.mask * 3) return; this.resize(this.used > 50000 ? this.used * 2 : this.used * 4); return; }
+        if (t.h === e.h && t.k === e.k) return;
+        idx++;
+      } while (probes-- > 0);
+      perturb >>= 5n; i = Number((BigInt(i) * 5n + 1n + perturb) & BigInt(this.mask));
+    }
+  }
+  add(a, b) { this.addEntry({ k: PySet.key(a, b), h: pyHashTuple2(a, b) }); return this; }
+  merge(o) {   /* so |= other */
+    if (o === this || o.used === 0) return this;
+    if ((this.fill + o.used) * 5 >= this.mask * 3) this.resize((this.used + o.used) * 2);
+    if (this.fill === 0 && this.mask === o.mask && o.fill === o.used) { this.table = o.table.slice(); this.fill = o.fill; this.used = o.used; return this; }
+    if (this.fill === 0) { this.fill = o.used; this.used = o.used; for (const e of o.table) if (e !== null) this.insertClean(this.table, this.mask, e); return this; }
+    for (const e of o.table) if (e !== null) this.addEntry(e);
+    return this;
+  }
+  order() { return this.table.filter(e => e !== null).map(e => e.k); }
+}
+const setOrder = arr => arr;
+
+/* Python text of numbers and tuples as the scripts print them */
+const pyNum = v => typeof v === 'number' ? (Number.isInteger(v) ? v.toFixed(1) : (v === Infinity ? 'inf' : v === -Infinity ? '-inf' : String(v))) : String(v);
+const pyTuple = a => '(' + a.map(v => typeof v === 'string' ? `'${v}'` : Array.isArray(v) ? pyTuple(v) : pyNum(v)).join(', ') + (a.length === 1 ? ',' : '') + ')';
+const n1i = x => x === Infinity ? 'inf' : n1(x);
+
+/* ---------- padcheck.py ---------- */
+function truckRoutesAll(G) {   /* padcheck._routes: TRUCK_ROUTES plus the named rects that are not None */
+  const TR = get(G, 'TRUCK_ROUTES', null), d = TR !== null ? Object.assign({}, TR) : {};
+  for (const k of ['DRIVE', 'APRON', 'AISLE', 'COURT', 'YARD_AISLE']) if (G[k] !== undefined && G[k] !== null && !(k in d)) d[k] = G[k];
+  return d;
+}
+const prect = x => Array.isArray(x.r[0]) ? x.r[0] : x.r;
+function padAnalyse(G) {
+  const PL = G.PLANT || [], pads = PL.filter(x => x.id.startsWith('t'));
+  if (!pads.length) return null;
+  const S1 = roomsOf(G, 1), bldR = S1.filter(x => !x.id.startsWith('alc')).flatMap(x => x.r), alc = S1.filter(x => x.id.startsWith('alc'));
+  const gens_ = PL.filter(x => x.id.startsWith('g')).map(prect);
+  const chl = PL.filter(x => x.id.startsWith('c')).map(prect).concat((get(G, 'CHILL', []) || []).filter(r => rectUnionArea(bldR, r) < 0.5));
+  const vg = get(G, 'VGATES', []) || [], gatePolys = vg.map(([a, b]) => flatBuf(a, b, 0.08));
+  const fl = (get(G, 'PLANT_YARDS', []) || []).map(polyOf).concat((get(G, 'WALK', []) || []).map(polyOf));
+  const strip = get(G, 'STRIP', null); if (strip !== null) fl.push(polyOf(strip));
+  const fenceSegs = []; for (const P of fl) for (const [a, b] of edgesOf(P)) fenceSegs.push(...(gatePolys.length ? segMinus(a, b, gatePolys) : [[a, b]]));
+  const lot = G.LOTPOLY.map(p => [p[0], p[1]]), se = get(G, 'STREET_EDGES', []) || [], streetPolys = se.map(([a, b]) => flatBuf(a, b, 0.3));
+  const lotSegs = []; for (const [a, b] of edgesOf(lot)) lotSegs.push(...(streetPolys.length ? segMinus(a, b, streetPolys) : [[a, b]]));
+  const TR = Object.entries(truckRoutesAll(G)).map(([k, v]) => [k, polyOf(v)]);
+  const lineBufs = fenceSegs.concat(lotSegs).map(([a, b]) => { const L = hyp(b[0] - a[0], b[1] - a[1]) || 1, ex = 0.02 / L, a2 = [a[0] - (b[0] - a[0]) * ex, a[1] - (b[1] - a[1]) * ex], b2 = [b[0] + (b[0] - a[0]) * ex, b[1] + (b[1] - a[1]) * ex]; return flatBuf(a2, b2, 0.02); });
+  const out = [], P = pads.map(x => [x.id, prect(x)]);
+  for (const [pid, r] of P) {
+    const others = P.filter(([i]) => i !== pid).map(([, q]) => q), pb = gBox(r), bd = q => gPolyD(pb, gBox(q));
+    const inalc = alc.some(a => { const q = a.r[0]; return q[0] - 0.05 <= r[0] && r[1] <= q[1] + 0.05 && q[2] - 0.05 <= r[2] && r[3] <= q[3] + 0.05; });
+    const d = { id: pid };
+    d.bld = bldR.length ? Math.min(...bldR.map(bd)) : 0;
+    d.gen = gens_.length ? Math.min(...gens_.map(bd)) : 99;
+    d.chl = chl.length ? Math.min(...chl.map(bd)) : 99;
+    d.fence = fenceSegs.length ? gPolySegs(pb, fenceSegs) : 99;
+    d.pad = others.length ? Math.min(...others.map(bd)) : 99;
+    const rectObs = bldR.concat(gens_, chl, others);
+    const [u0, u1, v0, v1] = r;
+    const frontBox = (k, t) => ({ S: [u0, u1, v0 - t, v0], N: [u0, u1, v1, v1 + t], W: [u0 - t, u0, v0, v1], E: [u1, u1 + t, v0, v1] })[k];
+    const blocked = bx => { if (bx[1] - bx[0] <= 0 || bx[3] - bx[2] <= 0) return 0; let a = rectUnionArea(rectObs, bx); for (const L of lineBufs) { a += clipArea(L, bx); if (a >= 0.01) break; } return a; };
+    d.depth = {}; for (const k of ['S', 'N', 'W', 'E']) { let got = 0.0; for (let x = 40; x >= 0; x--) { const t = x / 10; if (blocked(frontBox(k, t)) < 0.01) { got = t; break; } } d.depth[k] = got; }
+    d.alcove = inalc;
+    d.metal3 = [['generator sets', d.gen], ['chillers', d.chl], ['fence or gate', d.fence]].filter(([, v]) => v < 3.0).map(([n]) => n);
+    d.bld3 = d.bld < 3.0 && !inalc;
+    d.truck = TR.filter(([, t]) => gPolyD(pb, t) < 3.0).map(([k]) => k).sort();
+    d.street = streetPolys.length > 0 && Math.min(...streetPolys.map(s => gPolyD(pb, s))) < 3.0;
+    out.push(d);
+  }
+  return out;
+}
+function bondRow(G, city) {
+  const A = padAnalyse(G);
+  if (!A) return ['pass', 'Pad bonding and bollards', 'BC Hydro ES54 F0-02.02, .03', 'no transformer pads on this lot'];
+  const src = 'BC Hydro ES54 F0-02.02 (Mechanical Protection), F0-02.03 (Grounding), Sep 2022' + (city === 'V' ? '' : '; EPCOR rule not read ?, BC Hydro read as the analogue (our reading)');
+  const metal = [...new Set(A.flatMap(d => d.metal3))].sort(), bld = A.some(d => d.bld3), truck = [...new Set(A.flatMap(d => d.truck))].sort(), street = A.some(d => d.street);
+  const parts = [];
+  if (metal.length) parts.push('bond to the transformer ground: ' + metal.join(', ') + ' within 3 m (fence material ?)');
+  if (bld) parts.push(`pad ${pyFixed(Math.min(...A.map(d => d.bld)), 1)} m from the building: if its walls are conductive or carry metal, ES54 F3-07 and a stamped grounding report (wall material ?)`);
+  if (truck.length || street) parts.push('bollards (ES54 U2-02): within 3 m of ' + truck.map(t => t.toLowerCase().replace(/_/g, ' ')).concat(street ? ['a street or lane'] : []).join(', ') + '; roadway concrete barriers to be considered for trucks (F0-02.02)');
+  if (!parts.length) return ['pass', 'Pad bonding and bollards', src, 'no metal, building or truck route within 3 m of the pads'];
+  return ['tight', 'Pad bonding and bollards', src, 'check in design: ' + parts.join('; ')];
+}
+
+/* ---------- intakes.py ---------- */
+const GEN_H = 3.5, CH_H = 2.90, WALL_Z = 1.5, ROOF_Z = 0.3, NEED_I = { gen: 3.0, bay: 7.6, chill: 7.6, art: 7.6 }, GEN_TIGHT = 10.0;
+const zsOf = G => { const z = [get(G, 'SLAB', 0.0)]; for (const h of G.H) z.push(z[z.length - 1] + h); return z; };
+const isGenRoom = x => x.id === 'gen' || x.n.toLowerCase().startsWith('generator');
+function intakeSources(G, cfg) {
+  const zs = zsOf(G), src = [];
+  for (const p of (G.PLANT || [])) { const r = prect(p); if (p.n.includes('enerator')) src.push(['gen', ['box', r], 0.0, GEN_H]); if (p.n.includes('hiller')) src.push(['chill', ['box', r], 0.0, CH_H]); }
+  for (const st of Object.keys(G.S).map(Number)) for (const x of roomsOf(G, st)) {
+    const n = x.n.toLowerCase();
+    if (isGenRoom(x)) for (const r of x.r) src.push(['gen', ['box', r], zs[st - 1], zs[st - 1] + GEN_H]);
+    if (x.g === 'load' && ['bay', 'loading space', 'apron', 'truck court'].some(k => n.includes(k)) && !n.includes('lobby')) for (const r of x.r) src.push(['bay', ['box', r], 0.0, 0.0]);
+  }
+  for (const poly of (get(G, 'TRUCK_GROUND', []) || [])) src.push(['bay', ['poly', poly], 0.0, 0.0]);
+  const units = cfg.chill_units;
+  if (T(units)) for (const [r, s, b] of units) src.push(['chill', ['box', r], b, b + CH_H]);
+  else { const seen = []; for (const r of (cfg.chill_rects || []).concat(get(G, 'CHILL', []) || [])) { if (seen.some(q => r.every((a, i) => Math.abs(a - q[i]) < 0.01))) continue; seen.push(r); const b = cfg.chill_base !== undefined && cfg.chill_base !== null ? cfg.chill_base : zs[cfg.chill_storey !== undefined && cfg.chill_storey !== null ? cfg.chill_storey : 1]; src.push(['chill', ['box', r], b, b + CH_H]); } }
+  for (const [a, b] of (get(G, 'ARTERIAL_EDGES', []) || [])) src.push(['art', ['line', [a, b]], 0.0, 0.0]);
+  return src;
+}
+function hdist(p, g) {   /* shapely Point.distance: GEOS point-to-segment over the shape's ring (0 inside) */
+  if (g[0] === 'line') return gPS(p, g[1][0], g[1][1]);
+  const P = g[0] === 'box' ? gBox(g[1]) : g[1].map(q => [q[0], q[1]]);
+  if (insideP(p, P)) return 0; let m = Infinity; for (const [a, b] of gRing(P)) m = Math.min(m, gPS(p, a, b)); return m;
+}
+function intakeZones(G) {
+  const Z = [['hub', x => x.g === 'pub'], ['clinic', x => x.g === 'clin'], ['data centre', x => ['hall', 'sup'].includes(x.g) && !isGenRoom(x)]];
+  return Z.map(([k, f]) => [k, Object.keys(G.S).map(Number).flatMap(st => roomsOf(G, st).filter(f).map(x => [st, x]))]);
+}
+function intakeCandidates(G, rooms) {
+  const zs = zsOf(G), out = [];
+  for (const st of [...new Set(rooms.map(([s]) => s))].sort((a, b) => a - b)) {
+    const allR = roomsOf(G, st).flatMap(x => x.r), ZR = rooms.filter(([s]) => s === st).flatMap(([, x]) => x.r);
+    /* zone outline lying on the storey's outline (exterior walls of the zone) */
+    const BA = boundary(allR), pieces = [];
+    for (const e of boundary(ZR)) for (const f of BA) {
+      if (f.o !== e.o || Math.abs(f.c - e.c) > 1e-9 || f.ins !== e.ins) continue;
+      const a = Math.max(e.a, f.a), b = Math.min(e.b, f.b); if (!(b > a + 1e-9)) continue;
+      /* shapely keeps every room-rectangle corner on an outline as a vertex, and the overlay splits there: cut the piece at each */
+      const cuts = uniqRaw(allR.concat(ZR).flatMap(r => [[r[0], r[2]], [r[0], r[3]], [r[1], r[2]], [r[1], r[3]]])
+        .filter(q => e.o === 'v' ? Math.abs(q[0] - e.c) < 1e-9 && q[1] > a + 1e-9 && q[1] < b - 1e-9 : Math.abs(q[1] - e.c) < 1e-9 && q[0] > a + 1e-9 && q[0] < b - 1e-9)
+        .map(q => e.o === 'v' ? q[1] : q[0]));
+      const ts = [a].concat(cuts, [b]);
+      for (let k = 0; k < ts.length - 1; k++) pieces.push(e.o === 'v' ? [[e.c, ts[k]], [e.c, ts[k + 1]]] : [[ts[k], e.c], [ts[k + 1], e.c]]);
+    }
+    /* GEOS returns the overlay's edges unmerged, split at every corner of either outline: one straight piece each */
+    for (const ch of pieces) {
+      const L = chainLen(ch); if (L < 0.5) continue; const n = Math.max(1, Math.trunc(L / 0.5));
+      for (let i = 0; i <= n; i++) { let t = L * i / n, k = 0; while (k < ch.length - 2 && t > hyp(ch[k + 1][0] - ch[k][0], ch[k + 1][1] - ch[k][1])) { t -= hyp(ch[k + 1][0] - ch[k][0], ch[k + 1][1] - ch[k][1]); k++; }
+        const sl = hyp(ch[k + 1][0] - ch[k][0], ch[k + 1][1] - ch[k][1]) || 1, f = Math.min(1, t / sl); out.push([[ch[k][0] + (ch[k + 1][0] - ch[k][0]) * f, ch[k][1] + (ch[k + 1][1] - ch[k][1]) * f], zs[st - 1] + WALL_Z, st, 'wall']); }
+    }
+    const above = G.S[String(st + 1)] ? roomsOf(G, st + 1).flatMap(x => x.r) : null;
+    for (const [s, x] of rooms) {
+      if (s !== st) continue; const top = zs[st - 1] + (x.h !== undefined ? x.h : G.H[st - 1]) + ROOF_Z;
+      for (const r of x.r) for (let u = r[0] + 0.5; u < r[1]; u += 1.0) for (let v = r[2] + 0.5; v < r[3]; v += 1.0)
+        if (above === null || !(above.some(q => q[0] < u && u < q[1] && q[2] < v && v < q[3]) || (above.some(q => q[0] <= u && u <= q[1] && q[2] <= v && v <= q[3]) && interiorOfUnion(above, [u, v])))) out.push([[u, v], top, st, 'roof']);
+    }
+  }
+  return out;
+}
+const interiorOfUnion = (R, p) => [[1e-9, 0], [-1e-9, 0], [0, 1e-9], [0, -1e-9]].every(([a, b]) => R.some(q => q[0] <= p[0] + a && p[0] + a <= q[1] && q[2] <= p[1] + b && p[1] + b <= q[3]));
+function intakeCheck(G, cfg) {
+  const src = intakeSources(G, cfg), res = new Map();
+  for (const [zn, rooms] of intakeZones(G)) {
+    if (!rooms.length) continue; let best = null;
+    for (const [p, z, st, kd] of intakeCandidates(G, rooms)) {
+      const d = {}; for (const k of Object.keys(NEED_I)) { let m = 99.0; for (const [kk, g, z0, z1] of src) if (kk === k) { const dh = hdist(p, g), dz = (z0 <= z && z <= z1) ? 0.0 : Math.min(Math.abs(z - z0), Math.abs(z - z1)); m = Math.min(m, pyHypot(dh, dz)); } d[k] = m; }
+      const m = Math.min(...Object.keys(NEED_I).map(k => d[k] - NEED_I[k])), key2 = [m >= 0.5 ? 1 : 0, Math.min(d.gen, GEN_TIGHT + 0.5), m];
+      const gt = (a, b) => a[0] !== b[0] ? a[0] > b[0] : a[1] !== b[1] ? a[1] > b[1] : a[2] > b[2];
+      if (best === null || gt(key2, best[0])) best = [key2, p, z, st, kd, d, m];
+    }
+    if (best === null) continue;
+    const [, p, z, st, kd, d, m] = best, lim = pyMin(Object.keys(NEED_I), k => d[k] - NEED_I[k]);
+    res.set(zn, { p, z, st, kind: kd, d, margin: m, limit: lim });
+  }
+  return res;
+}
+function intakeRow(G, cfg, C = 'VBBL') {
+  const R = intakeCheck(G, cfg);
+  if (!R.size) return ['?', 'Outdoor air intakes', `${C} Table 6.3.2.9`, 'no zone found'];
+  let worst = 'pass'; const parts = [], order = { pass: 0, tight: 1, fail: 2 }, lab = { gen: 'generator', bay: 'bays', chill: 'chillers', art: 'arterial' };
+  for (const [zn, r] of R) {
+    let s = st_(r.margin >= 0, r.margin), note = '';
+    if (S_(s) === 'pass' && r.d.gen < GEN_TIGHT) { s = 'tight'; note = ' (3–10 m from a generator: tight, check in design; ASHRAE 62.1, our reading)'; }
+    if (typeof s === 'object' && s.over != null) note += ` (over by ${f2(s.over)} m, fix in design)`;
+    const where = `storey ${r.st} ${r.kind === 'roof' ? 'roof' : 'wall'}`;
+    let dd = Object.keys(NEED_I).filter(k => r.d[k] < 50).map(k => `${lab[k]} ${pyFixed(r.d[k], 1)}`).join(', '); dd = dd ? dd + ' m' : 'every source more than 50 m away';
+    parts.push(`${zn}: best point ${where} (${dd})${S_(s) !== 'pass' ? ': ' + S_(s) : ''}${note}`);
+    if (order[S_(s)] > order[worst]) worst = S_(s);
+  }
+  const txt = 'one intake per zone, placed by the script at the best point on its walls (1.5 m up) or roof (0.3 m up); best spot found; actual HVAC layout may differ: '
+    + parts.join(' · ') + '. Needs: generator exhaust ≥ 3.0 m (vent for combustion products; 3–10 m tight, ASHRAE 62.1, our reading), '
+    + 'bays and arterial roads ≥ 7.6 m, chiller discharge ≥ 7.6 m; 3-D distance (our reading); generator exhaust 3.5 m up (?). '
+    + 'Garbage, kitchen and sanitary vents not drawn [script]';
+  return [worst, 'Outdoor air intakes', `BCBC 2018 Table 6.3.2.9 (${C} to confirm); J.B. 11 Nov; eh/intakes.py`, txt];
+}
+
+/* ---------- fuelfill.py ---------- */
+function fuelFill(G) {
+  const Gs = (G.PLANT || []).filter(x => x.n.includes('enerator'));
+  if (!Gs.length) return null;
+  const FF = get(G, 'FUEL_FILL', null);
+  if (!T(FF)) return ['?', `${Gs.length} yard generator(s); fuel fill point not drawn`];
+  const yds = yards(G), TR = truckRoutes(G), ENT = new Set(Object.keys(get(G, 'TRUCK_ENTRIES', {}))), VIA = new Set(Object.keys(get(G, 'TRUCK_VIA', {})));
+  const stand = Object.values(TR).map(polyOf).concat((get(G, 'FUEL_STAND', []) || []).map(polyOf)), dIn = (p, P) => insideP(p, P) ? 0.0 : edgeD(p, P);
+  const out = [];
+  for (const q of FF) {
+    const p = [q[0], q[1]], far = Math.max(...Gs.map(x => rectD(p, prect(x)))), pp = pyTuple(p);
+    const on = yds.filter(P => edgeD(p, P) <= 0.3);
+    if (on.length) {
+      const gap = stand.length ? Math.min(...stand.map(S => insideP(p, S) ? 0.0 : edgeD(p, S))) : null;
+      const g = gap !== null ? `${pyFixed(gap, 1)} m from truck ground` : 'no truck ground declared next to it';
+      out.push([gap !== null ? 'tight' : '?', `fill box ${pp} on the yard fence: truck stays outside, ${g} (hose reach ?), fill pipe ≤ ${pyFixed(far, 1)} m to the farthest generator (limit ?)`]);
+    } else if (yds.some(P => insideP(p, P))) {
+      const ok = Object.keys(TR).filter(k => (ENT.has(k) || VIA.has(k)) && dIn(p, polyOf(TR[k])) <= 1.0);
+      out.push(ok.length ? ['pass', `fill ${pp} inside the yard on the ${ok[0]} route, which enters through a drawn vehicle gate`] : ['fail', `fill ${pp} inside the yard: a fuel truck must enter and no declared gated route reaches it`]);
+    } else {
+      const gap = stand.length ? Math.min(...stand.map(S => insideP(p, S) ? 0.0 : edgeD(p, S))) : null;
+      out.push(gap !== null && gap <= 1.0 ? ['tight', `remote fill box ${pp} outside the yard beside truck ground (${pyFixed(gap, 1)} m), fill pipe ≤ ${pyFixed(far, 1)} m to the farthest generator (limit ?)`] : ['fail', `fill ${pp} is not on a plant-yard fence, not inside a yard and not beside truck ground`]);
+    }
+  }
+  let st = out.some(([s]) => s === 'fail') ? 'fail' : out.some(([s]) => s === '?') ? '?' : out.some(([s]) => s === 'tight') ? 'tight' : 'pass';
+  let txt = out.map(([, t]) => t).join('; ');
+  if (T(get(G, 'FUEL_ASSUMED', null)) && st !== 'fail') { st = '?'; txt = txt + ' — ? ' + G.FUEL_ASSUMED; }
+  return [st, txt];
+}
+
+/* ---------- claims.py (typed rows checked by script) ---------- */
+const CTOL = 0.5;
+const crd = (a, b) => hyp(Math.max(a[0] - b[1], b[0] - a[1], 0), Math.max(a[2] - b[3], b[2] - a[3], 0));
+const cov = (a, b) => Math.max(0, Math.min(a[1], b[1]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[3], b[3]) - Math.max(a[2], b[2]));
+const cr = x => Array.isArray(x.r) && Array.isArray(x.r[0]) ? x.r : [x.r];
+const cst = (ok, margin) => st_(ok, margin);
+function cPads(G, m, cfg) {
+  const A = padAnalyse(G); if (!A) return null;
+  const alc = roomsOf(G, 1).filter(x => x.id.startsWith('alc'));
+  const alcD = d => { const q = prect((G.PLANT || []).find(x => x.id === d.id)); for (const a_ of alc) { const r = a_.r[0]; if (r[0] - 1e-6 <= q[0] && q[1] <= r[1] + 1e-6 && r[2] - 1e-6 <= q[2] && q[3] <= r[3] + 1e-6) return Math.min(q[0] - r[0], r[1] - q[1], q[2] - r[2]); } return null; };
+  const parts = [], margins = [];
+  for (const d of A) {
+    let b = d.alcove ? alcD(d) : null; b = b === null ? d.bld : b;
+    const cand = [['building', b], ['generator set', d.gen], ['chiller', d.chl], ['fence', d.fence]], s_ = Math.min(...cand.map(c => c[1])), what = pyMin(cand, c => c[1])[0];
+    const fr = Math.max(...Object.values(d.depth));
+    margins.push(s_ - 1.0, d.pad < 50 ? d.pad - 1.0 : 9, fr - 3.0);
+    parts.push(`${d.id}: ${n1(s_)} m to the nearest structure (${what}; ≥ 1.0)` + (d.pad < 50 ? `, ${n1(d.pad)} m to the next pad (≥ 1.0)` : '') + `, best front clear ${n1(fr)} m (≥ 3.0)`);
+  }
+  const mg = Math.min(...margins);
+  return [cst(mg >= -1e-6, mg), `${A.length} pads: ` + parts.join('; ') + ' (ES54 F0-02.01-.02; structures = buildings, generator sets, chillers at grade, yard fences: our reading; front = the best side, not drawn) [script]'];
+}
+function cStoreys(G) {
+  const sts = storeys(G);
+  if (sts.length === 1) return ['pass', 'one storey: everything at grade'];
+  const lifts = {}; for (const st of sts) lifts[st] = roomsOf(G, st).filter(x => x.n.toLowerCase().includes('lift'));
+  const dc = sts.filter(st => roomsOf(G, st).some(x => ['hall', 'sup'].includes(x.g))), pub = sts.filter(st => roomsOf(G, st).some(x => ['pub', 'clin'].includes(x.g)));
+  const miss = dc.filter(st => !lifts[st].some(x => x.n.toLowerCase().includes('freight') || x.id === 'e2')).map(st => `storey ${st} data centre`)
+    .concat(pub.filter(st => st > 1 && !lifts[st].some(x => ['circ', 'pub', 'clin'].includes(x.g) && x.id !== 'e2')).map(st => `storey ${st} public`));
+  return [miss.length ? 'fail' : 'pass', miss.length ? 'lift missing: ' + miss.join(', ') : `freight lift on storeys ${dc.join(', ')}; public lift on ${pub.filter(s => s > 1).join(', ') || 'no upper public storey'} (VBBL 3.8.2.3)`];
+}
+const ENTRY_IDS = ['s1', 's2', 's3', 's4', 'e2', 'ves', 'lv', 'dock', 'b1', 'b2', 'b3', 'b4', 'scor', 'link', 'sh1', 'sh2', 'psh', 'ris3'];
+function cAtGrade(G, m, cfg) {
+  let bad = roomsOf(G, 1).filter(x => x.g === 'hall' || (x.g === 'sup' && !(x.stair || x.core || ENTRY_IDS.includes(x.id) || x.id.startsWith('pas') || x.n.toLowerCase().includes('lift') || x.n.toLowerCase().includes('vestibule') || x.n.toLowerCase().includes('stair')))).map(x => x.id);
+  if (cfg.no_clinic_at_grade) bad = bad.concat(roomsOf(G, 1).filter(x => x.g === 'clin').map(x => x.id));
+  return [bad.length ? 'fail' : 'pass', bad.length ? 'at grade: ' + bad.join(', ') : 'storey 1 holds only data-centre stairs, lifts, vestibules, the dock and bays' + (cfg.no_clinic_at_grade ? ' and no clinic room' : '')];
+}
+function cSeparations(G, m, cfg, typed) {
+  const sts = storeys(G), over = [];
+  for (const st of sts.slice(0, -1)) {
+    const hub = roomsOf(G, st).filter(x => ['pub', 'circ'].includes(x.g) && !x.core).flatMap(x => x.r), dc = roomsOf(G, st + 1).filter(x => ['hall', 'sup', 'plant', 'load'].includes(x.g) && !x.core).flatMap(x => x.r);
+    let a = 0; for (const h of hub) for (const d of dc) a += cov(h, d);
+    if (a > 0.5) over.push([st + 1, a]);
+  }
+  if (sts.length === 1) return ['pass', 'one storey: hub and data centre side by side; 2 h wall between them (drawing claim)'];
+  if (over.length && typed.includes('no data-centre room over the hub')) return ['fail', 'data-centre rooms over the hub: ' + over.map(([s, a]) => `${n1(a)} m² on storey ${s}`).join(', ') + ', but the row says none'];
+  return ['pass', over.length ? 'data-centre rooms over the hub: ' + over.map(([s, a]) => `${n1(a)} m² on storey ${s}`).join(', ') + ' → 2 h floor there (VBBL Table 3.1.3.1; the drawn floor is a drawing claim)' : 'no data-centre room over the hub'];
+}
+const WET = /\bwcs?\b|washroom|toilet|shower|pool|\bspa\b|spa hall|steam|sauna|change room|universal change|dressing|greenhouse|growing|rest area|janitor|mop|kitchen|laundry|hot tub|whirlpool/;
+function cOffHall(G) {
+  const hall = []; for (const st of Object.keys(G.S).map(Number)) for (const x of roomsOf(G, st)) if (x.g === 'hall') for (const r of x.r) hall.push([st, r]);
+  const eq = (G.PLANT || []).flatMap(p => cr(p).map(r => [p.id, r])).concat((get(G, 'CHILL', []) || []).map(c => ['chiller', c]), (get(G, 'GENS', []) || []).map(g => ['generator', g]));
+  const hit = [...new Set(eq.filter(([, r]) => hall.some(([, h]) => cov(r, h) > 0.01)).map(([i]) => i))].sort();
+  const wet = new Set(); for (const st of Object.keys(G.S).map(Number)) for (const x of roomsOf(G, st)) if (x.g !== 'hall' && WET.test(x.n.toLowerCase())) for (const r of x.r) for (const [hs, h] of hall) if (st > hs && cov(r, h) > 0.01) wet.add(`${x.n} (storey ${st})`);
+  const bad = hit.concat([...wet].sort());
+  return [bad.length ? 'fail' : 'pass', bad.length ? 'over or under the hall in plan: ' + bad.join(', ') : `no generator, tank, pad or chiller over or under the hall, and no wet room (WCs, showers, pools, greenhouse ...) over it, in plan (${eq.length} plant items checked; FM 5-32 2.2.1.6)`];
+}
+const covered = x => { const n = x.n.toLowerCase(); return !(x.open || ['aisle', 'apron', 'court'].includes(x.id) || /truck aisle|\baisle\b|apron|truck court|open/.test(n)); };
+function cGens(G) {
+  const Gs = (G.PLANT || []).filter(p => p.n.includes('enerator') || p.id.startsWith('g')); if (!Gs.length) return null;
+  const bld = roomsOf(G, 1).filter(covered).flatMap(x => (x.n.includes('enerator') && x.g === 'plant') ? [] : x.r);
+  const yard = Gs.filter(p => !bld.some(r => cov(cr(p)[0], r) > 0.01)); if (!yard.length) return null;
+  const gaps = []; for (let i = 0; i < yard.length; i++) for (let j = i + 1; j < yard.length; j++) gaps.push(crd(cr(yard[i])[0], cr(yard[j])[0]));
+  const tob = bld.length ? Math.min(...yard.map(p => Math.min(...bld.map(r => crd(cr(p)[0], r))))) : 99;
+  const lot = G.LOTPOLY, tolot = q => { const pts = [[q[0], q[2]], [q[1], q[2]], [q[1], q[3]], [q[0], q[3]]]; let m = Infinity; for (const p of pts) for (let i = 0; i < lot.length; i++) m = Math.min(m, segD(p, lot[(i - 1 + lot.length) % lot.length], lot[i])); return m; };
+  const tol = Math.min(...yard.map(p => tolot(cr(p)[0]))), g = gaps.length ? Math.min(...gaps) : 99;
+  const stt = cst(g >= 2.0 - 1e-6 && tob >= 1.5 - 1e-6 && tol >= 3.0 - 1e-6, Math.min(g - 2.0, tob - 1.5, tol - 3.0));
+  return [stt, `${yard.length} sets: ${gaps.length ? n1(g) : 'one set'} m apart (≥ 2.0, CSA C282 6.5.1.1); tanks ${n1(tob)} m to the building (≥ 1.5) and ${n1(tol)} m to lot lines (≥ 3.0, CSA B139 Table 2, 2,500–50,000 L)`];
+}
+const roomTop = (G, st, x) => get(G, 'SLAB', 0.0) + G.H.slice(0, st - 1).reduce((a, b) => a + b, 0) + (x.h !== undefined ? x.h : G.H[st - 1]);
+function cChillers(G, m, cfg) {
+  const grade = (G.PLANT || []).filter(p => p.n.includes('hiller')).map(p => cr(p)[0]);
+  let roof = [];
+  if (T(cfg.chill_units)) roof = cfg.chill_units.map(([r, s_, z_]) => [r, s_, z_]);
+  else for (const r of (cfg.chill_rects || []).concat(get(G, 'CHILL', []) || [])) if (!roof.some(q => r.every((a, i) => Math.abs(a - q[0][i]) < 0.01))) roof.push([r, cfg.chill_storey === undefined ? null : cfg.chill_storey, cfg.chill_base === undefined ? null : cfg.chill_base]);
+  if (!grade.length && !roof.length) return null;
+  const margins = [], notes = [], alongU = r => (r[1] - r[0]) >= (r[3] - r[2]);
+  const sideEnd = (r, q) => {
+    const ou = Math.min(r[1], q[1]) - Math.max(r[0], q[0]), ovv = Math.min(r[3], q[3]) - Math.max(r[2], q[2]);
+    if (ou > 0 && ovv > 0) return [0.0, 1.5, 'unit on an obstacle'];
+    if (alongU(r)) { if (ou > 0) return [crd(r, q), 1.5, 'side']; if (ovv > 0) return [crd(r, q), 2.1, 'end']; }
+    else { if (ovv > 0) return [crd(r, q), 1.5, 'side']; if (ou > 0) return [crd(r, q), 2.1, 'end']; }
+    return null;
+  };
+  const faces = r => { const n = 5, us = [], vs = []; for (let i = 0; i < n; i++) { us.push(r[0] + (r[1] - r[0]) * (i + 0.5) / n); vs.push(r[2] + (r[3] - r[2]) * (i + 0.5) / n); }
+    const [su, sv] = !alongU(r) ? [1.5, 2.1] : [2.1, 1.5];
+    return [[vs.map(v => [r[0], v]), [-1, 0], su], [vs.map(v => [r[1], v]), [1, 0], su], [us.map(u => [u, r[2]]), [0, -1], sv], [us.map(u => [u, r[3]]), [0, 1], sv]]; };
+  const depthIn = (p, d, inside, cap = 6.0) => { let t = 0.0; while (t < cap) { const q = [p[0] + d[0] * (t + 0.01), p[1] + d[1] * (t + 0.01)]; if (!inside(q)) return pyRound2(t + 0.005); t += 0.01; } return cap; };
+  const lot = G.LOTPOLY;
+  grade.forEach((r, i) => {
+    const obs = roomsOf(G, 1).flatMap(x => x.r).concat((G.PLANT || []).map(p => cr(p)[0]).filter(q => !(q[0] === r[0] && q[1] === r[1] && q[2] === r[2] && q[3] === r[3])));
+    for (const q of obs) { const s = sideEnd(r, q); if (s) { margins.push(s[0] - s[1]); if (s[0] - s[1] < 0.5) notes.push(`chiller ${i + 1} ${s[2]} ${n1(s[0])} m (≥ ${pyNum(s[1])})`); } }
+    let yds = []; try { const c = [(r[0] + r[1]) / 2, (r[2] + r[3]) / 2]; yds = yards(G).filter(P => insideP(c, P)); } catch (e) { /* as the Python: no yards */ }
+    const insideAll = q => inShape(lot, q[0], q[1]) && yds.every(P => insideP(q, P));
+    for (const [pts, d, req] of faces(r)) { const free = Math.min(...pts.map(p => depthIn(p, d, insideAll))); margins.push(free - req); if (free - req < 0.5) notes.push(`chiller ${i + 1} zone to the ${yds.length ? 'yard fence or lot line' : 'lot line'} ${n1(free)} m (≥ ${pyNum(req)})`); }
+  });
+  roof.forEach(([r, cs, zb], i) => {
+    let high, level = [];
+    if (zb !== null && zb !== undefined) high = Object.keys(G.S).map(Number).flatMap(st => roomsOf(G, st).filter(x => roomTop(G, st, x) > zb + 0.05).flatMap(x => x.r));
+    else high = Object.keys(G.S).map(Number).filter(st => cs !== null && cs !== undefined && st > cs).flatMap(st => roomsOf(G, st).flatMap(x => x.r));
+    level = Object.keys(G.S).map(Number).flatMap(st => roomsOf(G, st).filter(x => (zb !== null && zb !== undefined && Math.abs(roomTop(G, st, x) - zb) <= 0.05) || ((zb === null || zb === undefined) && st === cs)).flatMap(x => x.r));
+    for (const q of high) { const s = sideEnd(r, q); if (s) { margins.push(s[0] - s[1]); if (s[0] - s[1] < 0.5) notes.push(`roof chiller ${i + 1} ${s[2]} ${n1(s[0])} m to a wall above the roof (≥ ${pyNum(s[1])})`); } }
+    if (level.length) {
+      const onroof = q => level.some(a => a[0] <= q[0] && q[0] <= a[1] && a[2] <= q[1] && q[1] <= a[3]);
+      const ends = faces(r).filter(([, , req]) => req === 2.1), best = Math.max(...ends.map(([pts, d]) => Math.min(...pts.map(p => depthIn(p, d, onroof)))));
+      margins.push(best - 2.1); if (best - 2.1 < 0.5) notes.push(`roof chiller ${i + 1}: the better end zone has ${n1(best)} m of roof at its level (≥ 2.1)`);
+    }
+  });
+  const units = grade.map(u => [u, 'g']).concat(roof.map(([u]) => [u, 'r']));
+  for (let i = 0; i < units.length; i++) for (let j = i + 1; j < units.length; j++) {
+    const [a, ka] = units[i], [b, kb] = units[j]; if (ka !== kb) continue;
+    const ou = Math.min(a[1], b[1]) - Math.max(a[0], b[0]), ovv = Math.min(a[3], b[3]) - Math.max(a[2], b[2]); if (!(ou > 0 || ovv > 0)) continue;
+    const side = alongU(a) ? ou > 0 : ovv > 0, need = side ? 3.0 : 4.2, gap = crd(a, b);
+    margins.push(gap - need); if (gap - need < 0.5) notes.push(`units ${n1(gap)} m apart ${side ? 'side to side' : 'end to end'} (≥ ${pyNum(need)})`);
+  }
+  const mg = margins.length ? Number(pyFixed(Math.min(...margins), 3)) + 0.0 : 99, st = cst(mg >= -1e-9, mg);
+  let txt = `${units.length} chillers: clear zones 1.5 m sides, 2.1 m ends free of walls, plant and fences; units 3.0 m side to side, 4.2 m end to end (Vertiv SL-70790 4.2.4, maker claim; spacing our reading); least margin ${n1(mg)} m`;
+  if (notes.length) txt += ' — ' + [...new Set(notes)].sort().join('; ');
+  return [st, txt];
+}
+const cHubCap = (G, m) => [m.dc <= 2325 + 1e-6 ? 'pass' : 'fail', `data centre ${n1(m.dc)} m² ≤ 2,325 (hub cap, J.B. 8 Nov)`];
+function cPublicExits(G) { const r2 = reach(G).out.filter(o => o[0] === 'R2'); return [r2.length ? 'fail' : 'pass', r2.length ? r2.map(o => `${pyTuple(o[1])} ${o[2]}`).join('; ') : 'T-reach R2: no public or clinic exit into data-centre ground, bays, drives or plant yards except onto a walkway (eh/reach.py)']; }
+function cLoading(G, m) {
+  const bays = Object.keys(G.S).map(Number).flatMap(st => roomsOf(G, st).filter(x => x.g === 'load' && (/^b\d+$/.test(x.id) || x.n.toLowerCase().includes('loading'))));
+  const dims = bays.flatMap(x => x.r.slice(0, 1).map(r => [r[1] - r[0], r[3] - r[2]].sort((a, b) => a - b)));
+  if (m.nb === null || m.nb === undefined) return ['?', `${bays.length} bays drawn; number needed not set`];
+  return [bays.length >= m.nb ? 'pass' : 'fail', `${bays.length} bays drawn ≥ ${m.nb} needed; sizes ${dims.map(([a, b]) => `${pyFixed(a, 1)} × ${pyFixed(b, 1)}`).join(', ')} m (size against the by-law: by hand)`];
+}
+const CLAIMS = { 'Loading count and size': cLoading, 'Transformer pads': cPads, 'Every storey reached': cStoreys, 'At grade: data centre only as entrances': cAtGrade,
+  'At grade: no data storage, no health care office': cAtGrade, 'Fire separations': cSeparations, '2 h floor over the hub': cSeparations,
+  'Nothing wet over the hall': cOffHall, 'Generator tanks': cGens, 'Chiller clear zones': cChillers, 'Plant off the hall': cOffHall, 'Plant off the public edge and off the hall': cOffHall,
+  'Data-centre size: hub cap': cHubCap, 'Public exits beside the plant yard, not through it': cPublicExits, 'Public exits beside the drive, not on it': cPublicExits,
+  'Clinic exit beside the plant yard, not through it': cPublicExits, "Public corridor's second exit": cPublicExits, 'P2 and the exit passage on Pender St': cPublicExits };
+const CORD = ['pass', 'tight', 'flag', 'flag-red', '?', 'approval', 'fail'];
+const worse = (a, b) => CORD.indexOf(a) >= CORD.indexOf(b) ? a : b;
+function claimApply(G, m, cfg, row) {
+  const [st, name, clause, text] = row, f = CLAIMS[name];
+  if (!f) return [row, null];
+  let r;
+  try { r = f === cSeparations ? f(G, m, cfg, text) : f(G, m, cfg); }
+  catch (ex) { return [['?', name, clause + ' · checked by script', text + ` [script failed: ${ex.message}]`], [name, st, '?', String(ex.message)]]; }
+  if (r === null) return [row, null];
+  const sScr = S_(r[0]); let t2 = r[1];
+  const s2 = (st === '?' || st === 'approval') ? (sScr === 'fail' ? 'fail' : st) : worse(st, sScr);
+  if (s2 === 'fail' && st !== 'fail') t2 = 'SCRIPT FAILS: ' + t2;
+  return [[s2, name, clause + ' · checked by script', text + ` [script: ${t2}]`], s2 !== st ? [name, st, s2, t2] : null];
+}
+/* board(): a pass row with no margin reads tight */
+const finalizeRows = rows => rows.map(c => (c[0] === 'pass' && (c[3].includes('0 margin') || c[3].includes('no margin')) && !c[3].includes(TIGHT)) ? ['tight', c[1], c[2], c[3] + ' — ' + TIGHT] : c);
+
+/* ---------- tfboard.py: zone exits and the shared rows ---------- */
+function zoneExits(G, st, ids) {
+  const rooms = new Map(roomsOf(G, st).map(x => [x.id, x])), K = {}; for (const [i, x] of rooms) K[i] = kind(x, st);
+  const P = new Set(['lobby', 'pcor', 'ccor', 'pcore', 'proom', 'croom']), seen = new Set(ids.filter(i => rooms.has(i))), todo = [...seen], ex = new Map();
+  while (todo.length) {
+    const c = todo.pop();
+    for (const d of G.D) {
+      if (d[0] !== st || !(c === d[1] || c === d[2])) continue;
+      const o = d[2] === c ? d[1] : (d[1] === c ? d[2] : d[1]);
+      const oo = d[1] === c ? d[2] : d[1];
+      if (oo === 'OUT' || oo === 'YARD') {
+        if (inload(roomsOf(G, st), d[3], d[4], d[5])) continue;
+        if (oo === 'OUT' && P.has(K[c])) { if (dcGround(G, outsidePoint(G, st, d[3], d[4], d[5])) || !dcRoute(G, st, d[3], d[4], d[5])[0]) continue; }
+        ex.set(`door ${pyNum(pyRound2(d[3]))}, ${pyNum(pyRound2(d[4]))}`, 1); continue;
+      }
+      void o;
+      const x = rooms.get(oo); if (!x) continue;
+      if (x.stair) { ex.set(`stair ${oo}`, 1); continue; }
+      if (x.core || x.g === 'load') continue;
+      if (!seen.has(oo)) { seen.add(oo); todo.push(oo); }
+    }
+  }
+  return [ex.size, [...ex.keys()].sort()];
+}
+function egressRow(G, cfg) {
+  const rows = egress2(G), bad = rows.filter(r => r[r.length - 1] !== 'ok'), big = rows.filter(r => r[2] > 60);
+  const txt = big.map(r => `${r[0]} ${r.f2 ? pyNum(r[2]) : r[2]} people, ${r[3]} doors ${pyNum(r[4])} ≥ ${pyNum(r[5])} m`).join(' · '), C = cfg.code || 'VBBL';
+  const s = st_(!bad.length, big.length ? Math.min(...big.map(r => r[4] - r[5])) : 99);
+  return [S_(s), 'Refuge and shelter egress doors', `${C} Table 3.1.17.1 (0.75 m² a person), 3.3.1.5.(2); J.B. 9 Nov`, t_(s, txt + " (doors ≥ ⅓ of the room's diagonal apart)")];
+}
+function areaRow(G, cfg, rowsIn) {   /* rowsIn: egress3 rows given directly (the hub's failure tests stub them) */
+  const rows = rowsIn || egress3(G), need = rows.filter(r => r.need), near = rows.filter(r => !r.need && r.A > 0.95 * r.lim && !(r.n >= 2 && r.apart >= r.third));
+  const lab = { 'F-2': 'data hall', 'A': 'refuge', 'D': 'clinic suite' };
+  const txt = need.map(r => `${lab[r.grp]} ${n0(r.A)} m² > ${r.lim}: ${r.n} doors ${n1(r.apart)} ≥ ${n1(r.third)} m`).join(' · ') || 'no room or suite over the table';
+  const C = cfg.code || 'VBBL', ed = C === 'VBBL' ? '' : "; NBC 2020 Table 3.3.1.5.-B (J.B.'s copy) gives the same limits; NBC 2023 (AE) not read ?";
+  const sts = need.map(r => r.n < 2 ? st_(false, r.lim - r.A, true, r.lim) : st_(r.apart >= r.third - 1e-9, r.apart - r.third)).concat(near.map(() => 'tight'));
+  const s = sts.find(x => S_(x) === 'fail') || sts.find(x => typeof x === 'object' && x.over != null) || (sts.some(x => S_(x) === 'tight') ? 'tight' : 'pass');
+  return [S_(s), 'Egress doorways by room area', `${C === 'VBBL' ? 'VBBL' : 'NBC 2020'} 3.3.1.5.(1)(d), Table 3.3.1.5.-B (sprinklered: A 200, D 300, F-2 200 m²); J.B. 9 Nov${ed}`, t_(s, txt + ' (data hall F-2, refuge A, clinic suite D: our reading; unassigned floor not checked)')];
+}
+function walkRow(G, cfg) {
+  const [rows, hub, n] = walkload(G), bad = rows.filter(r => r[r.length - 1] !== 'ok');
+  const txt = rows.map(r => `${r[1].join('+')}: ${r[2]} people (full load ${r[3]}) → ${f2(r[5])} m needed, ${f2(r[4])} m drawn`).join(' · '), C = cfg.code || 'VBBL';
+  const s = st_(!bad.length, rows.length ? Math.min(...rows.map(r => r[4] - r[5])) : 99);
+  return [S_(s), 'Walkways carry their load', `${C} 3.4.3.2.(1)(a); J.B. 9 Nov`, t_(s, txt + `. Load per exit: the storey's public load (${hub}) split over its ${n} exits, each at least half where there are two (3.4.3.2.(7)); data-centre storeys at 46 m² a person (storage, fallback for designed staff, our reading)`)];
+}
+function reachRow(G) {
+  let out; try { out = reach(G).out; } catch (ex) { return ['?', 'T-reach (doors, lines, through-rooms, lobby)', 'spec rule 15d; eh/reach.py', `not run (${ex.message}) [script]`]; }
+  out = out.filter(o => o[0] !== 'R8');
+  if (!out.length) return ['pass', 'T-reach (doors, lines, through-rooms, lobby)', 'spec rule 15d; eh/reach.py', 'R0–R7 pass: doors on shared walls, public and secure lines never share a door, step-free reach, through-rooms as rule 15a, lobby [script]'];
+  return ['fail', 'T-reach (doors, lines, through-rooms, lobby)', 'spec rule 15d; eh/reach.py', out.slice(0, 8).map(o => `${o[0]} ${o[1] ? o[1][1] : ''} (storey ${o[1] ? o[1][0] : '-'}): ${o[2]}`).join('; ') + (out.length > 8 ? ` (+${out.length - 8} more)` : '') + ' [script]'];
+}
+/* tfboard.common_checks: the rows every hub board shares. m carries what measure() gives (exits, discharges, travel, zone exits, people ...). */
+function commonChecks(G, cfg, m) {
+  const C = cfg.code || 'VBBL';
+  const ex = m.exits.map(([z, d, need, half, pc]) => `${z} ${n1(d)} ≥ ${n1(need)} m` + (pc ? ' (public corridor: ≤ 9 m needed)' : '')).join(' · ');
+  const exok = m.exits.every(([, d, need]) => d >= need - 1e-9);
+  const dis = m.discharges.map(([a, b, d, need]) => `${a}–${b} ${n1(d)} ≥ ${n1(need)} m`).join(' · '), disok = m.discharges.every(([, , d, need]) => d >= need - 1e-9);
+  const tr = m.travel.map(([z, d, k]) => d !== Infinity && d !== null && d !== 'inf' ? `${z} ${n1(d)}` : `${z}: ${k}`).join(' · '), trok = m.travel.every(([, d]) => typeof d === 'number' && d <= 45);
+  const exm = m.exits.length ? Math.min(...m.exits.map(([, d, need]) => d - need)) : 99, dism = m.discharges.length ? Math.min(...m.discharges.map(([, , d, need]) => d - need)) : 99;
+  const trm = 45 - (m.travel.length ? Math.max(...m.travel.map(([, d]) => typeof d === 'number' ? d : Infinity)) : 0);
+  const sEx = st_(exok, exm), sDis = st_(disok, dism), sTr = st_(trok, trm);
+  const ze = m.zone_exits || [], mr = m.ref_main || 0.0, small = !!cfg.small_lot;
+  const sRef = st_(m.people >= 50 && (mr >= 175 || small), (small ? (m.ref_counted !== undefined ? m.ref_counted : m.ref) : mr) - 175, true, 175);
+  let rows = [
+    [sEx, 'Exits apart', `${C} 3.4.2.3.(1), (3)`, t_(sEx, `${ex}. Rule: with a public corridor min(½ diagonal, 9 m), otherwise max(½ diagonal, 9 m); door to door stands in for the smoke path (our arithmetic)`)],
+    [sDis, 'Exterior stair discharges apart', `${C} 3.4.2.3.(4)`, t_(sDis, `${dis}. 9 m, or 6 m sprinklered with both within 15 m of a street; measured door edge to door edge (J.B. 9 Nov)`)],
+    [sTr, 'Travel along the path', `${C} 3.4.2.5.(1)`, t_(sTr, `${tr} m ≤ 45 m (0.25 m grid, through 0.9 m doors)`)],
+    reachRow(G),
+    [!ze.length ? '?' : ze.every(([, n]) => n >= 2) ? 'pass' : 'fail', 'Two exits from every zone', `${C} 3.4.2.1; spec rule 6; eh/tfboard.zone_exits`, ze.map(([z, n]) => `${z} ${n}`).join(' · ') + ' exits reached (distinct exterior doors, yard doors and exit stairs; loading doors and public doors with no clear route to a street not counted) [script]'],
+    [sRef, 'Refuge minimum', 'spec Part 1 (refuge main room); J.B. 8 Nov: 50 people at 3.5 m²', `${n0(m.ref_counted)} m² clear, counted → ${m.people} people ≥ 50; largest refuge room ${n0(mr)} m² clear ` + (small ? '(small lot: refuge and shelter count together)' : '≥ 175') + ' (clear = inside the walls: 0.15 m off fire and exterior walls, 0.05 m off partitions, J.B. 11 Nov)'],
+    ['pass', 'Loading count and size', cfg.city === 'van' ? 'Parking By-law 5.1.5, 5.2.3, 5.2.5, 5.2.9, 5.5.1.2' : 'Zoning Bylaw 20001 s. 5.80 Table 7.2', `${m.nb} needed; drawn count from the plan (eh/claims.loading; see Loading)`],
+    m.genkw === 300 ? ['?', 'Generator test noise', cfg.city === 'van' ? 'By-law 6555 s. 4.1(c)' : 'Bylaw 14600 s. 21', `${m.ngen} small sets (300 kW): no sourced noise figure: check in design (J.B. 11 Nov)`]
+      : cfg.city === 'van' ? ['flag', 'Generator test noise', 'By-law 6555 s. 4.1(c)', `one set ${n1(m.gen1)} ≤ 80 dBA at 6.1 m; ${m.ngen} together ${n1(m.genall)}: test one at a time (maker claim, our arithmetic)`]
+      : ['?', 'Generator test noise', 'Bylaw 14600 s. 21', `one set ${n1(m.gen1)} dBA at 6.1 m (maker claim); limit 85 dBA at a non-residential lot line: distance to the lines not modelled`],
+    intakeRow(G, cfg, C), sizingRow(G, cfg, m), hubsetRow(G, cfg, m), batteryRow(G, cfg, m), bondRow(G, cfg.city === 'edm' ? 'E' : 'V'),
+    ['?', 'Hall heat used by the hub', 'DECISIONS 11 Nov (every typology board, provisional)', "share of the hall's heat the hub uses: ? (the hub's heat demand is not sourced: space heat is ? in the NECB 2020 build-up): provisional"],
+    ['?', 'Seismic importance', `${C} Table 4.1.2.1; 4.1.8.1 (IE)`, 'High: the refuge is a building likely to be used as a post-disaster shelter (Table 4.1.2.1), IE 1.3; '
+      + 'the whole structure unless the parts are separated by a seismic joint (our reading; no mixed-use rule read). Clinic: primary care, '
+      + 'not an emergency treatment facility (our reading, J.B. 11 Nov): if the clinic is meant to treat injuries after an earthquake, it is '
+      + 'post-disaster (IE 1.5). Data centre as a communications facility (post-disaster) ?'],
+    ['?', 'Hub emergency power', 'J.B. 11 Nov; spec 1c; NECB 2020 Tables 4.2.1.6, A-8.4.3.2(2); Rehlko G5-641, G5-642, g5650; CSA C282 (2 h minimum, life safety; not read, secondary source)',
+      `the hub runs 72 h on its own set (${m.hub_set.model}, row 'Hub generator (72 h)'), the data centre 12 h on its own sets; hub load ${n0(m.hub.kw)} kW `
+      + '(lighting, receptacles, hot water; NECB 2020); fans and space heat ? (check in design)' + (m.hub.other.length ? `; rooms read with lounge values: ${m.hub.other.join(', ')}` : '')],
+  ];
+  if (cfg.city === 'edm') rows.unshift(['flag', 'Indicative', 'J.B. 11 Nov', 'indicative: tool rectangle, placeholder cooling']);
+  if (!m.discharges.length) rows = rows.filter(r => r[1] !== 'Exterior stair discharges apart');
+  try {
+    const de = corridors(G), ok = de.every(r => r[4] <= 6.0);
+    let sDe = st_(ok, 6.0 - (de.length ? Math.max(...de.map(r => r[4])) : 0));
+    const txt = de.map(r => `storey ${r[0]} ${r[2].replace('pcor', 'public').replace('ccor', 'clinic').replace('scor', 'secure')} ${n1i(r[4])} m`).join(' · ');
+    rows.splice(3, 0, widthRow(G, cfg)); rows.splice(4, 0, egressRow(G, cfg)); rows.splice(5, 0, areaRow(G, cfg));
+    if (T(get(G, 'WALK', null))) rows.splice(6, 0, walkRow(G, cfg));
+    const ds = corridors(G, { strict: true });
+    const q24 = de.map((r, i) => [r, ds[i]]).filter(([r, s]) => s[4] > 6.0 && r[4] <= 6.0);
+    let note = '', Y = null, ygErr = null; try { Y = yards(G); } catch (e) { ygErr = e.message; }
+    const yg = T(Y) ? yardgate(G) : null, GN = get(G, 'GATE_NOTES', {}) || {}, gnote = g => GN[pyTuple(g)] !== undefined ? GN[pyTuple(g)] : GN['(' + g.join(', ') + ')'];
+    if (q24.length && yg !== null && T(get(G, 'GATES', null))) {
+      const bad = yg.doors.filter(d => d.status === 'fail').concat(yg.gates.filter(g => g.status === 'fail'), (yg.vgates || []).filter(v => v.status === 'fail'));
+      const tg = yg.gates.filter(g => g.status === 'tight').concat(yg.doors.filter(d => d.status === 'tight'));
+      note = ' · secure exits into the plant yard counted: the yard gate to an open public thoroughfare (street or lane; J.B. 10 Nov) is drawn and opens from inside without a key (J.B. 9 Nov, Q24; our reading)' + Object.values(GN).map(v => '; gate ' + String(v)).join('') + '; '
+        + `clear routes ≥ 1.1 m from ${yg.doors.length} yard doors to the gate (eh/yardgate.py v3), gate ${yg.gates.map(g => n1(g.width)).join('/')} m wide`
+        + ((yg.vgates || []).length ? `; truck route crosses the yard fence at a drawn vehicle gate (${yg.vgates.map(v => v.route.toLowerCase()).join(', ')})` : '');
+      if (bad.length) { sDe = 'fail'; note += ' · FAILS: ' + bad.map(b => (b.door ? pyTuple(b.door) : pyTuple(b.gate)) + ' ' + (b.why !== undefined ? b.why : 'gate')).join('; '); }
+      else if (tg.length && S_(sDe) === 'pass') sDe = 'tight';
+    } else if (q24.length) {
+      sDe = 'fail';
+      note = ' · ' + q24.map(([r, s]) => `storey ${r[0]} secure ${n1i(s[4])} m: the exit into the plant yard needs a drawn gate to the street that opens from inside without a key (J.B. 9 Nov, Q24)`).join(' · ');
+    }
+    if (ygErr) rows.splice(3, 0, ['?', 'Plant-yard doors and gates', 'spec rule 6; Q24 (J.B. 9 Nov); eh/yardgate.py v6', ygErr]);
+    else if (yg === null) rows.splice(3, 0, ['pass', 'Plant-yard doors and gates', 'spec rule 6; Q24 (J.B. 9 Nov); eh/yardgate.py v6', 'no plant yard on this fit (PLANT_YARDS empty) [script]']);
+    else {
+      const all = yg.doors.map(d => ['door ' + String(d.door[0]), d]).concat(yg.gates.map(g => ['gate ' + pyTuple(g.gate) + (gnote(g.gate) !== undefined ? ' ' + gnote(g.gate) : ''), g]), (yg.vgates || []).map(v => ['truck route ' + v.route, v]));
+      const sty = all.some(([, x]) => x.status === 'fail') ? 'fail' : all.some(([, x]) => x.status === 'tight') ? 'tight' : 'pass';
+      const tx = all.length ? `${Y.length} plant yard(s), ${yg.gates.length} gate(s) to a street or lane drawn, ${yg.doors.length} door(s) into the yard: ` + all.map(([k, x]) => `${k} ${x.status}` + (x.why && x.status !== 'pass' ? ` (${x.why})` : '')).join('; ') + ' [script]' : `${Y.length} plant yard(s); no door opens into it and no gate is drawn [script]`;
+      rows.splice(3, 0, [sty, 'Plant-yard doors and gates', 'spec rule 6; Q24 (J.B. 9 Nov); eh/yardgate.py v6', tx]);
+    }
+    const ff = fuelFill(G);
+    if (ff) rows.splice(4, 0, [ff[0], 'Fuel fill (generators)', 'J.B. 10 Nov; eh/fuelfill.py; hose and pipe limits not sourced', ff[1] + ' [script]']);
+    rows.splice(3, 0, [S_(sDe), 'Dead-end corridors', `${C} 3.3.1.9.(5); J.B. 8 Nov (strict)`, t_((!note || S_(sDe) !== 'tight') ? sDe : 'tight', `${txt} ≤ 6 m, along the corridor centreline from the last point with two ways to separate exits (J.B. 8 Nov; eh/deadend.py, our arithmetic)` + note)]);
+  } catch (ex_) { rows.splice(3, 0, ['?', 'Dead-end corridors', `${C} 3.3.1.9.(5)`, `not measured (${ex_.message})`]); }
+  return rows.map(r => [S_(r[0])].concat(r.slice(1)));
+}
+
 const api = { kind, LINE, CIRC, reach,
   gens, transformers, switchMargin, kd300lh, hubTank, hubSet, battCabinets, battRoom, hubLoad, RULES, HARD, hard, rule, auditGeom,
-  st_, t_, measureSizing, sizingRow, hubsetRow, batteryRow, widthRow, pyFixed, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
-  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11 port (yardgate v7, reach, dcspace, portal, clear sizes)' };
+  st_, t_, measureSizing, sizingRow, hubsetRow, batteryRow, widthRow, pyFixed,
+  corridors, egress2, egress3, walkload, sep2hWalls, sep2hText, padAnalyse, bondRow, intakeCheck, intakeRow, fuelFill, claimApply, CLAIMS, finalizeRows,
+  zoneExits, egressRow, areaRow, walkRow, reachRow, commonChecks, TIES, capArea, cappedArea, dcRoute, dcGround, outsidePoint, shapesTruck, portal, yards, yardgate,
+  clearGeom, clearSize, localWidth, maxSquare, version: 'EH-FREEZE-2026-11-11b port (every shared board check)' };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hubchecks = api; }
 })(typeof window !== 'undefined' ? window : null);

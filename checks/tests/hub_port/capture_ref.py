@@ -20,6 +20,7 @@ def geom_of(G):
     return {k: js(getattr(G, k)) for k in dir(G) if not k.startswith('_') and (k.isupper() or k == 'S') and not callable(getattr(G, k))}
 sys.path[:0] = [EH, os.path.join(EH, 'grade')]
 import reach, yardgate, portal, dcspace, audit_rooms, tfboard, html as _html, re as _re, shutil
+import deadend, egress2, egress3, walkload, sep2h, padcheck, intakes, fuelfill, claims
 def board_rows(path):
     """(status, title, text) of every check row on a board page"""
     t = open(path, encoding='utf-8').read(); out = []
@@ -46,6 +47,30 @@ for fit, extra in FITS:
         return w
     tfboard.measure, audit_rooms.audit_geom = w_ms, w_ag
     for k in o_rows: setattr(tfboard, k, mk(k))
+    # 11 Nov (step 2 of the port): every call into the remaining board scripts, and the board's whole check list
+    rec['more'] = []
+    MORE = [(deadend, 'corridors', 'G'), (egress2, 'check', 'G'), (egress3, 'check', 'G'), (walkload, 'check', 'G'), (sep2h, 'walls', 'Gc'), (sep2h, 'text', 'Gc'),
+            (padcheck, 'analyse', 'G'), (padcheck, 'bond_row', 'G'), (intakes, 'row', 'Gc'), (fuelfill, 'check', 'G'), (tfboard, 'zone_exits', 'G'),
+            (tfboard, '_egress_row', 'Gc'), (tfboard, '_area_row', 'Gc'), (tfboard, '_walk_row', 'Gc'), (tfboard, 'common_checks', 'Gcm'), (claims, 'apply', 'Gmc')]
+    o_more = [(mod, nm, getattr(mod, nm)) for mod, nm, _ in MORE]
+    def mk2(mod, nm, kind, f):
+        def w(*a, **kw):
+            r = f(*a, **kw)
+            e = {'fn': f'{mod.__name__}.{nm}', 'strict': deadend.STRICT if nm == 'corridors' else None}
+            if kind == 'G': e['args'] = js(list(a[1:]))
+            elif kind == 'Gc': e['cfg'] = js(a[1]); e['args'] = js(list(a[2:]))
+            elif kind == 'Gcm': e['cfg'] = js(a[1]); e['m'] = js(a[2])
+            elif kind == 'Gmc': e['m'] = js(a[1]); e['cfg'] = js(a[2]); e['row'] = js(a[3])
+            e['out'] = js([str(x) for x in r] if nm == 'apply' and False else r)
+            if nm == 'row' and mod is intakes: e['out'] = js([str(r[0])] + list(r[1:]))
+            if nm == 'common_checks': e['out'] = [js([str(x[0])] + list(x[1:])) for x in r]
+            if nm == 'apply': e['out'] = [js([str(r[0][0])] + list(r[0][1:])), js(r[1])]
+            if nm in ('_egress_row', '_area_row', '_walk_row'): e['out'] = js([str(r[0])] + list(r[1:]))
+            if rec['geom'] is None: rec['geom'] = geom_of(a[0])
+            rec['more'].append(e); return r
+        return w
+    for mod, nm, kind in MORE: setattr(mod, nm, mk2(mod, nm, kind, getattr(mod, nm)))
+    claims.MAP = dict(claims.MAP)
     o_run, o_yg, o_pt, o_rt, o_cg = reach.run, yardgate.check, portal.check, dcspace.route, audit_rooms.clear_geom
     def w_run(G, *a, **k):
         r = o_run(G, *a, **k)
@@ -80,6 +105,7 @@ for fit, extra in FITS:
         reach.run, yardgate.check, portal.check, dcspace.route, audit_rooms.clear_geom = o_run, o_yg, o_pt, o_rt, o_cg
         tfboard.measure, audit_rooms.audit_geom = o_ms, o_ag
         for k in o_rows: setattr(tfboard, k, o_rows[k])
+        for mod, nm, f in o_more: setattr(mod, nm, f)
     bp = os.path.join(tmp, 'board.html')
     if os.path.exists(bp): rec['board_rows'] = board_rows(bp)
     json.dump(rec, open(os.path.join(OUT, fit + '.json'), 'w', encoding='utf-8'), ensure_ascii=False)

@@ -51,9 +51,29 @@ for (const c of C) {
     } else if (fn === 'tfboard._width_row') {
       if (c.clear_flag === false) { skipped[fn + ' (CLEAR = False: centreline sizes, not ported)'] = (skipped[fn + ' (CLEAR = False: centreline sizes, not ported)'] || 0) + 1; continue; }
       const j = H.widthRow(G, c.cfg); T(fn, j[0] === c.out[0] && j[3] === c.out[3], { suite: c.suite, py: [c.out[0], c.out[3]], js: [j[0], j[3]] });
-    } else if (fn.startsWith('tfboard._')) {
+    } else if (['tfboard._sizing_row', 'tfboard._hubset_row', 'tfboard._battery_row'].includes(fn)) {
       const f = { _sizing_row: H.sizingRow, _hubset_row: H.hubsetRow, _battery_row: H.batteryRow }[fn.split('.')[1]];
       const j = f(G, c.cfg, c.m); T(fn, j[0] === c.out[0] && j[3] === c.out[3], { suite: c.suite, py: [c.out[0], c.out[3]], js: [j[0], j[3]] });
+    } else if (fn === 'deadend.corridors') {
+      const js = H.corridors(G, { strict: c.strict }).map(r => r.slice(0, 6)), py = c.out.map(r => r.slice(0, 6)); T(fn, deep(py, js), { suite: c.suite, py, js });
+    } else if (fn === 'egress2.check') { const js = H.egress2(G).map(r => r.slice()); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'egress3.check') { const js = H.egress3(G); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'walkload.check') { const js = H.walkload(G); T(fn, deep(c.out, js), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'sep2h.walls') { const js = Object.fromEntries([...H.sep2hWalls(G, c.cfg)].map(([k, v]) => [String(k), v])); T(fn, deep(c.out, js), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'sep2h.text') { const js = H.sep2hText(G, c.cfg); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'padcheck.analyse') { const js = H.padAnalyse(G), py = c.out && c.out.map(d => { const o = Object.assign({}, d); delete o.front; return o; }); T(fn, deep(py, js), { suite: c.suite, py, js });
+    } else if (fn === 'padcheck.bond_row') { const js = H.bondRow(G, a[0]); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'intakes.row') { const js = H.intakeRow(G, c.cfg, (c.m === null && a.length > 1) ? a[1] : 'VBBL'); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'fuelfill.check') { const js = H.fuelFill(G); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'tfboard.zone_exits') { const js = H.zoneExits(G, a[0], a[1]); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'tfboard._egress_row' || fn === 'tfboard._area_row' || fn === 'tfboard._walk_row') {
+      const f = { 'tfboard._egress_row': H.egressRow, 'tfboard._area_row': H.areaRow, 'tfboard._walk_row': H.walkRow }[fn]; const js = fn === 'tfboard._area_row' && c.e3rows ? f(G, c.cfg, c.e3rows) : f(G, c.cfg); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'tfboard.common_checks') { const js = H.commonChecks(G, c.cfg, c.m); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn === 'claims.apply') { const js = H.claimApply(G, c.m, c.cfg, a[0]); T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
+    } else if (fn.startsWith('claims.')) {
+      const name = fn.split('.')[1], key = { pads: 'Transformer pads', gens: 'Generator tanks', chillers: 'Chiller clear zones', off_hall: 'Nothing wet over the hall', loading: 'Loading count and size', storeys: 'Every storey reached', at_grade: 'At grade: data centre only as entrances', separations: 'Fire separations', hub_cap: 'Data-centre size: hub cap', public_exits: 'Public exits beside the drive, not on it' }[name];
+      const f = H.CLAIMS[key], r = name === 'separations' ? f(G, c.m, c.cfg, a[0]) : f(G, c.m, c.cfg), js = r === null ? null : [typeof r[0] === 'object' ? r[0].st : r[0], r[1]];
+      T(fn, J(js) === J(c.out), { suite: c.suite, py: c.out, js });
     } else skipped[fn] = (skipped[fn] || 0) + 1;
   } catch (e) { T(fn, false, { suite: c.suite, js: 'error ' + e.message + ' ' + (e.stack || '').split('\n')[1] }); }
 }

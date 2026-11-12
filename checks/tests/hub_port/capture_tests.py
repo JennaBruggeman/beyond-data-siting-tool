@@ -14,6 +14,7 @@ def js(o):
 def geom_of(G):
     return {k: js(getattr(G, k)) for k in dir(G) if not k.startswith('_') and (k.isupper() or k == 'S') and not callable(getattr(G, k))}
 import reach, yardgate, dcspace, portal, audit_rooms, sizing, hubload, tfboard
+import deadend, egress2, egress3, walkload, sep2h, padcheck, intakes, fuelfill, claims
 CALLS = []; CTX = {'suite': None}
 def wrap(mod, name, kind):
     f = getattr(mod, name)
@@ -26,6 +27,8 @@ def wrap(mod, name, kind):
                 rec.update(geom=geom_of(a[0]), args=js(list(a[1:])), kw=js(k))
             elif kind == 'Gcfg':
                 rec.update(geom=geom_of(a[0]), cfg=js(a[1]), m=js(a[2]) if len(a) > 2 else None)
+            elif kind == 'Gmc':   # claims functions: (G, m, cfg[, typed])
+                rec.update(geom=geom_of(a[0]), m=js(a[1]), cfg=js(a[2]), args=js(list(a[3:])))
             elif kind == 'clear':
                 x, rooms, st = a; rec.update(x=js(x), rooms=js(rooms), st=st)
             elif kind == 'audit':
@@ -33,9 +36,17 @@ def wrap(mod, name, kind):
             else:
                 rec.update(args=js(list(a)), kw=js(k))
             if name == 'run': rec['serves'] = reach.SERVES
+            if name == 'corridors': rec['strict'] = deadend.STRICT
+            if name == '_area_row':   # the test may stub egress3.check with synthetic rows: record what the row read
+                try: rec['e3rows'] = js(egress3.check(a[0]))
+                except Exception: rec['e3rows'] = None
             rec['clear_flag'] = audit_rooms.CLEAR   # clear sizes on (the freeze) or off (centreline, a test switch)
             if name == 'clear_geom': rec['out'] = {'area': r[0].area, 'cells': sorted(f'{p},{q}' for p, q in r[1])}
             elif name == '_st': rec['out'] = [str(r), getattr(r, 'over', None), getattr(r, 'unit', None)]
+            elif mod is claims and name != 'apply': rec['out'] = js(None if r is None else [str(r[0]), r[1]])
+            elif name == 'apply': rec['out'] = [js([str(r[0][0])] + list(r[0][1:])), js(r[1])]
+            elif name in ('_egress_row', '_area_row', '_walk_row', 'row', 'bond_row'): rec['out'] = js([str(r[0])] + list(r[1:]))
+            elif name == 'common_checks': rec['out'] = [js([str(x[0])] + list(x[1:])) for x in r]
             else: rec['out'] = js(r)
         except Exception as ex:
             rec['capture_error'] = repr(ex)
@@ -44,7 +55,12 @@ def wrap(mod, name, kind):
 for m, n, k in [(reach, 'run', 'G'), (yardgate, 'check', 'G'), (dcspace, 'route', 'G'), (portal, 'check', 'G'), (audit_rooms, 'audit_geom', 'audit'),
                 (audit_rooms, 'clear_geom', 'clear'), (sizing, 'gens', 'a'), (sizing, 'transformers', 'a'), (sizing, 'switch_margin', 'a'), (sizing, 'hub_tank', 'a'),
                 (sizing, 'hub_set', 'a'), (sizing, 'batt_cabinets', 'a'), (sizing, 'batt_room', 'a'), (sizing, 'kd300_lh', 'a'), (hubload, 'load', 'G'),
-                (tfboard, '_st', 'a'), (tfboard, '_width_row', 'Gcfg'), (tfboard, '_sizing_row', 'Gcfg'), (tfboard, '_hubset_row', 'Gcfg'), (tfboard, '_battery_row', 'Gcfg')]:
+                (tfboard, '_st', 'a'), (tfboard, '_width_row', 'Gcfg'), (tfboard, '_sizing_row', 'Gcfg'), (tfboard, '_hubset_row', 'Gcfg'), (tfboard, '_battery_row', 'Gcfg'),
+                (deadend, 'corridors', 'G'), (egress2, 'check', 'G'), (egress3, 'check', 'G'), (walkload, 'check', 'G'), (sep2h, 'walls', 'Gcfg'), (sep2h, 'text', 'Gcfg'),
+                (padcheck, 'analyse', 'G'), (padcheck, 'bond_row', 'G'), (intakes, 'row', 'Gcfg'), (fuelfill, 'check', 'G'), (tfboard, 'zone_exits', 'G'),
+                (tfboard, '_egress_row', 'Gcfg'), (tfboard, '_area_row', 'Gcfg'), (tfboard, '_walk_row', 'Gcfg'), (tfboard, 'common_checks', 'Gcfg'),
+                (claims, 'apply', 'Gmc'), (claims, 'pads', 'Gmc'), (claims, 'gens', 'Gmc'), (claims, 'chillers', 'Gmc'), (claims, 'off_hall', 'Gmc'), (claims, 'loading', 'Gmc'),
+                (claims, 'storeys', 'Gmc'), (claims, 'at_grade', 'Gmc'), (claims, 'separations', 'Gmc'), (claims, 'hub_cap', 'Gmc'), (claims, 'public_exits', 'Gmc')]:
     wrap(m, n, k)
 log = io.StringIO()
 for suite, argv in [('fixbatch', []), ('ic20', [EH])]:

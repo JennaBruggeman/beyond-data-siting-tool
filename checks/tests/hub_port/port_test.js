@@ -28,7 +28,7 @@ function boardRows(p) {
 }
 for (const f of fs.readdirSync(REF).filter(f => f.endsWith('.json')).sort()) {
   const fit = f.replace('.json', ''); if (only.length && !only.includes(fit)) continue;
-  const R = JSON.parse(fs.readFileSync(path.join(REF, f), 'utf8')), G = R.geom, out = { reach: [0, 0], yard: [0, 0], route: [0, 0], portal: [0, 0], clear: [0, 0], diffs: [] };
+  const R = JSON.parse(fs.readFileSync(path.join(REF, f), 'utf8').replace(/Infinity/g, '1e999')), G = R.geom, out = { reach: [0, 0], yard: [0, 0], route: [0, 0], portal: [0, 0], clear: [0, 0], diffs: [] };
   if (!G) { res[fit] = { error: 'no geometry captured' }; continue; }
   const diff = (k, what, py, js) => { out[k][1]++; out.diffs.push({ check: k, what, py, js }); };
   /* reach */
@@ -103,8 +103,36 @@ for (const f of fs.readdirSync(REF).filter(f => f.endsWith('.json')).sort()) {
       if (a === b) out.board[0]++; else { const n = Math.max(ic.length, R.board_rows.length); for (let i = 0; i < n; i++) if (JSON.stringify(ic[i]) !== JSON.stringify(R.board_rows[i])) { diff('board', 're-run vs ic37 row ' + i, ic[i] || null, R.board_rows[i] || null); break; } }
     }
   }
+  /* ---- remaining board scripts and the board's own rows (dead ends, egress, walkways, 2 h walls, pads, intakes, fuel fill, claims) ---- */
+  out.more = [0, 0];
+  const J2 = x => norm(JSON.stringify(x, (k, v) => typeof v === 'number' ? (Number.isInteger(v) ? v : Math.round(v * 1e6) / 1e6) : v));
+  for (const e of (R.more || [])) {
+    let py = e.out, js, cmpPy = py;
+    try {
+      switch (e.fn) {
+        case 'deadend.corridors': js = H.corridors(G, { strict: e.strict }).map(r => r.slice(0, 6)); cmpPy = py.map(r => r.slice(0, 6)); break;
+        case 'egress2.check': js = H.egress2(G).map(r => r.slice()); break;
+        case 'egress3.check': js = H.egress3(G); break;
+        case 'walkload.check': js = H.walkload(G); break;
+        case 'sep2h.walls': js = Object.fromEntries([...H.sep2hWalls(G, e.cfg)].map(([k, v]) => [String(k), v])); break;
+        case 'sep2h.text': js = H.sep2hText(G, e.cfg); break;
+        case 'padcheck.analyse': js = H.padAnalyse(G); cmpPy = py && py.map(d => { const o = Object.assign({}, d); delete o.front; return o; }); break;
+        case 'padcheck.bond_row': js = H.bondRow(G, e.args[0]); break;
+        case 'intakes.row': js = H.intakeRow(G, e.cfg, e.args[1]); break;
+        case 'fuelfill.check': js = H.fuelFill(G); break;
+        case 'tfboard.zone_exits': js = H.zoneExits(G, e.args[0], e.args[1]); break;
+        case 'tfboard._egress_row': js = H.egressRow(G, e.cfg); break;
+        case 'tfboard._area_row': js = H.areaRow(G, e.cfg); break;
+        case 'tfboard._walk_row': js = H.walkRow(G, e.cfg); break;
+        case 'tfboard.common_checks': js = H.commonChecks(G, e.cfg, e.m); break;
+        case 'claims.apply': { const [r2, ch] = H.claimApply(G, e.m, e.cfg, e.row); js = [r2, ch]; break; }
+        default: continue;
+      }
+    } catch (ex) { js = 'JS error: ' + ex.message + ' ' + (ex.stack || '').split(String.fromCharCode(10))[1]; }
+    if (J2(cmpPy) === J2(js)) out.more[0]++; else diff('more', e.fn + (e.row ? ' ' + e.row[1] : ''), cmpPy, js);
+  }
   res[fit] = out; out.accepted = out.diffs.filter(d => accepted(fit, d)); out.diffs = out.diffs.filter(d => !accepted(fit, d)); const bad = out.diffs.length; totalBad += bad;
-  console.log(fit.padEnd(10), ['reach', 'yard', 'route', 'portal', 'clear', 'sizing', 'audit', 'rows', 'board'].map(k => `${k} ${out[k][0]}${out[k][1] ? '/' + out[k][1] + ' DIFF' : ''}`).join('  '));
+  console.log(fit.padEnd(10), ['reach', 'yard', 'route', 'portal', 'clear', 'sizing', 'audit', 'rows', 'board', 'more'].map(k => `${k} ${out[k][0]}${out[k][1] ? '/' + out[k][1] + ' DIFF' : ''}`).join('  '));
 }
 fs.writeFileSync(path.join(__dirname, 'port_test_result.json'), JSON.stringify(res, null, 1));
 console.log((totalBad ? `${totalBad} differences (port_test_result.json)` : 'all match') + `; accepted: ${Object.values(res).reduce((n, o) => n + ((o.accepted || []).length), 0)} (339 refuge corner)`);
