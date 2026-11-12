@@ -52,13 +52,15 @@ const SPEC={
    unsure:['fan Ø not printed; drawn to fill the deck','cold-water basin height read off the drawing (not dimensioned)','top inlets and side outlet shown; sizes not mapped from the table']},
  genset:{name:'Standby generator in enclosure (2 MW)',L:13.493,W:3.488,H:4.777,src:'Rehlko (Kohler) KD2000, Sound Level 2 enclosure (G5-626 rev 6/24): 13493 × 3488 × 4777 mm max; 2000 kW standby, data-centre rating the same; Tier 2, UL 2200 + CSA. Chosen as the middle of Cat, Rehlko and Generac (18.5–38.4 m² per MW)',
    unsure:['radiator fans, doors, louvres and controls drawn after the Cat 3516C sheet layout; the Rehlko layout ?','fuel tank (sub-base) height 0.3 m drawn; ?','exhaust: no stack drawn']},
- genset80:{name:'Hub standby generator, KD80, in enclosure (72 h)',L:3.2,W:1.2,H:1.7,tank:0.3,src:'Rehlko KD80, enclosure G12-625: 3.2 × 1.2 × 1.7 m (L × W × H, our reading of the table order; J.B. 12 Nov 2026), on its sub-base tank. The hub’s own set (EH-FREEZE-2026-11-11b, sizing.hub_set: smallest of KD80, KD100, KD300 that carries the hub load). Tool-vs-board difference until the hub chat amends its boards (they draw the 2.27 × 1.149 m skid).',
-   unsure:['sub-base tank height not published: 0.3 m drawn under the enclosure','doors and louvres drawn as a typical small enclosure']},
+ genset80:{name:'Hub standby generator, KD80, in enclosure (72 h)',L:3.200,W:1.168,H:1.651,fullLoadLh:28.0,src:'Rehlko KD80 sell sheet G12-625: enclosure 126 × 46 × 65 in = 3.200 × 1.168 × 1.651 m (L × W × H, our reading of the table order), as the hub (EH-FREEZE-2026-11-11c, sizing.ENCLOSURE). On its sub-base tank: tank height = 72 h fuel ÷ the enclosure footprint (the hub’s way: sizing.hub_set need_l): at full load 28.0 L/h (Rehlko G5-641) × 72 h = 2,016 L ÷ 3.738 m² = 0.539 m; per lot, the hub load’s 72 h volume.',
+   unsure:['doors and louvres drawn as a typical small enclosure']},
  transformer:{name:'Pad-mounted transformer 2,500 kVA (customer-owned)',L:2.565,W:2.515,H:1.854,pad:[2.667,2.616],src:'Eaton CA08104001E (Apr 2016) p. 17.0-18, Table 17.0-13, 2,500 kVA: cabinet 73 × 101 × 99 in (A height × B width × C depth) = 1.854 × 2.565 × 2.515 m; pad B + 4 in × C + 4 in = 2.667 × 2.616 m (Figure 17.0-12, our reading). The rule (J.B. 12 Nov 2026): above 1,500 kVA in Vancouver, and all of Edmonton, a customer-owned pad-mounted unit, our reading (BC Hydro’s standard stops at 1,500 kVA; EPCOR’s standard not read). Replaces the unit-substation model (CA022021EN).',
    rows:{150:[50,68,49],225:[50,72,53],300:[50,72,55],500:[50,72,61],750:[64,72,63],1000:[64,72,64],1500:[73,89,71],2000:[73,101,75],2500:[73,101,99]},   /* kVA: A height, B width, C depth (in), Table 17.0-13 */
    unsure:['cabinet doors and cooling fins drawn as a typical pad-mounted unit; the sheet gives the outline only']},
- transformerBCH:{name:'BC Hydro pad-mounted transformer (up to 1,500 kVA)',L:2.21,W:2.21,H:1.626,src:'BC Hydro ES54 Table 1, row "750 ≤ PMT ≤ 1500 kVA": pad 2.21 × 2.21 m (J.B. 12 Nov 2026). The transformer is BC Hydro’s; its cabinet is drawn at the Eaton CA08104001E Table 17.0-13 row for the same kVA (our reading; default 1,000 kVA, 64 × 72 × 64 in = 1.626 × 1.829 × 1.626 m). The 1,500 kVA Eaton cabinet (89 in = 2.261 m wide) is wider than the 2.21 m pad. Used up to 1,500 kVA in Vancouver.',
-   unsure:['BC Hydro’s own unit size is not in ES54: cabinet drawn at the Eaton row for the same kVA']},
+ transformerBCH500:{name:'BC Hydro three-phase pad, 500 kVA and smaller',L:1.68,W:1.58,H:0.2,src:'BC Hydro ES54 F3-04.01 (R.6 Feb 2017), three-phase transformer pad 500 kVA and smaller: 1680 × 1580 mm, 200 mm thick (ES54 Section F, p. 16; J.B. 12 Nov 2026). The transformer is BC Hydro’s and its size is not in ES54: drawn inside the pad, 0.15 m in from each edge (drawing choice), height at the Eaton CA08104001E Table 17.0-13 row for the kVA. Used in Vancouver up to 500 kVA.',
+   unsure:[]},
+ transformerBCH:{name:'BC Hydro three-phase pad, 750 kVA and larger (to 1,500 kVA)',L:2.20,W:2.20,H:0.2,src:'BC Hydro ES54 F3-05.01 (R.8 Sep 2017), three-phase transformer pad 750 kVA and larger: 2200 × 2200 mm, 200 mm thick (ES54 Section F, p. 21; J.B. 12 Nov 2026). The drawing gives no top limit; above 1,500 kVA the unit is customer-owned (Eaton pad-mount, our reading: Eaton’s 2,500 kVA cabinet, 2.57 m, cannot sit on a 2.20 m pad). BC Hydro’s transformer size is not in ES54: drawn inside the pad, 0.15 m in from each edge (drawing choice), height at the Eaton row for the kVA. Used in Vancouver from 750 to 1,500 kVA.',
+   unsure:[]},
  switchgear:{name:'Low-voltage switchgear (6 sections drawn)',L:0.813,W:1.778,H:2.438,src:'Siemens Type WL (Siemens Canada catalogue §12): 32 in wide, 96 in high; at least 70 in deep when cable-connected at 3200 A or more; UL 1558, CSA C22.2 No. 31',unsure:['catalogue date not printed']},
  ups:{name:'UPS, 1 MW frame',L:3.6,W:0.9,H:1.97,src:'Schneider Galaxy VX 1000 kW (990-5451L-001): 3600 × 900 × 1970 mm',unsure:['panel divisions drawn; ?']},
  battery:{name:'Lithium-ion battery cabinet',L:0.6,W:0.75,H:2.0,src:'Vertiv EnergyCore Li5, 18 modules (SL-71271 R06/26): 600 × 750 × 2000 mm, 31.1 kWh, 263 kW; CSA mark (UL 1973), tested to UL 9540A; about 4 cabinets per MW for 5 min at end of life (our calculation)',unsure:['axes not labelled on the sheet; 2000 read as height','only one maker\'s cabinet sheet could be read']},
@@ -121,9 +123,12 @@ function vcoil(s,pads){ const g=new T.Group(), L=s.L, H=s.H, cw=2.383, deck=H-0.
 
 /* pad-mounted transformer (J.B. 12 Nov 2026): concrete pad, cabinet with front doors, cooling fins at the back. dims: the Eaton row for
    the kVA (A height, B width, C depth in inches) or a given cabinet [B, C, A] in metres; the pad: cabinet + 4 in, or the spec's own pad */
+/* BC Hydro pad (ES54 F3-04.01 / F3-05.01) with BC Hydro's transformer drawn inside it, 0.15 m in from each edge (drawing choice),
+   height at the Eaton row for the kVA */
+function bchPad(s,kva){ const r=SPEC.transformer.rows[kva]||SPEC.transformer.rows[kva<=500?500:1000], inch=0.0254; return padmount(s, null, [s.L-0.3, s.W-0.3, r[0]*inch]); }
 function padmount(s,kva,cab){ const g=new T.Group(), inch=0.0254;
   let B, C, A; if(cab){ [B,C,A]=cab; } else { const r=s.rows[kva]||s.rows[2500]; A=r[0]*inch; B=r[1]*inch; C=r[2]*inch; }
-  const PL=cab?s.L:B+4*inch, PW=cab?s.W:C+4*inch, ph=0.15;
+  const PL=cab?s.L:B+4*inch, PW=cab?s.W:C+4*inch, ph=0.2;   /* pad 200 mm, as ES54's pads (Eaton gives none: our reading) */
   box(g,PL,ph,PW,0,0,0,M.shade);                                          // pad
   box(g,B,A,C*0.82,0,ph,-C*0.09,M.body);                                  // cabinet (front compartment)
   box(g,B*0.9,A*0.8,C*0.18,0,ph,C*0.41-0.01,M.body);                      // tank with fins at the back
@@ -175,13 +180,14 @@ const B={
    for(const x of [-L/2+0.3,L/2-0.3]) for(const z of [-W/2-0.05,W/2+0.05]) lug(g,x,0.1,z);
    return g; },
  transformer(o){ return padmount(SPEC.transformer, (o&&o.kva)||2500); },
- transformerBCH(o){ const s=SPEC.transformerBCH, r=SPEC.transformer.rows[(o&&o.kva)||1000]||SPEC.transformer.rows[1000], inch=0.0254; return padmount(s, null, [r[1]*inch, r[2]*inch, r[0]*inch]); },   /* cabinet at the Eaton row for the kVA (default 1,000) */
- genset80(o){ const s=SPEC.genset80, g=new T.Group(), L=s.L, W=s.W, H=s.H, tk=s.tank;
+ transformerBCH500(o){ return bchPad(SPEC.transformerBCH500, (o&&o.kva)||500); },
+ transformerBCH(o){ return bchPad(SPEC.transformerBCH, (o&&o.kva)||1000); },
+ genset80(o){ const s=SPEC.genset80, g=new T.Group(), L=s.L, W=s.W, H=s.H, need=(o&&o.need_l)||s.fullLoadLh*72, tk=need/1000/(L*W);   /* tank: 72 h fuel ÷ footprint (the hub's way) */
    box(g,L,tk,W,0,0,0,M.dark);                                            // sub-base tank
-   box(g,L,H-tk,W,0,tk,0,M.body); box(g,L+0.04,0.05,W+0.04,0,H-0.05,0,M.shade); // enclosure and roof edge
-   for(const sd of [1,-1]) door(g,sd>0?'z+':'z-',-L*0.15,tk+0.05,0.8,Math.min(1.25,H-tk-0.15),sd*(W/2+0.012),{left:sd<0});
-   door(g,'x+',0,tk+0.1,W*0.7,H-tk-0.25,L/2+0.012); door(g,'x-',0,tk+0.1,W*0.7,H-tk-0.25,-L/2-0.012);   // radiator and controls ends
-   cyl(g,0.06,0.3,L*0.3,H+0.15,0,M.dark);                                 // exhaust stub
+   box(g,L,H,W,0,tk,0,M.body); box(g,L+0.04,0.05,W+0.04,0,tk+H-0.05,0,M.shade); // enclosure (65 in) on the tank, roof edge
+   for(const sd of [1,-1]) door(g,sd>0?'z+':'z-',-L*0.15,tk+0.05,0.8,Math.min(1.25,H-0.15),sd*(W/2+0.012),{left:sd<0});
+   door(g,'x+',0,tk+0.1,W*0.7,H-0.25,L/2+0.012); door(g,'x-',0,tk+0.1,W*0.7,H-0.25,-L/2-0.012);   // radiator and controls ends
+   cyl(g,0.06,0.3,L*0.3,tk+H+0.15,0,M.dark);                              // exhaust stub
    return g; },
  switchgear(o){ const s=SPEC.switchgear, g=new T.Group(), n=(o&&o.n)||6, L=s.L*n, W=s.W, H=s.H;
    box(g,L,0.1,W,0,0,0,M.dark); box(g,L,H-0.1,W,0,0.1,0,M.body);
