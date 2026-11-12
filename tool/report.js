@@ -188,7 +188,7 @@ async function build(pal){ const c=await ctx(); const D=BD.flow.reportData(); co
   // the site sheets in the booklet's style (sheet.js); heat first, the others to follow once J.B. has seen it
   try{ fig.sheetHeat=BD.sheets?await BD.sheets.heatSheet():''; }catch(e){ console.warn(e); fig.sheetHeat=''; }
   const opts=D.tier==='resident'?[]:await optionsBlock(c,pal); const spec=picks.map(n=>({n,html:specCardHTML(c,n,pal),flow:specFlow(n,pal,c),plan:oppPlanSVG(c,n,pal),data:specData(c,n)}));
-  const key=[['Servers',`${r1(c.mw)} MW`],['Largest that fits',BD.fitMax?`${(BD.fitMax()||0).toFixed(1)} MW`:''],['Power at the meter',rngT(c.r.fac[0],c.r.fac[1],'MW')],['Heat offered',c.rec?rngT(c.r.avail[0]/1000,c.r.avail[1]/1000,'GWh/yr'):'none recovered (air)']];
+  const key=[['Servers',`${r1(c.mw)} MW`],['Largest that fits',BD.fitMax?`${(BD.fitMax()||0).toFixed(1)} MW`:''],...(BD.denseLine?[[BD.hallNote().kind==='air'?'With a denser hall (RICS)':'Conservative end (RICS)',(()=>{const d=BD.denseLine(); return d.mw!=null&&d.mw>=0.05?`about ${d.mw.toFixed(1)} MW`:'none fits';})()]]:[]),['Power at the meter',rngT(c.r.fac[0],c.r.fac[1],'MW')],['Heat offered',c.rec?rngT(c.r.avail[0]/1000,c.r.avail[1]/1000,'GWh/yr'):'none recovered (air)']];
   // the step notes, by tier; "worked out from" goes to the appendix
   const items=[]; const appx=[]; for(const G of D.groups) for(const n of G.items){ if(['report','site','setup'].includes(n.k)) continue; items.push(Object.assign({},n,{grp:G.l}));
     for(const s of n.secs) if(s[2]&&s[2].length) appx.push([n.title+' · '+s[0],s[2].join(' · ')]); }

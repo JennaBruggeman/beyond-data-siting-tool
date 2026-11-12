@@ -41,7 +41,23 @@
       "fmDS0532"
      ]
     }
-   ]
+   ],
+   "perMWLiquid": {
+    "v": 150,
+    "src": [
+     "schneiderRD99"
+    ]
+   },
+   "perMWDense": {
+    "v": [
+     250,
+     400
+    ],
+    "src": [
+     "ricsDCdemand"
+    ]
+   },
+   "_density_note": "J.B. 12 Nov 2026: air = perMW (four Canadian halls, white space); liquid to the chip and immersion = perMWLiquid (Schneider RD99, maker reference design; immersion a stand-in); the \"modern denser hall\" line = perMWDense high end (RICS)"
   },
   {
    "id": "electrical",

@@ -278,7 +278,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "quantities": 225,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1711
+"sources": 1713
 }
 },
 "stages": [
@@ -8889,7 +8889,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Largest size that fits",
 "formula": "hall area ÷ area per MW (range); for part of a building, also capped by floor load, electrical service and heat-rejection space",
-"coef": "LBNL prototypes 3.7–13.9 m² per rack → ≈186–2,325 m² per MW; Ark UP4 28 MW IT in 15,410 m² (three buildings); 111 E 5th ≤ 291 m² per MW (upper bound); Uptime 2024 average 8 kW per rack (industry survey); Cologix VAN2 (≈619 m² per MW) dropped: its 2 MW is site capacity, not IT load; the range is unchanged, VAN5 (≈627) sets the top [decision 30 Oct 2026]",
+"coef": "LBNL prototypes 3.7–13.9 m² per rack → ≈186–2,325 m² per MW; Ark UP4 28 MW IT in 15,410 m² (three buildings); 111 E 5th ≤ 291 m² per MW (upper bound); Uptime 2024 average 8 kW per rack (industry survey); Cologix VAN2 (≈619 m² per MW) dropped: its 2 MW is site capacity, not IT load; the range is unchanged, VAN5 (≈627) sets the top [decision 30 Oct 2026]; by cooling type (J.B. 12 Nov 2026): air 560-640 m2 per MW (four built Canadian halls); liquid to the chip about 150 m2 per MW (Schneider RD99, maker's reference design, claim); immersion the same figure as a stand-in, density not sourced yet; shown beside every lot: RICS 2.5-4.0 kW/m2 net white space (250-400 m2 per MW), run at 400, not the default",
 "unit": "MW IT (range)",
 "sources": [
 "lbnl_proto2021",
@@ -8898,7 +8898,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "evapcoLayout2026",
 "vanParking5",
 "edmZB580",
-"uptime2024survey"
+"uptime2024survey",
+"schneiderRD99",
+"ricsDCdemand"
 ],
 "source_roles": [
 {
@@ -8950,6 +8952,20 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "role": "traced from src16",
 "conf": 50,
 "verified": false
+},
+{
+"id": "schneiderRD99",
+"term": "Largest size that fits",
+"role": "data (claim)",
+"conf": 50,
+"verified": true
+},
+{
+"id": "ricsDCdemand",
+"term": "Largest size that fits",
+"role": "cross-check (industry)",
+"conf": 50,
+"verified": true
 }
 ],
 "conf": 50,
@@ -8966,7 +8982,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 2,
 "edm": 1,
 "both": 0,
-"gen": 4
+"gen": 6
 }
 },
 {
@@ -13136,7 +13152,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "stage": "size",
 "name": "Data hall, m² per MW of IT (Architecture mode)",
 "formula": "hall floor = MW of IT × 290–630 m² per MW (≈250 at high density); per floor, on the floors the zone allows data storage",
-"coef": "five built Canadian halls, operator claims (register it_load_outside; tool/data/size.json m2PerMW); not at the ground floor in Vancouver I-2, I-3, FC-2; ceiling at most 9 m (FM 5-32 2.2.5.2, insurer guidance); 1 h walls, 2 h between halls (FM 5-32 2.2.4.1, insurer guidance); code separation depends on the hall's occupancy, which no code names (if F-2: Table 3.1.3.1)",
+"coef": "five built Canadian halls, operator claims (register it_load_outside; tool/data/size.json m2PerMW); not at the ground floor in Vancouver I-2, I-3, FC-2; ceiling at most 9 m (FM 5-32 2.2.5.2, insurer guidance); 1 h walls, 2 h between halls (FM 5-32 2.2.4.1, insurer guidance); code separation depends on the hall's occupancy, which no code names (if F-2: Table 3.1.3.1); by cooling type (J.B. 12 Nov 2026): air 560-640 m2 per MW (four built Canadian halls); liquid to the chip about 150 m2 per MW (Schneider RD99, maker's reference design, claim); immersion the same figure as a stand-in, density not sourced yet; shown beside every lot: RICS 2.5-4.0 kW/m2 net white space (250-400 m2 per MW), run at 400, not the default",
 "unit": "m² per MW IT",
 "sources": [
 "estruxtureVAN1ds",
@@ -13146,7 +13162,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van_zdb_i2",
 "van_zdb_i3",
 "van_zdb_fc2",
-"arch_pub_nbc3131full"
+"arch_pub_nbc3131full",
+"schneiderRD99",
+"ricsDCdemand"
 ],
 "source_roles": [],
 "conf": 50,
@@ -13163,7 +13181,7 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "van": 6,
 "edm": 1,
 "both": 0,
-"gen": 1
+"gen": 3
 }
 },
 {
@@ -20492,7 +20510,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "cp_fit_rules": "DECISION (J.B., 9 Nov 2026): Claude Link community_pool/specs/community_pool.md rules 2, 5, 9, 14, 15: pool hall single volume, the data hall never over or under it; wet kind and bather path (R8); chlorine rules in both cities; spare-floor order; fallback ladder with the learner pool. A decision, not a source: no trust rating (n/a). Spec, not live yet.",
 "arch_sportEngPoolsApp2": "HOLD, NOT READ: DESIGN GUIDE (UK benchmark): Swimming Pools Design Guidance Note 2013, Appendix 2 Servicing the building, Sport England (hosted by CIBSE), Table 4 (citing PWTAG 2009): pool water temperatures by pool type and air about 1 °C above water, as reported by the main Cowork chat 9 Nov 2026 (figures ? until read: 28 competitive, 29 main, 30 leisure, 31 children, 32 babies/disabled, 35 hydrotherapy, 40 spa) — https://cibse.org/media/vihawrzw/swimming-pools-2013-appendix-2-servicing-the-building.pdf. Trust ? (benchmark, outside Canada).",
 "hpacAshraeLC2014": "HOLD, NOT READ: TRADE REPORT: HPAC Engineering, 22 Apr 2014, on ASHRAE TC 9.9 Liquid Cooling Guidelines 2nd ed.: 'five water-temperature classes', the highest 'greater than 45°C' (as reported by the main Cowork chat 9 Nov 2026; edition differs from upsiteASHRAE5's 5th-edition W classes) — https://www.hpac.com/air-conditioning/article/20927580/ashrae-adds-supply-water-temp-class-to-data-center-cooling-guidance. Trust 50 (trade report); replace with the ASHRAE text.",
-"ashraeTG5liquid": "STANDARD GUIDELINE (licensed; J.B. via UBC Library, 11 Nov 2026; never in the repo): ASHRAE TC 9.9, Thermal Guidelines for Data Processing Environments, 5th ed. (2021), ch. 3, Table 3.1, 2021 Thermal Guidelines for Liquid Cooling, p. 47: facility supply water temperature by class, W17 17 °C, W27 27, W32 32, W40 40, W45 45, W+ >45; minimum water temperature 2 °C for all classes; typical facilities: W32 cooling tower with chiller or district heating system, W45 cooling tower with district heating system. p. 48: classes with supply temperatures of 32 °C and above (Table 3.1) are candidates for district heating. Supply temperatures are requirements met by the ITE; the facility owner must allow for the CDU approach (p. 48). No return temperature or rise given."
+"ashraeTG5liquid": "STANDARD GUIDELINE (licensed; J.B. via UBC Library, 11 Nov 2026; never in the repo): ASHRAE TC 9.9, Thermal Guidelines for Data Processing Environments, 5th ed. (2021), ch. 3, Table 3.1, 2021 Thermal Guidelines for Liquid Cooling, p. 47: facility supply water temperature by class, W17 17 °C, W27 27, W32 32, W40 40, W45 45, W+ >45; minimum water temperature 2 °C for all classes; typical facilities: W32 cooling tower with chiller or district heating system, W45 cooling tower with district heating system. p. 48: classes with supply temperatures of 32 °C and above (Table 3.1) are candidates for district heating. Supply temperatures are requirements met by the ITE; the facility owner must allow for the CDU approach (p. 48). No return temperature or rise given.",
+"schneiderRD99": "MAKER CLAIM (trust 50): Schneider Electric, reference design RD99 (download.schneider-electric.com/doc/RD99DSR0_EN/RD99DSR5.pdf). Hybrid hall: direct-to-chip liquid-cooled racks up to 73 kW and air-cooled racks up to 40 kW; 3,818 kW of IT on 574 m2 of IT floor (two IT rooms); whole facility 3,060 m2. About 150 m2 of IT floor per MW (our arithmetic: 574 / 3.818). One maker's reference design, not a built hall. Read 12 Nov 2026.",
+"ricsDCdemand": "INDUSTRY GUIDANCE (trust 50): RICS Construction Journal, \"Data centre demand\". Net data hall 2.5-4.0 kW/m2 = 250-400 m2 per MW net white space (our arithmetic); 30 MW example 8,570 m2 net; gross 571-714 m2 per MW; white space 40-50 % of gross. Read 12 Nov 2026."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -24932,7 +24952,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "kohlerG6154sound": "claude",
 "van6555s41c": "claude",
 "edm14600s19to24": "claude",
-"ashraeTG5liquid": "claude"
+"ashraeTG5liquid": "claude",
+"schneiderRD99": "main chat, read 12 Nov 2026 (Claude Link SOURCING_crosscheck_batch3_2026-11-12.md)",
+"ricsDCdemand": "main chat, read 12 Nov 2026 (Claude Link SOURCING_crosscheck_batch2_2026-11-12.md)"
 },
 "source_city": {
 "abgas": "edm",
@@ -26644,7 +26666,9 @@ main.full{grid-template-columns:1fr} main.full aside{display:none}
 "cp_fit_rules": "gen",
 "arch_sportEngPoolsApp2": "gen",
 "hpacAshraeLC2014": "gen",
-"ashraeTG5liquid": "gen"
+"ashraeTG5liquid": "gen",
+"schneiderRD99": "gen",
+"ricsDCdemand": "gen"
 },
 "city_gaps": {
 "van": [

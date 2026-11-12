@@ -289,7 +289,7 @@ function fitsView(){
   <dt>Share of floor</dt><dd>48–72% (Burlington plan set; its own figures disagree)</dd></dl>${src('hall')}
   <h3>Largest data centre that fits</h3>${f.mw[1]<0.05?`<p style="font-size:16px;margin:4px 0"><span class="k">Nothing fits</span> <span class="sub">— after setbacks, loading and plant, no floor is left for servers (lot ${BD.fmt(f.lot||0)} m²)</span></p>`:(()=>{ let fm=null; try{ fm=BD.fitMax?BD.fitMax():null; }catch(e){} /* sweep 20 Oct: the headline is the size that fits with its plant, generators and loading; the floor-only range follows (it read as the answer before) */
     const fp=fm&&BD.fitPlan?BD.fitPlan():null; /* dcshare 4 Nov 2026: name the noise measure the size depends on */
-    return fm?`<p style="font-size:22px;font-weight:300;margin:4px 0">${fm.toFixed(1)} MW <span class="sub">of servers, with its plant, generators and loading, within the noise by-law${fp&&fp.measure?' '+esc(fp.measure.t):''}; ${rng(f.mw[0],f.mw[1],'MW')} counting floor space only</span></p>${fp&&fp.measure&&fp.measure.auto?`<p class="sub">With the roof plant as set up: ${fp.asIs!=null?fp.asIs.toFixed(1)+' MW':'no size passes the noise by-law'}.</p>`:''}`:`<p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers counting floor space only; with the plant, generators, loading and the noise by-law as set up, none fits</span></p>`; })()}
+    return fm?`<p style="font-size:22px;font-weight:300;margin:4px 0">${fm.toFixed(1)} MW <span class="sub">of servers, with its plant, generators and loading, within the noise by-law${fp&&fp.measure?' '+esc(fp.measure.t):''}; ${rng(f.mw[0],f.mw[1],'MW')} counting floor space only</span></p>${BD.hallNote?`<p class="sub">Hall density: ${esc(BD.hallNote().t)}. ${esc(BD.denseLine().t)}.</p>`:''}${fp&&fp.measure&&fp.measure.auto?`<p class="sub">With the roof plant as set up: ${fp.asIs!=null?fp.asIs.toFixed(1)+' MW':'no size passes the noise by-law'}.</p>`:''}`:`<p style="font-size:22px;font-weight:300;margin:4px 0">${rng(f.mw[0],f.mw[1],'MW')} <span class="sub">of servers counting floor space only; with the plant, generators, loading and the noise by-law as set up, none fits</span></p>`; })()}
   ${(()=>{ const M=BD.model&&BD.model(); return M&&M.notes&&M.notes.length?M.notes.map(t=>`<p class="nflag" data-tl="1">${esc(t)}</p>`).join(''):''; })()/* noise flag (2 Nov 2026): a note, not a block */}
   ${(()=>{ let lc=null; try{ lc=A.built==='new'&&BD.scene3d&&BD.scene3d.layoutCheck?BD.scene3d.layoutCheck():null; }catch(e){} return lc?`<p class="sub">Rack layout check: at ${lc.mw} MW the hall needs about <b>${BD.fmt(lc.need[0])}–${BD.fmt(lc.need[1])} racks</b> (8–7.1 kW a rack); on the building this size leaves, the layout ${lc.ok?'places them':`places only ${BD.fmt(lc.placed)} (?)`} on ${lc.floors} floor${lc.floors>1?'s':''} (${BD.fmt(lc.floor)} m²), spread evenly, with corridors, room cooling and the UPS room (our arithmetic; register: hall_layout, rack_count). The size itself is set by the floor test, 637 m² per MW for the hall, UPS and battery rooms.</p>`:''; })()}
   ${rangeBar([{lo:f.mwS[0],hi:f.mwS[1],lab:f.mwL?'strict':'range'}].concat(f.mwL?[{lo:f.mwL[0],hi:f.mwL[1],lab:'lenient'}]:[]).concat(f.mwCheck?[{lo:f.mwCheck[0],hi:f.mwCheck[1],lab:'real buildings',ghost:true}]:[]))}
@@ -369,17 +369,19 @@ async function recvView(){
 /* ---------- round 3: three options, trade-off tables by party ---------- */
 function optionSet(f,near,nets){
   const fm=BD.fitMax?BD.fitMax():null, top=fm!=null?fm:f.mw[1], A=BD.S.answers, chosen=Math.min(A.mw||top/2,top); /* largest = everything fits (J.B. 20 Oct) */
+  /* J.B. 12 Nov 2026: the liquid-cooled options (b with heat, c) size the hall at the liquid density (about 150 m²/MW, Schneider RD99, maker's reference design) */
+  const fl=BD.fitMax?BD.fitMax({inside:'liquid'}):null, topL=Math.max(top,fl!=null?fl:top), LQ=' (liquid-cooled hall at about 150 m² per MW: maker’s reference design)';
   const net=nets.find(n=>n.inside&&n.edge>=50&&n.src==='van9552');
-  const sizes=[Math.max(0.1,+(chosen/2).toFixed(1)),+chosen.toFixed(1),+Math.max(chosen,top).toFixed(1)];
+  const sizes=[Math.max(0.1,+(chosen/2).toFixed(1)),+chosen.toFixed(1),+Math.max(chosen,topL).toFixed(1)];
   // sweep 20 Oct 2026: when the chosen size is already the largest that fits, B and C came out the same; then B keeps the size air-cooled and C recovers the heat
-  if(sizes[2]-sizes[1]<0.05) return [
+  if(+Math.max(chosen,top).toFixed(1)-sizes[1]<0.05) return [
    {id:'a',name:'Smaller, air-cooled',gives:'least plant and grid; heat goes to the air',mw:sizes[0],recover:false},
    {id:'b',name:'Largest that fits, air-cooled',gives:'the most servers; heat goes to the air',mw:sizes[1],recover:false},
-   {id:'c',name:'Largest that fits, '+(net?'heat to the network':'heat to neighbours'),gives:net?'the most heat, sent to '+net.n:'liquid-cooled servers and a heat pump; the most heat, more than nearby buildings may take',mw:sizes[2],recover:true,to:net?'net':'near'}];
+   {id:'c',name:'Largest that fits, '+(net?'heat to the network':'heat to neighbours'),gives:(net?'the most heat, sent to '+net.n:'liquid-cooled servers and a heat pump; the most heat, more than nearby buildings may take')+LQ,mw:sizes[2],recover:true,to:net?'net':'near'}];
   return [
    {id:'a',name:'Smaller, air-cooled',gives:'least plant and grid; heat goes to the air',mw:sizes[0],recover:false},
    {id:'b',name:'Chosen size, heat to neighbours',gives:'liquid-cooled servers and a heat pump; heat offered to buildings within reach',mw:sizes[1],recover:true,to:'near'},
-   {id:'c',name:'Largest that fits, '+(net?'heat to the network':'heat to neighbours'),gives:net?'the most heat, sent to '+net.n:'the most heat, more than nearby buildings may take',mw:sizes[2],recover:true,to:net?'net':'near'},
+   {id:'c',name:'Largest that fits, '+(net?'heat to the network':'heat to neighbours'),gives:(net?'the most heat, sent to '+net.n:'the most heat, more than nearby buildings may take')+LQ,mw:sizes[2],recover:true,to:net?'net':'near'},
   ];
 }
 function calc(o,f,near,nets){

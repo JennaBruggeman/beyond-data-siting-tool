@@ -438,15 +438,24 @@ function setupProblems(noFloor){ const m=model(); if(!m||!m.F) return []; const 
   return p; }
 /* the largest size at which everything fits: servers, cooling plant, generators, loading (J.B. 20 Oct: worked examples open at it; "as large as fits" means it).
    Binary search to 0.1 MW between 0.1 and the most the floor holds; assumes a smaller size never needs more room. Returns null if nothing fits. */
-function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
-function fitMax0(){ fitMax0.beyond=false; const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
+/* J.B. 12 Nov 2026 (hall density by cooling type): air keeps the four Canadian halls (dc_rooms.json hall, high end, white space); liquid to the chip
+   about 150 m² per MW of IT floor (Schneider RD99, a maker's reference design: 3,818 kW on 574 m²); immersion the same figure (stand-in from a
+   direct-to-chip design; immersion density not sourced yet). opt.hall gives a hall density directly: the "modern denser hall" line uses 400 m² per MW,
+   the conservative end of RICS's 2.5–4.0 kW/m² net white space. UPS and battery rooms are added as before. */
+function hallRows(){ return (BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; }
+function hallDensity(opt){ const H=hallRows().find(r=>r.id==='hall'); if(opt&&opt.hall!=null) return opt.hall; const ins=(opt&&opt.inside)||BD.S.answers.inside||'air';
+  if((ins==='liquid'||ins==='immersion')&&H&&H.perMWLiquid!=null) return +H.perMWLiquid; return H&&H.perMW?H.perMW[1]:630; }
+function perHiOf(opt){ const R=hallRows(), all=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0), H=R.find(r=>r.id==='hall'), hallAir=H&&H.perMW?H.perMW[1]:0;
+  if(!(all>0)) return {per:630,air:630}; return {per:all-hallAir+hallDensity(opt),air:all}; }
+function fitMax(opt){ const asIs=!!(opt&&opt.asIs); if(asIs){ roomOff=true; cache.key=null; } try{ return fitMax0(opt); }finally{ if(asIs){ roomOff=false; cache.key=null; } } } /* dcshare: {asIs:true} = without the plant-room step (the set-up exactly as chosen) */
+function fitMax0(opt){ fitMax0.beyond=false; const A=BD.S.answers, keep=A.mw; A.mw=null; cache.key=null; let hi=0; try{ hi=BD.eng.siteFacts().mw[1]; }catch(e){}
   /* 7 Nov 2026 (Clark Dr hand check follow-up; J.B.: the conservative end): a size fails if the footprint left beside the plant yard cannot hold the data
      centre's floor at the conservative m² per MW the tool pairs with the tested (low) MW: hall + UPS + battery rooms at the high end of dc_rooms.json
      (≈635 m² per MW; register arch_dc_hall, arch_dc_electrical, arch_dc_battery). The dense end (≈293) only sets the top of the MW range shown.
      J.B. 7 Nov 2026 (gate 3): support rooms added at the conservative end: the register's 'median of six whole-building cases 27–33 %' (tool/data/arch.json
      ratioGround.support; range 13–52 %, not a rule; the test fits ≈30 %), so the floor needed is mw × 635 ÷ (1 − 0.33). Also a size whose generators need a
      plant yard deeper than the tested range (21.7 m, plant.js bigYard) is not a fit: the largest size inside the tested range is reported instead. */
-  const perHi=(()=>{ const R=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[]; const v=R.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0); return v>0?v:630; })();
+  const PH=perHiOf(opt), perHi=PH.per; if(PH.air>perHi) hi*=PH.air/perHi;   /* a denser hall: the floor-space range scales with it (air: unchanged) */
   const supHi=(()=>{ const g=BD.data.arch&&BD.data.arch.ratioGround&&BD.data.arch.ratioGround.support; return g&&g[1]>0&&g[1]<1?g[1]:0.33; })();
   /* 7 Nov 2026 (J.B.: 339 1st Ave E fell to 0.5 MW): where the zone keeps the ground storey from data storage (I-2 2.2.7, I-3 2.2.11, FC-2), only the
      racks are barred at grade: hall + UPS + battery must fit on the upper storeys, and the whole data centre with its support rooms on the upper storeys
@@ -502,11 +511,21 @@ const planText=v=>v&&v.mw!=null?`up to ${v.mw.toFixed(1)} MW ${v.measure?v.measu
 BD.measureOf=measureOf; BD.fitPlan=fitPlan; BD.planText=planText;
 /* 11 Nov 2026 (J.B., one method for floor and racks): the step from the largest size that fits to the next: generator sets, sets per row, yard depth,
    footprint, and the hall floors against the floor test (637 m² per MW: hall + UPS + battery, the conservative end of dc_rooms.json). Answers restored after. */
-function fitStep(mw){ const A=BD.S.answers, keep=A.mw, RR=(BD.data.dc_rooms&&BD.data.dc_rooms.rooms)||[], per=RR.filter(r=>r.split&&r.perMW).reduce((t,r)=>t+r.perMW[1],0)||630;
+function fitStep(mw,opt){ const A=BD.S.answers, keep=A.mw, per=perHiOf(opt).per;
   const at=v=>{ A.mw=v; cache.key=null; const m=model(); if(!m||!m.foot||m.existing) return null; const P=m.plant||{}, s=P.s||{}, all=m.nF?m.nF[0]:1, up=Math.max(1,m.Z&&m.Z.ground?all-1:all), fa=BD.area(m.foot);
     return {mw:v,gN:s.gN||0,gNeed:s.gNeed||0,setL:s.g?s.g.L:null,perRow:P.genPerRow||null,width:m.v?m.v[1]-m.v[0]:null,yard:m.plantYardDepth||0,foot:fa,up,floor:fa*up,need:v*per}; };
   try{ return {per,a:at(mw),b:at(Math.round((mw+0.1)*10)/10)}; } catch(e){ return null; } finally{ A.mw=keep; cache.key=null; } }
-BD.fitStep=fitStep;
+BD.fitStep=fitStep; BD.hallDensity=hallDensity;
+/* J.B. 12 Nov 2026: hall density by cooling type. Air keeps the four Canadian halls; liquid ~150 m²/MW (Schneider RD99, maker's reference design);
+   immersion uses the same figure as a stand-in; every lot also shows RICS's 2.5–4.0 kW/m² (400 m²/MW, the conservative end) as a line, not the default. */
+function hallNote(){ const ins=BD.S.answers.inside||'air';
+  if(ins==='liquid') return {kind:'liquid',t:'hall at about 150 m² per MW: maker’s reference design (Schneider RD99, direct-to-chip hybrid hall)'};
+  if(ins==='immersion') return {kind:'immersion',t:'hall at about 150 m² per MW: stand-in from a direct-to-chip design; immersion density not sourced yet (Schneider RD99)'};
+  return {kind:'air',t:'hall at 560–640 m² per MW: four built Canadian halls'}; }
+function denseLine(){ let mw=null; try{ mw=fitMax({hall:400}); }catch(e){} const n=hallNote();
+  const lab=n.kind==='air'?'With a modern denser hall (2.5–4.0 kW/m² net white space, RICS Construction Journal)':'Conservative end (RICS Construction Journal, 2.5–4.0 kW/m² net white space)';
+  return {mw,lab,t:lab+': '+(mw!=null&&mw>=0.05?'about '+mw.toFixed(1)+' MW':'none fits')+(n.kind==='air'?' (shown, not the default)':'')}; }
+BD.hallNote=hallNote; BD.denseLine=denseLine;
 BD.fitWhy=()=>{ fitMax(); return fitMax0.why; }; BD.setupProblems=setupProblems; BD.fitMax=fitMax; BD.fitBeyond=()=>!!fitMax0.beyond; BD.fitSizes=fitSizes; BD.fitNear=fitNear; BD.sizePasses=sizePasses;
 /* bugfix 4 Nov 2026 (retest rules 1, V339): the required yards are set in from the lot's bounding rectangle, so along an angled lot line the line of the
    yards (the lot clipped to that rectangle) runs inside a required yard. Each lot edge takes the yard of the side it faces in the tool's own frame (front,
