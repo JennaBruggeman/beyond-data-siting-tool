@@ -1,0 +1,32 @@
+# Equipment kit SPEC, for design board A2 (12 Nov 2026)
+
+Generated from tool/kit3d.js SPEC (the one source for the 3D kit and the Engineering report stills). L × W × H in metres. "Changed" marks what A2 needs updating.
+
+| Key | Model | L × W × H (m) | Change | Source |
+|---|---|---|---|---|
+| dry | Dry cooler, V-coil | 12.04 × 2.383 × 2.883 |  | EVAPCO eco-Air EAW-VD9120ZA, catalogue EA26MRKT (2026) p.13: 39'-5-7/8" × 7'-9-7/8", 9'-5-1/2" high; 20 fans in two rows of 10; 4461 MBH = 1.31 MW (maker's claim) |
+| chill | Air-cooled chiller with free-cooling coils | 12.141 × 2.362 × 2.896 |  | Vertiv Liebert AFC FIZ135 (SL-71060 R09/24, "Preliminary data"): 478 × 93 × 114 in, 1489 kW at 95 °F ambient, 82/66 °F fluid, 30% glycol; "oversized free cooling coils". Chosen as the middle of Vertiv and Airedale (16.4–30.5 m² per MW) |
+| hybrid | Adiabatic (hybrid) cooler | 12.04 × 2.765 × 2.883 |  | EVAPCO eco-Air EAW-VA, EA26MRKT (2026) p.13 note: adiabatic width 9'-7/8"; same drawing, 9'-5-1/2" high; p.8: wetted pads stand outside both coil faces |
+| tower | Cooling tower cell (crossflow) | 6.579 × 3.607 × 3.886 |  | BAC Series 3000 S3E-1222-07R (Engineering Data C15–C16, 2023): W 21'-7" (end elevation, access door both ends), L 11'-10" (side elevation, intake louvres), H 12'-9" with fan guard, A 11'-4"; 690 nominal tons ≈ 3.0 MW. Chosen as the middle of 140 BAC and Marley cells (4.7–16.5 m² per MW) |
+| genset | Standby generator in enclosure (2 MW) | 13.493 × 3.488 × 4.777 |  | Rehlko (Kohler) KD2000, Sound Level 2 enclosure (G5-626 rev 6/24): 13493 × 3488 × 4777 mm max; 2000 kW standby, data-centre rating the same; Tier 2, UL 2200 + CSA. Chosen as the middle of Cat, Rehlko and Generac (18.5–38.4 m² per MW) |
+| genset80 | Hub standby generator, KD80, in enclosure (72 h) | 3.2 × 1.2 × 1.7 | new | Rehlko KD80, enclosure G12-625: 3.2 × 1.2 × 1.7 m (L × W × H, our reading of the table order; J.B. 12 Nov 2026), on its sub-base tank. The hub’s own set (EH-FREEZE-2026-11-11b, sizing.hub_set: smallest of KD80, KD100, KD300 that carries the hub load). Tool-vs-board difference until the hub chat amends its boards (they draw the 2.27 × 1.149 m skid). |
+| transformer | Pad-mounted transformer 2,500 kVA (customer-owned) | 2.565 × 2.515 × 1.854 (pad 2.667 × 2.616) | changed (was unit substation, Eaton CA022021EN: 2.263 × 2.39 × 2.084 m) | Eaton CA08104001E (Apr 2016) p. 17.0-18, Table 17.0-13, 2,500 kVA: cabinet 73 × 101 × 99 in (A height × B width × C depth) = 1.854 × 2.565 × 2.515 m; pad B + 4 in × C + 4 in = 2.667 × 2.616 m (Figure 17.0-12, our reading). The rule (J.B. 12 Nov 2026): above 1,500 kVA in Vancouver, and all of Edmonton, a customer-owned pad-mounted unit, our reading (BC Hydro’s standard stops at 1,500 kVA; EPCOR’s standard not read). Replaces the unit-substation model (CA022021EN). |
+| transformerBCH | BC Hydro pad-mounted transformer (up to 1,500 kVA) | 2.21 × 2.21 × 1.626 | new | BC Hydro ES54 Table 1, row "750 ≤ PMT ≤ 1500 kVA": pad 2.21 × 2.21 m (J.B. 12 Nov 2026). The transformer is BC Hydro’s; its cabinet is drawn at the Eaton CA08104001E Table 17.0-13 row for the same kVA (our reading; default 1,000 kVA, 64 × 72 × 64 in = 1.626 × 1.829 × 1.626 m). The 1,500 kVA Eaton cabinet (89 in = 2.261 m wide) is wider than the 2.21 m pad. Used up to 1,500 kVA in Vancouver. |
+| switchgear | Low-voltage switchgear (6 sections drawn) | 0.813 × 1.778 × 2.438 |  | Siemens Type WL (Siemens Canada catalogue §12): 32 in wide, 96 in high; at least 70 in deep when cable-connected at 3200 A or more; UL 1558, CSA C22.2 No. 31 |
+| ups | UPS, 1 MW frame | 3.6 × 0.9 × 1.97 |  | Schneider Galaxy VX 1000 kW (990-5451L-001): 3600 × 900 × 1970 mm |
+| battery | Lithium-ion battery cabinet | 0.6 × 0.75 × 2 |  | Vertiv EnergyCore Li5, 18 modules (SL-71271 R06/26): 600 × 750 × 2000 mm, 31.1 kWh, 263 kW; CSA mark (UL 1973), tested to UL 9540A; about 4 cabinets per MW for 5 min at end of life (our calculation) |
+| bess | Battery storage container | 6.058 × 2.438 × 2.896 |  | Sungrow PowerTitan 2.0 ST5015UX data sheet V5 (2024): 6058 × 2438 × 2896 mm; front single-door design |
+| rack | Server rack, 42U | 0.6 × 1.2 × 2 |  | Vertiv VR3300 (North American brochure 06/25): 600 × 1200 × 2000 mm, UL 2416; 1U = 44.45 mm (EIA-310) |
+| crah | Room air unit (CRAH), about 180 kW | 3.099 × 1.067 × 2.388 |  | Vertiv Liebert CW181 (North American, 60 Hz, ©2024): 179 kW sensible (211 kW total) at 75 °F, 45 °F water, 3.099 × 1.067 × 2.388 m; the middle of the units with printed sizes |
+| twall | Thermal wall unit (fan wall), 500 kW | 3.962 × 1.524 × 3.67 |  | Vertiv CoolLoop Thermal Wall CA80 (SL-80367 R11/25): 500 kW net sensible, 60 × 156 × 144.5 in; gallery-side mounting; service from the gallery side (SL-70701); UL 1995 |
+| crv | In-row cooler, 73.7 kW | 0.6 × 1.1 × 2 |  | Vertiv Liebert CRV CR050RC (System Design Catalog): 73.7 kW at 95 °F return, 45/55 °F water; 600 mm wide, 1100 mm deep |
+| cdu | Coolant distribution unit, 1.5 MW | 0.914 × 1.565 × 2.045 |  | Motivair (Schneider) MCDU-50, CDU brochure ©2025: 36 × 61-5/8 × 80-1/2 in, 1516 kW at a 4 K approach; UL, 50/60 Hz. The middle of 10 units from 6 makers |
+| heatpump | Water-to-water heat pump, about 2 MW to 70–90 °C | 6.1 × 3 × 2.1 |  | Johnson Controls Sabroe DualPAC 716-W data sheet (johnsoncontrols.de, undated): 6100 × 3000 × 2100 mm, 1991 kW at 50→70 °C (source 30→20 °C), 1841 kW at 70→90 °C. Nearest the median of 10 units from Sabroe and GEA (5.6–15.1 m² per MW) |
+| phe | Plate heat exchanger | 3.93 × 0.78 × 2.145 |  | Alfa Laval T20-FM leaflet (2016-04): H 2145, W 780, L 930–3930 mm, DN200 ports |
+| tank | Buffer tank, 5,000 L | 1.5 × 1.5 × 3.211 |  | Reflex Storatherm H 5000/R (09/2026): Ø 1500 × 3211 mm, uninsulated |
+| pipe | Pre-insulated twin pipe, DN200 | 4 × 0.56 × 0.56 |  | Logstor catalogue 2014.09: DN200 twin, casing Ø 560 (series 1) / 630 / 710 mm |
+
+Notes
+- transformer rows by kVA (Eaton Table 17.0-13, inches A × B × C): 150 50×68×49; 225 50×72×53; 300 50×72×55; 500 50×72×61; 750 64×72×63; 1000 64×72×64; 1500 73×89×71; 2000 73×101×75; 2500 73×101×99. Pad = B + 4 in × C + 4 in.
+- BC Hydro pads (up to 1,500 kVA, Vancouver): the cabinet is drawn at the Eaton row for the kVA; the Eaton 1,500 kVA cabinet (2.261 m wide) is wider than the 2.21 m pad.
+- KD80: tool-vs-board difference until the hub chat amends its boards (they draw the 2.27 × 1.149 m skid).
