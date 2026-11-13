@@ -477,10 +477,11 @@ function noiseRecv(){ const S=BD.S, s=S.sel; if(!s) return []; const city=s.city
   const G=new Map(), C=50, cell=(x,y)=>Math.floor(x/C)+'_'+Math.floor(y/C), far=(bb,Rr)=>bb[2]<c[0]-Rr||bb[0]>c[0]+Rr||bb[3]<c[1]-Rr||bb[1]>c[1]+Rr;
   for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const p of S.tiles[k].par){ if(far(p.bb,NRAD+200)||mine(p)) continue;
     for(let i=Math.floor(p.bb[0]/C);i<=Math.floor(p.bb[2]/C);i++) for(let j=Math.floor(p.bb[1]/C);j<=Math.floor(p.bb[3]/C);j++){ const q=i+'_'+j; if(!G.has(q)) G.set(q,[]); G.get(q).push(p); } } }
-  const siteB=new Set(s.blds||[]), byP=new Map(), list=[], ownR=[...own];
-  for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const b of S.tiles[k].bld){ if(b.f===3||siteB.has(b)||Math.hypot(b.c[0]-c[0],b.c[1]-c[1])>NRAD) continue;
+  const siteB=new Set(s.blds||[]), byP=new Map(), list=[], ownR=[...own], pkey=p=>String(p.ids?p.ids[0]:p.id)+':'+p.r[0]+':'+p.r[1];
+  const TK=Object.keys(S.tiles).filter(k=>k.startsWith(city+':')).sort();   /* 13 Nov 2026 (J.B.): tiles in key order, not load order, so the receiver count repeats */
+  for(const k of TK){ for(const b of S.tiles[k].bld){ if(b.f===3||siteB.has(b)||Math.round(Math.hypot(b.c[0]-c[0],b.c[1]-c[1])*100)/100>NRAD) continue;
       if(ownR.some(r=>BD.pip(b.c[0],b.c[1],r))) continue; let hit=null, ha=0;
-      for(const p of G.get(cell(b.c[0],b.c[1]))||[]){ const bb=p.bb; if(b.c[0]<bb[0]||b.c[0]>bb[2]||b.c[1]<bb[1]||b.c[1]>bb[3]||!BD.pip(b.c[0],b.c[1],p.r)) continue; const ar=BD.area(p.r); if(!hit||ar<ha){ hit=p; ha=ar; } }
+      for(const p of G.get(cell(b.c[0],b.c[1]))||[]){ const bb=p.bb; if(b.c[0]<bb[0]||b.c[0]>bb[2]||b.c[1]<bb[1]||b.c[1]>bb[3]||!BD.pip(b.c[0],b.c[1],p.r)) continue; const ar=BD.area(p.r); if(!hit||ar<ha-1e-6||(Math.abs(ar-ha)<=1e-6&&pkey(p)<pkey(hit))){ hit=p; ha=ar; } }
       if(hit){ let Rv=byP.get(hit); if(!Rv){ const id=hit.ids?hit.ids[0]:hit.id, a=id!=null?aRec(city,id):null, z=a?(city==='van'?((a[1]||'').trim()||null):(a[2]||a[1]||null)):null;
           Rv=Object.assign({ring:hit.r,bb:hit.bb,lot:true,addr:a&&a[0]?String(a[0]).trim():'',blds:[]},noiseLimitAt(src,z,b.c[0],b.c[1])); byP.set(hit,Rv); list.push(Rv); } Rv.blds.push(b); }
       else { let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; for(let i=0;i<b.r.length;i+=2){ x0=Math.min(x0,b.r[i]); y0=Math.min(y0,b.r[i+1]); x1=Math.max(x1,b.r[i]); y1=Math.max(y1,b.r[i+1]); }
@@ -491,8 +492,8 @@ function noiseRecv(){ const S=BD.S, s=S.sel; if(!s) return []; const city=s.city
      property zoned for' a use, building or not. Lots already holding a receiver are skipped; one entry per lot (smallest outline first, a lot whose centre falls in
      one already added is skipped, so Edmonton city parcels and lot outlines are not counted twice). Screens get no credit there (no receiver height). */
   NREC.skipped=0; { const have=[...byP.keys()], cand=[], seen=new Set(), ctr=r=>BD.centroid(r);
-    for(const k in S.tiles){ if(!k.startsWith(city+':')) continue; for(const p of S.tiles[k].par){ if(far(p.bb,NRAD)||mine(p)) continue; const key=(p.ids?p.ids[0]:p.id)+':'+p.r[0]; if(seen.has(key)) continue; seen.add(key); cand.push(p); } }
-    cand.sort((a,b)=>BD.area(a.r)-BD.area(b.r));
+    for(const k of TK){ for(const p of S.tiles[k].par){ if(far(p.bb,NRAD)||mine(p)) continue; const key=(p.ids?p.ids[0]:p.id)+':'+p.r[0]; if(seen.has(key)) continue; seen.add(key); cand.push(p); } }
+    cand.sort((a,b)=>(BD.area(a.r)-BD.area(b.r))||(pkey(a)<pkey(b)?-1:pkey(a)>pkey(b)?1:0));
     const taken=have.slice(); const inTaken=(x,y)=>taken.some(q=>x>=q.bb[0]&&x<=q.bb[2]&&y>=q.bb[1]&&y<=q.bb[3]&&BD.pip(x,y,q.r));
     for(const p of cand){ if(byP.has(p)) continue; const c=ctr(p.r); if(inTaken(c[0],c[1])) continue; taken.push(p);
       const id=p.ids?p.ids[0]:p.id, a=id!=null?aRec(city,id):null, z=a?(city==='van'?((a[1]||'').trim()||null):(a[2]||a[1]||null)):null;
@@ -541,7 +542,7 @@ function noiseCheck(m){ const s=BD.S.sel; if(!m||!m.plant||!m.plant.s||!s) retur
     return r.sc[i]=c; };
   const lev=(r,rho,o,noRoom)=>{ let e=0; G.forEach((g,i)=>{ e+=Math.pow(10,(lwG(g,rho,o)+r.gd[i].t+(noRoom?g.room:0)-(o.scr?scrAt(r,i):0))/10); }); return 10*Math.log10(e)-(o.fan||0); };
   const list0=noiseRecv(), list=[]; let nIn=0; NLOT.clear();
-  for(const r of list0){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(lb>NRAD*NRAD) continue; nIn++;
+  for(const r of list0){ const bb=r.bb, lb=Math.max(0,bb[0]-pc[0],pc[0]-bb[2])**2+Math.max(0,bb[1]-pc[1],pc[1]-bb[3])**2; if(Math.round(Math.sqrt(lb)*100)/100>NRAD) continue; nIn++;
     r.gd=G.map(g=>{ const [d0,px,py]=ringD(g.c[0],g.c[1],r.ring); return {d0,px,py,t:-20*Math.log10(Math.max(5,d0))-8-g.room}; }); r.sc=null;
     const hs=r.blds.map(b=>b.h).filter(h=>h>0); r.zr=hs.length?Math.max(...hs):null; list.push(r); }
   /* options, in the order tried */
