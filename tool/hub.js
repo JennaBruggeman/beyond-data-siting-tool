@@ -100,6 +100,8 @@ const TA = [[25, 1, 1], [50, 1, 2], [75, 2, 3], [100, 2, 4], [125, 3, 5], [150, 
 const WALLX = 0.3;
 function progOf(x) { return PRG[x.prog] || PRG[x.id] || PRG[(x.id || '').replace(/\d+$/, '')] || null; }
 function sizedW(x, d) { const p = progOf(x), a = p && p.step != null && p.step <= 4 ? WALLX : 0; return Math.max((x.w || 0) + a, x.m2 ? up1(x.m2 / Math.max(0.5, d - a) + a) : 0); }
+/* EH-FREEZE-2026-11-11f: generator service clearance at least 457 mm round each set, inside the yard (Kohler TP-5700 s. 3.2; our reading for the KD sets) */
+const SVC_CLEAR = 0.457;
 function batRoomM2(mw, d) { d = d || PRG.bat.w; const n = Math.max(1, Math.ceil(mw * 1000 / 124.4 - 1e-9)), len = Math.ceil(n / 2) * 0.6 + 1.1 + 0.2; return r2(Math.max(mw * 3.8 + 1.0 * PRG.bat.w, len * d)); }   /* d: the depth the room is packed at (its length = m² ÷ d); 0.2 m of walls */
 function HPM() { return (typeof BD !== 'undefined' && BD.hallDensity) ? BD.hallDensity() : RULES.hallPerMW.v; }
 function wcA(n) { for (const r of TA) if (n <= r[0]) return [r[1], r[2]]; return [7 + Math.ceil((n - 400) / 200), 13 + Math.ceil((n - 400) / 100)]; }
@@ -212,7 +214,8 @@ function layout(S0) {
   const ladder = extra => { const why = [];
     for (const st of lad) {
       const tryMW = mw => { const X = (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {})); X.mwUsed = mw; return X; };
-      let mw = S.mwExact || S.mwStart || r2(RULES.cap.m2 / HPM()), L = tryMW(mw);   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
+      const notGrown = S.city === 'edm' && !S.mwExact && !S.mwStart;   /* EH-FREEZE-2026-11-11f (J.B. 12 Nov): Edmonton at grade not grown, rule pending (11g) */
+      let mw = S.mwExact || S.mwStart || (notGrown ? (S.mw || 1.8) : r2(RULES.cap.m2 / HPM())), L = tryMW(mw); if (notGrown && !L.fail) L.notGrown = true;   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
       if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
       /* the plant must fit: else the hall shrinks ("smaller where the lot can't hold it") */
       const big0 = L.plant && !L.plant.ok ? { MW: L.MW, why: L.plant.why || L.plant.whyAll || 'reason not recorded (?)' } : null;   /* step 2 (12 Nov 2026): the stopping rule named when the plant yard sets the size */
@@ -224,6 +227,8 @@ function layout(S0) {
       if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
       if (big0 && L.plant && L.plant.ok && L.MW < big0.MW - 1e-3 && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'plant yard', at: L.MW, tried: big0.MW, why: big0.why };
         flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard stops it at ${L.MW.toFixed(2)} MW (at ${big0.MW.toFixed(2)} MW: ${big0.why}; J.B. 12 Nov 2026)`); }
+      if (notGrown && !S.mwExact) L.notGrown = true;
+      if (L.notGrown && !flags.some(f => /rule pending \(11g\)/.test(f))) flags.push('Data centre not grown to the floor cap: Edmonton at-grade growth rule pending (11g); sized at the tool’s tested size (EH-FREEZE-2026-11-11f)');
       L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
     }
     return { out: null, why }; };
@@ -759,7 +764,7 @@ function plantLayout(C, W, Da, MW, rooms) {
     for (let a = aS0; a <= aS1; a = r2(a + 0.5)) for (let b = roof ? roof[2] : -10; b <= (roof ? roof[3] : Wscan + 10); b = r2(b + 0.5)) {
       const r = [a, r2(a + it.L), b, r2(b + it.Wd)], z = it.zone ? it.zone(r) : r;
       if (items.some(o => !!o.roof === !!roof && (hit(z, o.keep) || hit(o.z, it.keepFor ? it.keepFor(r) : grow(r, 0)) || hit(grow(r, it.gap || 0), o.r)))) continue;   /* the cheap test first (12 Nov 2026: same result, much faster) */
-      if (!okRect(r) || (it.zone && !okRect(z))) continue;
+      if (!okRect(r) || (it.zone && !okRect(z)) || (it.clear && !okRect(grow(r, it.clear)))) continue;   /* it.clear: service clearance round a set (11f) */
       if (it.lot != null && lotDist(r) < it.lot - 1e-6) continue;
       return { r, z, rot };
     } }
@@ -768,12 +773,12 @@ function plantLayout(C, W, Da, MW, rooms) {
   for (let i = 0; i < nT; i++) { const p = tryPlace({ L: T.l, Wd: T.w, gap: 1.0 }, side ? null : aP); if (!p) { why.push(`transformer pad ${i + 1} of ${nT}`); break; }
     items.push({ id: 't' + (i + 1), n: `Transformer pad ${i + 1}${tz ? `, ${tz.kva.toLocaleString('en-CA')} kVA (${tz.pad_src})` : ''}`, kind: 'pad', r: p.r, z: p.r, keep: grow(p.r, 1.0), front: 'faces the yard aisle' }); }
   /* generators at grade (FM 5-32 2.6.4.3): sets 2.0 m apart (CSA C282 6.5.1.1); tanks 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2) */
-  for (let i = 0; i < nG; i++) { const p = tryPlace({ L: G.l, Wd: G.w, gap: 2.0, lot: tankLot, rot: true }); if (!p) { why.push(`generator ${i + 1} of ${nG}`); break; }
+  for (let i = 0; i < nG; i++) { const p = tryPlace({ L: G.l, Wd: G.w, gap: 2.0, lot: tankLot, rot: true, clear: SVC_CLEAR }); if (!p) { why.push(`generator ${i + 1} of ${nG}`); break; }
     items.push({ id: 'g' + (i + 1), n: `Generator ${i + 1}, ${setKW.toLocaleString('en-CA')} kW${gz ? ' ' + gz.model : ''}, sub-base tank`, kind: 'gen', r: p.r, z: p.r, keep: grow(p.r, 2.0) }); }
   /* the hub's own set (J.B. 11 Nov; spec item 22): at grade in its enclosure, 2.0 m from the other sets (CSA C282 6.5.1.1). Where the yard can't hold it the
      data centre is not made smaller for it: flagged instead (the spec's HUBGEN room upstairs is not drawn yet ?) */
   let hubSetOut = null;
-  if (hs && hs.kw) { const e = hs.enclosure ? hs.enclosure[0] : hs.footprint; const p = e ? tryPlace({ L: e[0], Wd: e[1], gap: 2.0, rot: true }) : null;
+  if (hs && hs.kw) { const e = hs.enclosure ? hs.enclosure[0] : hs.footprint; const p = e ? tryPlace({ L: e[0], Wd: e[1], gap: 2.0, rot: true, clear: SVC_CLEAR }) : null;
     if (p) items.push({ id: 'h1', n: `Hub generator, ${hs.model} (${hs.kw} kW standby), in its enclosure`, kind: 'gen', hub: true, r: p.r, z: p.r, keep: grow(p.r, 2.0) });
     else hubSetOut = `the hub's own set (${hs.model}) does not fit in the yard at grade: its own 2 h room is not drawn yet (?)`; }
   /* chillers (Vertiv Liebert AFC): 1.5 m on each long side, 2.1 m at each end, zones not shared (3.0 / 4.2 m between units, our reading); long axis along a, panel end to the yard aisle */
@@ -1003,6 +1008,7 @@ function v2Checks(L, S) {
   m.dc = sts.reduce((a, st) => a + G.S[st].filter(x => ['hall', 'sup'].includes(x.g) || (st > 1 && x.g === 'spare')).reduce((b, x) => b + area(x), 0), 0);
   m.gen1 = 78 - 20 * Math.log10(6.1 / 7); m.genall = m.gen1 + 10 * Math.log10(m.ngen);
   const rows = H.commonChecks(G, cfg, m);
+  rows.push(['tight', 'Service access around the sets', 'Kohler TP-5700 s. 3.2 (our reading for KD sets); EH-FREEZE-2026-11-11f', `each generator set placed with at least 457 mm clear round it inside the plant yard (${((L.plant && L.plant.items) || []).filter(it => it.kind === 'gen').length} sets): check in design`]);
   return { rows, cfg, notDrawn: ['plant yards and gates (step 4)', '2 h wall marks (steps 3–4)', 'fuel fill (step 5)'], version: H.version };
 }
 
@@ -1013,14 +1019,15 @@ function withV2(L, S) { try { L.v2 = v2Checks(L, S); } catch (e) { L.v2 = { erro
    cap; where exit spacing fails at that size the hall comes back 0.05 MW (about 31.5 m² of hall) at a time until it passes, and the stopping rule
    is named. If no size within 1 MW of the cap passes, the size at the cap is kept with its failure shown (growth is not what fails it). */
 function grown(S) {
-  const lay = S1 => layout(Object.assign({}, S1, { noV2: true })), fails = X => (X.apart || []).filter(a => a.status === 'fail');
+  const lay = S1 => layout(Object.assign({}, S1, { noV2: true })), fails = X => (X.apart || []).filter(a => a.status === 'fail').concat((X.travel || []).filter(t => t.status === 'fail').map(t => ({ zone: t.zone, apart_m: t.worst, need_m: 45, travel: true })));   /* 11f: travel <= 45 m in the step-back too */
   const L0 = lay(S); if (!L0.rooms || !fails(L0).length) return { L: L0, S };
   let L = L0, S1 = S;
   for (let g = 0; g < 20; g++) { const m = r2(L.MW - 0.05); if (m < 0.3) break; const S2 = Object.assign({}, S, { mwStart: m }), L2 = lay(S2);
     if (!L2.rooms || L2.MW >= L.MW - 1e-3) break; L = L2; S1 = S2;
     if (!fails(L).length) { const f = fails(L0)[0];
-      L.sizeStop = { rule: 'exit spacing', at: L.MW, capMW: L0.MW, capM2: Math.round(L0.dcArea), why: `${f.zone} exits ${f.apart_m} m apart at ${L0.MW} MW, ${f.need_m} m needed` };
-      L.flags.push(`Data centre smaller than the 2,325 m² floor cap: exit spacing stops it at ${L.MW.toFixed(2)} MW (at the cap, ${L0.MW.toFixed(2)} MW and ${Math.round(L0.dcArea)} m², the ${f.zone} exits are ${f.apart_m} m apart, ${f.need_m} m needed; J.B. 12 Nov 2026, grown in 0.05 MW steps)`);
+      const why_ = f.travel ? `${f.zone} travel ${f.apart_m} m to an exit, 45 m allowed` : `the ${f.zone} exits are ${f.apart_m} m apart, ${f.need_m} m needed`;
+      L.sizeStop = { rule: f.travel ? 'travel distance' : 'exit spacing', at: L.MW, capMW: L0.MW, capM2: Math.round(L0.dcArea), why: why_ };
+      L.flags.push(`Data centre smaller than the 2,325 m² floor cap: ${f.travel ? 'travel distance' : 'exit spacing'} stops it at ${L.MW.toFixed(2)} MW (at the cap, ${L0.MW.toFixed(2)} MW and ${Math.round(L0.dcArea)} m², ${why_}; J.B. 12 Nov 2026, grown in 0.05 MW steps)`);
       return { L, S: S1 }; } }
   L0.flags.push('Exit spacing fails at the 2,325 m² floor cap and at every size tried down to 1 MW less: kept at the cap with the failure shown (?)');
   return { L: L0, S }; }
