@@ -45,7 +45,7 @@ def status_class(t):
 van = table(INV / 'inv_van.md', 11)
 VAN_ADDR = {1: '555 HASTINGS ST W', 2: '555 HASTINGS ST W', 3: '555 HASTINGS ST W', 4: '555 HASTINGS ST W', 5: '515 HASTINGS ST W', 6: '1050 PENDER ST W',
             7: '175 CORDOVA ST W', 8: '900 HASTINGS ST W', 9: '701 GEORGIA ST W', 11: '333 TERMINAL AVE', 12: '369 TERMINAL AVE', 13: '308 5TH AVE E',
-            14: '2828 NATAL ST', 15: '2772 NATAL ST', 16: '3438 LOUGHEED HWY', 17: '111 5TH AVE E', 18: '150 GEORGIA ST W'}
+            14: '2828 NATAL ST', 16: '3438 LOUGHEED HWY', 17: '111 5TH AVE E', 18: '150 GEORGIA ST W'}
 VAN_OUT = {20: 'Burnaby', 21: 'Burnaby', 22: 'Burnaby', 23: 'Burnaby', 24: 'Coquitlam', 25: 'UBC (Electoral Area A)'}
 shards = {}
 def parcel(a):
@@ -59,7 +59,7 @@ VAN_NOTE = {
     8: ('900 W Hastings St', 'address from the operator’s page and FAQ (OC arch_inv_hut8VaultWeb; main chat 12 Nov 2026: the vault page’s 1700-666 Burrard is not repeated on the current page, dropped)'),
     9: ('701 W Georgia St', 'address from a directory listing (DIR arch_inv3_dcmapRackforce; the operator’s current page gives none; main chat 12 Nov 2026)'),
     10: (None, 'address 55 E 7th Ave is not in the City’s address records the tool searches (?): listed, not placed'),
-    15: ('3448 Cornett Rd (City records: 2772 Natal St)', 'placed at 2772 Natal St, the address the inventory gives as its former one'),
+    15: ('3448 Cornett Rd', 'not placed: the address is given as 3448 Cornett Rd, formerly 2772 Natal St, and the City’s records hold only the former one (milestone 1 rule, 12 Nov 2026: “formerly” and two-address rows are listed, never guessed)'),
     19: (None, 'address not confirmed: the BCUC order puts the data centre “in a building adjacent to the Project site” (the TELUS Garden block); no source names the building (main chat 12 Nov 2026)'),
 }
 TYPE_VAN = {}
@@ -127,7 +127,7 @@ for c in van:
         if note: f['addrNote'] = note[1]
         f['parcel'] = parcel(a) if a else None
         if f['parcel']: f['placed'] = 'placed by address in the City’s records (our method)'
-        if not f['parcel']: f['inMap'] = n not in (10, 19) and f['inMap']
+        if not f['parcel']: f['inMap'] = False
     out['van'].append(f)
 
 # ---------------- Edmonton ----------------
