@@ -13,12 +13,9 @@ const NOTE = /\b[\w-]+\.(?:js|py|md|json)\b|\bBD\.\w|\bEH-FREEZE|\bJ\.B\.|\bCowo
       await p.goto('http://localhost:8766/index.html?nointro&x=' + Date.now()); await p.waitForSelector('#f1'); await p.waitForTimeout(2500);
       await p.evaluate(t => BD.f1.viewer(t, { pick: true }), tpl); await p.waitForTimeout(1500); await p.click(`#f1v [data-pcity="${city}"]`); await p.waitForTimeout(1200);
       if (tpl !== 'resident') { await p.fill('#f1pick-q', addr); await p.waitForTimeout(3000); await p.click('#f1v [data-hit="0"]'); await p.waitForTimeout(9000); } else await p.waitForTimeout(4000);
-      /* the headline figures on the cards before the report */
-      const cardFigs = []; const n = await p.evaluate(() => document.querySelectorAll('#f1v .f1v-strip [data-to]').length);
-      for (let i = 0; i < n - 1; i++) { await p.evaluate(k => document.querySelectorAll('#f1v .f1v-strip [data-to]')[k].click(), i); await p.waitForTimeout(tpl === 'architecture' ? 3500 : 2500);
-        cardFigs.push(...(await p.evaluate(() => [...document.querySelectorAll('#f1v .f1c-hero > div')].map(h => h.innerText.replace(/\s+/g, ' '))))); }
-      await p.evaluate(k => document.querySelectorAll('#f1v .f1v-strip [data-to]')[k].click(), n - 1); await p.waitForTimeout(12000);
-      const pages = await p.evaluate(() => [...document.querySelectorAll('#f1v .f1r-sheet, #f1v .f1c-mua-sheet, #f1v .f1r-pg .sheet, #f1v [class*="pg"] .sheet')].map((s, i) => ({ i: i + 1, over: s.scrollHeight > s.clientHeight + 4, h: [s.scrollHeight, s.clientHeight], words: s.innerText.trim().split(/\s+/).length, text: s.innerText.replace(/\s+/g, ' ').slice(0, 4000) })));
+      const cardFigs = []; const n = await p.evaluate(() => document.querySelectorAll('#f1v .f1v-strip [data-to]').length);   /* straight to the report (stepping through every card first raced the report build); the cards' figures come from the walkthrough */
+      await p.evaluate(k => document.querySelectorAll('#f1v .f1v-strip [data-to]')[k].click(), n - 1); await p.waitForTimeout(15000);
+      const pages = await p.evaluate(() => [...document.querySelectorAll('#f1v .f1r-sheet, #f1v .f1c-mua-sheet, #f1v .f1c-eng-b-pg .sh')].map((s, i) => ({ i: i + 1, over: s.scrollHeight > s.clientHeight + 4, h: [s.scrollHeight, s.clientHeight], words: s.innerText.trim().split(/\s+/).length, text: s.innerText.replace(/\s+/g, ' ').slice(0, 4000) })));
       await p.screenshot({ path: path.join(SHOTS, `reports_${key}_${tpl}.jpg`), type: 'jpeg', quality: 60, fullPage: true });
       pages.forEach(pg => { const m = NOTE.exec(pg.text); pg.note = m ? pg.text.slice(Math.max(0, m.index - 40), m.index + 60) : null; pg.blank = pg.words < 12; delete pg.text; });
       res.push({ key, tpl, pages, cardMW: [...new Set(cardFigs.filter(t => /MW\b/.test(t)))].slice(0, 8), errs });

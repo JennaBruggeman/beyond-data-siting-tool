@@ -53,7 +53,11 @@ const val=v=>v&&v.q?`<b class="f1c-q" title="${esc(v.why)}">?</b><span class="f1
 /* render a built card into the shell's drawing area and panel body */
 /* audit H35: a range whose ends are equal prints as one figure ("42–42" -> "42") */
 const oneEnd=h=>String(h).replace(/(^|[^\d.,])(\d[\d,]*(?:\.\d+)?)–\2(?![\d.,])/g,'$1$2');
-function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=oneEnd(res.draw||'');
+/* walkthrough 13 Nov (reports): a letter page whose content runs past the page is scaled down to fit, so nothing is cut off on screen or in print */
+function fitSheets(root){ root.querySelectorAll('.f1r-sheet').forEach(sh=>{ let w=sh.querySelector(':scope > .f1r-fit'); if(!w){ w=document.createElement('div'); w.className='f1r-fit'; while(sh.firstChild) w.appendChild(sh.firstChild); sh.appendChild(w); }
+  w.style.zoom=''; const cs=getComputedStyle(sh), avail=sh.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)-24; if(!(avail>0)) return;   /* 24 px: margins the content height does not count */ let k=1;
+  for(let it=0;it<6;it++){ const need=w.getBoundingClientRect().height/(parseFloat(w.style.zoom||'1')||1)*k; if(w.scrollHeight*k<=avail+1&&need<=avail+1) break; k=Math.max(0.4,k*Math.min(0.98,avail/(w.scrollHeight*k))); w.style.zoom=String(k); } }); }
+function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=oneEnd(res.draw||''); [60,600,2000].forEach(t=>setTimeout(()=>{ try{ fitSheets(dr); }catch(e){} },t));
   const hero=(res.hero||[]).length?`<div class="f1c-hero">${res.hero.map(h=>`<div data-fig="${esc(h.l||'')}"${h.k?` data-k="${esc(h.k)}"`:''} role="button" tabindex="0" title="Open the interactive logic diagram at this figure"><div class="v${h.red?' red':''}">${h.v&&h.v.q?'<b class="f1c-q">?</b>':esc(h.v)}${h.u?`<span>${esc(h.u)}</span>`:''}</div><div class="l">${esc(h.l)}${h.v&&h.v.q?' · not in the tool yet':''}</div></div>`).join('')}</div>`:'';
   const rows=(res.rows||[]).length?`<dl class="f1c-rows">${res.rows.map(r=>`<dt>${esc(r[0])}</dt><dd data-fig="${esc(r[0])}"${r[2]?` data-k="${esc(r[2])}"`:''} role="button" tabindex="0" title="Open the interactive logic diagram at this figure">${val(r[1])}</dd>`).join('')}</dl>`:'';
   const met=(res.meters||[]).map(meter).join('');

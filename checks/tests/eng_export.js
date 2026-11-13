@@ -96,6 +96,7 @@ const LOTS = { V339: { city: 'van', golden: '../golden/V339.json' } };   /* the 
     const all = d.pts.map(q => Object.assign({}, q, { dist: BD.recvDist(f, q) })).filter(q => q.dist <= R.recvRadius);
     let r = e.calc({ mw, recover: true, to: 'near' }, f, all, nets), air = (A.inside || 'air') === 'air', cap = [r.itMWhR[0] * R.capture[0], r.itMWhR[1] * R.capture[1]];
     if (air) { cap = [r.itMWhR[0], r.itMWhR[1]]; const av = [cap[0] * R.cop[1] / (R.cop[1] - 1), cap[1] * R.cop[0] / (R.cop[0] - 1)]; r = Object.assign({}, r, { avail: av, hp: [av[0] / R.cop[1], av[1] / R.cop[0]] }); }
+    all.forEach(q => { q.econ = BD.heatEcon(f, q, r.avail); });   /* as the Heat offered card */
     const Bh = BD.bestHeat(f, all, r.avail[0]), b0 = Bh && Bh[0], rd = v => Math.round(v);
     return { cooling: A.inside || 'air', optionA: air, mw, itMWh: r.itMWhR.map(rd), recoveredMWh: cap.map(rd), offeredMWh: r.avail.map(rd), heatPumpElectricityMWh: r.hp.map(rd), cop: R.cop,
       costOfHeatPerMWh: b0 ? { mid: rd(b0.mid.lcoh), low: rd(b0.lo.lcoh), high: rd(b0.hi.lcoh), buildings: b0.G.map(q => q.n) } : null, heatWorthPerMWh: BD.ECON.heatVal ? BD.ECON.heatVal(f.city) : null,
