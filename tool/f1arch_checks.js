@@ -172,6 +172,14 @@ function planFor(x,P){
   PLANC.k=key; PLANC.v=v; return v; }
 /* the svg around the storey groups: site context, lot, storeys, street names, north arrow, scale bar */
 function planSvg(x,P,pl,id,label,groups){ const {g,mp,ox,W}=pl;
+  /* A section (J.B. 12 Nov 2026): the hub's plans are the report's plan set (f1plans.js, port of reports/plans_fire.py): one drawing style in the card and
+     the report. One plan per storey (the tabs show one), rooms numbered as the schedule; the old plan layer stays for layouts without board geometry. */
+  const L=pl.PL&&pl.PL.hub, G=L&&L.G;
+  if(G&&BD.f1plans){ let html='';
+    pl.stor.forEach((st,i)=>{ const nums=new Map(); st.rooms.forEach(o=>{ if(!nums.has(o.id)) nums.set(o.id,o.n); });
+      const r=BD.f1plans.plan(G,i+1,{w:Math.max(560,Math.min(W,820)),num:rm=>nums.has(rm.id)?nums.get(rm.id):null});
+      if(r) html+=`<div data-z="${st.z}" style="${st.i?'display:none':''}" role="img" aria-label="${esc(label)}">${r.svg}</div>`; });
+    if(html) return `<div class="f1p-set">${html}${BD.f1plans.legend()}</div>`; }
   return `<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="${esc(label)}"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${ctxG(x,P,g,mp,ox)}<g clip-path="url(#${id})"><path d="${pl.lotP}" fill="#fff" stroke="${K.mute}" stroke-width="0.8"/></g>${groups}${pl.streets}${northScale(g,mp,ox,ox+8,mp.H-30,10)}</svg>`; }
 const stTitle=(pl,st)=>{ const blocks=[]; st.rooms.forEach(o=>{ const b=o.block==='data centre'?'data centre':short(o.name); if(!blocks.includes(b)) blocks.push(b); });
   return `<div data-z="${st.z}" class="${NS}ttl" style="${st.i?'display:none':''}"><b>Storey ${st.i+1} · floor at ${n1(st.z)} m</b><span>${esc(blocks.join(', '))}</span></div>`; };
@@ -188,7 +196,7 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
     sched+=`<div data-z="${st.z}" class="${NS}sch" style="${st.i?'display:none':''}"><table><thead><tr><th>No.</th><th>Room</th><th>m²</th></tr></thead><tbody>${st.noCorr?`<tr class="warn"><td></td><td colspan="2">No corridor or shared lobby on this storey ${RQ}</td></tr>`:''}${rows}</tbody></table></div>`; });
   const hasStarred=stor.some(st=>st.rooms.some(o=>!o.drawn));
   const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre support'),sw(K.fillPub,'public programs'),sw(K.fillClin,'clinic'),`<span><i style="background:#fff;border:1px solid ${K.faint}"></i>corridor, lobby</span>`,`<span><i style="background:${HATCH};border:1px solid ${K.mute}"></i>stair (lift: cross)</span>`,`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span>${RQ}&nbsp;no sourced size, or no corridor access</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Rooms are numbered; the schedule under the plan names them · street at the bottom${hasStarred?' · * not a rectangle, listed but not drawn':''}${pl.snUsed?SNCAP:''}</p>${titles}${planSvg(x,P,pl,'f1c-a14','Plan of each storey: numbered rooms, walls, doors, stairs and exits',groups)}${sched}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Rooms are numbered; the schedule under the plan names them · street on the left${hasStarred?' · * not a rectangle, listed but not drawn':''}${pl.snUsed?SNCAP:''}</p>${titles}${planSvg(x,P,pl,'f1c-a14','Plan of each storey: numbered rooms, walls, doors, stairs and exits',groups)}${sched}</div>`;
   const mw=P.ratio&&P.ratio.mwTest, hallM2=pl.DP?pl.DP.L.pieces.filter(q=>q.id==='hall').reduce((t,q)=>t+q.m2,0):null, dock=pl.DP&&pl.DP.L.dock;
   const meters=PL.programs.filter(p=>p.storeys>1).map(p=>({l:short(p.name)+', floor after stairs and lift',v:p.net,lim:p.asked,max:p.asked*1.15,unit:'m²',pass:p.short<=0.5,cap:`${n0(p.net)} of ${n0(p.asked)} m² · needed ${n0(p.asked)} m²`,src:'plan.js net floor'}));
   const tbl=zs.map(z=>{ const rr=roomRows.filter(r=>r[0]===z); return `<tr><th colspan="2">${storeyLabel(z)} storey</th></tr>`+rr.map(r=>`<tr><td>${esc(r[1])}</td><td>${n0(r[2])} m²</td></tr>`).join(''); }).join('');
@@ -247,7 +255,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
     const svg=planSvg(x,P,pl,'f1c-a15','Plan of each storey, greyed back, with the fire separations between the data centre, the hub and the clinic',groups);
     const sepLine=(w,c)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"/></svg>`;
     const key=KEY([`<span>${sepLine(4,K.ink)}2 h (F-2 beside A-2)</span>`,`<span>${sepLine(2,K.ink)}1 h (A-2 beside D)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
-    return {draw:`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`,
+    return {draw:`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street on the left · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`,
       lead:'Which walls hold back fire between the data centre, the hub and the clinic, storey by storey (spec rule 8).',
       hero:[{v:String(n2),l:'wall stretches at 2 h'},{v:String(n1h),l:'wall stretches at 1 h'},{v:C.q(),l:'exit stair shafts rated'}],
       rows:[['Data centre (F-2) beside the hub (A-2)','2 h (VBBL Table 3.1.3.1)'],['Hub (A-2) beside the clinic (D)','1 h'],['Clinic (D) beside or under F-2','none'],['Floors',over],['Exit stair shafts, rating (NBC 3.4.4.1)',C.q()],['Battery room','2 h room kept (NFPA 855; spec 1b)']],
@@ -268,7 +276,7 @@ C.add(T,'Separations',{chip:CHIP,async build(x){
   const sepLine=(w,c,d)=>`<svg width="22" height="8" style="vertical-align:middle;margin-right:6px"><line x1="0" y1="4" x2="22" y2="4" stroke="${c}" stroke-width="${w}"${d?` stroke-dasharray="${d}"`:''}/></svg>`;
   const ratings=[...hrs].sort((a,b)=>b-a).map(h=>`<span>${sepLine(h>=2?4:2,K.ink)}${h} h separation</span>`);
   const key=KEY([...(ratings.length?ratings:[`<span>${sepLine(4,K.ink)}2 h separation</span>`]),`<span>${sepLine(2,K.red)}gap between blocks</span>`,`<span>${sepLine(1.8,K.red,'5 3')}separation, rating ?</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street on the left · only the separations are drawn on top${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
   const list=Object.values(pairs).filter(p=>p&&p.name), n2=list.filter(p=>p.h>=2).length, nGap=list.filter(p=>!p.touch&&p.gap>0.05).length;
   const rows=[]; list.forEach(p=>rows.push([short(p.name),(p.h!=null?p.h+' h from the data centre':C.q('rating not in the tool'))])); /* val() shows a string or a ? */
   list.forEach(p=>rows.push([short(p.name)+', distance',p.touch?'touching':n1(p.gap)+' m apart']));
@@ -298,7 +306,7 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
     nExit=stor.reduce((t,st)=>t+st.S.exits.filter(e=>e.kind!=='loading').length,0);
     const svg=planSvg(x,P,pl,'f1c-a16','Plan of each storey, greyed back, with exit doors, exit stairs, the worst travel path and the spacing of each zone’s exits',groups);
     const key=KEY([`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span><i style="background:${K.ink};opacity:.2;border:1px solid ${K.ink}"></i>exit stair</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.red}" stroke-width="1.6" stroke-dasharray="5 3"/></svg>worst travel path to an exit</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.ink}" stroke-width="1"/></svg>exits apart (door to door)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`]);
-    const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · travel on a 0.25 m grid through 0.9 m doors${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
+    const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street on the left · travel on a 0.25 m grid through 0.9 m doors${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
     const worst=HB.travel.filter(t=>t.worst!=null).sort((a,b)=>b.worst-a.worst)[0], nOk=ES.filter(e=>e.ok).length;
     const rows=HB.travel.map(t=>[`Worst travel, ${t.zone}`,t.worst==null?C.q(t.why):`${n1(t.worst)} m of 45 m${TT(t.status)}`]).concat(ES.map(e=>[`Exits apart, ${e.block}`,e.apart_m==null?C.q('one exit'):`${n1(e.apart_m)} m, needs ${n1(e.need_m)} m${TT(e.status)}`]),
       HB.discharge.map(d=>[`Exterior discharges ${d.a.toUpperCase()}–${d.b.toUpperCase()}`,`${n1(d.d)} m, needs ${d.need} m${TT(d.status)}`]),[['T-reach (rule 15d)',TL.reach],['Dead ends',TL.dead],['Egress doorways (VBBL 3.3.1.5)',(EG=>!EG.length?'no room needs 2':EG.filter(e=>!e.ok).length?EG.filter(e=>!e.ok).map(e=>`${e.name}: ${e.doors<2?'1 door':e.apart_m+' m apart, needs '+e.need_m+' m'} (to fix)`).join('; '):`PASS: ${EG.length} rooms with 2 doorways ⅓ of their diagonal apart${EG.some(e=>e.status==='tight')?' · tight, check in design: '+EG.filter(e=>e.status==='tight').map(e=>e.name).join(', '):''}`)((HB.treach&&HB.treach.egress)||[])],['Exit stair shaft ratings (NBC 3.4.4.1)',C.q()]]);
@@ -326,7 +334,7 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
   nExit=stor.reduce((t,st)=>t+st.S.exits.filter(e=>e.kind!=='loading').length,0);
   const svg=planSvg(x,P,pl,'f1c-a16','Plan of each storey, greyed back, with exit doors, exit stairs and the spacing between the two exits of each block',groups);
   const key=KEY([`<span><i style="width:3px;height:11px;background:${K.ink};border:0;border-radius:1px"></i>exit door</span>`,`<span><i style="background:${K.ink};opacity:.2;border:1px solid ${K.ink}"></i>exit stair</span>`,`<span><svg width="26" height="10" style="vertical-align:middle;margin-right:6px"><line x1="2" y1="5" x2="24" y2="5" stroke="${K.ink}" stroke-width="1"/><line x1="2" y1="1" x2="2" y2="9" stroke="${K.ink}"/><line x1="24" y1="1" x2="24" y2="9" stroke="${K.ink}"/></svg>spacing of the two exits (door edge to door edge)</span>`,`<span><i style="background:#F2F2F2;border:1px solid #C4C5C7"></i>plan, greyed back</span>`,`<span>${RQ}&nbsp;worst travel path: not computed, so not drawn</span>`]);
-  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street at the bottom · straight-line spacing, never longer than the path${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
+  const draw=`<div class="${NS}wrap">${tabsHtml(zs)}${key}<p class="${NS}cap">Same plan as Rooms · street on the left · straight-line spacing, never longer than the path${pl.snUsed?SNCAP:''}</p>${titles}${svg}</div>`;
   const nPass=ES.filter(e=>e.ok).length, nFail=ES.length-nPass;
   const meters=ES.map(e=>({l:'Exit spacing, '+short(e.block),v:e.apart_m,lim:e.need_m,max:Math.max(e.need_m*1.4,e.apart_m*1.1),unit:'m',pass:e.ok,tight:e.status==='tight',cap:`${n1(e.apart_m)} m apart · needed ${n1(e.need_m)} m`,src:clause}));
   const cn=pl.counts;
@@ -340,17 +348,36 @@ C.add(T,'Exits',{chip:CHIP,async build(x){
 
 /* ======================= 17 Plant and site ======================= */
 const segRectDist=(p,q,r)=>{ /* distance from segment pq to rectangle r=[u0,u1,v0,v1] (0 if it crosses) */ const N=24; let m=1e9; for(let i=0;i<=N;i++){ const t=i/N, u=p[0]+(q[0]-p[0])*t, v=p[1]+(q[1]-p[1])*t, du=Math.max(0,r[0]-u,u-r[1]), dv=Math.max(0,r[2]-v,v-r[3]); m=Math.min(m,Math.hypot(du,dv)); } return m; };
+/* A section (J.B. 12 Nov 2026): the site plan in the report's style (reports/site_plan.py): grey ground, light parcels, neighbouring buildings white with a grey
+   outline from the City of Vancouver LiDAR 2022 (tool/tiles/van/lid_<key>.json, checks/tests/lidar_to_tiles.py; not in git), buildings standing on the lot left out.
+   Edmonton (no LiDAR outlines in the tool): the City footprints, as before. */
+const SP={bld:'#1E3A5F',truck:'#E4E3DF',plant:'#DCDBD6',plantS:'#8A8985',ground:'#EDECE8',parcel:'#F6F5F2',nb:'#8A8985'};
+const LID={};
+async function lidarCtx(x,g,mp,ox){ if(x.city!=='van') return null; let m=null; try{ m=await BD.getJSON('tiles/van/meta.json'); }catch(e){ return null; }
+  const c=[[0,0],[mp.W,0],[0,mp.H],[mp.W,mp.H]].map(([a,b])=>{ const [u,v]=mp.inv(a,b); return g.F.toW(u,v); }), xs=c.map(p=>p[0]), ys=c.map(p=>p[1]), bb=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];
+  const keys=[]; for(let i=Math.floor(bb[0]/m.T);i<=Math.floor(bb[2]/m.T);i++) for(let j=Math.floor(bb[1]/m.T);j<=Math.floor(bb[3]/m.T);j++) keys.push(i+'_'+j);
+  const B=[]; for(const k of keys){ if(LID[k]===undefined){ try{ LID[k]=(await BD.getJSON(`tiles/van/lid_${k}.json`)).B; }catch(e){ LID[k]=null; } } if(LID[k]) B.push(...LID[k]); }
+  if(!B.length) return null;
+  const Pw=(X,Y)=>{ const [u,v]=g.F.toL(X,Y), q=mp.lp(u,v); return [q[0]+ox,q[1]]; }, lot=g.M.ring;
+  let par='', bl=''; const seen=new Set();
+  for(const k in BD.S.tiles){ if(!k.startsWith('van:')) continue; for(const p of BD.S.tiles[k].par||[]){ const id=p.id+':'+p.r[0]; if(seen.has(id)) continue; seen.add(id); const b=p.bb||C.bbox(p.r); if(!C.hit(bb,b)) continue; let d=''; for(let i=0;i<p.r.length;i+=2){ const [a,q]=Pw(p.r[i],p.r[i+1]); d+=(i?'L':'M')+a.toFixed(1)+' '+q.toFixed(1); } par+=d+'Z'; } }
+  for(const b of B){ let cx=0,cy=0,n=0,x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; for(let i=2;i<b.length;i+=2){ cx+=b[i]; cy+=b[i+1]; n++; x0=Math.min(x0,b[i]); x1=Math.max(x1,b[i]); y0=Math.min(y0,b[i+1]); y1=Math.max(y1,b[i+1]); }
+    if(!C.hit(bb,[x0,y0,x1,y1])) continue; if(BD.pip(cx/n,cy/n,lot)) continue;   /* standing on the lot itself: left out */
+    let d=''; for(let i=2;i<b.length;i+=2){ const [a,q]=Pw(b[i],b[i+1]); d+=(i>2?'L':'M')+a.toFixed(1)+' '+q.toFixed(1); } bl+=d+'Z'; }
+  const id='f1c-lid'+Math.random().toString(36).slice(2,6);
+  return `<g><defs><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath></defs><g clip-path="url(#${id})"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}" fill="${SP.ground}"/><path d="${par}" fill="${SP.parcel}" stroke="#DAD9D5" stroke-width="0.6"/><path d="${bl}" fill="#FFFFFF" stroke="${SP.nb}" stroke-width="0.7"/></g></g>`; }
 C.add(T,'Plant and site',{chip:CHIP,async build(x){
   const P=await x.arch(); if(!P) return {draw:'<p class="f1v-empty">No lot loaded.</p>'}; const g=geo(P), M=g.M, F=g.F, PLT=M.plant||{}, DP=BD.archTest.dcPieces(P), R=BD.archTest.rules(P), PL=planOf(P);
-  if(PL&&PL.hub&&PL.hub.rooms){ const HB=PL.hub, PT=HB.plant, mp=mapper(g,lotBox(g,3),470,10), LW=300, W=mp.W+2*LW, ox=LW, id='f1c-a17h', P2=r=>{ const q=mp.rect(r); q.x+=ox; return q; };
+  if(PL&&PL.hub&&PL.hub.rooms){ const HB=PL.hub, PT=HB.plant, mp=mapper(g,lotBox(g,35),560,10)   /* A section: the lot with ~35 m of its surroundings, as the report's site plan */, LW=300, W=mp.W+2*LW, ox=LW, id='f1c-a17h', P2=r=>{ const q=mp.rect(r); q.x+=ox; return q; };
     const lot=ringPts(M.ring,g,mp).map(p=>[p[0]+ox,p[1]]); let s='';
-    PL.storeys[0].rooms.concat(PL.storeys[0].corridors,PL.storeys[0].stairs,PL.storeys[0].lifts).forEach(o=>{ s+=rc(P2(o.rect),o.block==='data centre'?(o.id==='hall'?K.fillHall:K.fillSup):o.block==='clinic'?K.fillClin:K.fillPub); });
-    if(HB.truck&&HB.truck.courtUV) s+=rc(P2(HB.truck.courtUV),'none',` stroke="${K.faint}" stroke-width="0.8" stroke-dasharray="6 4"`);
+    PL.storeys[0].rooms.concat(PL.storeys[0].corridors,PL.storeys[0].stairs,PL.storeys[0].lifts).forEach(o=>{ if(o.rect) s+=rc(P2(o.rect),SP.bld,` stroke="${SP.bld}" stroke-width="0.6"`); });   /* A section: the building in one colour (reports/site_plan.py) */
+    if(HB.truck&&HB.truck.courtUV) s=rc(P2(HB.truck.courtUV),SP.truck)+s;
     if(M.sideDrive){ const sd=[]; for(let i=0;i<M.sideDrive.ring.length;i+=2) sd.push(F.toL(M.sideDrive.ring[i],M.sideDrive.ring[i+1])); const bb=[Math.min(...sd.map(p=>p[0])),Math.max(...sd.map(p=>p[0])),Math.min(...sd.map(p=>p[1])),Math.max(...sd.map(p=>p[1]))]; s+=rc(P2(bb),K.hair,` stroke="${K.faint}" stroke-width="0.5" stroke-dasharray="6 4"`); }
-    (PT?PT.items:[]).forEach(it=>{ if(it.kind==='chiller') s+=rc(P2(it.zoneUV),'none',` stroke="${K.mute}" stroke-width="0.8" stroke-dasharray="3 2"`); s+=rc(P2(it.rect),it.kind==='chiller'?K.neut:it.kind==='gen'?K.ink2:K.mute); });
+    (PT?PT.items:[]).forEach(it=>{ if(it.kind==='chiller') s+=rc(P2(it.zoneUV),'none',` stroke="${K.mute}" stroke-width="0.8" stroke-dasharray="3 2"`); const q=P2(it.rect); s+=rc(q,SP.plant,` stroke="${SP.plantS}" stroke-width="0.8"`);
+      const tag=String(it.id||'').replace(/^([gtch])/,m=>m.toUpperCase()); if(tag&&q.w>9&&q.h>7) s+=`<text x="${(q.x+q.w/2).toFixed(1)}" y="${(q.y+q.h/2+3).toFixed(1)}" font-size="8.5" fill="${K.ink}" text-anchor="middle">${esc(tag)}</text>`; });
     let setback=''; try{ if(M.inset&&BD.buildArea){ const ba=BD.buildArea(M); if(ba&&ba.length>=6) setback=`<path d="${poly(ringPts(ba,g,mp).map(p=>[p[0]+ox,p[1]]))}" fill="none" stroke="${K.mute}" stroke-width="0.5" stroke-dasharray="4 3"/>`; } }catch(e){}
-    const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Site plan: the hub at grade, truck court, generators, transformer pads and chillers with their clear zones"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${ctxG(x,P,g,mp,ox)}<path d="${poly(lot)}" fill="#fff" stroke="none"/><g clip-path="url(#${id})">${s}${setback}</g><path d="${poly(lot)}" fill="none" stroke="${K.ink}" stroke-width="1.2"/>${northScale(g,mp,ox,12,mp.H-30,20)}</svg>`;
-    const key=KEY([sw(K.fillHall,'data hall'),sw(K.fillSup,'data-centre rooms'),sw(K.fillPub,'hub'),sw(K.fillClin,'clinic'),sw(K.ink2,'generators'),sw(K.mute,'transformer pads'),sw(K.neut,'chillers'),`<span><i style="background:#fff;border:1px dashed ${K.mute}"></i>chiller clear zone</span>`,`<span><i style="background:#fff;border:1px dashed ${K.faint}"></i>truck court, aisle, side drive</span>`]);
+    const svg=`<svg viewBox="0 0 ${W} ${mp.H}" width="${W}" height="${mp.H}" ${FONT} role="img" aria-label="Site plan: the hub at grade, truck court, generators, transformer pads and chillers with their clear zones"><clipPath id="${id}"><rect x="${ox}" y="0" width="${mp.W}" height="${mp.H}"/></clipPath>${(await lidarCtx(x,g,mp,ox))||ctxG(x,P,g,mp,ox)}<path d="${poly(lot)}" fill="#fff" stroke="none"/><g clip-path="url(#${id})">${s}${setback}</g><path d="${poly(lot)}" fill="none" stroke="${K.ink}" stroke-width="1.1" stroke-dasharray="8 3 1.5 3"/>${northScale(g,mp,ox,12,mp.H-30,20)}</svg>`;
+    const key=KEY([sw(SP.bld,'the building'),sw(SP.truck,'truck court'),sw(SP.plant,'plant: G generator set, H hub set, T transformer pad, C chiller'),`<span><i style="background:#fff;border:1px dashed ${K.mute}"></i>chiller clear zone</span>`,sw('#FFFFFF',x.city==='van'?'neighbouring buildings (City LiDAR 2022)':'neighbouring buildings (City footprints)')]);
     const G2=HB.grades||{}, LD=HB.loading||{}, roofC=(PT?PT.items:[]).filter(i=>i.roof).length;
     const rows=[['Plant (tool rules, spec 1c)',PT?`Q = ${HB.MW.toFixed(2)} × 1.55 = ${PT.Q} MW → ${PT.nG} generators (${PT.setKW.toLocaleString('en-CA')} kW), ${PT.nC} chillers, ${PT.nT} transformer pads`:C.q()],
       ['Chillers',PT?(roofC?`${roofC} on the hub roof (a lower roof, not over the hall); the rest at grade`:'all at grade, clear zones 1.5 / 2.1 m, 3.0 / 4.2 m apart'):C.q()],['Generator tank',PT?`${n0(PT.tank)} L a set: 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2)`:C.q()],

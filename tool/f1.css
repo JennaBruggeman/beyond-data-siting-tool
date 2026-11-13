@@ -286,3 +286,33 @@
 .f1v-hits button{background:none;border:0;width:100%;text-align:left;padding:10px 4px;font:inherit;color:var(--f-ink);cursor:pointer}
 .f1v-hits button:hover{background:#F4F3F0}
 .f1v-pick .sub{color:var(--f-mute);font-size:13px;margin:0}
+/* Resident cards (milestone 1, 12 Nov 2026) */
+.f1c-res-find{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.f1c-res-find figure{margin:0}
+.f1c-res-list{flex:1;min-width:280px;max-height:640px;overflow:auto;font-size:13px}
+.f1c-res-list input{font:inherit;width:100%;box-sizing:border-box;padding:7px 9px;border:1px solid var(--f-rule);border-radius:4px;margin-bottom:8px}
+.f1c-res-list h4{font-size:12px;font-weight:500;color:var(--f-mute);margin:12px 0 4px}
+.f1c-res-list ul{list-style:none;margin:0;padding:0}
+.f1c-res-list button{background:none;border:0;border-bottom:1px solid var(--f-hair,#ECECEC);width:100%;text-align:left;padding:6px 2px;font:inherit;color:var(--f-ink2);cursor:pointer}
+.f1c-res-list button.on{color:var(--f-ink);background:#F4F3F0}
+.f1c-res-list em{font-style:normal;color:var(--f-mute)}
+.f1c-res-axo{margin:0;display:flex;flex-direction:column;align-items:center}
+.f1c-res-axo figcaption{font-size:12px;color:var(--f-mute);max-width:620px;margin-top:6px}
+.f1c-res-t{border-collapse:collapse;font-size:10px;width:100%}
+.f1c-res-t th{text-align:left;font-weight:500;color:var(--f-mute);padding:2px 6px 2px 0;vertical-align:top;width:28%}
+.f1c-res-t td{padding:2px 0;vertical-align:top}
+/* A section (12 Nov 2026): where the report plan set draws, its own legend replaces the old key */
+div:has(> .f1p-set) > .f1c-key{display:none}
+.f1p-set{overflow-x:auto}
+
+/* Architecture report pages (A22, 12 Nov 2026): letter size (816 × 1056 px), shown scaled in the card, full size when printed */
+.f1r-pages{display:flex;flex-wrap:wrap;gap:18px}
+.f1r-pg .cap{font-size:12px;color:var(--f-mute);margin-bottom:4px}
+.f1r-box{width:302px;height:391px;overflow:hidden;border:1px solid var(--f-rule);background:#fff}
+.f1r-sheet{width:816px;height:1056px;box-sizing:border-box;padding:48px 56px 40px;transform:scale(.37);transform-origin:0 0;background:#fff;color:#18191B;font-family:'IBM Plex Sans',system-ui,sans-serif;overflow:hidden}
+.f1r-sheet .hd{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.08em;color:#6B6A66;border-bottom:1px solid #DAD9D5;padding-bottom:10px;margin-bottom:16px}
+.f1r-sheet h1{margin:0 0 12px;font-size:28px;font-weight:400}
+.f1r-sheet .ld{font-size:13px;line-height:1.55;color:#45464A}
+.f1r-sheet .lb{font-size:12px;font-weight:500;letter-spacing:.08em;color:#6B6A66;text-transform:uppercase;margin:12px 0 4px}
+.f1r-sheet .f1c-res-t{font-size:11px}
+@media print{ .f1r-box{width:auto;height:auto;border:0;overflow:visible} .f1r-sheet{transform:none;page-break-after:always} .f1r-pg .cap{display:none} }
