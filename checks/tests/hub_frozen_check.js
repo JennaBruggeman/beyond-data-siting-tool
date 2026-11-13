@@ -1,4 +1,4 @@
-// The tool against freeze EH-FREEZE-2026-11-11g on the 13 board lots, and 11h's 1425 Clark Dr (14 lots; 10220 104 Ave NW left out, J.B. 12 Nov) (J.B. 12 Nov 2026): opens each lot, builds the hub (tool/hub.js) and compares
+// The tool against freeze EH-FREEZE-2026-11-11i (13 Nov 2026; boards eh/ic45) on the 14 board lots (10220 104 Ave NW left out of the milestone tests, J.B. 12 and 13 Nov) (J.B. 12 Nov 2026): opens each lot, builds the hub (tool/hub.js) and compares
 // MW, data-centre m² and the stopping rule with the freeze's per-board table, and says whether the frozen board was read (tool/data/hub_frozen_<city>.json).
 // Edmonton lots read their board only where the git-ignored hub_frozen_edm.json is present; otherwise the engine runs ("rule pending").
 // ENGINE=1: the 13-board rebuild test (J.B. 12 Nov, option 2): the hub engine alone (BD.hubEngineOnly), not the frozen boards, against the same table.
@@ -7,11 +7,11 @@ const fs = require('fs'), path = require('path');
 const NM = (process.env.NODE_PATH || '').split(path.delimiter)[0];
 const { chromium } = require('playwright');
 const LOTS = {   /* lot selection as checks/tests/hub_match.js; freeze 11g per-board table */
-  V339: { lab: '339 1st Ave E', sel: { city: 'van', tile: '1_1', id: '63819485' }, f: [1.83, 2134, 'building line'] },
+  V339: { lab: '339 1st Ave E', sel: { city: 'van', tile: '1_1', id: '63819485' }, f: [1.98, 2324.5, 'floor cap'] },   /* 11i */
   V1330: { lab: '1330 Glen Dr', sel: { city: 'van', tile: '1_1', id: '22260652' }, f: [0.41, 1140, 'not grown: upper floors over the truck drive (frozen failing)'] },
   V8238: { lab: '8238 Fraser St', sel: { city: 'van', tile: '1_-3', id: '21083038' }, f: [0.94, 1688, 'not grown: roof holds only two chillers'] },
   V1353: { lab: '1353 Pender St E', sel: { city: 'van', tile: '2_2', id: '59223039' }, f: [1.82, 2325, 'floor cap'] },
-  V8980: { lab: '8980 Oak St', sel: { city: 'van', tile: '-1_-4', id: '14984188' }, f: [1.25, 1768, 'building line'] },
+  V8980: { lab: '8980 Oak St', sel: { city: 'van', tile: '-1_-4', id: '14984188' }, f: [1.55, 1988.6, 'plant yard'] },   /* 11i */
   V1360: { lab: '1360 Frances St', sel: { city: 'van', tile: '2_2', id: '59423054' }, f: [0.37, 1104, 'not grown: only room left is over transformer alcove 2'] },
   E06B: { lab: '64 Airport Rd NW', sel: { city: 'edm', tile: '-1_1', id: '146402' }, f: [1.89, 1798, 'drawn plant (roof chillers)'] },
   E4103: { lab: '4103 97 St NW', sel: { city: 'edm', tile: '0_-3', id: '904935' }, f: [1.89, 1798, 'plant yard'] },
@@ -25,7 +25,7 @@ const LOTS = {   /* lot selection as checks/tests/hub_match.js; freeze 11g per-b
 const new_ = { built: 'new', extent: 'whole', floor: '' };
 /* J.B. 13 Nov 2026: boards whose size was drawn, not grown by the hub's step-back (no grown.json, or grown 0 m), are being grown in freeze 11i.
    In the rebuild tests (ENGINE=1, LOO=1) they show as "drawn, awaiting 11i" and are not counted. V8980 grew 11.7 m but J.B. listed it (the hub may re-grow it). */
-const DRAWN = { V339: 'drawn storey 1 (grown 0 m)', V1330: 'not grown (frozen failing)', V8238: 'not grown', V1360: 'not grown', E10004: 'not grown', V8980: 'listed by J.B. (grown 11.7 m in 11g)' };
+const DRAWN = {};   /* 13 Nov 2026: 11i landed (Claude Link eh/ic45), every board counts; the 'drawn, awaiting 11i' marking is kept for the next re-freeze */
 const REBUILD = !!(process.env.ENGINE || process.env.LOO);
 (async () => {
   const out = process.argv[2] || 'hub_frozen_check.json', keys = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(LOTS);

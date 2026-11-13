@@ -7,7 +7,7 @@ import sys, os, json, importlib.util
 EH, OUT = sys.argv[1], sys.argv[2]
 sys.path.insert(0, EH)
 import stepback as SB
-FITS = ['e4103', 'e10003', 'e15231', 'e16075', 'e06b', 'e14715']
+FITS = ['e4103', 'e10003', 'e15231', 'e16075', 'e06b', 'e14715', 'v339', 'v8980']   # 11i (13 Nov): 339 and 8980 grow by moving the back wall too (layout (a))
 def geo(G):
     rect = lambda r: [round(float(v), 4) for v in r]
     return dict(S={str(k): [dict(id=x['id'], n=x['n'], g=x['g'], r=[rect(r) for r in x['r']], core=bool(x.get('core')), stair=bool(x.get('stair'))) for x in G.S[k]] for k in G.S},
@@ -30,8 +30,16 @@ for f in FITS:
     for m in [k for k in list(sys.modules) if k.startswith(('geom', 'grow'))]: del sys.modules[m]
     G, W = SB._load(fit)
     sys.path[:] = [p for p in sys.path if p not in (fit,)] ; sys.path.insert(0, EH)
-    g0, g1, g2 = geo(W.BUILD(0.0)), geo(W.BUILD(1.0)), geo(W.BUILD(2.0))
+    g0, g1, g2, gh = geo(W.BUILD(0.0)), geo(W.BUILD(1.0)), geo(W.BUILD(2.0)), geo(W.BUILD(0.5))
     assert json.dumps(sorted(g0)) == json.dumps(sorted(g1)), f
+    def lin(x, y, t):   # x + t (y - x), number by number (same structure)
+        if isinstance(x, bool) or not isinstance(x, (int, float, list, dict)): return x
+        if isinstance(x, (int, float)): return round(x + t * (y - x), 4)
+        if isinstance(x, list): return [lin(p, q, t) for p, q in zip(x, y)]
+        return {k: lin(x[k], y[k], t) for k in x}
+    if len(flat(g0)) != len(flat(g1)):   # 11i (339, 8980): a piece that has no width at growth 0 is left out there; the form is taken from growth 1 and 2 and run back to 0 (zero-width pieces, no area)
+        g0 = lin(g1, g2, -1.0)
+        assert flat(lin(g1, g2, -0.5)) == [round(v, 4) for v in flat(gh)] or max(abs(p - q) for p, q in zip(flat(lin(g1, g2, -0.5)), flat(gh))) < 1e-3, f + ': not linear between 0.5 and 2'
     a0, a1, a2 = flat(g0), flat(g1), flat(g2)
     assert len(a0) == len(a1) == len(a2), f
     moved = sorted({round(x, 4) for x, y, z in zip(a0, a1, a2) if abs(y - x) > 1e-6})
@@ -45,8 +53,10 @@ for f in FITS:
 json.dump(res, open(OUT, 'w'))
 # the tool's copy (tool/data/hub_grow_edm.json, git-ignored: Edmonton lot outlines), keyed by board key, without the hub's step lists
 if len(sys.argv) > 3:
-    KEY = {'e4103': 'E4103', 'e10003': 'E10003', 'e15231': 'E15231', 'e16075': 'E16075', 'e06b': 'E06B', 'e14715': 'E14715'}
-    tool = {'_about': 'Layout (c), J.B. 13 Nov 2026: the at-grade boards the hub grew (EH-FREEZE-2026-11-11g), at growth 0 and 1, with the step-back inputs; tool/growyard.js grows them. Built by checks/tests/growyard_fixture.py. Edmonton lot outlines: Altalis via EPSB GIS, academic use only; git-ignored.',
-            'fits': {KEY[f]: {k: v for k, v in x.items() if k not in ('grown', 'bad', 'moved')} | {'grownMW': x['grown']['MW'], 'grownStop': x['grown']['stop']['rule']} for f, x in res.items()}}
-    json.dump(tool, open(os.path.join(sys.argv[3], 'hub_grow_edm.json'), 'w'), separators=(',', ':'))
-    print('wrote', os.path.join(sys.argv[3], 'hub_grow_edm.json'))
+    KEY = {'e4103': 'E4103', 'e10003': 'E10003', 'e15231': 'E15231', 'e16075': 'E16075', 'e06b': 'E06B', 'e14715': 'E14715', 'v339': 'V339', 'v8980': 'V8980'}
+    for city in ('edm', 'van'):
+      tool = {'_about': 'Layout (c), J.B. 13 Nov 2026: the at-grade boards the hub grew (EH-FREEZE-2026-11-11g), at growth 0 and 1, with the step-back inputs; tool/growyard.js grows them. Built by checks/tests/growyard_fixture.py. Edmonton lot outlines: Altalis via EPSB GIS, academic use only; git-ignored.',
+            'fits': {KEY[f]: {k: v for k, v in x.items() if k not in ('grown', 'bad', 'moved')} | {'grownMW': x['grown']['MW'], 'grownStop': x['grown']['stop']['rule']} for f, x in res.items() if f[0] == city[0]}}
+      if city == 'van': tool['_about'] = tool['_about'].replace('Edmonton lot outlines: Altalis via EPSB GIS, academic use only; git-ignored.', 'Vancouver: City of Vancouver open data (in git).').replace('EH-FREEZE-2026-11-11g', 'EH-FREEZE-2026-11-11g/11i')
+      json.dump(tool, open(os.path.join(sys.argv[3], f'hub_grow_{city}.json'), 'w'), separators=(',', ':'))
+      print('wrote', os.path.join(sys.argv[3], f'hub_grow_{city}.json'))

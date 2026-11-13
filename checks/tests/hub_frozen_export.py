@@ -1,5 +1,5 @@
 # The frozen Emergency hub boards as tool data (J.B. 12 Nov 2026, option 1: "the tool reads the frozen boards", freeze EH-FREEZE-2026-11-11g).
-# Reads each board's own geometry (Claude Link eh/<fit>/geom.py, with its grown.json) and the board's rows (eh/ic43/TestFit_EH_<fit>.dc.html),
+# Reads each board's own geometry (Claude Link eh/<fit>/geom.py, with its grown.json) and the board's rows (eh/ic45/TestFit_EH_<fit>.dc.html, freeze 11i),
 # and writes:
 #   tool/data/hub_frozen_van.json  the six Vancouver boards (City of Vancouver open data frame): in git
 #   tool/data/hub_frozen_edm.json  the seven Edmonton boards (lot outlines Altalis via EPSB GIS, academic use only): git-ignored
@@ -7,9 +7,9 @@
 # Usage: <python> hub_frozen_export.py "<Claude Link>/eh" <tool/data>
 import sys, os, json, re, html, importlib.util, hashlib
 EH, OUT = sys.argv[1], sys.argv[2]
-FREEZE = 'EH-FREEZE-2026-11-11g'   # 11h adds two boards (1425 Clark Dr, 10220 104 Ave NW); the 13 stand as 11g
-FREEZE_OF = {'V1425': 'EH-FREEZE-2026-11-11h', 'E10220': 'EH-FREEZE-2026-11-11h'}
-BOARDDIR = {'V1425': 'ic44', 'E10220': 'ic44'}
+FREEZE = 'EH-FREEZE-2026-11-11i'   # 13 Nov 2026 (J.B.): 11i, boards Claude Link eh/ic45, is the answer key (339 and 8980 grown; the rest as 11g/11h)
+FREEZE_OF = {}
+BOARDDIR = {}   # every board from ic45 (11i)
 TILE = {'V339': '1_1', 'V1330': '1_1', 'V8238': '1_-3', 'V1353': '2_2', 'V8980': '-1_-4', 'V1360': '2_2', 'E06B': '-1_1', 'E4103': '0_-3', 'E14715': '-2_1',
         'E10003': '0_-2', 'E10004': '-3_-1', 'E15231': '-3_1', 'E16075': '3_3', 'V1425': '2_1', 'E10220': '0_0'}
 POINT = {'E10220': (154.0, 822.0)}   # a point inside the lot (tool world metres, from the board frame: x = 154 − U, y = 852 − V); its Altalis lot gives the ids   # the tool tile holding each lot (checks/tests/hub_match.js)
@@ -23,7 +23,7 @@ BOARDS = [  # key, folder, board file, parcel id in the tool, address
     ('E16075', 'e16075', 'E16075', '980987', '16075 Fort Road NW'),
     ('V1425', 'v1425', 'V1425', '23060741', '1425 Clark Dr')]   # 11h; 10220 104 Ave NW left out (J.B. 12 Nov: Rogers Place, the board assumes a cleared lot)
 # freeze 11g per-board table (FROZEN_EH-FREEZE-2026-11-11g.md with 11f for the boards 11g did not change): MW, data-centre m², stopping rule
-MANIFEST = {'V339': (1.83, 2134, 'building line'), 'V1353': (1.82, 2325, 'floor cap'), 'V8980': (1.25, 1768, 'building line'),
+MANIFEST = {'V339': (1.98, 2324.5, 'floor cap'), 'V1353': (1.82, 2325, 'floor cap'), 'V8980': (1.55, 1988.6, 'plant yard'),
     'V8238': (0.94, 1688, 'not grown: roof holds only two chillers'), 'V1330': (0.41, 1140, 'not grown: upper floors over the truck drive (frozen failing)'),
     'V1360': (0.37, 1104, 'not grown: only room left is over transformer alcove 2'), 'E10004': (0.31, 805, 'not grown: only room left holds a roof chiller'),
     'E16075': (0.95, 1179, 'plant yard'), 'V1425': (1.82, 2325, 'floor cap'), 'E10220': (1.89, 1798, 'drawn plant (roof chillers)'), 'E15231': (1.20, 1367, 'plant yard, then travel distance'), 'E4103': (1.89, 1798, 'plant yard'),
@@ -107,11 +107,11 @@ for key, folder, bf, pid, addr in BOARDS:
          'COURT': rr(g.COURT) if getattr(g, 'COURT', None) else None, 'DRIVE': rr(g.DRIVE) if getattr(g, 'DRIVE', None) else None,
          'COVERED': [rr(r) for r in getattr(g, 'COVERED', [])], 'PLANT_YARDS': rr(getattr(g, 'PLANT_YARDS', [])),
          'FUEL_FILL': [rr(p) for p in getattr(g, 'FUEL_FILL', [])], 'STREET_EDGES': [[rr(a), rr(c)] for a, c in getattr(g, 'STREET_EDGES', [])],
-         'rows': rows_of(os.path.join(EH, BOARDDIR.get(key, 'ic43'), f'TestFit_EH_{bf}.dc.html')),
-         'board': f'{BOARDDIR.get(key, "ic43")}/TestFit_EH_{bf}.dc.html', 'boardSha16': hashlib.sha256(open(os.path.join(EH, BOARDDIR.get(key, 'ic43'), f'TestFit_EH_{bf}.dc.html'), 'rb').read()).hexdigest()[:16]}
+         'rows': rows_of(os.path.join(EH, BOARDDIR.get(key, 'ic45'), f'TestFit_EH_{bf}.dc.html')),
+         'board': f'{BOARDDIR.get(key, "ic45")}/TestFit_EH_{bf}.dc.html', 'boardSha16': hashlib.sha256(open(os.path.join(EH, BOARDDIR.get(key, 'ic45'), f'TestFit_EH_{bf}.dc.html'), 'rb').read()).hexdigest()[:16]}
     for k_ in ([pid] if pid else IDS.get(key, [])): out['van' if key[0] == 'V' else 'edm'][k_] = dict(b, id=k_)
     print(key, 'storeys', list(S), 'rooms', sum(len(v) for v in S.values()), 'doors', len(b['D']), 'plant', len(plant), 'rows', len(b['rows']), 'MW', mw, 'grown', b['grownMW'], 'hall', b['hallDrawn'], 'reg', reg)
-about = ('Frozen Emergency hub boards, freeze %s (Claude Link eh/; boards ic43). Exported by checks/tests/hub_frozen_export.py. Board frame metres; '
+about = ('Frozen Emergency hub boards, freeze %s (Claude Link eh/; boards ic45). Exported by checks/tests/hub_frozen_export.py. Board frame metres; '
          'rects (u0, u1, v0, v1); rows as the boards print them. The tool reads these on the board lots so its numbers are the frozen board\'s.' % FREEZE)
 json.dump({'_about': about, 'boards': out['van']}, open(os.path.join(OUT, 'hub_frozen_van.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 json.dump({'_about': about + ' Edmonton lot outlines: Altalis via EPSB GIS, academic use only; this file is git-ignored.', 'boards': out['edm']},
