@@ -468,7 +468,7 @@
     for (const st of storeys(G)) for (const x of rooms(G, st)) {
       const k = kindOf(x), grp = groupOf(k); if (!grp || /^unassigned/i.test(String(x.n || ''))) continue;
       const A = x.r.reduce((s, r) => s + ra(r), 0), nm = String(x.n || '').toLowerCase(), assembly = /refuge|shelter|waiting|rest area/.test(nm) && !/staff|storage/.test(nm);
-      const load = grp === 'A' ? (assembly ? Math.ceil(A / 0.75) : null) : grp === 'D' && !/wc|washroom|storage|soiled|clean supply|housekeeping|medication/.test(nm) ? Math.ceil(A / 9.3) : null;   // washrooms, storage and service rooms: by area only
+      const load = grp === 'A' ? (assembly ? Math.ceil(A / 0.75) : null) : grp === 'D' && !/\bwc|washroom|storage|soiled|clean supply|housekeeping|medication/.test(nm) ? Math.ceil(A / 9.3) : null;   // washrooms, storage and service rooms: by area only
       const byArea = A > EGB[grp] + 1e-6, byLoad = load != null && load > 60; if (!byArea && !byLoad) continue;
       const u0 = Math.min(...x.r.map(r => r[0])), u1 = Math.max(...x.r.map(r => r[1])), v0 = Math.min(...x.r.map(r => r[2])), v1 = Math.max(...x.r.map(r => r[3]));
       const need = Math.hypot(u1 - u0, v1 - v0) / 3, ds = G.D.filter(d => +d[0] === +st && (d[1] === x.id || d[2] === x.id));

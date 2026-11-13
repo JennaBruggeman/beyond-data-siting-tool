@@ -39,12 +39,12 @@ const new_ = { built: 'new', extent: 'whole', floor: '' };
     const L = LOTS[key];
     await p.evaluate(x => { window.__EX.push(x); const w = document.getElementById('welcome'); if (w) w.remove(); window.__run(window.__EX.length - 1); }, { lab: L.lab, sub: '', sel: L.sel, ans: new_ });
     await p.waitForTimeout(9000);
-    if (process.env.ENGINE) await p.evaluate(() => { BD.hubEngineOnly = true; });
+    if (process.env.ENGINE || process.env.LOO) await p.evaluate(l => { BD.hubEngineOnly = true; if (l) BD.hubLeaveOut = true; }, !!process.env.LOO);   /* LOO=1: leave-one-out, each lot borrows from the most similar other board */
     const r = await p.evaluate(async () => { try { if (BD.arch) BD.arch.typology = 'emergency_hub'; const P = await BD.f1cards.arch(); const H = BD.hub.build(P), h = (H && H.hub) || {};
-      return { frozen: h.frozen || null, MW: h.doesntFit ? null : h.MW, dc: h.dcArea, stop: h.sizeStop ? h.sizeStop.rule : null, doesntFit: h.doesntFit ? h.doesntFit.limiting.slice(-1)[0] : null, rows: ((h.v2 || {}).rows || []).length,
+      return { frozen: h.frozen || null, borrowed: h.transplant ? h.transplant.addr : null, MW: h.doesntFit ? null : h.MW, dc: h.dcArea, stop: h.sizeStop ? h.sizeStop.rule : null, doesntFit: h.doesntFit ? h.doesntFit.limiting.slice(-1)[0] : null, rows: ((h.v2 || {}).rows || []).length,
         reach: h.treach ? (h.treach.reach || []).length : null, travel: (h.travel || []).map(t => `${t.zone} ${t.worst} ${t.status}`), height: h.grades && h.grades.height }; } catch (e) { return { err: String(e.stack || e) }; } });
     const f = L.f, failing = /frozen failing/.test(f[2]), ok = failing ? !!r.doesntFit : (r.MW != null && Math.abs(r.MW - f[0]) < 0.005 && Math.abs((r.dc || 0) - f[1]) < 1 && r.stop === f[2]);   /* a board the freeze keeps failing: the doesn't-fit state */
     r.freeze = f; r.match = ok; r.errors = errs; res[key] = r; if (ok) pass++;
-    console.log(key.padEnd(7), ok ? 'MATCH' : 'differ', '| freeze', f[0], f[1], f[2], '| tool', r.MW == null ? '-' : (+r.MW).toFixed(2), r.dc == null ? '-' : Math.round(r.dc), r.stop || r.doesntFit || r.err || '', r.frozen ? '| frozen board' : '| engine', errs.length ? '| page errors ' + errs.length : '');
+    console.log(key.padEnd(7), ok ? 'MATCH' : 'differ', '| freeze', f[0], f[1], f[2], '| tool', r.MW == null ? '-' : (+r.MW).toFixed(2), r.dc == null ? '-' : Math.round(r.dc), r.stop || r.doesntFit || r.err || '', r.borrowed ? '| borrowed from ' + r.borrowed : r.frozen ? '| frozen board' : '| engine', errs.length ? '| page errors ' + errs.length : '');
     await p.close(); }
   console.log(`${pass} / ${keys.length} match the freeze`); fs.writeFileSync(out, JSON.stringify(res, null, 1)); await b.close(); })();

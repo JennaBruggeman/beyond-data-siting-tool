@@ -1099,7 +1099,8 @@ function transplant(S, keys) {
   const per = P => P.reduce((t, p, i) => t + Math.hypot(P[(i + 1) % P.length][0] - p[0], P[(i + 1) % P.length][1] - p[1]), 0);
   const area = polyArea(S.ring), pr = per(S.ring);   /* the most similar lot: area and perimeter (the front can be read differently on corner lots) */
   const sim = b => Math.abs(Math.log((area || 1) / (polyArea(b.LOTPOLY) || 1))) + Math.abs(Math.log((pr || 1) / (per(b.LOTPOLY) || 1)));
-  const cands = fam[key].map(k => byKey[k]).filter(Boolean).sort((x, y) => sim(x) - sim(y));
+  const ownKey = (lib[String(S.id)] || {}).key, loo = root && root.BD && root.BD.hubLeaveOut;   /* leave-one-out test (J.B. 13 Nov): a board lot never borrows its own plan */
+  const cands = fam[key].map(k => byKey[k]).filter(Boolean).filter(b => !(loo && b.key === ownKey)).sort((x, y) => sim(x) - sim(y));
   for (const B of cands) { const reg = placePlan(S, B); if (!reg) continue;
     const P = frozenBoard(S, B, reg); if (!P) continue;
     const H = P.hub; H.transplant = { from: B.key, addr: B.addr, layout: key, slide: reg.slide, setback: reg.setback };

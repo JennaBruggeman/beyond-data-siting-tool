@@ -230,12 +230,12 @@ function partHere(f,P){ const txt=[f.cooling,f.sizeText,f.serves,f.building].fil
   const bits=txt.split(/;\s*/).filter(b=>P.re.test(b)).map(b=>C.words(b)).filter(Boolean);
   const here=bits.join('; ').replace(/\s+/g,' ').slice(0,180);
   const code=/\bOC\b/.test(txt)?'operator':/\bGOV\b/.test(txt)?'government record':/\bBRK\b/.test(txt)?'broker':/\bOBS\b/.test(txt)?'site visit (author)':'the facility’s sources';
-  return {here:here+(/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L|kWh|MWh|%)/.test(here)?'':'; size ?'),src:code,kind:P.kAlt?P.kAlt(txt):P.k}; }
+  return {here:here+(/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L\b|kWh|MWh|%)/.test(here)?'':'; size ?'),src:code,kind:P.kAlt?P.kAlt(txt):P.k}; }
 C.add(T,'What’s inside',{async build(x){
   const f=await picked(x); if(!f) return {draw:'<p class="f1v-empty">No data centre picked.</p>'};
   const rows=PARTS.map(P=>({P,h:partHere(f,P)}));
   const tile=({P,h})=>`<figure class="f1c-res-part${h?'':' off'}"><img src="f1/kit/one_${h&&h.kind||P.k}.png" width="300" height="210" alt="${esc(P.n)}: a generic unit"><figcaption><b>${esc(P.n)}</b><span class="d">${esc(P.does)}</span><span class="n">Needs: ${esc(P.needs)}</span><span class="h">Here: ${h?esc(h.here).replace(/\?/g,'<i>?</i>'):'<i>not published</i>'}</span><span class="s">${h?esc(h.src):'no source names it'}</span></figcaption></figure>`;
-  const named=rows.filter(r=>r.h).length, SPEC=/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L|kWh|MWh|%)/, specs=rows.filter(r=>r.h&&SPEC.test(r.h.here)).length;   /* a spec is a figure with a unit */
+  const named=rows.filter(r=>r.h).length, SPEC=/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L\b|kWh|MWh|%)/, specs=rows.filter(r=>r.h&&SPEC.test(r.h.here)).length;   /* a spec is a figure with a unit */
   return {noZoneFlag:true,draw:`<div class="f1c-res-parts">${rows.map(tile).join('')}</div>`,
     lead:`The equipment the sources name for ${f.name}, drawn as generic units: what each part does and what it needs. Types only, not counts; “?” where a spec is not published.`,
     rows:[['Named by a source',`${named} of ${PARTS.length} parts`],['Specs published',specs?`${specs} with a figure; the rest read “?”`:'none: every spec reads “?”'],['Drawings','generic units from the Engineering 3-D kit, not this facility’s models'],['Heat reuse',esc(C.words(v(f.heat)))]],
