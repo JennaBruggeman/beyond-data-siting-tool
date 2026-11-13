@@ -1175,9 +1175,9 @@ function toPlan(L, S) {
     if (L.grades && L.grades.heightStatus === 'tight') tg.push(`height ${L.grades.height} m of ${L.grades.hLimit} m`);
     if (tg.length) flags.push('Tight, check in design (within 0.5 m or 5 % of the limit, J.B. 9 Nov): ' + tg.join('; '));
   }
-  if (L.kind === 'stacked') flags.push('Section: ground storey, 4.0 m support storey, one hall storey: the spec’s height-capped section, drawn on every lot by the hub cap (J.B. 8 Nov)');
+  if (L.kind === 'stacked' && !L.frozen) flags.push('Section: ground storey, 4.0 m support storey, one hall storey: the spec’s height-capped section, drawn on every lot by the hub cap (J.B. 8 Nov)');   /* the engine's notes, not on the frozen boards */
   if (L.grades && L.grades.heightOk === false) flags.push(`Not built yet: ${L.grades.height} m is over the ${L.grades.hLimit} m limit even with the height-capped section; a lower section is not built (?)`);
-  if (L.kind === 'stacked' && !L.narrow) flags.push('Refuge at 50 people, the minimum; the ground floor behind the hub stays the data-centre entrance row and covered truck court (J.B. 8 Nov)');
+  if (L.kind === 'stacked' && !L.narrow && !L.frozen) flags.push('Refuge at 50 people, the minimum; the ground floor behind the hub stays the data-centre entrance row and covered truck court (J.B. 8 Nov)');
   if (L.capW) flags.push(`Hub cap (2,325 m² of data centre, J.B. 8 Nov): at its smallest depth the building was still over the cap, so it narrows from ${L.capW.from} m to ${L.capW.to} m wide; the rest of the land stays open (drawing choice, 10 Nov 2026)`);
   if (L.narrow) { const n = L.narrow;
     flags.push(`Narrow lot (F2b, 10 Nov 2026): the hub bands run back from the street (refuge strip ${n.Wr} m | public corridor | service strip), the data-centre entrance and ${L.nb} bays at the rear; ${n.drive ? 'the corridor ends in an exit passage to the side drive' : 'an exit passage (2 h) runs from the corridor along the lot line to the truck court'} (drawing choices, as the 1330 Glen Dr and 8238 Fraser St hand fits)`);
@@ -1186,7 +1186,7 @@ function toPlan(L, S) {
     flags.push('No clinic on a narrow lot: no second separate exit fits (spec Part 6); the floor over the hub is data-centre support and unassigned floor');
     flags.push('Hall over the hub only; the rear (entrance row and bays) is two storeys, chillers on its roof (spec rule 1: a lower roof not over the hall)');
     if (!n.drive) flags.push(`Truck court behind the building, open to the sky, reached from ${n.svcWhy}; the route from that street to the court and truck turning are not checked (?)`); }
-  if (L.kind === 'stacked' && L.clin > 0) flags.push('Clinic grows into the spare floor over the hub (spare-floor order: the refuge grows only at grade; clinic kept under 500 m², J.B. 8 Nov)');
+  if (L.kind === 'stacked' && L.clin > 0 && !L.frozen) flags.push('Clinic grows into the spare floor over the hub (spare-floor order: the refuge grows only at grade; clinic kept under 500 m², J.B. 8 Nov)');
   if (L.plant && L.plant.items.some(it => it.kind === 'chiller' && it.roof)) flags.push('Chillers on the hub roof, over the refuge: A2L refrigerant pools below a leak; no safe distance in the maker’s guide (?)');
   if (S.city !== 'van') flags.push('Edmonton cooling: the Liebert AFC is outside Vertiv’s stated range at −30 °C (SL-70790 pp. 9–10): chillers are a placeholder (?)');
   const entrances = [{ id: 'lob_out', block: 'hub', slab_m: L.grades.slab, street_m: L.grades.street, stepFree: L.grades.stepFree }];

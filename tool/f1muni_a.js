@@ -1,6 +1,6 @@
 /* Beyond Data — F1 Municipal cards, group 'a' (CODE_JOB_F1 step 3): city, parcel, allowed, industrial land and jobs, approval process, report.
    Municipal is about rules, not buildings: no massing, no design; limits and clauses only. Every figure is from the tool's zone rows (tool/data/zones.json), the city overview
-   (tiles/<city>/meta.json) or the research files named in each card's sources; a figure the tool lacks is a red "?". */
+   (open data) or the research files named in each card's sources; a figure the tool lacks is a red "?". */
 (function(){
 'use strict';
 const BD=window.BD, C=BD.f1cards, K=C.K, esc=C.esc, T='municipal';
@@ -39,7 +39,7 @@ C.add(T,'Your city',{async build(x){
   return {noZoneFlag:true,draw,lead:`Where a data centre can go, by who decides. ${LINE1} ${LINE2} ${OUTRIGHT}`,
     rows:[...cntRows('van',cn),...cntRows('edm',cn)],
     more:[['What “outright” means',`<p>${OUTRIGHT} ${LARGE}</p>`],['Direct Control zones','<p>Edmonton’s Direct Control zones (DC1, DC2) carry their own site provisions, which are not in the bylaw copy the tool reads: whether a data centre is allowed is site by site (?).</p>']],
-    src:[CLS_SRC,CNT_SRC,'Zones: City of Vancouver and City of Edmonton zoning, as the tool’s city overview (tiles/<city>/meta.json). Streets: tool/streets_<city>.json.'],
+    src:[CLS_SRC,CNT_SRC,'Zones: City of Vancouver and City of Edmonton zoning, as the tool’s city overview (open data). Streets: City of Vancouver and City of Edmonton street centrelines (open data).'],
     missing:['Direct Control zones: site provisions (?)']}; }});
 C.add(T,'Your parcel',{async build(x){
   const sel=x.sel, r=sel.ring; if(!r) return {draw:'<p class="f1v-empty">No lot loaded.</p>'};
@@ -137,37 +137,39 @@ const PROC={
   decides:'Director of Planning, or the Development Permit Board',
   notice:'The Director or Board “may notify” owners and tenants it deems necessary (ZDB s. 4.3.8). Not required.', appeal:'Board of Variance', appealWin:'30 days', appealCl:'By-law 10200 s. 3.2',
   steps:[
-   {n:'Pre-application',w:'You and City planners',t:'Before applying. Order is our reading of the sources.',c:'municipal.md §1a'},
+   {n:'Pre-application',w:'You and City planners',t:'Before applying. Order is our reading of the sources.',c:'Zoning and Development By-law s. 4'},
    {n:'Development permit application',w:'Director of Planning',t:'Refers it to the Development Permit Board if public response warrants it.',c:'ZDB s. 4.3.7(h)'},
    {n:'Notice to neighbours',w:'Director or Board',t:'May notify the owners and tenants it deems necessary.',c:'ZDB s. 4.3.8'},
    {n:'Decision',w:'Director of Planning or Development Permit Board',t:'Grants it with or without conditions, or refuses.',c:'ZDB s. 4.3.1'},
    {n:'Appeal',w:'Board of Variance',t:'30 days from the decision.',c:'By-law 10200 s. 3.2'},
-   {n:'Building permit',w:'City of Vancouver',t:'Applied for once the development permit is issued.',c:'City permit page (municipal.md §1a)'}],
+   {n:'Building permit',w:'City of Vancouver',t:'Applied for once the development permit is issued.',c:'City of Vancouver development permit page'}],
   rezone:[
    {n:'Apply to rezone',w:'You and the City',t:'Council may not allow development contrary to the Official Development Plan.',c:'Vancouver Charter s. 563(2)'},
    {n:'Public hearing',w:'Council',t:'Required, unless the by-law is consistent with the Official Development Plan.',c:'Charter s. 559.02(1), (3)'},
    {n:'Council decides',w:'Council',t:'May adopt the by-law after the hearing.',c:'Charter s. 559.07(1)'},
    {n:'Regional vote',w:'Metro Vancouver Board',t:'Only if the Industrial or Employment land designation changes: a Type 3 amendment, 50% + 1 weighted vote.',c:'Metro 2050 amendment guide s. 1.0'},
-   {n:'Development permit',w:'As the main path',t:'Then the development permit steps.',c:'rezoning.md §1'}]},
+   {n:'Development permit',w:'As the main path',t:'Then the development permit steps.',c:'Vancouver Charter; City rezoning FAQ'}]},
  edm:{
   decides:'Development Planner',
   notice:'Mailed within 7 days of approval to owners within 60.0 m of the site, the community league and the BIA (s. 7.160). Not on a site sign by default in industrial zones.', appeal:'Subdivision and Development Appeal Board (SDAB)', appealWin:'21 days', appealCl:'Bylaw 20001 s. 7.170',
   steps:[
-   {n:'Pre-application',w:'You and City planners',t:'Before applying. Order is our reading of the sources.',c:'municipal.md §1b'},
+   {n:'Pre-application',w:'You and City planners',t:'Before applying. Order is our reading of the sources.',c:'Zoning Bylaw 20001 ss. 7.100–7.170'},
    {n:'Development permit application',w:'Development Planner',t:'A data centre is Major Industrial (City guidance, applied to every size): a permitted use in IH and EETC; elsewhere a rezoning comes first.',c:'Bylaw 20001 ss. 2.140 2.1, 3.52 2.1; edm_dc_major'},
    {n:'Decision',w:'Development Planner',t:'May approve with or without conditions, or refuse even if the rules are met.',c:'s. 7.100 1.1.9, 1.1.10'},
    {n:'Notice',w:'City of Edmonton',t:'Mailed within 7 days of approval to owners within 60.0 m, the community league and the BIA.',c:'s. 7.160 1.2–1.4'},
    {n:'Appeal',w:'SDAB',t:'21 days from the decision; “any person affected” 21 days after notice.',c:'s. 7.170 1–2'},
-   {n:'Building permit',w:'City of Edmonton',t:'After the development permit and its appeal period.',c:'municipal.md §1b'}],
+   {n:'Building permit',w:'City of Edmonton',t:'After the development permit and its appeal period.',c:'Zoning Bylaw 20001 ss. 7.100–7.170'}],
   rezone:[
-   {n:'Pre-application',w:'You and the City',t:'A Direct Control zone needs 21 days of pre-application notice.',c:'rezoning.md §3'},
-   {n:'Public hearing',w:'City Council',t:'Council makes the final decision on rezonings and plan amendments at a public hearing.',c:'rezoning.md §3'},
+   {n:'Pre-application',w:'You and the City',t:'A Direct Control zone needs 21 days of pre-application notice.',c:'City of Edmonton rezoning page'},
+   {n:'Public hearing',w:'City Council',t:'Council makes the final decision on rezonings and plan amendments at a public hearing.',c:'City of Edmonton rezoning page'},
    {n:'Regional referral',w:'EMRB',t:'A rezoning is not referred. A plan amendment is, if it converts over 32 ha of a major employment area outside Downtown.',c:'REF 4.3(d)'},
-   {n:'Development permit',w:'As the main path',t:'Then the development permit steps.',c:'rezoning.md §3'}]}};
+   {n:'Development permit',w:'As the main path',t:'Then the development permit steps.',c:'City of Edmonton rezoning page'}]}};
 const PATHS=[
  {id:'permitted',name:'Permitted',k:'As of right',what:'The zone lists a data centre as a permitted use. The use itself needs no decision.',who:'No decision on the use; a development permit is still needed.'},
  {id:'conditional',name:'Conditional or discretionary',k:'The City decides',what:'The zone lists it with conditions. Vancouver calls this a conditional use; Edmonton, a discretionary use.',who:null},
  {id:'rezoning',name:'Rezoning',k:'Council decides',what:'The zone does not list a data centre. Council changes the zoning at a public hearing, within its plans and the regional plan.',who:null}];
+/* audit K49 (12 Nov 2026): the approval path in one sentence, per path and city */
+const pathSentence=(x,city)=>{ const p=pathOf(x); return p==='rezoning'?'Here a data centre needs a rezoning: City Council decides, after a public hearing.':p==='permitted'?(city==='edm'?'Here a data centre is a permitted use: it still needs a development permit, issued where the zone’s rules are met.':'Here a data centre is permitted outright: it still needs a development permit.'):city==='van'?'Here a data centre is a conditional use: the Director of Planning decides, after a development permit application.':'Here a data centre is a discretionary use: the Development Planner decides, after a development permit application.'; };
 const pathOf=x=>{ const w=x.status.word; return /rezoning/.test(w)?'rezoning':/permitted/.test(w)?'permitted':/conditional|discretionary/.test(w)?'conditional':'rezoning'; };
 const zonesOf=city=>(city==='van'?BD.data.raw.zones.ZV:BD.data.raw.zones.ZE)||{};
 const zoneCount=city=>{ const R=zonesOf(city), c={permitted:0,conditional:0,rezoning:0};
@@ -187,9 +189,9 @@ C.add(T,'Is a data centre allowed?',{async build(x){
    lead:(city==='edm'?'The City treats large-scale data centres as Major Industrial; it gives no size threshold, so the tool applies it to every data centre. ':'')+(path==='conditional'?`A data centre here is a ${wd} use, so ${city==='van'?'the City':'the Development Planner'} decides. No rezoning is needed.`:path==='rezoning'?'The zone does not list a data centre, so the land would need rezoning.':'The zone lists a data centre as permitted.'),
    hero:[{v:wd,l:'path for this lot'},path==='rezoning'?{v:String(cnt.n),l:`${CITYN[city]} zones allow a data centre${city==='edm'?' (IH, EETC)':''}`}:{v:`${path==='permitted'?cnt.permitted:cnt.conditional} of ${cnt.n}`,l:`${CITYN[city]} zones that allow it list it this way`}],
    rows:[['Zone',x.zone],['Use',st.word],['Clause',st.clause||'?'],['Decided by',path==='rezoning'?(city==='van'?'Council, after a public hearing':'City Council, at a public hearing'):P.decides],['Rezoning needed',path==='rezoning'?'yes':'no: the zone lists it'],...(sub?[['Sub-area','A only; the tool does not map sub-areas']]:[])],
-   more:[['What conditional means',`<p>${city==='van'?'A conditional use needs a permit decision: the Director of Planning or the Development Permit Board may grant it “either unconditionally or subject to conditions” or refuse it (ZDB s. 4.3.1).':'A discretionary use needs a permit decision: the Development Planner may approve it with or without conditions, or refuse it even if it meets the by-law (s. 7.100 1.1.9–1.1.10).'}</p>`],
+   more:[[city==='van'?'What conditional means':'What discretionary means',`<p>${city==='van'?'A conditional use needs a permit decision: the Director of Planning or the Development Permit Board may grant it “either unconditionally or subject to conditions” or refuse it (ZDB s. 4.3.1).':'A discretionary use needs a permit decision: the Development Planner may approve it with or without conditions, or refuse it even if it meets the by-law (s. 7.100 1.1.9–1.1.10).'}</p>`],
          [city==='edm'?'Why Major Industrial':'Why no lot shows “permitted”',city==='edm'?`<p>Zoning Bylaw 20001 names no data-centre use. The City says “large-scale” data centres are Major Industrial and gives no size threshold, so the tool applies it to every data centre (J.B., 8 Nov 2026). Major Industrial is permitted in IH (s. 2.140, 2.1) and EETC (s. 3.52, 2.1). IM lists it only where it existed on 1 January 2024 (s. 2.130, 2.3); BE and the other zones do not list it, so a new data centre there needs a rezoning. The deemed-use path (s. 7.20 3.3.2) is not used.</p>`:`<p>${cnt.permitted?'':`None of the ${cnt.n} zones the tool lists for ${esc(CITYN[city])} gives a data centre a plain permitted use. `}In Vancouver “Bulk Data Storage” is conditional in every zone that lists it. Only lots in listed zones can be picked, so rezoning shows here only as the other path.</p>`]],
-   src:[`Zone row and clause: tool/data/zones.json, ${x.zone} (${(st.src||[]).join(', ')||'?'}); ${st.clause||'?'}.`,`Who decides: ${SRC_M}, ${city==='van'?'ZDB s. 4.3.1 (arch_mun_vanZDB4)':'Bylaw 20001 s. 7.100 (arch_mun_edm7100)'}; rezoning: ${SRC_R}.`,'Zone counts: our arithmetic over the rows of tool/data/zones.json.',...(city==='edm'?['Major Industrial for every data centre: City of Edmonton, “Data Centre Development” page, saved by J.B. 8 Nov 2026 (register edm_dc_major, guidance, trust 80); use lists: Zoning Bylaw 20001 ss. 2.120, 2.130, 2.140, 3.52.']:[])]}; }});
+   src:[`Zone row and clause: tool/data/zones.json, ${x.zone} (${(st.src||[]).join(', ')||'?'}); ${st.clause||'?'}.`,`Who decides: ${city==='van'?'Zoning and Development By-law s. 4.3.1 (arch_mun_vanZDB4); a rezoning: City Council (Vancouver Charter, arch_rz_vanCharter28)':'Zoning Bylaw 20001 s. 7.100 (arch_mun_edm7100); a rezoning: City Council at a public hearing (City of Edmonton rezoning page, arch_rz_edmRezoning)'}.`,'Zone counts: our arithmetic over the rows of tool/data/zones.json.',...(city==='edm'?['Major Industrial for every data centre: City of Edmonton, “Data Centre Development” page, saved by J.B. 8 Nov 2026 (register edm_dc_major, guidance, trust 80); use lists: Zoning Bylaw 20001 ss. 2.120, 2.130, 2.140, 3.52.']:[])]}; }});
 
 /* M4 Industrial land and jobs: the lot on the city's industrial land (zones where a data centre is allowed, City open data) at city scale and close up.
    Waits for Cowork's policy read (Metro 2050; Vancouver Industrial Lands Policy; Edmonton): the policy lines are "?" until then. Jobs are not in the tool. */
@@ -225,8 +227,8 @@ C.add(T,'Industrial land and jobs',{async build(x){
    hero:[{v:C.n1(A),u:'km²',l:`${CITYN[city]} zones where a data centre is allowed`},{v:C.n1(100*A/TOT),u:'%',l:'of the city’s zoned area'},{v:qj,l:'jobs on this land'},{v:(100*lotKm/A)<0.1?'<0.1':C.n1(100*lotKm/A),u:'%',l:'of that land is this lot'}],
    rows:[['Lot zone',x.zone],['Lot area',C.n0(sel.lotArea)+' m²'],[city==='van'?'Regional designation':'District designation',qd],['Policy lines','our reading'],['Jobs figure',qj],['Minimum jobs in policy','none set (region measures jobs per area)']],
    more:[['What “industrial land” means here',`<p>The map shades the ${nz} mapped zone areas where the tool lists a data centre as permitted, conditional or discretionary. Other industrial zones and the designation layers are not mapped yet. Areas are the City’s zone polygons, summed (our arithmetic).</p>`],
-         ['Weaknesses of the policy read','<p>Cowork’s self-check only; not independently checked. Metro 2050 itself was not read: quotes are from the Implementation Guideline, which says it does not replace the strategy. Vancouver’s 2023 framework is a staff report; Council adoption is ?. Edmonton’s data-centre page could not be read (blocked to automated reading). Edmonton’s Industrial Investment Action Plan was not used. The designation of this lot needs the map layers, not yet read.</p>']],
-   src:['Zone polygons: City open data, tiles/'+city+'/meta.json; shaded = zones in tool/data/zones.json. Area and share: our arithmetic.',...(city==='van'?['Metro Vancouver, Metro 2050 Implementation Guideline: Industrial and Employment Lands (Nov 2023): https://metrovancouver.org/services/regional-planning/Documents/metro-2050-implementation-guideline-industrial-and-employment-lands.pdf (s. 2.0 pp. 4–5; 2.2.9 c) iii) p. 8).','City of Vancouver, Industrial Modernization and Intensification Framework, RTS 15772, 31 Oct 2023: https://council.vancouver.ca/20231114/documents/r4.pdf (pp. 1, 5, 6). Adoption: ?']:['City of Edmonton, District Plan | District Policy, office consolidation April 2026: https://webdocs.edmonton.ca/infraplan/plans_in_effect/District-Policy-Consolidation.pdf (2.5.3 p. 28; 2.5.3.1; 2.5.3.4).']),'Policy read: Claude Link/policy_read_industrial_land_2026-11-07.md (Cowork, 7 Nov 2026). Draft: J.B. to confirm.'],
+         ['Weaknesses of the policy read',`<p>Our reading, checked once; not independently checked. ${city==='van'?'Metro 2050 itself was not read: quotes are from the Implementation Guideline, which says it does not replace the strategy. Vancouver’s 2023 framework is a staff report; Council adoption is ?.':'Edmonton’s data-centre page could not be read (blocked to automated reading). Edmonton’s Industrial Investment Action Plan was not used.'} The designation of this lot needs the map layers, not yet read.</p>`]],   /* audit K50: each city's caveats on its own lots */
+   src:['Zone polygons: City open data, tiles/'+city+'/meta.json; shaded = zones in tool/data/zones.json. Area and share: our arithmetic.',...(city==='van'?['Metro Vancouver, Metro 2050 Implementation Guideline: Industrial and Employment Lands (Nov 2023): https://metrovancouver.org/services/regional-planning/Documents/metro-2050-implementation-guideline-industrial-and-employment-lands.pdf (s. 2.0 pp. 4–5; 2.2.9 c) iii) p. 8).','City of Vancouver, Industrial Modernization and Intensification Framework, RTS 15772, 31 Oct 2023: https://council.vancouver.ca/20231114/documents/r4.pdf (pp. 1, 5, 6). Adoption: ?']:['City of Edmonton, District Plan | District Policy, office consolidation April 2026: https://webdocs.edmonton.ca/infraplan/plans_in_effect/District-Policy-Consolidation.pdf (2.5.3 p. 28; 2.5.3.1; 2.5.3.4).']),'Policy lines: our reading of each document (read 7 Nov 2026).'],
    missing:['designation of this lot (map layer, date, licence)','regional industrial-land map','jobs figure','Vancouver 2023 framework: Council adoption']}; }});
 
 /* M11 Approval process: the steps for this lot's path as a horizontal sequence, real names; who decides, notice. No timeline (dropped, J.B. 7 Nov: unsourced) */
@@ -239,7 +241,7 @@ C.add(T,'Approval process',{async build(x){
    hero:[{v:String(steps.length),l:'steps on this lot’s path'},{v:path==='rezoning'?'Council':city==='van'?'Director':'Planner',l:'decides'},{v:P.appealWin,l:'appeal window'}],
    rows:[['Decides',P.decides],['Notice',P.notice],['Appeal to',P.appeal],['Appeal window',`${P.appealWin} (${P.appealCl})`],['Time to decision',C.q('no sourced figure; not shown')]],
    more:[['If the use were not listed: rezoning',list(P.rezone)],['Other approvals that run alongside','<p>Electrical service (utility), emissions or air permit for generators, and sewer and water connections. Who decides and the order are in the research file (municipal.md, later sections) and are not drawn here.</p>']],
-   src:[`Steps, deciders, notice and appeal: ${SRC_M}, ${city==='van'?'§1a (ZDB s. 4, By-law 10200)':'§1b (Bylaw 20001 ss. 7.20, 7.100, 7.160, 7.170)'}.`,`Rezoning path: ${SRC_R}, ${city==='van'?'§1 and §2 (Charter, Metro 2050 guide)':'§3 (City page, EMRB REF)'}.`,'Path: tool/data/zones.json, '+x.zone+'. Processing times are left out (J.B., 7 Nov).'],
+   src:[city==='van'?'Steps, deciders, notice and appeal: Zoning and Development By-law s. 4 (register arch_mun_vanZDB4); City of Vancouver development permit page (arch_mun_vanDPpage); Board of Variance By-law 10200, quoting Vancouver Charter s. 573 (arch_mun_vanBoV10200). The order of steps is our reading.':'Steps, deciders, notice and appeal: Zoning Bylaw 20001 ss. 7.20, 7.100, 7.160, 7.170 (register arch_zon_Edm720, arch_mun_edm7100, arch_mun_edm7160, arch_mun_edm7170); Alberta SDAB timelines fact sheet (arch_mun_abSdabTimelines). The order of steps is our reading.',city==='van'?'Rezoning path: Vancouver Charter (arch_rz_vanCharter28); City of Vancouver rezoning FAQ (arch_rz_vanDAPfaq); Metro 2050 Implementation Guideline (Nov 2023).':'Rezoning path: City of Edmonton rezoning page (arch_rz_edmRezoning); Edmonton Metropolitan Region Board, Regional Evaluation Framework.','Path: the zone row ('+x.zone+'). Processing times are left out (decision of the author, 7 Nov 2026).'],
    missing:['time to decision (dropped: unsourced)']}; }});
 
 /* M12 Report (audit B10, 12 Nov 2026): the Municipal report end to end, as the board's Report_Muni pages (Claude Link reports/report_muni.py, v2 of
@@ -254,7 +256,7 @@ C.add(T,'Report',{async build(x){
   const pg=(n,t,body)=>`<div class="f1r-pg"><div class="cap">Page ${n} · ${esc(t)}</div><div class="f1r-box"><div class="f1r-sheet"><div class="hd"><span>BEYOND DATA · MUNICIPAL REPORT · ${esc(String(x.addr||'').toUpperCase())}</span><span>${n} / 7</span></div><h1>${esc(t)}</h1>${body}</div></div></div>`;
   const pages=[];
   pages.push(`<div class="f1r-pg"><div class="cap">Page 1 · Title</div><div class="f1r-box"><div class="f1r-sheet"><div class="hd"><span>BEYOND DATA</span><span>1 / 7</span></div>
-    <div style="margin-top:120px"><div class="lb">Municipal report</div><h1 style="font-size:40px;font-weight:300">${esc(x.addr)}</h1><p class="ld">${esc(CITYN[city])} · zone ${esc(x.zone)} · ${esc(C.n0(sel.lotArea))} m² · a data centre is ${esc(st.word)} here.</p></div>
+    <div style="margin-top:120px"><div class="lb">Municipal report</div><h1 style="font-size:40px;font-weight:300">${esc(x.addr)}</h1><p class="ld">${esc(CITYN[city])} · zone ${esc(x.zone)} · ${esc(C.n0(sel.lotArea))} m². ${esc(pathSentence(x,city))}</p></div>
     <div style="margin-top:40px">${mp}</div><p class="ld" style="margin-top:40px">Rules, not a design. [n] = source, page 7. “?” = no source read.</p></div></div></div>`);
   let n=2;
   for(const [title,cards] of RPAGES){ let body=''; for(const t of cards){ const r=await runCard(t); if(!r) continue; const refs=(r.src||[]).map(sid);

@@ -67,7 +67,8 @@ async function open(o){ o=o||{}; await load(); S.tab=o.tab||S.tab; S.sel=null; S
     W.addEventListener('click',e=>{ const t=e.target.closest('[data-k],[data-tab],[data-close]'); if(!t) return; e.preventDefault();
       if(t.dataset.close!=null){ W.remove(); return; } if(t.dataset.tab){ S.tab=t.dataset.tab; if(S.sel&&!shown(S.sel)) S.sel=null; draw(); return; }
       if(t.dataset.k){ S.sel=S.sel===t.dataset.k?null:t.dataset.k; draw(); } });
-    W.addEventListener('keydown',e=>{ if(e.key==='Escape') W.remove(); const g=e.target.closest&&e.target.closest('g[data-k]'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); S.sel=g.dataset.k; draw(); } }); }
+    if(!window.__f1lEsc){ window.__f1lEsc=true; document.addEventListener('keydown',e=>{ const L=document.getElementById('f1l'); if(L&&e.key==='Escape'){ e.preventDefault(); e.stopImmediatePropagation(); L.remove(); } },true); }   /* audit I40: Esc closes the top layer only */
+    W.addEventListener('keydown',e=>{ const g=e.target.closest&&e.target.closest('g[data-k]'); if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); S.sel=g.dataset.k; draw(); } }); }
   draw(); }
 /* the parts a card lights: logic.js's step list for the matching step */
 /* F6 (8 Nov 2026, J.B.): every figure on every card links to its part. Per card: '_' = the card's parts; f = [label pattern, parts] for single figures

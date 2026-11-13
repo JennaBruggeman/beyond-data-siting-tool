@@ -93,8 +93,8 @@
 /* phone width: cards stack, drawing above, panel below (job sheet §2.5) */
 @media (max-width:760px){
   .f1-wrap{padding:0 16px}
-  .f1-nav{gap:16px}
-  .f1-nav a:not(.f1-old){display:none}
+  .f1-head{height:auto;flex-wrap:wrap;gap:6px 16px;padding:12px 0}
+  .f1-nav{gap:14px;font-size:13.5px;flex-wrap:wrap}   /* audit I45: on a phone the nav links stay, smaller (the old tool is a footer link) */
   .f1-hero{grid-template-columns:1fr;min-height:0;padding:16px 0 0}
   .f1-hero h1{font-size:38px}
   .f1-lines{grid-template-columns:1fr 1fr;gap:20px}
@@ -333,3 +333,17 @@ div:has(> .f1p-set) > .f1c-key{display:none}
 .f1r-dr{max-height:420px;overflow:hidden;margin:6px 0 10px}
 .f1r-dr svg,.f1r-dr img{max-width:100%;height:auto}
 .f1r-dr .f1c-mua-maps{display:flex;gap:10px}
+
+/* Resident R3b What's inside (board Res_R3b_Inside): kit renders in a grid; a part no source names is greyed */
+.f1c-res-parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px 26px;width:100%;max-width:1000px;align-self:flex-start}
+.f1c-res-part{margin:0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--f-rule);padding-top:10px}
+.f1c-res-part img{width:100%;height:auto;background:#F6F5F2}
+.f1c-res-part figcaption{display:flex;flex-direction:column;gap:4px}
+.f1c-res-part b{font-size:15px;font-weight:400;color:var(--f-ink)}
+.f1c-res-part .d{font-size:12.5px;line-height:1.45;color:var(--f-ink2)}
+.f1c-res-part .n{font-size:12px;color:var(--f-mute)}
+.f1c-res-part .h{font-size:12.5px;color:var(--f-ink)}
+.f1c-res-part .h i{font-style:normal;color:#8A8985}
+.f1c-res-part .s{font-size:11px;color:var(--f-faint)}
+.f1c-res-part.off{opacity:.7}
+.f1c-res-part.off img{opacity:.35;filter:grayscale(1)}

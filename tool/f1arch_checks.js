@@ -73,7 +73,7 @@ function northScale(g,mp,ox,sx,sy,m){ const c=g.F.toW(0,0), n=g.F.toW(0,0); cons
   return `<g ${FONT} font-size="11" fill="${K.mute}"><line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${K.ink}" stroke-width="1"/><path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${(x1-dx*6+px*3).toFixed(1)} ${(y1-dy*6+py*3).toFixed(1)}L${(x1-dx*6-px*3).toFixed(1)} ${(y1-dy*6-py*3).toFixed(1)}Z" fill="${K.ink}"/><text x="${(x1+dx*9-3.5).toFixed(1)}" y="${(y1+dy*9+4).toFixed(1)}" fill="${K.ink2}">N</text>
   <rect x="${sx}" y="${sy}" width="${(L/2).toFixed(1)}" height="4" fill="${K.ink}"/><rect x="${(sx+L/2).toFixed(1)}" y="${sy}" width="${(L/2).toFixed(1)}" height="4" fill="#fff" stroke="${K.ink}" stroke-width="0.8"/><text x="${sx}" y="${sy+16}">0</text><text x="${(sx+L).toFixed(1)}" y="${sy+16}" text-anchor="end">${m} m</text></g>`; }
 
-const storeyLabel=z=>z<0.05?'Ground':n1(z)+' m';
+let LASTZ=[]; const storeyLabel=z=>{ const i=LASTZ.findIndex(v=>Math.abs(v-z)<0.05); return i>=0?`Storey ${i+1}`:(z<0.05?'Storey 1':n1(z)+' m'); };   /* audit F23: storeys by number, as the plans name them */
 const tabsHtml=(zs)=>`<div class="${NS}tabs" role="group" aria-label="Storeys">${zs.map((z,i)=>`<button type="button" data-z="${z}" aria-pressed="${i===0}">${storeyLabel(z)}</button>`).join('')}</div>`;
 
 /* the blocks on one storey, for the separation drawing: data-centre rooms (dcPieces) and program storeys (Arrange's boxes) */
@@ -120,7 +120,7 @@ function planFor(x,P){
   const key=[x.city,(BD.S.sel||{}).id,P.s.dir,JSON.stringify([P.hall.u,P.hall.v,P.hall.base,P.hall.storeys,P.hall.h]),JSON.stringify((P.boxes||[]).map(b=>[b.id,b.u,b.v,b.base,b.storeys,b.h,b.front])),(P.s.M.ring||[]).slice(0,4).join(',')].join('|');
   if(PLANC.k===key&&PLANC.v) return PLANC.v;
   const A=BD.archTest, PL=planOf(P); if(!PL||!PL.storeys.length) return null;
-  const g=geo(P), M=g.M, zs=PL.storeys.map(s=>s.z);
+  const g=geo(P), M=g.M, zs=PL.storeys.map(s=>s.z); LASTZ=zs;
   let b=[1e9,-1e9,1e9,-1e9]; PL.storeys.forEach(S=>S.rooms.forEach(r=>{ if(r.rect) b=[Math.min(b[0],r.rect[0]),Math.max(b[1],r.rect[1]),Math.min(b[2],r.rect[2]),Math.max(b[3],r.rect[3])]; }));
   /* F8 (10 Nov 2026): the hub's front yard (a from −depth to 0 across the hub's width), drawn on the ground storey; the frame takes it in so the street stays in view */
   const FY=PL.hub&&PL.hub.frontYard&&PL.hub.frontYard.depth>0&&PL.hub.toUV?(()=>{ const H=PL.hub, d=H.frontYard.depth, p=H.toUV(-d,0), q=H.toUV(0,H.W||0); return {d,m2:H.frontYard.m2,pub:H.frontYard.public,rect:[Math.min(p[0],q[0]),Math.max(p[0],q[0]),Math.min(p[1],q[1]),Math.max(p[1],q[1])]}; })():null;
@@ -136,10 +136,10 @@ function planFor(x,P){
   let nNoAcc=0, nNoCorr=0, nRooms=0;
   const stor=PL.storeys.map((S,i)=>{
     const rooms=[], by=new Map();
-    S.rooms.forEach(r=>{ const k=r.block+'|'+r.id; let o=by.get(k); if(!o){ o={k,block:r.block,id:r.id,name:r.name,m2:0,parts:[]}; by.set(k,o); rooms.push(o); } o.m2+=r.m2||0; if(r.rect) o.parts.push(r); });
+    S.rooms.forEach(r=>{ const k=r.block+'|'+r.id; let o=by.get(k); if(!o){ o={k,block:r.block,id:r.id,name:r.name,kind:r.kind,m2:0,parts:[]}; by.set(k,o); rooms.push(o); } o.m2+=r.m2||0; if(r.rect) o.parts.push(r); });
     const thr=new Map(S.doors.filter(d=>d.through).map(d=>[d.room,d.to])), hasD=new Set((PL.hub?S.doors.flatMap(d=>[d.room,d.to]).concat(S.exits.map(e=>e.via)):S.doors.map(d=>d.room)).filter(Boolean)), noCorr=S.corridors.length===0&&!PL.hub;
     rooms.forEach((o,j)=>{ o.n=j+1; o.drawn=o.parts.length>0; o.sourced=PL.hub?!!(o.parts[0]&&o.parts[0].min&&o.parts[0].min.step<6):o.block==='data centre'?srcd.has(o.id):!!progSrc[o.id];
-      o.flag=o.block==='data centre'?(thr.has(o.id)?'through':(o.drawn&&!hasD.has(o.id)?'noway':null)):(noCorr?'nocorr':null);
+      o.flag=o.block==='data centre'?(thr.has(o.id)?'through':(o.drawn&&!hasD.has(o.id)&&o.kind!=='bay'?'noway':null)):(noCorr?'nocorr':null);   /* F22: a loading space opens onto the truck court, not through a door */
       if(o.flag==='through'){ const t=rooms.find(q=>q.id===thr.get(o.id)&&q.block==='data centre'); o.via=t?short(t.name):'another room'; } });
     nRooms+=rooms.length; nNoAcc+=rooms.filter(o=>o.flag).length; if(noCorr) nNoCorr++;
     return {i,z:S.z,S,rooms,noCorr}; });
@@ -205,23 +205,22 @@ C.add(T,'Rooms',{chip:CHIP,async build(x){
   const HB=PL.hub, TL=tLine(HB);
   if(HB&&HB.rooms){ const lob=pl.stor[0].rooms.find(o=>o.id==='lob'), ppl=Math.floor(pl.stor[0].rooms.filter(o=>/^ref/.test(o.id)).reduce((t,o)=>t+o.m2,0)/3.5);
     const hubRows=[['Variant',`${HB.variant.main}${(HB.variant.flags||[]).length?', '+HB.variant.flags.join(', '):''}${HB.variant.sideDrive?', side drive':''}${HB.variant.lotType&&HB.variant.lotType!=='?'?' (lot type: '+HB.variant.lotType.replace('_','-')+')':''}${HB.variant.notBuilt.length?' · not built yet: '+HB.variant.notBuilt.join(', '):''}`],['Fallback ladder',`step ${HB.ladder.step}: ${HB.ladder.what}${HB.ladder.limiting.length?' · limiting: '+HB.ladder.limiting[HB.ladder.limiting.length-1].replace(/^step \d+ \([^)]*\): /,''):''}`],
-      ['Hall and MW',`${n0(HB.hall)} m² ÷ 630 m²/MW = ${HB.MW.toFixed(2)} MW · data centre ${n0(HB.dcArea)} m² (cap 2,325)`],['Refuge people',`${ppl} at 3.5 m² (minimum 50)`],['Clinic',HB.clin?`${n0(HB.clin)} m²`:'none'],
+      ['Hall and MW',`${n0(HB.hall)} m² ÷ 630 m²/MW = ${HB.MW.toFixed(2)} MW · data centre ${n0(HB.dcArea)} m² (cap 2,325). 630 m²/MW is the hub freeze’s figure, inside the air-cooled range of 560–640 (decisions log, 11 Nov 2026); Engineering sizes at the conservative 637`],['Refuge people',`${ppl} at 3.5 m² (minimum 50)`],['Clinic',HB.clin?`${n0(HB.clin)} m²`:'none'],
       ['T-reach (rule 15d)',TL.reach],['Dead ends (VBBL 3.3.1.9.(5), 6 m)',TL.dead],['T-width (room widths)',TL.width],['Shared lobby',lob?`${n0(lob.m2)} m² (drawing choice; ≥ 20 m², spec 15c)`:C.q()]];
     const cn=pl.counts, mins=pl.stor.flatMap(st=>st.rooms.filter(o=>o.parts[0]&&o.parts[0].min).map(o=>{ const m=o.parts[0].min; return `<tr><td>${esc(storeyLabel(st.z))} · ${esc(o.name)}</td><td>${n0(o.m2)} m² · min ${m.m2!=null?n0(m.m2)+' m²':'?'}${m.w!=null?', '+m.w+' m wide':''} · step ${m.step}${m.rank?' · rank '+m.rank:''}</td></tr>`; })).join('');
     return {draw,lead:'One plan per storey from the Emergency hub rule sheet: bands from the street back, one outline per storey, the public and secure lines kept apart. Every room numbered, with a schedule under it.',
-      hero:[{v:HB.MW.toFixed(1),u:'MW',l:'one hall storey'},{v:String(cn.nRooms),l:'rooms on '+zs.length+' storeys'},{v:TL.reach==='PASS'?'PASS':'fail',l:'T-reach',red:TL.reach!=='PASS'},{v:String(HB.ladder.step),l:'ladder step'}],
+      hero:[{v:HB.MW.toFixed(2),u:'MW',l:'one hall storey'},{v:String(cn.nRooms),l:'rooms on '+zs.length+' storeys'},{v:TL.reach==='PASS'?'PASS':'fail',l:'T-reach',red:TL.reach!=='PASS'},{v:HB.frozen?'board':String(HB.ladder.step),l:HB.frozen?'as frozen (EH-FREEZE-2026-11-11g)':'ladder step'}],
       rows:hubRows,meters:[],
       more:[['T-reach, dead ends and room widths',`<p>T-reach: ${esc(TL.reach)}</p><p style="margin-top:6px">Dead ends: ${esc(TL.dead)}</p><p style="margin-top:6px">T-width: ${esc(TL.width)}</p><p style="margin-top:8px;color:${K.mute}">tool/treach.js (Cowork’s reach.py, deadend.py, audit_rooms.py), run on this layout.</p>`],
         ['Room minimums: area, width, step, source',`<table class="${NS}tbl">${mins}</table><p style="margin-top:8px;color:${K.mute}">Steps (room minimums rule, J.B. 8 Nov): 1 code · 2 equipment and clearances · 3 guideline · 4 per-person rate × J.B.’s count · 5 precedent · 6 none (drawing choice).</p>`],
-        ['What the rule sheet chose',`<p>${Object.values(PL.rules).filter(r=>r&&r.why).map(r=>esc(r.why)).join('</p><p style="margin-top:6px">')}</p>`],
         ['What the plan flags',`<p>${PL.flags.length?PL.flags.map(esc).join('</p><p style="margin-top:6px">'):'Nothing.'}</p>`]],
-      src:[C.CONTEXT_SRC(x.city),SNSRC,`Plan: ${PL.version} (tool/hub.js) from spec Claude Link/eh/specs/emergency_hub.md parts 1–3 (final) and the room minimums rule (8 Nov 2026). Every size is a code or spec figure, or a drawing choice named in the rule sheet.`,'Checks: tool/treach.js (T-reach, dead ends, T-width).'],
+      src:[C.CONTEXT_SRC(x.city),SNSRC,`Plan: ${PL.version} (tool/hub.js) from the Emergency hub specification parts 1–3 (final) and the room minimums rule (8 Nov 2026). Every size is a code or spec figure, or a drawing choice named in the rule sheet.`,'Checks: the tool’s exit-route checks (T-reach, dead ends, T-width).'],
       missing:['outdoor air intakes (rule 9, not drawn)','truck turning (not checked)','fire department access and FDC','exterior steps at exits where the yard is lower']}; }
   const cn=pl.counts, zk=String(x.zone||''), dockGrade=dock&&Math.abs(dock.base||0)<0.1&&(/^I-2/.test(zk)||zk==='I-3')?{why:`strict reading of ${zk==='I-3'?'I-3 s. 2.2.11':'I-2 s. 2.2.7'} allows only entrances; the Emergency hub spec settles it`}:null;
   const noAccList=stor.flatMap(st=>st.rooms.filter(o=>o.flag).map(o=>`${esc(o.name)} (${storeyLabel(st.z)}): ${o.flag==='through'?'opens through '+esc(o.via):o.flag==='noway'?'no way in':'storey has no corridor or shared lobby'}`));
   const unsrc=[...new Set(stor.flatMap(st=>st.rooms.filter(o=>!o.sourced).map(o=>short(o.name))))];
   return {draw,lead:'One plan per storey: every room numbered, with a schedule under it. The plan shows the tool’s layout as it is, including rooms that open through other rooms.',
-    hero:[{v:mw!=null?mw.toFixed(1):C.q(),u:mw!=null?'MW':'',l:'IT load tested'},{v:String(cn.nRooms),l:'rooms on '+zs.length+' storeys'},{v:String(nExit),l:'exit doors drawn'},{v:String(cn.nNoAcc),l:'rooms without corridor access',red:cn.nNoAcc>0}],
+    hero:[{v:mw!=null?mw.toFixed(2):C.q(),u:mw!=null?'MW':'',l:'IT load tested'},{v:String(cn.nRooms),l:'rooms on '+zs.length+' storeys'},{v:String(nExit),l:'exit doors drawn'},{v:String(cn.nNoAcc),l:'rooms without corridor access',red:cn.nNoAcc>0}],
     rows:[['Rooms without corridor access',`${cn.nNoAcc}${cn.nNoCorr?` · ${cn.nNoCorr} of ${zs.length} storeys have no corridor or shared lobby`:''}`],['Data hall',hallM2!=null?`${n0(hallM2)} m², ${P.hall.storeys} storeys`:C.q()],['Loading bays inside',dock?String(dock.n):'none drawn'],['Doors drawn',String(nDoors)],['Shared lobby',C.q('no code source for its size')]].concat(dockGrade?[['Loading dock at grade',C.q(dockGrade.why)]]:[]),
     meters,
     more:[['Rooms without corridor access',`<p>${noAccList.length?noAccList.join('</p><p style="margin-top:6px">'):'None.'}</p><p style="margin-top:8px;color:${K.mute}">Read from the plan’s doors: a room whose doors all open into other rooms, or that has none; and every room on a storey with no corridor or shared lobby. The layout is not changed here.</p>`],

@@ -14,7 +14,7 @@ const META={}; const meta=async c=>META[c]||(META[c]=await BD.getJSON(`tiles/${c
 const NP='not published';
 const STAT={operating:'operating',approved:'approved',permitted:'permitted','use approved':'use approved',proposed:'proposed',rezoning:'rezoning',announced:'announced','plant approved':'plant approved',closed:'closed','?':'status not confirmed'};
 const solid=f=>f.status==='operating';
-const TYPE={tower:'inside a tower (floors in a building with other occupants)',standalone:'stand-alone building','?':'type not confirmed'};
+const TYPE={tower:'inside a shared building (floors or a suite in a building with other occupants)',standalone:'stand-alone building','?':'type not confirmed'};
 /* the picked facility, per city (R2 picks; R3 and R4 read it) */
 const PICK=BD.f1res=BD.f1res||{pick:{}};
 /* world position of a facility: Vancouver from its parcel (the tool's tile, centroid); Edmonton from the City permit geocode (engine.js P projection) */
@@ -201,7 +201,7 @@ function factRows(f){ const imp=/implausible/i.test(f.sizeText||'')?'; the inven
   return [['Name',f.name],['Operator',v(f.operator)],['Status',v(f.statusText)],['Address',(f.addr||'address not confirmed')+(f.addrNote?' ('+f.addrNote+')':'')+(f.placed?' · '+f.placed:'')+(f.alsoTenant?' · '+f.alsoTenant:'')],
     ['Type',TYPE[f.type]+(f.typeNote?' ('+f.typeNote+')':'')+(f.fenced?' · fenced site: '+f.fenced.text:'')],['Floors',f.floors?f.floors.text:(f.type==='standalone'?'the whole building':NP)],
     ['Size',sz],['Cooling and backup power',v(f.cooling)],['Heat reuse',v(f.heat)],['Who it serves',v(f.serves)],['Opened',v(f.opened)],['Building',v(f.building)]].map((r,i)=>i?[r[0],C.words(r[1])]:r); }   /* audit C12: source codes in words, no register ids or code names in the rows */
-const srcLine=f=>'This facility’s sources (register ids): '+(f.src||[]).concat((f.size&&f.size.src)||[],(f.floors&&f.floors.src)||[],(f.fenced&&f.fenced.src)||[]).filter((s,i,a)=>a.indexOf(s)===i).join(', ')+'.';
+const srcLine=f=>{ const ids=(f.src||[]).concat((f.size&&f.size.src)||[],(f.floors&&f.floors.src)||[],(f.fenced&&f.fenced.src)||[]).filter((s,i,a)=>a.indexOf(s)===i); return ids.length?'This facility’s sources (register ids): '+ids.join(', ')+'.':null; };
 C.add(T,'What it is',{async build(x){
   const f=await picked(x); if(!f) return {draw:'<p class="f1v-empty">No data centre on record in this city.</p>'};
   const B=f.inMap?await block(f):null, A=B?axo(f,B):null;
@@ -209,7 +209,37 @@ C.add(T,'What it is',{async build(x){
     :`<div style="max-width:560px;margin:40px auto"><p class="f1v-empty" style="text-align:left">${esc(f.name)} is not on the map: ${esc(f.addrNote||f.where||'its location is not confirmed')}.</p></div>`;
   return {noZoneFlag:true,draw,lead:`${f.name}${f.operator?', run by '+C.words(f.operator):''}: ${STAT[f.status]||f.status}. ${TYPE[f.type].charAt(0).toUpperCase()+TYPE[f.type].slice(1)}. Facts as the sources state them; missing ones are “not published”.`,
     rows:factRows(f).map(r=>[r[0],esc(r[1])]),
-    src:[SRC_INV,SRC_PLACE,srcLine(f),'3-D massing: Vancouver, the City of Vancouver LiDAR 2022 buildings with measured heights (tool tiles lid_*, checks/tests/lidar_to_tiles.py); Edmonton, the City footprints the tool holds. Floors drawn only where a source names them and gives the storey count, at height × floor ÷ storeys (our reading; J.B. 11 Nov 2026).'],missing:[]}; }});
+    src:[SRC_INV,SRC_PLACE,srcLine(f)].filter(Boolean).concat(['3-D massing: Vancouver, the City of Vancouver LiDAR 2022 buildings with measured heights (tool tiles lid_*, checks/tests/lidar_to_tiles.py); Edmonton, the City footprints the tool holds. Floors drawn only where a source names them and gives the storey count, at height × floor ÷ storeys (our reading; J.B. 11 Nov 2026).']),missing:[]}; }});
+
+/* ---------- R3b What's inside (J.B. 12 Nov 2026, board Res_R3b_Inside; Claude Link reports/resident_equip.py) ----------
+   The equipment the facility's sources name, drawn with the Engineering 3-D kit (tool/f1/kit/one_<kind>.png, rendered from kit3d.js by
+   checks/tests/kit_renders.js: generic units, not this facility's models). A part is shown only where a source names it; one no source names is
+   greyed, "not published". Specs not published read "?". Types only, never counts. */
+const PARTS=[
+ {k:'rack',n:'Servers in racks',does:'The computers. Almost all the power they draw leaves as heat.',needs:'power, cool air in front, warm air out the back',re:/server|rack|colocation|suite|cabinet|ft²|ft2|white space|IT load/i,always:true},
+ {k:'crah',n:'Cooling: room units',does:'Units along the walls or between the racks take the heat out of the room air into a water or glycol loop, or straight outdoors.',needs:'floor space beside the racks, a pipe or refrigerant loop, power',re:/CRAC|CRAH|in-row|perimeter|room unit|air handler|computer room air/i},
+ {k:'dry',n:'Cooling: outdoor units',does:'Dry coolers, chillers or towers release the heat to the outdoor air, usually on the roof or in a yard.',needs:'roof or yard space, open air around them, power; water for towers',re:/dry cooler|chiller|cooling tower|condenser|evaporat|free cooling|adiabatic/i,kAlt:t=>/chiller/i.test(t)?'chill':'dry'},
+ {k:'ups',n:'UPS (battery-backed power)',does:'Keeps the servers running in the seconds between a power cut and the generators starting.',needs:'its own room, cooling, batteries behind it',re:/\bUPS\b|uninterrupt/i},
+ {k:'battery',n:'Batteries',does:'Store the energy the UPS uses for those first minutes.',needs:'a fire-separated room, cooling',re:/batter|li-ion|lithium|VRLA/i},
+ {k:'genset',n:'Standby generators',does:'Diesel engines that take over when the grid fails; tested about once a month.',needs:'fuel on site, air, a place where noise and exhaust can go',re:/generator|genset|diesel/i},
+ {k:'transformer',n:'Utility power',does:'Feeds from the electric utility; transformers step the voltage down for the building.',needs:'a vault or pad, clearances, a utility connection',re:/\bkV\b|feeder|feed|substation|transformer|BC Hydro|EPCOR|utility power/i}];
+function partHere(f,P){ const txt=[f.cooling,f.sizeText,f.serves,f.building].filter(Boolean).join('; ');
+  if(!P.re.test(txt)) return P.always&&(f.src||[]).length?{here:'a data centre’s servers; rack count ?',src:'the facility’s listing'}:null;
+  const bits=txt.split(/;\s*/).filter(b=>P.re.test(b)).map(b=>C.words(b)).filter(Boolean);
+  const here=bits.join('; ').replace(/\s+/g,' ').slice(0,180);
+  const code=/\bOC\b/.test(txt)?'operator':/\bGOV\b/.test(txt)?'government record':/\bBRK\b/.test(txt)?'broker':/\bOBS\b/.test(txt)?'site visit (author)':'the facility’s sources';
+  return {here:here+(/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L|kWh|MWh|%)/.test(here)?'':'; size ?'),src:code,kind:P.kAlt?P.kAlt(txt):P.k}; }
+C.add(T,'What’s inside',{async build(x){
+  const f=await picked(x); if(!f) return {draw:'<p class="f1v-empty">No data centre picked.</p>'};
+  const rows=PARTS.map(P=>({P,h:partHere(f,P)}));
+  const tile=({P,h})=>`<figure class="f1c-res-part${h?'':' off'}"><img src="f1/kit/one_${h&&h.kind||P.k}.png" width="300" height="210" alt="${esc(P.n)}: a generic unit"><figcaption><b>${esc(P.n)}</b><span class="d">${esc(P.does)}</span><span class="n">Needs: ${esc(P.needs)}</span><span class="h">Here: ${h?esc(h.here).replace(/\?/g,'<i>?</i>'):'<i>not published</i>'}</span><span class="s">${h?esc(h.src):'no source names it'}</span></figcaption></figure>`;
+  const named=rows.filter(r=>r.h).length, SPEC=/\d[\d,.]*\s*(?:kW|MW|kV|kVA|ton|ft²|m²|L|kWh|MWh|%)/, specs=rows.filter(r=>r.h&&SPEC.test(r.h.here)).length;   /* a spec is a figure with a unit */
+  return {noZoneFlag:true,draw:`<div class="f1c-res-parts">${rows.map(tile).join('')}</div>`,
+    lead:`The equipment the sources name for ${f.name}, drawn as generic units: what each part does and what it needs. Types only, not counts; “?” where a spec is not published.`,
+    rows:[['Named by a source',`${named} of ${PARTS.length} parts`],['Specs published',specs?`${specs} with a figure; the rest read “?”`:'none: every spec reads “?”'],['Drawings','generic units from the Engineering 3-D kit, not this facility’s models'],['Heat reuse',esc(C.words(v(f.heat)))]],
+    more:[['How the parts connect: power in, heat out','<p>Power comes in from the utility through transformers, passes the UPS (batteries behind it, generators for longer outages) and reaches the servers. Almost all of it leaves the servers as heat: room units move it into a loop, and the outdoor units release it to the air unless a neighbour takes it.</p>'],
+          ['Why the specs are missing','<p>Operators publish little about their equipment; permits name units without sizes, and spec sheets are claims. The card shows what a source names and marks the rest “?”; nothing is estimated.</p>']],
+    src:[SRC_INV,srcLine(f),'Drawings: the Engineering 3-D kit (generic units at their real scale class), rendered one at a time; not this facility’s equipment. Parts: named only where the facility’s sources name them (types, not counts).'].filter(Boolean),missing:[]}; }});
 
 /* ---------- R4 Report ---------- */
 const SCOPE=s=>/IT/.test(s)?'MW of IT':/grid|requested|allocation/.test(s)?'MW requested or allocated from the grid':'MW of site capacity or design';
@@ -226,7 +256,7 @@ C.add(T,'Report',{async build(x){
   const AB=B?axo(f,B,{W:704,H:560}):null;
   const draw=`<div class="f1r-pages">${pg(1,f.name,`${AB?AB.svg:''}<p class="ld">${esc(f.operator?f.operator.split(' (')[0]+' · ':'')}${esc(STAT[f.status]||f.status)} · ${esc(f.addr||'no street address')}. ${esc(TYPE[f.type])}.</p>`)}${pg(2,'What it is',`<table class="f1c-res-t">${rows}</table>`)}${pg(3,'Where it is',A?`${A.svg}<p class="ld">${esc(A.label||'')}</p>`:`<p class="ld">Not on the map: ${esc(f.addrNote||f.where||'location not confirmed')}.</p>`)}${pg(4,'How it compares',p3)}${pg(5,'Sources',`<p class="ld">${esc(SRC_INV)}</p><p class="ld">${esc(SRC_PLACE)}</p><p class="ld">${esc(srcLine(f))}</p>`)}</div>
     <button class="f1c-mua-print" type="button" onclick="window.print()">Print the report</button>`;
-  return {noZoneFlag:true,draw,lead:'Five pages, as the Report_Res draft: cover, what it is, where it is, how it compares with the others in the city, and the sources. No comparisons to homes or cars (no sourced conversion). Print or save as PDF.',
+  return {noZoneFlag:true,draw,lead:'Five pages: cover, what it is, where it is, how it compares with the others in the city, and the sources. No comparisons to homes or cars (no sourced conversion). Print or save as PDF.',
     hero:[{v:'5',l:'pages'}],rows:[['Page 1','cover: the building in 3-D'],['Page 2','what it is, as the sources state it'],['Page 3','where it is'],['Page 4','one chart of the facilities with the same kind of size figure'],['Page 5','sources']],
-    src:[SRC_INV,SRC_PLACE,srcLine(f)],missing:[]}; }});
+    src:[SRC_INV,SRC_PLACE,srcLine(f)].filter(Boolean),missing:[]}; }});
 })();

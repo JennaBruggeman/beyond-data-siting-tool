@@ -13,7 +13,7 @@ const add=(tpl,title,spec)=>{ (REG[tpl]=REG[tpl]||{})[title]=spec; };
 const has=(tpl,title)=>!!(REG[tpl]&&REG[tpl][title]);
 const n0=x=>x==null||!isFinite(x)?'?':Math.round(x).toLocaleString('en-CA');
 const n1=x=>x==null||!isFinite(x)?'?':(Math.round(x*10)/10).toLocaleString('en-CA');
-const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
+const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se|Bc|Ubc|Yvr|Ymca|Ywca)\b/g,m=>m.toUpperCase()).replace(/\(BC Assessment; Address Not Shown\)/g,'(BC Assessment; address not shown)');
 /* the zones where a data centre is permitted, conditional or discretionary: the rows of tool/data/zones.json (the same test as the zone rule and job A1) */
 const ZR=()=>(BD.data&&BD.data.raw&&BD.data.raw.zones)||{ZV:{},ZE:{}};
 const zoneKey=(city,a)=>city==='van'?String(a[1]||'').trim():String(a[2]||a[1]||'').trim().split(/\s+/)[0].toUpperCase();
@@ -51,13 +51,16 @@ function meter(m){ const max=m.max||(m.lim?m.lim/0.87:Math.max(1,m.v||1)), pct=x
 const q=(why)=>({q:true,why:why||'not in the tool yet'});
 const val=v=>v&&v.q?`<b class="f1c-q" title="${esc(v.why)}">?</b><span class="f1c-qn">${esc(v.why)}</span>`:esc(v);
 /* render a built card into the shell's drawing area and panel body */
-function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=res.draw||'';
+/* audit H35: a range whose ends are equal prints as one figure ("42–42" -> "42") */
+const oneEnd=h=>String(h).replace(/(^|[^\d.,])(\d[\d,]*(?:\.\d+)?)–\2(?![\d.,])/g,'$1$2');
+function render(res,dr,pb,srcEl,tpl){ dr.innerHTML=oneEnd(res.draw||'');
   const hero=(res.hero||[]).length?`<div class="f1c-hero">${res.hero.map(h=>`<div data-fig="${esc(h.l||'')}"${h.k?` data-k="${esc(h.k)}"`:''} role="button" tabindex="0" title="Open the interactive logic diagram at this figure"><div class="v${h.red?' red':''}">${h.v&&h.v.q?'<b class="f1c-q">?</b>':esc(h.v)}${h.u?`<span>${esc(h.u)}</span>`:''}</div><div class="l">${esc(h.l)}${h.v&&h.v.q?' · not in the tool yet':''}</div></div>`).join('')}</div>`:'';
   const rows=(res.rows||[]).length?`<dl class="f1c-rows">${res.rows.map(r=>`<dt>${esc(r[0])}</dt><dd data-fig="${esc(r[0])}"${r[2]?` data-k="${esc(r[2])}"`:''} role="button" tabindex="0" title="Open the interactive logic diagram at this figure">${val(r[1])}</dd>`).join('')}</dl>`:'';
   const met=(res.meters||[]).map(meter).join('');
   const more=(res.more||[]).map(m=>`<details class="f1c-more"><summary>${esc(m[0])}</summary><div>${m[1]}</div></details>`).join('');
-  let M0=null; try{ M0=BD.model(); }catch(e){} const mix=tpl==='architecture'&&!res.noZoneFlag&&BD.archTest&&BD.archTest.mixRezone&&BD.archTest.mixRezone(), nz=!mix&&M0&&M0.Z&&M0.Z.notAllowed&&!res.noZoneFlag; /* Edmonton: a typology with public uses needs a rezoning on every lot (r_edm_mix_rezoning) */ /* the zone needs a rezoning (I-3 sub-area B; Edmonton zones without Major Industrial): every card says it is shown as if rezoned */
-  pb.innerHTML=(mix?`<p class="f1c-zflag"><span class="f1c-q">?</span> Needs rezoning: no Edmonton zone allows a data centre with public uses (IH and EETC: no Community, Health or Emergency Service; BE: no Major Industrial). Shown as if rezoned: a flagged option, not a prediction.</p>`:nz?`<p class="f1c-zflag"><span class="f1c-q">?</span> Not allowed here; rezoning needed. Shown as if rezoned: a flagged option, not a prediction.</p>`:'')+(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more;
+  let M0=null; try{ M0=BD.model(); }catch(e){} const first=!(BD.f1cardIndex>0);   /* audit K52: the rezoning banner once, on the workflow's first card (the header chip keeps saying it) */
+  const mix=first&&tpl==='architecture'&&!res.noZoneFlag&&BD.archTest&&BD.archTest.mixRezone&&BD.archTest.mixRezone(), nz=first&&!mix&&M0&&M0.Z&&M0.Z.notAllowed&&!res.noZoneFlag; /* Edmonton: a typology with public uses needs a rezoning on every lot (r_edm_mix_rezoning) */ /* the zone needs a rezoning (I-3 sub-area B; Edmonton zones without Major Industrial): every card says it is shown as if rezoned */
+  pb.innerHTML=oneEnd((mix?`<p class="f1c-zflag"><span class="f1c-q">?</span> Needs rezoning: no Edmonton zone allows a data centre with public uses (IH and EETC: no Community, Health or Emergency Service; BE: no Major Industrial). Shown as if rezoned: a flagged option, not a prediction.</p>`:nz?`<p class="f1c-zflag"><span class="f1c-q">?</span> Not allowed here; rezoning needed. Shown as if rezoned: a flagged option, not a prediction.</p>`:'')+(res.lead?`<p class="lead">${esc(res.lead)}</p>`:'')+hero+rows+met+more);
   if(srcEl) srcEl.innerHTML=`<summary>Sources and assumptions</summary><ul>${(res.src||[]).map(s=>`<li>${pubSrc(s)}</li>`).join('')}${(res.missing||[]).length?`<li class="f1c-miss">Not in the tool yet: ${esc(res.missing.join('; '))}</li>`:''}</ul>`; }
 /* the Architecture state the cards read (Ratios at the tool's defaults, the Emergency hub's programs, Arrange's placement), set up once per lot as
    checks/tests/export_layout.js does it: the lot sized as a worked example (flow.js findFit), Ratios at its own defaults, then the programs picked (refuge side by side,
@@ -103,7 +106,7 @@ function ctx(city){ const M=BD.model(), sel=BD.S.sel||{}, a=sel.a||[], key=zoneK
 const V1C=new WeakMap();
 const hubOnP=P=>!!(BD.hub&&P&&(P.boxes||[]).some(b=>b.id==='refuge')&&(!BD.arch||!BD.arch.typology||BD.arch.typology==='emergency_hub'));
 function v1(P){ if(!P) return null; if(V1C.has(P)) return V1C.get(P); let out=null;
-  try{ const H=hubOnP(P)?BD.hub.build(P):null, L=H&&H.hub;
+  try{ const H=hubOnP(P)?BD.hub.build(P):null, L=H&&H.hub; if(L&&!L.doesntFit&&BD.S.sel) BD.f1hubLast={id:BD.S.sel.id,nb:L.nb};   /* H39: the hub's bays, for the Municipal loading card on the same lot */
     if(L&&L.rooms){ const ra=r=>(r[1]-r[0])*(r[3]-r[2]), all=f=>Object.keys(L.rooms).reduce((t,st)=>t+(L.rooms[st]||[]).filter(f).reduce((a,x)=>a+x.r.reduce((b,r)=>b+ra(r),0),0),0);
       const dock=all(x=>x.id==='dock'&&x.block==='data centre');
       const areas={refuge:all(x=>/^ref/.test(x.id)&&x.block==='hub'),warming_shelter:all(x=>/^shel/.test(x.id)&&x.block==='hub'),clinic:L.clin||0,hall:L.hall,dock,support:Math.max(0,(L.dcArea||0)-L.hall-dock),dcAll:L.dcArea||0};
@@ -119,21 +122,32 @@ function budgetsV1(P){ const V=v1(P); if(!V) return BD.archTest.budgets(P);
 const V1CHIP='Draft plan · rule sheet v1';
 /* audit C12–C13 (12 Nov 2026): sources read as sources. Code names, file paths and chat names out; the author's decisions as "decision of the author,
    [date]"; the inventory's source codes in words. pubSrc also sets register ids in a small grey tag (kept for traceability). */
-const CODEW={OC:'operator',GOV:'government record',BRK:'broker',OBS:'observed',PR:'press release by the operator'};
+const CODEW={OC:'operator',GOV:'government record',BRK:'broker',OBS:'observed',PR:'press release by the operator',DIR:'directory listing',ENG:'engineer’s project sheet'};
+/* register ids (tool/data/register_ids.json, generated from the register): shown as small grey tags; any other code-like token (a function or field name) is dropped */
+let RIDS=null; const rids=()=>{ if(RIDS) return RIDS; RIDS=new Set(); try{ const x=new XMLHttpRequest(); x.open('GET','data/register_ids.json',false); x.send(null); if(x.status===200) RIDS=new Set(JSON.parse(x.responseText).ids||[]); }catch(e){} return RIDS; };
+const IDLIKE=/\b(?:[a-z][a-z0-9]*_[A-Za-z0-9_*]+|[a-z][a-z0-9]*[A-Z][A-Za-z0-9]*)\b/g;
+const UNITS=/^(?:kW|kWh|kWe|kWth|kVA|kV|dB|dBA|mW|mWh|mL|pH|eCO2|kPa|mJ|kJ|kN|kg|kgCO2e|tCO2e|gCO2e)$/;
+const isRid=m=>rids().has(m)||/\d/.test(m)||/_/.test(m)||/^(?:van|edm|bc|bch|ab|arch|metro|nrcan|statcan|cov|coe|od|eh)[A-Z]/.test(m);   /* in the register, or a source id: digits, underscores or a city or agency prefix (van6555s41c, arch_mun_vanZDB4, vanLibraries, bcCare) */
+const keepTok=m=>UNITS.test(m)||isRid(m);
 function pub(t){ let s=String(t==null?'':t).replace(/&quot;/g,'"').replace(/&amp;/g,'&');
   s=s.replace(/\bOBS\s+fieldJB\b/g,'site visit (author)').replace(/\bfieldJB\b/g,'site visit (author)').replace(/J\.B\.[’']s (?:own )?site visit/g,'site visit (author)');
   s=s.replace(/J\.B\.[’']s (?:final )?gate/g,'the author’s review').replace(/\bJ\.B\.,?\s+(\d{1,2}\s+[A-Z][a-z]{2}(?:\s+\d{4})?)/g,'decision of the author, $1').replace(/\bJ\.B\.[’']s\b/g,'the author’s').replace(/\bJ\.B\.(?=[\s,;:)])/g,'the author');
+  s=s.replace(/\s*\bvia\s+sources\/\d+\s*§\s*[\w.]+/g,'').replace(/\bsources\/\d+(?:\s*§\s*[\w.]+)?/g,'the source file');   /* K56 */
   s=s.replace(/\s*\(?\b(?:Cowork|main chat)(?:[’']s)?,?\s*(?:\d{1,2}\s+[A-Z][a-z]{2}(?:\s+\d{4})?)?\)?/g,'');
   s=s.replace(/(?:Claude Link\/)?(?:[\w.\-]+\/)*specs\/([\w\-]+)\.md/g,(m,n)=>'the '+n.replace(/_/g,' ').replace(/^\w/,c=>c.toUpperCase())+' specification');
-  s=s.replace(/(?:\b[\w.\-]+\/)*[\w\-*]+\.(?:json|geojson|csv)\b/g,'the tool’s data').replace(/\btool tiles [\w*]+/g,'the tool’s data').replace(/\btiles\/[\w\/*.\-]*/g,'the tool’s data');
+  s=s.replace(/(?:\b[\w.\-<>]+\/)*[\w\-*<>]+\.(?:json|geojson|csv)\b/g,'the tool’s data').replace(/\btool tiles [\w*]+/g,'the tool’s data').replace(/\btiles\/[\w\/*.\-<>]*/g,'the tool’s data');
   s=s.replace(/(?:Claude Link\s*\/?\s*)?\b(?:tool|checks|register|reports|eh|docs)\/[\w.\/*\-]+/g,'').replace(/\bClaude Link\b/g,'');
-  s=s.replace(/\b[\w\-*]+\.(?:json|geojson|csv)\b/g,'the tool’s data').replace(/\b[\w\-*]+\.(?:js|py|md)\b(?:\s+[a-z_][\w]*(?:\(\))?(?=[\s,;:).]|$))?/g,'').replace(/(the tool’s data)(?:[,;]?\s*(?:and\s+)?the tool’s data)+/g,'$1').replace(/\bBD\.[\w.]+(?:\(\))?/g,'');
-  s=s.replace(/\(\s*(?:[,;:·]\s*)*\)/g,'').replace(/\(\s*[,;:]\s*/g,'(').replace(/\s*[,;:]\s*\)/g,')').replace(/([,;])\s*[,;]+/g,'$1').replace(/\s+([,.;:)])/g,'$1').replace(/\(\s+/g,'(').replace(/\s{2,}/g,' ').replace(/^[\s,;:]+|[\s,;:]+$/g,'');
+  s=s.replace(/\b[\w\-*]+\.(?:js|py|md)\b(?:\s+[a-z_][\w]*(?:\(\))?(?=[\s,;:).]|$))?(?:\s*§\s*[\w.]+(?:\s+and\s+§\s*[\w.]+)?)?/g,'').replace(/\bthe research file\b[^,;.)]*/g,'');
+  s=s.replace(/\b(?:BD|Z|M|R|S|HS|ECON|C|F|L|P|T|A|PL|X|G)\.[A-Za-z_][\w.]*(?:\(\))?/g,'').replace(/\(\(\{[^)]*\}\)\)/g,'');   /* field and function references */
+  s=s.replace(IDLIKE,m=>keepTok(m)?m:'');
+  s=s.replace(/(the tool’s data)(?:\s*[,;\/]?\s*(?:and\s+)?the tool’s data)+/g,'$1');
+  /* tidy what the removals leave: empty brackets, dangling words and punctuation */
+  for(let k=0;k<3;k++) s=s.replace(/\(\s*(?:[,;:·\/]\s*)*\)/g,'').replace(/\(\s*[,;:]\s*/g,'(').replace(/\s*[,;:]\s*\)/g,')').replace(/\s+(?:from|through|by|in|with|of|via|as|and|or|to|on|at|through)\s*(?=[;,.)]|$)/g,'').replace(/:\s*[,;.]/g,':').replace(/:\s*(?=and\b)/g,': ').replace(/([,;])\s*[,;.]+/g,'$1').replace(/\s+([,.;:)])/g,'$1').replace(/\(\s+/g,'(').replace(/\s{2,}/g,' ');
+  s=s.replace(/:\s*and\s+/g,': ').replace(/:\s*\./g,'.').replace(/^[\s,;:]+|[\s,;:]+$/g,'').replace(/\s+\./g,'.');
   return s; }
-const RID=/\b(?:[a-z][a-z0-9]*_[A-Za-z0-9_]+|[a-z]+[A-Z][A-Za-z]*[0-9]{2,4}[a-z]?|(?:arch|bch|van|edm|lot|spec|res)[A-Z][A-Za-z0-9]+)\b/g;
-const pubSrc=t=>esc(pub(t)).replace(RID,m=>`<span class="f1c-rid">${m}</span>`);
+const pubSrc=t=>esc(pub(t)).replace(IDLIKE,m=>!UNITS.test(m)&&isRid(m)?`<span class="f1c-rid">${m}</span>`:m);
 /* the inventory's status words: "operating ? (OC arch_inv_x: ...; OBS fieldJB 11 Oct 2026)" -> "operating; not confirmed (operator: ...; site visit (author), 11 Oct 2026)" */
-function words(t){ let s=pub(t).replace(/\barch_inv_\w+:?/g,'').replace(/\b(OC|GOV|BRK|OBS|PR)\b(?=[\s:;,)])/g,(m,k)=>CODEW[k]).replace(/\s\?(?=[\s;,)]|$)/g,'; not confirmed');
+function words(t){ let s=pub(t).replace(/\barch_inv_\w+:?/g,'').replace(/\b(OC|GOV|BRK|OBS|PR|DIR|ENG)\b(?=[\s:;,)])/g,(m,k)=>CODEW[k]).replace(/\s\?(?=[\s;,)]|$)/g,'; not confirmed');
   return s.replace(/\(\s*(?:[,;:]\s*)*\)/g,'').replace(/\(\s*[,;:]\s*/g,'(').replace(/\s*[,;:]\s*\)/g,')').replace(/\s+([,.;:)])/g,'$1').replace(/\s{2,}/g,' ').replace(/(operator|government record|broker|observed)\s+(?=[;)])/g,'$1').trim(); }
 BD.f1cards={pub,pubSrc,words,context,CONTEXT_SRC,arch,eng,withAnswers,v1,budgetsV1,V1CHIP,EXAMPLE_PICKS,add,has,get:(tpl,title)=>REG[tpl]&&REG[tpl][title],render,ctx,K,meter,frame,pathOf,bbox,hit,scaleBar,allowed,zoneKey,dcStatus,q,n0,n1,esc,titleCase};
 })();
