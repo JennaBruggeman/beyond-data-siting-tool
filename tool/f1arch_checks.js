@@ -103,6 +103,8 @@ const PLC=new WeakMap();
 function noFitWhy(P){ const PL=planOf(P), H=PL&&PL.hub, lim=(H&&H.doesntFit&&H.doesntFit.limiting)||[], fl=((PL&&PL.flags)||(H&&H.flags)||[]).filter(f=>/^Not built yet: the turned|^Doesn.t fit/.test(f)&&!/^Doesn.t fit here/.test(f));
   return {lim, extra:fl, frozen:!!(H&&H.doesntFit&&H.doesntFit.frozen), head:hubOn(P)?(H&&H.doesntFit&&H.doesntFit.frozen?'The Emergency hub doesn’t fit on this lot: the frozen board fails.':'The Emergency hub doesn’t fit on this lot.'):'The tool has no layout for this lot.'}; }
 /* audit I41 (12 Nov 2026): where the hub doesn't fit, every card after Pick a typology shows this state (no figures for a building that isn't there) */
+/* item 1b: where the lot needs a layout the engine doesn't have yet, its figures are an estimate (null on the frozen boards) */
+BD.f1archEstimate=async x=>{ const P=await x.arch(); if(!P||!hubOn(P)) return null; const PL=planOf(P), H=PL&&PL.hub; return H&&!H.frozen&&!H.doesntFit&&H.estimate?H.estimate:null; };
 BD.f1archNoFit=async x=>{ const P=await x.arch(); if(!P||!hubOn(P)) return null; const PL=planOf(P); return PL&&PL.hub&&PL.hub.doesntFit?noFitCard(P):null; };
 function noFitCard(P){ const w=noFitWhy(P);
   const list=w.lim.length?`<ol class="f1c-nofit">${w.lim.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:`<p class="f1v-empty">The size search gave no reason (?).</p>`;

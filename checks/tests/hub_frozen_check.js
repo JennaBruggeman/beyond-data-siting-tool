@@ -1,4 +1,4 @@
-// The tool against freeze EH-FREEZE-2026-11-11g on the 13 board lots (J.B. 12 Nov 2026): opens each lot, builds the hub (tool/hub.js) and compares
+// The tool against freeze EH-FREEZE-2026-11-11g on the 13 board lots, and 11h's two (1425 Clark Dr, 10220 104 Ave NW) (J.B. 12 Nov 2026): opens each lot, builds the hub (tool/hub.js) and compares
 // MW, data-centre m² and the stopping rule with the freeze's per-board table, and says whether the frozen board was read (tool/data/hub_frozen_<city>.json).
 // Edmonton lots read their board only where the git-ignored hub_frozen_edm.json is present; otherwise the engine runs ("rule pending").
 // ENGINE=1: the 13-board rebuild test (J.B. 12 Nov, option 2): the hub engine alone (BD.hubEngineOnly), not the frozen boards, against the same table.
@@ -20,6 +20,8 @@ const LOTS = {   /* lot selection as checks/tests/hub_match.js; freeze 11g per-b
   E10004: { lab: '10004 167 Street NW', sel: { city: 'edm', tile: '-3_-1', id: '16765' }, f: [0.31, 805, 'not grown: only room left holds a roof chiller'] },
   E15231: { lab: '15231 118 Avenue NW', sel: { city: 'edm', tile: '-3_1', id: '149677' }, f: [1.20, 1367, 'plant yard, then travel distance'] },
   E16075: { lab: '16075 Fort Road NW', sel: { city: 'edm', tile: '3_3', id: '980987' }, f: [0.95, 1179, 'plant yard'] },
+  V1425: { lab: '1425 Clark Dr', sel: { city: 'van', tile: '2_1', id: '23060741' }, f: [1.82, 2325, 'floor cap'] },   /* EH-FREEZE-2026-11-11h */
+  E10220: { lab: '10220 104 Ave NW', sel: { city: 'edm', tile: '0_0', id: '966135' }, f: [1.89, 1798, 'drawn plant (roof chillers)'] },
 };
 const new_ = { built: 'new', extent: 'whole', floor: '' };
 (async () => {

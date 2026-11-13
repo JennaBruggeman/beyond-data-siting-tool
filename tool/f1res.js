@@ -160,11 +160,13 @@ function axo(f,B,o){ o=o||{}; const W=900,H=640, small=!!o.small;
   const pts=Q=>Q.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
   const ply=(Q,fill,st,sw,dash)=>`<polygon points="${pts(Q)}" fill="${fill}" stroke="${st}" stroke-width="${sw}"${dash?` stroke-dasharray="${dash}"`:''} stroke-linejoin="round"/>`;
   const ln=(a,b,col,sw)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${col}" stroke-width="${sw}"/>`;
-  const INK=K.ink||'#18191B', MUTE=K.mute||'#75746F', st=storeysOf(f), fl=(f.floors&&f.floors.list)||[], num=fl.filter(v=>typeof v==='number').sort((a,b)=>a-b), below=fl.filter(v=>typeof v!=='number');
+  const INK=K.ink||'#18191B', MUTE=K.mute||'#75746F', st0=storeysOf(f), fl=(f.floors&&f.floors.list)||[], num=fl.filter(v=>typeof v==='number').sort((a,b)=>a-b), below=fl.filter(v=>typeof v!=='number');
   let svg=`<rect width="${W}" height="${H}" fill="#F6F5F2"/>`, ghosts='', lab='', label=null;
   if(B.par){ const pp=ccwP(B.par.map(fn)); svg+=ply(pp.map(q=>S(q[0],q[1],0)),'#FFFFFF',INK,1,'8 3 1.5 3'); }
   const mine=its.filter(z=>z.it.mine), tb=me?ccwP(hull(mine.flatMap(z=>sil(z.P,z.h)))):null, tA=tb?Math.abs(areaP(tb)):0, dep=me?(cenP(me.P)[0]+cenP(me.P)[1]):-1e9;
   const ek=(a,b)=>Math.round(a[0]*20)+','+Math.round(a[1]*20)+'>'+Math.round(b[0]*20)+','+Math.round(b[1]*20), inner=new Set(); for(const z of mine) for(let i=0;i<z.P.length;i++) inner.add(ek(z.P[i],z.P[(i+1)%z.P.length]));
+  /* K57 (J.B. 12 Nov 2026): where no source gives the storey count, it is estimated at 4 m a storey from the building's height (our reading) */
+  const stEst=!st0&&me&&num.length?Math.max(1,Math.round(me.h/4)):null, st=st0||stEst;
   const mode=!me?null:f.type==='standalone'?'whole':f.type==='?'?'outline':(fl.length&&st&&num.length)?'floors':(below.length&&!num.length)?'below':'tint';
   for(const z of its.slice().sort((a,b)=>(cenP(a.P)[0]+cenP(a.P)[1])-(cenP(b.P)[0]+cenP(b.P)[1]))){ const P=z.P, h=z.h, isMe=!!z.it.mine, c=cenP(P);
     if(!z.it.tgt&&me&&c[0]+c[1]>dep){ const o2=clipC(ccwP(sil(P,h)),tb); if(o2.length>2&&Math.abs(areaP(o2))>0.02*tA){   /* would hide the named building */
@@ -185,7 +187,7 @@ function axo(f,B,o){ o=o||{}; const W=900,H=640, small=!!o.small;
       const op=f.operator?String(f.operator).split(' (')[0]:'', nm0=op&&op.length<=20&&!/['’"]/.test(op)&&!String(f.name).includes(op)?op+' '+f.name:f.name, nm=nm0.length>30?nm0.slice(0,29)+'…':nm0, t1=mode==='floors'?`Floor${num.length>1?'s':''} ${num.join(', ')}: ${nm}`:nm;
       const t2=[f.addr,(/(Harbour Centre|TELUS Garden|[A-Z][\w’']+ (?:Centre|Tower|Building|Place))/.exec(f.building||'')||[])[1]].filter(Boolean).join(', ');
       if(!small) lab=ln([lx,ly],[W-230,ly],INK,0.8)+`<text x="${W-222}" y="${(ly-4).toFixed(1)}" font-size="14" fill="${INK}">${esc(t1)}</text>`+(t2?`<text x="${W-222}" y="${(ly+13).toFixed(1)}" font-size="12" fill="${MUTE}">${esc(t2)}</text>`:'');
-      label=mode==='floors'?`Floor${num.length>1?'s':''} ${num.join(', ')} of ${st}, our reading`:mode==='whole'?'the whole building':mode==='outline'?'type not confirmed: outline only':mode==='below'?`${below.join(', ')} (below grade; drawn as a band at ground level)`:fl.length?`data centre inside: floors ${fl.join(', ')} named, the storey count not published, so not placed`:'data centre inside: floors not published'; } }
+      label=mode==='floors'?(stEst?`Floor${num.length>1?'s':''} ${num.join(', ')} of about ${st} (storey count not published: estimated at 4 m a storey from the building’s height, our reading)`:`Floor${num.length>1?'s':''} ${num.join(', ')} of ${st}, our reading`):mode==='whole'?'the whole building':mode==='outline'?'type not confirmed: outline only':mode==='below'?`${below.join(', ')} (below grade; drawn as a band at ground level)`:fl.length?`data centre inside: floors ${fl.join(', ')} named, the storey count not published, so not placed`:'data centre inside: floors not published'; } }
   svg+=ghosts+lab;
   if(!me) label='no building footprint found at this location in the City data (?)';
   const src=B.lidar?`Buildings: City of Vancouver LiDAR 2022, within ${R3} m. Buildings that would hide it: footprint and dashed outline.`:`Buildings: City of Edmonton footprints and heights, within ${R3} m. Buildings that would hide it: footprint and dashed outline.`;

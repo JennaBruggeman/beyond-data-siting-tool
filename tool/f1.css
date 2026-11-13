@@ -347,3 +347,6 @@ div:has(> .f1p-set) > .f1c-key{display:none}
 .f1c-res-part .s{font-size:11px;color:var(--f-faint)}
 .f1c-res-part.off{opacity:.7}
 .f1c-res-part.off img{opacity:.35;filter:grayscale(1)}
+
+/* item 1b: an engine estimate on a lot that needs a layout the engine does not have yet */
+.f1c-est{display:block;font-weight:400;color:var(--f-red);margin-bottom:6px}

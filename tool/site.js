@@ -390,7 +390,7 @@ function frontYard(m){ const F=m.F, dir=m.dir, sf=m.serverFoot&&m.sizedTo&&!m.si
   if(!D.length) return;
   const fr=(m.edgeYards||[]).find(e=>e.kind==='front'), dMin=Math.min(...D), dMax=Math.max(...D), m2=Math.round(D.reduce((a,b)=>a+b,0)*0.5);
   m.frontYard={m2,dMin,dMax,public:dMin>=6,toStreet:fr?fr.abuts==='street':null,beside:!!m.sideDrive,capFront:m.capFront||0,
-    heat:'covered beds and heated paths fed by data-centre heat (J.B. gate 10 Nov; figures ? until the heat cascade research)', why:'F8 (J.B.’s gate passed 10 Nov 2026, GATE_front_public_yard): building against the plant yard; depth from the building face to the front yard line, every 0.5 m across the building (our arithmetic); public yard ≥ 6 m deep (J.B. 10 Nov, drawing choice); maximum front setback not read (?); noise at the yard not checked (?)'}; }
+    heat:'covered beds and heated paths fed by data-centre heat (J.B. gate 10 Nov; figures ? until the heat cascade research)', why:'the author’s review, 10 Nov 2026: building against the plant yard; depth from the building face to the front yard line, every 0.5 m across the building (our arithmetic); public yard ≥ 6 m deep (J.B. 10 Nov, drawing choice); maximum front setback not read (?); noise at the yard not checked (?)'}; }
 
 /* LOTLINES 4 Nov 2026 (part 2): the yard of every lot line, from its class (lotside.js classify). Vancouver, and Edmonton zones without a by-abutment table:
    front, rear and side from the zone; a flanking line takes the front yard where the schedule says so (I-2 sub-area B, I-3, FC-2; register

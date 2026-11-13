@@ -49,6 +49,7 @@ const RULES = {
   largeW: { w: 60, why: 'beside variant: the building takes at most 60 m of frontage; on wider lots the rest of the land stays open (spec Part 2 large lot; drawing choice, F2b 9 Nov 2026: at 85 m the data-centre travel on 14715 Yellowhead Trail was 46.7 m, over 45 m)' },
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
+  lineOn: false,   /* EH-FREEZE-2026-11-11e building line in the stacked layout: written, off until the storey-2 re-plan (J.B. 12 Nov 2026) */
   narrow: { wMax: 20, dS: 3.0, dO: 3.5, dA: 5.2, pl: 1.5, why: 'narrow lots (F2b, 10 Nov 2026, as the 1330 Glen Dr and 8238 Fraser St hand fits): where the stacked rows do not fit across a lot under 20 m wide, the hub bands run back from the street: refuge and shelter strip | public corridor | 3.0 m service strip, the lobby across the corridor and service strip at the street; overflow rooms in a 3.5 m pocket of the refuge strip on the corridor; the data-centre entrance row and the bays at the rear (with a side drive: a 5.2 m row only as wide as the bays, stair S2 and lift E2 turned across, the dock and vestibule behind them, the plant yard behind the refuge, as the 1330 hand fit; with no drive: across the lot, stair S2 along the exit passage); the hall only over the hub, the rear two storeys with chillers on their roof (all drawing choices); the refuge held at the spec size, the rest of its strip open ground, not built (J.B. 10 Nov)' },
   base: { why: 'base surface: the corner grades joined by triangles; both triangulations computed (fans from neighbouring corners: on a four-corner lot the two diagonals) and the lower surface used under the building (Z&D s. 2 joins the corner grades; J.B. 8 Nov, our reading)' },
 };
@@ -208,9 +209,10 @@ function layout(S0) {
     res.doesntFit = { limiting: [why0] }; res.variant = variant; flags.push('Doesn’t fit here: ' + why0 + ' (?)'); return res; }
 
   const H = RULES.storeyH, ground = van ? (I2 ? 6.1 : 6.0) : H.hall;
-  const lad = [{ k: 1, t: 'full program', exams: 13, shelter: true, shared: false }, { k: 2, t: 'clinic 13 → 5 exam rooms', exams: 5, shelter: true, shared: false },
-    { k: 3, t: 'no clinic', exams: 0, shelter: true, shared: false }, { k: 4, t: 'shelter merged into the refuge (day)', exams: 0, shelter: false, shared: false },
-    { k: 5, t: 'shared loading by approval (Parking By-law 5.1.5)', exams: 0, shelter: false, shared: true }];
+  /* H38 (J.B. 12 Nov 2026): step 1 is the spec's full program with 5 exam rooms; the old 13-room step and the 13 → 5 step are gone (steps renumbered) */
+  const lad = [{ k: 1, t: 'full program (5 exam rooms)', exams: 5, shelter: true, shared: false },
+    { k: 2, t: 'no clinic', exams: 0, shelter: true, shared: false }, { k: 3, t: 'shelter merged into the refuge (day)', exams: 0, shelter: false, shared: false },
+    { k: 4, t: 'shared loading by approval (Parking By-law 5.1.5)', exams: 0, shelter: false, shared: true }];
   const ladder = extra => { const why = [];
     for (const st of lad) {
       const tryMW = mw => { const X = (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {})); X.mwUsed = mw; return X; };
@@ -227,6 +229,8 @@ function layout(S0) {
       if (L.plant && !L.plant.ok) { why.push(`step ${st.k} (${st.t}): plant does not fit (${L.plant.why})`); continue; }
       if (big0 && L.plant && L.plant.ok && L.MW < big0.MW - 1e-3 && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'plant yard', at: L.MW, tried: big0.MW, why: big0.why };
         flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard stops it at ${L.MW.toFixed(2)} MW (at ${big0.MW.toFixed(2)} MW: ${big0.why}; J.B. 12 Nov 2026)`); }
+      if (L.lineCut && !L.sizeStop && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'building line', at: L.MW, why: `upper storeys stay within the ground-floor building line (the back of the loading bays, ${L.Dline} m from the front); the truck court behind is open to the sky` };
+        flags.push(`Data centre smaller than the 2,325 m² floor cap: the building line stops it at ${L.MW.toFixed(2)} MW (upper storeys within the storey-1 outline, nothing over truck ground: EH-FREEZE-2026-11-11e)`); }
       if (notGrown && !S.mwExact) L.notGrown = true;
       if (L.notGrown && !flags.some(f => /rule pending \(11g\)/.test(f))) flags.push('Data centre not grown to the floor cap: Edmonton at-grade growth rule pending (11g); sized at the tool’s tested size (EH-FREEZE-2026-11-11f)');
       L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
@@ -311,7 +315,7 @@ function stackedRows(C) {
       return { rItems: rI, pr: prr }; };
     /* storey 1, front row: refuge (grows) | day shelter | [overflow rooms] | lobby on the drive side (spec 15c: one wall on the main street).
        F2b (9 Nov 2026): the front row deepens until it fits (it was one depth only), the lobby narrows on narrow lots (RULES.lobby.ws), rooms
-       that overflow the service row move beside the refuge (RULES.overflow), and when the clinic is dropped (ladder step 3 on) its stairs P1, P2
+       that overflow the service row move beside the refuge (RULES.overflow), and when the clinic is dropped (ladder step 2 on) its stairs P1, P2
        and lift E1 are not built: the floor over the hub is unassigned data-centre floor off the secure corridor */
     const OVF = ['off', 'fa', 'cot'];
     let F, dF, fItems, rItems, pr, lobW;
@@ -320,7 +324,7 @@ function stackedRows(C) {
       const ovfItems = ovf.map(id => id === 'off' ? { id: 'off', n: 'Staff office (shared)', k: 'proom', w: PRG.off.w, m2: PRG.off.m2, ovf: true } : id === 'fa' ? { id: 'fa', n: 'First aid', k: 'proom', w: PRG.fa.w, m2: PRG.fa.m2, ovf: true } : { id: 'cot', n: 'Cot and supply storage', k: 'proom', w: sm, ovf: true });
       let pf = null;
       for (lobW of RULES.lobby.ws) {
-        fItems = [{ id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 4)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2, grow: true }]
+        fItems = [{ id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 3)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2, grow: true }]
           .concat(st.shelter ? [{ id: 'shel', n: 'Warming shelter rest area (day)', k: 'shelter', w: 4.0, m2: PRG.shelter.m2 }] : []).concat(ovfItems)
           .concat([{ id: 'lob', n: 'Shared lobby', k: 'lobby', w: lobW, m2: RULES.lobby.m2 }]);
         const minF = (PRG.refuge.m2 + (st.shelter ? PRG.shelter.m2 : 0)) / Math.max(1, W - lobW);
@@ -349,9 +353,16 @@ function stackedRows(C) {
   const aB = B.aB, cores = 2 * SW * SL + RULES.e2.w * RULES.e2.l;
   const hallNeed = HPM() * C.mw;
   let Da = up1((hallNeed + cores) / W);
-  const minDa = r2(aB + RULES.dcFront.d + RULES.cor.w + 6.0);   // a storey-2 back row of at least 6 m (drawing choice)
-  Da = Math.max(Da, minDa, r2(aB + B.bayL + 0.1));
-  if (Da > C.aMax) { Da = Math.floor(C.aMax * 10) / 10; if (Da < minDa) return { fail: `the lot is ${C.aMax} m deep inside the yards and depth limit; the stacked hub needs ${minDa} m` }; }
+  /* EH-FREEZE-2026-11-11e building line (J.B. 12 Nov 2026, milestone 1 item 1a): upper floors stay within the ground-floor building line and nothing
+     stands over truck ground. The line is the back face of the loading bays (aB + bay length): the bays sit under the building, the truck court
+     behind them is open to the sky. The storey-2 back row takes what the line leaves (6 m where it can, drawing choice; at least 3 m, as the 339
+     board's 4.6 m row). */
+  const Dline = r2(aB + B.bayL), minDa0 = r2(aB + RULES.dcFront.d + RULES.cor.w + 6.0), minDa = RULES.lineOn ? Math.min(minDa0, Dline) : minDa0;   /* a storey-2 back row of at least 6 m (drawing choice) */
+  if (RULES.lineOn && Dline < r2(aB + RULES.dcFront.d + RULES.cor.w + 3.0)) return { fail: `the building line (the back of the loading bays, ${Dline} m) leaves under 3 m for the storey-2 back row` };
+  /* switched off (RULES.lineOn): with it, storey 2 behind the hub is one 10 m band and its rooms do not fit on any stacked lot; the storey-2 re-plan
+     needs the board's ground plan (clinic stairs near the front), not built yet. Until then the overhang is labelled (variantNeed: 'line') */
+  let lineCut = RULES.lineOn && Da > Dline + 1e-6; if (RULES.lineOn) Da = Math.min(Math.max(Da, minDa), Dline); else Da = Math.max(Da, minDa0, r2(aB + B.bayL + 0.1));
+  if (Da > C.aMax) { lineCut = false; Da = Math.floor(C.aMax * 10) / 10; if (Da < minDa) return { fail: `the lot is ${C.aMax} m deep inside the yards and depth limit; the stacked hub needs ${minDa} m` }; }
   /* width over the full depth (slanted yard lines) */
   sp = C.spanOver(0, Da); if (!sp) return { fail: 'no width over the building depth' };
   if (r2(sp[1] - sp[0]) < W - 0.01) { W = r2(sp[1] - sp[0]); B = build(W, Da); if (B.fail) return B; }
@@ -359,7 +370,7 @@ function stackedRows(C) {
   C.mapUV = (a, b) => [C.uOf(C.a0 + a), bOrigin + C.sv * b];
   const L = stackedRest(C, B, W, Da, true);
   if (L.fail) return L;
-  Object.assign(L, { W, Da, bOrigin });
+  Object.assign(L, { W, Da, bOrigin, lineCut, Dline });
   /* hub cap: data centre ≤ 2,325 m² */
   let guard = 0; while (L.dcArea > RULES.cap.m2 + 0.5 && guard++ < 60) { const Da2 = r2(L.Da - 0.5); if (Da2 < minDa) break; const L2 = stackedRest(C, B, W, Da2, true); if (L2.fail) break; Object.assign(L2, { W, Da: Da2, bOrigin }); Object.assign(L, L2); L.capped = true; }
   /* 10 Nov 2026 fix (J.B.: the cap holds on every lot; 1515 Boundary Rd was 3,392 m²): where the depth can't come down further, the building narrows
@@ -476,7 +487,7 @@ function stackedRest(C, B, W, Da, noPlant) {
   const dcArea = sum(R.filter(x => x.block === 'data centre' && x.kind !== 'bay').map(x => sum(x.r.map(ra)))) + sum(R2.filter(x => x.block === 'data centre' || (x.block === 'spare' && x.r[0][0] >= aB - 0.01)).map(x => sum(x.r.map(ra)))) + sum(R3.map(x => sum(x.r.map(ra))));
   const rooms = { 1: R, 2: R2, 3: R3 };
   const H = [C.ground, RULES.storeyH.up, RULES.storeyH.hall];
-  const truck = { court: [r2(aB + bayL), r2(Da + RULES.aisle.w), 0, W], covered: [r2(aB + bayL), Da, 0, W], why: 'bays open to a covered truck court under storeys 2–3, reached from the drive; 6.1 m yard aisle behind the building (Parking By-law 5.4.1 aisle; drawing choice)' };
+  const truck = { court: [r2(aB + bayL), r2(Math.max(Da, aB + bayL) + RULES.aisle.w), 0, W], covered: Da > aB + bayL + 0.01 ? [r2(aB + bayL), Da, 0, W] : null, why: Da > aB + bayL + 0.01 ? 'bays open to a covered truck court under storeys 2–3 (?: over truck ground, against the 11e building line)' : 'bays under the building, open to a truck court behind it, open to the sky (EH-FREEZE-2026-11-11e building line); 6.1 m aisle (Parking By-law 5.4.1; drawing choice)' };
   const plant = noPlant ? null : plantLayout(C, W, Da, MW, rooms);   /* noPlant: the cap's depth search (12 Nov 2026, speed): the plant is placed once on the depth kept */
   return { rooms, H, hall, MW, dcArea, hubArea, clin, nb, nDC, nRef, nCl, clinWhy, shared: st.shared, truck, plant, aB, aC, aR, dF, kind: 'stacked', storeyNames: ['Hub at grade; data-centre entrance rooms only', 'Clinic over the hub; data-centre support', 'One data-hall storey'] };
 }
@@ -549,7 +560,7 @@ function narrowLot(C) {
   let a = lobD; const pocketR = [lobD, r2(lobD + sum(pocket.map(len))), r2(Wr - dO), Wr];
   pocket.forEach(x => { const l = len(x); hubRoom(x.id, x.n, x.k === 'plant' ? 'plant' : 'pub', x.k, [[a, r2(a + l), r2(Wr - dO), Wr]], { prog: x.id, ovf: true }); a = r2(a + l); });
   const aEr = P.aRef, aOpen = r2(aEr + shL);
-  hubRoom('ref', st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 4)', 'pub', 'proom', subAll([[0, aEr, 0, Wr]], [S1r].concat(pocket.length ? [pocketR] : [])).sort((x, y) => x[0] - y[0] || x[2] - y[2]), { prog: 'refuge' });   /* street piece first (its street door) */
+  hubRoom('ref', st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 3)', 'pub', 'proom', subAll([[0, aEr, 0, Wr]], [S1r].concat(pocket.length ? [pocketR] : [])).sort((x, y) => x[0] - y[0] || x[2] - y[2]), { prog: 'refuge' });   /* street piece first (its street door) */
   if (st.shelter) hubRoom('shel', 'Warming shelter rest area (day)', 'pub', 'proom', [[aEr, aOpen, 0, Wr]], { prog: 'shelter' });
   const openR = aE - aOpen > 0.01 ? [aOpen, aE, 0, Wr] : null;   /* open ground at grade (not built), under storey 2 */
   hubRoom('lob', 'Shared lobby', 'circ', 'lobby', [[0, lobD, Wr, P.W]], { prog: 'lobby' });
@@ -653,7 +664,7 @@ function besideW(C, W) {
   const { st, van } = C, cw = RULES.cor.w, sm = RULES.smallRoom.w, wcm = RULES.wcMod.w, pw = RULES.pexit.w; let sp;
   const R = [];
   /* front row: hub exit passage | refuge (grows) | shelter | lobby | clinic exit passage | waiting | exams | procedure | office | staff | storage */
-  const hubI = [{ id: 'pas', n: 'Exit passage from the public corridor to the street', k: 'exitpas', fix: pw }, { id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 4)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2 }]
+  const hubI = [{ id: 'pas', n: 'Exit passage from the public corridor to the street', k: 'exitpas', fix: pw }, { id: 'ref', n: st.shelter ? 'Refuge main room' : 'Refuge main room, day shelter merged (ladder step 3)', k: 'refuge', w: 4.0, m2: PRG.refuge.m2 }]
     .concat(st.shelter ? [{ id: 'shel', n: 'Warming shelter rest area (day)', k: 'shelter', w: 4.0, m2: PRG.shelter.m2 }] : []).concat([{ id: 'lob', n: 'Shared lobby', k: 'lobby', w: RULES.lobby.w }]);
   const clI = st.exams > 0 ? [{ id: 'wait', n: 'Clinic waiting, reception', k: 'croom', w: PRG.wait.w, p: 'wait' }, { id: 'pas2', n: 'Clinic exit passage to the street', k: 'exitpas', fix: pw }]
     .concat(Array.from({ length: st.exams }, (_, i) => ({ id: 'ex' + (i + 1), n: 'Exam room ' + (i + 1), k: 'croom', w: PRG.exam.w, m2: PRG.exam.m2, p: 'exam' })))
@@ -1104,10 +1115,23 @@ function grown(S) {
       return { L, S: S1 }; } }
   L0.flags.push('Exit spacing fails at the 2,325 m² floor cap and at every size tried down to 1 MW less: kept at the cap with the failure shown (?)');
   return { L: L0, S }; }
+/* variant check (J.B. 12 Nov 2026, milestone 1 item 1b): the layouts a lot needs that the engine does not have yet (tool/data/variant_need.json, from
+   checks/tests/variant_census.py; a lot not in it is read from its lot type only), and, on a stacked lot, upper storeys over the truck court (the 11e
+   building line waits for the storey-2 re-plan). Where any applies, the engine's figures are an estimate and the cards say so. */
+let VNEED = null;
+const VNAMES = { line: 'upper storeys within the building line (the engine’s storeys 2–3 still reach over the truck court)' };
+function variantNeed(S, L) { if (VNEED === null) { VNEED = {}; try { if (root && typeof XMLHttpRequest !== 'undefined') { const x = new XMLHttpRequest(); x.open('GET', 'data/variant_need.json', false); x.send(null); if (x.status === 200) VNEED = JSON.parse(x.responseText); }
+    else if (typeof require !== 'undefined') { const fs = require('fs'), path = require('path'), f = path.join(__dirname, 'data', 'variant_need.json'); if (fs.existsSync(f)) VNEED = JSON.parse(fs.readFileSync(f, 'utf8')); } } catch (e) { VNEED = {}; } }
+  const N = Object.assign({}, VNEED.names || {}, VNAMES), city = S.city; let keys = ((VNEED[city] || {})[String(S.id)] || null);
+  if (!keys) { const t = S.lotType && S.lotType.type; keys = city === 'edm' ? ['growyard'].concat(t === 'small' ? ['small'] : t === 'wide_shallow' ? ['turned'] : t === 'narrow_deep' ? ['narrowdeep'] : t === 'irregular' ? ['wide'] : [])
+    : t === 'small' ? ['small'] : t === 'wide_shallow' ? ['rearplant'] : t === 'irregular' ? ['wide'] : []; }
+  keys = keys.slice(); if (L && L.kind === 'stacked' && L.truck && L.truck.covered && !keys.length) keys.push('line');
+  return keys.length ? { keys, names: keys.map(k => N[k] || k) } : null; }
 function fromSite(S0) {
   const G = grown(S0), S = G.S; let L = G.L;
   if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop && !L.sizeStop) { L.sizeStop = L1.sizeStop; const ff = L1.flags.find(f => /^Data centre smaller than the 2,325 m² floor cap/.test(f)); if (ff) L.flags.push(ff); } }
   if (L.rooms && !L.v2) withV2(L, S);
+  if (L.rooms) { L.estimate = variantNeed(S, L); if (L.estimate) L.flags.push('Estimate: this lot needs a layout the engine doesn’t have yet (' + L.estimate.names.join('; ') + '). The figures are the engine’s own layout, not a fit.'); }
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
 }

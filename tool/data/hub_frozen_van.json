@@ -12269,6 +12269,2297 @@
 ],
 "board": "ic43/TestFit_EH_V1360.dc.html",
 "boardSha16": "5c134f6a1179eb78"
+},
+"23060741": {
+"key": "V1425",
+"reg": {
+"th": -1.570796,
+"mirror": false,
+"t": [
+3010.85,
+2459.0
+],
+"rms": 0.0,
+"deg": -90.0
+},
+"addr": "1425 Clark Dr",
+"id": "23060741",
+"freeze": "EH-FREEZE-2026-11-11h",
+"MW": 1.82,
+"dcArea": 2325,
+"stop": "floor cap",
+"grownMW": 1.819,
+"grownDC": 2325.0,
+"stopText": "held at the 2,325 m² floor cap (data centre 2,325.0 m²): exits and plant pass at the cap",
+"hallDrawn": 1145.8,
+"hpm": 630.0,
+"H": [
+6.1,
+4.0,
+6.0
+],
+"SLAB": 4.6,
+"LOTPOLY": [
+[
+71.0,
+-0.85
+],
+[
+71.0,
+43.15
+],
+[
+46.5,
+43.65
+],
+[
+47.5,
+78.15
+],
+[
+-13.0,
+78.65
+],
+[
+-14.5,
+0.15
+]
+],
+"S": {
+"1": [
+{
+"id": "p2",
+"n": "Stair P2 (clinic)",
+"g": "circ",
+"r": [
+[
+0.62,
+3.2,
+0.0,
+6.9
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "ref",
+"n": "Refuge main room",
+"g": "pub",
+"r": [
+[
+4.4,
+22.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "lob",
+"n": "Shared lobby, floor sloped at the door",
+"g": "circ",
+"r": [
+[
+22.0,
+27.4,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "p1",
+"n": "Stair P1 (clinic)",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+0.0,
+6.9
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "psh",
+"n": "Programs shaft",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+6.9,
+8.6
+]
+],
+"core": true
+},
+{
+"id": "e1",
+"n": "Lift E1 (public, storeys 1-2)",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+8.6,
+12.0
+]
+],
+"core": true
+},
+{
+"id": "shel",
+"n": "Warming shelter rest area (day)",
+"g": "pub",
+"r": [
+[
+30.0,
+40.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "ref2",
+"n": "Refuge, second room (grown into spare floor)",
+"g": "pub",
+"r": [
+[
+40.0,
+58.0,
+0.0,
+12.0
+],
+[
+31.0,
+46.0,
+12.0,
+14.0
+],
+[
+32.6,
+46.0,
+14.0,
+21.0
+],
+[
+46.0,
+58.0,
+12.0,
+15.0
+]
+]
+},
+{
+"id": "wc2m",
+"n": "WC men 2 (4)",
+"g": "pub",
+"r": [
+[
+46.0,
+50.0,
+15.0,
+21.0
+]
+]
+},
+{
+"id": "wc2w",
+"n": "WC women 2 (9)",
+"g": "pub",
+"r": [
+[
+50.0,
+58.0,
+15.0,
+21.0
+]
+]
+},
+{
+"id": "cor",
+"n": "Public corridor",
+"g": "circ",
+"r": [
+[
+0.62,
+31.0,
+12.0,
+14.0
+]
+]
+},
+{
+"id": "pasW",
+"n": "Exit passage (2 h) from the public corridor to the west street",
+"g": "circ",
+"r": [
+[
+0.62,
+4.4,
+6.9,
+12.0
+],
+[
+3.2,
+4.4,
+0.0,
+6.9
+]
+]
+},
+{
+"id": "pmec",
+"n": "Programs mechanical, emergency panel",
+"g": "plant",
+"r": [
+[
+0.62,
+4.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "wcw",
+"n": "WC women (8)",
+"g": "pub",
+"r": [
+[
+4.6,
+12.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "wcm",
+"n": "WC men (5)",
+"g": "pub",
+"r": [
+[
+12.6,
+17.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "uwc",
+"n": "Universal WC",
+"g": "pub",
+"r": [
+[
+17.6,
+19.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "sho",
+"n": "Universal shower",
+"g": "pub",
+"r": [
+[
+19.6,
+21.4,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "fa",
+"n": "First aid",
+"g": "pub",
+"r": [
+[
+21.4,
+24.8,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "off",
+"n": "Staff office (shared)",
+"g": "pub",
+"r": [
+[
+24.8,
+27.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "cot",
+"n": "Cot and supply storage",
+"g": "pub",
+"r": [
+[
+27.6,
+30.0,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "s1",
+"n": "Stair S1 (data centre)",
+"g": "sup",
+"r": [
+[
+30.0,
+32.6,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "ves",
+"n": "DC staff entrance: vestibule, guard point, portal",
+"g": "sup",
+"r": [
+[
+58.0,
+70.5,
+0.0,
+8.6
+],
+[
+61.4,
+67.9,
+8.6,
+12.0
+],
+[
+67.9,
+70.5,
+8.6,
+14.0
+]
+]
+},
+{
+"id": "e2",
+"n": "Freight lift E2 (passenger-rated)",
+"g": "sup",
+"r": [
+[
+58.0,
+61.4,
+8.6,
+12.0
+]
+],
+"core": true
+},
+{
+"id": "dock",
+"n": "Dock and lift lobby (entrance)",
+"g": "sup",
+"r": [
+[
+58.0,
+67.9,
+12.0,
+21.0
+]
+]
+},
+{
+"id": "s2",
+"n": "Stair S2 (data centre)",
+"g": "sup",
+"r": [
+[
+67.9,
+70.5,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "b1",
+"n": "Loading space 1, Class B, at aisle grade",
+"g": "load",
+"r": [
+[
+59.0,
+62.4,
+21.0,
+31.2
+]
+]
+},
+{
+"id": "b2",
+"n": "Loading space 2, Class B",
+"g": "load",
+"r": [
+[
+62.4,
+65.8,
+21.0,
+31.2
+]
+]
+},
+{
+"id": "b3",
+"n": "Loading space 3, Class B",
+"g": "load",
+"r": [
+[
+65.8,
+69.2,
+21.0,
+31.2
+]
+]
+}
+],
+"2": [
+{
+"id": "p2",
+"n": "Stair P2 (clinic)",
+"g": "circ",
+"r": [
+[
+0.62,
+3.2,
+0.0,
+6.9
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "proc",
+"n": "Procedure room",
+"g": "clin",
+"r": [
+[
+3.2,
+6.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex1",
+"n": "Exam room 1",
+"g": "clin",
+"r": [
+[
+6.7,
+9.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex2",
+"n": "Exam room 2",
+"g": "clin",
+"r": [
+[
+9.7,
+12.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex3",
+"n": "Exam room 3",
+"g": "clin",
+"r": [
+[
+12.7,
+15.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex4",
+"n": "Exam room 4",
+"g": "clin",
+"r": [
+[
+15.7,
+18.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex5",
+"n": "Exam room 5",
+"g": "clin",
+"r": [
+[
+18.7,
+21.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ex6",
+"n": "Exam room 6",
+"g": "clin",
+"r": [
+[
+21.7,
+24.7,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "cstf",
+"n": "Clinic staff lounge, office",
+"g": "clin",
+"r": [
+[
+24.7,
+27.4,
+0.0,
+5.0
+]
+]
+},
+{
+"id": "ccor",
+"n": "Clinic corridor",
+"g": "clin",
+"r": [
+[
+3.2,
+27.4,
+5.0,
+7.0
+],
+[
+25.4,
+27.4,
+7.0,
+11.4
+]
+]
+},
+{
+"id": "cons",
+"n": "Consult room",
+"g": "clin",
+"r": [
+[
+0.62,
+4.2,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "cwc3",
+"n": "Clinic WC 3",
+"g": "clin",
+"r": [
+[
+4.2,
+5.7,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "med",
+"n": "Medication room",
+"g": "clin",
+"r": [
+[
+5.7,
+7.7,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "cln",
+"n": "Clean supply",
+"g": "clin",
+"r": [
+[
+7.7,
+9.7,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "soil",
+"n": "Soiled holding",
+"g": "clin",
+"r": [
+[
+9.7,
+11.7,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "hk",
+"n": "Housekeeping",
+"g": "clin",
+"r": [
+[
+11.7,
+13.2,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "cwc1",
+"n": "Clinic WC 1",
+"g": "clin",
+"r": [
+[
+13.2,
+14.8,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "cwc2",
+"n": "Clinic WC 2",
+"g": "clin",
+"r": [
+[
+14.8,
+16.4,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "cuw",
+"n": "Clinic universal WC",
+"g": "clin",
+"r": [
+[
+16.4,
+18.4,
+7.0,
+14.0
+]
+]
+},
+{
+"id": "wait",
+"n": "Clinic waiting, reception",
+"g": "clin",
+"r": [
+[
+18.4,
+25.4,
+7.0,
+14.0
+],
+[
+25.4,
+30.0,
+12.0,
+14.0
+],
+[
+25.4,
+27.4,
+11.4,
+12.0
+]
+]
+},
+{
+"id": "p1",
+"n": "Stair P1 (clinic)",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+0.0,
+6.9
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "psh",
+"n": "Programs shaft",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+6.9,
+8.6
+]
+],
+"core": true
+},
+{
+"id": "e1",
+"n": "Lift E1 (public)",
+"g": "circ",
+"r": [
+[
+27.4,
+30.0,
+8.6,
+12.0
+]
+],
+"core": true
+},
+{
+"id": "scor",
+"n": "Secure corridor",
+"g": "sup",
+"r": [
+[
+30.0,
+70.5,
+12.0,
+14.0
+]
+]
+},
+{
+"id": "s1",
+"n": "Stair S1 (data centre)",
+"g": "sup",
+"r": [
+[
+30.0,
+32.6,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "doff",
+"n": "DC offices",
+"g": "sup",
+"r": [
+[
+30.0,
+35.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "brk",
+"n": "DC break room",
+"g": "sup",
+"r": [
+[
+35.0,
+40.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "spare",
+"n": "Unassigned (no use yet)",
+"g": "spare",
+"r": [
+[
+40.0,
+52.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "stag",
+"n": "Storage and staging",
+"g": "sup",
+"r": [
+[
+52.0,
+58.0,
+0.0,
+12.0
+]
+]
+},
+{
+"id": "e2",
+"n": "Freight lift E2",
+"g": "sup",
+"r": [
+[
+58.0,
+61.4,
+8.6,
+12.0
+]
+],
+"core": true
+},
+{
+"id": "ship",
+"n": "Shipping and receiving",
+"g": "sup",
+"r": [
+[
+58.0,
+70.5,
+0.0,
+8.6
+],
+[
+61.4,
+70.5,
+8.6,
+12.0
+]
+]
+},
+{
+"id": "ups",
+"n": "UPS room (3 modules, N+1)",
+"g": "sup",
+"r": [
+[
+32.6,
+37.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "bat",
+"n": "Battery room, Li-ion",
+"g": "sup",
+"r": [
+[
+37.6,
+41.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "bhv",
+"n": "Battery room HVAC (separate)",
+"g": "sup",
+"r": [
+[
+41.6,
+44.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "mv",
+"n": "MV switchgear, main electrical",
+"g": "sup",
+"r": [
+[
+44.6,
+48.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "mmr1",
+"n": "Meet-me room 1",
+"g": "sup",
+"r": [
+[
+48.6,
+51.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "mmr2",
+"n": "Meet-me room 2",
+"g": "sup",
+"r": [
+[
+51.6,
+54.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "valv",
+"n": "Sprinkler valve room, cylinders",
+"g": "sup",
+"r": [
+[
+54.6,
+56.6,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "noc",
+"n": "Security control room / NOC",
+"g": "sup",
+"r": [
+[
+56.6,
+61.3,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "garb",
+"n": "Garbage and recycling",
+"g": "sup",
+"r": [
+[
+61.3,
+64.3,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "jan",
+"n": "Janitor (DC)",
+"g": "sup",
+"r": [
+[
+64.3,
+65.8,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "dwc",
+"n": "DC staff WC, shower",
+"g": "sup",
+"r": [
+[
+65.8,
+67.9,
+14.0,
+21.0
+]
+]
+},
+{
+"id": "s2",
+"n": "Stair S2 (data centre)",
+"g": "sup",
+"r": [
+[
+67.9,
+70.5,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+}
+],
+"3": [
+{
+"id": "hall",
+"n": "Data hall (one storey)",
+"g": "hall",
+"r": [
+[
+13.6,
+29.84,
+14.0,
+21.0
+],
+[
+13.6,
+30.0,
+0.0,
+14.0
+],
+[
+30.0,
+32.6,
+0.0,
+14.0
+],
+[
+32.6,
+58.0,
+0.0,
+21.0
+],
+[
+58.0,
+61.4,
+0.0,
+8.6
+],
+[
+58.0,
+61.4,
+12.0,
+21.0
+],
+[
+61.4,
+67.9,
+0.0,
+21.0
+],
+[
+67.9,
+70.5,
+0.0,
+14.0
+]
+]
+},
+{
+"id": "s1",
+"n": "Stair S1 (data centre)",
+"g": "sup",
+"r": [
+[
+30.0,
+32.6,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+},
+{
+"id": "e2",
+"n": "Freight lift E2",
+"g": "sup",
+"r": [
+[
+58.0,
+61.4,
+8.6,
+12.0
+]
+],
+"core": true
+},
+{
+"id": "s2",
+"n": "Stair S2 (data centre)",
+"g": "sup",
+"r": [
+[
+67.9,
+70.5,
+14.0,
+21.0
+]
+],
+"core": true,
+"stair": true
+}
+]
+},
+"D": [
+[
+1.0,
+"p2",
+"OUT",
+1.9,
+0.0,
+"h"
+],
+[
+1.0,
+"ref",
+"OUT",
+12.0,
+0.0,
+"h",
+1.8
+],
+[
+1.0,
+"ref",
+"cor",
+12.0,
+12.0,
+"h",
+1.8
+],
+[
+1.0,
+"lob",
+"OUT",
+24.7,
+0.0,
+"h",
+1.8
+],
+[
+1.0,
+"lob",
+"cor",
+26.2,
+12.0,
+"h",
+2.4
+],
+[
+1.0,
+"p1",
+"OUT",
+28.7,
+0.0,
+"h"
+],
+[
+1.0,
+"e1",
+"cor",
+28.7,
+12.0,
+"h"
+],
+[
+1.0,
+"shel",
+"cor",
+30.5,
+12.0,
+"h"
+],
+[
+1.0,
+"shel",
+"OUT",
+39.0,
+0.0,
+"h",
+1.8
+],
+[
+1.0,
+"ref2",
+"cor",
+31.0,
+13.0,
+"v",
+1.8
+],
+[
+1.0,
+"ref2",
+"OUT",
+49.0,
+0.0,
+"h",
+1.8
+],
+[
+1.0,
+"wc2m",
+"ref2",
+48.0,
+15.0,
+"h"
+],
+[
+1.0,
+"wc2w",
+"ref2",
+54.0,
+15.0,
+"h"
+],
+[
+1.0,
+"pasW",
+"cor",
+2.5,
+12.0,
+"h",
+1.8
+],
+[
+1.0,
+"pasW",
+"OUT",
+3.8,
+0.0,
+"h"
+],
+[
+1.0,
+"pmec",
+"cor",
+3.6,
+14.0,
+"h"
+],
+[
+1.0,
+"wcw",
+"cor",
+8.6,
+14.0,
+"h"
+],
+[
+1.0,
+"wcm",
+"cor",
+15.1,
+14.0,
+"h"
+],
+[
+1.0,
+"uwc",
+"cor",
+18.6,
+14.0,
+"h"
+],
+[
+1.0,
+"sho",
+"cor",
+20.5,
+14.0,
+"h"
+],
+[
+1.0,
+"fa",
+"cor",
+23.1,
+14.0,
+"h"
+],
+[
+1.0,
+"off",
+"cor",
+26.2,
+14.0,
+"h"
+],
+[
+1.0,
+"cot",
+"cor",
+28.8,
+14.0,
+"h"
+],
+[
+1.0,
+"s1",
+"OUT",
+31.3,
+21.0,
+"h"
+],
+[
+1.0,
+"ves",
+"OUT",
+64.25,
+0.0,
+"h",
+1.8
+],
+[
+1.0,
+"e2",
+"ves",
+59.7,
+8.6,
+"h"
+],
+[
+1.0,
+"dock",
+"ves",
+64.65,
+12.0,
+"h",
+1.8
+],
+[
+1.0,
+"ves",
+"s2",
+69.2,
+14.0,
+"h"
+],
+[
+1.0,
+"dock",
+"e2",
+59.7,
+12.0,
+"h"
+],
+[
+1.0,
+"dock",
+"b2",
+64.1,
+21.0,
+"h",
+2.4
+],
+[
+1.0,
+"s2",
+"OUT",
+69.85,
+21.0,
+"h"
+],
+[
+2.0,
+"p2",
+"ccor",
+3.2,
+6.0,
+"v"
+],
+[
+2.0,
+"proc",
+"ccor",
+4.8,
+5.0,
+"h"
+],
+[
+2.0,
+"ex1",
+"ccor",
+8.2,
+5.0,
+"h"
+],
+[
+2.0,
+"ex2",
+"ccor",
+11.2,
+5.0,
+"h"
+],
+[
+2.0,
+"ex3",
+"ccor",
+14.2,
+5.0,
+"h"
+],
+[
+2.0,
+"ex4",
+"ccor",
+17.2,
+5.0,
+"h"
+],
+[
+2.0,
+"ex5",
+"ccor",
+20.2,
+5.0,
+"h"
+],
+[
+2.0,
+"ex6",
+"ccor",
+23.2,
+5.0,
+"h"
+],
+[
+2.0,
+"cstf",
+"ccor",
+25.9,
+5.0,
+"h"
+],
+[
+2.0,
+"p1",
+"ccor",
+27.4,
+6.0,
+"v"
+],
+[
+2.0,
+"cons",
+"ccor",
+3.75,
+7.0,
+"h",
+0.8
+],
+[
+2.0,
+"cwc3",
+"ccor",
+4.95,
+7.0,
+"h"
+],
+[
+2.0,
+"med",
+"ccor",
+6.7,
+7.0,
+"h"
+],
+[
+2.0,
+"cln",
+"ccor",
+8.7,
+7.0,
+"h"
+],
+[
+2.0,
+"soil",
+"ccor",
+10.7,
+7.0,
+"h"
+],
+[
+2.0,
+"hk",
+"ccor",
+12.45,
+7.0,
+"h"
+],
+[
+2.0,
+"cwc1",
+"ccor",
+14.0,
+7.0,
+"h"
+],
+[
+2.0,
+"cwc2",
+"ccor",
+15.6,
+7.0,
+"h"
+],
+[
+2.0,
+"cuw",
+"ccor",
+17.4,
+7.0,
+"h"
+],
+[
+2.0,
+"wait",
+"ccor",
+25.4,
+9.5,
+"v",
+1.8
+],
+[
+2.0,
+"e1",
+"ccor",
+27.4,
+10.3,
+"v"
+],
+[
+2.0,
+"s1",
+"scor",
+31.3,
+14.0,
+"h"
+],
+[
+2.0,
+"s2",
+"scor",
+69.2,
+14.0,
+"h"
+],
+[
+2.0,
+"e2",
+"scor",
+59.7,
+12.0,
+"h"
+],
+[
+2.0,
+"e2",
+"ship",
+59.7,
+8.6,
+"h"
+],
+[
+2.0,
+"doff",
+"scor",
+34.0,
+12.0,
+"h"
+],
+[
+2.0,
+"brk",
+"scor",
+37.5,
+12.0,
+"h"
+],
+[
+2.0,
+"spare",
+"scor",
+46.0,
+12.0,
+"h"
+],
+[
+2.0,
+"stag",
+"scor",
+55.0,
+12.0,
+"h"
+],
+[
+2.0,
+"ship",
+"scor",
+66.0,
+12.0,
+"h",
+1.8
+],
+[
+2.0,
+"ups",
+"scor",
+35.1,
+14.0,
+"h"
+],
+[
+2.0,
+"bat",
+"scor",
+39.6,
+14.0,
+"h"
+],
+[
+2.0,
+"bhv",
+"scor",
+43.1,
+14.0,
+"h"
+],
+[
+2.0,
+"mv",
+"scor",
+46.6,
+14.0,
+"h"
+],
+[
+2.0,
+"mmr1",
+"scor",
+50.1,
+14.0,
+"h"
+],
+[
+2.0,
+"mmr2",
+"scor",
+53.1,
+14.0,
+"h"
+],
+[
+2.0,
+"valv",
+"scor",
+55.6,
+14.0,
+"h"
+],
+[
+2.0,
+"noc",
+"scor",
+58.95,
+14.0,
+"h"
+],
+[
+2.0,
+"garb",
+"scor",
+62.8,
+14.0,
+"h"
+],
+[
+2.0,
+"jan",
+"scor",
+65.05,
+14.0,
+"h"
+],
+[
+2.0,
+"dwc",
+"scor",
+66.85,
+14.0,
+"h"
+],
+[
+3.0,
+"hall",
+"s1",
+31.3,
+14.0,
+"h"
+],
+[
+3.0,
+"hall",
+"s2",
+69.2,
+14.0,
+"h"
+],
+[
+3.0,
+"hall",
+"e2",
+59.7,
+8.6,
+"h"
+]
+],
+"PLANT": [
+{
+"id": "g1",
+"n": "Generator 1, 1,000 kW, sub-base tank",
+"r": [
+3.8,
+12.23,
+22.5,
+25.12
+]
+},
+{
+"id": "g2",
+"n": "Generator 2, 1,000 kW, sub-base tank",
+"r": [
+14.23,
+22.66,
+22.5,
+25.12
+]
+},
+{
+"id": "g3",
+"n": "Generator 3, 1,000 kW, sub-base tank",
+"r": [
+24.66,
+33.09,
+22.5,
+25.12
+]
+},
+{
+"id": "g4",
+"n": "Generator 4, 1,000 kW, sub-base tank",
+"r": [
+35.09,
+43.52,
+22.5,
+25.12
+]
+},
+{
+"id": "t1",
+"n": "Transformer pad 1",
+"r": [
+47.0,
+49.63,
+22.5,
+24.99
+]
+},
+{
+"id": "t2",
+"n": "Transformer pad 2",
+"r": [
+50.63,
+53.26,
+22.5,
+24.99
+]
+},
+{
+"id": "t3",
+"n": "Transformer pad 3",
+"r": [
+54.26,
+56.89,
+22.5,
+24.99
+]
+},
+{
+"id": "c1",
+"n": "Chiller 1 (at grade)",
+"r": [
+3.0,
+15.14,
+27.5,
+29.86
+]
+},
+{
+"id": "c2",
+"n": "Chiller 2 (at grade)",
+"r": [
+19.34,
+31.48,
+27.5,
+29.86
+]
+},
+{
+"id": "c3",
+"n": "Chiller 3 (at grade)",
+"r": [
+35.68,
+47.82,
+27.5,
+29.86
+]
+},
+{
+"id": "h1",
+"n": "Hub generator, KD100 in its enclosure (Rehlko G12-625: KD80, KD100 and KD130 share it, 126 x 46 x 65 in; 72 h, own sub-base tank)",
+"r": [
+50.37,
+53.57,
+28.0,
+29.168
+]
+}
+],
+"COURT": null,
+"DRIVE": null,
+"COVERED": [],
+"PLANT_YARDS": [
+[
+0.62,
+58.0,
+21.0,
+31.4
+]
+],
+"FUEL_FILL": [
+[
+56.0,
+31.4
+]
+],
+"STREET_EDGES": [
+[
+[
+71.0,
+-0.85
+],
+[
+-14.5,
+0.15
+]
+],
+[
+[
+71.0,
+-0.85
+],
+[
+71.0,
+43.15
+]
+],
+[
+[
+47.5,
+78.15
+],
+[
+-13.0,
+78.65
+]
+]
+],
+"rows": [
+[
+"pass",
+"At grade: data centre only as entrances",
+"I-2 2.2.7 (strict, J.B. 8 Nov) · checked by script",
+"stairs S1, S2, lift E2, staff vestibule with guard point and portal (from the west street), dock and lift lobby (1353's plan, unchanged) [script: storey 1 holds only data-centre stairs, lifts, vestibules, the dock and bays]"
+],
+[
+"flag",
+"Use: hub programs conditional",
+"I-2 2.1 · by hand",
+"Bulk Data Storage; Social Service Centre or Community Centre (refuge); Health Care Office"
+],
+[
+"pass",
+"Height",
+"I-2 3.1.2.1; Z&D s. 2 · by hand",
+"roof 20.7 − base surface 4.2 = 16.5 m ≤ 18.3 (base surface from the 6 lot corners; slab at the FCL 4.6)"
+],
+[
+"pass",
+"Floor area",
+"I-2 3.1.1.1 · by hand",
+"3,923 m² ÷ 5,845 (assessment record; tile ring 5,835) = 0.67 ≤ 3.00 · non-industrial 1,598 ≤ 5,845 (1.00) · clinic 362 ≤ 33.3 % = 1,306"
+],
+[
+"pass",
+"Yards",
+"I-2 3.1.2.2–3; ZDB 10.26.1(b) · by hand",
+"front (Grant St, the shortest street boundary of a corner site) 0, flank and side 0 (every adjoining lot I-2), rear 3.1 m from 1345 Clark Dr (no lane): the building starts 11.4 m inside the rear yard line; the notch line is not reached (our reading: a side line, 0 m)"
+],
+[
+"tight",
+"Storey heights",
+"I-2 3.1.2.4 · by hand",
+"6.1 / 4.0 / 6.0 m ≥ 6.1 / 4.0 (0 margin on storeys 1 and 2) — tight: check in design (J.B. 9 Nov: within 0.5 m or 5 % of the limit)"
+],
+[
+"pass",
+"Turned plan on the long frontage",
+"spec Part 2; drawing choice · by hand",
+"1353's turned bands run along the 85.5 m west street: hub on the street, corridor and service rooms behind, inner court for the plant and the bays; the plant stays off every street front"
+],
+[
+"flag",
+"Spare floor (J.B. 8 Nov: refuge, then clinic, then unassigned)",
+"drawing result · by hand",
+"refuge grown at grade (second room 376 m²); clinic upstairs, 6 exam rooms; 144 m² on storey 2 unassigned (inside the secure line)"
+],
+[
+"flag",
+"Data-centre size: hub cap",
+"J.B. 8 Nov (drawing choice, labelled) · checked by script",
+"hall 1,146 m² = 1.8 MW, data centre 2,325 m² ≤ 2,325: one hall storey, the 1353 plan grown to the floor cap; the east half of the lot is left open. The tool reports this lot as \"doesn't fit\" (main chat, 12 Nov): this board disagrees [script: data centre 2,325.0 m² ≤ 2,325 (hub cap, J.B. 8 Nov)]"
+],
+[
+"pass",
+"Construction, building area",
+"VBBL 3.2.2.77 (F-2 governs, our reading) · by hand",
+"3 storeys, largest footprint 1,467 m², sprinklered, noncombustible"
+],
+[
+"pass",
+"Fire separations",
+"VBBL Table 3.1.3.1 · checked by script",
+"2 h floor under the storey-2 data-centre rooms over the hub (dashed); hall over the clinic (F-2 over D): none; clinic over the refuge (D over A-2) 1 h; storey 1: 2 h walls between the hub and the data-centre rooms, cores, bays and plant beside it, 37.7 m, all dashed; storey 2: 2 h walls between the hub and the data-centre rooms, cores, bays and plant beside it, 12.0 m, all dashed [script, eh/sep2h.py] [script: data-centre rooms over the hub: 425.8 m² on storey 2 → 2 h floor there (VBBL Table 3.1.3.1; the drawn floor is a drawing claim)]"
+],
+[
+"pass",
+"Exits apart",
+"VBBL 3.4.2.3.(1), (3)",
+"hub 25.2 ≥ 9.0 m (public corridor: ≤ 9 m needed) · clinic 24.2 ≥ 15.1 m · storey 2 37.9 ≥ 21.7 m · hall 37.9 ≥ 30.3 m. Rule: with a public corridor min(½ diagonal, 9 m), otherwise max(½ diagonal, 9 m); door to door stands in for the smoke path (our arithmetic)"
+],
+[
+"pass",
+"Exterior stair discharges apart",
+"VBBL 3.4.2.3.(4)",
+"p1–p2 25.9 ≥ 6.0 m · s1–s2 37.6 ≥ 9.0 m · p1–s1 21.1 ≥ 9.0 m. 9 m, or 6 m sprinklered with both within 15 m of a street; measured door edge to door edge (J.B. 9 Nov)"
+],
+[
+"pass",
+"Travel along the path",
+"VBBL 3.4.2.5.(1)",
+"hub 25.9 · clinic 19.0 · storey 2 29.3 · hall 24.2 m ≤ 45 m (0.25 m grid, through 0.9 m doors)"
+],
+[
+"pass",
+"Dead-end corridors",
+"VBBL 3.3.1.9.(5); J.B. 8 Nov (strict)",
+"storey 1 public 4.8 m · storey 2 clinic 5.4 m · storey 2 secure 1.3 m ≤ 6 m, along the corridor centreline from the last point with two ways to separate exits (J.B. 8 Nov; eh/deadend.py, our arithmetic)"
+],
+[
+"tight",
+"Plant-yard doors and gates",
+"spec rule 6; Q24 (J.B. 9 Nov); eh/yardgate.py v6",
+"1 plant yard(s), 1 gate(s) to a street or lane drawn, 1 door(s) into the yard: door s1 tight (route only 1.1–1.6 m wide somewhere); gate (52.0, 53.8, 31.4) to the truck aisle and Grant St (no key from inside) pass; truck route AISLE pass [script]"
+],
+[
+"tight",
+"Fuel fill (generators)",
+"J.B. 10 Nov; eh/fuelfill.py; hose and pipe limits not sourced",
+"fill box (56.0, 31.4) on the yard fence: truck stays outside, 0.0 m from truck ground (hose reach ?), fill pipe ≤ 44.2 m to the farthest generator (limit ?) [script]"
+],
+[
+"tight",
+"Room widths and shapes",
+"J.B. 8 Nov minimum widths; eh/audit_rooms.py",
+"clear sizes inside the walls (J.B. 11 Nov); only sourced minimums (steps 1-4) fail, steps 5-6 read tight, judged (J.B. 11 Nov). 0 more than 5 % under a sourced minimum (fail): none · 4 5 % or less under a sourced minimum (tight: check in design, D1): st1 Loading space 1, st1 Loading space 3, st2 Soiled holding, st2 Battery room HVAC · 19 under a judged minimum (tight, judged): st1 Stair P2, st1 Stair P1, st1 Stair S1, st1 Stair S2, st2 Stair P2, st2 Exam room 1, st2 Exam room 2, st2 Exam room 3, st2 Exam room 4, st2 Exam room 5, st2 Exam room 6, st2 Clinic WC 3, st2 Housekeeping, st2 Stair P1, st2 Stair S1, st2 Janitor, st2 Stair S2, st3 Stair S1, st3 Stair S2 · 75 rooms checked"
+],
+[
+"pass",
+"Refuge and shelter egress doors",
+"VBBL Table 3.1.17.1 (0.75 m² a person), 3.3.1.5.(2); J.B. 9 Nov",
+"ref 281 people, 2 doors 12.0 ≥ 7.1 m · shel 160 people, 2 doors 14.0 ≥ 5.2 m · ref2 501 people, 2 doors 20.9 ≥ 11.4 m (doors ≥ ⅓ of the room's diagonal apart)"
+],
+[
+"pass",
+"Egress doorways by room area",
+"VBBL 3.3.1.5.(1)(d), Table 3.3.1.5.-B (sprinklered: A 200, D 300, F-2 200 m²); J.B. 9 Nov",
+"refuge 211 m² > 200: 2 doors 12.0 ≥ 7.1 m · refuge 376 m² > 200: 2 doors 20.9 ≥ 11.4 m · clinic suite 362 m² > 300: 3 doors 24.4 ≥ 10.8 m · data hall 1,146 m² > 200: 3 doors 37.0 ≥ 20.2 m (data hall F-2, refuge A, clinic suite D: our reading; unassigned floor not checked)"
+],
+[
+"pass",
+"T-reach (doors, lines, through-rooms, lobby)",
+"spec rule 15d; eh/reach.py",
+"R0–R7 pass: doors on shared walls, public and secure lines never share a door, step-free reach, through-rooms as rule 15a, lobby [script]"
+],
+[
+"pass",
+"Two exits from every zone",
+"VBBL 3.4.2.1; spec rule 6; eh/tfboard.zone_exits",
+"hub 5 · clinic 2 · storey 2 2 · hall 2 exits reached (distinct exterior doors, yard doors and exit stairs; loading doors and public doors with no clear route to a street not counted) [script]"
+],
+[
+"pass",
+"Refuge minimum",
+"spec Part 1 (refuge main room); J.B. 8 Nov: 50 people at 3.5 m²",
+"568 m² clear, counted → 162 people ≥ 50; largest refuge room 362 m² clear ≥ 175 (clear = inside the walls: 0.15 m off fire and exterior walls, 0.05 m off partitions, J.B. 11 Nov)"
+],
+[
+"pass",
+"Loading count and size",
+"Parking By-law 5.1.5, 5.2.3, 5.2.5, 5.2.9, 5.5.1.2 · checked by script",
+"3 needed; drawn count from the plan (eh/claims.loading; see Loading) [script: 3 bays drawn ≥ 3 needed; sizes 3.4 × 10.2, 3.4 × 10.2, 3.4 × 10.2 m (size against the by-law: by hand)]"
+],
+[
+"flag",
+"Generator test noise",
+"By-law 6555 s. 4.1(c)",
+"one set 79.2 ≤ 80 dBA at 6.1 m; 4 together 85.2: test one at a time (maker claim, our arithmetic)"
+],
+[
+"pass",
+"Outdoor air intakes",
+"BCBC 2018 Table 6.3.2.9 (VBBL to confirm); J.B. 11 Nov; eh/intakes.py",
+"one intake per zone, placed by the script at the best point on its walls (1.5 m up) or roof (0.3 m up); best spot found; actual HVAC layout may differ: hub: best point storey 1 wall (generator 22.7, bays 33.2, chillers 27.7 m) · clinic: best point storey 2 roof (generator 24.8, chillers 29.6 m) · data centre: best point storey 3 roof (generator 28.1, chillers 32.6 m). Needs: generator exhaust ≥ 3.0 m (vent for combustion products; 3–10 m tight, ASHRAE 62.1, our reading), bays and arterial roads ≥ 7.6 m, chiller discharge ≥ 7.6 m; 3-D distance (our reading); generator exhaust 3.5 m up (?). Garbage, kitchen and sanitary vents not drawn [script]"
+],
+[
+"pass",
+"Plant sized to load",
+"J.B. 11 Nov (sizing to load); eh/sizing.py",
+"data centre 1.8 MW × 1.55 = 2.8 MW on its own sets: generators 3 + 1 spare × 1,000 kW (KD1000, 8.43 × 2.62 m; 12 h fuel 2,977 L a duty set); transformers carry the data centre and the hub 94 kW (normal power, our reading): 2 + 1 × 2,500 kVA (pad 2.67 × 2.62 m, Eaton CA08104001E, cabinet + 4 in (our reading)). Drawn: 4 × 1,000 kW sets, 3 × 2,500 kVA pads. Rule: smallest set size with at most 3 duty sets (our reading), N+1; Rehlko KD230–300 ADV-10068 and g5650 fuel curve, KD1000, KD2000 (fuel 0.264 L/kWh, register fuel_on_site; maker claims). Headroom before a step up: generators 181 kW, transformers 2,087 kVA"
+],
+[
+"pass",
+"Hub generator (72 h)",
+"J.B. 11 Nov (own set); eh/sizing.hub_set",
+"hub load 94 kW (NECB 2020 build-up; fans and space heat ?) → KD100 (100 kW standby, 94 % load; Rehlko G5-642, maker claim): 72 h at that load on its curve 2,256 L in a sub-base tank (tank sizes not published ?: drawn under the enclosure), set in its enclosure 3.20 × 1.17 m outdoors (G12-625, KD80/100/130 4.5 L); open set 2.27 × 1.15 m indoors (G5-641/642). Drawn: Hub generator, KD100 in its enclosure (Rehlko G12-625: KD80, KD100 and KD130 share it, 126 x 46 x 65 in; 72 h, own sub-base tank) (at grade; clearances with the other sets (Generator tanks row), 3.20 × 1.17 m)"
+],
+[
+"pass",
+"Battery cabinets (UPS 10–15 min)",
+"J.B. 11 Nov (10–15 min, FM 5-32 3.5.2.1); tool/engine.js R.equip.cabKW, tool/dcrooms.js; Vertiv EnergyCore Li5 31.1 kWh (maker claim)",
+"data centre 1.8 MW: 15 cabinets for 15 min (10 for 10 min; 124.4 / 186.6 kW a cabinet, our arithmetic); two rows facing one 0.914 m aisle (our reading) needs 5.9 × 2.46 m clear; Battery room (storey 2) is 7.0 × 3.90 m clear"
+],
+[
+"tight",
+"Pad bonding and bollards",
+"BC Hydro ES54 F0-02.02 (Mechanical Protection), F0-02.03 (Grounding), Sep 2022",
+"check in design: bond to the transformer ground: chillers, fence or gate within 3 m (fence material ?); pad 1.5 m from the building: if its walls are conductive or carry metal, ES54 F3-07 and a stamped grounding report (wall material ?)"
+],
+[
+"?",
+"Hall heat used by the hub",
+"DECISIONS 11 Nov (every typology board, provisional)",
+"share of the hall's heat the hub uses: ? (the hub's heat demand is not sourced: space heat is ? in the NECB 2020 build-up): provisional"
+],
+[
+"?",
+"Seismic importance",
+"VBBL Table 4.1.2.1; 4.1.8.1 (IE)",
+"High: the refuge is a building likely to be used as a post-disaster shelter (Table 4.1.2.1), IE 1.3; the whole structure unless the parts are separated by a seismic joint (our reading; no mixed-use rule read). Clinic: primary care, not an emergency treatment facility (our reading, J.B. 11 Nov): if the clinic is meant to treat injuries after an earthquake, it is post-disaster (IE 1.5). Data centre as a communications facility (post-disaster) ?"
+],
+[
+"?",
+"Hub emergency power",
+"J.B. 11 Nov; spec 1c; NECB 2020 Tables 4.2.1.6, A-8.4.3.2(2); Rehlko G5-641, G5-642, g5650; CSA C282 (2 h minimum, life safety; not read, secondary source)",
+"the hub runs 72 h on its own set (KD100, row 'Hub generator (72 h)'), the data centre 12 h on its own sets; hub load 94 kW (lighting, receptacles, hot water; NECB 2020); fans and space heat ? (check in design)"
+],
+[
+"pass",
+"Upper floors within the ground-floor line",
+"J.B. 12 Nov (EH-FREEZE-2026-11-11e); eh/rules11e.py",
+"no upper storey beyond the storey-1 building line or over truck ground (slivers under 0.3 m: drawing tolerance) [script]"
+],
+[
+"pass",
+"Service access around the sets",
+"Kohler/Rehlko TP-5700 (11/22) 3.2, Fig. 14: ≥ 457 mm to walls or other obstructions, all sides (maker claim; applies to the KD sets: our reading)",
+"least gap from each set to a fence, wall or other unit g1 1.50 m, g2 1.50 m, g3 1.50 m, g4 1.50 m, h1 2.23 m (≥ 0.457 m) [script]"
+],
+[
+"pass",
+"Data-centre size: floor cap and step-back",
+"J.B. 12 Nov (floor cap 2,325 m², 0.05 MW steps; upper floors within the ground-floor line, nothing over truck ground); eh/stepback.py, eh/plantfit.py, eh/rules11e.py",
+"data centre 2,325.0 m², hall 1,146 m² at 630 m²/MW = 1.82 MW (hall grown by 114 m² inside the ground-floor line): held at the 2,325 m² floor cap (data centre 2,325.0 m²): exits and plant pass at the cap. Steps: 1.82 MW (4 x 1000 kW, 3 chillers): exits pass, plant as drawn [script]"
+],
+[
+"pass",
+"Hub exit width",
+"VBBL 3.4.3.2; 3.3.1.5 · by hand",
+"load 943 × 6.1 mm = 5,752 mm; refuge, lobby and second-room street doors 1.8 m each, the shelter's street door and the corridor's exit passage to the west street"
+],
+[
+"pass",
+"Washrooms, hub",
+"VBBL Table 3.7.2.2.-A · by hand",
+"load 943 split equally (3.7.2.2.(1)) → 472 a sex → 8 M + 14 F; drawn 9 M + 17 F; universal WC and shower"
+],
+[
+"pass",
+"Washrooms, clinic",
+"VBBL Table 3.7.2.2.-B · by hand",
+"clinic 362 m² ÷ 9.3 = 39 persons (our reading), split equally (3.7.2.2.(1)) → 20 a sex → 1 a sex = 2; drawn 3 WC rooms + 1 universal, either sex (our reading)"
+],
+[
+"pass",
+"Step-free entrance (lobby)",
+"VBBL 3.8.3.2.(3)(e)–(g), 3.8.3.5 · by hand",
+"west street 4.2 m at the lobby door, slab at the FCL 4.6 m: the lobby floor slopes 1:20 over its first 8.0 m (0.4 m) inside the 12 m lobby (drawing choice, not drawn as a slope); refuge, shelter and second-room street doors (4.1–4.3 m outside) are exits: 0.3–0.5 m, steps or sloped walks inside the rooms not drawn"
+],
+[
+"?",
+"DC staff door and court exits",
+"VBBL 3.4.4; site grading",
+"staff door: west street 4.6 m, level with the slab. Court exits rise to the court: S1 0.1 m, S2 0.5 m (steps or ramps not drawn). DC entrance rooms: second exit through stair S2 to the court and the aisle (our reading)"
+],
+[
+"?",
+"Dock height",
+"Parking By-law 5.5; maker data not read",
+"bays at aisle grade 5.1 m, dock lobby at 4.6 m: the dock floor is 0.5 m below the truck bed's ground; a dock needs the bay ramped down about 1.2 m (not drawn)"
+],
+[
+"pass",
+"Every storey reached",
+"VBBL 3.8.2.3 · checked by script",
+"E1 public to the clinic; E2 passenger-rated to storeys 2–3 [script: freight lift on storeys 1, 2, 3; public lift on 2 (VBBL 3.8.2.3)]"
+],
+[
+"tight",
+"Generator tanks",
+"CSA B139 Table 2 · checked by script",
+"2,977 L a set (12 h ÷ duty sets) → 1.5 m to building (1.5 drawn, 0 margin), 3.0 m to lot lines (14 m to the rear lot line; the court is inside the lot); sets 2.0 m apart (C282) [script: 5 sets: 2.0 m apart (≥ 2.0, CSA C282 6.5.1.1); tanks 1.5 m to the building, any storey (≥ 1.5) and 14.3 m to lot lines (≥ 3.0, CSA B139 Table 2, 2,500–50,000 L)]"
+],
+[
+"tight",
+"Transformer pads",
+"BC Hydro ES54 F; J.B. 8 Nov (front toward the yard aisle, drawing choice) · checked by script",
+"1.0 m apart (0 margin), 1.5 m from the building, 3.5 m from generator 4; pads moved 1.0 m west (11 Nov): pad 3 1.1 m from the yard fence, 2.1 m from loading bay 1; 3 m clear in front (toward the court's east fence), which overlaps chiller 3's end zone (both clear space, our reading) [script: 3 pads: t1: 1.5 m to the nearest structure (building; ≥ 1.0), 1.0 m to the next pad (≥ 1.0), best front clear 3.4 m (≥ 3.0); t2: 1.5 m to the nearest structure (building; ≥ 1.0), 1.0 m to the next pad (≥ 1.0), best front clear 4.0 m (≥ 3.0); t3: 1.1 m to the nearest structure (fence; ≥ 1.0), 1.0 m to the next pad (≥ 1.0), best front clear 4.0 m (≥ 3.0) (ES54 F0-02.01-.02; structures = buildings, generator sets, chillers at grade, yard fences: our reading; front = the best side, not drawn) [script]]"
+],
+[
+"tight",
+"Chiller clear zones",
+"Vertiv SL-70790 s. 4.2.4, Fig. 4.2 (maker claim); 3.0 m between units: our reading · checked by script",
+"3 chillers end to end in one row at grade: 2.1 m at each end, not shared (4.2 m between ends, our reading); chiller 1's end zone 2.4 m from the court's north fence (no lot line there); 1.5 m side zones clear of the generators and the court's east fence; open sky [script: 3 chillers: clear zones 1.5 m sides, 2.1 m ends free of walls, plant and fences; units 3.0 m side to side, 4.2 m end to end (Vertiv SL-70790 4.2.4, maker claim; spacing our reading); least margin 0.0 m — chiller 1 zone to the yard fence or lot line 1.5 m (≥ 1.5); chiller 1 zone to the yard fence or lot line 2.4 m (≥ 2.1); chiller 2 zone to the yard fence or lot line 1.5 m (≥ 1.5); chiller 3 end 2.5 m (≥ 2.1); chiller 3 zone to the yard fence or lot line 1.5 m (≥ 1.5); units 4.2 m apart end to end (≥ 4.2)]"
+],
+[
+"?",
+"Chiller siting: drains, refrigerant leaks, MV/HV",
+"Vertiv SL-70790 p. 34 (maker claim)",
+"court drains not mapped (keep ≥ 5 m); A2L leak: the court exit doors are openings, safety distance not given; transformer pad 1 about 2.7 m from chiller 3, no distance given"
+],
+[
+"pass",
+"Plant off the public edge and off the hall",
+"5 Nov rule; FM 5-32 · checked by script",
+"all plant at grade in the inner court, 21 m behind the west street and 36 m from Grant St; nothing on a roof [script: no generator, tank, pad or chiller over or under the hall, and no wet room (WCs, showers, pools, greenhouse ...) over it, in plan (11 plant items checked; FM 5-32 2.2.1.6)]"
+],
+[
+"?",
+"Generator exhaust and the court exit",
+"NFPA 37 4.1.4 (US) ?",
+"stair S1's court door is about 2 m from generator 3"
+],
+[
+"?",
+"Chiller and generator noise at the lot lines",
+"By-law 6555",
+"court sets 14 m and more from the rear lot line, 25 m from the notch lots: not run"
+],
+[
+"pass",
+"Public exits beside the plant yard, not through it",
+"spec rule 6 (J.B. 9 Nov: plant yards are data-centre space) · checked by script",
+"the public corridor's second exit is a 2 h passage (1.2 m) beside stair P2 to the west street; the programs mechanical room's court door is a service door (as 1353) [script: T-reach R2: no public or clinic exit into data-centre ground, bays, drives or plant yards except onto a walkway (eh/reach.py)]"
+],
+[
+"pass",
+"P2 and the exit passage on the west street",
+"VBBL 3.4.2.3.(4) (exit stairs serving the same floor area; J.B. 9 Nov) · by hand",
+"1.0 m apart edge to edge, serving different floor areas (P2 the clinic storey only), so the 9 m / 6 m spacing doesn't apply (our reading, as 1353)"
+],
+[
+"?",
+"Truck access to the bays",
+"Parking By-law 5.4.1, 5.5.3",
+"a 9.1 m on-site aisle from Grant St (local street, our reading) runs beside the court to the three bays; trucks back in from the aisle; turning not checked; the crossing on Grant St needs the City's permit (not read)"
+],
+[
+"tight",
+"Flood construction level",
+"VBBL Div. A, FCL definition; tool data: City of Vancouver Open Data designated floodplain via the tool (eh/toolflood.py); J.B. 12 Nov (pads on fill)",
+"lot 35 % in the designated floodplain (its west part, where the building stands; 0 % wave effect, 0 % Fraser risk-today area); slab 4.6 = FCL 4.6 m (0 margin; FCL as 339 and 8980, the floodplain diagram for this area not checked ?): every room floor at the slab; court plant at 4.7–5.1 m, above it — tight: pads raised to FCL, check in design (g1 on ground 4.4–4.6 m, g2 on ground 4.5–4.6 m: pads raised on fill to ≥ 4.6 m, drawn dashed) [script, eh/rules11e.py]"
+],
+[
+"?",
+"Fire department access, FDC",
+"VBBL 3.2.5",
+"not drawn"
+],
+[
+"?",
+"Schedule C setbacks and sub-area A",
+"Z&D s. 10.7 (Schedule C not in the sources); I-2 sub-area A map (not in the tool)",
+"if the west street, Grant St or Clark Dr is listed in Schedule C there is a setback this board does not apply; if the lot is in sub-area A the first storey is ≥ 6.1 m (drawn 6.1, 0 margin)"
+],
+[
+"flag",
+"Existing building",
+"BC Assessment record via the tool (year 1966) · by hand",
+"the board assumes a cleared lot, as every board: the 1966 building (four parts, 4.1–9.3 m) is not kept"
+]
+],
+"board": "ic44/TestFit_EH_V1425.dc.html",
+"boardSha16": "baa3a886590590a4"
 }
 }
 }

@@ -7,9 +7,12 @@
 # Usage: <python> hub_frozen_export.py "<Claude Link>/eh" <tool/data>
 import sys, os, json, re, html, importlib.util, hashlib
 EH, OUT = sys.argv[1], sys.argv[2]
-FREEZE = 'EH-FREEZE-2026-11-11g'
+FREEZE = 'EH-FREEZE-2026-11-11g'   # 11h adds two boards (1425 Clark Dr, 10220 104 Ave NW); the 13 stand as 11g
+FREEZE_OF = {'V1425': 'EH-FREEZE-2026-11-11h', 'E10220': 'EH-FREEZE-2026-11-11h'}
+BOARDDIR = {'V1425': 'ic44', 'E10220': 'ic44'}
 TILE = {'V339': '1_1', 'V1330': '1_1', 'V8238': '1_-3', 'V1353': '2_2', 'V8980': '-1_-4', 'V1360': '2_2', 'E06B': '-1_1', 'E4103': '0_-3', 'E14715': '-2_1',
-        'E10003': '0_-2', 'E10004': '-3_-1', 'E15231': '-3_1', 'E16075': '3_3'}   # the tool tile holding each lot (checks/tests/hub_match.js)
+        'E10003': '0_-2', 'E10004': '-3_-1', 'E15231': '-3_1', 'E16075': '3_3', 'V1425': '2_1', 'E10220': '0_0'}
+POINT = {'E10220': (154.0, 822.0)}   # a point inside the lot (tool world metres, from the board frame: x = 154 − U, y = 852 − V); its Altalis lot gives the ids   # the tool tile holding each lot (checks/tests/hub_match.js)
 BOARDS = [  # key, folder, board file, parcel id in the tool, address
     ('V339', 'v339', 'V339', '63819485', '339 1st Ave E'), ('V1330', 'v1330', 'V1330', '22260652', '1330 Glen Dr'),
     ('V8238', 'v8238', 'V8238_Outright', '21083038', '8238 Fraser St'), ('V1353', 'v1353', 'V1353', '59223039', '1353 Pender St E'),
@@ -17,12 +20,13 @@ BOARDS = [  # key, folder, board file, parcel id in the tool, address
     ('E06B', 'e06b', 'E06B', '146402', '64 Airport Rd NW'), ('E4103', 'e4103', 'E4103', '904935', '4103 97 St NW'),
     ('E14715', 'e14715', 'E14715', '150388', '14715 Yellowhead Trail NW'), ('E10003', 'e10003', 'E10003', '701026', '10003 63 Avenue NW'),
     ('E10004', 'e10004', 'E10004', '16765', '10004 167 Street NW'), ('E15231', 'e15231', 'E15231', '149677', '15231 118 Avenue NW'),
-    ('E16075', 'e16075', 'E16075', '980987', '16075 Fort Road NW')]
+    ('E16075', 'e16075', 'E16075', '980987', '16075 Fort Road NW'),
+    ('V1425', 'v1425', 'V1425', '23060741', '1425 Clark Dr'), ('E10220', 'e10220', 'E10220', None, '10220 104 Ave NW')]
 # freeze 11g per-board table (FROZEN_EH-FREEZE-2026-11-11g.md with 11f for the boards 11g did not change): MW, data-centre m², stopping rule
 MANIFEST = {'V339': (1.83, 2134, 'building line'), 'V1353': (1.82, 2325, 'floor cap'), 'V8980': (1.25, 1768, 'building line'),
     'V8238': (0.94, 1688, 'not grown: roof holds only two chillers'), 'V1330': (0.41, 1140, 'not grown: upper floors over the truck drive (frozen failing)'),
     'V1360': (0.37, 1104, 'not grown: only room left is over transformer alcove 2'), 'E10004': (0.31, 805, 'not grown: only room left holds a roof chiller'),
-    'E16075': (0.95, 1179, 'plant yard'), 'E15231': (1.20, 1367, 'plant yard, then travel distance'), 'E4103': (1.89, 1798, 'plant yard'),
+    'E16075': (0.95, 1179, 'plant yard'), 'V1425': (1.82, 2325, 'floor cap'), 'E10220': (1.89, 1798, 'drawn plant (roof chillers)'), 'E15231': (1.20, 1367, 'plant yard, then travel distance'), 'E4103': (1.89, 1798, 'plant yard'),
     'E10003': (1.82, 1752, 'plant yard'), 'E06B': (1.89, 1798, 'drawn plant (roof chillers)'), 'E14715': (1.89, 1798, 'drawn plant (roof chillers)')}
 
 def rows_of(f):
@@ -48,12 +52,20 @@ from shapely.geometry import Polygon, Point
 def lot_lp(g):
     if getattr(g, 'LOTPOLY', None): return [tuple(p) for p in g.LOTPOLY]
     L = g.LOT; return [(L[0], L[2]), (L[1], L[2]), (L[1], L[3]), (L[0], L[3])]
+IDS = {}
 def tool_ring(city, key, pid):
     Q = json.load(open(os.path.join(OUT, '..', 'tiles', city, 'meta.json'), encoding='utf-8'))['Q']
     t = json.load(open(os.path.join(OUT, '..', 'tiles', city, 't_' + TILE[key] + '.json'), encoding='utf-8')); ox, oy = t['o']
     a = next((a for i_, a in t.get('P', []) if str(i_) == pid), None)
     if a is None and city == 'edm':   # Edmonton lots: the Altalis outlines (l_ tiles, academic use), the lot whose account ids hold the board's id
         l = json.load(open(os.path.join(OUT, '..', 'tiles', city, 'l_' + TILE[key] + '.json'), encoding='utf-8')); ox, oy = l['o']
+        if pid is None and key in POINT:   # 11h: no id known; the lot that holds the point, and all its ids
+            px, py = POINT[key]
+            for a0, ids in l['L']:
+                xx = yy = 0; rr = []
+                for i in range(0, len(a0), 2): xx += a0[i]; yy += a0[i + 1]; rr.append((ox + xx / Q, oy + yy / Q))
+                if Polygon(rr).contains(Point(px, py)): IDS[key] = [str(i) for i in ids]; return rr
+            return None
         a = next((a for a, ids in l['L'] if pid in [str(i) for i in ids]), None)
     if a is None: return None
     x = y = 0; out = []
@@ -87,7 +99,7 @@ for key, folder, bf, pid, addr in BOARDS:
     mw, dc, stop = MANIFEST[key]
     hall = sum((r[1] - r[0]) * (r[3] - r[2]) for x in g.S.get(max(g.S), []) if x.get('g') == 'hall' for r in x['r'])
     lp = lot_lp(g); ring = tool_ring('van' if key[0] == 'V' else 'edm', key, pid); reg = register(lp, ring) if ring else None
-    b = {'key': key, 'reg': reg, 'addr': addr, 'id': pid, 'freeze': FREEZE, 'MW': mw, 'dcArea': dc, 'stop': stop,
+    b = {'key': key, 'reg': reg, 'addr': addr, 'id': pid, 'freeze': FREEZE_OF.get(key, FREEZE), 'MW': mw, 'dcArea': dc, 'stop': stop,
          'grownMW': grown and grown.get('MW'), 'grownDC': grown and grown.get('dc'), 'stopText': grown and grown.get('stop', {}).get('text'),
          'hallDrawn': round(hall, 1), 'hpm': (grown or {}).get('hpm', 630.0),
          'H': list(getattr(g, 'H', [])), 'SLAB': getattr(g, 'SLAB', None), 'LOTPOLY': [rr(p) for p in lp], 'S': S,
@@ -95,9 +107,9 @@ for key, folder, bf, pid, addr in BOARDS:
          'COURT': rr(g.COURT) if getattr(g, 'COURT', None) else None, 'DRIVE': rr(g.DRIVE) if getattr(g, 'DRIVE', None) else None,
          'COVERED': [rr(r) for r in getattr(g, 'COVERED', [])], 'PLANT_YARDS': rr(getattr(g, 'PLANT_YARDS', [])),
          'FUEL_FILL': [rr(p) for p in getattr(g, 'FUEL_FILL', [])], 'STREET_EDGES': [[rr(a), rr(c)] for a, c in getattr(g, 'STREET_EDGES', [])],
-         'rows': rows_of(os.path.join(EH, 'ic43', f'TestFit_EH_{bf}.dc.html')),
-         'board': f'ic43/TestFit_EH_{bf}.dc.html', 'boardSha16': hashlib.sha256(open(os.path.join(EH, 'ic43', f'TestFit_EH_{bf}.dc.html'), 'rb').read()).hexdigest()[:16]}
-    out['van' if key[0] == 'V' else 'edm'][pid] = b
+         'rows': rows_of(os.path.join(EH, BOARDDIR.get(key, 'ic43'), f'TestFit_EH_{bf}.dc.html')),
+         'board': f'{BOARDDIR.get(key, "ic43")}/TestFit_EH_{bf}.dc.html', 'boardSha16': hashlib.sha256(open(os.path.join(EH, BOARDDIR.get(key, 'ic43'), f'TestFit_EH_{bf}.dc.html'), 'rb').read()).hexdigest()[:16]}
+    for k_ in ([pid] if pid else IDS.get(key, [])): out['van' if key[0] == 'V' else 'edm'][k_] = dict(b, id=k_)
     print(key, 'storeys', list(S), 'rooms', sum(len(v) for v in S.values()), 'doors', len(b['D']), 'plant', len(plant), 'rows', len(b['rows']), 'MW', mw, 'grown', b['grownMW'], 'hall', b['hallDrawn'], 'reg', reg)
 about = ('Frozen Emergency hub boards, freeze %s (Claude Link eh/; boards ic43). Exported by checks/tests/hub_frozen_export.py. Board frame metres; '
          'rects (u0, u1, v0, v1); rows as the boards print them. The tool reads these on the board lots so its numbers are the frozen board\'s.' % FREEZE)
