@@ -189,7 +189,7 @@ Sizing coefficients found: LBNL 2024 per-server power 600 W (2023) → 782 W (20
 - Shafiee Roudbari 2025 full text (UBC Library).
 
 ## 15 Oct 2026 — Edmonton lot polygons
-- City of Edmonton open data: no lot (parcel) polygons found; assessment gives one point per property (288,738 records, 19,140 with no building, i.e. vacant). Email to opendata@edmonton.ca still to send.
+- City of Edmonton open data: no lot (parcel) polygons found; assessment gives one point per property (288,738 records, 19,140 with no building, i.e. vacant). **Closed 13 Nov 2026:** the City publishes none: "As of November 1st, 2021, the City will no longer provide datasets with land parcel boundary polygon geometry" (City of Edmonton Open Data, Vacant Land - Industrial, https://data.edmonton.ca/d/stt5-pzaa). The tool's Edmonton lot outlines are Altalis title mapping via EPSB GIS (academic use), not City open data; the public web version shows Edmonton as points (Land Parcels_Assessment Parcels (Point), dm3i-bp8w; Property Information, dkk9-cj3x).
 - Alberta title mapping (lot polygons) is AltaLIS data, licensed. A copy is served by Edmonton Public Schools' GIS server ("Titled Lots Current", credit "Altalis", no licence stated, current to 1 Sep 2025). NOT used: no licence to reuse. Ask UBC Library (Jeremy Buhler) whether UBC holds an AltaLIS academic licence; ask the City.
 - Interim (tool v15): click picks the point in the clicked building, else nearest within 60 m, else nearest record in the same zone polygon within 400 m (with a note).
 - 15 Oct 2026: J.B. requested an Altalis quote for Title – Area of Interest, City of Edmonton (GDB, 3TM 114 preferred). Awaiting quote and licence terms; do not load until terms confirmed in writing.

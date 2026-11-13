@@ -1281,7 +1281,7 @@ function transplant(S, keys) {
       if (fl.length) { const lim = [`doesn’t fit as placed: ${fl.join('; ')} (the ${B.addr} test fit placed on this lot)`];
         const H0 = { doesntFit: { limiting: lim, placed: B.addr }, flags: ['Doesn’t fit here: ' + lim[0]], variant: H.variant, transplant: H.transplant, site: {} };
         return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; } }
-    const note = own ? null : `Estimate: borrowed from the ${B.addr} test fit (12 Nov 2026): its plan placed on this lot along the street and checked by the tool’s rules, not re-planned`;
+    const note = own ? null : `Borrowed from the ${B.addr} test fit, not checked here: its plan placed on this lot along the street, not re-planned`;   /* J.B. 13 Nov: what stands behind the figure */
     if (note) { if (H.flags) H.flags.unshift(note); if (P.flags && P.flags !== H.flags) P.flags.unshift(note); }
     H.estimate = own ? null : { keys, names: [`${(VNEED && VNEED.names && VNEED.names[key]) || VNAMES[key] || key}`], transplant: B.addr };
     return P; }
@@ -1325,6 +1325,8 @@ function regrow(S, B, REG, GF, own) {
   const B2 = Object.assign({}, B, { S: r.G.S, D: r.G.D, PLANT, PLANT_YARDS: r.G.PLANT_YARDS, MW: Math.round(r.MW * 100) / 100, dcArea: r.dc, hallDrawn: r.hall, stop: r.stop.rule, stopText: r.stop.text, grownHere: { d: r.d, steps: r.steps.length, own } });
   return { B: B2, note: own ? null : `Grown on this lot by the hub's step-back (layout (c)): hall wall moved ${r.d} m into the plant yard, ${B2.MW.toFixed(2)} MW, stopped by the ${r.stop.rule}` };
 }
+/* the date a board's figures were checked: freeze 11i (13 Nov 2026), earlier freezes 12 Nov 2026 */
+const freezeDate = f => /11i$/.test(f || '') ? '13 Nov 2026' : '12 Nov 2026';
 function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from another lot (variants, overnight 13 Nov) */
   const B0_ = B0; let B = B0 || (S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null), REG = reg0 || (B && B.reg); if (!B || !REG || !S.F) return null;
   /* a board the freeze keeps failing (1330 Glen Dr): the doesn't-fit state, with the freeze's reasons (its failing rows), no figures (audit I41, I42) */
@@ -1359,7 +1361,7 @@ function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from anot
       storeyNames: nSt > 1 ? ['Storey 1: hub at grade, data-centre entrance', 'Storey 2: ' + ((rooms[2] || []).some(x => x.kind === 'croom') ? 'clinic and data-centre support' : 'data-centre support'), 'Storey 3: one data-hall storey'] : ['Storey 1: hub, ' + (clinic ? 'clinic ' : '') + 'and data centre at grade'],
       plant: { ok: true, items, nG: items.filter(it => it.kind === 'gen').length, nT: items.filter(it => it.kind === 'pad').length, nC: items.filter(it => it.kind === 'chiller').length, setKW, Q: r2(B.MW * 1.55), tank: null, hubSet: items.some(it => it.kind === 'hubset'), why: '', whyAll: '', rules: (B.rows || []).filter(r => /generator|chiller|transformer|plant|fuel|service access|sets/i.test(r[1])).map(r => `${r[1]} (${r[0]}): ${r[3] || ''}`) },
       truck: B.COURT ? { court: mv(B.COURT), why: 'truck court as the frozen board draws it' } : null,
-      ladder: { step: '–', what: 'the test fit for ' + B.addr + ', 12 Nov 2026', limiting: [] },
+      ladder: { step: '–', what: 'Checked test fit, ' + freezeDate(B.freeze) + ' (' + B.addr + ')', limiting: [] },
       variant: { main: nSt > 1 ? 'stacked' : 'beside', sideDrive: !!B.DRIVE, notBuilt: [], flags: [], lotType: '?' },
       sizeStop: { rule: B.stop, at: B.MW, why: B.stopText || B.stop } };
     L.toUV = (a, b) => { const w = toW(a, b); return F.toL(w[0], w[1]).map(r2); };
@@ -1370,8 +1372,8 @@ function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from anot
     { const hr = (B.rows || []).find(r => r[1] === 'Height'), t = hr ? hr[3] : '', m = /roof\s*([\d.]+)\s*−\s*base surface\s*([\d.]+)\s*=\s*([\d.]+)\s*m/.exec(t), m1 = !m && /([\d.]+)\s*m\s*≤/.exec(t), lim = /≤\s*([\d.]+)/.exec(t);
       if (L.grades) { if (B.SLAB != null) L.grades.slab = B.SLAB; if (m) Object.assign(L.grades, { roof: +m[1], base: +m[2], height: +m[3] }); else if (m1) Object.assign(L.grades, { height: +m1[1], roof: null, base: null });
         if (lim && L.grades.hLimit == null) L.grades.hLimit = +lim[1]; if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
-    L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the test fit for ' + B.addr + ', 12 Nov 2026' };
-    if (!B0_) L.flags.push(`The test fit for ${B.addr} (12 Nov 2026): ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop}; drawn as fitted, not re-laid out by the tool`);
+    L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'Checked test fit, ' + freezeDate(B.freeze) + ' (' + B.addr + ')' };
+    if (!B0_) L.flags.push(`Checked test fit, ${freezeDate(B.freeze)} (${B.addr}): ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop}; drawn as fitted, not re-laid out by the tool`);
     if (growNote) L.flags.push(growNote);
     if (REG.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(REG.rms)} m off on average (?)`);
     return toPlan(L, S);
@@ -1409,7 +1411,7 @@ function fromSite(S0) {
   const G = grown(S0), S = G.S; let L = G.L;
   if (S.frontYard && L.rooms) { const L1 = L; L = pushBack(S, L); if (L !== L1 && L1.sizeStop && !L.sizeStop) { L.sizeStop = L1.sizeStop; const ff = L1.flags.find(f => /^Data centre smaller than the 2,325 m² floor cap/.test(f)); if (ff) L.flags.push(ff); } }
   if (L.rooms && !L.v2) withV2(L, S);
-  if (L.rooms) { L.estimate = variantNeed(S, L); if (L.estimate) L.flags.push('Estimate: this lot needs a layout the engine doesn’t have yet (' + L.estimate.names.join('; ') + '). The figures are the engine’s own layout, not a fit.'); }
+  if (L.rooms) { L.estimate = variantNeed(S, L); if (L.estimate) L.flags.push('First pass, not checked: the engine doesn’t have this lot’s layout yet (' + L.estimate.names.join('; ') + ').'); }
   if (!L.rooms) return { version: RULES.version, rules: RULES, storeys: [], flags: L.flags, exitSep: [], programs: [], entrances: [], hub: L };
   return toPlan(L, S);
 }

@@ -19,7 +19,7 @@ STAGES = [
 
 # External inputs: what they are and where the tool gets them
 INPUTS = {
-    'parcel': ('Parcel', 'address → folio, lot, zoning, footprint, storeys; lot area from the outline (Edmonton record as a note), corrected to true degree lengths (+0.8% Van, +0.9% Edm; 30 Oct 2026)', 'City open data (Vancouver property-tax report, 2009 footprints; Edmonton parcels); BCA extract', 80),
+    'parcel': ('Parcel', 'address → folio, lot, zoning, footprint, storeys; lot area from the outline (Edmonton record as a note), corrected to true degree lengths (+0.8% Van, +0.9% Edm; 30 Oct 2026)', 'City open data (Vancouver property-tax report, 2009 footprints; Edmonton property information and assessment parcel points); Edmonton lot outlines: Altalis title mapping via EPSB GIS (academic use, not open data); BCA extract', 80),
     'cooling_type': ('Cooling type', 'air / glycol-dry cooler / chilled water / liquid', 'permits (public record), operator page (claim), site visit', 70),
     'weather': ('Weather file', 'CWEC typical year, hourly', 'ECCC CWEC 2020 (Vancouver Intl, Edmonton Intl)', 80),
     'plant_schedule': ('Plant on site', 'generators, chillers, dry coolers, transformers — what, where', 'permits, filed noise reports, site visit', 70),

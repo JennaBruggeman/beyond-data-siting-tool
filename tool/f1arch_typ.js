@@ -129,8 +129,8 @@ C.add(T,'The governing principle',{async build(x){
     <span class="f1c-note">A principle, drawn as a diagram. It is not this lot's layout and has no dimensions.</span></div></div>`;
   return {draw,lead:'Every layout follows the same bands from the street back. On a new lot the bands stretch or stack; the order stays.',
     rows:[['Order','street, public front, hub, spine, data centre, plant yard'],['Direction','public at the street, private at the back'],['Ground floor, this zone',gf?gf[1]:q('no ground-floor rule read for this zone')],['Layout engine',BD.hub?'the Emergency hub’s layout places the bands on each lot (hub.js, rule sheet v1); other typologies not yet':q('not built yet: bands are not placed on this lot')]],
-    more:[['Where the order comes from',`<p>The order is the Emergency hub specification’s: the tool lays the bands out on each lot with the hub engine (rule sheet v1); on the 13 test lots it draws the frozen boards. Other typologies get their band layout with their engines.</p>`]],
-    src:['Order of the bands: the Emergency hub specification, laid out on this lot by the hub engine (rule sheet v1); the frozen boards on the test lots.',gf?`Ground-floor rule: ${gf[2]} (tool/data/zones.json).`:'Ground-floor rule: tool/data/zones.json, no row for this zone.'],
+    more:[['Where the order comes from',`<p>The order is the Emergency hub specification’s: the tool lays the bands out on each lot with the hub engine (rule sheet v1); on the 14 test lots it draws the checked test fits. Other typologies get their band layout with their engines.</p>`]],
+    src:['Order of the bands: the Emergency hub specification, laid out on this lot by the hub engine (rule sheet v1); the checked test fits on the test lots.',gf?`Ground-floor rule: ${gf[2]} (tool/data/zones.json).`:'Ground-floor rule: tool/data/zones.json, no row for this zone.'],
     missing:BD.hub?['the band layout for typologies other than the Emergency hub']:['the band layout engine (bands on this lot)','lobby and exit rules (code check 8) as a layout rule']}; }});
 
 /* ---------- 12 The numbers ---------- */
