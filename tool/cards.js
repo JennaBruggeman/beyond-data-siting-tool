@@ -228,7 +228,7 @@ BD.bestHeat=bestHeat;
 const HG={};
 function heatGroup(f,kinds,mw){ const k=f.city+'|'+f.c.join(',')+'|'+mw.toFixed(1)+'|'+kinds.join(','); if(k in HG) return HG[k];
   if(!RT||RT.key!==f.city+'|'+f.c.join(',')) return null; const d=BD.recv[f.city]; if(!d) return null; const e=E();
-  const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=REACH), nets=e.netsAt(f,d);
+  const all=d.pts.map(p=>Object.assign({},p,{dist:BD.recvDist(f,p)})).filter(p=>p.dist<=REACH), nets=e.netsAt(f,d);   /* section D: UTM metres from the lot's centroid */
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets); const sub=all.filter(p=>kinds.includes(p.t)); sub.forEach(p=>{ p.econ=heatEcon(f,p,r.avail); });
   const B=bestHeat(f,sub,r.avail[0]); HG[k]=B&&B[0]?B[0]:null; return HG[k]; }
 BD.heatGroup=heatGroup;
@@ -254,7 +254,7 @@ function bestSec(f,B,base,mw,mwMax,Bmax){ if(!B||!B.length) return '';
 async function heatIndex(){
   await opps(); const e=E(), f=e.siteFacts(), A=BD.S.answers, mw=A.mw||(f.M&&f.M.mwSized)||1; BD.S.view2='tab';
   const d=await e.loadRecv(f.city), nets=e.netsAt(f,d); await routeTree(f);
-  const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=REACH).sort((a,b)=>a.dist-b.dist);
+  const all=d.pts.map(p=>Object.assign({},p,{dist:BD.recvDist(f,p)})).filter(p=>p.dist<=REACH).sort((a,b)=>a.dist-b.dist);
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets);
   all.forEach(p=>{ p.econ=heatEcon(f,p,r.avail); p.beyond=p.econ.status==='beyond'; p.diff=difficulty(f,p,nets); });
   const showB=A.showBeyond===true; const inside=nets.find(n=>n.inside);

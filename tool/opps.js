@@ -27,7 +27,7 @@ function withRungs(u,L,city,rung){ const c=city==='van'?'van':'edm', rows=(Array
 function ladderWorst(L,city){ const rk=['not_allowed','no_rule','unknown','approval','allowed','na']; const rows=Array.isArray(L&&L.rules)?L.rules:[]; const c=city==='van'?'van':'edm'; const v=rows.map(x=>x[c][0]).sort((a,b)=>rk.indexOf(a)-rk.indexOf(b))[0];
   return v==='allowed'?'yes':v==='approval'?'chg':v==='not_allowed'?'no':'nk'; } // 'na' (no rule read) is not yet known, not 'possible here' (sweep minor 43)
 function ctx(){ const e=E(), f=e.siteFacts(), R=e.R, A=BD.S.answers, M=f.M, mw=A.mw||(M&&M.mwSized)||1; /* sweep M72: the same provisional size the plant uses until a size is set */ const d=BD.recv[f.city]||{pts:[],nets:[]};
-  const near=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})); const nets=e.netsAt(f,d);
+  const near=d.pts.map(p=>Object.assign({},p,{dist:BD.recvDist(f,p)})); const nets=e.netsAt(f,d);
   const r=e.calc({mw,recover:true,to:'near'},f,near,nets); const zone=f.zone, city=f.city; const lot=f.lot||0, foot=(M&&M.footArea)||0;
   return {e,f,R,A,mw,M,near,nets,r,zone,city,lot,foot,free:Math.max(0,lot-foot-((M&&M.loading)?BD.area(M.loading):0)-((M&&M.plant&&M.plant.yard)?BD.area(M.plant.yard):0))}; }
 /* the opportunities, in families (fixed order); six added 19 Oct 2026 (J.B.: the avenues "are supposed to be part of the tool"; audit/research_2026-10-19 K, L, M) */

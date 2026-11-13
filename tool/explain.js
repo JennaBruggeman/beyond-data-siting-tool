@@ -20,7 +20,7 @@ function ctx(){ const e=BD.eng, f=e.siteFacts(), R=e.R, A=BD.S.answers, mw=A.mw|
   const WETS={van:[1085,0.124],edm:[914,0.104]};
   const water=o=>{ const m=r.facMWh[1]*1.5; return o==='towers'?m:o==='hybrid'?m*WETS[f.city][1]:0; };
   // every receiver within 1.5 km, as on the Heat step (verification sweep M4: e.nearby() cuts at each type's own reach)
-  const all15=(d.pts||[]).filter(p=>Math.hypot(p.x-f.c[0],p.y-f.c[1])<=1500);
+  const all15=(d.pts||[]).filter(p=>BD.recvDist(f,p)<=1500);
   return {e,f,R,A,mw,r,near,all15,nets,size,water,WETS,city:f.city==='van'?'Vancouver':'Edmonton'}; }
 
 /* ---------- drawing helpers ---------- */

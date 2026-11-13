@@ -139,7 +139,7 @@ function oppPlanSVG(c,n,pal){ const {m,f,d}=c; const kinds=(SPEC[n]||[])[3]||[];
   const W=300, H=300, s=(W/2-14)/R, X=x=>W/2+(x-f.c[0])*s, Y=y=>H/2-(y-f.c[1])*s; let g=`<rect width="${W}" height="${H}" fill="${pal.bg}"/>`;
   g+=`<circle cx="${W/2}" cy="${H/2}" r="${R*s}" fill="none" stroke="${pal.faint}" stroke-dasharray="3 3"/>`+txt(W/2+R*s*0.71+2,H/2-R*s*0.71,`${fmt(R)} m`,{fill:pal.mute,size:9.5});
   for(const nt of d.nets||[]) if(kinds.includes('net')){ let p=''; for(let i=0;i<nt.r.length;i+=2) p+=(i?'L':'M')+X(nt.r[i]).toFixed(1)+','+Y(nt.r[i+1]).toFixed(1); g+=`<path d="${p}Z" fill="${pal.fill}" stroke="${pal.acc}" stroke-width=".8" opacity=".8"/>`; }
-  let cnt=0; for(const p of d.pts||[]){ if(!kinds.includes(p.t)) continue; const dd=Math.hypot(p.x-f.c[0],p.y-f.c[1]); if(dd>R) continue; cnt++; g+=`<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="2.6" fill="${pal.acc}"/>`; }
+  let cnt=0; for(const p of d.pts||[]){ if(!kinds.includes(p.t)) continue; const dd=BD.recvDist(f,p); if(dd>R) continue; cnt++; g+=`<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="2.6" fill="${pal.acc}"/>`; }
   if(m&&m.ring){ let p=''; for(let i=0;i<m.ring.length;i+=2) p+=(i?'L':'M')+X(m.ring[i]).toFixed(1)+','+Y(m.ring[i+1]).toFixed(1); g+=`<path d="${p}Z" fill="${pal.ink}" stroke="${pal.ink}"/>`; }
   g+=`<g transform="translate(${W-18},22)"><path d="M0,-12 L4,3 L0,0 L-4,3 Z" fill="${pal.ink}"/></g>`;
   const what=kinds.filter(k=>k!=='net').map(k=>({housing:'non-market housing',apartment:'apartment buildings',care:'care homes',hospital:'hospitals',campus:'campuses'}[k]||k));

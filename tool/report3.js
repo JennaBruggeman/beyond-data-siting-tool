@@ -81,7 +81,7 @@ function axisTicks(x0,x1,y,vals,fmtv){ return vals.map(v=>{ const x=x0+(x1-x0)*v
 async function collect(){ const e=E(), f=e.siteFacts(), A=BD.S.answers, m=BD.model(); const mw=A.mw||(m&&m.mwSized)||1, rec=(A.inside||'air')!=='air';
   const d=await e.loadRecv(f.city), near=e.nearby(f,d), nets=e.netsAt(f,d); const r=e.calc({mw,recover:rec,to:'near'},f,near,nets), rL=e.calc({mw,recover:true,to:'near'},f,near,nets);
   // every building within 3 km, costed for heat as if liquid-cooled (the heat step's own method)
-  let heat=[]; try{ if(BD.routeTree) await BD.routeTree(f); heat=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=3000); heat.forEach(p=>{ p.econ=BD.heatEcon(f,p,rL.avail); }); }catch(err){ console.warn(err); }
+  let heat=[]; try{ if(BD.routeTree) await BD.routeTree(f); heat=d.pts.map(p=>Object.assign({},p,{dist:BD.recvDist(f,p)})).filter(p=>p.dist<=3000); heat.forEach(p=>{ p.econ=BD.heatEcon(f,p,rL.avail); }); }catch(err){ console.warn(err); }
   let best=null; try{ const B=BD.bestHeat?BD.bestHeat(f,heat.filter(p=>p.econ&&p.econ.take),rL.avail[0]):null; best=B&&B[0]; }catch(err){}
   const EC=BD.ECON, cop=e.R.cop; const worth=c=>EC.heatVal(c); /* sweep 20 Oct: the gas a MWh of heat replaces, as the heat step compares it; the heat pump's electricity is already inside each cost per MWh (cards.js lcoh), so it is not taken off here too */
   const refs=BD.compareRefs?BD.compareRefs(f):[]; let prec=null; try{ prec=await (await fetch('precedents.json')).json(); }catch(err){}
@@ -238,7 +238,7 @@ function pTime(D,no){ const {rec,EC}=D; let s=''; const X0=M+90, X1=PW-M, Y=130,
 
 function nearMap(D,x0,y0,w,h){ const {f,d}=D; if(h<120) return ''; const R=1000, cx=x0+h/2, cy=y0+h/2, sc=(h/2-8)/R; let s=caps(x0,y0-4,'Who lives and works within 1 km');
   for(const r of [200,500,1000]) s+=`<circle cx="${cx}" cy="${cy}" r="${r*sc}" fill="none" stroke="${K.faint}" stroke-width=".5" stroke-dasharray="3 2"/>`+T(cx+r*sc*0.71+2,cy-r*sc*0.71,`${fmt(r)} m`,{fs:5.6,c:K.mute});
-  const by={}; for(const p of d.pts||[]){ const dd=Math.hypot(p.x-f.c[0],p.y-f.c[1]); if(dd>R) continue; by[p.t]=by[p.t]||[0,0,0]; by[p.t][dd<=200?0:dd<=500?1:2]++; s+=dot(cx+(p.x-f.c[0])*sc,cy-(p.y-f.c[1])*sc,1.8,TYPEC[p.t]||K.dim); }
+  const by={}; for(const p of d.pts||[]){ const dd=BD.recvDist(f,p); if(dd>R) continue; by[p.t]=by[p.t]||[0,0,0]; by[p.t][dd<=200?0:dd<=500?1:2]++; s+=dot(cx+(p.x-f.c[0])*sc,cy-(p.y-f.c[1])*sc,1.8,TYPEC[p.t]||K.dim); }
   s+=`<rect x="${cx-3}" y="${cy-3}" width="6" height="6" fill="${K.ink}"/>`;
   const X=x0+h+30; let y=y0+10; s+=T(X,y,'Type',{fs:6,c:K.mute})+T(X+150,y,'200 m',{fs:6,c:K.mute,a:'end'})+T(X+190,y,'500 m',{fs:6,c:K.mute,a:'end'})+T(X+230,y,'1 km',{fs:6,c:K.mute,a:'end'}); y+=12;
   for(const [t,c] of Object.entries(by).sort((a,b)=>(b[1][0]+b[1][1]+b[1][2])-(a[1][0]+a[1][1]+a[1][2]))){ s+=dot(X+3,y-2.5,2.4,TYPEC[t]||K.dim)+T(X+10,y,TYPEN[t]||t,{fs:6.6}); [c[0],c[0]+c[1],c[0]+c[1]+c[2]].forEach((v,i)=>{ s+=T(X+150+i*40,y,fmt(v),{fs:6.6,a:'end'}); }); y+=12; }

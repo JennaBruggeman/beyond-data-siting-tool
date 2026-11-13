@@ -71,8 +71,30 @@ BD.gridNote=f=>gridNote(f);
 function inCPCN(c){ if(!c) return false; if(!CPCN_R) CPCN_R=CPCN_RING.flatMap(([lo,la])=>P(lo,la)); return BD.pip(c[0],c[1],CPCN_R); }
 function P(lon,lat){ const m=BD.S.meta[BD.S.city]; const k=Math.cos(m.lat0*Math.PI/180)*111320; return [(lon-m.lon0)*k,(lat-m.lat0)*110540]; }
 BD.recv={};
+/* milestone 1 section D (J.B. 12 Nov 2026): one distance method everywhere, UTM metres from the lot's centroid (as the reports): WGS84 transverse Mercator,
+   zone 10 (Vancouver) or 12 (Edmonton); the standard series (accurate to well under a metre at these ranges). */
+function utm(lon,lat,zone){ const a=6378137, f=1/298.257223563, k0=0.9996, e2=f*(2-f), ep2=e2/(1-e2), l0=((zone-1)*6-180+3)*Math.PI/180, ph=lat*Math.PI/180, la=lon*Math.PI/180;
+  const N=a/Math.sqrt(1-e2*Math.sin(ph)**2), Tt=Math.tan(ph)**2, Cc=ep2*Math.cos(ph)**2, A=Math.cos(ph)*(la-l0);
+  const M=a*((1-e2/4-3*e2**2/64-5*e2**3/256)*ph-(3*e2/8+3*e2**2/32+45*e2**3/1024)*Math.sin(2*ph)+(15*e2**2/256+45*e2**3/1024)*Math.sin(4*ph)-(35*e2**3/3072)*Math.sin(6*ph));
+  return [k0*N*(A+(1-Tt+Cc)*A**3/6+(5-18*Tt+Tt**2+72*Cc-58*ep2)*A**5/120)+500000, k0*(M+N*Math.tan(ph)*(A**2/2+(5-Tt+9*Cc+4*Cc**2)*A**4/24+(61-58*Tt+Tt**2+600*Cc-330*ep2)*A**6/720))]; }
+const ZONE={van:10,edm:12};
+function lotUTM(f){ const m=BD.S.meta[f.city||BD.S.city]; const k=Math.cos(m.lat0*Math.PI/180)*111320; const lon=f.c[0]/k+m.lon0, lat=f.c[1]/110540+m.lat0; return utm(lon,lat,ZONE[f.city||BD.S.city]); }
+function recvDist(f,p){ if(p.ue==null) [p.ue,p.un]=utm(p.lon,p.lat,ZONE[f.city||BD.S.city]); const c=f.__utm&&f.__utmK===f.c[0]+','+f.c[1]?f.__utm:(f.__utm=lotUTM(f),f.__utmK=f.c[0]+','+f.c[1],f.__utm); return Math.hypot(p.ue-c[0],p.un-c[1]); }
+BD.recvDist=recvDist; BD.utm=utm;
+/* the receiver points as loaded (section D): the same coordinates from the same source are one place: merged, demand summed, names listed (53 groups in
+   Vancouver: vanBCA pairs, vanNMH groups, odef groups); a social-housing row with no name reads "Social housing (name not published)"; BC Assessment rows
+   (vanBCA) carry a type only: their "n" is a street address derived from licensed data and is never shown */
+const SUMF=['u','fa','dem','lo','cap'];
+function tidyRecv(pts){ const G=new Map(), out=[];
+  for(const p of pts){ if(p.src==='vanNMH'&&!String(p.n||'').trim()) p.n='Social housing (name not published)';
+    if(p.src==='vanBCA') p.aka=null; else if(Array.isArray(p.aka)){ p.aka=p.aka.filter(t=>!/vanBCA/.test(String(t))); if(!p.aka.length) p.aka=null; }   /* no BC Assessment address in any field */
+    const k=p.lon+','+p.lat+','+p.src, q=G.get(k); if(!q){ const c=Object.assign({},p,{names:[p.n]}); G.set(k,c); out.push(c); continue; }
+    for(const f of SUMF) if(p[f]!=null) q[f]=(q[f]||0)+(+p[f]||0); q.names.push(p.n); q.merged=(q.merged||1)+1; }
+  for(const q of out){ if(q.src==='vanBCA'){ q.n=({residential:'Residential building',commercial:'Commercial building',industrial:'Industrial building',institutional:'Institutional building'}[q.t]||'Building')+' (BC Assessment; address not shown)'+(q.merged?` · ${q.merged} records at one place`:''); q.names=null; }
+    else if(q.merged){ const u=[...new Set(q.names)]; q.n=u.length>1?`${u[0]} and ${u.length-1} more at this place (${u.slice(1).join(', ')})`:u[0]; } }
+  return out; }
 async function loadRecv(city){ if(BD.recv[city]) return BD.recv[city];
-  try{ const d=await BD.getJSON(`tiles/${city}/receivers.json`);
+  try{ const d=await BD.getJSON(`tiles/${city}/receivers.json`); d.raw=d.pts.length; d.pts=tidyRecv(d.pts);
     d.pts.forEach((p,i)=>{ [p.x,p.y]=P(p.lon,p.lat); p.id=i; });
     d.nets.forEach(n=>{ n.r=new Float64Array(n.ring.flatMap(([lo,la])=>P(lo,la))); n.path=BD.pathOf([n.r]); });
     BD.recv[city]=d; BD.draw(); return d; }catch(e){ console.warn(e); BD.recv[city]={pts:[],nets:[]}; return BD.recv[city]; } }
@@ -343,7 +365,7 @@ function fitsView(){
 /* ---------- who could take the heat ---------- */
 const TYPE={housing:'Non-market housing',school:'School',campus:'University or college campus',care:'Care home',hospital:'Hospital',rec:'Recreation centre',hall:'Community league hall',pool:'Pool',arena:'Indoor arena',apartment:'Apartment building',office:'Office building',hotel:'Hotel',commercial:'Commercial building'};
 const FIRM={completed:'existing','under construction':'committed',approved:'planned',proposed:'proposed'};
-function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=Math.hypot(p.x-f.c[0],p.y-f.c[1]); const reach=R.recvRadius; if(dist<=reach) out.push(Object.assign({dist,reach,guide:false,rvo:R.reach[p.t]||R.reachGuide},p)); } return out.sort((a,b)=>a.dist-b.dist); } /* finding I-03 (30 Oct 2026): search to the register's 3 km (receiver_radius); the RVO reaches are kept only as a reference (rvo) */
+function nearby(f,d){ const out=[]; for(const p of d.pts){ const dist=recvDist(f,p); const reach=R.recvRadius; if(dist<=reach) out.push(Object.assign({dist,reach,guide:false,rvo:R.reach[p.t]||R.reachGuide},p)); } return out.sort((a,b)=>a.dist-b.dist); } /* finding I-03 (30 Oct 2026): search to the register's 3 km (receiver_radius); the RVO reaches are kept only as a reference (rvo) */
 function netsAt(f,d){ return d.nets.map(n=>{ const inside=BD.pip(f.c[0],f.c[1],n.r); const e=distToRing(f.c[0],f.c[1],n.r); return Object.assign({inside,edge:e},n); }).filter(n=>n.inside||n.edge<1200).sort((a,b)=>(b.inside-a.inside)||(a.edge-b.edge)); } // inside first, then nearest (verification sweep M16)
 async function recvView(){
   const f=siteFacts(); BD.S.view2='recv'; const d=await loadRecv(f.city); const near=nearby(f,d), nets=netsAt(f,d);
@@ -821,7 +843,7 @@ function socialView(){
   /* 2 Nov 2026 (J.B.): counted with the by-law check (noiseCheck): each neighbouring lot at its point nearest the plant, against the night limit for its zone */
   const Mn=BD.model?BD.model():null, nc=(Mn&&Mn.noise)||null; const within=nc?[nc.overQ,nc.overQ+nc.overS]:[0,0], byCls=nc?nc.byCls:{quiet:0,other:0,unknown:0,assumed:0};
   const limitFor=b=>{ const v=NLEV.get(b); return v?v.L:limQ; };
-  const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&Math.hypot(p.x-f.c[0],p.y-f.c[1])<=200).reduce((t,p)=>t+(p.u||0),0);
+  const d=BD.recv[f.city]||{pts:[]}; const homes=d.pts.filter(p=>p.t==='housing'&&recvDist(f,p)<=200).reduce((t,p)=>t+(p.u||0),0);
   const key='bd-notes-'+S.city+'-'+S.sel.id; let notes=''; try{ notes=localStorage.getItem(key)||''; }catch(e){}
   let h=tabBar('social')+`<h2>What neighbours would hear, see and feel</h2><p class="draft">Described as experienced, not scored. Measured where the data allows; your site observations sit beside it, labelled as yours.</p>
   <h3>Sound</h3><dl><dt>Cooling plant</dt><dd>${n} ${CU.name} (as laid out, spares included), rated ${rng(lw[0],lw[1],'dBA')} together (${CU.name==='dry coolers'?'dry-cooler ratings at full fan speed, manufacturer claims':CU.name==='air-cooled chillers'?'air-cooled chiller ratings for two Vertiv models (FH3135, FIZ135), manufacturer claims; the lower one not yet indexed ?':'air-cooled chiller ratings used as a stand-in: no rating found for this kind'})</dd>

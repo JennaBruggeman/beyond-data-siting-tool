@@ -76,7 +76,7 @@ const modelNow=async x=>{ const M=await x.eng(); return M; };
 let HD=null;
 async function heatData(x){ await modelNow(x); const e=BD.eng, key=stateKey(); if(HD&&HD.key===key) return HD;
   const f=e.siteFacts(), A=BD.S.answers, M=BD.model(), mw=A.mw||(M&&M.mwSized)||1; await BD.opps(); const d=await e.loadRecv(f.city), nets=e.netsAt(f,d); await BD.routeTree(f);
-  const all=d.pts.map(p=>Object.assign({},p,{dist:Math.hypot(p.x-f.c[0],p.y-f.c[1])})).filter(p=>p.dist<=e.R.recvRadius).sort((a,b)=>a.dist-b.dist);
+  const all=d.pts.map(p=>Object.assign({},p,{dist:BD.recvDist(f,p)})).filter(p=>p.dist<=e.R.recvRadius).sort((a,b)=>a.dist-b.dist);
   const r=e.calc({mw,recover:true,to:'near'},f,all,nets); all.forEach(p=>{ p.econ=BD.heatEcon(f,p,r.avail); });
   const B=BD.bestHeat(f,all,r.avail[0]); const cnt={within:0,depends:0,beyond:0,unknown:0}; all.forEach(p=>{ cnt[p.econ.status]=(cnt[p.econ.status]||0)+1; });
   return HD={key,f,A,M,mw,all,nets,r,B:B&&B[0]?B[0]:null,cnt,e}; }
