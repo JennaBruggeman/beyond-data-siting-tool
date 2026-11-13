@@ -9,7 +9,7 @@
 "quantities": 226,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1771
+"sources": 1775
 }
 },
 "stages": [
@@ -20396,7 +20396,11 @@
 "arch_inv3_dcmapRackforce": "DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, RackForce Networks, Vancouver (datacentermap.com/canada/vancouver/rackforce-networks/): 701 W Georgia St (V7Y postal code). Used only for Hut 8 Vancouver (VAN2, ex-RackForce/TeraGo): the operator's current page gives no address. Main chat, 12 Nov 2026.",
 "arch_inv3_dcmapWolfpawEdm2": "DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, Wolfpaw EDM2 and EDM3, Edmonton: 10200 102 Ave NW and 17204 114 Ave NW, the buildings of inventory rows E1 and E2 (tenants there, not new facilities). Main chat, 12 Nov 2026.",
 "bchEastVanSub": "UTILITY PROJECT PAGE (trust 80): BC Hydro, East Vancouver Substation project page (read 12 Nov 2026): Murrin substation on Main Street (built 1947) to be replaced by a new East Vancouver substation at 303 Vernon Drive; construction could begin in 2027 at the earliest and take about four years.",
-"bchWestEndSub": "UTILITY PROJECT PAGE (trust 80): BC Hydro, West End Substation project page (read 12 Nov 2026): construction starting November 2026; replaces Dal Grauer; serves downtown."
+"bchWestEndSub": "UTILITY PROJECT PAGE (trust 80): BC Hydro, West End Substation project page (read 12 Nov 2026): construction starting November 2026; replaces Dal Grauer; serves downtown.",
+"edmLibraries": "GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, \"Public Libraries\" (jn25-zspi), CSV, 22 branches with name, address and coordinates; rows updated 11 Nov 2026; downloaded 13 Nov 2026 (5,554 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/jn25-zspi",
+"edmRecFacilities": "GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, \"Recreation Facilities\" (nz3t-vyg3), CSV, 107 City-owned, operated or funded facilities (19 recreation centres, 22 arenas, 5 outdoor pools and others) with coordinates; rows updated 12 Nov 2026; downloaded 13 Nov 2026 (22,656 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/nz3t-vyg3",
+"edmLeagueHalls": "GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, \"Community League Halls\" (kaps-rk7z), CSV, 141 halls with name and coordinates (street address on 23 rows only); rows updated 8 Nov 2026; downloaded 13 Nov 2026 (20,361 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/kaps-rk7z",
+"abFloodHazard": "GOVERNMENT DATASET (trust 80): Government of Alberta, Alberta Flood Mapping, file geodatabase AB_Flood_Mapping.gdb, layer flood_hazard (floodway, flood fringe, high-hazard and protected flood fringe; 1:200 and 1:500 zones outside the hazard area). Edmonton: North Saskatchewan River Flood Study (Northwest Hydraulic Consultants, 2020-2022; final, 23 Sep 2024; https://open.alberta.ca/publications/north-saskatchewan-river-flood-study), with the St. Albert and Nisku studies at the edges. Open Government Licence - Alberta. Alberta sets no flood construction level."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -23745,7 +23749,11 @@
 "vbbl25_32229": "rule",
 "cp_fit_rules": "decision",
 "arch_sportEngPoolsApp2": "design guide (benchmark, outside Canada)",
-"hpacAshraeLC2014": "trade report (secondary)"
+"hpacAshraeLC2014": "trade report (secondary)",
+"edmLibraries": "government dataset",
+"edmRecFacilities": "government dataset",
+"edmLeagueHalls": "government dataset",
+"abFloodHazard": "government dataset"
 },
 "source_check": {
 "mfrDryCooler": "agent",
@@ -24897,7 +24905,11 @@
 "arch_inv3_dcmapWolfpawEdm2": "main chat, read 12 Nov 2026 (Claude Link RESIDENT_addresses_floors_2026-11-12.md)",
 "atlasCloud": "inventory research pass 2-3 Nov 2026, cited in checks/research_arch_v1/inv_van.md row 13 (operator claim, 16 racks)",
 "bchEastVanSub": "main chat, read 12 Nov 2026 (Claude Link QUEUE_for_when_computer_is_back_2026-11-12.md, block 2 C)",
-"bchWestEndSub": "main chat, read 12 Nov 2026 (Claude Link QUEUE_for_when_computer_is_back_2026-11-12.md, block 2 C)"
+"bchWestEndSub": "main chat, read 12 Nov 2026 (Claude Link QUEUE_for_when_computer_is_back_2026-11-12.md, block 2 C)",
+"edmLibraries": "claude",
+"edmRecFacilities": "claude",
+"edmLeagueHalls": "claude",
+"abFloodHazard": "claude"
 },
 "source_city": {
 "abgas": "edm",
@@ -26669,7 +26681,11 @@
 "arch_inv3_dcmapRackforce": "van",
 "arch_inv3_dcmapWolfpawEdm2": "edm",
 "bchEastVanSub": "van",
-"bchWestEndSub": "van"
+"bchWestEndSub": "van",
+"edmLibraries": "edm",
+"edmRecFacilities": "edm",
+"edmLeagueHalls": "edm",
+"abFloodHazard": "edm"
 },
 "city_gaps": {
 "van": [

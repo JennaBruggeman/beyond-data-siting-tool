@@ -1,6 +1,6 @@
 # Beyond Data — formula register
 
-Generated 12 Nov 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
+Generated 13 Nov 2026 from `formula_register.json` (the diagram reads the JSON; edit that, then run `make_register_md.py`).
 
 **Scale.** 100 arithmetic/physics · 90 regulation, tariff or standard read directly · 80 government dataset or statistic · 70 peer-reviewed coefficient transferred from another context · 60 derived with stated assumption · 50 operator or industry claim · 40 proxy · 20 judged · 0 gap
 
@@ -3126,6 +3126,10 @@ Source ids added 9–11 Oct are listed first with their citations; ids from the 
 - `arch_inv3_dcmapWolfpawEdm2` — DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, Wolfpaw EDM2 and EDM3, Edmonton: 10200 102 Ave NW and 17204 114 Ave NW, the buildings of inventory rows E1 and E2 (tenants there, not new facilities). Main chat, 12 Nov 2026.
 - `bchEastVanSub` — UTILITY PROJECT PAGE (trust 80): BC Hydro, East Vancouver Substation project page (read 12 Nov 2026): Murrin substation on Main Street (built 1947) to be replaced by a new East Vancouver substation at 303 Vernon Drive; construction could begin in 2027 at the earliest and take about four years.
 - `bchWestEndSub` — UTILITY PROJECT PAGE (trust 80): BC Hydro, West End Substation project page (read 12 Nov 2026): construction starting November 2026; replaces Dal Grauer; serves downtown.
+- `edmLibraries` — GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, "Public Libraries" (jn25-zspi), CSV, 22 branches with name, address and coordinates; rows updated 11 Nov 2026; downloaded 13 Nov 2026 (5,554 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/jn25-zspi
+- `edmRecFacilities` — GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, "Recreation Facilities" (nz3t-vyg3), CSV, 107 City-owned, operated or funded facilities (19 recreation centres, 22 arenas, 5 outdoor pools and others) with coordinates; rows updated 12 Nov 2026; downloaded 13 Nov 2026 (22,656 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/nz3t-vyg3
+- `edmLeagueHalls` — GOVERNMENT DATASET (trust 80): City of Edmonton Open Data, "Community League Halls" (kaps-rk7z), CSV, 141 halls with name and coordinates (street address on 23 rows only); rows updated 8 Nov 2026; downloaded 13 Nov 2026 (20,361 bytes). Licence: City of Edmonton Open Data Terms of Use (Open Government Licence). https://data.edmonton.ca/d/kaps-rk7z
+- `abFloodHazard` — GOVERNMENT DATASET (trust 80): Government of Alberta, Alberta Flood Mapping, file geodatabase AB_Flood_Mapping.gdb, layer flood_hazard (floodway, flood fringe, high-hazard and protected flood fringe; 1:200 and 1:500 zones outside the hazard area). Edmonton: North Saskatchewan River Flood Study (Northwest Hydraulic Consultants, 2020-2022; final, 23 Sep 2024; https://open.alberta.ca/publications/north-saskatchewan-river-flood-study), with the St. Albert and Nisku studies at the edges. Open Government Licence - Alberta. Alberta sets no flood construction level.
 
 Source ids from the first register (hunts 1–8; full reports in sources/01–08):
 
