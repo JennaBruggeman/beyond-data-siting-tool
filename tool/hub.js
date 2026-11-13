@@ -50,6 +50,8 @@ const RULES = {
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
   transplant: true,   /* variants as plan transplants from the frozen boards (overnight 13 Nov) */
+  growYard: true,   /* layout (c), J.B. 13 Nov 2026: placed at-grade plans grown into the plant yard by the hub's step-back (tool/growyard.js) */
+  plantUp: false,   /* OFF until freeze 11i grows the drawn boards (J.B. 13 Nov 2026). Layout (b): the small-lot plant-up layout (spec Part 6 step 4a) where the stacked, narrow and beside layouts don't fit */
   lineOn: false,   /* EH-FREEZE-2026-11-11e building line in the stacked layout: written, off until the storey-2 re-plan (J.B. 12 Nov 2026) */
   narrow: { wMax: 20, dS: 3.0, dO: 3.5, dA: 5.2, pl: 1.5, why: 'narrow lots (F2b, 10 Nov 2026, as the 1330 Glen Dr and 8238 Fraser St hand fits): where the stacked rows do not fit across a lot under 20 m wide, the hub bands run back from the street: refuge and shelter strip | public corridor | 3.0 m service strip, the lobby across the corridor and service strip at the street; overflow rooms in a 3.5 m pocket of the refuge strip on the corridor; the data-centre entrance row and the bays at the rear (with a side drive: a 5.2 m row only as wide as the bays, stair S2 and lift E2 turned across, the dock and vestibule behind them, the plant yard behind the refuge, as the 1330 hand fit; with no drive: across the lot, stair S2 along the exit passage); the hall only over the hub, the rear two storeys with chillers on their roof (all drawing choices); the refuge held at the spec size, the rest of its strip open ground, not built (J.B. 10 Nov)' },
   base: { why: 'base surface: the corner grades joined by triangles; both triangulations computed (fans from neighbouring corners: on a four-corner lot the two diagonals) and the lower surface used under the building (Z&D s. 2 joins the corner grades; J.B. 8 Nov, our reading)' },
@@ -216,7 +218,8 @@ function layout(S0) {
     { k: 4, t: 'shared loading by approval (Parking By-law 5.1.5)', exams: 0, shelter: false, shared: true }];
   const ladder = extra => { const why = [];
     for (const st of lad) {
-      const tryMW = mw => { const X = (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {})); X.mwUsed = mw; return X; };
+      const tryMW = mw => { let X = (variant.main === 'stacked' ? stacked : beside)(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags }, extra || {}));
+        if (X.fail && RULES.plantUp && !(extra && (extra.turned || extra.maxW))) { const fl = [], U = plantUp(Object.assign({ S, st, mw, a0, aMax, spanOver, uOf, sv, van, I2, I3, ground, inYard, inDrive, flags: fl }, extra || {})); if (!U.fail) { X = U; X.puFlags = fl; } else { X.plantUpWhy = U.fail; LASTPU.push(`step ${st.k}: ${U.fail}`); } } X.mwUsed = mw; return X; };
       const notGrown = S.city === 'edm' && !S.mwExact && !S.mwStart;   /* EH-FREEZE-2026-11-11f (J.B. 12 Nov): Edmonton at grade not grown, rule pending (11g) */
       let mw = S.mwExact || S.mwStart || (notGrown ? (S.mw || 1.8) : r2(RULES.cap.m2 / HPM())), L = tryMW(mw); if (notGrown && !L.fail) L.notGrown = true;   /* 12 Nov 2026 (J.B., decisions log): the hub grows to the cap (2,325 m² of data centre, one hall storey) and MW follows; no MW cap (was the tool's tested size, S.mw) */
       if (L.fail) { why.push(`step ${st.k} (${st.t}): ${L.fail}`); continue; }
@@ -250,6 +253,7 @@ function layout(S0) {
       if (out && out.dcArea < RULES.cap.m2 - 0.5 && !out.sizeStop) { out.sizeStop = { rule: 'turned plant yard', at: out.MW, yard: out.turnedYard };
         flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard beside the building (${out.turnedYard} m wide, the narrowest that holds the plant) sets the building's width, ${out.MW.toFixed(2)} MW (J.B. 12 Nov 2026)`); } }
   }
+  if (out && out.puFlags) out.puFlags.forEach(f => flags.push(f));
   if (!out) { res.doesntFit = { limiting: why }; res.variant = variant; flags.push('Doesn’t fit here (ladder step 7): ' + why.join('; '));
     const front = streets.find(e => e.kind === 'front'), fw = front ? Math.hypot(front.b[0] - front.a[0], front.b[1] - front.a[1]) : null;
     if (fw && fw > aMax) flags.push(`Not built yet: the turned variant (bands along the street, spec Part 2) might fit this wide, shallow lot (frontage ${Math.round(fw)} m, depth ${Math.round(aMax)} m) (?)`);
@@ -644,6 +648,165 @@ function narrowLot(C) {
     storeyNames: ['Hub at grade, bands back from the street; data-centre entrance rooms at the rear', 'Data-centre support over the hub; unassigned floor', 'One data-hall storey over the hub'] };
   return L;
 }
+/* ---------- PLANT UP (layout (b), J.B. 13 Nov 2026): spec Part 6 step 4a (J.B. 9–10 Nov; the 1360 Frances St and 10004 167 St NW test fits) ----------
+   A small lot where the stacked and narrow layouts don't fit: generators in a 2 h room on storey 2 (VBBL 3.6.2.8), transformers in alcoves open to the lane
+   or, when the lane frontage is full, to the street (BC Hydro ES54 F3-06), chillers on the roof but not over the hall (FM 5-32 2.2.1.6). Labelled "meets code
+   as read; not FM 5-32 (insurer)" and "exception to the 5 Nov rule, this variant only". Needs a lane or street at the rear. Drawing choices, as the 10004
+   test fit drawn on a plain rectangle (a from the street, b across, the lane or side street at b = W):
+   storey 1: lobby, office and first aid on the street, a public corridor behind them, stair S1 at the street corner; the refuge (the day shelter merged on
+   small lots, ladder step 3) along a public corridor, washrooms and service rooms in a strip on the far side; an exit passage from the corridor's far end to the
+   lane; at the lane the bays, the dock with freight lift E2, the staff vestibule, stair S2 and the alcoves.
+   storey 2: data-centre support off a secure corridor; the generator room (sets 2.0 m apart, 1.0 m to the walls: spec rule 9, our reading); the hub set's own 2 h room.
+   storey 3: the hall; along one side a band under the chillers (units 1.5 m in from the roof edge, end clear zones on the roof) holding the UPS and battery
+   rooms; no hall over the alcoves (oil-filled transformers below ?).
+   Not drawn: generator exhaust and air, fuel delivery upstairs, structure for the roof plant, truck turning at the lane (?). */
+function plantUp(C) {
+  const { st, van } = C, cw = RULES.cor.w, SW = RULES.stair.w, SL = RULES.stair.l, sm = RULES.smallRoom.w, wcm = RULES.wcMod.w, pw = RULES.pexit.w, HX = HC();
+  if (!HX) return { fail: 'the sizing rule (hubchecks) is not loaded' };
+  if (st.exams > 0) return { fail: 'no clinic on a small lot (no second separate exit fits, spec Part 6)' };
+  const lane = C.S.edges.find(e => (e.abuts === 'alley' || e.abuts === 'street') && e.kind === 'rear');
+  if (!lane) return { fail: 'no lane or street at the rear for the bays, stair S2, the staff entrance and the refuge’s second exit' };
+  const D = Math.floor(C.aMax * 10) / 10, sp = C.spanOver(0, D); if (!sp) return { fail: 'no width over the lot depth' };
+  const W = r2(sp[1] - sp[0]), city = C.S.city === 'edm' ? 'e' : 'v', bayL = van ? 10.2 : 9.0, bayW = van ? 3.4 : 3.3, dS = r2(PRG.uwc.w + WALLX);
+  const CH = { l: 12.14, w: 2.36, side: 1.5, end: 2.1, endGap: 4.2 }, E2w = RULES.e2.w, E2l = RULES.e2.l, VESw = RULES.ves.w, VESl = RULES.ves.l;
+  const lenOf = (x, d) => x.fix != null ? x.fix : sizedW(x, d);
+  const sec = (s_, id, n, kind, rects, o) => room(s_, id, n, kind === 'hall' ? 'hall' : kind === 'bay' ? 'load' : 'sup', kind, rects.filter(r => r[1] - r[0] > 0.01 && r[3] - r[2] > 0.01), Object.assign({ block: 'data centre' }, o || {}));
+  const hubRoom = (R, id, n, g, kind, rects, o) => R.push(room(1, id, n, g, kind, rects, Object.assign({ block: 'hub' }, o || {})));
+  /* loading (Parking By-law 5.2.5, 5.2.3; no clinic): data centre on storeys 2–3, the hub at grade */
+  const dcEst = 2 * W * D, hubEst = W * D * 0.6;
+  const nDC = van ? bays5_2_5(dcEst) : 0, nRef = van ? (hubEst < 100 ? 0 : rh517(hubEst / 2800)) : 0;
+  const nb = van ? (st.shared ? Math.max(nDC, nRef) : nDC + nRef) : (hubEst + dcEst < 2500 ? 0 : hubEst + dcEst <= 7500 ? 1 : 2);
+  const dRB = r2(Math.max(SL, nb ? bayL : 0, VESl, E2l + 2.4)), aM = r2(D - dRB);
+  const attempt = mw => {
+    const Q = mw * 1.55, flags = [];
+    /* transformers: count and pad from the sizing rule (the hub load estimated from 50 people first, then from the drawn refuge) */
+    const tz0 = HX.transformers(Q, 60, city), T = { l: tz0.pad[0], w: tz0.pad[1] }, alcW = r2(T.w + 2.0), alcD = r2(T.l + 1.0), nT = tz0.n;
+    const laneW = r2(W - pw), colW = r2(nb * bayW + E2w + VESw + SW), alcLane = colW + nT * alcW <= laneW + 1e-6;
+    if (colW > laneW + 1e-6) return { fail: `the lane frontage holds ${nb} bays ${bayW} m wide, the dock and lift E2, the staff vestibule, stair S2 and the refuge's exit passage only with ${r2(colW + pw)} m; ${W} m available` };
+    /* storey 1, the street band: lobby | (alcoves when the lane is full) | office, first aid | S1 */
+    const R = [], dFr = r2(SL - cw);
+    const offW = sizedW({ id: 'off', w: PRG.off.w, m2: PRG.off.m2 }, dFr), faW = sizedW({ id: 'fa', w: PRG.fa.w, m2: PRG.fa.m2 }, dFr), wL0 = Math.max(RULES.lobby.ws[RULES.lobby.ws.length - 1], up1(RULES.lobby.m2 / dFr));
+    const alcF = alcLane ? 0 : r2(nT * alcW);
+    if (!alcLane && W - SW - wL0 - alcF < -1e-6) return { fail: `the transformer alcoves (${nT} × ${alcW} m) fit neither on the lane nor on the street beside the lobby and stair S1 (${W} m)` };
+    if (!alcLane && alcD > dFr + 1e-6) return { fail: `the street alcoves need ${alcD} m of depth in front of the public corridor; ${dFr} m` };
+    const ofFront = W - SW - wL0 - alcF >= offW + faW - 1e-6, wL = r2(W - SW - alcF - (ofFront ? offW + faW : 0));
+    const S1r = [0, SL, r2(W - SW), W];
+    hubRoom(R, 'lob', 'Shared lobby', 'circ', 'lobby', [[0, dFr, 0, wL]], { prog: 'lobby' });
+    const alcs = []; for (let i = 0; i < nT; i++) alcs.push(alcLane ? null : [0, alcD, r2(wL + i * alcW), r2(wL + (i + 1) * alcW)]);
+    if (!alcLane && alcD < dFr - 0.01) hubRoom(R, 'lobx', 'Shared lobby', 'circ', 'lobby', []);   /* placeholder (removed below) */
+    if (ofFront) { const b0 = r2(wL + alcF); hubRoom(R, 'off', 'Staff office (shared)', 'pub', 'proom', [[0, dFr, b0, r2(b0 + offW)]], { prog: 'off' }); hubRoom(R, 'fa', 'First aid', 'pub', 'proom', [[0, dFr, r2(b0 + offW), r2(W - SW)]], { prog: 'fa' }); }
+    /* the middle: refuge | public corridor | service strip */
+    const wR = r2(W - dS - cw); if (wR < PRG.refuge.w + WALLX - 1e-6) return { fail: `the refuge strip is ${wR} m wide beside the corridor and the washroom strip; ${r2(PRG.refuge.w + WALLX)} m needed` };
+    const areaRS = PRG.refuge.m2 + (st.shelter ? PRG.shelter.m2 : 0), load = Math.ceil(areaRS / 0.75), nW = wcA(Math.ceil(load / 2));
+    const strip = [{ id: 'uwc', n: 'Universal WC', w: PRG.uwc.w, m2: PRG.uwc.m2 }, { id: 'sho', n: 'Universal shower', w: PRG.sho.w, m2: PRG.sho.m2 },
+      { id: 'wcm', n: `WC men (${nW[0]})`, fix: Math.max(sm, r2(nW[0] * wcm)) }, { id: 'wcw', n: `WC women (${nW[1]})`, fix: Math.max(sm, r2(nW[1] * wcm)) },
+      { id: 'cot', n: 'Cot and supply storage', fix: sm }, { id: 'pmec', n: 'Programs mechanical, emergency panel', fix: PRG.pmec.w, plant: true }]
+      .concat(ofFront ? [] : [{ id: 'off', n: 'Staff office (shared)', w: PRG.off.w, m2: PRG.off.m2 }, { id: 'fa', n: 'First aid', w: PRG.fa.w, m2: PRG.fa.m2 }]);
+    const sL = r2(sum(strip.map(x => lenOf(x, dS)))), refL = up1((PRG.refuge.m2) / (wR - WALLX) ), shL = st.shelter ? up1(PRG.shelter.m2 / (wR - WALLX)) : 0;
+    const need = r2(SL + Math.max(refL + shL, sL + pw));
+    if (need > aM + 1e-6) return { fail: `the hub needs ${r2(need + dRB)} m of depth (street band ${SL} m, refuge ${refL}${shL ? ` and shelter ${shL}` : ''} m, the lane rooms ${dRB} m); ${D} m inside the yards` };
+    R.push(room(1, 'cor', 'Public corridor', 'circ', 'pcor', [[dFr, SL, 0, r2(W - SW)], [SL, aM, wR, r2(wR + cw)]], { block: 'hub', corridor: true }));
+    const aSh = r2(aM - shL);
+    hubRoom(R, 'ref', st.shelter ? 'Refuge main room' : 'Refuge with the day warming shelter (one room, ladder step 3)', 'pub', 'proom', [[SL, aSh, 0, wR]], { prog: 'refuge' });
+    if (st.shelter) hubRoom(R, 'shel', 'Warming shelter rest area (day)', 'pub', 'proom', [[aSh, aM, 0, wR]], { prog: 'shelter' });
+    let a = SL; strip.forEach(x => { const l = lenOf(x, dS); hubRoom(R, x.id, x.n, x.plant ? 'plant' : 'pub', x.plant ? 'plant' : 'proom', [[a, r2(a + l), r2(W - dS), W]], { prog: x.id }); a = r2(a + l); });
+    R.push(room(1, 'pas', 'Exit passage (2 h) from the corridor’s far end to the lane', 'circ', 'exitpas', [[a, aM, r2(W - dS), W], [aM, D, r2(W - pw), W]], { block: 'hub' }));
+    /* the lane rooms: bays | dock and E2 | vestibule | S2 | alcoves | (open) | exit passage */
+    const bE = r2(nb * bayW), bV = r2(bE + E2w), bS = r2(bV + VESw), bA = r2(bS + SW);
+    const E2r = [r2(D - E2l), D, bE, bV], VESr = [r2(D - VESl), D, bV, bS], S2r = [r2(D - SL), D, bS, bA];
+    if (alcLane) for (let i = 0; i < nT; i++) alcs[i] = [r2(D - alcD), D, r2(bA + i * alcW), r2(bA + (i + 1) * alcW)];
+    const bOpen = alcLane ? r2(bA + nT * alcW) : bA;
+    for (let i = 0; i < nb; i++) R.push(sec(1, 'b' + (i + 1), `Loading space ${i + 1}, ${van ? 'Class B 10.2 × 3.4 m' : '9.0 × 3.3 m'}, open to the lane`, 'bay', [[r2(D - bayL), D, r2(i * bayW), r2((i + 1) * bayW)]]));
+    const dockR = [[aM, r2(D - E2l), bE, bV], [aM, r2(D - VESl), bV, bS], [aM, r2(D - SL), bS, bA], [aM, r2(D - bayL), 0, bE]]
+      .concat(alcLane ? [[aM, r2(D - alcD), bA, bOpen]] : []).concat([[aM, D, bOpen, laneW]]).filter(r => r[1] - r[0] > 0.3 && r[3] - r[2] > 0.3);
+    R.push(sec(1, 'dock', 'Dock and lift lobby (entrance)', 'dock', dockR));
+    R.push(sec(1, 'e2', 'Freight lift E2 (passenger-rated)', 'score', [E2r], { core: true, lift: true }));
+    R.push(sec(1, 'ves', 'DC staff entrance: vestibule, guard point, portal', 'entry', [VESr]));
+    R.push(sec(1, 's2', 'Stair S2 (data centre), discharging to the lane', 'score', [S2r], { core: true, stair: true }));
+    R.push(sec(1, 's1', 'Stair S1 (data centre), discharging to the street', 'score', [S1r], { core: true, stair: true }));
+    alcs.forEach((r, i) => R.push(room(1, 'alc' + (i + 1), `Transformer alcove ${i + 1}, open to the ${alcLane ? 'lane' : 'street'} (BC Hydro ES54 F3-06; EPCOR rules not read ? in Edmonton)`, 'plant', 'plant', [r], { block: 'plant', alcove: true })));
+    for (let i = R.length - 1; i >= 0; i--) if (R[i].id === 'lobx') R.splice(i, 1);
+    /* the hub's load from the drawn refuge (eh/hubload.py, ported), then the plant */
+    const people = Math.floor(sum(R.filter(x => x.g === 'pub' && /^ref/.test(x.id)).map(x => sum(x.r.map(ra)))) / 3.5);
+    const hubKw = HX.hubLoad ? HX.hubLoad({ S: { 1: R } }, people).kw : 60, tz = HX.transformers(Q, hubKw, city), hs = HX.hubSet(hubKw);
+    if (tz.n !== nT || tz.pad[0] !== T.l || tz.pad[1] !== T.w) return { fail: `transformer count changed with the hub load (${nT} → ${tz.n}) (?)` };
+    /* storey 2: the generator room (the rule's set size, else the next size up, flagged: spec Part 1c, J.B. 11 Nov) */
+    const gz0 = HX.gens(Q, 0), aG0 = r2(SL + cw), aGmax = r2(aM - cw - aG0), wGmax = r2(W - cw - 2.4);
+    let gz = null, gR = null, inline = true;
+    for (const size of [gz0.kw, 1000, 2000].filter((k, i, A) => k >= gz0.kw && A.indexOf(k) === i)) {
+      const g = size === gz0.kw ? gz0 : HX.gens(Q, 0, size); if (!g.footprint) continue; const [gl, gw] = g.footprint;
+      const opts = [{ inline: true, W: r2(gw + 2.0), L: r2(g.n * gl + (g.n - 1) * 2.0 + 2.0) }, { inline: false, W: r2(g.n * gw + (g.n - 1) * 2.0 + 2.0), L: r2(gl + 2.0) }];
+      const o = opts.find(o => o.L <= aGmax + 1e-6 && o.W <= wGmax + 1e-6); if (o) { gz = g; inline = o.inline; gR = [aG0, r2(aG0 + o.L), r2(W - o.W), W]; break; } }
+    if (!gz) return { fail: `the generator room on storey 2 (${gz0.n} × ${gz0.kw.toLocaleString('en-CA')} kW sets, 2.0 m apart, 1.0 m to the walls) does not fit beside the secure corridor (${aGmax} × ${wGmax} m)` };
+    if (gz.kw !== gz0.kw) flags.push(`Generator sets: the rule's ${gz0.n} × ${gz0.kw.toLocaleString('en-CA')} kW sets don't fit the storey-2 generator room; ${gz.n} × ${gz.kw.toLocaleString('en-CA')} kW drawn (the next size up, flagged: spec Part 1c, J.B. 11 Nov)`);
+    const gW = r2(W - gR[2]), R2 = [], bDc = r2(W - gW - cw);
+    R2.push(sec(2, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }), sec(2, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }), sec(2, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true }));
+    R2.push(sec(2, 'dcor', 'Secure corridor', 'scor', [[SL, aG0, bDc, W], [aG0, r2(aM - cw), bDc, r2(W - gW)], [r2(aM - cw), aM, 0, W], [aM, r2(D - SL), bS, bA]], { corridor: true }));
+    R2.push(sec(2, 'gen', `Generator room, 2 h (VBBL 3.6.2.8): ${gz.n} sets, ${gz.kw.toLocaleString('en-CA')} kW ${gz.model}, sub-base tanks`, 'sroom', [gR], { prog: 'gen' }));
+    if (aM - cw - gR[1] > 0.3) R2.push(room(2, 'gsp', 'Unassigned (no use yet), off the secure corridor', 'spare', 'spare', [[gR[1], r2(aM - cw), gR[2], W]], { block: 'spare', dcSide: true }));
+    R2.push(sec(2, 'ship', 'Shipping, receiving, storage (over the street rooms)', 'sroom', [[0, SL, 0, r2(W - SW)]], { prog: 'ship' }));
+    const hubRm = hs && hs.kw ? { id: 'hgen', n: `Hub generator room, 2 h: ${hs.model}, own sub-base tank (72 h)`, fix: r2((hs.footprint ? hs.footprint[0] : 2.27) + 2.0) } : null;
+    const sideI = (hubRm ? [hubRm] : []).concat([{ id: 'mv', n: 'MV switchgear, main electrical', w: PRG.mv.w }, { id: 'mmr1', n: 'Meet-me room 1', w: PRG.mmr.w }, { id: 'mmr2', n: 'Meet-me room 2', w: PRG.mmr.w },
+      { id: 'valv', n: 'Sprinkler valve room, cylinders', w: PRG.valv.w }, { id: 'jan', n: 'Janitor (DC)', w: PRG.jan.w }, { id: 'dwc', n: 'DC staff WC, shower', w: PRG.dwc.w }, { id: 'garb', n: 'Garbage and recycling', w: PRG.garb.w },
+      { id: 'noc', n: 'Security control room / NOC', w: PRG.noc.w }, { id: 'doff', n: 'DC offices (reference size)', w: PRG.doff.w, m2: PRG.doff.m2 }, { id: 'brk', n: 'DC break room', w: PRG.brk.w, m2: PRG.brk.m2 }]);
+    const rowL = r2(aM - cw - SL); if (bDc < 2.4 - 1e-6 || (hubRm && bDc < (hs.footprint ? hs.footprint[1] : 1.149) + 2.0 - 1e-6)) return { fail: `storey-2 support rooms: ${bDc} m beside the generator room and the secure corridor` };
+    let ps = pack(sideI.concat([{ id: 'sp', w: 0, grow: true }]), rowL, bDc), sideIt = sideI;
+    if (ps.fail) { sideIt = sideI.map(x => Object.assign({}, x, { m2: null })); ps = pack(sideIt.concat([{ id: 'sp', w: 0, grow: true }]), rowL, bDc); }
+    if (ps.fail) return { fail: `storey-2 support rooms need ${ps.fail} m along the secure corridor; ${rowL} m` };
+    place(sideIt.concat([{ id: 'srow', n: 'Unassigned (no use yet), off the secure corridor', w: 0, grow: true, spare: true }]), ps.ws, SL, 0, bDc).map(x => Object.assign(x, { rr: [x.rr[2], x.rr[3], x.rr[0], x.rr[1]] }))
+      .filter(x => x.rr[1] - x.rr[0] > 0.01).forEach(x => R2.push(x.spare ? room(2, x.id, x.n, 'spare', 'spare', [x.rr], { block: 'spare', dcSide: true }) : sec(2, x.id, x.n, 'sroom', [x.rr], { prog: x.id === 'hgen' ? 'hgen' : x.id })));
+    if (nb) R2.push(sec(2, 'ship2', 'Storage over the bays', 'sroom', [[aM, D, 0, bE]], { prog: 'ship' }));
+    R2.push(sec(2, 'stag', 'Storage and staging', 'sroom', [[aM, r2(D - E2l), bE, bV], [aM, D, bV, bS]], { prog: 'ship' }));
+    R2.push(room(2, 'lsp', alcLane ? 'Unassigned (no use yet; over the transformer alcoves)' : 'Unassigned (no use yet)', 'spare', 'spare', [[aM, D, bA, W]], { block: 'spare', dcSide: true }));
+    /* storey 3: the chiller band (units along a, end to end; FM 5-32 2.2.1.6: not over the hall), the UPS and battery rooms under it; the hall */
+    const nC = Math.ceil(Q / 1.489 - 1e-9) + 1, bC = r2(CH.w + CH.side), Lc = r2(2 * CH.end + nC * CH.l + (nC - 1) * CH.endGap);
+    const upsM2 = r2(mw * 3.3 + 1.0 * PRG.ups.w), batM2 = batRoomM2(mw, bC);
+    const sup3 = [{ id: 'ups', n: `UPS room (${Math.ceil(mw) + 1} modules, N+1)`, w: PRG.ups.w, m2: upsM2 }, { id: 'bat', n: 'Battery room, Li-ion', w: PRG.bat.w, m2: batM2 }, { id: 'bhv', n: 'Battery room HVAC (separate)', w: PRG.bhv.w }];
+    const supL = r2(sum(sup3.map(x => sizedW(x, bC)))), Lb = r2(Math.max(Lc, supL));
+    const cores = [S1r, S2r, E2r], band = [0, Lb, 0, bC];
+    if (Lb > D + 1e-6) return { fail: `the roof band for ${nC} chillers end to end needs ${Lc} m; ${D} m` };
+    if (cores.some(c => c[0] < band[1] - 1e-6 && c[1] > band[0] + 1e-6 && c[2] < band[3] - 1e-6 && c[3] > band[2] + 1e-6)) return { fail: `the roof band for ${nC} chillers (${Lb} × ${bC} m) runs into a stair or lift` };
+    const R3 = [sec(3, 's1', 'Stair S1 (data centre)', 'score', [S1r], { core: true, stair: true }), sec(3, 's2', 'Stair S2 (data centre)', 'score', [S2r], { core: true, stair: true }), sec(3, 'e2', 'Freight lift E2', 'score', [E2r], { core: true, lift: true })];
+    a = 0; sup3.forEach(x => { const l = sizedW(x, bC); R3.push(sec(3, x.id, x.n, 'sroom', [[a, r2(a + l), 0, bC]], { prog: x.id })); a = r2(a + l); });
+    if (Lb - a > 0.3) R3.push(room(3, 'bsp', 'Unassigned data-centre floor (no use yet; chillers on its roof)', 'spare', 'spare', [[a, Lb, 0, bC]], { block: 'spare', dcSide: true }));
+    const over = alcs.map(r => r.slice());
+    if (over.length) R3.push(room(3, 'asp', 'Unassigned data-centre floor over the transformer alcoves (not hall: oil-filled transformers below ?)', 'spare', 'spare', over, { block: 'spare', dcSide: true }));
+    const hallR = subAll([[0, D, 0, W]], [band].concat(over, cores)).sort((x, y) => x[0] - y[0] || x[2] - y[2]);
+    R3.push(sec(3, 'hall', 'Data hall (one storey)', 'hall', hallR));
+    const hall = sum(hallR.map(ra)), MW = hall / HPM();
+    /* the plant: pads in the alcoves, sets in the generator room, the hub set in its room, chillers on the band's roof */
+    const items = [];
+    alcs.forEach((r, i) => { const pr = alcLane ? [r2(D - T.l), D, r2(r[2] + 1.0), r2(r[2] + 1.0 + T.w)] : [0, T.l, r2(r[2] + 1.0), r2(r[2] + 1.0 + T.w)];
+      items.push({ id: 't' + (i + 1), n: `Transformer pad ${i + 1}, ${tz.kva.toLocaleString('en-CA')} kVA (${tz.pad_src}), in alcove ${i + 1}`, kind: 'pad', r: pr, z: pr, keep: pr, front: `faces the ${alcLane ? 'lane' : 'street'}` }); });
+    const [gl, gw] = gz.footprint;
+    for (let i = 0; i < gz.n; i++) { const r = inline ? [r2(gR[0] + 1 + i * (gl + 2)), r2(gR[0] + 1 + i * (gl + 2) + gl), r2(gR[2] + 1), r2(gR[2] + 1 + gw)] : [r2(gR[0] + 1), r2(gR[0] + 1 + gl), r2(gR[2] + 1 + i * (gw + 2)), r2(gR[2] + 1 + i * (gw + 2) + gw)];
+      items.push({ id: 'g' + (i + 1), n: `Generator ${i + 1}, ${gz.kw.toLocaleString('en-CA')} kW ${gz.model}, sub-base tank (storey-2 generator room)`, kind: 'gen', roof: true, up: 2, r, z: r, keep: r }); }
+    const hR = R2.find(x => x.id === 'hgen'); let hubSetOut = null;
+    if (hR && hs) { const f = hs.footprint || [2.27, 1.149], q = hR.r[0], r = [r2(q[0] + 1), r2(q[0] + 1 + f[0]), r2(q[2] + 1), r2(q[2] + 1 + f[1])]; items.push({ id: 'h1', n: `Hub generator, ${hs.model} (${hs.kw} kW standby), in its own 2 h room on storey 2`, kind: 'gen', hub: true, roof: true, up: 2, r, z: r, keep: r }); }
+    else if (hs && hs.kw) hubSetOut = 'the hub set’s own room is not drawn (?)';
+    for (let i = 0; i < nC; i++) { const a0 = r2(CH.end + i * (CH.l + CH.endGap)), r = [a0, r2(a0 + CH.l), CH.side, bC];
+      items.push({ id: 'c' + (i + 1), n: `Chiller ${i + 1} (on the storey-3 roof over the UPS and battery band, not over the hall)`, kind: 'chiller', roof: true, r, z: [r2(r[0] - CH.end), r2(r[1] + CH.end), r2(r[2] - CH.side), r2(r[3] + CH.side)], keep: r, panel: 'end toward the street or lane' }); }
+    const plant = { ok: true, why: null, whyAll: null, Q: r2(Q), nG: gz.n, nC, nT, setKW: gz.kw, gen: gz, tx: tz, hubSet: hs, hubKw: r2(hubKw), hubSetOut, tank: Math.round(gz.tank_l), tankLot: null, tankBld: null, items, aisle: null, up: true,
+      rules: ['plant up on a small lot (spec Part 6 step 4a, J.B. 9–10 Nov): generators in a 2 h room on storey 2 (VBBL 3.6.2.8), meets code as read; not FM 5-32 (insurer)', 'sets 2.0 m apart, 1.0 m to the room walls (spec rule 9, our reading)',
+        `transformer alcoves open to the ${alcLane ? 'lane' : 'street'}: the exception to the 5 Nov rule, this variant only (BC Hydro ES54 F3-06)`, 'chillers on the roof, never over the hall (FM 5-32 2.2.1.6); clear zones 1.5 m long sides, 2.1 m ends, 4.2 m between ends (Vertiv SL-70790 s. 4.2.4, our reading)',
+        'generator exhaust and air, fuel delivery upstairs and the structure for the roof plant not drawn (?)'] };
+    const rooms = { 1: R, 2: R2, 3: R3 };
+    const hubArea = sum(R.filter(x => x.block === 'hub' && !x.core && x.kind !== 'exitpas').map(x => sum(x.r.map(ra))));
+    const dcArea = sum(R.filter(x => x.block === 'data centre' && x.kind !== 'bay').map(x => sum(x.r.map(ra)))) + sum(R2.filter(x => x.block === 'data centre' || x.dcSide).map(x => sum(x.r.map(ra)))) + sum(R3.map(x => sum(x.r.map(ra))));
+    return { rooms, hall, MW, dcArea, hubArea, plant, flags, alcLane, nT, gz, inline, Lb, bC, aM, dRB, refA: r2(sum(R.filter(x => /^ref/.test(x.id)).map(x => sum(x.r.map(ra))))) };
+  };
+  let mw = Math.max(0.1, (W * D * 0.55) / HPM()), A = null;
+  for (let k = 0; k < 8; k++) { A = attempt(mw); if (A.fail) return A; if (Math.abs(A.MW - mw) < 0.002) break; mw = A.MW; }
+  if (C.mw && A.MW > C.mw + 0.005) return { fail: `the plant-up hall is ${r2(A.MW)} MW, over the size asked (${C.mw} MW) (?)` };
+  const bOrigin = C.sv < 0 ? sp[1] : sp[0]; C.mapUV = (aa, b) => [C.uOf(C.a0 + aa), bOrigin + C.sv * b];
+  const H = [C.ground, RULES.storeyH.up, RULES.storeyH.hall];
+  A.flags.forEach(f => C.flags && C.flags.push(f));
+  return { rooms: A.rooms, H, hall: A.hall, MW: A.MW, dcArea: A.dcArea, hubArea: A.hubArea, clin: 0, nb, nDC, nRef, nCl: 0, clinWhy: null, shared: st.shared,
+    truck: { court: null, why: 'bays open to the lane (drawing choice, as the 1360 Frances St test fit); truck turning at the lane not checked (?)' }, plant: A.plant, aB: SL, aC: r2(SL - cw), aR: SL, dF: SL,
+    kind: 'stacked', plantUp: { alcLane: A.alcLane, nT: A.nT, inline: A.inline, band: [A.Lb, A.bC], aM: A.aM, dRB: A.dRB, refuge: A.refA }, W, Da: D, bOrigin,
+    sizeStop: { rule: 'plant up: storey 3', at: A.MW, why: 'the hall is storey 3 less the chiller band (UPS and battery rooms under it), the floor over the alcoves and the cores' },
+    storeyNames: ['Hub at grade; data-centre entrance rooms and transformer alcoves', 'Data-centre support and the generator room', 'One data-hall storey; chillers on the roof over the UPS band'] };
+}
 /* Parking By-law 6059 row 5.2.5 Class B: one for the first 465 m², one for the next 1,860 (to 2,325), one per further 2,325; fractions to the nearest
    whole number above zero, one-half up (5.1.7; register arch_up3_vanPkg5). Was rounded up (10 Nov 2026 fix; no test lot changes: the hub caps the data centre at 2,325 m²) */
 const rh517 = x => Math.max(1, Math.floor(x + 0.5));
@@ -651,6 +814,7 @@ function bays5_2_5(m2) { return m2 <= 0 ? 0 : m2 <= 465 ? 1 : m2 <= 2325 ? 2 : 2
 function subR(a, b) { if (!(b[0] < a[1] - 1e-6 && b[1] > a[0] + 1e-6 && b[2] < a[3] - 1e-6 && b[3] > a[2] + 1e-6)) return [a]; const o = [];
   if (b[0] > a[0]) o.push([a[0], b[0], a[2], a[3]]); if (b[1] < a[1]) o.push([b[1], a[1], a[2], a[3]]); const m0 = Math.max(a[0], b[0]), m1 = Math.min(a[1], b[1]);
   if (b[2] > a[2]) o.push([m0, m1, a[2], b[2]]); if (b[3] < a[3]) o.push([m0, m1, b[3], a[3]]); return o.filter(r => ra(r) > 0.05).map(r => r.map(r2)); }
+const LASTPU = [];   /* tests only: the plant-up layout's last reasons for not fitting */
 const subAll = (rs, cut) => cut.reduce((acc, c) => acc.flatMap(r => subR(r, c)), rs);
 
 /* ---------- BESIDE (Edmonton BE: hall at grade behind the hub; one storey) ---------- */
@@ -1101,9 +1265,10 @@ function transplant(S, keys) {
   const sim = b => Math.abs(Math.log((area || 1) / (polyArea(b.LOTPOLY) || 1))) + Math.abs(Math.log((pr || 1) / (per(b.LOTPOLY) || 1)));
   const ownKey = (lib[String(S.id)] || {}).key, loo = root && root.BD && root.BD.hubLeaveOut;   /* leave-one-out test (J.B. 13 Nov): a board lot never borrows its own plan */
   const cands = fam[key].map(k => byKey[k]).filter(Boolean).filter(b => !(loo && b.key === ownKey)).sort((x, y) => sim(x) - sim(y));
-  for (const B of cands) { const reg = placePlan(S, B); if (!reg) continue;
+  for (const B of cands) { const reg = placePlan(S, B) || (B.key === ownKey && B.reg ? B.reg : null); if (!reg) continue;   /* a board's own lot: its best-fit registration when the plan doesn't place inside the tool's outline (E10003, drawn on a stand-in rectangle) */
     const P = frozenBoard(S, B, reg); if (!P) continue;
     const H = P.hub; H.transplant = { from: B.key, addr: B.addr, layout: key, slide: reg.slide, setback: reg.setback };
+    if (H.doesntFit) return P;   /* grown on this lot and nothing fits (layout (c)): the doesn't-fit state, as a placed plan that fails a check */
     const own = ((lib[String(S.id)] || {}).key === B.key);   /* a board's own lot: its rows hold */
     if (!own && H.rooms) {   /* J.B. 13 Nov: on another lot the placed plan is checked by the tool's own rules; any fail -> doesn't fit as placed */
       withV2(H, S); const fl = [];
@@ -1121,13 +1286,57 @@ function transplant(S, keys) {
     H.estimate = own ? null : { keys, names: [`${(VNEED && VNEED.names && VNEED.names[key]) || VNAMES[key] || key}`], transplant: B.addr };
     return P; }
   return null; }
+/* layout (c), J.B. 13 Nov 2026: the at-grade boards the hub grew, at growth 0 and 1 (tool/data/hub_grow_<city>.json, git-ignored: Edmonton lot outlines),
+   grown again by the hub's step-back (tool/growyard.js) wherever their plan is placed: on the board's own lot with the board's limit and floor; on another lot
+   with that lot's outline (the plant yard clipped to it, the hall growing until it reaches the lot line) and no floor but the plan as drawn. */
+const GROWD = {};
+function growData(city) { if (GROWD[city] !== undefined) return GROWD[city]; GROWD[city] = null;
+  try { if (root && typeof XMLHttpRequest !== 'undefined') { const x = new XMLHttpRequest(); x.open('GET', `data/hub_grow_${city}.json`, false); x.send(null); if (x.status === 200) GROWD[city] = JSON.parse(x.responseText).fits || null; }
+    else if (typeof require !== 'undefined') { const fs = require('fs'), path = require('path'), f = path.join(__dirname, 'data', `hub_grow_${city}.json`); if (fs.existsSync(f)) GROWD[city] = JSON.parse(fs.readFileSync(f, 'utf8')).fits || null; } } catch (e) { GROWD[city] = null; }
+  return GROWD[city]; }
+const GYm = (typeof module !== 'undefined' && module.exports) ? (() => { try { return require('./growyard.js'); } catch (e) { return null; } })() : null;
+const GY = () => (root && root.BD && root.BD.growyard) || GYm;
+/* Sutherland–Hodgman: the lot polygon clipped to a rectangle (u0, u1, v0, v1) */
+function clipRect(P, r) { let out = P.slice();
+  const edges = [[p => p[0] >= r[0], (a, b) => [r[0], a[1] + (b[1] - a[1]) * (r[0] - a[0]) / (b[0] - a[0])]], [p => p[0] <= r[1], (a, b) => [r[1], a[1] + (b[1] - a[1]) * (r[1] - a[0]) / (b[0] - a[0])]],
+    [p => p[1] >= r[2], (a, b) => [a[0] + (b[0] - a[0]) * (r[2] - a[1]) / (b[1] - a[1]), r[2]]], [p => p[1] <= r[3], (a, b) => [a[0] + (b[0] - a[0]) * (r[3] - a[1]) / (b[1] - a[1]), r[3]]]];
+  for (const [inn, cut] of edges) { const src = out; out = []; for (let i = 0; i < src.length; i++) { const a = src[i], b = src[(i + 1) % src.length];
+    if (inn(b)) { if (!inn(a)) out.push(cut(a, b)); out.push(b); } else if (inn(a)) out.push(cut(a, b)); } if (!out.length) break; }
+  return out.map(p => [r2(p[0]), r2(p[1])]); }
+function regrow(S, B, REG, GF, own) {
+  const Y = GY(); if (!Y) return { B, note: null };
+  const c = Math.cos(REG.th), s = Math.sin(REG.th), my = REG.mirror ? -1 : 1, tx = REG.t[0], ty = REG.t[1];
+  const wToB = (X, Yw) => { const dx = X - tx, dy = Yw - ty; return [r2(c * dx + s * dy), r2((-s * dx + c * dy) * my)]; };
+  const F = JSON.parse(JSON.stringify(GF)); let opt = {};
+  if (!own) {
+    const ring = S.ring.map(p => { const w = S.F.toW(p[0], p[1]); return wToB(w[0], w[1]); });
+    const inside = q => inPoly(q, ring) || ring.some((p, i) => dSeg(q, p, ring[(i + 1) % ring.length]) <= 0.5);
+    const fits = d => { const G = Y.geomAt(F, d); return (G.S[1] || []).every(x => x.r.every(r => [[r[0], r[2]], [r[1], r[2]], [r[1], r[3]], [r[0], r[3]]].every(inside))); };
+    if (!fits(0)) { LASTPU.push(`grow ${B.key} on ${S.id}: growth 0 not inside the lot`); return { B: null, note: 'the plan at growth 0 does not fit inside this lot' }; }
+    let d = 0; while (d < 60 && fits(r2(d + 0.1))) d = r2(d + 0.1);
+    F.DMAX = d; F.LIMIT = 'lot line (the placed plan)'; F.MW_FLOOR = null;
+    opt.clip = ring;
+  }
+  const r = Y.run(F, opt); if (r.fail && r.steps && r.steps.length) r.fail = `no size from ${r.steps[0].MW.toFixed(2)} MW down to the plan as drawn fits (at ${r.steps[0].MW.toFixed(2)} MW: ${r.steps[0].plant})`; LASTPU.push(`grow ${B.key} on ${S.id}: ${r.fail || r.MW + ' ' + r.stop.rule} | ` + (r.steps || []).slice(0, 3).concat((r.steps || []).slice(-2)).map(x => `${x.MW} d ${x.d}: ${x.plant}`).join(' ; ')); if (r.fail) return { B: null, note: `grown on this lot: ${r.fail}` };
+  const pl = r.plant, gz = pl && pl.gen, tz = pl && pl.tx, hs = pl && pl.hub, cnt = {};
+  const PLANT = pl ? pl.items.slice().sort((a, b) => ['gen', 'pad', 'hub', 'chill'].indexOf(a.kind) - ['gen', 'pad', 'hub', 'chill'].indexOf(b.kind)).map(it => { cnt[it.kind] = (cnt[it.kind] || 0) + 1; const i = cnt[it.kind];
+    const n = it.kind === 'gen' ? `Generator ${i}, ${gz.kw.toLocaleString('en-CA')} kW ${gz.model}, sub-base tank` : it.kind === 'pad' ? `Transformer pad ${i}, ${tz.kva.toLocaleString('en-CA')} kVA (${tz.pad_src})` : it.kind === 'hub' ? `Hub generator, ${hs.model} in its enclosure (72 h, own sub-base tank)` : `Chiller ${i} (at grade)`;
+    return { id: ({ gen: 'g', pad: 't', hub: 'h', chill: 'c' })[it.kind] + i, n, r: it.r.slice() }; }) : r.G.PLANT;
+  const B2 = Object.assign({}, B, { S: r.G.S, D: r.G.D, PLANT, PLANT_YARDS: r.G.PLANT_YARDS, MW: Math.round(r.MW * 100) / 100, dcArea: r.dc, hallDrawn: r.hall, stop: r.stop.rule, stopText: r.stop.text, grownHere: { d: r.d, steps: r.steps.length, own } });
+  return { B: B2, note: own ? null : `Grown on this lot by the hub's step-back (layout (c)): hall wall moved ${r.d} m into the plant yard, ${B2.MW.toFixed(2)} MW, stopped by the ${r.stop.rule}` };
+}
 function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from another lot (variants, overnight 13 Nov) */
-  const B0_ = B0; const B = B0 || (S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null), REG = reg0 || (B && B.reg); if (!B || !REG || !S.F) return null;
+  const B0_ = B0; let B = B0 || (S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null), REG = reg0 || (B && B.reg); if (!B || !REG || !S.F) return null;
   /* a board the freeze keeps failing (1330 Glen Dr): the doesn't-fit state, with the freeze's reasons (its failing rows), no figures (audit I41, I42) */
   const fails = (B.rows || []).filter(r => r[0] === 'fail' || r[0] === 'fix');
   if (fails.length) { const lim = [`${B.stop} (the test fit for ${B.addr}, 12 Nov 2026)`].concat(fails.map(r => `${r[1]}: ${String(r[3] || '').replace(/^SCRIPT FAILS:\s*/, '').replace(/\s*\[script[^\]]*\]?.*$/, '')}`));
     const H0 = { doesntFit: { limiting: lim, frozen: true }, flags: ['Doesn’t fit here (the frozen board fails): ' + lim.join('; ')], variant: { main: Object.keys(B.S).length > 1 ? 'stacked' : 'beside', flags: [], notBuilt: [] }, frozen: { key: B.key, addr: B.addr, freeze: B.freeze, board: B.board, failing: true }, site: {} };
     return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; }
+  let growNote = null;
+  if (B0_ && RULES.growYard) { const GF = (growData(S.city) || {})[B.key]; if (GF) { const own = ((frozenData(S.city) || {})[String(S.id)] || {}).key === B.key, g = regrow(S, B, REG, GF, own); if (!g.B) { if (own) return null; const lim = [`doesn’t fit as placed: ${g.note} (the ${B.addr} test fit placed on this lot)`];   /* J.B. 13 Nov: a placed plan that fails shows why */
+      const H0 = { doesntFit: { limiting: lim, placed: B.addr }, flags: ['Doesn’t fit here: ' + lim[0]], variant: { main: 'beside', flags: [], notBuilt: [] }, site: {} };
+      return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; }
+    B = g.B; growNote = g.note; } }
   try {
     const F = S.F, c = Math.cos(REG.th), s = Math.sin(REG.th), my = REG.mirror ? -1 : 1, tx = REG.t[0], ty = REG.t[1];
     const all = Object.values(B.S).flat().flatMap(x => x.r), u0 = Math.min(...all.map(r => r[0])), v0 = Math.min(...all.map(r => r[2])), u1 = Math.max(...all.map(r => r[1])), v1 = Math.max(...all.map(r => r[3]));
@@ -1163,6 +1372,7 @@ function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from anot
         if (lim && L.grades.hLimit == null) L.grades.hLimit = +lim[1]; if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
     L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the test fit for ' + B.addr + ', 12 Nov 2026' };
     if (!B0_) L.flags.push(`The test fit for ${B.addr} (12 Nov 2026): ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop}; drawn as fitted, not re-laid out by the tool`);
+    if (growNote) L.flags.push(growNote);
     if (REG.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(REG.rms)} m off on average (?)`);
     return toPlan(L, S);
   } catch (e) { if (typeof console !== 'undefined') console.warn('frozen board', e); return null; } }
@@ -1298,7 +1508,7 @@ function wallsOf(rects, R2uv) { const segs = [], key = s => [s.axis, s.at, s.fro
       if (!segs.some(t => key(t) === key(s))) segs.push(s); } }); });
   return segs; }
 
-const api = { build, fromSite, siteOf, layout, RULES, PRG, wcA, wcB, wcBload };
+const api = { build, fromSite, siteOf, layout, RULES, PRG, wcA, wcB, wcBload, plantUpWhy: () => LASTPU.slice(-4) };
 if (typeof module !== 'undefined' && module.exports) module.exports = api;
 if (root) { root.BD = root.BD || {}; root.BD.hub = api; }
 })(typeof window !== 'undefined' ? window : null);

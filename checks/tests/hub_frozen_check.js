@@ -23,9 +23,13 @@ const LOTS = {   /* lot selection as checks/tests/hub_match.js; freeze 11g per-b
   V1425: { lab: '1425 Clark Dr', sel: { city: 'van', tile: '2_1', id: '23060741' }, f: [1.82, 2325, 'floor cap'] },   /* EH-FREEZE-2026-11-11h */
 };
 const new_ = { built: 'new', extent: 'whole', floor: '' };
+/* J.B. 13 Nov 2026: boards whose size was drawn, not grown by the hub's step-back (no grown.json, or grown 0 m), are being grown in freeze 11i.
+   In the rebuild tests (ENGINE=1, LOO=1) they show as "drawn, awaiting 11i" and are not counted. V8980 grew 11.7 m but J.B. listed it (the hub may re-grow it). */
+const DRAWN = { V339: 'drawn storey 1 (grown 0 m)', V1330: 'not grown (frozen failing)', V8238: 'not grown', V1360: 'not grown', E10004: 'not grown', V8980: 'listed by J.B. (grown 11.7 m in 11g)' };
+const REBUILD = !!(process.env.ENGINE || process.env.LOO);
 (async () => {
   const out = process.argv[2] || 'hub_frozen_check.json', keys = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(LOTS);
-  const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl'] }), res = {}; let pass = 0;
+  const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl'] }), res = {}; let pass = 0, counted = 0;
   for (const key of keys) {
     const p = await b.newPage({ viewport: { width: 1440, height: 900 } }), errs = []; p.on('pageerror', e => errs.push(e.message));
     const local = (re, file, type) => p.route(re, r => r.fulfill({ body: fs.readFileSync(path.join(NM, file)), contentType: type }));
@@ -39,12 +43,13 @@ const new_ = { built: 'new', extent: 'whole', floor: '' };
     const L = LOTS[key];
     await p.evaluate(x => { window.__EX.push(x); const w = document.getElementById('welcome'); if (w) w.remove(); window.__run(window.__EX.length - 1); }, { lab: L.lab, sub: '', sel: L.sel, ans: new_ });
     await p.waitForTimeout(9000);
-    if (process.env.ENGINE || process.env.LOO) await p.evaluate(l => { BD.hubEngineOnly = true; if (l) BD.hubLeaveOut = true; }, !!process.env.LOO);   /* LOO=1: leave-one-out, each lot borrows from the most similar other board */
+    if (process.env.ENGINE || process.env.LOO) await p.evaluate(l => { BD.hubEngineOnly = true; if (l) BD.hubLeaveOut = true; }, !!process.env.LOO);
+    if (process.env.NOTP) await p.evaluate(() => { BD.hub.RULES.transplant = false; });   /* NOTP=1 (with ENGINE=1): the engine's own layouts only, no placed plans */   /* LOO=1: leave-one-out, each lot borrows from the most similar other board */
     const r = await p.evaluate(async () => { try { if (BD.arch) BD.arch.typology = 'emergency_hub'; const P = await BD.f1cards.arch(); const H = BD.hub.build(P), h = (H && H.hub) || {};
       return { frozen: h.frozen || null, borrowed: h.transplant ? h.transplant.addr : null, MW: h.doesntFit ? null : h.MW, dc: h.dcArea, stop: h.sizeStop ? h.sizeStop.rule : null, doesntFit: h.doesntFit ? h.doesntFit.limiting.slice(-1)[0] : null, rows: ((h.v2 || {}).rows || []).length,
-        reach: h.treach ? (h.treach.reach || []).length : null, travel: (h.travel || []).map(t => `${t.zone} ${t.worst} ${t.status}`), height: h.grades && h.grades.height }; } catch (e) { return { err: String(e.stack || e) }; } });
+        reach: h.treach ? (h.treach.reach || []).length : null, travel: (h.travel || []).map(t => `${t.zone} ${t.worst} ${t.status}`), height: h.grades && h.grades.height, plantUp: BD.hub.plantUpWhy ? BD.hub.plantUpWhy() : null, layout: h.plantUp ? 'plant up' : h.narrow ? 'narrow' : null }; } catch (e) { return { err: String(e.stack || e) }; } });
     const f = L.f, failing = /frozen failing/.test(f[2]), ok = failing ? !!r.doesntFit : (r.MW != null && Math.abs(r.MW - f[0]) < 0.005 && Math.abs((r.dc || 0) - f[1]) < 1 && r.stop === f[2]);   /* a board the freeze keeps failing: the doesn't-fit state */
-    r.freeze = f; r.match = ok; r.errors = errs; res[key] = r; if (ok) pass++;
-    console.log(key.padEnd(7), ok ? 'MATCH' : 'differ', '| freeze', f[0], f[1], f[2], '| tool', r.MW == null ? '-' : (+r.MW).toFixed(2), r.dc == null ? '-' : Math.round(r.dc), r.stop || r.doesntFit || r.err || '', r.borrowed ? '| borrowed from ' + r.borrowed : r.frozen ? '| frozen board' : '| engine', errs.length ? '| page errors ' + errs.length : '');
+    const drawn = REBUILD && DRAWN[key]; r.freeze = f; r.match = ok; r.drawn = drawn || null; r.errors = errs; res[key] = r; if (!drawn) { counted++; if (ok) pass++; }
+    console.log(key.padEnd(7), drawn ? 'drawn, awaiting 11i (' + drawn + '; ' + (ok ? 'match' : 'differs') + ')' : ok ? 'MATCH' : 'differ', '| freeze', f[0], f[1], f[2], '| tool', r.MW == null ? '-' : (+r.MW).toFixed(2), r.dc == null ? '-' : Math.round(r.dc), r.stop || r.doesntFit || r.err || '', r.borrowed ? '| borrowed from ' + r.borrowed : r.frozen ? '| frozen board' : '| engine', errs.length ? '| page errors ' + errs.length : '');
     await p.close(); }
-  console.log(`${pass} / ${keys.length} match the freeze`); fs.writeFileSync(out, JSON.stringify(res, null, 1)); await b.close(); })();
+  console.log(REBUILD ? `${pass} / ${counted} match the freeze (${keys.length - counted} drawn, awaiting 11i, not counted)` : `${pass} / ${keys.length} match the freeze`); fs.writeFileSync(out, JSON.stringify(res, null, 1)); await b.close(); })();
