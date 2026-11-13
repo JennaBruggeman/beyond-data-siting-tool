@@ -261,7 +261,7 @@ C.add(T,'Report',{async build(x){
   let n=2;
   for(const [title,cards] of RPAGES){ let body=''; for(const t of cards){ const r=await runCard(t); if(!r) continue; const refs=(r.src||[]).map(sid);
       body+=`<div class="lb">${esc(t)}</div>${r.lead?`<p class="ld">${C.pub(r.lead)}${refs.length?` <span style="color:#6B6A66">[${refs.join(', ')}]</span>`:''}</p>`:''}`+
-        `<div class="f1r-dr">${r.draw||''}</div>`+((r.rows||[]).length?`<table class="f1c-res-t">${r.rows.map(q=>`<tr><th>${esc(q[0])}</th><td>${q[1]}</td></tr>`).join('')}</table>`:''); }
+        `<div class="f1r-dr">${r.draw||''}</div>`+((r.rows||[]).length?`<table class="f1c-res-t">${r.rows.map(q=>`<tr><th>${esc(q[0])}</th><td>${q[1]&&typeof q[1]==='object'?`<b style="color:#CC746C">?</b> ${esc(q[1].why||'')}`:q[1]}</td></tr>`).join('')}</table>`:''); }
     pages.push(pg(n++,title,body||'<p class="ld">Not available for this lot.</p>')); }
   pages.push(pg(7,'Sources',`<p class="ld">Every figure in this report, keyed by number.</p><ol class="ld" style="padding-left:20px">${SRC.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`));
   const titles=['Title'].concat(RPAGES.map(p=>p[0]),['Sources']);

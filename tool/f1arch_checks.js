@@ -105,7 +105,12 @@ function noFitWhy(P){ const PL=planOf(P), H=PL&&PL.hub, lim=(H&&H.doesntFit&&H.d
 /* audit I41 (12 Nov 2026): where the hub doesn't fit, every card after Pick a typology shows this state (no figures for a building that isn't there) */
 /* item 1b: where the lot needs a layout the engine doesn't have yet, its figures are an estimate (null on the frozen boards) */
 BD.f1archEstimate=async x=>{ const P=await x.arch(); if(!P||!hubOn(P)) return null; const PL=planOf(P), H=PL&&PL.hub; return H&&(!H.frozen||H.transplant)&&!H.doesntFit&&H.estimate?H.estimate:null; };
-BD.f1archNoFit=async x=>{ const P=await x.arch(); if(!P||!hubOn(P)) return null; const PL=planOf(P); return PL&&PL.hub&&PL.hub.doesntFit?noFitCard(P):null; };
+BD.f1archNoFit=async x=>{ const P=await x.arch(); if(!P) return null;
+  if(!hubOn(P)&&(!BD.arch||!BD.arch.typology||BD.arch.typology==='emergency_hub')){   /* walkthrough 13 Nov (555 W Hastings): no hub laid out here: say so, no older Arrange figures */
+    const M=P.s&&P.s.M, Z=(M&&M.Z)||{}, why=['The tool’s placement step puts no Emergency hub on this lot: no ground floor is left for its refuge and public rooms.'].concat(Z.notAllowed?[`Zone ${Z.zone||'?'} does not allow a data centre (a rezoning would be needed).`]:[]);
+    return {draw:`<div style="max-width:620px;margin:40px auto;text-align:left"><p class="f1v-empty" style="text-align:left">The Emergency hub isn’t laid out on this lot.</p><ol class="f1c-nofit">${why.map(t=>`<li>${esc(t)}</li>`).join('')}</ol></div>`,
+      lead:'The Emergency hub isn’t laid out on this lot. '+why.join(' '),rows:why.map(t=>['Why',esc(t)]),src:['The tool’s placement step (the Ratios and Arrange cards) and the zone row.'],missing:[]}; }
+  if(!hubOn(P)) return null; const PL=planOf(P); return PL&&PL.hub&&PL.hub.doesntFit?noFitCard(P):null; };
 function noFitCard(P){ const w=noFitWhy(P);
   const list=w.lim.length?`<ol class="f1c-nofit">${w.lim.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:`<p class="f1v-empty">The size search gave no reason (?).</p>`;
   return {draw:`<div style="max-width:620px;margin:40px auto;text-align:left"><p class="f1v-empty" style="text-align:left;margin:0 0 10px">${esc(w.head)} ${w.lim.some(t=>/^step \d/.test(t))?'What stops it, at each step of the program ladder (the hub drops a part at each step and tries again):':'What stops it:'}</p>${list}${w.extra.map(t=>`<p class="f1v-empty" style="text-align:left">${esc(t)}</p>`).join('')}</div>`,
@@ -386,7 +391,7 @@ C.add(T,'Plant and site',{chip:CHIP,async build(x){
       ['Chillers',PT?(roofC?`${roofC} on the hub roof (a lower roof, not over the hall); the rest at grade`:'all at grade, clear zones 1.5 / 2.1 m, 3.0 / 4.2 m apart'):C.q()],['Generator tank',PT?`${n0(PT.tank)} L a set: 1.5 m to the building, 3.0 m to lot lines (CSA B139 Table 2)`:C.q()],
       ['Chiller drains, A2L leak, MV/HV distance',C.q('drains not drawn; no figure for the leak or MV distance (Vertiv p. 34)')],
       ['Loading',`${LD.n} · ${LD.why||''}`],['Street at the lobby door',G2.street!=null?`${n1(G2.street)} m (${G2.datum})`:C.q(G2.why)],['Slab',G2.slab!=null?`${n1(G2.slab)} m`:C.q()],['Step-free entrance',G2.stepFree||C.q()],
-      ['Height',G2.height!=null?`roof ${n1(G2.roof)} − base surface ${n1(G2.base)} = ${n1(G2.height)} m (limit ${G2.hLimit})${TT(G2.heightStatus)}`:C.q(G2.why)]];
+      ['Height',G2.boardHeight&&G2.roof==null?esc(G2.boardHeight):G2.height!=null?`roof ${n1(G2.roof)} − base surface ${n1(G2.base)} = ${n1(G2.height)} m${G2.hLimit!=null?` (limit ${G2.hLimit} m)`:''}${TT(G2.heightStatus)}`:C.q(G2.why)]];
     if(x.city!=='van') rows.push(['Edmonton cooling',C.q('placeholder: the AFC is outside Vertiv\u2019s range at −30 °C')]);
     return {draw:`<div class="${NS}wrap">${svg}${key}</div>`,lead:'The hub on its lot: the truck court, and the plant packed behind the building with the codes\u2019 distances and the chillers\u2019 clear zones.',
       hero:[{v:PT?String(PT.nG):C.q(),l:'generator sets'},{v:PT?String(PT.nC):C.q(),l:'chillers'},{v:String(LD.n),l:'loading spaces'},{v:G2.height!=null?n1(G2.height):C.q(),u:G2.height!=null?'m':'',l:'height'}],

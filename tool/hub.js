@@ -1157,9 +1157,9 @@ function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from anot
     analyse(L, S);
     L.loading = { n: L.nb, why: `${L.nb} loading spaces, as the frozen board draws them`, size: '', aisle: '' };
     /* height and slab as the board states them (its Height row: "roof R − base surface B = H m"; one-storey boards: "6.0 m") */
-    { const hr = (B.rows || []).find(r => r[1] === 'Height'), t = hr ? hr[3] : '', m = /roof\s*([\d.]+)\s*−\s*base surface\s*([\d.]+)\s*=\s*([\d.]+)\s*m/.exec(t), m1 = !m && /([\d.]+)\s*m\s*≤/.exec(t);
+    { const hr = (B.rows || []).find(r => r[1] === 'Height'), t = hr ? hr[3] : '', m = /roof\s*([\d.]+)\s*−\s*base surface\s*([\d.]+)\s*=\s*([\d.]+)\s*m/.exec(t), m1 = !m && /([\d.]+)\s*m\s*≤/.exec(t), lim = /≤\s*([\d.]+)/.exec(t);
       if (L.grades) { if (B.SLAB != null) L.grades.slab = B.SLAB; if (m) Object.assign(L.grades, { roof: +m[1], base: +m[2], height: +m[3] }); else if (m1) Object.assign(L.grades, { height: +m1[1], roof: null, base: null });
-        if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
+        if (lim && L.grades.hLimit == null) L.grades.hLimit = +lim[1]; if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
     L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the test fit for ' + B.addr + ', 12 Nov 2026' };
     if (!B0_) L.flags.push(`The test fit for ${B.addr} (12 Nov 2026): ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop}; drawn as fitted, not re-laid out by the tool`);
     if (REG.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(REG.rms)} m off on average (?)`);

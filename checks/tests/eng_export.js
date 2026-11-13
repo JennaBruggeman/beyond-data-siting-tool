@@ -90,8 +90,19 @@ const LOTS = { V339: { city: 'van', golden: '../golden/V339.json' } };   /* the 
     cards.push(card); console.log(`${k + 1} ${titles[k]}: ${res ? (card.figures || []).length + ' figures, ' + (card.gaps || []).length + ' ?' : 'NOT CAPTURED'}${ok ? '' : ' (still drawing after 180 s)'}`);
   }
   const after = await p.evaluate(() => { const A = BD.S.answers; return JSON.parse(JSON.stringify(A)); });
+  /* E17 (13 Nov 2026): the heat as the Engineering cards now price it (air cooling: option A, decisions log 11 Nov), and the cost of heat */
+  const heat = await p.evaluate(async () => { try { const e = BD.eng, f = e.siteFacts(), A = BD.S.answers, M = BD.model(), mw = A.mw || (M && M.mwSized) || 1, R = e.R;
+    const d = await e.loadRecv(f.city), nets = e.netsAt(f, d); await BD.routeTree(f);
+    const all = d.pts.map(q => Object.assign({}, q, { dist: BD.recvDist(f, q) })).filter(q => q.dist <= R.recvRadius);
+    let r = e.calc({ mw, recover: true, to: 'near' }, f, all, nets), air = (A.inside || 'air') === 'air', cap = [r.itMWhR[0] * R.capture[0], r.itMWhR[1] * R.capture[1]];
+    if (air) { cap = [r.itMWhR[0], r.itMWhR[1]]; const av = [cap[0] * R.cop[1] / (R.cop[1] - 1), cap[1] * R.cop[0] / (R.cop[0] - 1)]; r = Object.assign({}, r, { avail: av, hp: [av[0] / R.cop[1], av[1] / R.cop[0]] }); }
+    const Bh = BD.bestHeat(f, all, r.avail[0]), b0 = Bh && Bh[0], rd = v => Math.round(v);
+    return { cooling: A.inside || 'air', optionA: air, mw, itMWh: r.itMWhR.map(rd), recoveredMWh: cap.map(rd), offeredMWh: r.avail.map(rd), heatPumpElectricityMWh: r.hp.map(rd), cop: R.cop,
+      costOfHeatPerMWh: b0 ? { mid: rd(b0.mid.lcoh), low: rd(b0.lo.lcoh), high: rd(b0.hi.lcoh), buildings: b0.G.map(q => q.n) } : null, heatWorthPerMWh: BD.ECON.heatVal ? BD.ECON.heatVal(f.city) : null,
+      receiversWithinReach: all.length, reach_m: R.recvRadius,
+      basis: air ? 'air-cooled hall, option A (decisions log 11 Nov 2026): all the hall’s heat recovered at its return-air temperature, one heat pump lifts it, COP 3–4.5 (register cop)' : 'liquid capture (register liquid_capture) and the heat pump COP (register cop)' }; } catch (er) { return { error: String(er.message || er) }; } });
   const J = { lot: key, address: '339 1st Ave E', made: new Date().toISOString(), commit, toolDirty: !!dirty, by: 'checks/tests/eng_export.js (F9)',
     answers: ANS, answersInTool: after, note: 'Read-only: the tool as of this commit. Figures as each card hands them to the screen; "?" exported as "?". Re-export after any engine change.',
-    cards, errors: errs };
+    heat, cards, errors: errs };
   fs.writeFileSync(path.join(out, `eng_${key}.json`), JSON.stringify(J, null, 1)); console.log('errors:', errs.length ? errs.join(' | ') : 'none'); await b.close();
 })();
