@@ -121,7 +121,7 @@ function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return;
   if(spec&&V.ready){ const tok=V.tok=(V.tok||0)+1, dr=W.querySelector('.f1v-draw'), pb=W.querySelector('.f1c-body'), se=W.querySelector('.f1v-src');
     Promise.resolve().then(async()=>{ const x=BD.f1cards.ctx(V.city); /* audit I41: after Pick a typology, a lot where the hub doesn't fit shows that state on every card */
       if(V.t.id==='architecture'&&BD.f1archNoFit&&V.i>V.t.cards.findIndex(k=>k.t==='Pick a typology')){ const nf=await BD.f1archNoFit(x); if(nf) return nf;
-        const es=BD.f1archEstimate&&await BD.f1archEstimate(x); if(es){ const r=await spec.build(x); if(r){ r.hero=(r.hero||[]).map(h=>Object.assign({},h,{l:(h.l||'')+' (estimate)'})); r.estimate=es; } return r; } }   /* item 1b: no confident numbers on these lots */
+        const es=BD.f1archEstimate&&await BD.f1archEstimate(x); if(es){ const r=await spec.build(x); if(r){ r.hero=(r.hero||[]).map(h=>Object.assign({},h,{v:h.u&&/MW/.test(h.u)&&/^[\d.]+$/.test(String(h.v))?(+h.v).toFixed(1):h.v,l:(h.l||'')+' (estimate)'}));   /* J.B. 13 Nov: MW to one decimal on an estimate */ r.estimate=es; } return r; } }   /* item 1b: no confident numbers on these lots */
       return spec.build(x); }).then(res=>{ if(tok!==V.tok||!res) return; BD.f1cardIndex=V.i; BD.f1cards.render(res,dr,pb,se,V.t.id); W.dataset.built=c.t; })
       .catch(e=>{ if(tok!==V.tok) return; dr.innerHTML=`<p class="f1v-empty">This card could not be drawn: ${esc(String(e&&e.message||e).slice(0,160))}</p>`; console.error('f1 card',c.t,e); }); } }
 

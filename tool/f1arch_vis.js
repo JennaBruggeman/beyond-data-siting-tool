@@ -168,7 +168,7 @@ C.add(T,'Heat flow',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) re
 /* ================= 18 Program diagram ================= */
 C.add(T,'Program diagram',{chip:CHIP,async build(x){ const P=await x.arch(); if(!P) return noP(); const V=C.v1(P), G=G1(P), B=C.budgetsV1(P), B0=V?BD.archTest.budgets(P):B, pl=!V&&BD.plan&&BD.plan.build?BD.plan.build(P):null, fl=V?{}:flagIds(P);
   /* the notes: the hub's own flags where it draws the layout (those with ? are to check), else Arrange's rules */
-  const rules=V?V.flags.map(t=>({sev:/\?/.test(t)?'q':'i',t:C.pub(t),src:[V.L&&V.L.frozen?'the frozen board':'the hub’s rule sheet v1']})):BD.archTest.rules(P);   /* F25: the note’s text, in public words */
+  const rules=V?V.flags.map(t=>({sev:/\?/.test(t)?'q':'i',t:C.pub(t),src:[V.L&&V.L.frozen?'the test fit for '+(V.L.frozen.addr||'this lot'):'the hub’s rule sheet v1']})):BD.archTest.rules(P);   /* F25: the note’s text, in public words */
   const lv=G.levels, W=960, gap=10, pw=Math.min(230,Math.floor((W-gap*(lv.length-1))/lv.length)), ph=Math.round(pw*0.95); let top='';
   lv.forEach((z,i)=>{ const it=atLevel(G,z), p=plan(G,{w:pw,h:ph,items:it,fs:11.5}); top+=`<g transform="translate(${i*(pw+gap)},22)"><text x="0" y="-8" font-size="13" fill="${K.ink}">${z===0?'Ground storey':'Storey at '+n0(z)+' m'}</text>${p.svg}</g>`; });
   const y0=22+ph+34, SH=230;

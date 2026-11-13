@@ -21,7 +21,7 @@ BOARDS = [  # key, folder, board file, parcel id in the tool, address
     ('E14715', 'e14715', 'E14715', '150388', '14715 Yellowhead Trail NW'), ('E10003', 'e10003', 'E10003', '701026', '10003 63 Avenue NW'),
     ('E10004', 'e10004', 'E10004', '16765', '10004 167 Street NW'), ('E15231', 'e15231', 'E15231', '149677', '15231 118 Avenue NW'),
     ('E16075', 'e16075', 'E16075', '980987', '16075 Fort Road NW'),
-    ('V1425', 'v1425', 'V1425', '23060741', '1425 Clark Dr'), ('E10220', 'e10220', 'E10220', None, '10220 104 Ave NW')]
+    ('V1425', 'v1425', 'V1425', '23060741', '1425 Clark Dr')]   # 11h; 10220 104 Ave NW left out (J.B. 12 Nov: Rogers Place, the board assumes a cleared lot)
 # freeze 11g per-board table (FROZEN_EH-FREEZE-2026-11-11g.md with 11f for the boards 11g did not change): MW, data-centre m², stopping rule
 MANIFEST = {'V339': (1.83, 2134, 'building line'), 'V1353': (1.82, 2325, 'floor cap'), 'V8980': (1.25, 1768, 'building line'),
     'V8238': (0.94, 1688, 'not grown: roof holds only two chillers'), 'V1330': (0.41, 1140, 'not grown: upper floors over the truck drive (frozen failing)'),

@@ -49,6 +49,7 @@ const RULES = {
   largeW: { w: 60, why: 'beside variant: the building takes at most 60 m of frontage; on wider lots the rest of the land stays open (spec Part 2 large lot; drawing choice, F2b 9 Nov 2026: at 85 m the data-centre travel on 14715 Yellowhead Trail was 46.7 m, over 45 m)' },
   cap: { m2: 2325, why: 'hub cap: data centre ≤ 2,325 m² and one hall storey on every lot, smaller where the lot can’t hold it (J.B. 8 Nov, drawing choice; Vancouver Parking By-law 5.2.5 step)' },
   grid: { g: 0.25, why: 'travel along the path on a 0.25 m grid, 8 directions, through the doors (spec rule 6); ≤ 45 m sprinklered (VBBL 3.4.2.5)' },
+  transplant: true,   /* variants as plan transplants from the frozen boards (overnight 13 Nov) */
   lineOn: false,   /* EH-FREEZE-2026-11-11e building line in the stacked layout: written, off until the storey-2 re-plan (J.B. 12 Nov 2026) */
   narrow: { wMax: 20, dS: 3.0, dO: 3.5, dA: 5.2, pl: 1.5, why: 'narrow lots (F2b, 10 Nov 2026, as the 1330 Glen Dr and 8238 Fraser St hand fits): where the stacked rows do not fit across a lot under 20 m wide, the hub bands run back from the street: refuge and shelter strip | public corridor | 3.0 m service strip, the lobby across the corridor and service strip at the street; overflow rooms in a 3.5 m pocket of the refuge strip on the corridor; the data-centre entrance row and the bays at the rear (with a side drive: a 5.2 m row only as wide as the bays, stair S2 and lift E2 turned across, the dock and vestibule behind them, the plant yard behind the refuge, as the 1330 hand fit; with no drive: across the lot, stair S2 along the exit passage); the hall only over the hub, the rear two storeys with chillers on their roof (all drawing choices); the refuge held at the spec size, the rest of its strip open ground, not built (J.B. 10 Nov)' },
   base: { why: 'base surface: the corner grades joined by triangles; both triangulations computed (fans from neighbouring corners: on a four-corner lot the two diagonals) and the lower surface used under the building (Z&D s. 2 joins the corner grades; J.B. 8 Nov, our reading)' },
@@ -230,9 +231,9 @@ function layout(S0) {
       if (big0 && L.plant && L.plant.ok && L.MW < big0.MW - 1e-3 && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'plant yard', at: L.MW, tried: big0.MW, why: big0.why };
         flags.push(`Data centre smaller than the 2,325 m² floor cap: the plant yard stops it at ${L.MW.toFixed(2)} MW (at ${big0.MW.toFixed(2)} MW: ${big0.why}; J.B. 12 Nov 2026)`); }
       if (L.lineCut && !L.sizeStop && L.dcArea < RULES.cap.m2 - 0.5) { L.sizeStop = { rule: 'building line', at: L.MW, why: `upper storeys stay within the ground-floor building line (the back of the loading bays, ${L.Dline} m from the front); the truck court behind is open to the sky` };
-        flags.push(`Data centre smaller than the 2,325 m² floor cap: the building line stops it at ${L.MW.toFixed(2)} MW (upper storeys within the storey-1 outline, nothing over truck ground: EH-FREEZE-2026-11-11e)`); }
+        flags.push(`Data centre smaller than the 2,325 m² floor cap: the building line stops it at ${L.MW.toFixed(2)} MW (upper storeys within the storey-1 outline, nothing over truck ground: the hub test fits, 12 Nov 2026)`); }
       if (notGrown && !S.mwExact) L.notGrown = true;
-      if (L.notGrown && !flags.some(f => /rule pending \(11g\)/.test(f))) flags.push('Data centre not grown to the floor cap: Edmonton at-grade growth rule pending (11g); sized at the tool’s tested size (EH-FREEZE-2026-11-11f)');
+      if (L.notGrown && !flags.some(f => /rule pending \(11g\)/.test(f))) flags.push('Data centre not grown to the floor cap: Edmonton at-grade growth rule pending (11g); sized at the tool’s tested size');
       L.ladder = { step: st.k, what: st.t, limiting: why.slice() }; return { out: L, why };
     }
     return { out: null, why }; };
@@ -1023,12 +1024,13 @@ function v2Checks(L, S) {
   m.dc = sts.reduce((a, st) => a + G.S[st].filter(x => ['hall', 'sup'].includes(x.g) || (st > 1 && x.g === 'spare')).reduce((b, x) => b + area(x), 0), 0);
   m.gen1 = 78 - 20 * Math.log10(6.1 / 7); m.genall = m.gen1 + 10 * Math.log10(m.ngen);
   const rows = H.commonChecks(G, cfg, m);
-  rows.push(['tight', 'Service access around the sets', 'Kohler TP-5700 s. 3.2 (our reading for KD sets); EH-FREEZE-2026-11-11f', `each generator set placed with at least 457 mm clear round it inside the plant yard (${((L.plant && L.plant.items) || []).filter(it => it.kind === 'gen').length} sets): check in design`]);
+  rows.push(['tight', 'Service access around the sets', 'Kohler TP-5700 s. 3.2 (our reading for KD sets); the hub test fits, 12 Nov 2026', `each generator set placed with at least 457 mm clear round it inside the plant yard (${((L.plant && L.plant.items) || []).filter(it => it.kind === 'gen').length} sets): check in design`]);
   return { rows, cfg, notDrawn: ['plant yards and gates (step 4)', '2 h wall marks (steps 3–4)', 'fuel fill (step 5)'], version: H.version };
 }
 
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
-function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); const FB = root && root.BD && root.BD.hubEngineOnly ? null : frozenBoard(S); if (FB) return FB; return fromSite(S); }   /* BD.hubEngineOnly: the 13-board rebuild test runs the engine, not the frozen boards */
+function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); const FB = root && root.BD && root.BD.hubEngineOnly ? null : frozenBoard(S); if (FB) return FB;
+  const PL = fromSite(S), H = PL && PL.hub; if (RULES.transplant && H) { const need = H.estimate || variantNeed(S, H.rooms ? H : null) || (!H.rooms ? { keys: [S.city === 'edm' ? 'growyard' : 'line'] } : null); if (need) { const T = transplant(S, need.keys); if (T) return T; } } return PL; }   /* BD.hubEngineOnly: the 13-board rebuild test runs the engine, not the frozen boards */
 /* ---------- the frozen boards (J.B. 12 Nov 2026, option 1: the tool reads the frozen boards, freeze EH-FREEZE-2026-11-11g) ----------
    On the 13 test lots the hub is the board itself: its rooms, doors, plant and check rows as frozen (tool/data/hub_frozen_<city>.json, from Claude Link eh/
    by checks/tests/hub_frozen_export.py); MW, data-centre floor and the stopping rule from the freeze's per-board table. The board frame is registered to
@@ -1047,21 +1049,86 @@ function FKIND(x, st, nSt, D) { const id = x.id, b = id.replace(/\d+$/, ''), g =
   if (x.core) return { kind: 'shaft', block: g === 'sup' ? 'data centre' : circBlock };
   if (g === 'circ') return b === 'lob' ? { kind: 'lobby', block: 'hub' } : b === 'cor' ? { kind: 'pcor', block: 'hub', corridor: true } : /^pas/.test(b) ? { kind: 'exitpas', block: 'hub' } : { kind: 'proom', block: circBlock };
   if (g === 'clin') return b === 'ccor' ? { kind: 'ccor', block: 'clinic', corridor: true } : /^pas/.test(b) ? { kind: 'exitpas', block: 'clinic' } : { kind: 'croom', block: 'clinic' };
-  if (g === 'pub') return { kind: /^ref2/.test(id) ? 'refuge2' : 'proom', block: 'hub' };
+  if (g === 'pub') return { kind: 'proom', block: 'hub' };   /* as the engine types its refuge rooms (the T-reach through-room rule reads proom) */
   if (g === 'load') return { kind: 'bay', block: 'data centre' };
   if (g === 'plant') return { kind: 'plant', block: b === 'pmec' ? 'hub' : 'data centre' };
   if (g === 'spare') return { kind: 'spare', block: 'spare', dcSide: D.some(d => d[0] === st && (d[1] === id || d[2] === id) && /cor$/.test(other(d)) && other(d) !== 'cor' && other(d) !== 'ccor') };
   /* data-centre support */
   return /cor$/.test(b) || b === 'link' ? { kind: 'scor', block: 'data centre', corridor: true } : b === 'dock' ? { kind: 'dock', block: 'data centre' } : b === 'ves' ? { kind: 'entry', block: 'data centre' } : /^pas/.test(b) ? { kind: 'exitpas', block: 'data centre' } : { kind: 'sroom', block: 'data centre' }; }
-function frozenBoard(S) {
-  const B = S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null; if (!B || !B.reg || !S.F) return null;
+/* ---------- variants as plan transplants (overnight queue A, 13 Nov 2026) ----------
+   A layout the engine does not have is taken from the frozen plan drawn for the most similar lot: the plan is placed on this lot with its street
+   front on the lot's front line (turned and mirrored as needed, slid along the front in 0.5 m steps, set back up to 6 m) and kept only if every
+   room, plant unit and truck court stays inside the lot. Not re-planned and not re-checked on this lot: the figures are that board's, labelled.
+   Families (which plans can stand in for a missing layout) follow the variant census keys. */
+const TFAM = { van: { small: ['V1360', 'V1330'], rearplant: ['V1353', 'V1425'], wide: ['V8980'], twohall: ['V8238'], line: ['V339', 'V1425', 'V1353'] },
+  edm: { small: ['E10004'], turned: ['E16075'], narrowdeep: ['E15231'], wide: ['E10003'], growyard: ['E4103', 'E06B', 'E14715'] } };
+const polyArea = P => { let a = 0; for (let i = 0; i < P.length; i++) { const p = P[i], q = P[(i + 1) % P.length]; a += p[0] * q[1] - q[0] * p[1]; } return Math.abs(a) / 2; };
+function lotFront(S) { const E = S.edges || []; const len = e => Math.hypot(e.b[0] - e.a[0], e.b[1] - e.a[1]);
+  return E.find(e => e.kind === 'front' && e.abuts === 'street') || E.filter(e => e.abuts === 'street').sort((x, y) => len(y) - len(x))[0] || null; }
+function placePlan(S, B) {   /* every street edge of the lot (its front first) against every street edge of the board, until one placement fits */
+  const f0 = lotFront(S), len = e => Math.hypot(e.b[0] - e.a[0], e.b[1] - e.a[1]);
+  const LE = [f0].concat((S.edges || []).filter(e => e !== f0 && (e.abuts === 'street' || e.abuts === 'alley')).sort((x, y) => len(y) - len(x))).filter(Boolean);
+  for (const fe of LE) for (const se of (B.STREET_EDGES || [])) { const r = placeOn(S, B, fe, se); if (r) return r; }
+  return null; }
+function placeOn(S, B, fe, se) {
+  if (!fe || !se || !S.F) return null;
+  const ring = S.ring, inside = q => inPoly(q, ring) || ring.some((p, i) => dSeg(q, p, ring[(i + 1) % ring.length]) <= 0.5);
+  const rects = Object.values(B.S).flat().flatMap(x => x.r).concat((B.PLANT || []).map(p => p.r)).concat(B.COURT ? [B.COURT] : []);
+  const pts = rects.flatMap(r => [[r[0], r[2]], [r[1], r[2]], [r[1], r[3]], [r[0], r[3]]]);
+  const bc = [pts.reduce((t, p) => t + p[0], 0) / pts.length, pts.reduce((t, p) => t + p[1], 0) / pts.length];
+  const lc = [ring.reduce((t, p) => t + p[0], 0) / ring.length, ring.reduce((t, p) => t + p[1], 0) / ring.length];
+  const fl = Math.hypot(fe.b[0] - fe.a[0], fe.b[1] - fe.a[1]); if (fl < 1) return null;
+  const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  for (const [A, Bv] of [[fe.a, fe.b], [fe.b, fe.a]]) for (const my of [1, -1]) {
+    const dl = [(Bv[0] - A[0]) / fl, (Bv[1] - A[1]) / fl], db0 = [se[1][0] - se[0][0], (se[1][1] - se[0][1]) * my], dbl = Math.hypot(db0[0], db0[1]) || 1, db = [db0[0] / dbl, db0[1] / dbl];
+    const th = Math.atan2(dl[1], dl[0]) - Math.atan2(db[1], db[0]), c = Math.cos(th), s = Math.sin(th);
+    const map = (p, t) => { const x = p[0], y = p[1] * my; return [c * x - s * y + t[0], s * x + c * y + t[1]]; };
+    const a0 = map(se[0], [0, 0]), nIn = cross(A, Bv, lc) > 0 ? [-dl[1], dl[0]] : [dl[1], -dl[0]];
+    /* the plan's interior must face the lot's interior */
+    const bcm = map(bc, [A[0] - a0[0], A[1] - a0[1]]); if ((bcm[0] - A[0]) * nIn[0] + (bcm[1] - A[1]) * nIn[1] <= 0) continue;
+    for (let k = 0; k <= 2 * Math.ceil(fl / 0.5); k++) { const sl = (k % 2 ? 1 : -1) * Math.ceil(k / 2) * 0.5; if (Math.abs(sl) > fl) continue;
+      for (let d = 0; d <= 6 + 1e-9; d += 0.5) { const t = [A[0] - a0[0] + dl[0] * sl + nIn[0] * d, A[1] - a0[1] + dl[1] * sl + nIn[1] * d];
+        if (pts.every(p => inside(map(p, t)))) {
+          /* board frame -> world: the lot frame's own turn and origin composed in (site.js F: toW(a, b) = [cx + a·ux − b·uy, cy + a·uy + b·ux]) */
+          const phi = Math.atan2(S.F.uy, S.F.ux), tw = S.F.toW(t[0], t[1]);
+          return { th: th + phi, mirror: my < 0, t: tw, rms: 0, slide: sl, setback: d }; } } } }
+  return null; }
+function transplant(S, keys) {
+  const lib = frozenData(S.city) || {}, byKey = {}; Object.values(lib).forEach(b => { if (!byKey[b.key]) byKey[b.key] = b; });
+  const fam = TFAM[S.city] || {}, key = keys.slice().reverse().find(k => fam[k]); if (!key) return null;
+  const per = P => P.reduce((t, p, i) => t + Math.hypot(P[(i + 1) % P.length][0] - p[0], P[(i + 1) % P.length][1] - p[1]), 0);
+  const area = polyArea(S.ring), pr = per(S.ring);   /* the most similar lot: area and perimeter (the front can be read differently on corner lots) */
+  const sim = b => Math.abs(Math.log((area || 1) / (polyArea(b.LOTPOLY) || 1))) + Math.abs(Math.log((pr || 1) / (per(b.LOTPOLY) || 1)));
+  const cands = fam[key].map(k => byKey[k]).filter(Boolean).sort((x, y) => sim(x) - sim(y));
+  for (const B of cands) { const reg = placePlan(S, B); if (!reg) continue;
+    const P = frozenBoard(S, B, reg); if (!P) continue;
+    const H = P.hub; H.transplant = { from: B.key, addr: B.addr, layout: key, slide: reg.slide, setback: reg.setback };
+    const own = ((lib[String(S.id)] || {}).key === B.key);   /* a board's own lot: its rows hold */
+    if (!own && H.rooms) {   /* J.B. 13 Nov: on another lot the placed plan is checked by the tool's own rules; any fail -> doesn't fit as placed */
+      withV2(H, S); const fl = [];
+      ((H.v2 && H.v2.rows) || []).filter(r => r[0] === 'fail' || r[0] === 'fix').forEach(r => fl.push(r[1]));
+      (H.travel || []).filter(t => t.status === 'fail').forEach(t => fl.push(`travel to an exit (${t.zone}, ${t.worst} m of 45 m)`));
+      (H.apart || []).filter(t => t.status === 'fail').forEach(t => fl.push(`exits apart (${t.zone}, ${t.apart_m} m, ${t.need_m} m needed)`));
+      if (H.grades && H.grades.heightStatus === 'fail') fl.push(`height (${H.grades.height} m of ${H.grades.hLimit} m)`);
+      if (H.treach) { (H.treach.reach || []).forEach(r => fl.push(`T-reach (${r.room}: ${r.reason})`)); (H.treach.dead || []).filter(c => !c.ok && c.status === 'fail').forEach(c => fl.push(`dead end (storey ${c.storey}, ${c.deadEnd_m} m of 6 m)`)); ((H.treach.width || {}).rows || []).filter(r => r.sev === 'fail').forEach(r => fl.push(`room width (${r.name}, ${r.width_m} m of ${r.min_m} m)`)); }
+      if (H.v2 && H.v2.error) fl.push('the checks could not run on the placed plan (?)');
+      if (fl.length) { const lim = [`doesn’t fit as placed: ${fl.join('; ')} (the ${B.addr} test fit placed on this lot)`];
+        const H0 = { doesntFit: { limiting: lim, placed: B.addr }, flags: ['Doesn’t fit here: ' + lim[0]], variant: H.variant, transplant: H.transplant, site: {} };
+        return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; } }
+    const note = own ? null : `Estimate: borrowed from the ${B.addr} test fit (12 Nov 2026): its plan placed on this lot along the street and checked by the tool’s rules, not re-planned`;
+    if (note) { if (H.flags) H.flags.unshift(note); if (P.flags && P.flags !== H.flags) P.flags.unshift(note); }
+    H.estimate = own ? null : { keys, names: [`${(VNEED && VNEED.names && VNEED.names[key]) || VNAMES[key] || key}`], transplant: B.addr };
+    return P; }
+  return null; }
+function frozenBoard(S, B0, reg0) {   /* B0, reg0: a plan transplanted from another lot (variants, overnight 13 Nov) */
+  const B0_ = B0; const B = B0 || (S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null), REG = reg0 || (B && B.reg); if (!B || !REG || !S.F) return null;
   /* a board the freeze keeps failing (1330 Glen Dr): the doesn't-fit state, with the freeze's reasons (its failing rows), no figures (audit I41, I42) */
   const fails = (B.rows || []).filter(r => r[0] === 'fail' || r[0] === 'fix');
-  if (fails.length) { const lim = [`${B.stop} (${B.freeze})`].concat(fails.map(r => `${r[1]}: ${String(r[3] || '').replace(/^SCRIPT FAILS:\s*/, '').replace(/\s*\[script[^\]]*\]?.*$/, '')}`));
-    const H0 = { doesntFit: { limiting: lim, frozen: true }, flags: ['Doesn’t fit here (the frozen board fails): ' + lim.join('; ')], variant: { main: Object.keys(B.S).length > 1 ? 'stacked' : 'beside', flags: [], notBuilt: [] }, frozen: { key: B.key, freeze: B.freeze, board: B.board, failing: true }, site: {} };
+  if (fails.length) { const lim = [`${B.stop} (the test fit for ${B.addr}, 12 Nov 2026)`].concat(fails.map(r => `${r[1]}: ${String(r[3] || '').replace(/^SCRIPT FAILS:\s*/, '').replace(/\s*\[script[^\]]*\]?.*$/, '')}`));
+    const H0 = { doesntFit: { limiting: lim, frozen: true }, flags: ['Doesn’t fit here (the frozen board fails): ' + lim.join('; ')], variant: { main: Object.keys(B.S).length > 1 ? 'stacked' : 'beside', flags: [], notBuilt: [] }, frozen: { key: B.key, addr: B.addr, freeze: B.freeze, board: B.board, failing: true }, site: {} };
     return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; }
   try {
-    const F = S.F, c = Math.cos(B.reg.th), s = Math.sin(B.reg.th), my = B.reg.mirror ? -1 : 1, tx = B.reg.t[0], ty = B.reg.t[1];
+    const F = S.F, c = Math.cos(REG.th), s = Math.sin(REG.th), my = REG.mirror ? -1 : 1, tx = REG.t[0], ty = REG.t[1];
     const all = Object.values(B.S).flat().flatMap(x => x.r), u0 = Math.min(...all.map(r => r[0])), v0 = Math.min(...all.map(r => r[2])), u1 = Math.max(...all.map(r => r[1])), v1 = Math.max(...all.map(r => r[3]));
     /* layout frame = the board frame moved so the building starts at (0, 0) */
     const toW = (a, b) => { const u = a + u0, v = (b + v0) * my; return [tx + c * u - s * v, ty + s * u + c * v]; };
@@ -1075,14 +1142,14 @@ function frozenBoard(S) {
     const g1 = items.find(it => it.kind === 'gen'), km = g1 && /([\d,]+)\s*kW/.exec(g1.n), setKW = km ? +km[1].replace(/,/g, '') : null;
     const clinic = Object.values(rooms).flat().some(x => x.kind === 'croom');
     const L = { site: { a0: 0, aMax: r2(u1 - u0), aFull: r2(u1 - u0), driveSide: '?', driveWhy: 'as the frozen board draws it' }, flags: [], notes: [],
-      frozen: { key: B.key, freeze: B.freeze, board: B.board, sha16: B.boardSha16, rms: B.reg.rms },
+      frozen: { key: B.key, addr: B.addr, freeze: B.freeze, board: B.board, sha16: B.boardSha16, rms: REG.rms },
       rooms, D, H: B.H.slice(), MW: B.MW, mwUsed: B.MW, dcArea: B.dcArea, hall: B.hallDrawn, hubArea: sumG(x => x.block === 'hub' && x.g === 'pub'), clin: sumG(x => x.block === 'clinic' && x.g === 'clin'),
       nb: Object.values(rooms).flat().filter(x => x.kind === 'bay' && /^b\d/.test(x.id)).length, nDC: null, nRef: null, nCl: null,
       kind: nSt > 1 ? 'stacked' : 'beside', W: r2(v1 - v0), Da: r2(u1 - u0), aB: 1e9, bOrigin: 0, ground: B.H[0],
       storeyNames: nSt > 1 ? ['Storey 1: hub at grade, data-centre entrance', 'Storey 2: ' + ((rooms[2] || []).some(x => x.kind === 'croom') ? 'clinic and data-centre support' : 'data-centre support'), 'Storey 3: one data-hall storey'] : ['Storey 1: hub, ' + (clinic ? 'clinic ' : '') + 'and data centre at grade'],
       plant: { ok: true, items, nG: items.filter(it => it.kind === 'gen').length, nT: items.filter(it => it.kind === 'pad').length, nC: items.filter(it => it.kind === 'chiller').length, setKW, Q: r2(B.MW * 1.55), tank: null, hubSet: items.some(it => it.kind === 'hubset'), why: '', whyAll: '', rules: (B.rows || []).filter(r => /generator|chiller|transformer|plant|fuel|service access|sets/i.test(r[1])).map(r => `${r[1]} (${r[0]}): ${r[3] || ''}`) },
       truck: B.COURT ? { court: mv(B.COURT), why: 'truck court as the frozen board draws it' } : null,
-      ladder: { step: '–', what: 'the frozen board’s program (' + B.freeze + ')', limiting: [] },
+      ladder: { step: '–', what: 'the test fit for ' + B.addr + ', 12 Nov 2026', limiting: [] },
       variant: { main: nSt > 1 ? 'stacked' : 'beside', sideDrive: !!B.DRIVE, notBuilt: [], flags: [], lotType: '?' },
       sizeStop: { rule: B.stop, at: B.MW, why: B.stopText || B.stop } };
     L.toUV = (a, b) => { const w = toW(a, b); return F.toL(w[0], w[1]).map(r2); };
@@ -1093,9 +1160,9 @@ function frozenBoard(S) {
     { const hr = (B.rows || []).find(r => r[1] === 'Height'), t = hr ? hr[3] : '', m = /roof\s*([\d.]+)\s*−\s*base surface\s*([\d.]+)\s*=\s*([\d.]+)\s*m/.exec(t), m1 = !m && /([\d.]+)\s*m\s*≤/.exec(t);
       if (L.grades) { if (B.SLAB != null) L.grades.slab = B.SLAB; if (m) Object.assign(L.grades, { roof: +m[1], base: +m[2], height: +m[3] }); else if (m1) Object.assign(L.grades, { height: +m1[1], roof: null, base: null });
         if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
-    L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the frozen board (' + B.freeze + ', ' + B.board + ')' };
-    L.flags.push(`Frozen board: ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop} (${B.freeze}; the board as frozen, not re-laid out by the tool)`);
-    if (B.reg.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(B.reg.rms)} m off on average (?)`);
+    L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the test fit for ' + B.addr + ', 12 Nov 2026' };
+    if (!B0_) L.flags.push(`The test fit for ${B.addr} (12 Nov 2026): ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop}; drawn as fitted, not re-laid out by the tool`);
+    if (REG.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(REG.rms)} m off on average (?)`);
     return toPlan(L, S);
   } catch (e) { if (typeof console !== 'undefined') console.warn('frozen board', e); return null; } }
 function withV2(L, S) { try { L.v2 = v2Checks(L, S); } catch (e) { L.v2 = { error: String(e && e.message || e) }; } return L; }
