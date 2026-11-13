@@ -6,7 +6,7 @@
 const fs = require('fs'), path = require('path'); const { chromium } = require('playwright');
 const LOTS = { V339: ['van', '339 1st Ave E'], V1425: ['van', '1425 Clark Dr'], V555: ['van', '555 Hastings St W'], E64: ['edm', '64 Airport Rd NW'], E16075: ['edm', '16075 Fort Rd NW'] };
 const TPLS = ['municipal', 'engineering', 'architecture', 'resident'];
-const SHOTS = path.join(__dirname, '..', 'walkthrough_2026-11-13');
+const SHOTS = process.env.WT_SHOTS || path.join(__dirname, '..', 'walkthrough_2026-11-13'), BASE = process.env.WT_BASE || 'http://localhost:8766';   /* WT_BASE: e.g. the public build on :8767 */
 (async () => { const out = process.argv[2] || 'walkthrough.json', keys = process.argv.slice(3).length ? process.argv.slice(3) : Object.keys(LOTS);
   fs.mkdirSync(SHOTS, { recursive: true }); const b = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-webgl'] }); const res = []; const doneRes = new Set();
   for (const key of keys) for (const tpl of TPLS) for (const [wname, W, H] of [['desk', 1440, 900], ['phone', 390, 844]]) {
@@ -14,7 +14,7 @@ const SHOTS = path.join(__dirname, '..', 'walkthrough_2026-11-13');
     const p = await b.newPage({ viewport: { width: W, height: H } }); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push('console: ' + m.text().slice(0, 200)); });
     const tag = `${tpl === 'resident' ? city : key}_${tpl}_${wname}`; let picked = null;
     try {
-      await p.goto('http://localhost:8766/index.html?nointro&x=' + Date.now()); await p.waitForSelector('#f1'); await p.waitForTimeout(2500);
+      await p.goto(BASE + '/index.html?nointro&x=' + Date.now()); await p.waitForSelector('#f1'); await p.waitForTimeout(2500);
       await p.evaluate(t => BD.f1.viewer(t, { pick: true }), tpl); await p.waitForTimeout(1500);
       await p.click(`#f1v [data-pcity="${city}"]`); await p.waitForTimeout(1200);
       if (tpl !== 'resident') { await p.fill('#f1pick-q', addr); await p.waitForTimeout(3000); picked = await p.evaluate(() => { const b = document.querySelector('#f1v [data-hit="0"]'); return b ? b.textContent : null; }); if (!picked) throw new Error('no address hit for ' + addr); await p.click('#f1v [data-hit="0"]'); await p.waitForTimeout(9000); }

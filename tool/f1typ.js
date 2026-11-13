@@ -97,7 +97,7 @@ function md(src){ const L=src.replace(/\r/g,'').split('\n'); let h='', par=[], s
     if(st.length&&ind>0){ flush(); h+=`<p>${inl(t)}</p>`; i++; continue; }
     closeTo(0); par.push(t); i++; }
   flush(); closeTo(0); return h; }
-async function specHtml(id){ const t=T.list.find(x=>x.id===id); const src=await fetch('f1/specs/'+id+'.md').then(r=>r.ok?r.text():'');
+async function specHtml(id){ const t=T.list.find(x=>x.id===id); const src=window.BD_PUBLIC?'':await fetch('f1/specs/'+id+'.md').then(r=>r.ok?r.text():'');   /* the public version does not carry the specification copies */
   return `<div class="f1t-wrap"><button class="f1t-back" data-typ="${esc(id)}">← ${esc(t?t.name:'Typology')}</button>
    <p class="f1t-q" style="max-width:980px">The typology spec as Cowork wrote it, published with the tool by J.B.’s decision (9 and 10 Nov 2026); copied unchanged from her working folder. Source ids are register entries (Logic diagram). File paths (eh/…, checks/…) are working files, not on this site; the Edmonton hand fits’ plans are not published (licensed lot lines).</p>
    ${t&&t.spec&&t.spec.gate==='approved'?'':`<div class="f1t-draft" role="note"><b>Draft:</b> not yet approved by J.B. Figures and rules may change.</div>`}

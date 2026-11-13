@@ -1201,7 +1201,7 @@ function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S =
    the tool's lot (best fit of the board's lot outline to the tool's, stored with the board); the tool's own analysis (exits, travel, T-reach, grades)
    runs on the board's geometry for the drawings; the rows are the board's. Edmonton's file is git-ignored (Altalis frame): without it the engine runs. */
 const FROZ = {};
-function frozenData(city) { if (FROZ[city] !== undefined) return FROZ[city]; FROZ[city] = null;
+function frozenData(city) { if (FROZ[city] !== undefined) return FROZ[city]; FROZ[city] = null; if (root && root.BD_PUBLIC && city === 'edm') return null;   /* the public web version has no Edmonton boards (Altalis frame) */
   try { if (root && typeof XMLHttpRequest !== 'undefined') { const x = new XMLHttpRequest(); x.open('GET', `data/hub_frozen_${city}.json`, false); x.send(null); if (x.status === 200) FROZ[city] = JSON.parse(x.responseText).boards || null; }
     else if (typeof require !== 'undefined') { const fs = require('fs'), path = require('path'), f = path.join(__dirname, 'data', `hub_frozen_${city}.json`); if (fs.existsSync(f)) FROZ[city] = JSON.parse(fs.readFileSync(f, 'utf8')).boards || null; } } catch (e) { FROZ[city] = null; }
   return FROZ[city]; }
@@ -1290,7 +1290,7 @@ function transplant(S, keys) {
    grown again by the hub's step-back (tool/growyard.js) wherever their plan is placed: on the board's own lot with the board's limit and floor; on another lot
    with that lot's outline (the plant yard clipped to it, the hall growing until it reaches the lot line) and no floor but the plan as drawn. */
 const GROWD = {};
-function growData(city) { if (GROWD[city] !== undefined) return GROWD[city]; GROWD[city] = null;
+function growData(city) { if (GROWD[city] !== undefined) return GROWD[city]; GROWD[city] = null; if (root && root.BD_PUBLIC && city === 'edm') return null;
   try { if (root && typeof XMLHttpRequest !== 'undefined') { const x = new XMLHttpRequest(); x.open('GET', `data/hub_grow_${city}.json`, false); x.send(null); if (x.status === 200) GROWD[city] = JSON.parse(x.responseText).fits || null; }
     else if (typeof require !== 'undefined') { const fs = require('fs'), path = require('path'), f = path.join(__dirname, 'data', `hub_grow_${city}.json`); if (fs.existsSync(f)) GROWD[city] = JSON.parse(fs.readFileSync(f, 'utf8')).fits || null; } } catch (e) { GROWD[city] = null; }
   return GROWD[city]; }

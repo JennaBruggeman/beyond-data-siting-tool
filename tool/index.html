@@ -438,7 +438,7 @@ const SRC={
  edm_data:['City of Edmonton Open Data: property assessment 2026, parcel points, zoning, rooflines','https://data.edmonton.ca/'],
  edm_lots:['Lot outlines: Alberta title mapping, © Altalis, via Edmonton Public Schools GIS (current to 1 Sep 2025); academic use','https://azimuth.epsb.ca/server/rest/services/Hosted/Titled_Lots_Current/FeatureServer/info/iteminfo?f=pjson'],
 };
-const srcs=ids=>'<div class="src">Sources: '+ids.map(i=>`<a href="${SRC[i][1]}" target="_blank" rel="noopener">${esc(SRC[i][0])}</a>`).join(' · ')+'</div>';
+const srcs=ids=>'<div class="src">Sources: '+ids.filter(i=>!(window.BD_PUBLIC&&i==='edm_lots')).map(i=>`<a href="${SRC[i][1]}" target="_blank" rel="noopener">${esc(SRC[i][0])}</a>`).join(' · ')+'</div>';
 
 /* ---------- zoning rules (from research notes 17, 18; register) ---------- */
 const VAN_ENV={
@@ -524,9 +524,9 @@ async function loadTile(city,key){
     const T={key,A:t.A,par:[],pts:[],bld:[]};
     if(t.P) for(const [pid,a] of t.P){ const r=decodeRing(a,ox,oy,q); T.par.push({id:pid,r,bb:bbox(r)}); }
     // Edmonton lot outlines: Alberta title mapping (c) Altalis, via Edmonton Public Schools GIS; academic use (separate files, not in git)
-    if(city==='edm'){ try{ const l=await getJSON(`tiles/edm/l_${key}.json`); const [lx,ly]=l.o; l.L.forEach(([a,ids],n)=>{ const r=decodeRing(a,lx,ly,q); T.par.push({id:'L'+key+'_'+n,r,bb:bbox(r),ids}); }); }catch(e){} }
+    if(city==='edm'&&!window.BD_PUBLIC){ try{ const l=await getJSON(`tiles/edm/l_${key}.json`); const [lx,ly]=l.o; l.L.forEach(([a,ids],n)=>{ const r=decodeRing(a,lx,ly,q); T.par.push({id:'L'+key+'_'+n,r,bb:bbox(r),ids}); }); }catch(e){} }
     /* ELEV 4 Nov 2026: ground elevation per lot (tiles/<city>/g_<key>.json, tool/make_grade.py; not in git). Missing file: grade '?' */
-    try{ T.G=(await getJSON(`tiles/${city}/g_${key}.json`)).G||{}; }catch(e){ T.G={}; }
+    try{ T.G=window.BD_PUBLIC&&city==='edm'?{}:(await getJSON(`tiles/${city}/g_${key}.json`)).G||{}; }catch(e){ T.G={}; }   /* public version: no Edmonton ground tiles exist (no request) */
     if(t.E) for(const [pid,x,y] of t.E) T.pts.push({id:pid,x:ox+x/q,y:oy+y/q});
     for(const [h,a,f] of t.B){ const r=decodeRing(a,ox,oy,q); let hh=h, ff=f||0; if(city==='edm'&&ff===0&&h>40){ ff=6; hh=4; } /* M70: an unmeasured estimate over 40 m (up to 280 m on sheds) is not trusted: height not known, drawn one storey */ T.bld.push({h:hh,r,f:ff,c:centroid(r),a:area(r),hEst:ff===6?h:undefined}); }
     T.pPath=pathOf(T.par.map(p=>p.r)); T.bPath=pathOf(T.bld.filter(b=>b.f!==3).map(b=>b.r)); T.gPath=pathOf(T.bld.filter(b=>b.f===3).map(b=>b.r));

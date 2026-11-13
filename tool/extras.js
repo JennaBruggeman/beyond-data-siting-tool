@@ -71,7 +71,7 @@ const CHANGES=[
 function aboutView(){
   $('#side').innerHTML=`<button class="x" id="back">← Back</button><div class="kind">About this tool</div><h2>What this tool can't tell you</h2>
   <p>${LIMITS_LEAD}</p><dl class="lim">${LIMITS.map(([l,t])=>`<dt>${l}</dt><dd>${t}</dd>`).join('')}</dl>
-  <h3>Data and their dates</h3><div class="tt"><table><thead><tr><th>Layer</th><th>Source</th><th>As of</th></tr></thead><tbody>${DATA.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+  <h3>Data and their dates</h3><div class="tt"><table><thead><tr><th>Layer</th><th>Source</th><th>As of</th></tr></thead><tbody>${DATA.filter(r=>!(window.BD_PUBLIC&&/Altalis/.test(r[1]))).map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
   <h3>Versions</h3><div class="tt"><table><tbody>${CHANGES.map(r=>`<tr><td>v${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
   <h3>Evidence badges</h3><p class="sub">Each source line carries a badge: <span class="evb ev-record">public record</span> <span class="evb ev-peer">research or government lab</span> <span class="evb ev-survey">industry survey</span> <span class="evb ev-claim">operator or maker claim</span> <span class="evb ev-physics">physics</span> <span class="evb ev-transfer">transferred from elsewhere</span> <span class="evb ev-assume">assumption or gap</span></p>
   <div class="draftnote">Version ${VERSION.n}, ${VERSION.date}.</div>`;
