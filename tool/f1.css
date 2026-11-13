@@ -316,3 +316,6 @@ div:has(> .f1p-set) > .f1c-key{display:none}
 .f1r-sheet .lb{font-size:12px;font-weight:500;letter-spacing:.08em;color:#6B6A66;text-transform:uppercase;margin:12px 0 4px}
 .f1r-sheet .f1c-res-t{font-size:11px}
 @media print{ .f1r-box{width:auto;height:auto;border:0;overflow:visible} .f1r-sheet{transform:none;page-break-after:always} .f1r-pg .cap{display:none} }
+/* J.B. 12 Nov 2026: the city is chosen in step 1; the header shows it as text, the name links back to step 1 */
+.f1v-cityname{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:var(--f-rule)}
+.f1v-chips .f1v-city{margin-right:10px}

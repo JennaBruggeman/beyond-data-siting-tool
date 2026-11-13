@@ -24,11 +24,11 @@ const { chromium } = require('playwright');
     for (const t of T) {
       await p.evaluate(id => BD.f1.viewer(id), t.id); await p.waitForTimeout(2500);
       for (const city of (tag === '1440' ? ['van', 'edm'] : ['van'])) {
-        if (city === 'edm') { await p.click('#f1v [data-city="edm"]'); await p.waitForTimeout(4000); }
+        if (city === 'edm') { await p.click('#f1v [data-to="0"]'); await p.waitForTimeout(800); await p.click('#f1v [data-city="edm"]'); await p.waitForTimeout(4000); }
         const idx = tag === '390' ? [0] : all ? t.cards.map((_, k) => k) : t.cards.map((c, k) => k).filter(k => k === 0 || t.cards[k] !== t.cards[k - 1]);
         for (const k of idx) { await p.click(`#f1v [data-to="${k}"]`); await p.evaluate(() => { document.getElementById('f1v').scrollTop = 0; }); await p.waitForFunction(() => { const d = document.querySelector('#f1v .f1v-draw'); return d && !/Drawing…/.test(d.innerText); }, null, { timeout: 90000 }).catch(() => bad.push(`${t.id} ${city} card ${k + 1} ${tag}: still drawing after 90 s`)); await p.waitForTimeout(400); await p.evaluate(() => { document.getElementById('f1v').scrollTop = 0; }); await textCheck(p, `${t.id} ${city} card ${k + 1} ${tag}`);
           await p.screenshot({ path: path.join(out, `${t.id}_${city}_${String(k + 1).padStart(2, '0')}_${tag}.png`) }); shots++; }
-        if (city === 'edm') { await p.click('#f1v [data-city="van"]'); await p.waitForTimeout(3000); } }
+        if (city === 'edm') { await p.click('#f1v [data-to="0"]'); await p.waitForTimeout(800); await p.click('#f1v [data-city="van"]'); await p.waitForTimeout(3000); } }   /* 12 Nov 2026: the city is chosen on step 1 */
       await p.click('#f1v [data-x]'); await p.waitForTimeout(300); }
     /* the logic view (§3d): each template tab with one part selected, then a card's parts lit (Engineering, Heat), and the plain view */
     const LV = [['resident', 'zoning_status'], ['municipal', 'zoning_status'], ['full', 'heat_delivered'], ['arch', 'envelope'], ['all', null]];

@@ -65,7 +65,7 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
 const V={t:null,i:0,city:'van',where:'',own:null,pick:false,pcity:'van',hits:[]};   /* own: the lot picked after Start {city,tile,id,label}; pick: the lot picker is showing */
 async function loadLot(city){ const S=V.own||LOTS[city]; V.where='…'; V.ready=false; draw();
   try{ if(BD.S.city!==city&&BD.setCity) await BD.setCity(city,true); await BD.select({city:S.city,tile:S.tile,id:S.id,quiet:true}); BD.modelReset(); const M=BD.model(), a=BD.S.sel&&BD.S.sel.a;
-    V.where=[a&&a[0]?titleCase(a[0]):S.id, M&&M.Z&&(M.Z.zone||M.Z.key)].filter(Boolean).join(' · '); }
+    V.where=[a&&a[0]?titleCase(a[0]):S.id, M&&M.Z&&(M.Z.zone||M.Z.key)].filter(Boolean).join(' · '); V.addr=a&&a[0]?titleCase(a[0]):S.id; }
   catch(e){ V.where=S.id+' (lot not loaded: '+String(e.message||e).slice(0,60)+')'; }
   V.ready=true; draw(); }
 const titleCase=s=>String(s).toLowerCase().replace(/\b([a-z])/g,c=>c.toUpperCase()).replace(/\b(\d+)(St|Nd|Rd|Th)\b/g,(m,n,x)=>n+x.toLowerCase()).replace(/\b(Nw|Ne|Sw|Se)\b/g,m=>m.toUpperCase());
@@ -94,10 +94,10 @@ function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return;
   const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap), spec=BD.f1cards&&BD.f1cards.get(t.id,c.t);
   W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${t.name}</span>
      <nav class="f1v-chap" aria-label="Chapters">${t.chaps.map((h,k)=>`<button data-chap="${esc(h)}" class="${k<ci?'past':k===ci?'now':''}"${k===ci?' aria-current="step"':''}>${esc(h)}</button>`).join('')}</nav>
-     <span class="f1v-where">${esc(V.where)}</span>
-     ${V.own?`<button class="f1v-how" data-relot>Change lot</button>`:`<div class="f1v-city" role="group" aria-label="Example lot">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>`}
+     <span class="f1v-where">${V.addr?`<button class="f1v-cityname" data-to="0" title="Change the city: back to step 1">${esc((LOTS[V.city]||{}).name||'')}</button> / ${esc(V.addr)}`:esc(V.where)}</span>
+     ${V.own?`<button class="f1v-how" data-relot>Change lot</button>`:''}
      <button class="f1v-how" data-how="all">How it works</button><button class="f1v-x" data-x aria-label="Close the cards">Close</button></header>
-   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips"><span class="f1v-chip">${spec?esc(V.own?'Your lot':(spec.chip||'Example lot · read-only')):'Preview · not built yet'}</span></div>
+   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips">${V.i===0&&!V.own?`<div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>`:''}<span class="f1v-chip">${spec?esc(V.own?'Your lot':(spec.chip||'Example lot · read-only')):'Preview · not built yet'}</span></div>
      <div class="f1v-draw">${spec?'<p class="f1v-empty">Drawing…</p>':''}${spec?'':`<p class="f1v-empty">This card’s drawing and figures are built in ${STEPNAME[t.step]} of the site build. It will read the example lot above and what the cards before it chose.</p>`}</div>
      <button class="f1v-how" data-how="card">This card in the interactive logic diagram</button><details class="f1v-src"><summary>Sources and assumptions</summary><p>Nothing on this card yet. Every figure will come from the tool, with its source here, or show as a red “?”.</p></details></main>
     <aside class="f1v-panel"><div class="chap">${esc(c.chap)}</div><h2>${esc(c.t)}</h2><div class="f1c-body">${spec?'':`<p class="lead">${t.name} · card ${V.i+1} of ${n}.</p>`}</div><div class="grow"></div>

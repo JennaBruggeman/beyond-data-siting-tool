@@ -195,18 +195,48 @@ async function massing(x,P,L,o){ o=o||{}; const W=o.W||760, Hh=o.H||540, M=P.s.M
   const PH={gen:3.7,pad:2.0,chiller:2.9};
   for(const it of ((L.plant&&L.plant.items)||[]).filter(it=>!it.roof&&it.r)){ const [u0,u1,v0,v1]=it.r, hh=it.hub?2.1:PH[it.kind]||2.0;
     objs.push([DEP((u0+u1)/2,(v0+v1)/2),ply([Q(u0,v0,0),Q(u1,v0,0),Q(u1,v0,hh),Q(u0,v0,hh)],shade(BIG.plant,0.9),INK2,0.5)+ply([Q(u0,v0,0),Q(u0,v1,0),Q(u0,v1,hh),Q(u0,v0,hh)],shade(BIG.plant,0.8),INK2,0.5)+ply([Q(u0,v0,hh),Q(u1,v0,hh),Q(u1,v1,hh),Q(u0,v1,hh)],BIG.plant,INK2,0.5)]); }
-  /* the building: per storey, exterior faces by big-picture program, then the roof */
-  let bsvg='', base=0, cA=0, cB=0, nC=0;
-  for(const st of sts){ const rects=[], grp=new Map(); for(const rm of S[st]) for(const r of rm.r){ rects.push(r); grp.set(r,rm.g); cA+=(r[0]+r[1])/2; cB+=(r[2]+r[3])/2; nC++; }
-    const z0=base, z1=base+(H[st-1]||4), faces=[];
-    for(const e of outerEdges(rects)){ if(!VIS(e.n[0],e.n[1])) continue; const r=rects.find(q=>(e.n[0]&&Math.abs((e.n[0]<0?q[0]:q[1])-e.a[0])<1e-6&&q[2]<=Math.min(e.a[1],e.b[1])+1e-6&&q[3]>=Math.max(e.a[1],e.b[1])-1e-6)||(e.n[1]&&Math.abs((e.n[1]<0?q[2]:q[3])-e.a[1])<1e-6&&q[0]<=Math.min(e.a[0],e.b[0])+1e-6&&q[1]>=Math.max(e.a[0],e.b[0])-1e-6));
-      const col=shade(BIG[r?grp.get(r):'']||'#FFFFFF',e.n[0]?0.8:0.9); faces.push([DEP(e.a[0]+e.b[0],e.a[1]+e.b[1]),ply([Q(e.a[0],e.a[1],z0),Q(e.b[0],e.b[1],z0),Q(e.b[0],e.b[1],z1),Q(e.a[0],e.a[1],z1)],col,INK2,0.5)]); }
-    faces.sort((p1,p2)=>p1[0]-p2[0]); bsvg+=faces.map(z=>z[1]).join(''); base=z1;
-    if(st===sts[sts.length-1]) for(const rm of S[st]) for(const r of rm.r) bsvg+=ply([Q(r[0],r[2],z1),Q(r[1],r[2],z1),Q(r[1],r[3],z1),Q(r[0],r[3],z1)],BIG[rm.g]||'#FFFFFF',BIG[rm.g]||'#FFFFFF',0.5); }
+  /* the building as big-picture volumes (J.B. 12 Nov 2026, as reports/massing_ctx.py): per storey one volume per group (data centre, public, plant,
+     unassigned); circulation and loading take the group they adjoin; pieces under 3 m wide join their neighbour's group; unassigned only as a real
+     volume; faces stroked in their own fill, dark lines only on the silhouette and where two groups meet. Rooms and seams stay in the plans. */
+  const GC={dc:'#BCCDE4',pub:'#CFE0CB',plant:'#DCDBD6',spare:'#F4F4F2'};
+  const g0=g=>(g==='hall'||g==='sup'||g==='load')?'dc':(g==='pub'||g==='clin')?'pub':g==='plant'?'plant':g==='spare'?'spare':null;
+  const shareLen=(a,b)=>{ let L=0; for(const x of [a[0],a[1]]) if(Math.abs(x-b[0])<1e-6||Math.abs(x-b[1])<1e-6) L+=Math.max(0,Math.min(a[3],b[3])-Math.max(a[2],b[2]));
+    for(const y of [a[2],a[3]]) if(Math.abs(y-b[2])<1e-6||Math.abs(y-b[3])<1e-6) L+=Math.max(0,Math.min(a[1],b[1])-Math.max(a[0],b[0])); return L; };
+  const groupsOf=st=>{ const R=[]; for(const rm of S[st]) for(const r of rm.r) R.push({r,g:g0(rm.g),fix:!!g0(rm.g)&&rm.g!=='load'});
+    const nb=o=>{ const w={}; for(const q of R){ if(q===o||!q.g) continue; const L=shareLen(o.r,q.r); if(L>0) w[q.g]=(w[q.g]||0)+L; } let best=null; for(const k in w) if(!best||w[k]>w[best]) best=k; return best; };
+    for(let it=0;it<6;it++) for(const o of R) if(!o.g||(!o.fix&&o.g==='dc')){ const b=nb(o); if(b) o.g=b; }   /* circulation and loading: the group they adjoin */
+    for(const o of R) if(!o.g) o.g='dc';
+    for(const o of R){ const w=Math.min(o.r[1]-o.r[0],o.r[3]-o.r[2]); if(w<3){ const b=nb(o); if(b) o.g=b; } }   /* slivers join their neighbour */
+    const spA=R.filter(o=>o.g==='spare').reduce((t,o)=>t+(o.r[1]-o.r[0])*(o.r[3]-o.r[2]),0);
+    for(const o of R) if(o.g==='spare'&&(spA<30||Math.min(o.r[1]-o.r[0],o.r[3]-o.r[2])<4)){ const b=nb(o); if(b&&b!=='spare') o.g=b; }   /* unassigned only as a real volume */
+    return R; };
+  const at=(R,u,v)=>{ for(const o of R) if(u>o.r[0]-1e-6&&u<o.r[1]+1e-6&&v>o.r[2]-1e-6&&v<o.r[3]+1e-6) return o; return null; };
+  const DK='#45464A'; let bsvg='', base=0, cA=0, cB=0, nC=0; const GS={}; sts.forEach(st=>GS[st]=groupsOf(st));
+  for(const st of sts){ const R=GS[st], rects=R.map(o=>o.r), z0=base, z1=base+(H[st-1]||4), up=GS[st+1]||null, faces=[], lines=[];
+    R.forEach(o=>{ cA+=(o.r[0]+o.r[1])/2; cB+=(o.r[2]+o.r[3])/2; nC++; });
+    const E=outerEdges(rects), vis=E.filter(e=>VIS(e.n[0],e.n[1]));
+    const grpOf=e=>{ const mu=(e.a[0]+e.b[0])/2-e.n[0]*0.05, mv=(e.a[1]+e.b[1])/2-e.n[1]*0.05, o=at(R,mu,mv); return o?o.g:'dc'; };
+    for(const e of vis){ const g=grpOf(e), col=shade(GC[g],e.n[0]?0.86:0.94); e.g=g;
+      faces.push([DEP(e.a[0]+e.b[0],e.a[1]+e.b[1]),ply([Q(e.a[0],e.a[1],z0),Q(e.b[0],e.b[1],z0),Q(e.b[0],e.b[1],z1),Q(e.a[0],e.a[1],z1)],col,col,0.6)]);
+      /* the storey's top edge: dark at the top of the building, or where the storey above is another group */
+      const mu=(e.a[0]+e.b[0])/2-e.n[0]*0.05, mv=(e.a[1]+e.b[1])/2-e.n[1]*0.05, above=up?at(up,mu,mv):null;
+      if(!above||above.g!==g){ const A=Q(e.a[0],e.a[1],z1), B=Q(e.b[0],e.b[1],z1); lines.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.8"/>`); }
+      if(st===sts[0]){ const A=Q(e.a[0],e.a[1],z0), B=Q(e.b[0],e.b[1],z0); lines.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.8"/>`); } }
+    /* vertical edges: dark where the facade meets a hidden face (the silhouette) or another group */
+    const key=p=>p[0].toFixed(2)+','+p[1].toFixed(2), byPt=new Map(); for(const e of E) for(const p of [e.a,e.b]){ const k=key(p); if(!byPt.has(k)) byPt.set(k,[]); byPt.get(k).push(e); }
+    for(const [k,es] of byPt){ const vs=es.filter(e=>vis.includes(e)); if(!vs.length) continue; const hid=es.some(e=>!vis.includes(e)), diff=new Set(vs.map(e=>e.g)).size>1, straight=vs.length===2&&vs[0].n[0]===vs[1].n[0]&&vs[0].n[1]===vs[1].n[1];
+      if(hid||(diff)){ const pt=vs[0].a&&key(vs[0].a)===k?vs[0].a:vs[0].b, A=Q(pt[0],pt[1],z0), B=Q(pt[0],pt[1],z1); lines.push(`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.8"/>`); } }
+    faces.sort((p1,p2)=>p1[0]-p2[0]); bsvg+=faces.map(z=>z[1]).join('')+lines.join(''); base=z1;
+    if(st===sts[sts.length-1]){ /* the roof: merged by group, then its outline and the lines between groups */
+      for(const o of R) bsvg+=ply([Q(o.r[0],o.r[2],z1),Q(o.r[1],o.r[2],z1),Q(o.r[1],o.r[3],z1),Q(o.r[0],o.r[3],z1)],GC[o.g],GC[o.g],0.6);
+      for(const e of E){ const A=Q(e.a[0],e.a[1],z1), B=Q(e.b[0],e.b[1],z1); bsvg+=`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.8"/>`; }
+      for(let a=0;a<R.length;a++) for(let b=a+1;b<R.length;b++){ if(R[a].g===R[b].g) continue; const ra=R[a].r, rb=R[b].r;
+        for(const x of [ra[0],ra[1]]) if(Math.abs(x-rb[0])<1e-6||Math.abs(x-rb[1])<1e-6){ const lo=Math.max(ra[2],rb[2]), hi=Math.min(ra[3],rb[3]); if(hi-lo>1e-6){ const A=Q(x,lo,z1), B=Q(x,hi,z1); bsvg+=`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.6"/>`; } }
+        for(const y of [ra[2],ra[3]]) if(Math.abs(y-rb[2])<1e-6||Math.abs(y-rb[3])<1e-6){ const lo=Math.max(ra[0],rb[0]), hi=Math.min(ra[1],rb[1]); if(hi-lo>1e-6){ const A=Q(lo,y,z1), B=Q(hi,y,z1); bsvg+=`<line x1="${A[0].toFixed(1)}" y1="${A[1].toFixed(1)}" x2="${B[0].toFixed(1)}" y2="${B[1].toFixed(1)}" stroke="${DK}" stroke-width="0.6"/>`; } } } } }
   objs.push([DEP(cA/nC,cB/nC),bsvg]);
   objs.sort((p1,p2)=>p1[0]-p2[0]); out.push(...objs.map(z=>z[1]));
   out.push('</svg>');
-  const key=`<div style="font-size:11px;color:${INK2};margin-top:4px"><span style="display:inline-block;width:10px;height:10px;background:${BIG.hall};vertical-align:-1px;margin-right:6px"></span>data centre <span style="display:inline-block;width:10px;height:10px;background:${BIG.pub};vertical-align:-1px;margin:0 6px 0 10px"></span>refuge, shelter, clinic <span style="display:inline-block;width:10px;height:10px;background:${BIG.plant};vertical-align:-1px;margin:0 6px 0 10px"></span>plant <span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #B9B8B3;vertical-align:-1px;margin:0 6px 0 10px"></span>neighbours (${x.city==='van'?'City LiDAR 2022':'City footprints'})</div>`;
+  const key=`<div style="font-size:11px;color:${INK2};margin-top:4px"><span style="display:inline-block;width:10px;height:10px;background:#BCCDE4;vertical-align:-1px;margin-right:6px"></span>data centre <span style="display:inline-block;width:10px;height:10px;background:#CFE0CB;vertical-align:-1px;margin:0 6px 0 10px"></span>refuge, shelter, clinic <span style="display:inline-block;width:10px;height:10px;background:${BIG.plant};vertical-align:-1px;margin:0 6px 0 10px"></span>plant <span style="display:inline-block;width:10px;height:10px;background:#fff;border:1px solid #B9B8B3;vertical-align:-1px;margin:0 6px 0 10px"></span>neighbours (${x.city==='van'?'City LiDAR 2022':'City footprints'})</div>`;
   return {svg:out.join(''),key}; }
 const C_bbox=r=>{ let a=1e18,b=1e18,c=-1e18,d=-1e18; for(let i=0;i<r.length;i+=2){ a=Math.min(a,r[i]); b=Math.min(b,r[i+1]); c=Math.max(c,r[i]); d=Math.max(d,r[i+1]); } return [a,b,c,d]; };
 BD.f1plans={plan,legend,BOARD_COL,isCirc,side,energy,energySvg,exploded,storeyLabels,modes,why,shares,icons,secT,massing,BIG};
@@ -256,5 +286,8 @@ BD.f1plans={plan,legend,BOARD_COL,isCirc,side,energy,energySvg,exploded,storeyLa
       hero:[{v:String(titles.length),l:'pages'},{v:String(bad.length),l:'code rows not passing'}],
       rows:titles.map((t,i)=>[`Page ${i+1}`,t]),
       src:['Pages: Claude Link reports/report_arch.py (Report_Arch_p1–p13), drawn here from tool/hub.js (layout) and tool/hubchecks.js (code rows).','Export: Print, or save as PDF (window.print).']}; });
+  /* A10 and A21 boards: the massing on the lot (J.B. 12 Nov 2026: massing as big-picture volumes wherever it shows) */
+  wrap('Variant and add-ons',async(x,P,V,r)=>{ const m=await F.massing(x,P,V.L,{W:760,H:460}); if(!m) return null; const d=r.draw||'', k=d.search(/<[^>]+>\s*Add-ons\s*</); return `<div class="f1p-set">${F.secT('The hub on its lot')}${m.svg}${m.key}${k>0?d.slice(k):''}</div>`; });
+  wrap('Compare',async(x,P,V,r)=>{ const m=await F.massing(x,P,V.L,{W:300,H:220}); return m?`<div class="f1p-set"><div style="display:grid;grid-template-columns:repeat(3,300px);gap:14px;margin-bottom:14px"><figure style="margin:0">${m.svg}<figcaption style="font-size:12px;margin-top:4px">Emergency hub · this lot</figcaption></figure>${['Community pool','Heat cascade'].map(t=>`<figure style="margin:0"><div style="width:300px;height:220px;border:1px solid #DAD9D5;display:flex;align-items:center;justify-content:center;font-size:12px;color:#6B6A66;text-align:center;padding:0 16px">still: comes with its engine (milestone 2)</div><figcaption style="font-size:12px;margin-top:4px">${t}</figcaption></figure>`).join('')}</div></div>${r.draw||''}`:null; });
   wrap('Program diagram',(x,P,V,r)=>`<div class="f1p-set">${F.icons(560)}${F.secT('The building pulled apart by storey')}<div style="display:grid;grid-template-columns:440px 1fr;gap:20px;align-items:center">${F.exploded(V.L,440,260)}<div style="display:flex;flex-direction:column;gap:12px">${F.storeyLabels(V.L)}</div></div></div>`);
 })();
