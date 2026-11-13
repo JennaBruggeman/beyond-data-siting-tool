@@ -2,19 +2,19 @@
  "_about": "F7 (CODE_JOB_F7_typologies.md, 8 Nov 2026): the typology library. One entry per typology, in MASTER_PLAN Phase B order. Figures come from each typology's spec (Emergency hub: Claude Link eh/specs/emergency_hub.md, parts 1-4, 9 Nov 2026) with register ids; a typology whose spec has not passed J.B.'s gate shows no figures. Status: specified (spec parts 1-3 final), in progress (spec being written; test-fit boards exist), not started (research file only, checks/research_typ/). Update this file when a spec changes. The three passed specs are published with the tool (J.B., 9 and 10 Nov 2026): tool/f1/specs/<id>.md, verbatim copies; re-copy one when Cowork changes it (checks/tests/spec_sync.js fails until then).",
  "_icons": "tool/f1/icons/*.svg (copied from Claude Link docs/icons, first pass, 8 Nov): servers, refuge, clinic, pool, greenhouse. Programs without a drawn model show their name only.",
  "list": [
-  {"id": "emergency_hub", "name": "Emergency hub", "status": "specified", "statusNote": "spec parts 1–3 final; 8 test lots",
+  {"id": "emergency_hub", "name": "Emergency hub", "status": "specified", "statusNote": "Specified; 13 test lots (freeze EH-FREEZE-2026-11-11f)",
    "spec": {"file": "emergency_hub.md", "link": "eh/specs/emergency_hub.md", "gate": "approved", "gateNote": "J.B. passed the spec at her final gate, 9 Nov 2026 (approved: no draft banner). Before that: 'draft'."},
    "programs": [{"icon": "servers", "name": "data centre"}, {"icon": "refuge", "name": "refuge + shelter"}, {"icon": "clinic", "name": "clinic"}],
    "shares": "backup power",
    "lead": "A data centre whose backup power keeps a refuge, a warming shelter and a small clinic running for its neighbours. The refuge is the core; the warming shelter stays with it; the clinic shrinks first, then drops.",
    "card": [
-    {"lo": 0.41, "hi": 1.83, "u": "MW", "l": "data centre, 8 test lots", "src": ["spec_emergencyHub"]},
+    {"lo": 0.31, "hi": 1.83, "u": "MW", "l": "data centre, 13 test lots (EH-FREEZE-2026-11-11f)", "src": ["spec_emergencyHub"]},
     {"lo": 50, "u": "people", "l": "refuge, at least", "src": ["spec_emergencyHub", "arch_ahsReceptionCentres", "refuge_people"]}
    ]},
-  {"id": "community_pool", "name": "Community pool", "status": "specified", "statusNote": "spec passed 10 Nov; parts 5–7 to follow (spec status line)",
+  {"id": "community_pool", "name": "Community pool", "status": "specified", "statusNote": "Specified; in progress: parts 5–7",
    "spec": {"file": "community_pool.md", "link": "community_pool/specs/community_pool.md", "gate": "approved", "gateNote": "J.B. passed the spec at her final gate, 10 Nov 2026 (Claude Link community_pool/specs/GATE_community_pool_2026-11-10.md). The spec's own status line still reads 'parts 1–3 FINAL … Parts 5–7 to follow' (asked in checks/to_cowork.md). Before that: 'draft'."},
    "programs": [{"icon": "servers", "name": "data centre"}, {"icon": "pool", "name": "community pool"}]},
-  {"id": "heat_cascade", "name": "Heat cascade", "status": "specified", "statusNote": "spec passed 10 Nov; six test fits drawn",
+  {"id": "heat_cascade", "name": "Heat cascade", "status": "specified", "statusNote": "Specified; six test fits drawn",
    "spec": {"file": "heat_cascade.md", "link": "heat_cascade/specs/heat_cascade.md", "gate": "approved", "gateNote": "J.B. passed the spec at her final gate, 10 Nov 2026 (Claude Link heat_cascade/specs/GATE_heat_cascade_2026-11-10.md). Before that: 'draft'."},
    "programs": [{"icon": "servers", "name": "data centre"}, {"name": "heat cascade"}]},
   {"id": "warm_bath", "name": "Warm bath", "status": "not started", "statusNote": "research file only", "programs": [{"icon": "servers", "name": "data centre"}, {"name": "warm bath"}]},
@@ -35,7 +35,7 @@
  "pages": {
   "emergency_hub": {
    "capacities": [
-    {"l": "Data centre", "lo": 0.41, "hi": 1.83, "u": "MW", "note": "across the 8 test lots; capped at", "cap": 2325, "capU": "m² of data-centre floor and one hall storey on every lot (drawing choice, J.B. 8 Nov)", "src": ["spec_emergencyHub", "vanParking5"]},
+    {"l": "Data centre", "lo": 0.31, "hi": 1.83, "u": "MW", "note": "across the 13 test lots (EH-FREEZE-2026-11-11f); capped at", "cap": 2325, "capU": "m² of data-centre floor and one hall storey on every lot (drawing choice, J.B. 8 Nov)", "src": ["spec_emergencyHub", "vanParking5"]},
     {"l": "Electricity at the meter", "pueLo": 1.4, "pueHi": 1.55, "note": "× the data centre's MW (PUE; the tool uses the same range for every cooling type ?)", "src": ["pue", "uptime2025", "lbnl2024"]},
     {"l": "Heat offered", "text": "depends on the cooling picked: see the Engineering template", "src": ["heat_delivered"]},
     {"l": "Refuge", "lo": 50, "u": "people at least", "area": 175, "rate": 3.5, "fitsLo": 50, "fitsHi": 166, "note": "refuge people in the 8 test fits", "src": ["spec_emergencyHub", "arch_ahsReceptionCentres", "arch_edmExtremeWeather", "refuge_people"]},

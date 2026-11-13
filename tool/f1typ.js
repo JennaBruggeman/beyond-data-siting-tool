@@ -19,13 +19,13 @@ const models=t=>`<div class="f1t-models">${t.programs.map((p,i)=>`${i?'<span cla
 const chip=s=>`<span class="f1t-chip ${s==='specified'?'on':s==='in progress'?'mid':''}">${esc(s)}</span>`;
 const fig=f=>`<div class="f1t-fig"><b>${f.hi!=null?`${n2(f.lo)}–${n2(f.hi)}`:`${n0(f.lo)}+`}</b> <span>${esc(f.u)}</span><div>${esc(f.l)}</div></div>`;
 
-function libHtml(){ return `<div class="f1t-wrap"><div class="f1t-intro"><h1>Typologies</h1><p>Ways a data centre and public programs can share one building. Each adapts to the lot through its variants. A typology shows figures only once its spec has passed J.B.’s gate: nothing unsourced.</p></div>
+function libHtml(){ return `<div class="f1t-wrap"><div class="f1t-intro"><h1>Typologies</h1><p>Ways a data centre and public programs can share one building. Each adapts to the lot through its variants. A typology shows figures only once its specification is final: nothing unsourced.</p></div>
   <div class="f1t-grid">${T.list.map(t=>`<article class="f1t-card${t.card?' has':''}"><header><h2>${esc(t.name)}</h2>${chip(t.status)}</header>${models(t)}
     ${t.card?`<div class="f1t-figs">${t.card.map(fig).join('')}</div><p class="f1t-share">shares: ${esc(t.shares)}</p><button class="f1t-open" data-typ="${esc(t.id)}">Open the typology →</button>`
-      :t.spec&&t.spec.gate==='approved'&&t.spec.file?`<p class="f1t-none">Spec passed J.B.’s gate; figures not on this page yet.<br><span>${esc(t.statusNote||'')}</span></p><button class="f1t-open" data-spec="${esc(t.id)}">Read the spec →</button>`
-      :`<p class="f1t-none">No figures until its spec passes the gate.<br><span>${esc(t.statusNote||'')}</span></p>`}</article>`).join('')}</div>
+      :t.spec&&t.spec.gate==='approved'&&t.spec.file?`<p class="f1t-none">Specified; figures not on this page yet.<br><span>${esc(t.statusNote||'')}</span></p><button class="f1t-open" data-spec="${esc(t.id)}">Read the spec →</button>`
+      :`<p class="f1t-none">No figures until its specification is final.<br><span>${esc(t.statusNote||'')}</span></p>`}</article>`).join('')}</div>
   ${smallHtml()}
-  <p class="f1t-foot">Program models: first pass (servers, refuge, clinic, pool drawn); the rest come with their specs. Figures: tool/data/typologies.json, from each spec, with register ids.</p></div>`; }
+  <p class="f1t-foot">Program models: first pass (servers, refuge, clinic, pool drawn); the rest come with their specs. Figures: from each typology’s specification, with register ids.</p></div>`; }
 
 /* F7 small-lot floors (J.B., 9 Nov 2026): tool/data/typologies.json smallLots, from the Emergency hub spec Part 4 and the 10 Nov gate notes */
 function smallHtml(){ const L=T.smallLots; if(!L) return '';

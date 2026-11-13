@@ -28,6 +28,8 @@ async function placed(city){ const L=FAC(city).filter(f=>f.inMap); const out=[];
 async function grouped(city){ const P=await placed(city), G=new Map(); for(const o of P){ const k=o.f.parcel?o.f.parcel.id:o.p.map(v=>v.toFixed(0)).join(','); if(!G.has(k)) G.set(k,{k,p:o.p,fs:[]}); G.get(k).fs.push(o.f); } return [...G.values()]; }
 /* default pick: the facility on the lot shown, else the nearest operating one */
 async function picked(x){ const city=x.city, L=FAC(city); let f=L.find(g=>g.id===PICK.pick[city]); if(f) return f;
+  /* audit D15: Vancouver opens on the board's example, Cologix VAN1 at 555 W Hastings (Res_R3_What); Resident is not about a lot, so no pick by the lot */
+  const DEF={van:'van1'}; f=L.find(g=>g.id===DEF[city]&&g.inMap); if(f) return (PICK.pick[city]=f.id,f);
   const sel=x.sel||{}; f=L.find(g=>g.parcel&&g.parcel.id===sel.id); if(f) return (PICK.pick[city]=f.id,f);
   const P=await placed(city), b=sel.ring?C.bbox(sel.ring):null, c=b?[(b[0]+b[2])/2,(b[1]+b[3])/2]:null;
   const cand=P.filter(o=>solid(o.f)); let best=null; for(const o of (cand.length?cand:P)){ const d=c?Math.hypot(o.p[0]-c[0],o.p[1]-c[1]):0; if(!best||d<best.d) best={d,f:o.f}; }
@@ -78,77 +80,134 @@ C.add(T,'Find a data centre',{async build(x){
     rows:[['Picked',cur?`${cur.name}${cur.operator?' · '+cur.operator.split(' (')[0]:''}`:'none'],['Not placed',`${c.nc}, listed with the reason (never a guessed dot)`],['Beyond the city',`${c.out}, listed`]],
     src:[SRC_INV,SRC_PLACE,'Streets: tool/streets_'+city+'.json.'],missing:[]}; }});
 
-/* ---------- the 3-D massing of the block (axonometric from the tool's footprints and heights) ---------- */
+/* ---------- the 3-D massing of the block: a true isometric, as the board Res_R3_What (Claude Link reports/resident_boards.py r3_axon; J.B. 12 Nov 2026) ----------
+   The block is turned so the named parcel's edges (its minimum rotated rectangle) run along the iso axes; of the four corners, the one with least in front of
+   the named building is the view. Context: every building within 230 m, extruded (Vancouver: City LiDAR 2022, measured heights; Edmonton: the footprints the
+   tool holds). Only a building that would hide the named one is drawn as its footprint and a dashed outline at its height. The named building is the LiDAR
+   outline clipped to the facility's parcel, so a neighbour never takes its band. */
 const pip=(x,y,r)=>BD.pip(x,y,r);
-async function block(f){ const p=await posOf(f); if(!p) return null; const m=await meta(f.city), R=110;
-  const ks=new Set(); for(let di=-1;di<=1;di++) for(let dj=-1;dj<=1;dj++) ks.add((Math.floor((p[0]+di*R)/m.T))+'_'+(Math.floor((p[1]+dj*R)/m.T)));
-  const tiles=[]; for(const k of ks){ if(!(m.tiles||[]).some(t=>t[0]+'_'+t[1]===k)) continue; try{ const t=await BD.loadTile(f.city,k); if(t) tiles.push(t); }catch(e){} }
-  const bl=[]; const seen=new Set(); let ring=null;
-  let lid=null; if(f.city==='van'){ try{ const mm=await meta('van'), ks2=new Set(); for(let di=-1;di<=1;di++) for(let dj=-1;dj<=1;dj++) ks2.add((Math.floor((p[0]+di*R)/mm.T))+'_'+(Math.floor((p[1]+dj*R)/mm.T)));
-      lid=[]; for(const k of ks2){ try{ const J=await BD.getJSON(`tiles/van/lid_${k}.json`); for(const b of J.B){ const r=b.slice(2); let a=0; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; a+=r[i]*r[j+1]-r[j]*r[i+1]; } lid.push({h:b[0],r,a:Math.abs(a)/2,c:BD.centroid(r)}); } }catch(e){} } if(!lid.length) lid=null; }catch(e){ lid=null; } }
-  for(const t of tiles){ if(f.parcel&&!ring){ const q=t.par.find(z=>z.id===f.parcel.id); if(q) ring=q.r; }
-    if(lid) continue;
-    for(const b of t.bld){ const c=b.c||BD.centroid(b.r); if(Math.hypot(c[0]-p[0],c[1]-p[1])>R) continue; const k=c[0].toFixed(1)+','+c[1].toFixed(1); if(seen.has(k)) continue; seen.add(k); bl.push(b); } }
-  if(lid) for(const b of lid){ if(Math.hypot(b.c[0]-p[0],b.c[1]-p[1])<=R) bl.push(b); }   /* section B: Vancouver neighbours from the City LiDAR 2022 (measured heights) */
-  /* the facility's building: Vancouver, the largest footprint whose centroid is inside the parcel; Edmonton, the footprint holding the geocode, else the nearest */
-  let own=null;
-  const better=(b,o)=>!o||b.a>o.a;
-  if(ring){ const on=bl.filter(b=>{ const c=b.c||BD.centroid(b.r); return pip(c[0],c[1],ring); }), hmax=Math.max(0,...on.map(b=>b.h||0));
-    /* a tower: the largest footprint among the tall ones (at least 60 % of the tallest: the tower body, not its podium or a lift or lookout shaft); else the largest */
-    for(const b of on) if((f.type!=='tower'||(b.h||0)>=0.6*hmax)&&better(b,own)) own=b; }
-  if(!own){ for(const b of bl) if(pip(p[0],p[1],b.r)&&better(b,own)) own=b; }
-  if(!own){ let best=null; for(const b of bl){ const c=b.c||BD.centroid(b.r), d=Math.hypot(c[0]-p[0],c[1]-p[1]); if(d<30&&(!best||d<best.d)) best={d,b}; } own=best?best.b:null; }
-  return {p,bl,own,ring,lidar:!!lid}; }
+const R3=230, BLUE='#3366A3';
+const ringPts=r=>{ const o=[]; for(let i=0;i<r.length;i+=2) o.push([r[i],r[i+1]]); return o; };
+const areaP=P=>{ let a=0; for(let i=0;i<P.length;i++){ const q=P[i], w=P[(i+1)%P.length]; a+=q[0]*w[1]-w[0]*q[1]; } return a/2; };
+const cenP=P=>{ let a=0,x=0,y=0; for(let i=0;i<P.length;i++){ const q=P[i], w=P[(i+1)%P.length], c=q[0]*w[1]-w[0]*q[1]; a+=c; x+=(q[0]+w[0])*c; y+=(q[1]+w[1])*c; } return Math.abs(a)<1e-9?P[0]:[x/(3*a),y/(3*a)]; };
+const hull=P=>{ const Q=P.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]), cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]), lo=[], up=[];
+  for(const q of Q){ while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0) lo.pop(); lo.push(q); }
+  for(let i=Q.length-1;i>=0;i--){ const q=Q[i]; while(up.length>1&&cr(up[up.length-2],up[up.length-1],q)<=0) up.pop(); up.push(q); }
+  return lo.slice(0,-1).concat(up.slice(0,-1)); };
+/* Sutherland–Hodgman: subject clipped by a convex, counter-clockwise clip polygon */
+const clipC=(S,Cp)=>{ let out=S; for(let i=0;i<Cp.length&&out.length;i++){ const a=Cp[i], b=Cp[(i+1)%Cp.length], inn=q=>(b[0]-a[0])*(q[1]-a[1])-(b[1]-a[1])*(q[0]-a[0])>=0;
+    const X=(p1,p2)=>{ const d1=(b[0]-a[0])*(p1[1]-a[1])-(b[1]-a[1])*(p1[0]-a[0]), d2=(b[0]-a[0])*(p2[1]-a[1])-(b[1]-a[1])*(p2[0]-a[0]), t=d1/(d1-d2); return [p1[0]+t*(p2[0]-p1[0]),p1[1]+t*(p2[1]-p1[1])]; };
+    const inp=out; out=[]; for(let k=0;k<inp.length;k++){ const c=inp[k], pv=inp[(k+inp.length-1)%inp.length]; if(inn(c)){ if(!inn(pv)) out.push(X(pv,c)); out.push(c); } else if(inn(pv)) out.push(X(pv,c)); } }
+  return out; };
+const ccwP=P=>areaP(P)<0?P.slice().reverse():P;
+/* a polygon clipped to the parcel: the parcel split into triangles (ear clipping) so each clip is convex; the pieces kept, the largest returned */
+function earTri(P){ P=ccwP(P); const V=P.map((q,i)=>i), T=[], cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]); let g=0;
+  while(V.length>3&&g++<5000){ let cut=false; for(let k=0;k<V.length;k++){ const a=P[V[(k+V.length-1)%V.length]], b=P[V[k]], c=P[V[(k+1)%V.length]]; if(cr(a,b,c)<=1e-9) continue;
+      let ok=true; for(const m of V){ const q=P[m]; if(q===a||q===b||q===c) continue; if(cr(a,b,q)>=0&&cr(b,c,q)>=0&&cr(c,a,q)>=0){ ok=false; break; } } if(!ok) continue;
+      T.push([a,b,c]); V.splice(k,1); cut=true; break; } if(!cut) break; }
+  if(V.length===3) T.push(V.map(m=>P[m])); return T; }
+/* the clipped pieces joined again: edges shared by two pieces (the triangulation's diagonals) cancel, the rest chained into outlines (1 cm keys) */
+function joinParts(parts){ if(parts.length<2) return parts; const key=q=>Math.round(q[0]*100)+','+Math.round(q[1]*100), E=new Map();
+  for(const P of parts) for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], ka=key(a), kb=key(b); if(ka===kb) continue; const r=kb+'>'+ka; if(E.has(r)) E.delete(r); else E.set(ka+'>'+kb,[a,b]); }
+  const nx=new Map(); for(const [k,[a,b]] of E){ const ka=k.split('>')[0]; if(nx.has(ka)) return parts; nx.set(ka,[a,b]); }
+  const out=[], used=new Set(); for(const [ka] of nx){ if(used.has(ka)) continue; const L=[]; let k=ka, g=0; while(!used.has(k)&&nx.has(k)&&g++<10000){ used.add(k); const [a,b]=nx.get(k); L.push(a); k=key(b); } if(k!==ka) return parts; if(L.length>2) out.push(L); }
+  return out.length?out:parts; }
+function clipToParcel(Q,par){ const tris=earTri(par); let area=0; const parts=[]; for(const t of tris){ const c=clipC(Q,t); if(c.length>2){ const a=Math.abs(areaP(c)); if(a>1e-3){ area+=a; parts.push(c); } } }
+  return {area,parts:joinParts(parts)}; }
+/* minimum rotated rectangle: the hull edge whose direction gives the smallest bounding box; its angle in radians */
+function mrrAngle(P){ const H=hull(P); let best=null; for(let i=0;i<H.length;i++){ const a=H[i], b=H[(i+1)%H.length], an=Math.atan2(b[1]-a[1],b[0]-a[0]), c=Math.cos(-an), s=Math.sin(-an);
+    let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; for(const q of H){ const x=q[0]*c-q[1]*s, y=q[0]*s+q[1]*c; x0=Math.min(x0,x); x1=Math.max(x1,x); y0=Math.min(y0,y); y1=Math.max(y1,y); }
+    const A=(x1-x0)*(y1-y0); if(!best||A<best.A) best={A,an}; } return best?best.an:0; }
+async function block(f){ const p=await posOf(f); if(!p) return null; const m=await meta(f.city), R=R3+40;
+  const keys=T=>{ const ks=new Set(); for(const dx of [-R,0,R]) for(const dy of [-R,0,R]) ks.add(Math.floor((p[0]+dx)/T)+'_'+Math.floor((p[1]+dy)/T)); return ks; };
+  const tiles=[]; for(const k of keys(m.T)){ if(!(m.tiles||[]).some(t=>t[0]+'_'+t[1]===k)) continue; try{ const t=await BD.loadTile(f.city,k); if(t) tiles.push(t); }catch(e){} }
+  let ring=null; for(const t of tiles){ if(f.parcel&&!ring){ const q=t.par.find(z=>z.id===f.parcel.id); if(q) ring=q.r; } }
+  const raw=[]; let lid=false;
+  if(f.city==='van'){ for(const k of keys(m.T)){ try{ const J=await BD.getJSON(`tiles/van/lid_${k}.json`); lid=true; for(const b of J.B) raw.push({h:b[0],P:ringPts(b.slice(2))}); }catch(e){} } }
+  if(!lid){ const seen=new Set(); for(const t of tiles) for(const b of t.bld){ const c=b.c||BD.centroid(b.r), k=c[0].toFixed(1)+','+c[1].toFixed(1); if(seen.has(k)) continue; seen.add(k); raw.push({h:b.h||4,P:ringPts(b.r)}); } }
+  const par=ring?ccwP(ringPts(ring)):null, pc=par?cenP(par):p, items=[];
+  for(const b of raw){ const P=ccwP(b.P), a=Math.abs(areaP(P)); if(a<25) continue; const c=cenP(P); if(Math.hypot(c[0]-pc[0],c[1]-pc[1])>R3) continue;
+    if(par){ const ov=clipToParcel(P,par), pa=Math.abs(areaP(par));
+      if(ov.area>0.5*a||ov.area>0.3*pa){ const sid=raw.indexOf(b); for(const q of ov.parts) items.push({P:ccwP(q),h:b.h,tgt:true,sid}); continue; }   /* the named building: only what stands on its parcel (more than half the outline on it, or covering 30 % of the parcel: a LiDAR outline can run over the next lot) */
+      if(ov.area>0.2*a) continue; }   /* a sliver of the parcel's own building that spills over: not a neighbour */
+    items.push({P,h:b.h,tgt:false}); }
+  if(!par){ /* Edmonton (no parcel): the footprint holding the geocode, else the nearest within 30 m */
+    let own=null; for(const it of items) if(pip(p[0],p[1],it.P.flat())&&(!own||Math.abs(areaP(it.P))>Math.abs(areaP(own.P)))) own=it;
+    if(!own){ let bd=30; for(const it of items){ const c=cenP(it.P), d=Math.hypot(c[0]-p[0],c[1]-p[1]); if(d<bd){ bd=d; own=it; } } }
+    if(own){ own.tgt=true; own.sid=-1; } }
+  /* the named building's band goes on its tallest piece on the parcel (the tower), never on a neighbour */
+  const T_=items.filter(it=>it.tgt); let own=null; for(const it of T_) if(!own||it.h>own.h+0.5||(Math.abs(it.h-own.h)<=0.5&&Math.abs(areaP(it.P))>Math.abs(areaP(own.P)))) own=it;
+  if(own) for(const it of T_) it.mine=it.sid===own.sid;   /* the named building: every piece of its outline on the parcel */
+  return {p:pc,items,own,par,ang:par?mrrAngle(par):0,lidar:lid}; }
 /* storeys from the source's own words ("28-storey", "22-storey", "28-floor"); none = floor bands not placed */
 const storeysOf=f=>{ const m=/(\d+)[- ](?:storey|floor)/i.exec(f.building||''); return m?+m[1]:null; };
-function axo(f,B,o){ o=o||{}; const W=o.W||620,H=o.H||520, p=B.p, cs=Math.cos(Math.PI/6), sn=Math.sin(Math.PI/6);
-  const pr=(x,y,z)=>[(x-p[0]-(y-p[1]))*cs,(-(x-p[0])-(y-p[1]))*sn-z];   /* view from the south-west, north-east up */
-  const all=[]; for(const b of B.bl){ const h=Math.max(2,b.h||4); for(let i=0;i<b.r.length;i+=2){ all.push(pr(b.r[i],b.r[i+1],0),pr(b.r[i],b.r[i+1],h)); } }
-  if(!all.length) return null;
+function axo(f,B,o){ o=o||{}; const W=900,H=640, small=!!o.small;
+  if(!B.items.length) return null;
+  const pr=(x,y,z)=>[(x-y)*0.8660,(x+y)*0.5-z];   /* iso: screen y down, larger x+y nearer the viewer */
+  /* turned so the parcel runs along the iso axes; y mirrored so the plan keeps its hand (north stays counter-clockwise of east) */
+  const turnTo=t=>{ const an=-B.ang+t*Math.PI/2, c=Math.cos(an), s=Math.sin(an); return q=>{ const x=q[0]-B.p[0], y=q[1]-B.p[1], X=x*c-y*s, Y=x*s+y*c; return [X,-Y]; }; };
+  const sil=(P,h)=>hull(P.flatMap(q=>[pr(q[0],q[1],0),pr(q[0],q[1],h)]));
+  let best=null;
+  for(let t=0;t<4;t++){ const fn=turnTo(t), its=B.items.map(it=>({it,P:ccwP(it.P.map(fn)),h:Math.max(2,it.h||4)})), me=its.find(z=>z.it===B.own); if(!me){ best={its,me:null,fn,score:0}; break; }
+    const mine=its.filter(z=>z.it.mine), tb=ccwP(hull(mine.flatMap(z=>sil(z.P,z.h)))), td=cenP(me.P), dep=td[0]+td[1]; let score=0;
+    for(const z of its){ if(z.it.tgt) continue; const c=cenP(z.P); if(c[0]+c[1]<=dep) continue; const o2=clipC(ccwP(sil(z.P,z.h)),tb); if(o2.length>2) score+=Math.abs(areaP(o2)); }
+    if(!best||score<best.score) best={its,me,fn,score,tb,dep}; }
+  const {its,me,fn}=best;
+  const all=its.flatMap(z=>z.P.flatMap(q=>[pr(q[0],q[1],0),pr(q[0],q[1],z.h)]));
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; for(const [a,b] of all){ x0=Math.min(x0,a); y0=Math.min(y0,b); x1=Math.max(x1,a); y1=Math.max(y1,b); }
-  const s=Math.min((W-20)/(x1-x0),(H-20)/(y1-y0)), ox=(W-(x1-x0)*s)/2-x0*s, oy=(H-(y1-y0)*s)/2-y0*s, S=(x,y,z)=>{ const [a,b]=pr(x,y,z); return [ox+a*s,oy+b*s]; };
-  const poly=pts=>pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
-  const depth=b=>{ const c=b.c||BD.centroid(b.r); return (c[0]-p[0])+(c[1]-p[1]); };
-  const sorted=B.bl.slice().sort((a,b)=>depth(b)-depth(a));
-  const st=storeysOf(f), fl=(f.floors&&f.floors.list)||[], isT=f.type==='tower', named=fl.length>0;
-  let svg='', label=null;
-  const ccw=r=>{ let A=0; for(let i=0;i<r.length;i+=2){ const j=(i+2)%r.length; A+=r[i]*r[j+1]-r[j]*r[i+1]; } return A>0; };
-  const prism=(b,z0,z1,fill,stroke,sw,dash,noTop)=>{ let g=''; const w=ccw(b.r)?1:-1; for(let i=0;i<b.r.length;i+=2){ const j=(i+2)%b.r.length, a=[b.r[i],b.r[i+1]], c=[b.r[j],b.r[j+1]];
-      if(w*((c[1]-a[1])*-1+(-(c[0]-a[0]))*-1)<=0) continue;   /* only the walls facing the viewer (south-west): outward normal · (−1, −1) > 0 */
-      g+=`<polygon points="${poly([S(a[0],a[1],z0),S(c[0],c[1],z0),S(c[0],c[1],z1),S(a[0],a[1],z1)])}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"${dash?' stroke-dasharray="4 3"':''}/>`; }
-    if(noTop) return g; const top=[]; for(let i=0;i<b.r.length;i+=2) top.push(S(b.r[i],b.r[i+1],z1)); g+=`<polygon points="${poly(top)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"${dash?' stroke-dasharray="4 3"':''}/>`; return g; };
-  if(B.ring){ const gr=[]; for(let i=0;i<B.ring.length;i+=2) gr.push(S(B.ring[i],B.ring[i+1],0)); svg+=`<polygon points="${poly(gr)}" fill="none" stroke="${K.ink}" stroke-width="1.1"/>`; }
-  const dOwn=B.own?depth(B.own):-1e9;
-  for(const b of sorted){ const h=Math.max(2,b.h||4), me=b===B.own;
-    if(!me&&depth(b)<dOwn-4){ const fp=[]; for(let i=0;i<b.r.length;i+=2) fp.push(S(b.r[i],b.r[i+1],0)); svg+=`<polygon points="${poly(fp)}" fill="#F6F5F2" stroke="#A7A6A1" stroke-width="0.5"/>`; continue; }   /* in front of the named building: footprint only, so it stays in view */
-    if(!me){ svg+=prism(b,0,h,'#fff',K.faint,0.5); continue; }
-    if(f.type==='standalone'){ svg+=prism(b,0,h,K.fillHall,K.dc,1.2); label='the whole building'; continue; }
-    if(f.type==='?'){ svg+=prism(b,0,h,'none',K.dc,1.4,true); label='type not confirmed: outline only'; continue; }
-    /* a tower: floors where a source names them and the storey count is published; else the whole tower in a light tint */
-    const num=fl.filter(v=>typeof v==='number'), below=fl.filter(v=>typeof v!=='number');
-    if(named&&st&&num.length){ const fh=h/st, ns=num.sort((a,c)=>a-c); let z=0;   /* bottom to top: white walls, each named floor as a band, white walls above, then the roof */
-      for(const n of ns){ const z0=(n-1)*fh, z1=n*fh; if(z0>z) svg+=prism(b,z,z0,'#fff',K.faint,0.6,false,true); svg+=prism(b,z0,z1,K.fillHall,K.dc,1.1,false,true); z=z1; }
-      svg+=prism(b,z,h,'#fff',K.faint,0.6);
-      label=`floor${num.length>1?'s':''} ${num.join(', ')} of ${st}, drawn at the building’s height × floor ÷ storeys (our reading)`; }
-    else if(named&&below.length&&!num.length){ svg+=prism(b,0,Math.min(3,h),K.fillHall,K.dc,1.1,false,true); svg+=prism(b,Math.min(3,h),h,'#fff',K.faint,0.6); label=`${below.join(', ')} (below grade; drawn as a band at ground level)`; }
-    else { svg+=prism(b,0,h,K.fillSup,K.dcSup,0.9); label=named?`data centre inside: floors ${fl.join(', ')} named, the storey count not published, so not placed`:'data centre inside: floors not published'; } }
-  if(!B.own) label='no building footprint found at this location in the City data (?)';
-  return {svg:`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(f.name)}: the block in 3-D massing">${svg}</svg>`,label}; }
+  const padR=small?20:260, k=Math.min((W-padR-30)/(x1-x0),(H-90)/(y1-y0)), ox=30-x0*k, oy=(H-60-(y1-y0)*k)/2-y0*k;
+  const S=(x,y,z)=>{ const q=pr(x,y,z); return [ox+q[0]*k,oy+q[1]*k]; };
+  const pts=Q=>Q.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
+  const ply=(Q,fill,st,sw,dash)=>`<polygon points="${pts(Q)}" fill="${fill}" stroke="${st}" stroke-width="${sw}"${dash?` stroke-dasharray="${dash}"`:''} stroke-linejoin="round"/>`;
+  const ln=(a,b,col,sw)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${col}" stroke-width="${sw}"/>`;
+  const INK=K.ink||'#18191B', MUTE=K.mute||'#75746F', st=storeysOf(f), fl=(f.floors&&f.floors.list)||[], num=fl.filter(v=>typeof v==='number').sort((a,b)=>a-b), below=fl.filter(v=>typeof v!=='number');
+  let svg=`<rect width="${W}" height="${H}" fill="#F6F5F2"/>`, ghosts='', lab='', label=null;
+  if(B.par){ const pp=ccwP(B.par.map(fn)); svg+=ply(pp.map(q=>S(q[0],q[1],0)),'#FFFFFF',INK,1,'8 3 1.5 3'); }
+  const mine=its.filter(z=>z.it.mine), tb=me?ccwP(hull(mine.flatMap(z=>sil(z.P,z.h)))):null, tA=tb?Math.abs(areaP(tb)):0, dep=me?(cenP(me.P)[0]+cenP(me.P)[1]):-1e9;
+  const ek=(a,b)=>Math.round(a[0]*20)+','+Math.round(a[1]*20)+'>'+Math.round(b[0]*20)+','+Math.round(b[1]*20), inner=new Set(); for(const z of mine) for(let i=0;i<z.P.length;i++) inner.add(ek(z.P[i],z.P[(i+1)%z.P.length]));
+  const mode=!me?null:f.type==='standalone'?'whole':f.type==='?'?'outline':(fl.length&&st&&num.length)?'floors':(below.length&&!num.length)?'below':'tint';
+  for(const z of its.slice().sort((a,b)=>(cenP(a.P)[0]+cenP(a.P)[1])-(cenP(b.P)[0]+cenP(b.P)[1]))){ const P=z.P, h=z.h, isMe=!!z.it.mine, c=cenP(P);
+    if(!z.it.tgt&&me&&c[0]+c[1]>dep){ const o2=clipC(ccwP(sil(P,h)),tb); if(o2.length>2&&Math.abs(areaP(o2))>0.02*tA){   /* would hide the named building */
+        svg+=ply(P.map(q=>S(q[0],q[1],0)),'#ECEBE7','#A7A6A1',0.5); ghosts+=ply(P.map(q=>S(q[0],q[1],h)),'none','#A7A6A1',0.5,'3 2'); continue; } }
+    const own=z.it.tgt, ec=own?INK:'#8A8985', ew=own?0.7:0.5; let g='';
+    for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], nx=b[1]-a[1], ny=-(b[0]-a[0]); if(nx+ny<=0) continue; if(isMe&&inner.has(ek(b,a))) continue;
+      const wall=nx>ny?'#F3F2EE':'#E3E2DD';
+      if(isMe&&mode==='whole'){ g+=ply([S(a[0],a[1],0),S(b[0],b[1],0),S(b[0],b[1],h),S(a[0],a[1],h)],BLUE,INK,0.7); continue; }
+      if(isMe&&mode==='tint'){ g+=ply([S(a[0],a[1],0),S(b[0],b[1],0),S(b[0],b[1],h),S(a[0],a[1],h)],K.fillSup||'#E4EAF2',INK,0.7); continue; }
+      g+=ply([S(a[0],a[1],0),S(b[0],b[1],0),S(b[0],b[1],h),S(a[0],a[1],h)],isMe&&mode==='outline'?'none':wall,isMe&&mode==='outline'?BLUE:ec,ew,isMe&&mode==='outline'?'4 3':null);
+      if(isMe&&mode==='floors'){ const fh=h/st; for(let q=1;q<st;q++) g+=ln(S(a[0],a[1],q*fh),S(b[0],b[1],q*fh),'#C9C8C3',0.25);
+        for(const n of num) g+=ply([S(a[0],a[1],(n-1)*fh),S(b[0],b[1],(n-1)*fh),S(b[0],b[1],n*fh),S(a[0],a[1],n*fh)],BLUE,INK,0.5); }
+      if(isMe&&mode==='below') g+=ply([S(a[0],a[1],0),S(b[0],b[1],0),S(b[0],b[1],Math.min(3,h)),S(a[0],a[1],Math.min(3,h))],BLUE,INK,0.5); }
+    const roof=isMe&&mode==='whole'?BLUE:isMe&&mode==='outline'?'none':'#FFFFFF';
+    svg+=g+ply(P.map(q=>S(q[0],q[1],h)),roof,isMe&&mode==='outline'?BLUE:ec,own?0.9:0.5,isMe&&mode==='outline'?'4 3':null);
+    if(z===me){ const MP=mine.flatMap(w=>w.P), sx=MP.reduce((m2,q)=>S(q[0],q[1],0)[0]>S(m2[0],m2[1],0)[0]?q:m2,MP[0]), fh=st?h/st:h;
+      const zl=mode==='floors'?(num[0]-0.5)*fh:mode==='below'?1.5:h*0.6, [lx,ly]=S(sx[0],sx[1],zl);
+      const op=f.operator?String(f.operator).split(' (')[0]:'', nm0=op&&op.length<=20&&!/['’"]/.test(op)&&!String(f.name).includes(op)?op+' '+f.name:f.name, nm=nm0.length>30?nm0.slice(0,29)+'…':nm0, t1=mode==='floors'?`Floor${num.length>1?'s':''} ${num.join(', ')}: ${nm}`:nm;
+      const t2=[f.addr,(/(Harbour Centre|TELUS Garden|[A-Z][\w’']+ (?:Centre|Tower|Building|Place))/.exec(f.building||'')||[])[1]].filter(Boolean).join(', ');
+      if(!small) lab=ln([lx,ly],[W-230,ly],INK,0.8)+`<text x="${W-222}" y="${(ly-4).toFixed(1)}" font-size="14" fill="${INK}">${esc(t1)}</text>`+(t2?`<text x="${W-222}" y="${(ly+13).toFixed(1)}" font-size="12" fill="${MUTE}">${esc(t2)}</text>`:'');
+      label=mode==='floors'?`Floor${num.length>1?'s':''} ${num.join(', ')} of ${st}, our reading`:mode==='whole'?'the whole building':mode==='outline'?'type not confirmed: outline only':mode==='below'?`${below.join(', ')} (below grade; drawn as a band at ground level)`:fl.length?`data centre inside: floors ${fl.join(', ')} named, the storey count not published, so not placed`:'data centre inside: floors not published'; } }
+  svg+=ghosts+lab;
+  if(!me) label='no building footprint found at this location in the City data (?)';
+  const src=B.lidar?`Buildings: City of Vancouver LiDAR 2022, within ${R3} m. Buildings that would hide it: footprint and dashed outline.`:`Buildings: City of Edmonton footprints and heights, within ${R3} m. Buildings that would hide it: footprint and dashed outline.`;
+  const nb=me?`Named building: ${B.par?'its parcel at the LiDAR height (tower and podium not separated yet)':'the footprint at the facility’s location'}. ${label.charAt(0).toUpperCase()+label.slice(1)}.`:label;
+  if(!small) svg+=`<text x="${W-20}" y="${H-30}" font-size="12" fill="${MUTE}" text-anchor="end">${esc(src)}</text><text x="${W-20}" y="${H-12}" font-size="12" fill="${MUTE}" text-anchor="end">${esc(nb)}</text>`;
+  return {svg:`<svg viewBox="0 0 ${W} ${H}" width="${o.w||'100%'}" font-family="'IBM Plex Sans', system-ui, sans-serif" role="img" aria-label="Axonometric of ${esc(f.addr||f.name)} among its neighbours${mode==='floors'?', the data centre floor highlighted':''}">${svg}</svg>`,label,src,nb}; }
 
+PICK._block=block; PICK._axo=axo;   /* for the checks */
 /* ---------- R3 What it is ---------- */
 const v=(t)=>t&&String(t).trim()&&String(t).trim()!=='?'?t:NP;
 function factRows(f){ const imp=/implausible/i.test(f.sizeText||'')?'; the inventory flags these figures: “implausible ratio”':'';
   const sz=(f.size?`${f.size.mw[0]===f.size.mw[1]?f.size.mw[0]:f.size.mw[0]+'–'+f.size.mw[1]} MW (${f.size.scope}; ${f.size.label})`:v(f.sizeText))+imp;
   return [['Name',f.name],['Operator',v(f.operator)],['Status',v(f.statusText)],['Address',(f.addr||'address not confirmed')+(f.addrNote?' ('+f.addrNote+')':'')+(f.placed?' · '+f.placed:'')+(f.alsoTenant?' · '+f.alsoTenant:'')],
     ['Type',TYPE[f.type]+(f.typeNote?' ('+f.typeNote+')':'')+(f.fenced?' · fenced site: '+f.fenced.text:'')],['Floors',f.floors?f.floors.text:(f.type==='standalone'?'the whole building':NP)],
-    ['Size',sz],['Cooling and backup power',v(f.cooling)],['Heat reuse',v(f.heat)],['Who it serves',v(f.serves)],['Opened',v(f.opened)],['Building',v(f.building)]]; }
+    ['Size',sz],['Cooling and backup power',v(f.cooling)],['Heat reuse',v(f.heat)],['Who it serves',v(f.serves)],['Opened',v(f.opened)],['Building',v(f.building)]].map((r,i)=>i?[r[0],C.words(r[1])]:r); }   /* audit C12: source codes in words, no register ids or code names in the rows */
 const srcLine=f=>'This facility’s sources (register ids): '+(f.src||[]).concat((f.size&&f.size.src)||[],(f.floors&&f.floors.src)||[],(f.fenced&&f.fenced.src)||[]).filter((s,i,a)=>a.indexOf(s)===i).join(', ')+'.';
 C.add(T,'What it is',{async build(x){
   const f=await picked(x); if(!f) return {draw:'<p class="f1v-empty">No data centre on record in this city.</p>'};
   const B=f.inMap?await block(f):null, A=B?axo(f,B):null;
-  const draw=A?`<figure class="f1c-res-axo">${A.svg}<figcaption>${esc(f.name)}: ${esc(A.label||'')}. Neighbouring buildings white${B.ring?'; the lot outlined':''}; buildings in front drawn as footprints. ${B.lidar?'Buildings: City of Vancouver LiDAR 2022 (measured heights); a LiDAR outline can join a tower and its podium (not separated yet), so the band runs round both.':'Footprints and heights: City open data.'}</figcaption></figure>`
+  const draw=A?`<figure class="f1c-res-axo">${A.svg}</figure>`
     :`<div style="max-width:560px;margin:40px auto"><p class="f1v-empty" style="text-align:left">${esc(f.name)} is not on the map: ${esc(f.addrNote||f.where||'its location is not confirmed')}.</p></div>`;
-  return {noZoneFlag:true,draw,lead:`${f.name}${f.operator?', run by '+f.operator:''}: ${STAT[f.status]||f.status}. ${TYPE[f.type].charAt(0).toUpperCase()+TYPE[f.type].slice(1)}. Facts as the sources state them; missing ones are “not published”.`,
+  return {noZoneFlag:true,draw,lead:`${f.name}${f.operator?', run by '+C.words(f.operator):''}: ${STAT[f.status]||f.status}. ${TYPE[f.type].charAt(0).toUpperCase()+TYPE[f.type].slice(1)}. Facts as the sources state them; missing ones are “not published”.`,
     rows:factRows(f).map(r=>[r[0],esc(r[1])]),
     src:[SRC_INV,SRC_PLACE,srcLine(f),'3-D massing: Vancouver, the City of Vancouver LiDAR 2022 buildings with measured heights (tool tiles lid_*, checks/tests/lidar_to_tiles.py); Edmonton, the City footprints the tool holds. Floors drawn only where a source names them and gives the storey count, at height × floor ÷ storeys (our reading; J.B. 11 Nov 2026).'],missing:[]}; }});
 
@@ -156,7 +215,7 @@ C.add(T,'What it is',{async build(x){
 const SCOPE=s=>/IT/.test(s)?'MW of IT':/grid|requested|allocation/.test(s)?'MW requested or allocated from the grid':'MW of site capacity or design';
 C.add(T,'Report',{async build(x){
   const f=await picked(x); if(!f) return {draw:'<p class="f1v-empty">No data centre picked.</p>'};
-  const B=f.inMap?await block(f):null, A=B?axo(f,B,{W:300,H:250}):null, city=f.city;
+  const B=f.inMap?await block(f):null, A=B?axo(f,B,{small:true,w:300}):null, city=f.city;
   const rows=factRows(f).map(r=>`<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
   /* page 3: one bar chart of the facilities in this city that publish the same kind of figure */
   let p3='<p class="ld">This facility publishes no size figure: no chart.</p>';

@@ -80,6 +80,8 @@
 .f1v-panel h2{font-size:var(--f-t-title);font-weight:300;line-height:1.2;margin:0}
 .f1v-panel .lead{font-size:14px;line-height:1.55;color:var(--f-ink2);margin:0}
 .f1v-panel .grow{flex:1 1 auto}
+/* audit A1 (12 Nov 2026): Back and Next pinned to the bottom of the panel; only the rows above scroll */
+.f1v-foot{position:sticky;bottom:-26px;margin:auto -36px -26px;padding:14px 36px 22px;background:var(--f-panel);border-top:1px solid var(--f-hair);display:flex;flex-direction:column;gap:8px;z-index:3}
 .f1v-nav{display:flex;align-items:center;justify-content:space-between}
 .f1v-back{background:none;border:0;font-size:var(--f-t-body);color:var(--f-ink2);padding:0}
 .f1v-back[disabled]{color:var(--f-faint);cursor:default}
@@ -108,6 +110,7 @@
   .f1v-main{padding:16px;flex:0 0 auto;overflow:visible}
   .f1v-body{flex:0 0 auto}
   .f1v-panel{flex:0 0 auto;border-left:0;border-top:1px solid var(--f-hair);padding:22px 16px}
+  .f1v-foot{bottom:0;margin:auto -16px -22px;padding:12px 16px 16px}
   .f1v-strip{padding:10px 16px}
 }
 /* ---------- How it works: the logic view (job sheet §3d) ---------- */
@@ -182,10 +185,12 @@
 .f1c-hero .v.red{color:var(--f-red)}
 .f1c-hero .l{font-size:11.5px;color:var(--f-mute);margin-top:4px}
 [data-fig]{cursor:pointer}[data-fig]:hover .v,dd[data-fig]:hover{color:var(--f-dc,#3268A6)}[data-fig]:focus-visible{outline:1px solid #3268A6;outline-offset:2px}
-.f1c-rows{display:grid;grid-template-columns:auto 1fr;gap:0;margin:0;border-top:1px solid var(--f-rule)}
+/* audit A2 (12 Nov 2026): labels wrap within at most 45 % of the row; the value column never under 120 px, values never clipped */
+.f1c-rows{display:grid;grid-template-columns:fit-content(45%) minmax(120px,1fr);gap:0;margin:0;border-top:1px solid var(--f-rule)}
 .f1c-rows dt,.f1c-rows dd{margin:0;padding:8px 0;border-bottom:1px solid var(--f-hair);font-size:13px}
 .f1c-rows dt{color:var(--f-mute);padding-right:16px}
-.f1c-rows dd{color:var(--f-ink);text-align:right}
+.f1c-rows dd{color:var(--f-ink);text-align:right;min-width:0;overflow-wrap:anywhere}
+.f1c-rows dt{min-width:0;overflow-wrap:break-word}
 .f1c-q{color:var(--f-red);font-weight:400}
 .f1c-qn{display:block;font-size:11.5px;color:var(--f-red)}
 .f1c-m{border-bottom:1px solid var(--f-hair);padding:10px 0}
@@ -296,7 +301,8 @@
 .f1c-res-list button{background:none;border:0;border-bottom:1px solid var(--f-hair,#ECECEC);width:100%;text-align:left;padding:6px 2px;font:inherit;color:var(--f-ink2);cursor:pointer}
 .f1c-res-list button.on{color:var(--f-ink);background:#F4F3F0}
 .f1c-res-list em{font-style:normal;color:var(--f-mute)}
-.f1c-res-axo{margin:0;display:flex;flex-direction:column;align-items:center}
+.f1c-res-axo{margin:0;width:100%;max-width:1000px;align-self:center}
+.f1c-res-axo svg{display:block;width:100%;height:auto;max-height:calc(100vh - 300px)}
 .f1c-res-axo figcaption{font-size:12px;color:var(--f-mute);max-width:620px;margin-top:6px}
 .f1c-res-t{border-collapse:collapse;font-size:10px;width:100%}
 .f1c-res-t th{text-align:left;font-weight:500;color:var(--f-mute);padding:2px 6px 2px 0;vertical-align:top;width:28%}
@@ -319,3 +325,11 @@ div:has(> .f1p-set) > .f1c-key{display:none}
 /* J.B. 12 Nov 2026: the city is chosen in step 1; the header shows it as text, the name links back to step 1 */
 .f1v-cityname{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-decoration-color:var(--f-rule)}
 .f1v-chips .f1v-city{margin-right:10px}
+
+/* audit C13: register ids as a small grey tag */
+.f1c-rid{font-size:10.5px;color:var(--f-faint);font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+/* Municipal report pages (audit B10): card drawings fitted to the letter page */
+.f1r-dr{max-height:420px;overflow:hidden;margin:6px 0 10px}
+.f1r-dr svg,.f1r-dr img{max-width:100%;height:auto}
+.f1r-dr .f1c-mua-maps{display:flex;gap:10px}

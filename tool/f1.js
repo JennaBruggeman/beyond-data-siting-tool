@@ -34,7 +34,7 @@ function howSvg(){ /* the logic in eight parts (board Final_F_Landing): boxes an
   return `<svg viewBox="0 0 630 270" role="img" aria-label="How the tool's logic runs: lot and zoning feed size, equipment and neighbours, which feed heat and rules, which feed the report">${E.map(path).join('')}${Object.values(N).map(([x,y,t])=>`<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="3" fill="#fff" stroke="#16181B" stroke-width="1"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-size="12.5" fill="#16181B" font-family="IBM Plex Sans,system-ui,sans-serif">${t}</text>`).join('')}</svg>`; }
 function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=document.createElement('div'); L.id='f1';
   L.innerHTML=`<div class="f1-wrap">
-   <header class="f1-head"><a class="f1-app" href="#" data-go="top">Beyond Data</a><nav class="f1-nav" aria-label="Site"><a href="#f1-work">Templates</a><a href="#" data-go="typ">Typologies</a><a href="#" data-go="logic">How it works</a><a href="#" data-go="logic">Sources</a><a href="#" class="f1-old" data-go="old">Old tool</a></nav></header>
+   <header class="f1-head"><a class="f1-app" href="#" data-go="top">Beyond Data</a><nav class="f1-nav" aria-label="Site"><a href="#f1-work">Templates</a><a href="#" data-go="typ">Typologies</a><a href="#" data-go="logic">How it works</a></nav></header>
    <section class="f1-hero"><div><h1>What could a data centre give the city around it?</h1>
      <p class="f1-lead">Test real lots in Vancouver and Edmonton: what a data centre could share with its neighbours, and what stands in the way.</p>
      <div class="f1-acts"><button class="f1-btn" data-go="work">Choose a template</button><button class="f1-link" data-go="logic">How it works</button><button class="f1-link quiet" data-go="intro">Watch the intro</button></div></div>
@@ -45,7 +45,7 @@ function landing(){ let L=document.getElementById('f1'); if(L) L.remove(); L=doc
       <div class="meta">${t.cards.length} steps<br>report</div><img src="f1/img/${t.img}.png" alt="${t.name}: the tool's 3-D view of 339 1st Ave E, Vancouver" loading="lazy"></div>`).join('')}
     <div class="f1-typstrip"><span>8 typologies: data centres that share their building with the city</span><button data-go="typ">See the typologies →</button></div></section>
    <section class="f1-how" id="f1-how"><div><h2>How it works</h2><p>One logic runs under all four templates. Every number in it is tied to a source and a check status, so a reader can follow any figure back to where it came from.</p><button class="f1-link" data-go="logic">Open the interactive logic diagram</button></div>${howSvg()}</section>
-   <footer class="f1-foot"><span>Beyond Data · ARCH 540, UBC School of Architecture and Landscape Architecture · 2026</span><span>Data: City of Vancouver and City of Edmonton open data. Maker and operator figures are labelled as claims.</span></footer></div>`;
+   <footer class="f1-foot"><span>Beyond Data · ARCH 540, UBC School of Architecture and Landscape Architecture · 2026</span><span>Data: City of Vancouver and City of Edmonton open data. Maker and operator figures are labelled as claims.</span><a href="#" class="f1-old" data-go="old">Archive: the earlier tool</a></footer></div>`;
   document.body.appendChild(L);
   L.addEventListener('click',e=>{ const g=e.target.closest('[data-go],[data-start],[data-see],[data-logic]'); if(!g) return;
     if(g.dataset.logic){ e.preventDefault(); if(BD.f1logic) BD.f1logic.open({tab:g.dataset.logic}); return; } /* F5 1(b), 8 Nov 2026: the template's interactive logic diagram */
@@ -74,14 +74,16 @@ function viewer(id,opt){ V.t=TPL.find(x=>x.id===id); V.i=0; V.pick=!!(opt&&opt.p
         BD.f1logic.open({tab:V.t.tab,label:c.t+' · '+(fg.dataset.fig||''),ids,lot:V.where,sel:k||(ids.length===1?ids[0]:null),val:(fg.querySelector('.v')||fg).innerText.replace(/\s+/g,' ').trim()}); return; } /* F5 1(c), 8 Nov 2026; F6: a figure with one part opens at that part */
       const b=e.target.closest('button'); if(!b) return; const d=b.dataset;
       if(d.x!=null){ W.remove(); return; } if(d.how){ const c=V.t.cards[V.i]; if(BD.f1logic) BD.f1logic.open(d.how==='all'?{tab:V.t.tab}:{tab:V.t.tab,label:c.t,ids:BD.f1logic.cardIds(c.t,V.t.tab),lot:V.where}); return; } if(d.city){ if(d.city!==V.city){ V.city=d.city; loadLot(V.city); } return; }
-      if(d.relot!=null){ V.pick=true; V.hits=[]; draw(); return; } if(d.pcity){ V.pcity=d.pcity; V.hits=[]; draw(); return; }
+      if(d.relot!=null){ V.pick=true; V.hits=[]; draw(); return; } if(d.pcity){ V.pcity=d.pcity; V.hits=[]; if(V.t.id==='resident'){ V.city=d.pcity; V.pick=false; V.own=null; V.i=0; draw(); loadLot(V.city); return; } draw(); return; }   /* audit B7: Resident is not about a lot: the city, then R1 */
       if(d.hit!=null){ const h=V.hits[+d.hit]; if(!h) return; V.own={city:V.pcity,tile:h[1],id:h[2],label:h[0]}; V.city=V.pcity; V.pick=false; V.i=0; draw(); loadLot(V.city); return; }
       if(d.to!=null){ V.i=+d.to; draw(); return; } if(d.chap!=null){ V.i=V.t.cards.findIndex(c=>c.chap===d.chap); draw(); return; }
       if(d.step==='back'&&V.i>0){ V.i--; draw(); } if(d.step==='next'&&V.i<V.t.cards.length-1){ V.i++; draw(); } });
     document.addEventListener('keydown',e=>{ if(!document.getElementById('f1v')) return; if(e.key==='Escape') document.getElementById('f1v').remove(); if(e.key==='ArrowRight'&&V.i<V.t.cards.length-1){ V.i++; draw(); } if(e.key==='ArrowLeft'&&V.i>0){ V.i--; draw(); } }); }
   draw(); if(!V.pick) loadLot(V.city); }
 /* the lot picker (milestone 1): city, then an address from the City's records (the old tool's search, BD.addrHits) */
-function pickHtml(){ return `<div class="f1v-pick"><h2>Choose a lot</h2><p class="lead">${esc(V.t.name)}: pick the city, then type an address. The cards then run on that lot.</p>
+function pickHtml(){ if(V.t.id==='resident') return `<div class="f1v-pick"><h2>Choose a city</h2><p class="lead">Resident: pick the city to see every data centre on record there, then find one.</p>
+  <div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-pcity="${l.city}">${l.name}</button>`).join('')}</div></div>`;
+  return `<div class="f1v-pick"><h2>Choose a lot</h2><p class="lead">${esc(V.t.name)}: pick the city, then type an address. The cards then run on that lot.</p>
   <div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-pcity="${l.city}" aria-pressed="${l.city===V.pcity}">${l.name}</button>`).join('')}</div>
   <input id="f1pick-q" type="search" placeholder="${V.pcity==='van'?'e.g. 339 1st Ave E':'e.g. 64 Airport Rd NW'}" autocomplete="off" aria-label="Address">
   <ul class="f1v-hits" role="listbox">${V.hits.map((h,k)=>`<li><button data-hit="${k}">${esc(h[0])}</button></li>`).join('')}</ul>
@@ -89,19 +91,22 @@ function pickHtml(){ return `<div class="f1v-pick"><h2>Choose a lot</h2><p class
 function wirePick(W){ const q=W.querySelector('#f1pick-q'); if(!q) return; q.focus(); let tm=null;
   q.addEventListener('input',()=>{ clearTimeout(tm); tm=setTimeout(async()=>{ const v=q.value.trim(); if(v.length<3||!BD.addrHits) return; const r=await BD.addrHits(V.pcity,v); V.hits=r.hits||[]; V.near=!!r.near;
     const ul=W.querySelector('.f1v-hits'); if(ul) ul.innerHTML=V.hits.length?V.hits.map((h,k)=>`<li><button data-hit="${k}">${esc(h[0])}</button></li>`).join(''):`<li class="sub">No match in ${V.pcity==='van'?'Vancouver':'Edmonton'}: try the number and street.</li>`; },180); }); }
+/* Resident header (audit B7): the city, then the facility once one is picked (cards 3 and 4) */
+function resWhere(){ const cn=(LOTS[V.city]||{}).name||'', pk=BD.f1res&&BD.f1res.pick&&BD.f1res.pick[V.city], f=pk&&((BD.data.facilities||{})[V.city]||[]).find(g=>g.id===pk);
+  return `<button class="f1v-cityname" data-to="0" title="Change the city: back to step 1">${esc(cn)}</button>${f&&V.i>=2?' / '+esc(f.name):''}`; }
 function draw(){ const W=document.getElementById('f1v'); if(!W||!V.t) return;
   if(V.pick){ W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${V.t.name}</span><span class="f1v-where"></span><button class="f1v-x" data-x aria-label="Close">Close</button></header><div class="f1v-body">${pickHtml()}</div>`; wirePick(W); return; }
   const t=V.t, c=t.cards[V.i], n=t.cards.length, ci=t.chaps.indexOf(c.chap), spec=BD.f1cards&&BD.f1cards.get(t.id,c.t);
   W.innerHTML=`<header class="f1v-head"><span class="f1-app">Beyond Data</span><span class="tpl">${t.name}</span>
      <nav class="f1v-chap" aria-label="Chapters">${t.chaps.map((h,k)=>`<button data-chap="${esc(h)}" class="${k<ci?'past':k===ci?'now':''}"${k===ci?' aria-current="step"':''}>${esc(h)}</button>`).join('')}</nav>
-     <span class="f1v-where">${V.addr?`<button class="f1v-cityname" data-to="0" title="Change the city: back to step 1">${esc((LOTS[V.city]||{}).name||'')}</button> / ${esc(V.addr)}`:esc(V.where)}</span>
-     ${V.own?`<button class="f1v-how" data-relot>Change lot</button>`:''}
+     <span class="f1v-where">${t.id==='resident'?resWhere():V.addr?`<button class="f1v-cityname" data-to="0" title="Change the city: back to step 1">${esc((LOTS[V.city]||{}).name||'')}</button> / ${esc(V.addr)}`:esc(V.where)}</span>
+     ${V.own&&t.id!=='resident'?`<button class="f1v-how" data-relot>Change lot</button>`:''}
      <button class="f1v-how" data-how="all">How it works</button><button class="f1v-x" data-x aria-label="Close the cards">Close</button></header>
-   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips">${V.i===0&&!V.own?`<div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>`:''}<span class="f1v-chip">${spec?esc(V.own?'Your lot':(spec.chip||'Example lot · read-only')):'Preview · not built yet'}</span></div>
+   <div class="f1v-body"><main class="f1v-main"><div class="f1v-chips">${V.i===0&&!V.own?`<div class="f1v-city" role="group" aria-label="City">${Object.values(LOTS).map(l=>`<button data-city="${l.city}" aria-pressed="${l.city===V.city}">${l.name}</button>`).join('')}</div>`:''}${t.id==='resident'?'':spec?(V.own?'<span class="f1v-chip">Your lot</span>':`<span class="f1v-chip">${esc(spec.chip||('Example lot: '+(V.addr||V.where||'')+', '+((LOTS[V.city]||{}).name||'')))}</span><button class="f1v-how" data-relot>Use my own lot</button>`):'<span class="f1v-chip">Preview · not built yet</span>'}</div>
      <div class="f1v-draw">${spec?'<p class="f1v-empty">Drawing…</p>':''}${spec?'':`<p class="f1v-empty">This card’s drawing and figures are built in ${STEPNAME[t.step]} of the site build. It will read the example lot above and what the cards before it chose.</p>`}</div>
      <button class="f1v-how" data-how="card">This card in the interactive logic diagram</button><details class="f1v-src"><summary>Sources and assumptions</summary><p>Nothing on this card yet. Every figure will come from the tool, with its source here, or show as a red “?”.</p></details></main>
     <aside class="f1v-panel"><div class="chap">${esc(c.chap)}</div><h2>${esc(c.t)}</h2><div class="f1c-body">${spec?'':`<p class="lead">${t.name} · card ${V.i+1} of ${n}.</p>`}</div><div class="grow"></div>
-     <div class="f1v-nav"><button class="f1v-back" data-step="back"${V.i?'':' disabled'}>Back</button><button class="f1-btn" data-step="next"${V.i<n-1?'':' disabled'}>${V.i<n-1?'Next':'Last card'}</button></div><div class="f1v-no">${V.i+1} / ${n}</div></aside></div>
+     <div class="f1v-foot"><div class="f1v-nav"><button class="f1v-back" data-step="back"${V.i?'':' disabled'}>Back</button><button class="f1-btn" data-step="next"${V.i<n-1?'':' disabled'}>${V.i<n-1?'Next':'Last card'}</button></div><div class="f1v-no">${V.i+1} / ${n}</div></div></aside></div>
    <nav class="f1v-strip" aria-label="All cards">${t.cards.map((x,k)=>`<button data-to="${k}"${k===V.i?' aria-current="true"':''}><span class="n">${k+1}</span><span>${esc(x.t)}</span></button>`).join('')}</nav>`;
   const cur=W.querySelector('.f1v-strip [aria-current="true"]'), sp=W.querySelector('.f1v-strip'); if(cur&&sp) sp.scrollLeft=Math.max(0,cur.offsetLeft-sp.clientWidth/2+cur.offsetWidth/2); /* the strip scrolls to the card; the page does not move */
   /* a built card (f1cards.js) draws once the example lot is loaded; a newer draw wins */

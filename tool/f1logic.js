@@ -28,7 +28,7 @@ function diagram(){ const keys=Object.keys(L.nodes).filter(shown).sort((a,b)=>OR
   const st=L.stages.map(s=>s[0]), cols={}; st.forEach(s=>cols[s]=[]); keys.forEach(k=>(cols[L.nodes[k].s]||(cols[L.nodes[k].s]=[])).push(k));
   const bw=150, bh=36, gy=8, cw=184, top=52, P={}; let H=0;
   st.forEach((s,i)=>(cols[s]||[]).forEach((k,j)=>{ P[k]=[16+i*cw, top+j*(bh+gy)]; H=Math.max(H,top+(j+1)*(bh+gy)); }));
-  const W=16+st.length*cw; let ed='', el='';
+  const W=16+st.length*cw+140; let ed='', el='';
   for(const k of keys){ const [x2,y2]=P[k]; for(const q of visParents(k,V)){ const [x1,y1]=P[q], sx=x1+bw, sy=y1+bh/2, ex=x2, ey=y2+bh/2, m=(sx+ex)/2;
     const d=`M${sx} ${sy}C${m} ${sy} ${m} ${ey} ${ex} ${ey}`; if(A.has(k)&&A.has(q)) el+=`<path d="${d}"/>`; else ed+=`<path d="${d}"/>`; } }
   const box=k=>{ const n=L.nodes[k], [x,y]=P[k], sel=S.sel===k, lit=A.has(k), gap=n.q==null||n.q===0, ln=wrap(n.n+(gap?' ?':''),20);

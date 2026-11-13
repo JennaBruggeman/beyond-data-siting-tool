@@ -270,7 +270,7 @@ C.add(T,'Report',{async build(x){
   const draw=`<div class="${NS}wrap"><div class="${NS}pages" tabindex="0" aria-label="The report's pages">${list||`<p class="f1v-empty">The report pages could not be drawn${err?': '+esc(err):''}.</p>`}</div>
     <p class="f1c-note">${pages.length} letter pages, drawn by the tool from this lot and the picks above. Scroll sideways for the rest.</p><button type="button" class="${NS}btn" onclick="window.print()">Print the report</button></div>`;
   const notBuilt=plan.filter(q=>!pages.some(p=>norm(info(p).t)===norm(q.title))&&q.id!=='sources'&&q.id!=='spec');
-  return {noZoneFlag:false,draw,lead:`The Engineering report has ${plan.length} sections in tool/templates.json; the tool draws ${pages.length} pages for this lot.`,
+  return {noZoneFlag:false,draw,lead:`The report has ${pages.length} pages for this lot.`,
     hero:[{v:String(pages.length),l:'pages drawn for this lot'},{v:String(plan.length),l:'sections in the report plan'}],
     rows:[...plan.map((q,i)=>[`${String(i+1).padStart(2,'0')} ${q.title}`,q.what]),['Export','Print or save as PDF (window.print)']],
     more:[['Print',`<p>The print button opens the browser’s print dialog; choose “Save as PDF” there. The tool’s own report view also saves a PDF with selectable sources (report3.js, jsPDF); it is not wired to these cards.</p>`],...(notBuilt.length?[['Sections without a page here',`<p>${notBuilt.map(q=>esc(q.title)).join(', ')}.</p>`]]:[]),['Could become',`<p>One page for each option picked in the Opportunities step; none is picked on this example lot, so none is drawn.</p>`]],

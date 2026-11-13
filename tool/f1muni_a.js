@@ -207,7 +207,7 @@ C.add(T,'Industrial land and jobs',{async build(x){
   const a=mapSvg(m,st,sel,city,bb,420,300,null), c=mapSvg(m,st,sel,city,close,520,300,[x.addr.length>22?x.addr.slice(0,22)+'…':x.addr,x.zone+' · '+C.n0(sel.lotArea)+' m²']);
   const reg=`<div class="f1c-mua-reg"><b>?</b>Regional industrial-land map<br>(${city==='van'?'Metro 2050 Industrial and Employment land':'Edmonton Metropolitan Region Growth Plan'})<br>not in the tool yet</div>`;
   const qj=C.q('not in the tool yet'), qd=C.q('needs the map layers (layer, date, licence)');
-  const D='draft: J.B. to confirm', MVG='Metro 2050 Implementation Guideline (Nov 2023)', RTS='Council report RTS 15772, 31 Oct 2023', DP='Edmonton District Policy (Apr 2026 consolidation)';
+  const D='our reading', MVG='Metro 2050 Implementation Guideline (Nov 2023)', RTS='Council report RTS 15772, 31 Oct 2023', DP='Edmonton District Policy (Apr 2026 consolidation)';
   const POL=city==='van'?[
    ['Industrial land is for','“Land uses and activities in Industrial areas should be predominantly industrial.” Residential “not intended”; “limited industrial-serving commercial uses” are appropriate.',MVG+', s. 2.0 p. 4; guidance to 2.2.9 c) iii) p. 8'],
    ['Employment land is for','“intended for light industrial, commercial” and other employment uses.',MVG+', s. 2.0 p. 4'],
@@ -221,9 +221,9 @@ C.add(T,'Industrial land and jobs',{async build(x){
   const pol=`<div style="width:100%;margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--f-mute);border-bottom:1px solid var(--f-ink);padding-bottom:5px"><span>WHAT THE POLICIES SAY ABOUT THIS LAND</span><span>${D}</span></div>${POL.map(r=>`<div style="display:grid;grid-template-columns:150px 1fr 280px;gap:16px;padding:5px 0;border-bottom:1px solid var(--f-hair);font-size:12px;line-height:1.45"><span style="color:var(--f-mute)">${esc(r[0])}</span><span style="color:var(--f-ink2)">${esc(r[1])}</span><span style="color:var(--f-mute)">${esc(r[2])}</span></div>`).join('')}</div>`;
   const draw=`<div class="f1c-mua-maps"><figure><figcaption>${CITYN[city]}</figcaption>${a.svg}</figure><figure><figcaption>The lot, ${C.n1(2*R/1000)} km across</figcaption>${c.svg}</figure><figure><figcaption>The region</figcaption>${reg}</figure></div>
    <div class="f1c-key"><span><i style="background:${K.dc};border-color:${K.dc}"></i>industrial zones where a data centre is allowed</span><span><i style="background:#fff;border-color:${K.hair}"></i>other zones</span><span><i class="ln" style="border-color:${K.rule}"></i>streets</span><span><i style="background:#fff;border-color:${K.ink};border-radius:50%"></i>this lot</span></div>${pol}`;
-  return {draw,lead:`This lot is in zone ${x.zone}, ${C.allowed(city,x.key)?'industrial land where a data centre is allowed':'where a data centre needs a rezoning (card 3)'}. The policies protect this kind of land for industry and jobs but are silent on data centres. Policy lines are drafts for J.B. to confirm.`,
+  return {draw,lead:`This lot is in zone ${x.zone}, ${C.allowed(city,x.key)?'industrial land where a data centre is allowed':'where a data centre needs a rezoning (card 3)'}. The policies protect this kind of land for industry and jobs but are silent on data centres. Policy lines are our reading of each document.`,
    hero:[{v:C.n1(A),u:'km²',l:`${CITYN[city]} zones where a data centre is allowed`},{v:C.n1(100*A/TOT),u:'%',l:'of the city’s zoned area'},{v:qj,l:'jobs on this land'},{v:(100*lotKm/A)<0.1?'<0.1':C.n1(100*lotKm/A),u:'%',l:'of that land is this lot'}],
-   rows:[['Lot zone',x.zone],['Lot area',C.n0(sel.lotArea)+' m²'],[city==='van'?'Regional designation':'District designation',qd],['Policy lines','draft: J.B. to confirm'],['Jobs figure',qj],['Minimum jobs in policy','none set (region measures jobs per area)']],
+   rows:[['Lot zone',x.zone],['Lot area',C.n0(sel.lotArea)+' m²'],[city==='van'?'Regional designation':'District designation',qd],['Policy lines','our reading'],['Jobs figure',qj],['Minimum jobs in policy','none set (region measures jobs per area)']],
    more:[['What “industrial land” means here',`<p>The map shades the ${nz} mapped zone areas where the tool lists a data centre as permitted, conditional or discretionary. Other industrial zones and the designation layers are not mapped yet. Areas are the City’s zone polygons, summed (our arithmetic).</p>`],
          ['Weaknesses of the policy read','<p>Cowork’s self-check only; not independently checked. Metro 2050 itself was not read: quotes are from the Implementation Guideline, which says it does not replace the strategy. Vancouver’s 2023 framework is a staff report; Council adoption is ?. Edmonton’s data-centre page could not be read (blocked to automated reading). Edmonton’s Industrial Investment Action Plan was not used. The designation of this lot needs the map layers, not yet read.</p>']],
    src:['Zone polygons: City open data, tiles/'+city+'/meta.json; shaded = zones in tool/data/zones.json. Area and share: our arithmetic.',...(city==='van'?['Metro Vancouver, Metro 2050 Implementation Guideline: Industrial and Employment Lands (Nov 2023): https://metrovancouver.org/services/regional-planning/Documents/metro-2050-implementation-guideline-industrial-and-employment-lands.pdf (s. 2.0 pp. 4–5; 2.2.9 c) iii) p. 8).','City of Vancouver, Industrial Modernization and Intensification Framework, RTS 15772, 31 Oct 2023: https://council.vancouver.ca/20231114/documents/r4.pdf (pp. 1, 5, 6). Adoption: ?']:['City of Edmonton, District Plan | District Policy, office consolidation April 2026: https://webdocs.edmonton.ca/infraplan/plans_in_effect/District-Policy-Consolidation.pdf (2.5.3 p. 28; 2.5.3.1; 2.5.3.4).']),'Policy read: Claude Link/policy_read_industrial_land_2026-11-07.md (Cowork, 7 Nov 2026). Draft: J.B. to confirm.'],
@@ -242,21 +242,30 @@ C.add(T,'Approval process',{async build(x){
    src:[`Steps, deciders, notice and appeal: ${SRC_M}, ${city==='van'?'§1a (ZDB s. 4, By-law 10200)':'§1b (Bylaw 20001 ss. 7.20, 7.100, 7.160, 7.170)'}.`,`Rezoning path: ${SRC_R}, ${city==='van'?'§1 and §2 (Charter, Metro 2050 guide)':'§3 (City page, EMRB REF)'}.`,'Path: tool/data/zones.json, '+x.zone+'. Processing times are left out (J.B., 7 Nov).'],
    missing:['time to decision (dropped: unsourced)']}; }});
 
-/* M12 Report: the Municipal report pages (Municipal1 board is page 1; tool/templates.json has no Municipal report). Page 1 is drawn from this lot's rows; pages 2 and 3 are not built */
+/* M12 Report (audit B10, 12 Nov 2026): the Municipal report end to end, as the board's Report_Muni pages (Claude Link reports/report_muni.py, v2 of
+   10 Nov): 1 title, 2 can a data centre go here, 3 how it gets approved, 4 what the rules let you build, 5 where the building can sit, 6 loading and noise,
+   7 sources. Each page is drawn from this lot by the Municipal cards themselves (their drawing, lead and rows), so card and report never differ. Letter pages; print. */
+const RPAGES=[['Can a data centre go here?',['Is a data centre allowed?','Industrial land and jobs']],['How it gets approved',['Approval process']],
+  ['What the rules let you build',['Height and floor area','Storeys and street frontage']],['Where the building can sit',['Yards by edge']],['Loading and noise',['Loading','Noise limits around the lot']]];
 C.add(T,'Report',{async build(x){
-  const city=x.city, st=x.status, sel=x.sel, zr=zonesOf(city)[x.key]||{}, m=await meta(city), sts=await BD.streets(city);
-  let mp=''; if(sel.ring){ const b=C.bbox(sel.ring), cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, R=420; mp=mapSvg(m,sts,sel,city,[cx-R,cy-R,cx+R,cy+R],110,110,null).svg; }
-  const rules=(zr.cl||[]).map(c=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}</td><td>${esc(c[2])}</td></tr>`).join('');
-  const sheet=`<div class="f1c-mua-sheet"><div class="hd"><span>Beyond Data · Municipal report · ${esc(CITYN[city])} · ${esc(x.zone)}</span><span>1</span></div>
-   <h5>${esc(x.addr)}: what the rules allow</h5><div class="ld">A data centre is a ${esc(st.word)} here: ${city==='van'?'the City decides':'the Development Planner decides'}.</div>
-   <div class="top"><div>${mp}</div><div><div class="lb">Zone</div><div class="big">${esc(x.zone)}</div><div class="lb">Lot</div><div class="big">${esc(C.n0(sel.lotArea))} m²</div><div class="lb">Data centre</div><div class="big">${esc(st.word)}</div></div></div>
-   <table><tr><th>Rule</th><th>What it says</th><th>Source</th></tr>${rules}</table></div>`;
-  const draw=`<div class="f1c-mua-pages"><div class="f1c-mua-pg"><div class="cap">Page 1 · What the rules allow (preview, drawn from this lot)</div>${sheet}</div></div>
-   <button class="f1c-mua-print" type="button" onclick="window.print()">Print the report</button>`;
-  return {draw,lead:'The report is one page plus its sources, built from this lot’s rule rows.',
-   hero:[{v:'1',l:'page, plus sources'}],
-   rows:[['Page 1 · What the rules allow','zone, lot, data-centre path, one row per rule with its clause (board Municipal1)'],['Sources','the clauses named on each row']],
-   more:[['What is missing from page 1','<p>Rows for noise, building code and generators are on the Municipal1 board but are not in the zone rows; they come from the by-law cards (Noise limits around the lot, Height and floor area, Loading) that group b builds.</p>'],['Print','<p>The print button uses the browser’s print dialog (window.print). Choose “Save as PDF” there.</p>']],
-   src:['Page 1: tool/data/zones.json, '+x.zone+' rows and clauses; city overview tiles/'+city+'/meta.json. Layout: board Municipal1.png.','tool/templates.json has no Municipal report; the one-page report follows board Municipal1.'],
-   missing:['Municipal report definition in tool/templates.json','noise, building code and generator rows for page 1']}; }});
+  const city=x.city, st=x.status, sel=x.sel, m=await meta(city), sts=await BD.streets(city), SRC=[], sid=t=>{ const p=C.pub(t); let k=SRC.indexOf(p); if(k<0){ SRC.push(p); k=SRC.length-1; } return k+1; };
+  let mp=''; if(sel.ring){ const b=C.bbox(sel.ring), cx=(b[0]+b[2])/2, cy=(b[1]+b[3])/2, R=420; mp=mapSvg(m,sts,sel,city,[cx-R,cy-R,cx+R,cy+R],300,300,null).svg; }
+  const runCard=async t=>{ const sp=C.get(T,t); if(!sp) return null; try{ return await sp.build(x); }catch(e){ console.warn('municipal report',t,e); return null; } };
+  const pg=(n,t,body)=>`<div class="f1r-pg"><div class="cap">Page ${n} · ${esc(t)}</div><div class="f1r-box"><div class="f1r-sheet"><div class="hd"><span>BEYOND DATA · MUNICIPAL REPORT · ${esc(String(x.addr||'').toUpperCase())}</span><span>${n} / 7</span></div><h1>${esc(t)}</h1>${body}</div></div></div>`;
+  const pages=[];
+  pages.push(`<div class="f1r-pg"><div class="cap">Page 1 · Title</div><div class="f1r-box"><div class="f1r-sheet"><div class="hd"><span>BEYOND DATA</span><span>1 / 7</span></div>
+    <div style="margin-top:120px"><div class="lb">Municipal report</div><h1 style="font-size:40px;font-weight:300">${esc(x.addr)}</h1><p class="ld">${esc(CITYN[city])} · zone ${esc(x.zone)} · ${esc(C.n0(sel.lotArea))} m² · a data centre is ${esc(st.word)} here.</p></div>
+    <div style="margin-top:40px">${mp}</div><p class="ld" style="margin-top:40px">Rules, not a design. [n] = source, page 7. “?” = no source read.</p></div></div></div>`);
+  let n=2;
+  for(const [title,cards] of RPAGES){ let body=''; for(const t of cards){ const r=await runCard(t); if(!r) continue; const refs=(r.src||[]).map(sid);
+      body+=`<div class="lb">${esc(t)}</div>${r.lead?`<p class="ld">${C.pub(r.lead)}${refs.length?` <span style="color:#6B6A66">[${refs.join(', ')}]</span>`:''}</p>`:''}`+
+        `<div class="f1r-dr">${r.draw||''}</div>`+((r.rows||[]).length?`<table class="f1c-res-t">${r.rows.map(q=>`<tr><th>${esc(q[0])}</th><td>${q[1]}</td></tr>`).join('')}</table>`:''); }
+    pages.push(pg(n++,title,body||'<p class="ld">Not available for this lot.</p>')); }
+  pages.push(pg(7,'Sources',`<p class="ld">Every figure in this report, keyed by number.</p><ol class="ld" style="padding-left:20px">${SRC.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`));
+  const titles=['Title'].concat(RPAGES.map(p=>p[0]),['Sources']);
+  return {draw:`<div class="f1r-pages">${pages.join('')}</div><button class="f1c-mua-print" type="button" onclick="window.print()">Print the report</button>`,
+   lead:'The Municipal report: seven letter pages drawn from this lot by the cards before it. Print, or save as PDF.',
+   hero:[{v:'7',l:'pages'},{v:String(SRC.length),l:'sources'}],
+   rows:titles.map((t,i)=>[`Page ${i+1}`,t]),
+   src:['Pages: the Municipal report layout (board Report_Muni, 10 Nov 2026); each page from the Municipal cards on this lot, with their sources.','Export: Print, or save as PDF.'],missing:[]}; }});
 })();
