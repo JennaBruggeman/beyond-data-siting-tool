@@ -1,13 +1,17 @@
 # The public web version on GitHub Pages (J.B. 13 Nov 2026). The site is built on J.B.'s computer (publish/build_public.py: open data only, with its
 # leak check) and attached to a GitHub release as public.zip; this workflow downloads that zip and publishes it as the Pages artifact. The data files
-# are never committed to git. Run by hand: Actions → Publish the public web version → Run workflow (tag of the release holding public.zip).
+# are never committed to git. It runs when publish/pages_release.txt changes on site-f1 (that file names the release holding public.zip; a run by
+# hand works once the workflow is on the default branch).
 name: Publish the public web version
 on:
+  push:
+    branches: [site-f1]
+    paths: [publish/pages_release.txt]
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag holding public.zip
-        required: true
+        description: Release tag holding public.zip (blank = publish/pages_release.txt)
+        required: false
 permissions:
   contents: read
   pages: write
@@ -22,11 +26,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: publish/pages_release.txt
+          sparse-checkout-cone-mode: false
       - name: Download the built site
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download "${{ inputs.tag }}" --repo "${{ github.repository }}" --pattern public.zip
+          TAG="${{ inputs.tag }}"; [ -n "$TAG" ] || TAG="$(tr -d '[:space:]' < publish/pages_release.txt)"
+          echo "release: $TAG"
+          gh release download "$TAG" --repo "${{ github.repository }}" --pattern public.zip
           mkdir site && unzip -q public.zip -d site
           test -f site/index.html && test -f site/MANIFEST.md
           grep -q "window.BD_PUBLIC=true" site/index.html
