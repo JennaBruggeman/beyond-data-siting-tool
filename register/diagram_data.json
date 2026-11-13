@@ -9,7 +9,7 @@
 "quantities": 226,
 "conditions": 111,
 "opportunities": 14,
-"sources": 1769
+"sources": 1771
 }
 },
 "stages": [
@@ -5030,7 +5030,7 @@
 "stage": "test",
 "name": "Grid headroom status",
 "formula": "governing document, date, stated cap or constraint, next milestone; headroom field in the form regulators publish elsewhere: remaining kVA band at station (≥7.5 MVA) and feeder (OEB) or feeder-segment kVA class (ENMAX)",
-"coef": "Vancouver: West End Substation CPCN (10 Nov 2025, read in full): the downtown substations (Murrin 1947, Dal Grauer 1952, Cathedral Square) are 'at their final stage of development with no room to add more capacity'; by fiscal 2027 all 12 kV feeder positions in the study area will be in use, after which new customers connect only by loading feeders above planning guidelines or using transfer-tie positions in other stations (s.2.2.2); the project is a 230/25 kV, 400 MVA underground substation at 1150 Nelson St, expected in service July 2032, cost $756 M–$1.391 B (expected $1.028 B); Mount Pleasant (150 MVA, 2014, expandable to 400 MVA) cannot absorb Murrin's load; decision pending; Edmonton: 1,200 MW allocated; Data Centre Regulation, Alta Reg 117/2026 (posted 17 Jun 2026; read in full): s.2 'large data centre' = maximum demand from the transmission system ≥ 75 MW (ISO may set a lower threshold); s.3 ISO may aggregate data centres on the same or adjacent parcels under the same person or affiliate; s.5 'tethered' = large data centre whose access request is tied to a generating unit or storage facility of equal or greater capability; s.6 tethered requests processed first; s.7 ISO may require site control, municipal zoning approval, financing, permits and water licences before service; s.8 tethered service capped at the tethered generation's rate; s.9 'bridged' = tethered data centre served before its generation is in service, for at most 3 years, with an ISO-set demand limit and an ISO-set limit on all bridged load (no MW figure in the regulation — the 1,600 MW pool is an AESO process figure, not statute); s.10 bridged data centres cut first in a supply shortfall, large data centres cut before other participants in mandatory load shedding; s.12 review by 31 May 2030, expires 31 May 2035; neither city publishes a load-capacity map (EPCOR, BC Hydro: verified negative); precedents: ENMAX feeder classes <999…11,000–12,999 kVA (Dec 2025), OEB bands 0–1,000/1,000–2,000/>2,000 kVA at stations, Toronto Hydro = planning limit − annual peak, Hydro-Québec zone residuals (Montréal-Est 100 MW); Edmonton substation example: Woodcroft POD N-1 firm 76.0 MVA vs 74.2 MVA 2024 peak, shortfall from 2032 (EPCOR DDR Sep 2025); AESO Phase 1 1,200 MW allocated (970 + 230), ~19,565 MW requested (GoA, Jul 2026); BC CFD 15 applications ~800 MW, up to 400 MW, timeline extended; AESO list Oct 2026: 56 data-load projects, 23,549 MW DTS in total — Active 16 / 1,752 MW, ISD Under Review 28 / 18,491 MW, Cluster 3 9 / 2,466 MW, cancelled 3 / 840 MW; none energized; 9 projects sized at exactly 74.9 MW (just under the 75 MW Alta Reg 117/2026 threshold); planning area 60-Edmonton: Beacon Saunders Lake A.I. Hub 400 MW (stage 2, ISD under review), Sovereign Cloud 74.9 MW (stage 2, active, ISD Dec 2029); EPCOR distribution-load reliability projects name the constrained areas: South Edmonton 51 MW (2031), West/Poundmaker 30.6 MW (2031), SW/Meadowlark 28 MW (2030), Woodcroft equipment change (Nov 2026); BC Hydro 2025 IRP (Exh. B-1): load scenarios follow Bill 31 (tabled 20 Oct 2025) — permanent ban on new cryptocurrency connections; sector limits for a two-year competitive call of 300 MW for AI and 100 MW for data centres (p.2-22 fn 17) — so the \"up to 400 MW\" Call for Demand is 100 MW of conventional data centre plus 300 MW of AI; Lower Mainland is one of three transfer-constrained regions, options with ~10-year lead times: SVCs at Ingledow/Meridian +400 MW ($20/kW-yr), new 500 kV Kelly Lake–Lower Mainland +630 MW ($195/kW-yr), Kelly Lake–Nicola +300 MW ($298/kW-yr) (Table 2-22); 13 Oct 2026: BC allocation framework — 300 MW AI + 100 MW data centres, ≥10 MW competitive, >150 MW full incremental cost; ISED principles (Sep 2026): proponents pay connection costs; BC's over-150 MW rule: context only (industrial, North Coast) [decision 30 Oct 2026]; AESO connection list: 40 data-related projects, 19,789 MW requested (saved extract); the 56 / 23,549 MW figure could not be found [decision 30 Oct 2026]",
+"coef": "Vancouver: West End Substation CPCN (10 Nov 2025, read in full): the downtown substations (Murrin 1947, Dal Grauer 1952, Cathedral Square) are 'at their final stage of development with no room to add more capacity'; by fiscal 2027 all 12 kV feeder positions in the study area will be in use, after which new customers connect only by loading feeders above planning guidelines or using transfer-tie positions in other stations (s.2.2.2); the project is a 230/25 kV, 400 MVA underground substation at 1150 Nelson St, expected in service July 2032, cost $756 M–$1.391 B (expected $1.028 B); Mount Pleasant (150 MVA, 2014, expandable to 400 MVA) cannot absorb Murrin's load; decision pending; Edmonton: 1,200 MW allocated; Data Centre Regulation, Alta Reg 117/2026 (posted 17 Jun 2026; read in full): s.2 'large data centre' = maximum demand from the transmission system ≥ 75 MW (ISO may set a lower threshold); s.3 ISO may aggregate data centres on the same or adjacent parcels under the same person or affiliate; s.5 'tethered' = large data centre whose access request is tied to a generating unit or storage facility of equal or greater capability; s.6 tethered requests processed first; s.7 ISO may require site control, municipal zoning approval, financing, permits and water licences before service; s.8 tethered service capped at the tethered generation's rate; s.9 'bridged' = tethered data centre served before its generation is in service, for at most 3 years, with an ISO-set demand limit and an ISO-set limit on all bridged load (no MW figure in the regulation — the 1,600 MW pool is an AESO process figure, not statute); s.10 bridged data centres cut first in a supply shortfall, large data centres cut before other participants in mandatory load shedding; s.12 review by 31 May 2030, expires 31 May 2035; neither city publishes a load-capacity map (EPCOR, BC Hydro: verified negative); precedents: ENMAX feeder classes <999…11,000–12,999 kVA (Dec 2025), OEB bands 0–1,000/1,000–2,000/>2,000 kVA at stations, Toronto Hydro = planning limit − annual peak, Hydro-Québec zone residuals (Montréal-Est 100 MW); Edmonton substation example: Woodcroft POD N-1 firm 76.0 MVA vs 74.2 MVA 2024 peak, shortfall from 2032 (EPCOR DDR Sep 2025); AESO Phase 1 1,200 MW allocated (970 + 230), ~19,565 MW requested (GoA, Jul 2026); BC CFD 15 applications ~800 MW, up to 400 MW, timeline extended; AESO list Oct 2026: 56 data-load projects, 23,549 MW DTS in total — Active 16 / 1,752 MW, ISD Under Review 28 / 18,491 MW, Cluster 3 9 / 2,466 MW, cancelled 3 / 840 MW; none energized; 9 projects sized at exactly 74.9 MW (just under the 75 MW Alta Reg 117/2026 threshold); planning area 60-Edmonton: Beacon Saunders Lake A.I. Hub 400 MW (stage 2, ISD under review), Sovereign Cloud 74.9 MW (stage 2, active, ISD Dec 2029); EPCOR distribution-load reliability projects name the constrained areas: South Edmonton 51 MW (2031), West/Poundmaker 30.6 MW (2031), SW/Meadowlark 28 MW (2030), Woodcroft equipment change (Nov 2026); BC Hydro 2025 IRP (Exh. B-1): load scenarios follow Bill 31 (tabled 20 Oct 2025) — permanent ban on new cryptocurrency connections; sector limits for a two-year competitive call of 300 MW for AI and 100 MW for data centres (p.2-22 fn 17) — so the \"up to 400 MW\" Call for Demand is 100 MW of conventional data centre plus 300 MW of AI; Lower Mainland is one of three transfer-constrained regions, options with ~10-year lead times: SVCs at Ingledow/Meridian +400 MW ($20/kW-yr), new 500 kV Kelly Lake–Lower Mainland +630 MW ($195/kW-yr), Kelly Lake–Nicola +300 MW ($298/kW-yr) (Table 2-22); 13 Oct 2026: BC allocation framework — 300 MW AI + 100 MW data centres, ≥10 MW competitive, >150 MW full incremental cost; ISED principles (Sep 2026): proponents pay connection costs; BC's over-150 MW rule: context only (industrial, North Coast) [decision 30 Oct 2026]; AESO connection list: 40 data-related projects, 19,789 MW requested (saved extract); the 56 / 23,549 MW figure could not be found [decision 30 Oct 2026]; the card names the lot's nearer substation inside the Downtown supply study area (straight line, our reading: Murrin and its East Vancouver replacement east of the peninsula; the West End substation on the peninsula); no utility publishes spare capacity (12 Nov 2026)",
 "unit": "status",
 "sources": [
 "wes",
@@ -5049,7 +5049,9 @@
 "altaReg117",
 "bchIRP2025",
 "bcIEAF",
-"isedPrinciples"
+"isedPrinciples",
+"bchEastVanSub",
+"bchWestEndSub"
 ],
 "source_roles": [
 {
@@ -5183,7 +5185,7 @@
 "inputs": [],
 "upstream": 90,
 "city": {
-"van": 5,
+"van": 7,
 "edm": 6,
 "both": 2,
 "gen": 4
@@ -20392,7 +20394,9 @@
 "arch_inv_parklandLUB": "RULE: Parkland County Land Use Bylaw 2025-12 (local copy data/raw/edm/parkland_LUB_2025-12.pdf, read 2 Nov 2026), s. 5.80 Data Processing Facility, pp. 98–99: 1.2 setback from Residential Uses with on-site power generation 'At the Discretion of the Development Authority in consultation with the Alberta Utilities Commission'; without it, 'Setback must align with the Building regulations of the district'; 2.1 'A noise impact assessment may be required ... a noise mitigation plan that includes a noise monitoring system will be required'; definition (p. 150): 'a Building, or part of a Building, used to house computer systems ... Typical Uses include centres for artificial intelligence or digital currency processing' — local file ‖ CHECK 2 (2 Nov 2026, fixed): quotes confirmed; pages corrected to 98–99, definition p. 150",
 "arch_inv_leadDirectory": "LEAD ONLY (popular directory, not evidence): Data Center Map, Edmonton listing (read 2 Nov 2026; header '17 Facilities from 7 Operators' in the title vs 20 rows and 13 operators in the body): used only to find names and to mark addresses '?': Qu Edmonton 1 at 10200 102 Ave NW and Qu Edmonton 2 at 17204 114 Ave NW; Kyndryl Acheson at 9672 279 St; ThinkTel at 10250 101 St NW; Wolfpaw EDM2 at 10200 102 Ave and EDM3 at 17204 114 Ave; 4WEB, 14315 118 Ave NW; Five Nine, 17008 90 St NW; Meta, 56111 Range Rd 223, Sturgeon County; Beacon Harry Smith AI Hub, Range Rd 264 & Twp Rd 524, Acheson; Beacon Saunders Lake AI Hub, 24549 Twp Rd 502 (Rolly View); Beacon Heartland, Range Rd 215; TransAlta Sundance and Keephills; Capital Power Genesee 1 and 2 — https://www.datacentermap.com/canada/edmonton/ ‖ CHECK 2 (2 Nov 2026, fixed): lead list re-read; Qu, Kyndryl and ThinkTel addresses added as lead-only; '#403' not on the page",
 "arch_inv3_dcmapRackforce": "DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, RackForce Networks, Vancouver (datacentermap.com/canada/vancouver/rackforce-networks/): 701 W Georgia St (V7Y postal code). Used only for Hut 8 Vancouver (VAN2, ex-RackForce/TeraGo): the operator's current page gives no address. Main chat, 12 Nov 2026.",
-"arch_inv3_dcmapWolfpawEdm2": "DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, Wolfpaw EDM2 and EDM3, Edmonton: 10200 102 Ave NW and 17204 114 Ave NW, the buildings of inventory rows E1 and E2 (tenants there, not new facilities). Main chat, 12 Nov 2026."
+"arch_inv3_dcmapWolfpawEdm2": "DIRECTORY LISTING (third-party, lowest trust; proxy 40): Data Center Map, Wolfpaw EDM2 and EDM3, Edmonton: 10200 102 Ave NW and 17204 114 Ave NW, the buildings of inventory rows E1 and E2 (tenants there, not new facilities). Main chat, 12 Nov 2026.",
+"bchEastVanSub": "UTILITY PROJECT PAGE (trust 80): BC Hydro, East Vancouver Substation project page (read 12 Nov 2026): Murrin substation on Main Street (built 1947) to be replaced by a new East Vancouver substation at 303 Vernon Drive; construction could begin in 2027 at the earliest and take about four years.",
+"bchWestEndSub": "UTILITY PROJECT PAGE (trust 80): BC Hydro, West End Substation project page (read 12 Nov 2026): construction starting November 2026; replaces Dal Grauer; serves downtown."
 },
 "example": {
 "site": "555 W Hastings St (Harbour Centre), Vancouver",
@@ -24891,7 +24895,9 @@
 "arch_inv_leadDirectory": "inventory research pass 2-3 Nov 2026, check 2 applied 3 Nov 2026 (checks/research_arch_v1/inv_edm_sources.json)",
 "arch_inv3_dcmapRackforce": "main chat, read 12 Nov 2026 (Claude Link RESIDENT_addresses_floors_2026-11-12.md)",
 "arch_inv3_dcmapWolfpawEdm2": "main chat, read 12 Nov 2026 (Claude Link RESIDENT_addresses_floors_2026-11-12.md)",
-"atlasCloud": "inventory research pass 2-3 Nov 2026, cited in checks/research_arch_v1/inv_van.md row 13 (operator claim, 16 racks)"
+"atlasCloud": "inventory research pass 2-3 Nov 2026, cited in checks/research_arch_v1/inv_van.md row 13 (operator claim, 16 racks)",
+"bchEastVanSub": "main chat, read 12 Nov 2026 (Claude Link QUEUE_for_when_computer_is_back_2026-11-12.md, block 2 C)",
+"bchWestEndSub": "main chat, read 12 Nov 2026 (Claude Link QUEUE_for_when_computer_is_back_2026-11-12.md, block 2 C)"
 },
 "source_city": {
 "abgas": "edm",
@@ -26661,7 +26667,9 @@
 "arch_inv_parklandLUB": "edm",
 "arch_inv_leadDirectory": "edm",
 "arch_inv3_dcmapRackforce": "van",
-"arch_inv3_dcmapWolfpawEdm2": "edm"
+"arch_inv3_dcmapWolfpawEdm2": "edm",
+"bchEastVanSub": "van",
+"bchWestEndSub": "van"
 },
 "city_gaps": {
 "van": [
