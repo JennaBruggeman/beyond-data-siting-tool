@@ -101,13 +101,15 @@ const hubOn=P=>!!(BD.hub&&P&&(P.boxes||[]).some(b=>b.id==='refuge')&&(!BD.arch||
 const PLC=new WeakMap();
 /* J.B. 12 Nov 2026: "doesn't fit" names the reason, from the size search's stopping rule (hub.js doesntFit: what stops each step of the program ladder) */
 function noFitWhy(P){ const PL=planOf(P), H=PL&&PL.hub, lim=(H&&H.doesntFit&&H.doesntFit.limiting)||[], fl=((PL&&PL.flags)||(H&&H.flags)||[]).filter(f=>/^Not built yet: the turned|^Doesn.t fit/.test(f)&&!/^Doesn.t fit here/.test(f));
-  return {lim, extra:fl, head:hubOn(P)?'The Emergency hub doesn’t fit on this lot.':'The tool has no layout for this lot.'}; }
+  return {lim, extra:fl, frozen:!!(H&&H.doesntFit&&H.doesntFit.frozen), head:hubOn(P)?(H&&H.doesntFit&&H.doesntFit.frozen?'The Emergency hub doesn’t fit on this lot: the frozen board fails.':'The Emergency hub doesn’t fit on this lot.'):'The tool has no layout for this lot.'}; }
+/* audit I41 (12 Nov 2026): where the hub doesn't fit, every card after Pick a typology shows this state (no figures for a building that isn't there) */
+BD.f1archNoFit=async x=>{ const P=await x.arch(); if(!P||!hubOn(P)) return null; const PL=planOf(P); return PL&&PL.hub&&PL.hub.doesntFit?noFitCard(P):null; };
 function noFitCard(P){ const w=noFitWhy(P);
   const list=w.lim.length?`<ol class="f1c-nofit">${w.lim.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:`<p class="f1v-empty">The size search gave no reason (?).</p>`;
   return {draw:`<div style="max-width:620px;margin:40px auto;text-align:left"><p class="f1v-empty" style="text-align:left;margin:0 0 10px">${esc(w.head)} ${w.lim.some(t=>/^step \d/.test(t))?'What stops it, at each step of the program ladder (the hub drops a part at each step and tries again):':'What stops it:'}</p>${list}${w.extra.map(t=>`<p class="f1v-empty" style="text-align:left">${esc(t)}</p>`).join('')}</div>`,
-    lead:w.head+' '+(w.lim.length?(/^step \d/.test(w.lim[w.lim.length-1])?'At the last step: ':'Why: ')+w.lim[w.lim.length-1].replace(/^step \d+ \([^)]*\): /,'')+'.':''),
+    lead:w.frozen&&w.lim.length?w.head+' Why: '+w.lim.slice(1).map(t=>t.split(':')[0].toLowerCase()).join('; ')+' (the board’s failing checks).':w.head+' '+(w.lim.length?(/^step \d/.test(w.lim[w.lim.length-1])?'At the last step: ':'Why: ')+w.lim[w.lim.length-1].replace(/^step \d+ \([^)]*\): /,'')+'.':''),
     rows:w.lim.map(t=>{ const m=/^step (\d+) \(([^)]*)\): (.*)$/.exec(t); return m?[`Step ${m[1]}: ${m[2]}`,esc(m[3])]:['Why',esc(t)]; }),
-    src:['Why it doesn’t fit: hub.js layout(), the program ladder (spec Part 1: full program; clinic to 5 exam rooms; no clinic; shelter merged into the refuge; shared loading by approval), each step’s first rule that fails.'],missing:[]}; }
+    src:[w.frozen?'Why it doesn’t fit: the frozen board’s failing rows (Emergency hub freeze EH-FREEZE-2026-11-11g).':'Why it doesn’t fit: the program ladder (Emergency hub specification Part 1: full program; clinic to 5 exam rooms; no clinic; shelter merged into the refuge; shared loading by approval), each step’s first rule that fails.'],missing:[]}; }
 function planOf(P){ if(!P) return null; if(PLC.has(P)) return PLC.get(P); const v=hubOn(P)?BD.hub.build(P):(BD.plan?BD.plan.build(P):null); PLC.set(P,v); return v; }
 const TT=s=>s==='tight'?' · tight: check in design':s==='fail'?' (to fix)':'';   /* J.B. 9 Nov: within 0.5 m (or 5 %) of a limit */
 const tLine=H=>{ if(!H||!H.treach) return null; const T=H.treach, de=T.dead.filter(c=>!c.ok), wf=T.width.rows.filter(r=>r.sev==='fail'), dt=T.dead.filter(c=>c.status==='tight'), wt=T.width.rows.filter(r=>r.sev==='tight');

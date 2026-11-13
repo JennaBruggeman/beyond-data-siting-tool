@@ -135,7 +135,7 @@ function siteOf(P) { const s = P.s, M = s.M, F = M.F, L = (X, Y) => F.toL(X, Y).
   return { city: M.city, id: sel.id || null, addr: sel.a ? sel.a[0] : null, zone: String(Z.zone || '').toUpperCase(), dir: s.dir < 0 ? -1 : 1, uf: s.uf, ring, edges,
     sideDrive: M.sideDrive ? { w: M.sideDrive.w, inYard: M.sideDrive.inYard, r: bb(M.sideDrive.ring) } : null, maxDepth: base.yards && base.yards.max || null,
     hLimit: M.H || null, mw: (P.ratio && P.ratio.mwTest) || An.mw || M.mwSized || null, fcl: M.grade && M.grade.fcl ? { v: M.grade.fcl.v, datum: M.grade.fcl.datum, src: M.grade.fcl.src } : null,
-    gradeDatum: M.grade ? M.grade.datum : null, grade, lotType: lotTypeOf(M.city, sel.id), frontYard: An.front === 'yard' };   /* F8 flag (10 Nov 2026) */
+    gradeDatum: M.grade ? M.grade.datum : null, grade, lotType: lotTypeOf(M.city, sel.id), frontYard: An.front === 'yard', F };   /* F8 flag (10 Nov 2026); F: the site model's frame (the frozen boards register through it) */
 }
 
 /* ---------- the core ---------- */
@@ -876,6 +876,10 @@ function finish(res, S) {
           door(1, e.room, 'cor', 0.06); ext(1, e.room, 'a0', 0.94, sW); } }
     } }
   L.D = D;
+  analyse(L, S);
+}
+/* the analysis of a laid-out hub (rooms by storey, doors L.D, in the layout frame): T-reach, zones, travel, exits apart, discharges, grades, loading */
+function analyse(L, S) { const R = L.rooms, D = L.D;
   /* the T-reach graph, in the local frame */
   const G = { S: {}, D, city: S.city };
   Object.keys(R).forEach(k => { G.S[k] = R[k].map(x => ({ id: x.id, n: x.n, g: x.g, kind: x.kind, r: x.r, core: !!x.core, stair: !!x.stair })); });
@@ -1013,7 +1017,76 @@ function v2Checks(L, S) {
 }
 
 /* ---------- public entry: P → the plan shape the Architecture cards draw ---------- */
-function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); return fromSite(S); }
+function build(P) { if (!P || !P.s || !P.s.M || !P.s.M.F) return null; const S = siteOf(P); const FB = root && root.BD && root.BD.hubEngineOnly ? null : frozenBoard(S); if (FB) return FB; return fromSite(S); }   /* BD.hubEngineOnly: the 13-board rebuild test runs the engine, not the frozen boards */
+/* ---------- the frozen boards (J.B. 12 Nov 2026, option 1: the tool reads the frozen boards, freeze EH-FREEZE-2026-11-11g) ----------
+   On the 13 test lots the hub is the board itself: its rooms, doors, plant and check rows as frozen (tool/data/hub_frozen_<city>.json, from Claude Link eh/
+   by checks/tests/hub_frozen_export.py); MW, data-centre floor and the stopping rule from the freeze's per-board table. The board frame is registered to
+   the tool's lot (best fit of the board's lot outline to the tool's, stored with the board); the tool's own analysis (exits, travel, T-reach, grades)
+   runs on the board's geometry for the drawings; the rows are the board's. Edmonton's file is git-ignored (Altalis frame): without it the engine runs. */
+const FROZ = {};
+function frozenData(city) { if (FROZ[city] !== undefined) return FROZ[city]; FROZ[city] = null;
+  try { if (root && typeof XMLHttpRequest !== 'undefined') { const x = new XMLHttpRequest(); x.open('GET', `data/hub_frozen_${city}.json`, false); x.send(null); if (x.status === 200) FROZ[city] = JSON.parse(x.responseText).boards || null; }
+    else if (typeof require !== 'undefined') { const fs = require('fs'), path = require('path'), f = path.join(__dirname, 'data', `hub_frozen_${city}.json`); if (fs.existsSync(f)) FROZ[city] = JSON.parse(fs.readFileSync(f, 'utf8')).boards || null; } } catch (e) { FROZ[city] = null; }
+  return FROZ[city]; }
+function FKIND(x, st, nSt, D) { const id = x.id, b = id.replace(/\d+$/, ''), g = x.g, circBlock = st === 1 || nSt === 1 ? 'hub' : 'clinic';
+  const other = d => d[1] === id ? d[2] : d[1];
+  if (g === 'hall') return { kind: 'hall', block: 'data centre' };
+  if (x.stair) return /^s\d/.test(id) || g === 'sup' ? { kind: 'score', block: 'data centre' } : { kind: 'pcore', block: circBlock };
+  if (x.core && /^e\d/.test(id)) return g === 'sup' ? { kind: 'score', block: 'data centre', lift: true } : { kind: 'pcore', block: circBlock, lift: true };
+  if (x.core) return { kind: 'shaft', block: g === 'sup' ? 'data centre' : circBlock };
+  if (g === 'circ') return b === 'lob' ? { kind: 'lobby', block: 'hub' } : b === 'cor' ? { kind: 'pcor', block: 'hub', corridor: true } : /^pas/.test(b) ? { kind: 'exitpas', block: 'hub' } : { kind: 'proom', block: circBlock };
+  if (g === 'clin') return b === 'ccor' ? { kind: 'ccor', block: 'clinic', corridor: true } : /^pas/.test(b) ? { kind: 'exitpas', block: 'clinic' } : { kind: 'croom', block: 'clinic' };
+  if (g === 'pub') return { kind: /^ref2/.test(id) ? 'refuge2' : 'proom', block: 'hub' };
+  if (g === 'load') return { kind: 'bay', block: 'data centre' };
+  if (g === 'plant') return { kind: 'plant', block: b === 'pmec' ? 'hub' : 'data centre' };
+  if (g === 'spare') return { kind: 'spare', block: 'spare', dcSide: D.some(d => d[0] === st && (d[1] === id || d[2] === id) && /cor$/.test(other(d)) && other(d) !== 'cor' && other(d) !== 'ccor') };
+  /* data-centre support */
+  return /cor$/.test(b) || b === 'link' ? { kind: 'scor', block: 'data centre', corridor: true } : b === 'dock' ? { kind: 'dock', block: 'data centre' } : b === 'ves' ? { kind: 'entry', block: 'data centre' } : /^pas/.test(b) ? { kind: 'exitpas', block: 'data centre' } : { kind: 'sroom', block: 'data centre' }; }
+function frozenBoard(S) {
+  const B = S.city && S.id ? (frozenData(S.city) || {})[String(S.id)] : null; if (!B || !B.reg || !S.F) return null;
+  /* a board the freeze keeps failing (1330 Glen Dr): the doesn't-fit state, with the freeze's reasons (its failing rows), no figures (audit I41, I42) */
+  const fails = (B.rows || []).filter(r => r[0] === 'fail' || r[0] === 'fix');
+  if (fails.length) { const lim = [`${B.stop} (${B.freeze})`].concat(fails.map(r => `${r[1]}: ${String(r[3] || '').replace(/^SCRIPT FAILS:\s*/, '').replace(/\s*\[script[^\]]*\]?.*$/, '')}`));
+    const H0 = { doesntFit: { limiting: lim, frozen: true }, flags: ['Doesn’t fit here (the frozen board fails): ' + lim.join('; ')], variant: { main: Object.keys(B.S).length > 1 ? 'stacked' : 'beside', flags: [], notBuilt: [] }, frozen: { key: B.key, freeze: B.freeze, board: B.board, failing: true }, site: {} };
+    return { version: RULES.version, rules: RULES, storeys: [], flags: H0.flags, exitSep: [], programs: [], entrances: [], hub: H0 }; }
+  try {
+    const F = S.F, c = Math.cos(B.reg.th), s = Math.sin(B.reg.th), my = B.reg.mirror ? -1 : 1, tx = B.reg.t[0], ty = B.reg.t[1];
+    const all = Object.values(B.S).flat().flatMap(x => x.r), u0 = Math.min(...all.map(r => r[0])), v0 = Math.min(...all.map(r => r[2])), u1 = Math.max(...all.map(r => r[1])), v1 = Math.max(...all.map(r => r[3]));
+    /* layout frame = the board frame moved so the building starts at (0, 0) */
+    const toW = (a, b) => { const u = a + u0, v = (b + v0) * my; return [tx + c * u - s * v, ty + s * u + c * v]; };
+    const fromW = (X, Y) => { const dx = X - tx, dy = Y - ty, u = c * dx + s * dy, v = (-s * dx + c * dy) * my; return [u - u0, v - v0]; };
+    const mv = r => [r2(r[0] - u0), r2(r[1] - u0), r2(r[2] - v0), r2(r[3] - v0)];
+    const nSt = Object.keys(B.S).length, D = (B.D || []).map(d => [Math.round(d[0]), d[1], d[2], r2(d[3] - u0), r2(d[4] - v0), d[5], d[6] || 0.9]);
+    const rooms = {}; for (const k of Object.keys(B.S)) { const st = +k; rooms[st] = B.S[k].map(x => Object.assign({ st, id: x.id, n: x.n, g: x.g, r: x.r.map(mv), core: !!x.core, stair: !!x.stair }, FKIND(x, st, nSt, B.D || []))); }
+    const ra = r => (r[1] - r[0]) * (r[3] - r[2]), sumG = f => r2(Object.values(rooms).flat().filter(f).reduce((t, x) => t + x.r.reduce((q, r) => q + ra(r), 0), 0));
+    const kindOf = it => /^g/.test(it.id) ? 'gen' : /^t/.test(it.id) ? 'pad' : /^c/.test(it.id) ? 'chiller' : /^h/.test(it.id) ? 'hubset' : 'plant';
+    const items = (B.PLANT || []).map(p => ({ id: p.id, n: p.n, kind: kindOf(p), r: mv(p.r), z: mv(p.r), roof: /roof/i.test(p.n), keep: true }));
+    const g1 = items.find(it => it.kind === 'gen'), km = g1 && /([\d,]+)\s*kW/.exec(g1.n), setKW = km ? +km[1].replace(/,/g, '') : null;
+    const clinic = Object.values(rooms).flat().some(x => x.kind === 'croom');
+    const L = { site: { a0: 0, aMax: r2(u1 - u0), aFull: r2(u1 - u0), driveSide: '?', driveWhy: 'as the frozen board draws it' }, flags: [], notes: [],
+      frozen: { key: B.key, freeze: B.freeze, board: B.board, sha16: B.boardSha16, rms: B.reg.rms },
+      rooms, D, H: B.H.slice(), MW: B.MW, mwUsed: B.MW, dcArea: B.dcArea, hall: B.hallDrawn, hubArea: sumG(x => x.block === 'hub' && x.g === 'pub'), clin: sumG(x => x.block === 'clinic' && x.g === 'clin'),
+      nb: Object.values(rooms).flat().filter(x => x.kind === 'bay' && /^b\d/.test(x.id)).length, nDC: null, nRef: null, nCl: null,
+      kind: nSt > 1 ? 'stacked' : 'beside', W: r2(v1 - v0), Da: r2(u1 - u0), aB: 1e9, bOrigin: 0, ground: B.H[0],
+      storeyNames: nSt > 1 ? ['Storey 1: hub at grade, data-centre entrance', 'Storey 2: ' + ((rooms[2] || []).some(x => x.kind === 'croom') ? 'clinic and data-centre support' : 'data-centre support'), 'Storey 3: one data-hall storey'] : ['Storey 1: hub, ' + (clinic ? 'clinic ' : '') + 'and data centre at grade'],
+      plant: { ok: true, items, nG: items.filter(it => it.kind === 'gen').length, nT: items.filter(it => it.kind === 'pad').length, nC: items.filter(it => it.kind === 'chiller').length, setKW, Q: r2(B.MW * 1.55), tank: null, hubSet: items.some(it => it.kind === 'hubset'), why: '', whyAll: '', rules: (B.rows || []).filter(r => /generator|chiller|transformer|plant|fuel|service access|sets/i.test(r[1])).map(r => `${r[1]} (${r[0]}): ${r[3] || ''}`) },
+      truck: B.COURT ? { court: mv(B.COURT), why: 'truck court as the frozen board draws it' } : null,
+      ladder: { step: '–', what: 'the frozen board’s program (' + B.freeze + ')', limiting: [] },
+      variant: { main: nSt > 1 ? 'stacked' : 'beside', sideDrive: !!B.DRIVE, notBuilt: [], flags: [], lotType: '?' },
+      sizeStop: { rule: B.stop, at: B.MW, why: B.stopText || B.stop } };
+    L.toUV = (a, b) => { const w = toW(a, b); return F.toL(w[0], w[1]).map(r2); };
+    L.fromUV = (u, v) => { const w = F.toW(u, v); return fromW(w[0], w[1]).map(r2); };
+    analyse(L, S);
+    L.loading = { n: L.nb, why: `${L.nb} loading spaces, as the frozen board draws them`, size: '', aisle: '' };
+    /* height and slab as the board states them (its Height row: "roof R − base surface B = H m"; one-storey boards: "6.0 m") */
+    { const hr = (B.rows || []).find(r => r[1] === 'Height'), t = hr ? hr[3] : '', m = /roof\s*([\d.]+)\s*−\s*base surface\s*([\d.]+)\s*=\s*([\d.]+)\s*m/.exec(t), m1 = !m && /([\d.]+)\s*m\s*≤/.exec(t);
+      if (L.grades) { if (B.SLAB != null) L.grades.slab = B.SLAB; if (m) Object.assign(L.grades, { roof: +m[1], base: +m[2], height: +m[3] }); else if (m1) Object.assign(L.grades, { height: +m1[1], roof: null, base: null });
+        if (hr) L.grades.heightStatus = hr[0]; L.grades.boardHeight = t; } }
+    L.v2 = { rows: (B.rows || []).map(r => [r[0], r[1], r[2] || '', r[3] || '']), source: 'the frozen board (' + B.freeze + ', ' + B.board + ')' };
+    L.flags.push(`Frozen board: ${B.MW.toFixed(2)} MW, ${Math.round(B.dcArea).toLocaleString('en-CA')} m² of data centre, stopped by ${B.stop} (${B.freeze}; the board as frozen, not re-laid out by the tool)`);
+    if (B.reg.rms > 1) L.flags.push(`The board draws this lot as a simplified outline (no exact lot outline on the board); placed on the tool’s lot by best fit, about ${Math.round(B.reg.rms)} m off on average (?)`);
+    return toPlan(L, S);
+  } catch (e) { if (typeof console !== 'undefined') console.warn('frozen board', e); return null; } }
 function withV2(L, S) { try { L.v2 = v2Checks(L, S); } catch (e) { L.v2 = { error: String(e && e.message || e) }; } return L; }
 /* 12 Nov 2026 (J.B., decisions log; the stated rule of the pool spec, rule 15 step 4, for every engine): the data centre grows to the 2,325 m² floor
    cap; where exit spacing fails at that size the hall comes back 0.05 MW (about 31.5 m² of hall) at a time until it passes, and the stopping rule
